@@ -45,7 +45,19 @@
 <link href="<%=baseUrl%>css/gateway.css" rel="stylesheet" type="text/css"><!-- gateway -->
 </head>
 
+<style>
+	.input_warning{
+		display: none;
+	}
+	.btn3c {
+	    border-radius: 5px!important;
+	    border: none;
+	}
+	.btn3,.top_btn1 {
+		border:none!important;
+	}
 
+</style>
 
 <body id="myAnchor">
 
@@ -67,6 +79,42 @@ $('a').click(function(){
         scrollTop: $( $(this).attr('href') ).offset().top
     }, 1000);
 });
+	
+	$(document).ready(function(){
+		$("#login_header").on("submit", function(e){
+			e.preventDefault();
+			var data = $(this).serializeJSON();
+			data["action"] = "submit";
+			submitLoginHeader(data);
+		});
+	});
+
+	function submitLoginHeader(data){
+		$.ajax({
+			url : 'UserLoginServlets',
+			data : data,
+			method: 'POST',
+		}).done(function(data){
+			$("#login-header-warn").hide();
+			$('#login_header input').css("border-color","#505455");
+			console.log(data);
+			if(data.status){
+				window.location.reload();
+			}else{
+				if(data.message == "User Id is required"){
+					$("#login_header input[name=userid]").css("border-color","#d50000").focus();
+				}else if(data.message == "Password is required"){
+					$("#login_header input[name=passwd]").css("border-color","#d50000").focus();
+				}else if(data.message == "User Id and Password is required"){
+					$('#login_header input').css("border-color","#d50000");
+					$("#login_header input[name=userid]").focus();
+				}
+	
+				$("#login-header-warn").html(data.message).show();
+				$("#login_header input[name=userid]").focus();
+			}
+		});
+	}
 
 
 </script>
@@ -168,9 +216,25 @@ $('a').click(function(){
 						<li><a href="<%=baseUrl%>info/sub05.jsp"><span class="top_btn2">내정보</span></a></li>
 	                </ul>
                	<% } else{  %>
-					<div class="top_right">
-						<button class="top_btn1" id="signinBtn" style="border:none!important;">Sign In</button>
-					</div>
+					<ul class="top_right">
+						<form id="login_header">
+							<li><input type="text" class="input_style01" name="userid" placeholder="ID"><img class="login-img-validator" id="userid-img" src="images/input_mark.png"></li>
+							<!-- input_blue 인풋활성화 -->
+		                    <li><input type="password" class="input_style01 " name="passwd" placeholder="PW"><img class="login-img-validator" id="passwd-img" src="images/input_mark.png"></li>
+		                     <li><div class="input_warning login-warn" id="login-header-warn" >조건에 맞는 아이디를 입력해주세요.</div></li>
+		                    <!-- input_red 인풋조건미충족 -->
+		                    <li>
+		                    	<input type="submit" class="top_btn1" value="로그인" >
+		                    </li>
+		                    <li><span class="top_btn2 fade_1_open" >회원가입</span></li>
+
+	                    </form>
+
+	                    <div class="error" style="position: inherit;margin-top: 29px;">
+	                    	<!-- <div class="input_warning login-warn" id="login-header-warn" >조건에 맞는 아이디를 입력해주세요.</div> -->
+	                    </div>
+					</ul>
+
                	<% }%>
 
             </div>
