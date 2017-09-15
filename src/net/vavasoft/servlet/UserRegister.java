@@ -17,6 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import net.arnx.jsonic.JSON;
+import net.vavasoft.bean.MgBettingProfileBean;
+import net.vavasoft.bean.MgPlayerAccountBean;
+import net.vavasoft.controller.TotalEgameController;
 import test.BetConManager_Test2;
 
 
@@ -235,7 +238,8 @@ public class UserRegister extends HttpServlet {
 			if(!status){
 				message = "Theres a problem adding user.";
 			}else{
-				message = "Added User Successfully";	
+				message = "Added User Successfully";
+				this.createMgAccount(request);
 			}
 			
 		} catch (SQLException e) {
@@ -249,6 +253,37 @@ public class UserRegister extends HttpServlet {
 
 		return hsm;
 		
+	}
+	
+	public String createMgAccount(HttpServletRequest request)
+	{
+		TotalEgameController teg_ctrl					= new TotalEgameController();
+		MgPlayerAccountBean user_profile 				= new MgPlayerAccountBean();
+		MgBettingProfileBean bet_profile				= new MgBettingProfileBean();
+		ArrayList<MgBettingProfileBean> bet_profiles	= new ArrayList<MgBettingProfileBean>();
+		
+		String teg_resp	= "";
+		String mb_pref	= request.getParameter("cell_prefix").trim().substring(1);
+		
+		bet_profile.setCategory("LGBetProfile");
+		bet_profile.setProfileId(1202);
+		
+		bet_profiles.add(bet_profile);
+		
+		user_profile.setPreferredAccountNumber(request.getParameter("userid").trim());
+		user_profile.setFirstName(request.getParameter("nick"));
+		user_profile.setLastName(request.getParameter("bank_owner").trim());
+		user_profile.setEmail("");
+		user_profile.setMobilePrefix(mb_pref);
+		user_profile.setMobileNumber(request.getParameter("cell").trim());
+		user_profile.setDepositAmount(0);
+		user_profile.setPinCode(request.getParameter("passwd").trim());
+		user_profile.setIsProgressive(0);
+		user_profile.setBettingProfiles(bet_profiles);
+		
+		teg_resp = teg_ctrl.addPlayerAccount(user_profile);
+		
+		return teg_resp;
 	}
 	
 	public HashMap validateUserid(String userid){
