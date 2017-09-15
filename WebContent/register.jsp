@@ -56,10 +56,10 @@
 	});
 
 	function resetForm1(){
-		$('input').css("border-color","#2e3032");
-		$(".img-validator").attr("src","images/input_mark3.jpg");
+		$('#form1 input').css("border-color","#2e3032");
+		$("#form1 .img-validator").attr("src","images/input_mark3.jpg");
 		$("#form1")[0].reset();
-		$('.input_warning').hide();
+		$('#form1 .input_warning').hide();
 	}
 
 	function submitForm(data){
@@ -72,8 +72,8 @@
 		.done(function(data){ 
 			console.log(data);
 			
-			$('.input_warning').hide();
-			$('input').css("border-color","#2e3032");
+			$('#form1 .input_warning').hide();
+			$('#form1 input').css("border-color","#2e3032");
 			$(".img-validator").attr("src","images/input_mark3.jpg");
 
 			if(!data.status){
@@ -85,11 +85,12 @@
 					}else{
 						$("#"+el.field+"-warn").html(el.message);
 						$("#"+el.field+"-warn").show();
-						$('input[name='+el.field+']').css("border-color","#820c0c");
+						$('#form1 input[name='+el.field+']').css("border-color","#d50000");
+
 						if(!el.valid ){
 							invalidIndexArr.push(index);
 							var min = Math.min.apply(Math,invalidIndexArr);
-							$('input[name='+data.response[min].field+']').focus();
+							$('#form1 input[name='+data.response[min].field+']').focus();
 							console.log(data.response[min].field);
 						}
 					}
