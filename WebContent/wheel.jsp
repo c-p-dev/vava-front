@@ -4,6 +4,8 @@
         <meta charset="utf-8">
         <title>WHEEL OF KAYAMANAAAN</title>
         
+        <link rel="stylesheet" href="http://textangular.com/dist/textAngular.css" type="text/css">
+        
         <style>
             body{text-align:center;}
             #wheel{
@@ -30,17 +32,66 @@
             }
         </style>
         
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
     </head>
-    <body>
-    
-        <canvas id="canvas" width="1200" height="800"></canvas>
-        <br>
+    <body ng-app = 'vava007'>
+    	<div ng-controller = 'spinCtrl'>
+    	
+	        <canvas id="canvas" width="1200" height="800"></canvas>
+	        <br>
+	        
+	        <div> 
+	        	<span> Testing Inputs </span>
+	        	<div>
+	        		<form id = 'test-wheel-form' ng-submit = 'testCalculateRng()'>
+		        		<label> No. of Tickets: </label>
+		        		<input type = 'text' ng-model = 'wheel.ticket_num'>
+		        		
+		        		<label> Win Amount:</label>
+		        		<input type = 'text' ng-model = 'wheel.win_amt'>
+		        		
+		        		<input type = 'submit'>
+	        		</form>
+	        		
+	        		<div id = 'error-msg'>
+	        		
+	        		</div>
+	        	</div>
+	        </div>
+        </div>
         
         <script type="text/javascript" charset="utf-8">
             function rand(min, max) {
                 return Math.random() * (max - min) + min;
             }
+
+
+            	angular.module("vava007", []);
+                
+                angular.module("vava007").controller('spinCtrl', function($scope, $http) {
+    				$scope.testCalculateRng = function() {
+    					
+    				    $http.post("WheelServlet?method=calculateTicketRng", $scope.wheel)
+    						.then(function success(srv_resp){
+    							console.log(srv_resp);
+    							if (0 < srv_resp.data.length) {
+    		                        location.reload();
+    							}
+    							else {
+    		            			$('#error-msg').html("Cannot find combination of numbers to match Win amount");
+    		            			$('#error-msg').show();
+    		            		}
+    						}, function failed(srv_resp) {
+    							
+    						}
+    					);
+    				    
+    				}
+    			});
+                
+            
             
             $(document).ready(function() {
                 
@@ -199,8 +250,8 @@
                         /*  Wait for AJAX calculation of result before setting stopping spin */
                         if (!lock) {
                             
-                            $.get('route.jsp?method=calculateUserSpinResult', function(srv_resp) {
-                                rng_idx     = srv_resp;
+                            $.get('WheelServlet?method=calculateUserSpinResult', function(srv_resp) {
+                                rng_idx     = srv_resp.rng_idx;
                                 rng_stop    = rand(1.3, 1.8);
                                 rng_deg     = ((360 - 90) - (rng_idx * sliceDeg)) + (sliceDeg / rng_stop);
                                 
@@ -209,7 +260,7 @@
                                 }
                                 
                                 spinning    = false;
-                            });
+                            }, 'json');
                             
                             lock        = true;
                             
@@ -281,7 +332,8 @@
                 };
                 
                 
-                $.get('route.jsp?method=getUserWheelDetails', function(srv_resp) {
+                $.get('WheelServlet?method=getUserWheelDetails', function(srv_resp) {
+                	console.log(srv_resp);
                     spinr_val   = srv_resp.spinr_val;
                     spinr_lbl   = srv_resp.spinr_lbl;
                     spin_res    = srv_resp.spin_result;

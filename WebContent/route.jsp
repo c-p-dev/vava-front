@@ -7,13 +7,9 @@
 	HttpSession user_session 		= request.getSession();
 	String json_output				= "";
 	String method_param				= request.getParameter("method");
-	TotalEgameController teg_obj 	= new TotalEgameController("testagent212555", "b43e0b");
+	TotalEgameController teg_obj 	= new TotalEgameController();
 
 	if (("getSpinBySpinData".equals(method_param))
-	|| ("getLiveDealerGames".equals(method_param))
-	|| ("getUserWheelDetails".equals(method_param))
-	|| ("calculateTicketRng".equals(method_param))
-	|| ("calculateUserSpinResult".equals(method_param))
 	|| ("getPlayersUpdatedBalance".equals(method_param))
 	|| ("getBettingProfileList".equals(method_param))) {
 		Method method_noparam		= teg_obj.getClass().getDeclaredMethod(method_param);
