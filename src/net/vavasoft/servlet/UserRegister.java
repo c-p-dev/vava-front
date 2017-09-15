@@ -49,7 +49,7 @@ public class UserRegister extends HttpServlet {
 		String action = "validate";
 		boolean status  = false;
 		String message = "View error list";
-		
+ 
 		HashMap<String, Object> result = new HashMap<String,Object>();
 		HashMap<String, Object> validationHsm = validateForm(request,response);
 		PrintWriter out = response.getWriter();
@@ -290,7 +290,7 @@ public class UserRegister extends HttpServlet {
 		HashMap<String, Object> hsm = new HashMap<String, Object>();
 		boolean valid = false;
 		String message = "Invalid Id";
-		Pattern p = Pattern.compile("[\\\"\\\'\\/`.,;:!\\[\\]@#$%&*()_+=|<>?{}\\\\[\\\\]~-]", Pattern.CASE_INSENSITIVE);
+		Pattern p = Pattern.compile("[\\\"\\\'\\/`.,;:!\\[\\]@#$%&†◘○☺◙♂♀↨☼Ž¶§▬↨↑↓▬©®¯³ÆœÖ™*()_=|<>?{}\\\\[\\\\]~-]", Pattern.CASE_INSENSITIVE);
 		Matcher m = p.matcher(userid);
 		boolean speacialChar = m.find();
 		BetConManager_Test2 bm = new BetConManager_Test2();
@@ -363,7 +363,7 @@ public class UserRegister extends HttpServlet {
 		String message = "Invalid Nickname";
 		
 		
-		Pattern p = Pattern.compile("[\\\"\\\'\\/`.,;:!\\[\\]@#$%&*()_+=|<>?{}\\\\[\\\\]~-]", Pattern.CASE_INSENSITIVE);
+		Pattern p = Pattern.compile("[\\\"\\\'\\/`.,;:!\\[\\]@#$%&†◘○☺◙♂♀↨☼¶§▬↨↑↓▬Ž©®¯³ÆœÖ™*()_=|<>?{}\\\\[\\\\]~-]", Pattern.CASE_INSENSITIVE);
 		Matcher m = p.matcher(nickname);
 		boolean speacialChar = m.find();
 		
