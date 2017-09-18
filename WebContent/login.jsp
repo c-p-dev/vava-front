@@ -55,7 +55,6 @@
 		$("#login_modal_form").on("submit",function(e){
 			e.preventDefault();
 			var data = $(this).serializeJSON();
-			data["action"] = "submit";
 			submitLoginModalForm(data);
 			
 		});
@@ -75,8 +74,9 @@
 
 
 	function submitLoginModalForm(data){
+		data["method"] = "login";
 		$.ajax({
-			url : 'UserLoginServlets',
+			url : '${baseUrl}UserServlet',
 			data : data,
 			method: 'POST',
 		}).done(function(data){

@@ -1,7 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="header.jsp" />
-<jsp:include page="register.jsp" />
-<jsp:include page="login.jsp" />
+<jsp:useBean id="bean" class="net.vavasoft.bean.UserBean" />
+<%
+	boolean checkSession = false;
+	// UserBean currentUser = (UserBean) session.getAttribute("currentSessionUser");
+	bean = (net.vavasoft.bean.UserBean) session.getAttribute("currentSessionUser");
+	if(session.getAttribute("currentSessionUser") != null){
+		checkSession = true;
+		out.print(bean.getNick());  
+	}
+%>
 <!-- header_wrap -->
 <div id="contents_wrap">
 	<div class="contents">
@@ -10,13 +18,13 @@
 				<div id="jssor_1" style="position:relative;width:930px;height:225px;overflow:hidden;visibility:hidden;">
 					<div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:930px;height:225px;overflow:hidden;">
 						<div>
-							<a class="fade_1_open" href="#fade_1"><img src="images/visual001.jpg"/></a> 
+							<a class='<%=(!checkSession) ? "fade_1_open" : ""  %>' href="#fade_1"><img src="images/visual001.jpg"/></a> 
 						</div>
 						<div>
-							<a class="fade_1_open" href="#fade_1"><img src="images/visual001.jpg"/></a>
+							<a class='<%=(!checkSession) ? "fade_1_open" : ""  %>' href="#fade_1"><img src="images/visual001.jpg"/></a>
 						</div>
 						<div>
-							<a class="fade_1_open" href="#fade_1"><img src="images/visual001.jpg"/></a>
+							<a class='<%=(!checkSession) ? "fade_1_open" : ""  %>' href="#fade_1"><img src="images/visual001.jpg"/></a>
 						</div>
 					</div>
 					<!-- Bullet Navigator -->

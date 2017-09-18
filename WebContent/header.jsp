@@ -3,10 +3,12 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+
 <%
 	String url = request.getRequestURL().toString(); 
 	String baseUrl = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
 %>
+<base href="<%=baseUrl%>" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>무제 문서</title>
 <meta name="viewport" content="width=1400,minimum-scale=0,maximum-scale=5,target-densitydpi=device-dpi">
@@ -90,8 +92,9 @@ $('a').click(function(){
 	});
 
 	function submitLoginHeader(data){
+		data["method"] = "login";
 		$.ajax({
-			url : 'UserLoginServlets',
+			url : '<%=baseUrl%>UserServlet',
 			data : data,
 			method: 'POST',
 		}).done(function(data){
@@ -206,7 +209,7 @@ $('a').click(function(){
 									<li><a>1:1문의 <span class="select_arrow"> > </span></a></li>
 									<li><a>쪽지함 <span class="select_arrow"> > </span></a></li>
 									<!-- signout -->
-									<li><a href="http://localhost:8080/ibet23/UserLogoutServlets" >로그아웃 </a></li> 
+									<li><a href="<%=baseUrl%>UserServlet?method=logout" >로그아웃 </a></li> 
 								</ul>
 							</div>				
 						</li>
@@ -252,3 +255,8 @@ $('a').click(function(){
         </div>
 	</div>
 </div><!-- header_wrap -->
+
+
+<!-- jsp include -->
+<jsp:include page="login.jsp" />
+<jsp:include page="register.jsp" />

@@ -19,6 +19,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 
 public class UserDao {
 	
@@ -160,6 +163,7 @@ public class UserDao {
 	}
 	
 	public boolean checkNickname(String nickname) throws SQLException{
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -196,4 +200,20 @@ public class UserDao {
 		}
 		
 	}
+	
+	public String registerUser(String json_post){
+		System.out.println(json_post);
+		Gson gson = new Gson();
+		HashMap<String, String> json_data 	= gson.fromJson(json_post, new TypeToken<HashMap<String, String>>(){}.getType());
+		System.out.println(json_data);
+		logger.debug(json_data);
+		
+		return json_post;
+		
+	}
+	
+	
+	
+	
+	
 }

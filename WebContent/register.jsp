@@ -63,13 +63,13 @@
 	}
 
 	function submitForm(data){
-		
+		data["method"] = "register";
 		$.ajax({
-			url : 'UserServlets',
+			// url : 'UserServlets',
+			url : '${baseUrl}UserServlet',
 			data : data,
 			method: 'POST',
-		})
-		.done(function(data){ 
+		}).done(function(data){ 
 			console.log(data);
 			
 			$('#form1 .input_warning').hide();
