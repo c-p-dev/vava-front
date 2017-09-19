@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="net.vavasoft.bean.UserBean"%>
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-
 <%
 	String url = request.getRequestURL().toString(); 
 	String baseUrl = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
@@ -92,31 +90,52 @@ $('a').click(function(){
 	});
 
 	function submitLoginHeader(data){
-		data["method"] = "login";
-		$.ajax({
-			url : '<%=baseUrl%>UserServlet',
-			data : data,
-			method: 'POST',
-		}).done(function(data){
-			$("#login-header-warn").hide();
-			$('#login_header input').css("border-color","#505455");
-			console.log(data);
-			if(data.status){
-				window.location.reload();
-			}else{
-				if(data.message == "User Id is required"){
-					$("#login_header input[name=userid]").css("border-color","#d50000").focus();
-				}else if(data.message == "Password is required"){
-					$("#login_header input[name=passwd]").css("border-color","#d50000").focus();
-				}else if(data.message == "User Id and Password is required"){
-					$('#login_header input').css("border-color","#d50000");
-					$("#login_header input[name=userid]").focus();
+		if(loginheaderValid()){
+			$.ajax({
+				url : '${baseUrl}process/login_process.jsp',
+				data : data,
+				method: 'POST',
+			}).done(function(data){
+				$("#login-header-warn").hide();
+				$('#login_header input').css("border-color","#505455");
+				console.log(data);
+				if(data == 0 ){
+					$("#login-header-warn").html("Login Successful").show();
+					location.reload();
+				}else if(data == 1 ){
+					$("#login-header-warn").html("Incorrect Password").show();
+					$("#passwd-header-input").focus();
+				}else if(data == 2){
+					$("#login-header-warn").html("Unknown User Id").show();
+					$("#userid-header-input").focus();
 				}
-	
-				$("#login-header-warn").html(data.message).show();
-				$("#login_header input[name=userid]").focus();
-			}
-		});
+			});
+		}
+		
+	}
+
+	function loginheaderValid(){
+		var valid = false;
+		var useridTxt = $.trim($("#userid-header-input").val());
+		var passwordTxt = $.trim($("#passwd-header-input").val());
+		$("#login-header-warn").hide();
+		$('#login_modal_form input').css("border-color","#2e3032");
+
+		if(useridTxt == "" || useridTxt == null){
+			$("#login-header-warn").html("User Id is required").show();
+			$("#userid-header-input").css("border-color","#d50000").focus();
+		}
+		else if(passwordTxt == "" || passwordTxt == null){
+			$("#login-header-warn").html("Password is required").show();
+			$("#passwd-header-input").css("border-color","#d50000").focus();
+		}
+		else if((useridTxt == "" || useridTxt == null) && ((passwordTxt == "" || passwordTxt == null))) {
+			$("#login-header-warn").html("User Id and Password is required").show();
+			$("#userid-header-input").css("border-color","#d50000").focus();
+		}else{
+			valid = true;
+		}
+		return valid;
 	}
 
 
@@ -209,7 +228,7 @@ $('a').click(function(){
 									<li><a>1:1문의 <span class="select_arrow"> > </span></a></li>
 									<li><a>쪽지함 <span class="select_arrow"> > </span></a></li>
 									<!-- signout -->
-									<li><a href="<%=baseUrl%>UserServlet?method=logout" >로그아웃 </a></li> 
+									<li><a href="<%=baseUrl%>process/logout_process.jsp" >로그아웃 </a></li> 
 								</ul>
 							</div>				
 						</li>
@@ -221,9 +240,9 @@ $('a').click(function(){
                	<% } else{  %>
 					<ul class="top_right">
 						<form id="login_header">
-							<li><input type="text" class="input_style01" name="userid" placeholder="ID"><img class="login-img-validator" id="userid-img" src="images/input_mark.png"></li>
+							<li><input id="userid-header-input" type="text" class="input_style01" name="userid" placeholder="ID"><img class="login-img-validator" id="userid-img" src="images/input_mark.png"></li>
 							<!-- input_blue 인풋활성화 -->
-		                    <li><input type="password" class="input_style01 " name="passwd" placeholder="PW"><img class="login-img-validator" id="passwd-img" src="images/input_mark.png"></li>
+		                    <li><input id="passwd-header-input" type="password" class="input_style01 " name="passwd" placeholder="PW"><img class="login-img-validator" id="passwd-img" src="images/input_mark.png"></li>
 		                     <li><div class="input_warning login-warn" id="login-header-warn" >조건에 맞는 아이디를 입력해주세요.</div></li>
 		                    <!-- input_red 인풋조건미충족 -->
 		                    <li>

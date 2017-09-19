@@ -101,7 +101,7 @@ public class UserDao {
 			    con = ds.getConnection();
 			    Date date = new Date();
 			    String  query = "INSERT INTO RT01.dbo.user_mst (userid,siteid,passwd,cell,bank_name,bank_owner,bank_num,regdate,state,watch,charge_level,ip,reg_ip,nick,recommand) "+
-					" VALUES ('"+userid+"',1, '"+passwd+"','"+cell+"','"+bank_name+"','"+bank_owner+"','"+bank_num+"','"+sdf.format(date)+"','NORMAL','N','LOW','"+ip+"','"+ip+"','"+nick+"','"+recommand+"')" ;
+						" VALUES ('"+userid+"',1, '"+passwd+"','"+cell+"','"+bank_name+"','"+bank_owner+"','"+bank_num+"','"+sdf.format(date)+"','NORMAL','N','LOW','"+ip+"','"+ip+"','"+nick+"','"+recommand+"')" ;
 									
 				stmt = con.createStatement();
 				
@@ -213,6 +213,7 @@ public class UserDao {
 	}
 	
 	
+
 	
 	
 	
