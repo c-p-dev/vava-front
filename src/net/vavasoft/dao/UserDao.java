@@ -196,4 +196,85 @@ public class UserDao {
 		}
 		
 	}
+	
+	public UserBean getUserByUserId(String user_id)
+	{
+		Connection con 			= null;
+		PreparedStatement pstmt = null;
+		ResultSet rs 			= null;
+		String  query 			= "SELECT TOP 1 * FROM user_mst WHERE userid = ?" ;
+		
+		UserBean user_data		= new UserBean();
+		
+		try {
+			Context initContext = new InitialContext();
+		 	Context envContext 	= (Context)initContext.lookup("java:/comp/env");
+			DataSource ds 		= (DataSource)envContext.lookup("jdbc/vava");
+			
+		    con 				= ds.getConnection();
+		    
+		    pstmt   			= con.prepareStatement(query);
+            pstmt.setString(1, user_id);
+            
+			rs      = pstmt.executeQuery();
+            
+            if (rs.next()) {
+            	user_data.setUserid(rs.getString("userid"));
+            	user_data.setPasswd(rs.getString("passwd"));
+            	user_data.setSiteid(rs.getString("siteid"));
+            	user_data.setMoney(rs.getInt("money"));
+            	user_data.setPoint(rs.getInt("point"));
+            	user_data.setNick(rs.getString("nick"));
+            	user_data.setCell(rs.getString("cell"));
+            	user_data.setRegdate(rs.getString("regdate"));
+            	user_data.setState(rs.getString("state"));
+            	user_data.setGrade(rs.getInt("grade"));
+            	user_data.setWatch(rs.getString("watch"));
+            	user_data.setRecommend_yn(rs.getString("recommend_yn"));
+            	user_data.setCharge_level(rs.getString("charge_level"));
+            	user_data.setBank_name(rs.getString("bank_name"));
+            	user_data.setBank_owner(rs.getString("bank_owner"));
+            	user_data.setBank_num(rs.getString("bank_num"));
+            	user_data.setRecommand(rs.getString("recommand"));
+            }
+            
+            rs.close();
+	        pstmt.close();
+	        con.close();
+		}
+		catch(Exception e) {
+			logger.debug(e);
+		}
+		
+		return user_data;
+	}
+	
+	public int setUserMoney(String user_id, double money) {
+		Connection con 			= null;
+		PreparedStatement pstmt = null;
+		int sts					= 0;
+		String  query 			= "UPDATE user_mst SET money = ? WHERE userid = + ?";		
+		
+		try {
+			Context initContext = new InitialContext();
+		 	Context envContext 	= (Context)initContext.lookup("java:/comp/env");
+			DataSource ds 		= (DataSource)envContext.lookup("jdbc/vava");
+			
+		    con 				= ds.getConnection();
+		    
+		    pstmt   			= con.prepareStatement(query);
+            pstmt.setDouble(1, money);
+            pstmt.setString(2, user_id);
+            
+			sts      = pstmt.executeUpdate();
+           
+	        pstmt.close();
+	        con.close();
+		}
+		catch(Exception e) {
+			logger.debug(e);
+		}
+		
+		return sts;
+	}
 }

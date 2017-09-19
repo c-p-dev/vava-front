@@ -206,7 +206,7 @@ $('a').click(function(){
 									<li><a>1:1문의 <span class="select_arrow"> > </span></a></li>
 									<li><a>쪽지함 <span class="select_arrow"> > </span></a></li>
 									<!-- signout -->
-									<li><a href="http://localhost:8080/ibet23/UserLogoutServlets" >로그아웃 </a></li> 
+									<li><a href="UserLogoutServlets" >로그아웃 </a></li> 
 								</ul>
 							</div>				
 						</li>

@@ -12,7 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import net.vavasoft.controller.SpinWheelController;
+import net.vavasoft.controller.TotalEgameController;
+
 
 @WebServlet("/TegServlet")
 public class TegServlet extends HttpServlet {
@@ -25,8 +26,25 @@ public class TegServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
+		TotalEgameController teg_ctrl	= new TotalEgameController();
+		String method 					= request.getParameter("method");
+		String srv_resp					= "";
+		PrintWriter output				= response.getWriter();
 		
+		switch (Integer.valueOf(method)) {
+			case 1:
+				srv_resp = teg_ctrl.userPlayCheck();
+				break;
+			
+			case 0:
+			default:
+				break;
+		}
 		
+		response.setContentType("application/json");
+
+		output.print(srv_resp);
+		output.flush();
 	}
 	
 	/**
