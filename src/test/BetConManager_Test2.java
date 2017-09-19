@@ -163,9 +163,8 @@ public class BetConManager_Test2 {
 		    con = ds.getConnection();			 	
 			pstmt = con.prepareStatement(query);
 			rs = pstmt.executeQuery();
-			logger.debug("this is rs: " + rs);
+			
 			if(rs.next()){
-				logger.debug("rs.next :" + rs.getString("nick"));
 				result = true;
 			}
 			
