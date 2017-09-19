@@ -19,6 +19,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 
 public class UserDao {
 	
@@ -98,7 +101,7 @@ public class UserDao {
 			    con = ds.getConnection();
 			    Date date = new Date();
 			    String  query = "INSERT INTO RT01.dbo.user_mst (userid,siteid,passwd,cell,bank_name,bank_owner,bank_num,regdate,state,watch,charge_level,ip,reg_ip,nick,recommand) "+
-					" VALUES ('"+userid+"',1, '"+passwd+"','"+cell+"','"+bank_name+"','"+bank_owner+"','"+bank_num+"','"+sdf.format(date)+"','NORMAL','N','LOW','"+ip+"','"+ip+"','"+nick+"','"+recommand+"')" ;
+						" VALUES ('"+userid+"',1, '"+passwd+"','"+cell+"','"+bank_name+"','"+bank_owner+"','"+bank_num+"','"+sdf.format(date)+"','NORMAL','N','LOW','"+ip+"','"+ip+"','"+nick+"','"+recommand+"')" ;
 									
 				stmt = con.createStatement();
 				
@@ -160,6 +163,7 @@ public class UserDao {
 	}
 	
 	public boolean checkNickname(String nickname) throws SQLException{
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -196,4 +200,21 @@ public class UserDao {
 		}
 		
 	}
+	
+	public String registerUser(String json_post){
+		System.out.println(json_post);
+		Gson gson = new Gson();
+		HashMap<String, String> json_data 	= gson.fromJson(json_post, new TypeToken<HashMap<String, String>>(){}.getType());
+		System.out.println(json_data);
+		logger.debug(json_data);
+		
+		return json_post;
+		
+	}
+	
+	
+
+	
+	
+	
 }

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!-- login -->
 <div id="fade_3" class="bg_mask_pop3">
 	<div class="bg_mask_pop_title">
@@ -10,11 +10,11 @@
 			<p class="pop_text_title">멤버로그인</p>
 			<table  width="100%" cellpadding="0" cellspacing="0" class="popup_table01">
 				<tr>
-					<td width="370"><input class="input_style02 login_input" name="userid" placeholder="Id" placeholder="아이디"></td>
+					<td width="370"><input class="input_style02 login_input" id="userid-input" name="userid" placeholder="Id" placeholder="아이디"></td>
 					<!-- <td><img class="login-img-validator" id="userid-img" src="images/input_mark2.jpg"></td> -->
 				</tr>
 				<tr>
-					<td width="370"><input class="input_style02 login_input" type="password" name="passwd" placeholder="Password" placeholder="패스워드"></td>
+					<td width="370"><input class="input_style02 login_input" id="passwd-input" name="passwd" type="password"  placeholder="Password" placeholder="패스워드"></td>
 					<!-- <td><img class="login-img-validator" id="passwd-img" src="images/input_mark2.jpg"></td> -->
 				</tr>
 				<tr>
@@ -46,16 +46,9 @@
 			$('#fade_1').popup("show");
 		});
 
-		// $(".login_input").on("change",function(){
-		// 	var data = $("#login_modal_form").serializeJSON();
-		// 	data["action"] = "validate";
-		// 	submitLoginForm(data);
-		// });
-
 		$("#login_modal_form").on("submit",function(e){
 			e.preventDefault();
 			var data = $(this).serializeJSON();
-			data["action"] = "submit";
 			submitLoginModalForm(data);
 			
 		});
@@ -66,37 +59,57 @@
 	      	onclose:function(){
 	    		$("#login_modal_form")[0].reset();
 	    		$('.input_warning').hide();
-	    	
 	    	}
-	    });
+	    });	
 
 
 	});
 
 
 	function submitLoginModalForm(data){
-		$.ajax({
-			url : 'UserLoginServlets',
-			data : data,
-			method: 'POST',
-		}).done(function(data){
-			$("#login_modal_form .login-warn").hide();
-			$('#login_modal_form input').css("border-color","#2e3032");
-			$("#login_modal_form .img-validator").attr("src","images/input_mark3.jpg");
-			$(".login-img-validator").attr("src","images/input_mark.jpg");
-			console.log(data);
-			if(data.status){
-				window.location.reload();
-			}else{
-				if(data.message == "User Id is required"){
-					$("input[name=userid]").css("border-color","#d50000").focus();
-				}else if(data.message == "Password is required"){
-					$("input[name=passwd]").css("border-color","#d50000").focus();
-				}else if(data.message == "User Id and Password is required"){
-					$('input').css("border-color","#d50000").focus();
+		if(loginValid()){
+			$.ajax({
+				url : '${baseUrl}process/login_process.jsp', //jsp				
+				data : data,
+				method: 'POST',
+			}).done(function(data){
+				$('#login_modal_form input').css("border-color","#2e3032");
+				if(data == 0 ){
+					$("#login_modal_form .login-warn").html("Login Successful").show();
+					location.reload();
+				}else if(data == 1 ){
+					$("#login_modal_form .login-warn").html("Incorrect Password").show();
+					$("#passwd-input").focus();
+				}else if(data == 2){
+					$("#login_modal_form .login-warn").html("Unknown User Id").show();
+					$("#userid-input").focus();
 				}
-				$("#login_modal_form .login-warn").html(data.message).show();
-			}
-		});
+			});
+		}
 	}
+
+	function loginValid(){
+		var valid = false;
+		var useridTxt = $.trim($("#userid-input").val());
+		var passwordTxt = $.trim($("#passwd-input").val());
+		$("#login_modal_form .login-warn").hide();
+		$('#login_modal_form input').css("border-color","#2e3032");
+
+		if(useridTxt == "" || useridTxt == null){
+			$("#login_modal_form .login-warn").html("User Id is required").show();
+			$("#userid-input").css("border-color","#d50000").focus();
+		}
+		else if(passwordTxt == "" || passwordTxt == null){
+			$("#login_modal_form .login-warn").html("Password is required").show();
+			$("#passwd-input").css("border-color","#d50000").focus();
+		}
+		else if((useridTxt == "" || useridTxt == null) && ((passwordTxt == "" || passwordTxt == null))) {
+			$("#login_modal_form .login-warn").html("User Id and Password is required").show();
+			$("#userid-input").css("border-color","#d50000").focus();
+		}else{
+			valid = true;
+		}
+		return valid;
+	}
+
 </script>

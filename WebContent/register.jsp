@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script> 
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/additional-methods.js"></script>
 <style>
 	.input_warning{
 		display: none;
@@ -10,112 +12,20 @@
 	.btn3{
 		border:none!important;
 	}
+	.form1-valid {
+		border-color:#2e3032!important;
+	}
+	.form1-invalid {
+		border-color:#d50000!important;
+	}
 </style>
-<script>
-	
-	$(document).ready(function () {
-
-	    $('#fade_1').popup({
-	      	transition: 'all 0.3s',
-	      	scrolllock: true,
-	      	onclose:function(){
-	      		resetForm1();
-	    	}
-	    });
-
-	    $('#fade_2').popup({
-			transition: 'all 0.3s',
-			scrolllock: true
-		});
-
-	    $('#fade_3').popup({
-			transition: 'all 0.3s',
-			scrolllock: true
-		});
-
-		$("#form1 input").on("change",function(e){
-			e.preventDefault();
-			var data = $("#form1").serializeJSON();
-			data["action"] = "validate";
-			submitForm(data);
-			
-		});
-
-		$("#form1").on("submit",function(e){	
-			e.preventDefault();
-			var data = $(this).serializeJSON();
-			data["action"] = "submit";
-			submitForm(data);
-		});
-
-		$("#loginBtn").on("click",function(e){
-	    	e.preventDefault();
-	    	$('#fade_1').popup("hide");
-	    	$('#fade_3').popup("show");
-	    });
-	});
-
-	function resetForm1(){
-		$('#form1 input').css("border-color","#2e3032");
-		$("#form1 .img-validator").attr("src","images/input_mark3.jpg");
-		$("#form1")[0].reset();
-		$('#form1 .input_warning').hide();
-	}
-
-	function submitForm(data){
-		
-		$.ajax({
-			url : 'UserServlets',
-			data : data,
-			method: 'POST',
-		})
-		.done(function(data){ 
-			console.log(data);
-			
-			$('#form1 .input_warning').hide();
-			$('#form1 input').css("border-color","#2e3032");
-			$(".img-validator").attr("src","images/input_mark3.jpg");
-
-			if(!data.status){
-				var invalidIndex = 0;
-				var invalidIndexArr = [];
-				$.each(data.response,function(index, el) {
-					if((el.field == "userid" || el.field == "nick" || el.field == "passwd") && el.valid){
-						$("#"+el.field+"-img-valid").attr("src","images/input_mark4.png");
-					}else{
-						$("#"+el.field+"-warn").html(el.message);
-						$("#"+el.field+"-warn").show();
-						$('#form1 input[name='+el.field+']').css("border-color","#d50000");
-
-						if(!el.valid ){
-							invalidIndexArr.push(index);
-							var min = Math.min.apply(Math,invalidIndexArr);
-							$('#form1 input[name='+data.response[min].field+']').focus();
-							console.log(data.response[min].field);
-						}
-					}
-				});
-
-				
-			}else{
-
-				$('#fade_1').popup('hide');
-				$("#fade_2").popup('show');
-				resetForm1();
-			}
-			
-		});
-	}
-
-</script>
-
 <!-- member registration form -->
 <div id="fade_1" class="bg_mask_pop1">
 	<div class="bg_mask_pop_title">
 		<span class="popup_logo"><img src="images/popup_logo.png"></span>
 		<span class="popup_close fade_1_close"><img src="images/popup_close.png"></span>
 	</div>
-	<form  id="form1" >
+	<form  id="form1" name="form1" >
 		<div class="bg_mask_pop1_in">
 			<p class="pop_text_title">회원가입</p>
 			<div class="pop_text">IBET25에 오신것을 환영합니다.<br>회원가입을 하시면 보다 폭넓은 서비스 이용이 가능합니다.</div>
@@ -340,7 +250,236 @@
 	</div>
 </div>
 
+<script>
+	
+	$(document).ready(function () {
 
+	    $('#fade_1').popup({
+	      	transition: 'all 0.3s',
+	      	scrolllock: true,
+	      	onclose:function(){
+	      		resetForm1();
+	    	}
+	    });
+
+	    $('#fade_2').popup({
+			transition: 'all 0.3s',
+			scrolllock: true
+		});
+
+	    $('#fade_3').popup({
+			transition: 'all 0.3s',
+			scrolllock: true
+		});
+
+		$("#form1 input").on("change",function(e){
+			e.preventDefault();
+			$("#form1").submit();
+			
+		});
+
+		$("#loginBtn").on("click",function(e){
+	    	e.preventDefault();
+	    	$('#fade_1').popup("hide");
+	    	$('#fade_3').popup("show");
+	    });
+	});
+
+	$.validator.addMethod(
+	        "regex",
+	        function(value, element) {
+	        	// var pattern = "^[!@#$%&*)(+=._-]*$";
+	        	var pattern ="/^[\w&.\-]+$/";
+
+	            var re = new RegExp(pattern);
+	            console.log(this.optional(element));
+	            console.log(!re.test(value));
+	            return !re.test(value);
+	        },
+	        "Invalid Input"
+	);
+
+	$("#form1").validate({
+		debug: true,
+	   	submitHandler: function(form) {
+    		console.log("submit this");
+  		},
+  		errorClass: 'form1-invalid',
+    	validClass: 'form1-valid',
+    	highlight: function(element, errorClass, validClass) {
+    		console.log(element);
+	      	$(element).addClass(errorClass).removeClass(validClass);
+	    },
+	    unhighlight: function(element, errorClass, validClass) {
+	    	console.log(element);
+	      	$(element).removeClass(errorClass).addClass(validClass);
+	    },
+  		rules: {
+		    userid :{
+				required:true,
+				remote: {
+					url: "${baseUrl}process/userid_checker.jsp",
+			        type: "post",
+			       	data: {
+			          	userid: function() {
+			            	return $( "#userid" ).val();
+			          	}
+			        },
+		      	},
+		      	minlength:4,
+		      	maxlength:15,
+		      	regex:true,
+			},
+			bank_name :{
+				required:true,
+			},
+			bank_num :{
+				required:true,
+				digits: true,
+			},
+			bank_owner :{
+				required:true,
+			},
+			cell :{
+				required:true,
+				digits: true,
+			},
+			cert :{
+				required:true,
+			},
+			passwd :{
+				required:true,
+			},
+			recommend :{
+				required:true,
+			},
+			referrer :{
+				required:true,
+				remote: {
+					url: "${baseUrl}process/referrence_checker.jsp",
+			        type: "post",
+			       	data: {
+			          	userid: function() {
+			            	return $( "#referrer" ).val();
+			          	}
+			        },
+		      	}
+			},
+			nick :{
+				required:true,
+			},
+
+		},
+		messages: {
+		    userid :{
+				required:"User Id is required",
+				remote:"User Id already exists",
+			},
+			bank_name :{
+				required:"Bank name is required",
+			},
+			bank_num :{
+				required:"Bank number is required",
+				digits: "Please enter only digits on Bank Number",
+			},
+			bank_owner :{
+				required:"Bank owner is required",
+			},
+			cell :{
+				required:"Mobile Number is required",
+			},
+			cert :{
+				required:"Certificate is required",
+			},
+			passwd :{
+				required:"Password is required",
+			},
+			recommend :{
+				required:"Recommand is required",
+			},
+			referrer :{
+				required:"Referrer is required",
+				remote: "User Id doesn't Exists"
+			},
+			nick :{
+				required:"Nick name is required",
+			},
+
+		},
+		errorPlacement: function(error, element) {
+			console.log(error);
+			console.log(element);
+			$('#form1 input').css("border-color","#2e3032");
+			var error_label = element.attr("name");
+		    if (element.attr("name") == error_label ){
+		    	$("#"+error_label+"-warn").html(error).show();
+		    	$('#'+error_label).css("border-color","#d50000");
+		    }
+		  
+		},
+		submitHandler: function(form) {
+			var data = $("#form1").serializeJSON();
+			console.log(data);
+		    submitForm(data);
+		  
+	  	}
+
+	});
+
+	
+	
+	$("#userid").rules("add", { regex: "/^[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]{6,}$/g" });
+
+	function resetForm1(){
+		$('#form1 input').css("border-color","#2e3032");
+		$("#form1 .img-validator").attr("src","images/input_mark3.jpg");
+		$("#form1")[0].reset();
+		// $('#form1 .input_warning').hide();
+		$("#form1").validate().resetForm();
+	}
+
+	function submitForm(data){
+		$.ajax({
+			url : '${baseUrl}process/register_process.jsp',
+			data : data,
+			method: 'POST',
+		}).done(function(data){ 
+			console.log(data);
+			if(data){
+				$('#fade_1').popup('hide');
+				$("#fade_2").popup('show');
+				resetForm1();
+			}else{
+				alert("something went wrong");
+			}
+		});
+	}
+
+	function regValid(){
+		var valid = false;
+		var useridTxt = $.trim($("#userid-input").val());
+		var passwordTxt = $.trim($("#passwd-input").val());
+		$("#login_modal_form .login-warn").hide();
+		$('#login_modal_form input').css("border-color","#2e3032");
+
+		if(useridTxt == "" || useridTxt == null){
+			$("#login_modal_form .login-warn").html("User Id is required").show();
+			$("#userid-input").css("border-color","#d50000").focus();
+		}
+		else if(passwordTxt == "" || passwordTxt == null){
+			$("#login_modal_form .login-warn").html("Password is required").show();
+			$("#passwd-input").css("border-color","#d50000").focus();
+		}
+		else if((useridTxt == "" || useridTxt == null) && ((passwordTxt == "" || passwordTxt == null))) {
+			$("#login_modal_form .login-warn").html("User Id and Password is required").show();
+			$("#userid-input").css("border-color","#d50000").focus();
+		}else{
+			valid = true;
+		}
+
+		return valid;
+	}
+</script>
 
 
 
