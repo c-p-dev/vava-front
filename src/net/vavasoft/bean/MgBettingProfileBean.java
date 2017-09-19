@@ -1,8 +1,8 @@
 package net.vavasoft.bean;
 
 public class MgBettingProfileBean {
-	String Category;
-	int ProfileId;
+	private String Category;
+	private int ProfileId;
 	
 	public String getCategory() {
 		return Category;

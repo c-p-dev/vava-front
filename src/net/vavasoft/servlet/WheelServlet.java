@@ -25,17 +25,23 @@ public class WheelServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		
 		SpinWheelController spin_ctrl	= new SpinWheelController();
 		String method 					= request.getParameter("method");
 		String srv_resp					= "";
 		PrintWriter output				= response.getWriter();
 		
-		if ("getUserWheelDetails".equals(method)) {
-			srv_resp = spin_ctrl.getUserWheelDetails();
-		}
-		else if ("calculateUserSpinResult".equals(method)) {
-			srv_resp = spin_ctrl.calculateUserSpinResult();
+		switch (Integer.valueOf(method)) {
+			case 1:
+				srv_resp = spin_ctrl.getUserWheelDetails();
+				break;
+			
+			case 2:
+				srv_resp = spin_ctrl.calculateUserSpinResult();
+				break;
+			
+			case 0:
+			default:
+				break;
 		}
 		
 		response.setContentType("application/json");
@@ -49,16 +55,20 @@ public class WheelServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		
 		SpinWheelController spin_ctrl	= new SpinWheelController();
 		String method 					= request.getParameter("method");
 		String srv_resp					= "";
 		PrintWriter output				= response.getWriter();
 		BufferedReader reader			= request.getReader();
 		
-		if ("calculateTicketRng".equals(method)) {
-			srv_resp = spin_ctrl.calculateTicketRng(reader.readLine());
-			System.out.println(srv_resp);
+		switch (Integer.valueOf(method)) {
+			case 3:
+				srv_resp = spin_ctrl.calculateTicketRng(reader.readLine());
+				break;
+			
+			case 0:
+			default:
+				break;
 		}
 		
 		response.setContentType("application/json");

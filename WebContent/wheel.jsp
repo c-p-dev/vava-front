@@ -43,7 +43,7 @@
 	        <br>
 	        
 	        <div> 
-	        	<span> Testing Inputs </span>
+	        	<span> For Testing </span>
 	        	<div>
 	        		<form id = 'test-wheel-form' ng-submit = 'testCalculateRng()'>
 		        		<label> No. of Tickets: </label>
@@ -73,9 +73,9 @@
                 angular.module("vava007").controller('spinCtrl', function($scope, $http) {
     				$scope.testCalculateRng = function() {
     					
-    				    $http.post("WheelServlet?method=calculateTicketRng", $scope.wheel)
+    				    $http.post("WheelServlet?method=3", $scope.wheel)
     						.then(function success(srv_resp){
-    							console.log(srv_resp);
+    							
     							if (0 < srv_resp.data.length) {
     		                        location.reload();
     							}
@@ -250,7 +250,7 @@
                         /*  Wait for AJAX calculation of result before setting stopping spin */
                         if (!lock) {
                             
-                            $.get('WheelServlet?method=calculateUserSpinResult', function(srv_resp) {
+                            $.get('WheelServlet?method=2', function(srv_resp) {
                                 rng_idx     = srv_resp.rng_idx;
                                 rng_stop    = rand(1.3, 1.8);
                                 rng_deg     = ((360 - 90) - (rng_idx * sliceDeg)) + (sliceDeg / rng_stop);
@@ -266,8 +266,11 @@
                             
                         }
                         else if (!spinning){
-                        	var ai2 = Math.floor(((360 - deg - 90) % 360) / sliceDeg); //deg 2 Array Index
-                            ai2 = (slices+ai2)%slices; //Fix negative index
+                        	/* Convert degree to array index	*/
+                        	var ai2 = Math.floor(((360 - deg - 90) % 360) / sliceDeg);
+                        	
+                        	/* Fix negative index	*/
+                        	ai2 = (slices+ai2)%slices;
                             
                             /* Decrease Speed   */
                             if (0.777 >= speed) {
@@ -332,8 +335,8 @@
                 };
                 
                 
-                $.get('WheelServlet?method=getUserWheelDetails', function(srv_resp) {
-                	console.log(srv_resp);
+                $.get('WheelServlet?method=1', function(srv_resp) {
+                	
                     spinr_val   = srv_resp.spinr_val;
                     spinr_lbl   = srv_resp.spinr_lbl;
                     spin_res    = srv_resp.spin_result;
@@ -386,7 +389,7 @@
                          }                    
                     });
                 
-                }, false);            
+                }, false);
                 // Add addbet.
                     colour: 'white',
                     clkbl_elems.push({

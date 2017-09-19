@@ -3,16 +3,16 @@ package net.vavasoft.bean;
 import java.util.List;
 
 public class MgPlayerAccountBean {
-	String FirstName;
-	String LastName;
-	String Email;
-	String MobilePrefix;
-	String MobileNumber;
-	double DepositAmount;
-	String PreferredAccountNumber;
-	String PinCode;
-	int IsProgressive;
-	List<MgBettingProfileBean> BettingProfiles;
+	private String FirstName;
+	private String LastName;
+	private String Email;
+	private String MobilePrefix;
+	private String MobileNumber;
+	private double DepositAmount;
+	private String PreferredAccountNumber;
+	private String PinCode;
+	private int IsProgressive;
+	private List<MgBettingProfileBean> BettingProfiles;
 	
 	public String getFirstName() {
 		return FirstName;

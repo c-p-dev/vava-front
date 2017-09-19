@@ -2,6 +2,7 @@ package net.vavasoft.bean;
 
 public class UserBean {
 	private String userid;
+	private String passwd;
 	private String siteid;
 	private int money;
 	private int point;
@@ -37,6 +38,12 @@ public class UserBean {
 	}
 	public void setUserid(String userid) {
 		this.userid = userid;
+	}
+	public String getPasswd() {
+		return passwd;
+	}
+	public void setPasswd(String passwd) {
+		this.passwd = passwd;
 	}
 	public String getSiteid() {
 		return siteid;
