@@ -19,9 +19,18 @@
 	    $('#fade_9').popup({
 			transition: 'all 0.3s',
 	      	scrolllock: true,
+	      	escape: false,
+	      	blur: false,
 	      	onclose: function(){
 	      		$('#game-pop-frame').attr('src', '');
 	      		$('#gm-pop-errmsg').html("");
+	      		
+				$.get("TegServlet?method=2", function(srv_resp) {
+					
+					if (1 == srv_resp) {
+						console.log('ow yeah')
+					}
+				});
 	    	}
 	    });
 	    

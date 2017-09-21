@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -35,11 +36,12 @@
     	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+		<script src="js/script.js"></script>
     </head>
     <body ng-app = 'vava007'>
     	<div ng-controller = 'spinCtrl'>
     	
-	        <canvas id="canvas" width="1200" height="800"></canvas>
+	        <canvas id="canvas" width="1200" height="680"></canvas>
 	        <br>
 	        
 	        <div> 
@@ -102,6 +104,10 @@
                 var lose        = 0;
                 var jpot        = 100;
                 
+                var inst_ln1 	= "IBET25 회원님들만을 위한 보너스 스핀게임 입니다!!";
+                var	inst_ln2 	= "룰렛판 중앙의 'SPIN' 버튼을 눌러 룰렛을 돌리신 후 나온 금액만큼의 금액을";
+                var inst_ln3 	= "포인트로 적립해 드립니다!";
+                	
                 var color       = ['green','red','green','orange', "grey", 'green', "red", 'grey', "indigo", 'grey','green','grey','blue', "grey", 'red', "orange", 'grey'];
                 var spinr_val   = [];
                 var spinr_lbl   = [];
@@ -136,7 +142,9 @@
                 var bglights_width = 695 ;
                 var result = 0;
                 var tickets = 0;
-                var total = 0;            
+                var total = 0;
+                var total_dsp = "0.00";
+                var result_dsp = "0.00";
                 var multiplier = 1   
                 
                 
@@ -184,8 +192,8 @@
                     ctx.rotate(deg2rad(deg));                
                     ctx.textAlign   = "right";
                     ctx.fillStyle   = "white";
-                    ctx.font        = 'bold 18px sans-serif';
-                    ctx.fillText(text, 170, 8);
+                    ctx.font        = 'bold 15px sans-serif';
+                    ctx.fillText(text+"원", 190, 5);
                     ctx.restore();
                 }
 
@@ -208,16 +216,21 @@
                     //ctx.drawImage(cont, cont_x, 195, 270 , 80); 
                     //ctx.drawImage(cont, cont_x, 285, 340 , 80); 
                     //ctx.drawImage(cont, cont_x, 375, 340 , 80); 
-                    ctx.drawImage(audiobtn, 1100, 680, 50 , 50); 
+                    ctx.drawImage(audiobtn, 1100, 90, 50 , 50); 
                     //ctx.drawImage(cont, cont_x, 285, 300 , 80); 
                     //ctx.drawImage(cont, cont_x, 375, 200 , 80); 
 
                     ctx.fillStyle       ="white";
                     
                     ctx.font            = "30px Georgia";
-                    ctx.fillText("Tickets:", 220, 245);
-                    ctx.fillText("Win:", 235, 335);
-                    ctx.fillText("Total:", 230, 425);
+                    ctx.fillText("남은횟수:", 165, 245);
+                    ctx.fillText("획득금액:", 165, 335);
+                    ctx.fillText("총 획득금액:", 130, 425);
+                    
+                    ctx.font            = "15px Georgia";
+                    ctx.fillText(inst_ln1, 90, 100);
+                    ctx.fillText(inst_ln2, 90, 135);
+                    ctx.fillText(inst_ln3, 90, 170);
                     
                     /*
                     ctx.fillStyle       ="green";
@@ -229,9 +242,9 @@
                     ctx.fillStyle   = "#FFFFFF";
                     ctx.font        = "20px Georgia";
                     
-                    ctx.fillText(result, 320, 330);
-                    ctx.fillText(tickets, 340, 240);
-                    ctx.fillText(total, 320, 420);
+                    ctx.fillText(tickets, 320, 240);
+                    ctx.fillText(result_dsp, 320, 330);
+                    ctx.fillText(total_dsp, 320, 420);
                     //drawBg(lyt);
                     ctx.drawImage(pin, 735 , 305 , 90 , 90);
                     ctx.drawImage(arrow, 757 , 110 , 50 , 50);
@@ -313,12 +326,17 @@
                         result = spinr_val[ai2] * multiplier
                         audio.pause();
                         audio.currentTime = 0;
+                        
                         if (spinr_val[ai2] > 1){
                             win.play();
-                            total = total+=result;
+                            total		+= result;
+                            total_dsp	= number_format(total, 2);
+                            result_dsp	= number_format(result, 2);
                         }
                         else {
-                            total = total+=result;
+                            total		+= result;
+                            total_dsp 	= number_format(total, 2);
+                            result_dsp 	= number_format(result, 2);
                         }
                         
                         drawImg();
@@ -366,6 +384,7 @@
                                         spinning    = true;
                                         lock        = false;
                                         result      = 0;
+                                        result_dsp	= "0.00";
                                         
                                         window.requestAnimationFrame( anim );
                                         tickets -= 1;
@@ -403,7 +422,7 @@
                     colour: 'Red',
                     width: 50,
                     height: 50,
-                    top: 687, 
+                    top: 90, 
                     left: 1100,
                     id: 'audiobtn',
                 });

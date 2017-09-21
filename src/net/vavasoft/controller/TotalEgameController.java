@@ -171,7 +171,7 @@ public class TotalEgameController {
 		        |-------------------------------------------------------------------*/
 				game_url_full	= game_url_base.concat("LoginName=").concat(username);
 				game_url_full	= game_url_full.concat("&Password=").concat(user_profile.getPasswd());
-				game_url_full	= game_url_full.concat("&UL=en-cn&CasinoID=2635&ClientID=7&BetProfileID=MobilePostLogin&StartingTab=SPSicbo&BrandID=igaming&altProxy=TNG");
+				game_url_full	= game_url_full.concat("&UL=ko-kr&CasinoID=2635&ClientID=7&BetProfileID=MobilePostLogin&StartingTab=Baccarat&BrandID=igaming&altProxy=TNG");
 			}
 		}
 		/*--------------------------------------------------------------------
@@ -182,6 +182,40 @@ public class TotalEgameController {
 		}
 		
 		return game_url_full;
+	}
+	
+	public int transferMoneyToVava(String username)
+	{
+		Gson gson				= new Gson();
+		UserDao user_db			= new UserDao();
+
+		MgWithdrawAllBean withdraw_data = new MgWithdrawAllBean();
+		UserBean user_profile			= new UserBean();
+		
+		String srv_resp = "";
+		double money	= 0;
+		int ret			= 0;
+		
+		/*--------------------------------------------------------------------
+        |	Withdraw all money from MG and save to database
+        |-------------------------------------------------------------------*/
+		srv_resp 		= this.withdrawAll(username);
+		withdraw_data	= gson.fromJson(srv_resp, MgWithdrawAllBean.class);
+		
+		if (0 == withdraw_data.getStatus().getErrorCode()) {
+			/*--------------------------------------------------------------------
+	        |	Query Database and Update Money
+	        |-------------------------------------------------------------------*/
+			user_profile 	= user_db.getUserByUserId(username);
+			money 			= user_profile.getMoney() + withdraw_data.getResult().getTransactionAmount();
+			
+			user_profile.setMoney((int)money);
+			user_db.setUserMoney(username, money);
+			
+			ret = 1;
+		}
+		
+		return ret;
 	}
 	
 	public String postToTeg(String url, String json_param)

@@ -255,6 +255,8 @@
 	    $('#fade_1').popup({
 	      	transition: 'all 0.3s',
 	      	scrolllock: true,
+	      	escape: false,
+	      	blur: false,
 	      	onclose:function(){
 	      		resetForm1();
 	    	}

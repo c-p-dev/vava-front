@@ -272,7 +272,7 @@ public class UserDao {
 		Connection con 			= null;
 		PreparedStatement pstmt = null;
 		int sts					= 0;
-		String  query 			= "UPDATE user_mst SET money = ? WHERE userid = + ?";		
+		String  query 			= "UPDATE user_mst SET money = ? WHERE userid = ?";		
 		
 		try {
 			Context initContext = new InitialContext();

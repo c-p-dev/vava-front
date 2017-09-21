@@ -203,7 +203,7 @@ public class SpinWheelController {
     {
         /*  Libraries       */
 		Gson gson			= new Gson();
-		DecimalFormat df	= new DecimalFormat("#,###,###,###,###");
+		DecimalFormat df	= new DecimalFormat("#,###,###,###,###.00");
         
         /*  Get Spin information from DB    */
         SpinDetails db_spin = this.getDbSpinInfo("test1234");

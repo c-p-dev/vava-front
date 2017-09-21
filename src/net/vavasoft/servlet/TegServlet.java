@@ -29,19 +29,29 @@ public class TegServlet extends HttpServlet {
 	{
 		TotalEgameController teg_ctrl	= new TotalEgameController();
 		String method 					= request.getParameter("method");
-		String srv_resp					= "";
+		
 		PrintWriter output				= response.getWriter();
 		
 		switch (Integer.valueOf(method)) {
 			case 1:
-				UserBean user_data	= (UserBean)request.getSession().getAttribute("currentSessionUser");
-				String username 	= user_data.getUserid();
+				UserBean udata_1	= (UserBean)request.getSession().getAttribute("currentSessionUser");
+				String uname_1 		= udata_1.getUserid();
 				int game_provider	= Integer.valueOf(request.getParameter("gm_provdr"));
-
-				srv_resp = teg_ctrl.userPlayCheck(username, game_provider);
-				output.print(srv_resp);
+				String srv_resp_1	= "";
+				
+				srv_resp_1 			= teg_ctrl.userPlayCheck(uname_1, game_provider);
+				output.print(srv_resp_1);
 				break;
 			
+			case 2:
+				UserBean udata_2	= (UserBean)request.getSession().getAttribute("currentSessionUser");
+				String uname_2 		= udata_2.getUserid();
+				int srv_resp_2		= 0;
+				
+				srv_resp_2 			= teg_ctrl.transferMoneyToVava(uname_2);
+				output.print(srv_resp_2);
+				break;
+				
 			case 0:
 			default:
 				break;
