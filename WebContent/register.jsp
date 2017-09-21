@@ -270,11 +270,11 @@
 			scrolllock: true
 		});
 
-		$("#form1 input").on("change",function(e){
-			e.preventDefault();
-			$("#form1").submit();
+		// $("#form1 input").on("change",function(e){
+		// 	e.preventDefault();
+		// 	$("#form1").submit();
 			
-		});
+		// });
 
 		$("#loginBtn").on("click",function(e){
 	    	e.preventDefault();
@@ -341,6 +341,7 @@
 			cell :{
 				required:true,
 				digits: true,
+				minlength:10,
 			},
 			cert :{
 				required:true,
@@ -385,6 +386,7 @@
 			},
 			cell :{
 				required:"Mobile Number is required",
+				minlength:"Minimum length is 10",
 			},
 			cert :{
 				required:"Certificate is required",
