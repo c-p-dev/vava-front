@@ -129,7 +129,7 @@
 				<jsp:include page="charge_tab.jsp" />
 			</div>
 			<div id="tab2" class="tab_content">
-				<ul class="smk_accordion">
+				<!-- <ul class="smk_accordion">
 					<li>
 						<div class="acc_head"><h3>환전신청</h3></div>
 						<div class="acc_content">
@@ -232,7 +232,8 @@
 							</div>
 						</div>
 					</li>
-				</ul>	
+				</ul> -->	
+				<jsp:include page="exchange_tab.jsp" />
 			</div>
 			<div id="tab3" class="tab_content">
 				<ul class="smk_accordion">

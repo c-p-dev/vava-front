@@ -378,4 +378,91 @@ public class UserDao {
 		return result;
 			
 	}
+	
+	public boolean withdraw(String userid,int siteid,String bank_name, String bank_num, String bank_owner, String reg_date, String ip, int withdraw ) throws SQLException{
+	      
+		  Connection con = null;
+		  Statement stmt = null;
+		  int row = 0;
+		  boolean result = false;
+		  
+			try{
+			
+				Context initContext = new InitialContext();
+			 	Context envContext = (Context)initContext.lookup("java:/comp/env");
+				DataSource ds = (DataSource)envContext.lookup("jdbc/vava");
+				System.out.println(bank_name);
+			    con = ds.getConnection();
+			    Date date = new Date();
+			    String  query = "INSERT INTO RT01.dbo.withdraw_lst (siteid,userid,bank_name,bank_owner,bank_num,money,regdate,wddate,wdstate,ip,viewtype,money_req) values "+" "
+			    		+ "("+siteid+", '"+userid+"','"+bank_name+"', '"+bank_owner+"', '"+bank_num+"', '"+withdraw+"','"+sdf.format(date)+"','"+sdf.format(date)+"','PEND', '123456' ,'y','"+withdraw+"')";			
+				
+				stmt = con.createStatement();
+				row = stmt.executeUpdate(query);
+				System.out.print("pasok ang query");
+				stmt.close();
+				con.close();
+				
+				if(row > 0) result = true;
+				
+				return result;
+	            	
+		  	}catch(Exception e){
+		  		System.out.print(e);
+		  		System.out.println("sala ang query");
+		  		System.out.println(siteid);
+		  		System.out.println(userid);
+		  		System.out.println(bank_name);
+		  		System.out.println(bank_owner);
+		  		System.out.println(bank_num);
+		  		System.out.println(withdraw);
+		  		System.out.println(reg_date);
+		  		
+		  		return false;
+
+		  	}finally{
+		  		if(stmt!=null) stmt.close();
+		  		if(con!=null) con.close();
+		  	}
+	}
+	public String getMoneyFromDB(String id) throws SQLException{
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		  
+		String s = "";
+		  
+		String query = "SELECT money from RT01.dbo.user_mst where userid='matthew'" ;
+		  
+		try{	      
+			
+		 	Context initContext = new InitialContext();
+		 	Context envContext = (Context)initContext.lookup("java:/comp/env");
+			DataSource ds = (DataSource)envContext.lookup("jdbc/vava");
+						 	
+			con = ds.getConnection();			 	
+			pstmt = con.prepareStatement(query);
+			rs = pstmt.executeQuery();
+					        
+			if(rs.next()){		        	
+				s = rs.getString("money");
+			}
+
+	        rs.close();
+	        pstmt.close();
+	        con.close();
+	  		    
+		} catch(Exception e){
+		       	e.printStackTrace();
+		
+		} finally{
+		 	  if(rs!=null) rs.close();
+		 	  if(pstmt!=null) pstmt.close();
+		 	  if(con!=null) con.close();
+		}
+  
+	  return s;
+		
+	}
 }
