@@ -13,123 +13,10 @@
 		</ul>
 		<div class="tab_container">
 			<div id="tab1" class="tab_content">
-<!-- 				<ul class="smk_accordion">
-					<li>
-						<div class="acc_head"><h3>충전신청</h3></div>
-						<div class="acc_content">
-							<div class="acc_content_in_2">
-								<div class="blue_wrap">
-									<div class="cash_box">
-										<div class="cash_in">
-											<div class="cash_1"><p style="float:left">보유금액</p><p style="float:right"><span  class="font_002">10,000,000</span> 원</p></div>
-											<div class="cash_2">
-												<input class="input_style03"  placeholder="비밀번호 입력 후 “전용계좌확인” 버튼을 클릭해주세요">
-											</div>
-											<div class="cash_3">
-												<a href="#"><span class="btn5">전용계좌확인</span></a>
-											</div>
-										</div>
-										<div class="cash_in">
-											<div class="cash_4">
-												<input class="input_style03"  placeholder="입금자명">		
-											</div>
-											<div class="cash_4">
-												<input class="input_style03"  placeholder="충전금액">		
-											</div>	
-											<div class="cash_5">
-												최소 충전 가능 금액은 1만원 입니다.
-											</div>
-										</div>
-										<div class="cash_in">
-											<a href="#"><span class="btn1">1만원</span></a> <a href="#"><span class="btn1">5만원</span></a> <a href="#"><span class="btn1">10만원</span></a> <a href="#"><span class="btn1">100만원</span></a> <a href="#"><span class="btn1">정정</span></a> <a href="#"><span class="btn3c">충전신청</span></a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li>
-						<div class="acc_head"><h3>충전신청 리스트</h3></div>
-						<div class="acc_content">
-							<div class="acc_content_in_2">
-								<table class="list_table" cellspacing="0" cellpadding="0" width="100%">
-									<tr>
-										<td class="list_table_t" width="10%">번호</td>
-										<td class="list_table_t" width="40%">신청일시</td>
-										<td class="list_table_t" width="25%">금액</td>
-										<td class="list_table_t" width="25%">상태</td>
-									</tr>
-									<tr>
-										<td class="list_table_center">123</td>
-										<td class="list_table_center">2017-02-02</td>
-										<td class="list_table_center"><span class="font_002">100,000</span>원</td>
-										<td class="list_table_center font_009">신청</td>
-									</tr>
-									<tr>
-										<td class="list_table_center">123</td>
-										<td class="list_table_center">2017-02-02</td>
-										<td class="list_table_center"><span class="font_002">100,000</span>원</td>
-										<td class="list_table_center font_010">대기</td>
-									</tr>
-									<tr>
-										<td class="list_table_center">123</td>
-										<td class="list_table_center">2017-02-02</td>
-										<td class="list_table_center"><span class="font_002">100,000</span>원</td>
-										<td class="list_table_center">완료</td>
-									</tr>
-								</table>
-								<div class="acc_btn_wrap"><a href="#"><div class="page"> >> </div></a> <a href="#"><span class="page"> > </span></a> <a href="#"><div class="page_on">1</div></a> <a href="#"><div class="page">2</div></a> <a href="#"><div class="page">3</div></a> <a href="#"><div class="page">4</div></a> <a href="#"><div class="page">5</div></a> <a href="#"><div class="page"> > </div></a> <a href="#"><div class="page"> >> </div></a></div>
-							</div>			
-						</div>
-					</li>
-					<li>
-						<div class="acc_head"><h3>충전신청 관련 유의사항</h3></div>
-						<div class="acc_content">
-							<div class="acc_content_in_2">
-								<ul class="cash_warning">
-									<li>· 수표 입금 불가</li>
-									<li>· 입금자명과 신청 금액이 입금 내용과 동일 해야 함 (상이 할 경우 환전 처리 불가)</li>
-									<li>· 의도적인 부정 환전 신청이 중복 될 경우 즉시 회원 자격이 상실 됩니다.</li>
-									<li>· 환전은 입금 후 5분 이내에 완료가 됩니다.</li>
-									<li>· 단, 해당 은행의 평일 점검, 서버 점검, 전산 장애가 있을 경우 환전이 지연 되오니 양해바랍니다.</li>
-								</ul>
-								<div class="cash_bank">
-									<span class="font_006">은행 점검 시간</span>	
-									<table cellspacing="0" cellpadding="0" class="back_table">
-										<tr>
-											<td class="bank_name b_left">국민은행</td>
-											<td class="bank_time">00 : 00 ~ 00 : 00</td>
-											<td class="bank_name">우리은행</td>
-											<td class="bank_time">00 : 00 ~ 00 : 00</td>
-										</tr>
-										<tr>
-											<td class="bank_name b_left">국민은행</td>
-											<td class="bank_time">00 : 00 ~ 00 : 00</td>
-											<td class="bank_name">우리은행</td>
-											<td class="bank_time">00 : 00 ~ 00 : 00</td>
-										</tr>
-										<tr>
-											<td class="bank_name b_left">국민은행</td>
-											<td class="bank_time">00 : 00 ~ 00 : 00</td>
-											<td class="bank_name">우리은행</td>
-											<td class="bank_time">00 : 00 ~ 00 : 00</td>
-										</tr>
-										<tr>
-											<td class="bank_name b_left">국민은행</td>
-											<td class="bank_time">00 : 00 ~ 00 : 00</td>
-											<td class="bank_name">우리은행</td>
-											<td class="bank_time">00 : 00 ~ 00 : 00</td>
-										</tr>
-									</table>	
-								</div>
-							</div>
-						</div>
-					</li>
-				</ul> -->
 				<jsp:include page="charge_tab.jsp" />
 			</div>
 			<div id="tab2" class="tab_content">
-				<ul class="smk_accordion">
+				<!-- <ul class="smk_accordion">
 					<li>
 						<div class="acc_head"><h3>환전신청</h3></div>
 						<div class="acc_content">
@@ -232,7 +119,8 @@
 							</div>
 						</div>
 					</li>
-				</ul>	
+				</ul> -->	
+				<jsp:include page="exchange_tab.jsp" />
 			</div>
 			<div id="tab3" class="tab_content">
 				<ul class="smk_accordion">

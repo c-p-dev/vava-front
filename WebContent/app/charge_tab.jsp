@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script><!-- switch -->
+<link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"><!-- gateway -->
+
 <style>
 	.add-money{
 		cursor: pointer;
@@ -7,6 +10,49 @@
 		margin:0px;
 		display: none;
 	}
+	
+	/*datatable*/
+	.dataTables_wrapper .dataTables_paginate {
+	     float: none!important; 
+	    text-align: center!important;
+	    padding-top: 20px!important;
+	}
+	.dataTables_wrapper .dataTables_paginate .paginate_button{
+		padding: 8px 12px 8px 12px!important;
+	    font-size: 12px!important;
+	    border-radius: 3px!important;
+	    display: inline-block!important;
+	    background: #2b2d2e!important;
+	    color:white!important;
+	}
+	.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+	    color: #333 !important;
+	    color: #ffffff!important;
+	    background: #0792c4!important;
+	    border:none!important;
+	}
+	.dataTables_wrapper {
+	    width: 100%!important;
+	    margin: 0 0 20px 0!important;
+	    border-top: solid 1px #0792c4!important;
+	}
+	table.dataTable thead th{ 
+	    color: #ffffff!important;
+	    background: #151516!important;
+	    /*height: 40px!important;*/
+	    text-align: center!important;
+	    border-bottom: solid 1px #000000!important;
+	}
+	table.dataTable tbody tr {
+	    background-color: transparent;
+	}
+	table.dataTable tbody td {
+	     padding: 0px; 
+	    text-align: center;
+	    border-bottom: solid 1px #2e3032;
+	    height: 40px;
+	}
+
 </style>
 <jsp:useBean id="bean" class="net.vavasoft.bean.UserBean" />
 <%
@@ -15,10 +61,6 @@
 		bean = (net.vavasoft.bean.UserBean) session.getAttribute("currentSessionUser");	
 	}
 %>
-
-
-
-
 <ul class="smk_accordion">
 	<li>
 		<div class="acc_head"><h3>충전신청</h3></div>
@@ -114,37 +156,12 @@
 		</div>
 	</li>
 	<li>
-		<div class="acc_head"><h3>충전신청 리스트</h3></div>
+		<div class="acc_head dt_div"><h3>충전신청 리스트</h3></div>
 		<div class="acc_content">
 			<div class="acc_content_in_2">
-				<table class="list_table" cellspacing="0" cellpadding="0" width="100%">
-					<tr>
-						<td class="list_table_t" width="10%">번호</td>
-						<td class="list_table_t" width="40%">신청일시</td>
-						<td class="list_table_t" width="25%">금액</td>
-						<td class="list_table_t" width="25%">상태</td>
-					</tr>
-					<tr>
-						<td class="list_table_center">123</td>
-						<td class="list_table_center">2017-02-02</td>
-						<td class="list_table_center"><span class="font_002">100,000</span>원</td>
-						<td class="list_table_center font_009">신청</td>
-					</tr>
-					<tr>
-						<td class="list_table_center">123</td>
-						<td class="list_table_center">2017-02-02</td>
-						<td class="list_table_center"><span class="font_002">100,000</span>원</td>
-						<td class="list_table_center font_010">대기</td>
-					</tr>
-					<tr>
-						<td class="list_table_center">123</td>
-						<td class="list_table_center">2017-02-02</td>
-						<td class="list_table_center"><span class="font_002">100,000</span>원</td>
-						<td class="list_table_center">완료</td>
-					</tr>
-				</table>
-				<div class="acc_btn_wrap"><a href="#"><div class="page"> >> </div></a> <a href="#"><span class="page"> > </span></a> <a href="#"><div class="page_on">1</div></a> <a href="#"><div class="page">2</div></a> <a href="#"><div class="page">3</div></a> <a href="#"><div class="page">4</div></a> <a href="#"><div class="page">5</div></a> <a href="#"><div class="page"> > </div></a> <a href="#"><div class="page"> >> </div></a></div>
-			</div>			
+				<table id="dataTable1" cellspacing="0" cellpadding="0" data-scroll-x="true" style="width: 100%!important;">
+            	</table>
+			</div>
 		</div>
 	</li>
 	<li>
@@ -213,7 +230,7 @@
 <script>
 	$(document).ready(function(){
 		
-		
+		var $dataTable1;
 
 		$(".add-money").on("click",function(e){
 			var am = $(this).attr("data-am");
@@ -229,13 +246,14 @@
 				if(data !="" || data !=null){
 					// data = bank_name - bank_owner - bank_number
 					$("#bankInfoTxt").val(data); 
+
 				}else{
 					alert("something went wrong");
 				}
 			});
 		});
 
-		 $('#chargeSuccesModal').popup({
+		$('#chargeSuccesModal').popup({
 	      	transition: 'all 0.3s',
 	      	scrolllock: true,
 	      	onclose:function(){
@@ -243,10 +261,79 @@
 	    	}
 	    });
 
-		 $("#cs_close").on("click",function(e){
+		$(".cs_close").on("click",function(e){
 			e.preventDefault();
+			$dataTable1.ajax.reload();
+	    	$dataTable1.columns.adjust().draw();
 			$("#chargeSuccesModal").popup("hide");
+
 		});
+
+		$dataTable1 = $('#dataTable1').DataTable({
+			ajax : 'process/application/charge/getChargeList.jsp',
+			bProcessing: true,
+			sAjaxDataProp:"",
+			searching: false,
+			bInfo : false,
+			lengthChange: false,
+			autowWidth:true,
+            columns : [
+                	{ 
+                        data   : 'chid',
+                        title  : '번호',
+
+                    },
+                    { 
+                        data   : 'regdate',
+                        title  : '신청일시',
+                    },
+                    { 
+                        data   : 'money',
+                        title  : '금액',
+                        render : function(data,type,row,meta){
+                        	var html = '<span class="font_002">'+data+'</span> 원';
+                        	return html;
+                        }
+                    },
+                    { 
+                        data   : 'chstate',
+                        title  : '상태',
+                       	render : function(data,type,row,meta){
+                        	var html = '<span class="font_009">신청<span>'; // pending
+                        	if(data == "DONE"){
+                        		html = '<span>완료</span>'; // complete
+                        	}else if(data=="WAIT"){
+                        		html = '<span class="font_010">대기</span>';
+                        	}
+                        	return html;
+                        }
+                       
+                    },
+                ],
+        	pagingType: "full_numbers",
+            language: {
+			    paginate: {
+			      	previous: "<",
+			      	next: ">",
+			      	first: "<<",
+			      	last: ">>",
+			    }
+			},
+            rowCallback : function(row , data , index) {
+                
+            },
+            drawCallback: function( settings ) {
+                
+            }
+        });
+
+
+        $(".dt_div").on("click",function(){
+        	
+        	setTimeout(function() {
+			  	$dataTable1.columns.adjust().draw();
+			}, 100);
+        });
 
 	});
 
@@ -302,8 +389,9 @@
 		submitHandler: function(form) {
 			var data = $("#chargeForm").serializeJSON();
 		    submitCharge(data);
-	  	}
+		
 
+	  	}
 	});
 
 	function addAmount(amount){

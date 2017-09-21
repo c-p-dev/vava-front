@@ -15,6 +15,7 @@ import net.vavasoft.bean.UserBean;
 import test.BetConManager_Test2;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -341,6 +342,7 @@ public class UserDao {
 	}
 	
 	public boolean saveChargeApplication(String userid,int siteid,String charge_level,String bank_name, String bank_owner,String bank_num,int money,String ip) throws SQLException {
+
 		Connection con = null;
 		Statement stmt = null;
 		int row = 0;
@@ -377,5 +379,144 @@ public class UserDao {
 		
 		return result;
 			
+	}
+	
+	public List<HashMap> getUserChargeList(String userid){
+		Gson gson = new Gson();
+		List<HashMap> list = new ArrayList<HashMap>();
+		String result = "";
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String query = "SELECT * FROM RT01.dbo.charge_lst WHERE userid = ?";
+		DecimalFormat formatter = new DecimalFormat("#,###");
+		DateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd");
+		
+		try{	      
+			
+		 	Context initContext = new InitialContext();
+		 	Context envContext = (Context)initContext.lookup("java:/comp/env");
+			DataSource ds = (DataSource)envContext.lookup("jdbc/vava");
+						 	
+			con = ds.getConnection();			 	
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1,userid);
+			rs = pstmt.executeQuery();
+					   
+			while(rs.next()){
+				HashMap<String, Object> hsm = new HashMap<String, Object>();
+				hsm.put("chid", (rs.getString("chid") != null ? rs.getString("chid") : null));
+				hsm.put("regdate", (rs.getString("regdate") != null ? dateFormater.format(dateFormater.parse(rs.getString("regdate"))) : null));
+				double amount = (rs.getString("money_req") != null ? Double.parseDouble(rs.getString("money_req")) : 0);
+				hsm.put("money", formatter.format(amount));
+				hsm.put("chdate", (rs.getString("chdate") != null ? rs.getString("chdate") : null));
+				hsm.put("chstate", (rs.getString("chstate") != null ?  rs.getString("chstate") : null));
+				
+				list.add(hsm);
+			}
+			
+			
+			
+			rs.close();
+	        pstmt.close();
+	        con.close();
+	  		    
+		} catch(Exception e){
+			System.out.println(e);
+			e.printStackTrace();
+		} 
+	  	return list;
+		
+	}
+	
+	
+	
+	
+	
+	public boolean withdraw(String userid,int siteid,String bank_name, String bank_num, String bank_owner, String reg_date, String ip, int withdraw ) throws SQLException{
+	      
+		  Connection con = null;
+		  Statement stmt = null;
+		  int row = 0;
+		  boolean result = false;
+		  
+			try{
+			
+				Context initContext = new InitialContext();
+			 	Context envContext = (Context)initContext.lookup("java:/comp/env");
+				DataSource ds = (DataSource)envContext.lookup("jdbc/vava");
+				System.out.println(bank_name);
+			    con = ds.getConnection();
+			    Date date = new Date();
+			    String  query = "INSERT INTO RT01.dbo.withdraw_lst (siteid,userid,bank_name,bank_owner,bank_num,money,regdate,wddate,wdstate,ip,viewtype,money_req) values "+" "
+			    		+ "("+siteid+", '"+userid+"','"+bank_name+"', '"+bank_owner+"', '"+bank_num+"', '"+withdraw+"','"+sdf.format(date)+"','"+sdf.format(date)+"','PEND', '123456' ,'y','"+withdraw+"')";			
+				
+				stmt = con.createStatement();
+				row = stmt.executeUpdate(query);
+				System.out.print("pasok ang query");
+				stmt.close();
+				con.close();
+				
+				if(row > 0) result = true;
+				
+				return result;
+	            	
+		  	}catch(Exception e){
+		  		System.out.print(e);
+		  		System.out.println("sala ang query");
+		  		System.out.println(siteid);
+		  		System.out.println(userid);
+		  		System.out.println(bank_name);
+		  		System.out.println(bank_owner);
+		  		System.out.println(bank_num);
+		  		System.out.println(withdraw);
+		  		System.out.println(reg_date);
+		  		
+		  		return false;
+
+		  	}finally{
+		  		if(stmt!=null) stmt.close();
+		  		if(con!=null) con.close();
+		  	}
+	}
+	public String getMoneyFromDB(String id) throws SQLException{
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		  
+		String s = "";
+		  
+		String query = "SELECT money from RT01.dbo.user_mst where userid='matthew'" ;
+		  
+		try{	      
+			
+		 	Context initContext = new InitialContext();
+		 	Context envContext = (Context)initContext.lookup("java:/comp/env");
+			DataSource ds = (DataSource)envContext.lookup("jdbc/vava");
+						 	
+			con = ds.getConnection();			 	
+			pstmt = con.prepareStatement(query);
+			rs = pstmt.executeQuery();
+					        
+			if(rs.next()){		        	
+				s = rs.getString("money");
+			}
+
+	        rs.close();
+	        pstmt.close();
+	        con.close();
+	  		    
+		} catch(Exception e){
+		       	e.printStackTrace();
+		
+		} finally{
+		 	  if(rs!=null) rs.close();
+		 	  if(pstmt!=null) pstmt.close();
+		 	  if(con!=null) con.close();
+		}
+  
+	  return s;
+		
 	}
 }

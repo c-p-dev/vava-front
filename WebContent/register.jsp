@@ -327,7 +327,7 @@
 			        },
 		      	},
 		      	minlength:4,
-		      	maxlength:15,
+		      	maxlength:12,
 		      	regex:true,
 			},
 			bank_name :{
