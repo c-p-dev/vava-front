@@ -156,6 +156,11 @@ $(document).ready(function () {
       transition: 'all 0.3s',
       scrolllock: true
     });
+	 
+	 $('#fade_9').popup({
+      transition: 'all 0.3s',
+      scrolllock: true
+    });
 });
 </script>
 
@@ -555,6 +560,20 @@ $(document).ready(function () {
 	</div>
 </div>
 
+<div id="fade_9" class="bg_mask_pop9">
+	<div class="bg_mask_pop_title">
+		<span class="popup_logo"><img src="images/popup_logo.png"></span>
+		<span class="popup_close fade_9_close"><img src="images/popup_close.png"></span>
+	</div>
+	
+	<div class="bg_mask_pop9_in">
+		<p class="pop_text_title">1:1문의하기</p>
+		<div class="inquiry_wrap">
+			<iframe id = 'game-pop-frame' src = '' width = "100%" height = "650px" allowFullscreen = 1></iframe>
+		</div>
+	</div>
+</div>
+
 
 <div id="contents_wrap">
 	<div class="contents">
@@ -566,6 +585,7 @@ $(document).ready(function () {
 		<a class="fade_6_open" href="#fade_6"><span class="btn3c">쪽지함</span></a>
 		<a class="fade_7_open" href="#fade_7"><span class="btn3c">전용계좌확인</span></a>
 		<a class="fade_8_open" href="#fade_8"><span class="btn3c">강제팝업</span></a>
+		<a class="fade_9_open" href="#fade_9"><span class="btn3c">Game Popup</span></a>
 	</div>
 </div>
 

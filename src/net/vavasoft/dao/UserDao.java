@@ -62,6 +62,8 @@ public class UserDao {
 					uib.setBank_name(rs.getString("bank_name"));
 					uib.setBank_owner(rs.getString("bank_owner"));
 					uib.setBank_num(rs.getString("bank_num"));	
+					uib.setCharge_level(rs.getString("charge_level"));
+					uib.setSiteid(rs.getInt("siteid"));
 				}else{
 					uib.setLoginStatus(1); // wrong password
 				}
@@ -212,12 +214,7 @@ public class UserDao {
 		
 	}
 	
-	
 
-	
-	
-	
-	
 	public UserBean getUserByUserId(String user_id)
 	{
 		Connection con 			= null;
@@ -242,7 +239,7 @@ public class UserDao {
             if (rs.next()) {
             	user_data.setUserid(rs.getString("userid"));
             	user_data.setPasswd(rs.getString("passwd"));
-            	user_data.setSiteid(rs.getString("siteid"));
+            	user_data.setSiteid(rs.getInt("siteid"));
             	user_data.setMoney(rs.getInt("money"));
             	user_data.setPoint(rs.getInt("point"));
             	user_data.setNick(rs.getString("nick"));
@@ -271,6 +268,7 @@ public class UserDao {
 	}
 	
 	public int setUserMoney(String user_id, double money) {
+
 		Connection con 			= null;
 		PreparedStatement pstmt = null;
 		int sts					= 0;
@@ -297,5 +295,87 @@ public class UserDao {
 		}
 		
 		return sts;
+	}
+	
+	public String getUserBankConfigAccount(int siteid,String charge_level) throws SQLException{
+		String bankAccount = "";
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			Context initContext = new InitialContext();
+		 	Context envContext = (Context)initContext.lookup("java:/comp/env");
+			DataSource ds = (DataSource)envContext.lookup("jdbc/vava");
+		
+		    String query = "";
+		    query = "SELECT CONCAT(bank_low_name,' ' ,bank_low_owner,' ',bank_low_num) as bank_account from dbo.config_mst WHERE siteid="+siteid;
+		    
+		    if(charge_level == "HIGH"){
+		    	query = "SELECT CONCAT(bank_high_name,' ' ,bank_high_owner,' ',bank_high_num) as bank_account from dbo.config_mst WHERE siteid="+siteid; 
+			}else if(charge_level == "MIDDLE"){
+				query = "SELECT CONCAT(bank_middle_name,' ' ,bank_middle_owner,' ',bank_middle_num) as bank_account from dbo.config_mst WHERE siteid="+siteid; 
+			}
+			
+		    con = ds.getConnection();			 	
+			pstmt = con.prepareStatement(query);
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				bankAccount =  rs.getString("bank_account");
+			}
+
+		
+			
+		} catch(Exception e){
+			logger.debug(e);
+			
+		}finally {
+			if(rs!=null) rs.close();
+			if(pstmt!=null) pstmt.close();
+	  		if(con!=null) con.close();
+		}
+		
+		return bankAccount;
+		
+	}
+	
+	public boolean saveChargeApplication(String userid,int siteid,String charge_level,String bank_name, String bank_owner,String bank_num,int money,String ip) throws SQLException {
+		Connection con = null;
+		Statement stmt = null;
+		int row = 0;
+		boolean result = false;
+		Date date = new Date();
+		String  query = "INSERT INTO RT01.dbo.charge_lst (userid,siteid,charge_level,bank_name,bank_owner,bank_num,money_req,user_grade,regdate,chstate,ip,viewtype) "+
+				" VALUES ('"+userid+"',"+siteid+",'"+charge_level+"','"+bank_name+"','"+bank_owner+"','"+bank_num+"',"+money+",1,'"+sdf.format(date)+"','PEND','"+ip+"','Y')";
+		try{
+		
+			Context initContext = new InitialContext();
+		 	Context envContext = (Context)initContext.lookup("java:/comp/env");
+			DataSource ds = (DataSource)envContext.lookup("jdbc/vava");
+	
+		    con = ds.getConnection();		
+			stmt = con.createStatement();
+			row = stmt.executeUpdate(query); 
+			logger.debug(query);
+			logger.debug(row);
+			stmt.close();
+			con.close();
+			logger.debug(row);
+			if(row > 0) result = true;
+		
+		
+			
+	  	}catch(Exception e){
+	  		logger.debug(query);
+	  		e.printStackTrace();
+	  
+	  	}finally{
+	  		if(stmt!=null) stmt.close();
+	  		if(con!=null) con.close();
+	  	}
+		
+		return result;
+			
 	}
 }

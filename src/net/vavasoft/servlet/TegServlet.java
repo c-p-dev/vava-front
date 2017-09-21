@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
+import net.vavasoft.bean.UserBean;
 import net.vavasoft.controller.TotalEgameController;
 
 
@@ -33,7 +34,12 @@ public class TegServlet extends HttpServlet {
 		
 		switch (Integer.valueOf(method)) {
 			case 1:
-				srv_resp = teg_ctrl.userPlayCheck();
+				UserBean user_data	= (UserBean)request.getSession().getAttribute("currentSessionUser");
+				String username 	= user_data.getUserid();
+				int game_provider	= Integer.valueOf(request.getParameter("gm_provdr"));
+
+				srv_resp = teg_ctrl.userPlayCheck(username, game_provider);
+				output.print(srv_resp);
 				break;
 			
 			case 0:
@@ -41,9 +47,6 @@ public class TegServlet extends HttpServlet {
 				break;
 		}
 		
-		response.setContentType("application/json");
-
-		output.print(srv_resp);
 		output.flush();
 	}
 	

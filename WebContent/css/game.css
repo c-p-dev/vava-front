@@ -324,7 +324,7 @@
 .casino_name {text-align:center; color:#ffffff; }
 .img {position: relative;float: left;overflow: hidden;}
 .overlay {display: block;position: absolute;z-index: 20;background: rgba(0, 0, 0, 0.8);overflow: hidden;-webkit-transition: all 0.5s;-moz-transition: all 0.5s;-o-transition: all 0.5s;transition: all 0.5s;}
-.expand {display: block;position: absolute;z-index: 100;width: 30px;height: 30px;border: solid 3px #fff;text-align: center;color: #fff;line-height: 30px;font-weight: 700;font-size: 30px;-webkit-border-radius: 30px;-moz-border-radius: 30px;-ms-border-radius: 30px;-o-border-radius: 30px;border-radius: 30px;}
+.expand {display: block;position: absolute;z-index: 100;width: 100px;height: 30px;border: solid 3px #fff;text-align: center;color: #fff;line-height: 30px;font-weight: 700;font-size: 20px;-webkit-border-radius: 30px;-moz-border-radius: 30px;-ms-border-radius: 30px;-o-border-radius: 30px;border-radius: 30px;}
 .overlay {bottom: 0;left: 0;right: 0;width: 100%;height: 0;}
 .overlay .expand {left: 0;right: 0;bottom: 55%;margin: 0 auto -30px auto;}
 .img.hover .overlay {height: 100%;}

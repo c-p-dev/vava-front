@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="../header.jsp" />
 <jsp:useBean id="bean" class="net.vavasoft.bean.UserBean" />
+<%@page import="net.vavasoft.dao.GameDao, net.vavasoft.bean.GameBean, java.util.*"%>
+
 <%
 	boolean checkSession = false;
 	// UserBean currentUser = (UserBean) session.getAttribute("currentSessionUser");
@@ -9,6 +11,9 @@
 		checkSession = true;
 		out.print(bean.getNick());  
 	}
+	
+	GameDao game_dao			= new GameDao();
+	List<GameBean> game_list	= game_dao.getAllGames();
 %>
 
 <div id="contents_wrap">
@@ -66,123 +71,28 @@
 					<div id="tab1" class="tab_content">
 						<div class="casino_board_wrap">
 							<ul class="casino_board_list">
+							
+								<%
+									for (int i = 0; i < game_list.size(); i++) {
+										GameBean cur_game = game_list.get(i);
+								%>
 								<li>
-									<a href="#">
+									<a href="#" data-gm_provdr = '<%=cur_game.getGame_provider()%>'>
 										<div class="img casino_board_img">
-											<img src="images/cazino_img.jpg">
+											<img src="images/<%=cur_game.getGame_img()%>" style = 'width: 320px; height: 195px;'>
 											<div class="overlay">
-												 <span class="expand">+</span>
+												 <span class="expand">Play now</span>
 											</div>
 										</div>
 									</a>
 									<div class="casino_board_text">
-										<p class="casino_name">제목에 오신걸 환영합니다.</p>
+										<p class="casino_name"><%=cur_game.getGame_name()%></p>
 									</div>
 								</li>
-								<li>
-									<a href="#">
-										<div class="img casino_board_img">
-											<img src="images/cazino_img.jpg">
-											<div class="overlay">
-												 <span class="expand">+</span>
-											</div>
-										</div>
-									</a>
-									<div class="casino_board_text">
-										<p class="casino_name">제목에 오신걸 환영합니다.</p>
-									</div>
-								</li>
-								<li>
-									<a href="#">
-										<div class="img casino_board_img">
-											<img src="images/cazino_img.jpg">
-											<div class="overlay">
-												 <span class="expand">+</span>
-											</div>
-										</div>
-									</a>
-									<div class="casino_board_text">
-										<p class="casino_name">제목에 오신걸 환영합니다.</p>
-									</div>
-								</li>
-								<li>
-									<a href="#">
-										<div class="img casino_board_img">
-											<img src="images/cazino_img.jpg">
-											<div class="overlay">
-												 <span class="expand">+</span>
-											</div>
-										</div>
-									</a>
-									<div class="casino_board_text">
-										<p class="casino_name">제목에 오신걸 환영합니다.</p>
-									</div>
-								</li>
-								<li>
-									<a href="#">
-										<div class="img casino_board_img">
-											<img src="images/cazino_img.jpg">
-											<div class="overlay">
-												 <span class="expand">+</span>
-											</div>
-										</div>
-									</a>
-									<div class="casino_board_text">
-										<p class="casino_name">제목에 오신걸 환영합니다.</p>
-									</div>
-								</li>
-								<li>
-									<a href="#">
-										<div class="img casino_board_img">
-											<img src="images/cazino_img.jpg">
-											<div class="overlay">
-												 <span class="expand">+</span>
-											</div>
-										</div>
-									</a>
-									<div class="casino_board_text">
-										<p class="casino_name">제목에 오신걸 환영합니다.</p>
-									</div>
-								</li>
-								<li>
-									<a href="#">
-										<div class="img casino_board_img">
-											<img src="images/cazino_img.jpg">
-											<div class="overlay">
-												 <span class="expand">+</span>
-											</div>
-										</div>
-									</a>
-									<div class="casino_board_text">
-										<p class="casino_name">제목에 오신걸 환영합니다.</p>
-									</div>
-								</li>
-								<li>
-									<a href="#">
-										<div class="img casino_board_img">
-											<img src="images/cazino_img.jpg">
-											<div class="overlay">
-												 <span class="expand">+</span>
-											</div>
-										</div>
-									</a>
-									<div class="casino_board_text">
-										<p class="casino_name">제목에 오신걸 환영합니다.</p>
-									</div>
-								</li>
-								<li>
-									<a href="#">
-										<div class="img casino_board_img">
-											<img src="images/cazino_img.jpg">
-											<div class="overlay">
-												 <span class="expand">+</span>
-											</div>
-										</div>
-									</a>
-									<div class="casino_board_text">
-										<p class="casino_name">제목에 오신걸 환영합니다.</p>
-									</div>
-								</li>
+								<%
+									}
+								%>
+								
 							</ul>
 							<script>
 								$(document).ready(function(){
@@ -254,17 +164,30 @@
 
 <script>
 	$(document).ready(function () {
-		$(".casino_board_list li a").on("click",function(e){
-			e.preventDefault();
-			var session = "<%=checkSession%>";
-			console.log("<%=checkSession%>");
-			if(!session || session == false || session == "false"){
+		$(".casino_board_list li a").on("click",function(e) {
+			
+			var session 	= "<%=checkSession%>";
+
+			if ((!session)
+			|| (false == session)
+			|| ("false" == session)) {
 				$('#fade_3').popup('show');
-			}else{
-				alert("go to game");
+			}
+			else {
+				$('#fade_9').popup('show');
+				
+				$.get("TegServlet?method=1&gm_provdr="+$(this).data('gm_provdr'), function(srv_resp) {
+					
+					if ("" != srv_resp) {
+						$('#game-pop-frame').attr('src', srv_resp);						
+					}
+					else {
+						$('#gm-pop-errmsg').html("An error occured. Please reload the game.");
+					}
+				});
 			}
 
-
+			return false;
 		})
 	});
 </script>

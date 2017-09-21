@@ -35,7 +35,9 @@
 <script type="text/javascript" src="<%=baseUrl%>js/text_slide.js"></script><!-- text_slide -->
 <script type="text/javascript" src="<%=baseUrl%>js/switch.js"></script><!-- switch -->
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.serializeJSON/2.8.1/jquery.serializejson.js"></script><!-- json serializer -->
+<script type="text/javascript" src="<%=baseUrl%>js/jquery.validate.js"></script> 
+<script type="text/javascript" src="<%=baseUrl%>js/additional-methods.js"></script>
+<script type="text/javascript" src="<%=baseUrl%>js/jquery.serializejson.js"></script><!-- json serializer -->
 
 <link href="<%=baseUrl%>css/common.css" rel="stylesheet" type="text/css"><!--공통-->
 <link href="<%=baseUrl%>css/layout.css" rel="stylesheet" type="text/css"><!--공통-->
@@ -43,6 +45,7 @@
 <link href="<%=baseUrl%>css/sub.css" rel="stylesheet" type="text/css"><!-- sub -->
 <link href="<%=baseUrl%>css/game.css" rel="stylesheet" type="text/css"><!-- game -->
 <link href="<%=baseUrl%>css/gateway.css" rel="stylesheet" type="text/css"><!-- gateway -->
+
 </head>
 
 <style>
@@ -279,3 +282,4 @@ $('a').click(function(){
 <!-- jsp include -->
 <jsp:include page="login.jsp" />
 <jsp:include page="register.jsp" />
+<jsp:include page="game-pop.jsp" />
