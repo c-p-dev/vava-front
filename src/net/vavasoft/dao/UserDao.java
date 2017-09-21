@@ -212,12 +212,6 @@ public class UserDao {
 		
 	}
 	
-	
-
-	
-	
-	
-	
 	public UserBean getUserByUserId(String user_id)
 	{
 		Connection con 			= null;

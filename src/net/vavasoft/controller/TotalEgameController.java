@@ -119,11 +119,8 @@ public class TotalEgameController {
 		return srv_resp;
 	}
 	
-	public String userPlayCheck()
-	{
-		String username 	= "agent009";
-		int game_provider 	= 2;
-		
+	public String userPlayCheck(String username, int game_provider)
+	{	
 		/*	Variable Declaration	*/
 		Gson gson				= new Gson();
 		String game_url_base	= "https://webservice.basestatic.net/ETILandingPage/index.aspx?";
@@ -160,7 +157,7 @@ public class TotalEgameController {
 		/*--------------------------------------------------------------------
         |	Game is from MicroGaming (TotalEgame API)
         |-------------------------------------------------------------------*/
-		if (2 == game_provider) {
+		if (1 == game_provider) {
 			/*	Deposit all money from VAVA to MG	*/
 			srv_resp		= this.deposit(username, money);
 			deposit_data	= gson.fromJson(srv_resp, MgDepositBean.class);
