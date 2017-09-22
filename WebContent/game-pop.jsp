@@ -26,9 +26,8 @@
 	      		$('#gm-pop-errmsg').html("");
 	      		
 				$.get("TegServlet?method=2", function(srv_resp) {
-					
-					if (1 == srv_resp) {
-						console.log('ow yeah')
+					if ('null' != srv_resp.money) {
+						$('.money_dsp').text(number_format(srv_resp.money, 2));
 					}
 				});
 	    	}

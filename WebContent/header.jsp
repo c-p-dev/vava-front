@@ -1,10 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="net.vavasoft.bean.UserBean"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="net.vavasoft.bean.UserBean, net.vavasoft.dao.UserDao, java.text.DecimalFormat"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <%
 	String url = request.getRequestURL().toString(); 
 	String baseUrl = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
+	DecimalFormat dfrmt				= new DecimalFormat("#,###,###,###,###.00");
 %>
 <base href="<%=baseUrl%>" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -145,8 +146,11 @@ $('a').click(function(){
 </script>
 <%
 	boolean checkSession = false;
-	UserBean currentUser = (UserBean) session.getAttribute("currentSessionUser");
-	if(session.getAttribute("currentSessionUser") != null){
+	UserDao user_db			= new UserDao();
+	UserBean user_data		= (UserBean)session.getAttribute("currentSessionUser");
+	UserBean currentUser 	= user_data;
+	if(session.getAttribute("currentSessionUser") != null) {
+		currentUser 		= user_db.getUserByUserId(user_data.getUserid());
 		checkSession = true;
 	}
 %>
@@ -181,7 +185,7 @@ $('a').click(function(){
         	if(checkSession){
         %>
 		<ul class="util_right">
-			<li>머니 <span class="util_money"><%=currentUser.getMoney()%></span></li>
+			<li>머니 <span class="util_money money_dsp"><%=dfrmt.format(currentUser.getMoney())%></span></li>
             <li>포인트 <span class="util_point"><%=currentUser.getPoint()%></span></li>
             <li>
 				<span class="popover-wrapper right">

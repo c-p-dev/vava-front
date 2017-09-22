@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="net.vavasoft.dao.GameDao, java.text.DecimalFormat, java.util.*"%>
+
 <style>
 	.add-money{
 		cursor: pointer;
@@ -10,7 +12,8 @@
 </style>
 <jsp:useBean id="bean" class="net.vavasoft.bean.UserBean" />
 <%
-	java.util.Formatter formatter = new java.util.Formatter();
+	DecimalFormat dfrmt				= new DecimalFormat("#,###,###,###,###.00");
+
 	if(session.getAttribute("currentSessionUser") != null){
 		bean = (net.vavasoft.bean.UserBean) session.getAttribute("currentSessionUser");	
 	}
@@ -26,7 +29,7 @@
 					<div class="blue_wrap">
 						<div class="cash_box">
 							<div class="cash_in">
-								<div class="cash_1"><p style="float:left">보유금액</p><p style="float:right"><span  class="font_002" id="money"><%=formatter.format("%.2f", (float) bean.getMoney())%></span>원 </p></div>
+								<div class="cash_1"><p style="float:left">보유금액</p><p style="float:right"><span class="font_002 money_dsp" id="money"><%=dfrmt.format(bean.getMoney())%></span>원 </p></div>
 							</div>
 							<div class="cash_in">
 								<div class="cash_4">

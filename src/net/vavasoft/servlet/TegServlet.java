@@ -12,8 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
+import com.google.gson.Gson;
+
 import net.vavasoft.bean.UserBean;
 import net.vavasoft.controller.TotalEgameController;
+import net.vavasoft.dao.UserDao;
 
 
 @WebServlet("/TegServlet")
@@ -27,6 +30,7 @@ public class TegServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
+		Gson gson						= new Gson();
 		TotalEgameController teg_ctrl	= new TotalEgameController();
 		String method 					= request.getParameter("method");
 		
@@ -46,12 +50,25 @@ public class TegServlet extends HttpServlet {
 			case 2:
 				UserBean udata_2	= (UserBean)request.getSession().getAttribute("currentSessionUser");
 				String uname_2 		= udata_2.getUserid();
-				int srv_resp_2		= 0;
+				String srv_resp_2	= "";
 				
-				srv_resp_2 			= teg_ctrl.transferMoneyToVava(uname_2);
+				srv_resp_2 			= gson.toJson(teg_ctrl.transferMoneyToVava(uname_2), UserBean.class);
+				
+				response.setContentType("application/json");
 				output.print(srv_resp_2);
 				break;
+			
+			case 3:
+				UserDao user_db		= new UserDao();
+				UserBean udata_3	= (UserBean)request.getSession().getAttribute("currentSessionUser");
+				String uname_3 		= udata_3.getUserid();
+				String srv_resp_3	= "";
 				
+				srv_resp_3 			= gson.toJson(user_db.getUserByUserId(udata_3.getUserid()));
+				
+				response.setContentType("application/json");
+				output.print(srv_resp_3);
+				break;
 			case 0:
 			default:
 				break;

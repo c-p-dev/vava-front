@@ -342,7 +342,10 @@ public class UserDao {
 	}
 	
 	public boolean saveChargeApplication(String userid,int siteid,String charge_level,String bank_name, String bank_owner,String bank_num,int money,String ip) throws SQLException {
-
+		
+		UserDao user_db		= new UserDao();
+		UserBean user_data	= new UserBean(); 
+		
 		Connection con = null;
 		Statement stmt = null;
 		int row = 0;
@@ -355,7 +358,7 @@ public class UserDao {
 			Context initContext = new InitialContext();
 		 	Context envContext = (Context)initContext.lookup("java:/comp/env");
 			DataSource ds = (DataSource)envContext.lookup("jdbc/vava");
-	
+			
 		    con = ds.getConnection();		
 			stmt = con.createStatement();
 			row = stmt.executeUpdate(query); 
@@ -364,9 +367,12 @@ public class UserDao {
 			stmt.close();
 			con.close();
 			logger.debug(row);
-			if(row > 0) result = true;
-		
-		
+			
+			if(row > 0) {
+				result = true;
+				user_data = user_db.getUserByUserId(userid);
+				user_db.setUserMoney(userid, user_data.getMoney() + money);
+			}
 			
 	  	}catch(Exception e){
 	  		logger.debug(query);

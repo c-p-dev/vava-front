@@ -68,7 +68,7 @@ public class TotalEgameController {
         |	Execute HTTP POST Request to TEG
         |-------------------------------------------------------------------*/
 		srv_resp 	= this.postToTeg(url, json_param);
-		
+		System.out.println(srv_resp);
 		return srv_resp;
 	}
 	
@@ -184,7 +184,7 @@ public class TotalEgameController {
 		return game_url_full;
 	}
 	
-	public int transferMoneyToVava(String username)
+	public UserBean transferMoneyToVava(String username)
 	{
 		Gson gson				= new Gson();
 		UserDao user_db			= new UserDao();
@@ -215,7 +215,7 @@ public class TotalEgameController {
 			ret = 1;
 		}
 		
-		return ret;
+		return user_profile;
 	}
 	
 	public String postToTeg(String url, String json_param)
@@ -265,4 +265,5 @@ public class TotalEgameController {
 		
 		return responseBody;
 	}
+
 }

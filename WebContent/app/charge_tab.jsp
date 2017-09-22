@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script><!-- switch -->
 <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"><!-- gateway -->
+<%@page import="net.vavasoft.dao.GameDao, java.text.DecimalFormat, java.util.*"%>
 
 <style>
 	.add-money{
@@ -56,7 +57,8 @@
 </style>
 <jsp:useBean id="bean" class="net.vavasoft.bean.UserBean" />
 <%
-	java.util.Formatter formatter = new java.util.Formatter();
+	DecimalFormat dfrmt				= new DecimalFormat("#,###,###,###,###.00");
+	
 	if(session.getAttribute("currentSessionUser") != null){
 		bean = (net.vavasoft.bean.UserBean) session.getAttribute("currentSessionUser");	
 	}
@@ -69,7 +71,7 @@
 				<div class="blue_wrap">
 					<div class="cash_box">
 						<div class="cash_in">
-							<div class="cash_1"><p style="float:left">보유금액</p><p style="float:right"><span  class="font_002"><%=formatter.format("%.2f", (float) bean.getMoney())%></span> 원</p></div>
+							<div class="cash_1"><p style="float:left">보유금액</p><p style="float:right"><span class="font_002 money_dsp"><%=dfrmt.format(bean.getMoney())%></span> 원</p></div>
 							<div class="cash_2">
 								<input class="input_style03" id="bankInfoTxt" placeholder="비밀번호 입력 후 “전용계좌확인” 버튼을 클릭해주세요">
 							</div>
@@ -395,7 +397,7 @@
 	});
 
 	function addAmount(amount){
-		console.log(amount);
+		
 		var current_am = parseInt($("#money").val()) || 0;
 		var am = 0;
 		var sum = 0;
@@ -416,8 +418,6 @@
 			sum = am + current_am;
 		}
 
-		
-		console.log(sum);
 		$("#money").val(sum);
 	}
 
@@ -431,6 +431,12 @@
 			console.log(data);
 			if(data){
 				$("#chargeSuccesModal").popup("show");
+				
+				$.get("TegServlet?method=3", function(srv_resp) {
+					if ('null' != srv_resp.money) {
+						$('.money_dsp').text(number_format(srv_resp.money, 2));
+					}
+				});
 			}
 		});
 		

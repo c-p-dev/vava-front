@@ -179,7 +179,8 @@
 				$.get("TegServlet?method=1&gm_provdr="+$(this).data('gm_provdr'), function(srv_resp) {
 					
 					if ("" != srv_resp) {
-						$('#game-pop-frame').attr('src', srv_resp);						
+						$('#game-pop-frame').attr('src', srv_resp);
+						$('.money_dsp').text('0.00');
 					}
 					else {
 						$('#gm-pop-errmsg').html("An error occured. Please reload the game.");

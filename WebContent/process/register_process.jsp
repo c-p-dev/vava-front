@@ -53,8 +53,8 @@
 			bet_profiles.add(bet_profile);
 			
 			user_profile.setPreferredAccountNumber(request.getParameter("userid").trim());
-			user_profile.setFirstName(request.getParameter("nick"));
-			user_profile.setLastName(request.getParameter("bank_owner").trim());
+			user_profile.setFirstName(request.getParameter("userid").trim().concat("FNAME"));
+			user_profile.setLastName(request.getParameter("userid").trim().concat("LNAME"));
 			user_profile.setEmail("");
 			user_profile.setMobilePrefix(mb_pref);
 			user_profile.setMobileNumber(request.getParameter("cell").trim());

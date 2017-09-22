@@ -23,7 +23,7 @@
 	    }else{
 	        ip =  new StringTokenizer(xForwardedForHeader, ",").nextToken().trim();
 	    }
-		result = ud.saveChargeApplication(bean.getUserid(),bean.getSiteid(),bean.getCharge_level(),bank_name,bank_owner,bank_num,money,ip);	
+		result = ud.saveChargeApplication(bean.getUserid(),bean.getSiteid(),bean.getCharge_level(),bank_name,bank_owner,bank_num,money,ip);
 		out.println(result);
 
 	}else{
