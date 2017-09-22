@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script><!-- switch -->
 <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"><!-- gateway -->
-
 <style>
 	.add-money{
 		cursor: pointer;
@@ -10,7 +9,18 @@
 		margin:0px;
 		display: none;
 	}
-	
+	select option{
+
+	    
+	    
+	    height: 30px;
+	    line-height: 30px;
+	    border-bottom: 1px solid #292f30;
+	    background: #1c2021;
+	    text-align: left;
+	    padding: 0 20px 0 20px;
+	    
+	}
 	/*datatable*/
 	.dataTables_wrapper .dataTables_paginate {
 	     float: none!important; 
@@ -50,8 +60,10 @@
 	     padding: 0px; 
 	    text-align: center;
 	    border-bottom: solid 1px #2e3032;
-	    height: 40px;
+	  	height: 40px;
 	}
+
+	
 
 </style>
 <jsp:useBean id="bean" class="net.vavasoft.bean.UserBean" />
@@ -81,6 +93,41 @@
 							<div class="cash_in">
 								<div class="cash_4">
 									<select class="input_style02" name="bank_name">
+										 	<option value="국민은행" selected>국민은행</option>
+										    <option value="기업은행">기업은행</option>
+										    <option value="경남은행">경남은행</option>
+										    <option value="광주은행">광주은행</option>
+										    <option value="동부증권">동부증권</option>
+										    <option value="대구은행">대구은행</option>
+										    <option value="부산은행">부산은행</option>
+										    <option value="산업은행">산업은행</option>
+										    <option value="삼성증권">삼성증권</option>
+										    <option value="삼성증권">신영증권</option>
+										    <option value="신한은행">신한은행</option>
+										    <option value="우리은행">우리은행</option>
+										    <option value="외환은행">외환은행</option>
+										    <option value="저축은행">저축은행</option>
+										    <option value="전북은행">전북은행</option>
+										    <option value="제주은행">제주은행</option>
+										    <option value="하나은행">하나은행</option>
+										    <option value="CITI은행">CITI은행</option>
+										    <option value="HSBC은행">HSBC은행</option>
+										    <option value="SC제일">SC제일</option>
+										    <option value="새마을금고">새마을금고</option>
+										    <option value="우체국">우체국</option>
+										    <option value="농협중앙회">농협중앙회</option>
+										    <option value="단위농협">단위농협</option>
+										    <option value="신협">신협</option>
+										    <option value="수협">수협</option>
+										    <option value="동양증권">동양증권</option>
+										    <option value="유진투자증권">유진투자증권</option>
+										    <option value="한국투자은행">한국투자은행</option>
+										    <option value="HMC투자증권">HMC투자증권</option>
+										    <option value="IBK투자증권">IBK투자증권</option>
+									</select>
+								</div>
+								<div class="cash_4">
+									<select class="sample" name="bank_name">
 										 	<option value="국민은행" selected>국민은행</option>
 										    <option value="기업은행">기업은행</option>
 										    <option value="경남은행">경남은행</option>
@@ -231,7 +278,6 @@
 	$(document).ready(function(){
 		
 		var $dataTable1;
-
 		$(".add-money").on("click",function(e){
 			var am = $(this).attr("data-am");
 			addAmount(am);

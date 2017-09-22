@@ -1,4 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css" rel="stylesheet" type="text/css"><!-- gateway -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.js"></script><!-- switch -->
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.css" rel="stylesheet" type="text/css"><!-- gateway -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.js"></script><!-- switch -->
+
+
 <style>
 	.input_warning{
 		display: none;
@@ -15,6 +23,43 @@
 	}
 	.form1-invalid {
 		border-color:#d50000!important;
+	}
+
+	.nice-select{
+		width: 100%;
+	    border: solid 1px #2e3032;
+        background: none;
+	    height: 40px;
+	    line-height: 40px;
+	    padding: 0 0 0 10px;
+	    color: #c1c3c4;
+	    border-radius: 0px;
+	}
+	.nice-select .list{
+		max-height: 200px;
+	    overflow-y: scroll;
+	    width: 100%;
+	    border-radius: 0px;
+	    background-color: #1c2021;
+	}
+	.nice-select .list li{
+		width: 100%;
+	    position: relative;
+	    overflow: hidden;
+	    height: 30px;
+	    line-height: 30px;
+	    border-bottom: 1px solid #292f30;
+	    background: #1c2021;
+	    text-align: left;
+	    padding: 0 10px 0 10px;
+	    cursor: pointer;
+	    background-color: !1c20
+	}
+	.nice-select .option:hover, .nice-select .option.focus, .nice-select .option.selected.focus {
+	    background: #252b2b;
+	}
+	.nice-select:hover {
+	    border-color: #2e3032;
 	}
 </style>
 <!-- member registration form -->
@@ -212,6 +257,39 @@
 					
 				</tr>
 			</table>
+			<select class="sample" name="bank_name2">
+				 	<option value="국민은행" selected>국민은행</option>
+				    <option value="기업은행">기업은행</option>
+				    <option value="경남은행">경남은행</option>
+				    <option value="광주은행">광주은행</option>
+				    <option value="동부증권">동부증권</option>
+				    <option value="대구은행">대구은행</option>
+				    <option value="부산은행">부산은행</option>
+				    <option value="산업은행">산업은행</option>
+				    <option value="삼성증권">삼성증권</option>
+				    <option value="삼성증권">신영증권</option>
+				    <option value="신한은행">신한은행</option>
+				    <option value="우리은행">우리은행</option>
+				    <option value="외환은행">외환은행</option>
+				    <option value="저축은행">저축은행</option>
+				    <option value="전북은행">전북은행</option>
+				    <option value="제주은행">제주은행</option>
+				    <option value="하나은행">하나은행</option>
+				    <option value="CITI은행">CITI은행</option>
+				    <option value="HSBC은행">HSBC은행</option>
+				    <option value="SC제일">SC제일</option>
+				    <option value="새마을금고">새마을금고</option>
+				    <option value="우체국">우체국</option>
+				    <option value="농협중앙회">농협중앙회</option>
+				    <option value="단위농협">단위농협</option>
+				    <option value="신협">신협</option>
+				    <option value="수협">수협</option>
+				    <option value="동양증권">동양증권</option>
+				    <option value="유진투자증권">유진투자증권</option>
+				    <option value="한국투자은행">한국투자은행</option>
+				    <option value="HMC투자증권">HMC투자증권</option>
+				    <option value="IBK투자증권">IBK투자증권</option>
+			</select>
 			<div class="text_center">모든 항목은 필수 입력 사항 입니다.</div>
 			<!-- <div class="btn_wrap"><a href="#"><span class="btn3c">회원가입</span></a></div> -->
 			<div class="btn_wrap">
@@ -283,6 +361,9 @@
 	    	$('#fade_1').popup("hide");
 	    	$('#fade_3').popup("show");
 	    });
+
+
+		$('.sample').niceSelect();
 	});
 
 	$.validator.addMethod(
@@ -422,7 +503,7 @@
 		submitHandler: function(form) {
 			var data = $("#form1").serializeJSON();
 			console.log(data);
-		    submitForm(data);
+		    // submitForm(data);
 		  
 	  	}
 

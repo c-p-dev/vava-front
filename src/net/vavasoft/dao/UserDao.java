@@ -65,6 +65,7 @@ public class UserDao {
 					uib.setBank_num(rs.getString("bank_num"));	
 					uib.setCharge_level(rs.getString("charge_level"));
 					uib.setSiteid(rs.getInt("siteid"));
+					
 				}else{
 					uib.setLoginStatus(1); // wrong password
 				}
@@ -92,6 +93,7 @@ public class UserDao {
 	      
 		  Connection con = null;
 		  Statement stmt = null;
+		  PreparedStatement pstmt = null;
 		  int row = 0;
 		  boolean result = false;
 		  
@@ -100,18 +102,28 @@ public class UserDao {
 				Context initContext = new InitialContext();
 			 	Context envContext = (Context)initContext.lookup("java:/comp/env");
 				DataSource ds = (DataSource)envContext.lookup("jdbc/vava");
-				
 			    con = ds.getConnection();
 			    Date date = new Date();
 			    String  query = "INSERT INTO RT01.dbo.user_mst (userid,siteid,passwd,cell,bank_name,bank_owner,bank_num,regdate,state,watch,charge_level,ip,reg_ip,nick,recommand) "+
-						" VALUES ('"+userid+"',1, '"+passwd+"','"+cell+"','"+bank_name+"','"+bank_owner+"','"+bank_num+"','"+sdf.format(date)+"','NORMAL','N','LOW','"+ip+"','"+ip+"','"+nick+"','"+recommand+"')" ;
+						" VALUES (?,1,?,? ,?,?,?,?,'NORMAL','N','LOW',?,?,?,?)";
 									
-				stmt = con.createStatement();
+			    pstmt = con.prepareStatement(query);
+			    pstmt.setString(1,userid);
+			    pstmt.setString(2,passwd);
+			    pstmt.setString(3,cell);
+			    pstmt.setString(4,bank_name);
+			    pstmt.setString(5,bank_owner);
+			    pstmt.setString(6,bank_num);
+			    pstmt.setString(7,sdf.format(date));
+			    pstmt.setString(8,ip);
+			    pstmt.setString(9,ip);
+			    pstmt.setString(10,nick);
+			    pstmt.setString(11,recommand);
 				
-				row = stmt.executeUpdate(query); 
+				row = pstmt.executeUpdate(); 
 				logger.debug(query);
 				logger.debug(row);
-				stmt.close();
+				pstmt.close();
 				con.close();
 				logger.debug(row);
 				if(row > 0) result = true;
@@ -126,7 +138,7 @@ public class UserDao {
 		  		if(stmt!=null) stmt.close();
 		  		if(con!=null) con.close();
 		  	}
-		}
+	}
 	
 	public boolean checkUserId(String userid) throws SQLException{
 
@@ -215,7 +227,6 @@ public class UserDao {
 		
 	}
 	
-
 	public UserBean getUserByUserId(String user_id)
 	{
 		Connection con 			= null;
@@ -311,8 +322,7 @@ public class UserDao {
 			DataSource ds = (DataSource)envContext.lookup("jdbc/vava");
 		
 		    String query = "";
-		    query = "SELECT CONCAT(bank_low_name,' ' ,bank_low_owner,' ',bank_low_num) as bank_account from dbo.config_mst WHERE siteid="+siteid;
-		    
+		    	query = "SELECT CONCAT(bank_low_name,' ' ,bank_low_owner,' ',bank_low_num) as bank_account from dbo.config_mst WHERE siteid="+siteid;
 		    if(charge_level == "HIGH"){
 		    	query = "SELECT CONCAT(bank_high_name,' ' ,bank_high_owner,' ',bank_high_num) as bank_account from dbo.config_mst WHERE siteid="+siteid; 
 			}else if(charge_level == "MIDDLE"){
@@ -325,8 +335,6 @@ public class UserDao {
 			if(rs.next()){
 				bankAccount =  rs.getString("bank_account");
 			}
-
-		
 			
 		} catch(Exception e){
 			logger.debug(e);
@@ -429,10 +437,6 @@ public class UserDao {
 		
 	}
 	
-	
-	
-	
-	
 	public boolean withdraw(String userid,int siteid,String bank_name, String bank_num, String bank_owner, String reg_date, String ip, int withdraw ) throws SQLException{
 	      
 		  Connection con = null;
@@ -483,9 +487,11 @@ public class UserDao {
 		Gson gson = new Gson();
 		List<HashMap> list = new ArrayList<HashMap>();
 		String result = "";
+	
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+
 		String query = "SELECT * FROM RT01.dbo.withdraw_lst WHERE userid = ?";
 		DecimalFormat formatter = new DecimalFormat("#,###");
 		DateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd");
@@ -526,4 +532,36 @@ public class UserDao {
 	  	return list;
 		
 	}	
+	
+	public int updateUserAfterLogin(String userid,String sessionId){
+		
+		Connection con 			= null;
+		PreparedStatement pstmt = null;
+		int sts = 0;
+		String  query 			= "UPDATE user_mst SET sess  = ?, login_cnt = login_cnt + 1 WHERE userid = ?";		
+		
+		try {
+			Context initContext = new InitialContext();
+		 	Context envContext 	= (Context)initContext.lookup("java:/comp/env");
+			DataSource ds 		= (DataSource)envContext.lookup("jdbc/vava");
+			
+		    con 				= ds.getConnection();
+		    pstmt   			= con.prepareStatement(query);
+            pstmt.setString(1, sessionId);
+            pstmt.setString(2, userid);
+			sts = pstmt.executeUpdate();
+			
+	        pstmt.close();
+	        con.close();
+	        
+		}
+		catch(Exception e) {
+			System.out.println(e);
+			logger.debug(e);
+		}
+		
+		return sts;
+		
+	}
+
 }
