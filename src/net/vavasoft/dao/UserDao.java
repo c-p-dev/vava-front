@@ -65,6 +65,7 @@ public class UserDao {
 					uib.setBank_num(rs.getString("bank_num"));	
 					uib.setCharge_level(rs.getString("charge_level"));
 					uib.setSiteid(rs.getInt("siteid"));
+					
 				}else{
 					uib.setLoginStatus(1); // wrong password
 				}
@@ -126,7 +127,7 @@ public class UserDao {
 		  		if(stmt!=null) stmt.close();
 		  		if(con!=null) con.close();
 		  	}
-		}
+	}
 	
 	public boolean checkUserId(String userid) throws SQLException{
 
@@ -215,7 +216,6 @@ public class UserDao {
 		
 	}
 	
-
 	public UserBean getUserByUserId(String user_id)
 	{
 		Connection con 			= null;
@@ -311,8 +311,7 @@ public class UserDao {
 			DataSource ds = (DataSource)envContext.lookup("jdbc/vava");
 		
 		    String query = "";
-		    query = "SELECT CONCAT(bank_low_name,' ' ,bank_low_owner,' ',bank_low_num) as bank_account from dbo.config_mst WHERE siteid="+siteid;
-		    
+		    	query = "SELECT CONCAT(bank_low_name,' ' ,bank_low_owner,' ',bank_low_num) as bank_account from dbo.config_mst WHERE siteid="+siteid;
 		    if(charge_level == "HIGH"){
 		    	query = "SELECT CONCAT(bank_high_name,' ' ,bank_high_owner,' ',bank_high_num) as bank_account from dbo.config_mst WHERE siteid="+siteid; 
 			}else if(charge_level == "MIDDLE"){
@@ -325,8 +324,6 @@ public class UserDao {
 			if(rs.next()){
 				bankAccount =  rs.getString("bank_account");
 			}
-
-		
 			
 		} catch(Exception e){
 			logger.debug(e);
@@ -429,10 +426,6 @@ public class UserDao {
 		
 	}
 	
-	
-	
-	
-	
 	public boolean withdraw(String userid,int siteid,String bank_name, String bank_num, String bank_owner, String reg_date, String ip, int withdraw ) throws SQLException{
 	      
 		  Connection con = null;
@@ -479,8 +472,9 @@ public class UserDao {
 		  		if(con!=null) con.close();
 		  	}
 	}
+	
 	public String getMoneyFromDB(String id) throws SQLException{
-		
+	
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -519,4 +513,36 @@ public class UserDao {
 	  return s;
 		
 	}
+	
+	public int updateUserAfterLogin(String userid,String sessionId){
+		
+		Connection con 			= null;
+		PreparedStatement pstmt = null;
+		int sts = 0;
+		String  query 			= "UPDATE user_mst SET sess  = ?, login_cnt = login_cnt + 1 WHERE userid = ?";		
+		
+		try {
+			Context initContext = new InitialContext();
+		 	Context envContext 	= (Context)initContext.lookup("java:/comp/env");
+			DataSource ds 		= (DataSource)envContext.lookup("jdbc/vava");
+			
+		    con 				= ds.getConnection();
+		    pstmt   			= con.prepareStatement(query);
+            pstmt.setString(1, sessionId);
+            pstmt.setString(2, userid);
+			sts = pstmt.executeUpdate();
+			
+	        pstmt.close();
+	        con.close();
+	        
+		}
+		catch(Exception e) {
+			System.out.println(e);
+			logger.debug(e);
+		}
+		
+		return sts;
+		
+	}
+
 }
