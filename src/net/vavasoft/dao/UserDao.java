@@ -483,17 +483,19 @@ public class UserDao {
 		  		if(con!=null) con.close();
 		  	}
 	}
-	
-	public String getMoneyFromDB(String id) throws SQLException{
+	public List<HashMap> getWithdrawList(String userid){
+		Gson gson = new Gson();
+		List<HashMap> list = new ArrayList<HashMap>();
+		String result = "";
 	
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		  
-		String s = "";
-		  
-		String query = "SELECT money from RT01.dbo.user_mst where userid='matthew'" ;
-		  
+
+		String query = "SELECT * FROM RT01.dbo.withdraw_lst WHERE userid = ?";
+		DecimalFormat formatter = new DecimalFormat("#,###");
+		DateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd");
+		
 		try{	      
 			
 		 	Context initContext = new InitialContext();
@@ -502,28 +504,34 @@ public class UserDao {
 						 	
 			con = ds.getConnection();			 	
 			pstmt = con.prepareStatement(query);
+			pstmt.setString(1,userid);
 			rs = pstmt.executeQuery();
-					        
-			if(rs.next()){		        	
-				s = rs.getString("money");
+					   
+			while(rs.next()){
+				HashMap<String, Object> hsm = new HashMap<String, Object>();
+				hsm.put("wdid", (rs.getString("wdid") != null ? rs.getString("wdid") : null));
+				hsm.put("regdate", (rs.getString("regdate") != null ? dateFormater.format(dateFormater.parse(rs.getString("regdate"))) : null));
+				double amount = (rs.getString("money_req") != null ? Double.parseDouble(rs.getString("money_req")) : 0);
+				hsm.put("money", formatter.format(amount));
+				hsm.put("chdate", (rs.getString("wddate") != null ? rs.getString("wddate") : null));
+				hsm.put("chstate", (rs.getString("wdstate") != null ?  rs.getString("wdstate") : null));
+				
+				list.add(hsm);
 			}
-
-	        rs.close();
+			
+			
+			
+			rs.close();
 	        pstmt.close();
 	        con.close();
-	  		    
+	        System.out.print(query);
 		} catch(Exception e){
-		       	e.printStackTrace();
+			System.out.println(e);
+			e.printStackTrace();
+		} 
+	  	return list;
 		
-		} finally{
-		 	  if(rs!=null) rs.close();
-		 	  if(pstmt!=null) pstmt.close();
-		 	  if(con!=null) con.close();
-		}
-  
-	  return s;
-		
-	}
+	}	
 	
 	public int updateUserAfterLogin(String userid,String sessionId){
 		
