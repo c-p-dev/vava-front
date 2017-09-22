@@ -9,6 +9,48 @@
 		margin:0px;
 		display: none;
 	}
+	
+	/*datatable*/
+	.dataTables_wrapper .dataTables_paginate {
+	     float: none!important; 
+	    text-align: center!important;
+	    padding-top: 20px!important;
+	}
+	.dataTables_wrapper .dataTables_paginate .paginate_button{
+		padding: 8px 12px 8px 12px!important;
+	    font-size: 12px!important;
+	    border-radius: 3px!important;
+	    display: inline-block!important;
+	    background: #2b2d2e!important;
+	    color:white!important;
+	}
+	.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+	    color: #333 !important;
+	    color: #ffffff!important;
+	    background: #0792c4!important;
+	    border:none!important;
+	}
+	.dataTables_wrapper {
+	    width: 100%!important;
+	    margin: 0 0 20px 0!important;
+	    border-top: solid 1px #0792c4!important;
+	}
+	table.dataTable thead th{ 
+	    color: #ffffff!important;
+	    background: #151516!important;
+	    /*height: 40px!important;*/
+	    text-align: center!important;
+	    border-bottom: solid 1px #000000!important;
+	}
+	table.dataTable tbody tr {
+	    background-color: transparent;
+	}
+	table.dataTable tbody td {
+	     padding: 0px; 
+	    text-align: center;
+	    border-bottom: solid 1px #2e3032;
+	    height: 40px;
+	}
 </style>
 <jsp:useBean id="bean" class="net.vavasoft.bean.UserBean" />
 <%
@@ -54,39 +96,14 @@
 			</div>
 		</li>
 		<li>
-			<div class="acc_head"><h3>환전신청 리스트</h3></div>
-			<div class="acc_content">
-				<div class="acc_content_in_2">
-					<table class="list_table" cellspacing="0" cellpadding="0" width="100%">
-						<tr>
-							<td class="list_table_t" width="10%">번호</td>
-							<td class="list_table_t" width="40%">신청일시</td>
-							<td class="list_table_t" width="25%">금액</td>
-							<td class="list_table_t" width="25%">상태</td>
-						</tr>
-						<tr> 
-							<td class="list_table_center">123</td>
-							<td class="list_table_center">2017-02-02</td>
-							<td class="list_table_center"><span class="font_002">100,000</span>원</td>
-							<td class="list_table_center font_009">신청</td>
-						</tr>
-						<tr>
-							<td class="list_table_center">123</td>
-							<td class="list_table_center">2017-02-02</td>
-							<td class="list_table_center"><span class="font_002">100,000</span>원</td>
-							<td class="list_table_center font_010">대기</td>
-						</tr>
-						<tr>
-							<td class="list_table_center">123</td>
-							<td class="list_table_center">2017-02-02</td>
-							<td class="list_table_center"><span class="font_002">100,000</span>원</td>
-							<td class="list_table_center">완료</td>
-						</tr>
-					</table>
-					<div class="acc_btn_wrap"><a href="#"><div class="page"> >> </div></a> <a href="#"><span class="page"> > </span></a> <a href="#"><div class="page_on">1</div></a> <a href="#"><div class="page">2</div></a> <a href="#"><div class="page">3</div></a> <a href="#"><div class="page">4</div></a> <a href="#"><div class="page">5</div></a> <a href="#"><div class="page"> > </div></a> <a href="#"><div class="page"> >> </div></a></div>
-				</div>			
+		<div class="acc_head dt_div"><h3>충전신청 리스트</h3></div>
+		<div class="acc_content">
+			<div class="acc_content_in_2">
+				<table id="dataTable2" cellspacing="0" cellpadding="0" data-scroll-x="true" style="width: 100%!important;">
+            	</table>
 			</div>
-		</li>
+		</div>
+	</li>
 		<li>
 			<div class="acc_head"><h3>환전신청 관련 유의사항</h3></div>
 			<div class="acc_content">
@@ -131,7 +148,90 @@
 			</div>
 		</li>
 	</ul>
+<!-- success -->
+<div id="ExchangeSuccesModal" class="bg_mask_pop2">
+	<div class="bg_mask_pop_title">
+		<span class="popup_logo"><img src="images/popup_logo.png"></span>
+		<span class="popup_close fade_2_close cs_close"><img src="images/popup_close.png"></span>
+	</div>
+	<div class="bg_mask_pop2_in">
+		<div class="pop_icon_center">
+			<img src="images/check_icon.png">
+		</div>
+		<div class="pop_text">
+			Exchange Application Submited<br>			
+		</div>
+		<div class="btn_wrap">
+			<span class="btn3c cs_close">충전하기</span></a>
+		</div>
+	</div>
+</div>
 <script>
+$dataTable1 = $('#dataTable2').DataTable({
+	ajax : 'process/application/exchange/getWithdrawList.jsp',
+	bProcessing: true,
+	sAjaxDataProp:"",
+	searching: false,
+	bInfo : false,
+	lengthChange: false,
+	autowWidth:true,
+    columns : [
+        	{ 
+                data   : 'wdid',
+                title  : '번호',
+
+            },
+            { 
+                data   : 'regdate',
+                title  : '신청일시',
+            },
+            { 
+                data   : 'money',
+                title  : '금액',
+                render : function(data,type,row,meta){
+                	var html = '<span class="font_002">'+data+'</span> 원';
+                	return html;
+                }
+            },
+            { 
+                data   : 'wdstate',
+                title  : '상태',
+               	render : function(data,type,row,meta){
+                	var html = '<span class="font_009">신청<span>'; // pending
+                	if(data == "DONE"){
+                		html = '<span>완료</span>'; // complete
+                	}else if(data=="WAIT"){
+                		html = '<span class="font_010">대기</span>';
+                	}
+                	return html;
+                }
+               
+            },
+        ],
+	pagingType: "full_numbers",
+    language: {
+	    paginate: {
+	      	previous: "<",
+	      	next: ">",
+	      	first: "<<",
+	      	last: ">>",
+	    }
+	},
+    rowCallback : function(row , data , index) {
+        
+    },
+    drawCallback: function( settings ) {
+        
+    }
+});
+
+
+$(".dt_div").on("click",function(){
+	
+	setTimeout(function() {
+	  	$dataTable1.columns.adjust().draw();
+	}, 100);
+});
 
 	$('.acc_content_in_2').on('submit', '#formwithdraw', function(){
 		console.log('aww');
@@ -182,12 +282,28 @@ function submitForm(withdraw){
 		data : withdraw,
 		method: 'POST',
 	}).done(function(data){ 
+		$("#ExchangeSuccesModal").popup("show");
 		//var mmm = parseInt($('#money').text());
 		//var newmmmm = mmm - parseInt($('#withdraw').val());
 		//$('#money').text(newmmmm);
 		//console.log(newmmmm)
 	});
 }
+$('#ExchangeSuccesModal').popup({
+  	transition: 'all 0.3s',
+  	scrolllock: true,
+  	onclose:function(){
+  		resetformwithdraw();
+	}
+});
+
+$(".cs_close").on("click",function(e){
+	e.preventDefault();
+	$dataTable1.ajax.reload();
+	$dataTable1.columns.adjust().draw();
+	$("#ExchangeSuccesModal").popup("hide");
+
+});
 $('#button1').click(function(){
 	 $("#withdraw").val("10000");
 });
