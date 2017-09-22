@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script><!-- switch -->
 <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"><!-- gateway -->
-<%@page import="net.vavasoft.dao.GameDao, java.text.DecimalFormat, java.util.*"%>
+<%@page import="net.vavasoft.dao.GameDao, java.text.DecimalFormat, java.util.*,net.vavasoft.dao.UserDao,net.vavasoft.bean.UserBean;"%>
 <style>
 	.add-money{
 		cursor: pointer;
@@ -9,70 +9,18 @@
 	.error_cash_in{
 		margin:0px;
 		display: none;
-	}
-	select option{
-
-	    
-	    
-	    height: 30px;
-	    line-height: 30px;
-	    border-bottom: 1px solid #292f30;
-	    background: #1c2021;
-	    text-align: left;
-	    padding: 0 20px 0 20px;
-	    
-	}
-	/*datatable*/
-	.dataTables_wrapper .dataTables_paginate {
-	     float: none!important; 
-	    text-align: center!important;
-	    padding-top: 20px!important;
-	}
-	.dataTables_wrapper .dataTables_paginate .paginate_button{
-		padding: 8px 12px 8px 12px!important;
-	    font-size: 12px!important;
-	    border-radius: 3px!important;
-	    display: inline-block!important;
-	    background: #2b2d2e!important;
-	    color:white!important;
-	}
-	.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
-	    color: #333 !important;
-	    color: #ffffff!important;
-	    background: #0792c4!important;
-	    border:none!important;
-	}
-	.dataTables_wrapper {
-	    width: 100%!important;
-	    margin: 0 0 20px 0!important;
-	    border-top: solid 1px #0792c4!important;
-	}
-	table.dataTable thead th{ 
-	    color: #ffffff!important;
-	    background: #151516!important;
-	    /*height: 40px!important;*/
-	    text-align: center!important;
-	    border-bottom: solid 1px #000000!important;
-	}
-	table.dataTable tbody tr {
-	    background-color: transparent;
-	}
-	table.dataTable tbody td {
-	     padding: 0px; 
-	    text-align: center;
-	    border-bottom: solid 1px #2e3032;
-	  	height: 40px;
-	}
-
-	
+	}	
 
 </style>
-<jsp:useBean id="bean" class="net.vavasoft.bean.UserBean" />
 <%
 	DecimalFormat dfrmt				= new DecimalFormat("#,###,###,###,###.00");
-	
-	if(session.getAttribute("currentSessionUser") != null){
-		bean = (net.vavasoft.bean.UserBean) session.getAttribute("currentSessionUser");	
+	boolean checkSession = false;
+	UserDao user_db			= new UserDao();
+	UserBean user_data		= (UserBean)session.getAttribute("currentSessionUser");
+	UserBean currentUser 	= user_data;
+	if(session.getAttribute("currentSessionUser") != null) {
+		currentUser 		= user_db.getUserByUserId(user_data.getUserid());
+		checkSession = true;
 	}
 %>
 <ul class="smk_accordion">
@@ -83,7 +31,7 @@
 				<div class="blue_wrap">
 					<div class="cash_box">
 						<div class="cash_in">
-							<div class="cash_1"><p style="float:left">보유금액</p><p style="float:right"><span class="font_002 money_dsp"><%=dfrmt.format(bean.getMoney())%></span> 원</p></div>
+							<div class="cash_1"><p style="float:left">보유금액</p><p style="float:right"><span class="font_002 money_dsp"><%=dfrmt.format(currentUser.getMoney())%></span> 원</p></div>
 							<div class="cash_2">
 								<input class="input_style03" id="bankInfoTxt" placeholder="비밀번호 입력 후 “전용계좌확인” 버튼을 클릭해주세요">
 							</div>
@@ -95,41 +43,6 @@
 							<div class="cash_in">
 								<div class="cash_4">
 									<select class="input_style02" name="bank_name">
-										 	<option value="국민은행" selected>국민은행</option>
-										    <option value="기업은행">기업은행</option>
-										    <option value="경남은행">경남은행</option>
-										    <option value="광주은행">광주은행</option>
-										    <option value="동부증권">동부증권</option>
-										    <option value="대구은행">대구은행</option>
-										    <option value="부산은행">부산은행</option>
-										    <option value="산업은행">산업은행</option>
-										    <option value="삼성증권">삼성증권</option>
-										    <option value="삼성증권">신영증권</option>
-										    <option value="신한은행">신한은행</option>
-										    <option value="우리은행">우리은행</option>
-										    <option value="외환은행">외환은행</option>
-										    <option value="저축은행">저축은행</option>
-										    <option value="전북은행">전북은행</option>
-										    <option value="제주은행">제주은행</option>
-										    <option value="하나은행">하나은행</option>
-										    <option value="CITI은행">CITI은행</option>
-										    <option value="HSBC은행">HSBC은행</option>
-										    <option value="SC제일">SC제일</option>
-										    <option value="새마을금고">새마을금고</option>
-										    <option value="우체국">우체국</option>
-										    <option value="농협중앙회">농협중앙회</option>
-										    <option value="단위농협">단위농협</option>
-										    <option value="신협">신협</option>
-										    <option value="수협">수협</option>
-										    <option value="동양증권">동양증권</option>
-										    <option value="유진투자증권">유진투자증권</option>
-										    <option value="한국투자은행">한국투자은행</option>
-										    <option value="HMC투자증권">HMC투자증권</option>
-										    <option value="IBK투자증권">IBK투자증권</option>
-									</select>
-								</div>
-								<div class="cash_4">
-									<select class="sample" name="bank_name">
 										 	<option value="국민은행" selected>국민은행</option>
 										    <option value="기업은행">기업은행</option>
 										    <option value="경남은행">경남은행</option>
