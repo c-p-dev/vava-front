@@ -93,6 +93,7 @@ public class UserDao {
 	      
 		  Connection con = null;
 		  Statement stmt = null;
+		  PreparedStatement pstmt = null;
 		  int row = 0;
 		  boolean result = false;
 		  
@@ -101,18 +102,28 @@ public class UserDao {
 				Context initContext = new InitialContext();
 			 	Context envContext = (Context)initContext.lookup("java:/comp/env");
 				DataSource ds = (DataSource)envContext.lookup("jdbc/vava");
-				
 			    con = ds.getConnection();
 			    Date date = new Date();
 			    String  query = "INSERT INTO RT01.dbo.user_mst (userid,siteid,passwd,cell,bank_name,bank_owner,bank_num,regdate,state,watch,charge_level,ip,reg_ip,nick,recommand) "+
-						" VALUES ('"+userid+"',1, '"+passwd+"','"+cell+"','"+bank_name+"','"+bank_owner+"','"+bank_num+"','"+sdf.format(date)+"','NORMAL','N','LOW','"+ip+"','"+ip+"','"+nick+"','"+recommand+"')" ;
+						" VALUES (?,1,?,? ,?,?,?,?,'NORMAL','N','LOW',?,?,?,?)";
 									
-				stmt = con.createStatement();
+			    pstmt = con.prepareStatement(query);
+			    pstmt.setString(1,userid);
+			    pstmt.setString(2,passwd);
+			    pstmt.setString(3,cell);
+			    pstmt.setString(4,bank_name);
+			    pstmt.setString(5,bank_owner);
+			    pstmt.setString(6,bank_num);
+			    pstmt.setString(7,sdf.format(date));
+			    pstmt.setString(8,ip);
+			    pstmt.setString(9,ip);
+			    pstmt.setString(10,nick);
+			    pstmt.setString(11,recommand);
 				
-				row = stmt.executeUpdate(query); 
+				row = pstmt.executeUpdate(); 
 				logger.debug(query);
 				logger.debug(row);
-				stmt.close();
+				pstmt.close();
 				con.close();
 				logger.debug(row);
 				if(row > 0) result = true;
