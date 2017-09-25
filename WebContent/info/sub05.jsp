@@ -1,0 +1,527 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<jsp:include page="../header.jsp" />
+<%@page import="net.vavasoft.dao.GameDao, java.text.DecimalFormat, java.util.*,net.vavasoft.dao.UserDao,net.vavasoft.bean.UserBean;"%>
+<%
+	UserBean user_data	= (UserBean)session.getAttribute("currentSessionUser");
+%>
+<div id="contents_wrap">
+	<div class="contents">
+		<ul class="tabs">
+			<li><a href="#tab1">내정보</a></li>
+			<li><a href="#tab2">베팅내역</a></li>
+			<li><a href="#tab3">1:1문의</a></li>
+			<li><a href="#tab4">쪽지함</a></li>
+		</ul>
+		<div class="tab_container">
+			<div id="tab1" class="tab_content">
+				<jsp:include page="profile.jsp" />
+			</div>
+			<div id="tab2" class="tab_content">
+				<ul class="smk_accordion">
+					<li>
+						<div class="acc_head"><h3>베팅내역</h3></div>
+						<div class="acc_content">
+							<div class="acc_content_in_2">
+								<div class="bet_search_wrap">
+									<table cellspacing="0" cellpadding="0" class="my_search_select">
+										<tr>
+											<td>
+												<select class="input_style02">
+													<option>전체</option>
+												</select>
+											</td>
+											<td>
+												<select class="input_style02">
+													<option>전체</option>
+												</select>
+											</td>
+											<td><input class="input_style04"  placeholder="기간" value="2017-00-00 ~ 2017-00-00"><a href="#" onClick="show_over(this);show_layer('depth1');"><img src="../images/car_icon.jpg"></a>
+												<div id="depth1" style="display:none; width:; position:absolute; z-index:100000000; left:530px;top:130px;">
+													<table border="0" cellspacing="0" cellpadding="0" class="car_table">
+														<tr>
+															<td bgcolor="#303030" style="border-radius:3px; padding:5px; box-shadow: 10px 10px 20px -5px rgba(10, 10, 5, 5);">
+																<table width="100%" border="0" cellspacing="0" cellpadding="0">
+																	<tr>
+																		<td>
+																			<ul class="car_period">
+																				<li class="select">전체</li>
+																				<li>최근24시간</li>
+																				<li>최근3일</li>
+																				<li>최근7일</li>
+																			</ul>
+																		</td>
+																	</tr>
+																</table>
+																<table width="100%" border="0" cellspacing="10" cellpadding="0">
+																	<tr>
+																		<td>
+																			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+																				<tr>
+																					<td><a href="#"><img src="../images/arrow_left.png"></a></td>
+																					<td height="30" align="center"><a href="#"><span class="font_style01">2017년 00월</span></a></td>
+																					<td align="right"><a href="#"><img src="../images/arrow_right.png"></a></td>
+																				</tr>
+																				<tr>
+																					<td colspan="3"><img src="../images/cale.jpg" width="100%"></td>
+																				</tr>
+																			</table>
+																			<table border="0" cellpadding="0" cellspacing="1" bgcolor="#242424">
+																				<tr>
+																					<td><a href="#"><span class="cale_off">30</span></a></td>
+																					<td><a href="#"><span class="cale_off">30</span></a></td>
+																					<td><a href="#"><span class="cale">1</span></a></td>
+																					<td><a href="#"><span class="cale">2</span></a></td>
+																					<td><a href="#"><span class="cale_on">3</span></a></td>
+																					<td><a href="#"><span class="cale">4</span></a></td>
+																					<td><a href="#"><span class="cale">5</span></a></td>
+																				</tr>
+																				<tr>
+																					<td><a href="#"><span class="cale">6</span></a></td>
+																					<td><a href="#"><span class="cale">7</span></a></td>
+																					<td><a href="#"><span class="cale">8</span></a></td>
+																					<td><a href="#"><span class="cale">9</span></a></td>
+																					<td><a href="#"><span class="cale">01</span></a></td>
+																					<td><a href="#"><span class="cale">11</span></a></td>
+																					<td><a href="#"><span class="cale">12</span></a></td>
+																				</tr>
+																				<tr>
+																					<td><a href="#"><span class="cale">13</span></a></td>
+																					<td><a href="#"><span class="cale">14</span></a></td>
+																					<td><a href="#"><span class="cale">15</span></a></td>
+																					<td><a href="#"><span class="cale">16</span></a></td>
+																					<td><a href="#"><span class="cale">17</span></a></td>
+																					<td><a href="#"><span class="cale">18</span></a></td>
+																					<td><a href="#"><span class="cale">19</span></a></td>
+																				</tr>
+																				<tr>
+																					<td><a href="#"><span class="cale">20</span></a></td>
+																					<td><a href="#"><span class="cale">21</span></a></td>
+																					<td><a href="#"><span class="cale">22</span></a></td>
+																					<td><a href="#"><span class="cale">23</span></a></td>
+																					<td><a href="#"><span class="cale">24</span></a></td>
+																					<td><a href="#"><span class="cale">25</span></a></td>
+																					<td><a href="#"><span class="cale">26</span></a></td>
+																				</tr>
+																				<tr>
+																					<td><a href="#"><span class="cale">27</span></a></td>
+																					<td><a href="#"><span class="cale">28</span></a></td>
+																					<td><a href="#"><span class="cale">29</span></a></td>
+																					<td><a href="#"><span class="cale">30</span></a></td>
+																					<td><a href="#"><span class="cale_off">1</span></a></td>
+																					<td><a href="#"><span class="cale_off">2</span></a></td>
+																					<td><a href="#"><span class="cale_off">3</span></a></td>
+																				</tr>
+																			</table>
+																		</td>
+																		<td>
+																			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+																				<tr>
+																					<td><a href="#"><img src="../images/arrow_left.png"></a></td>
+																					<td height="30" align="center"><a href="#"><span class="font_style01">2017년 00월</span></a></td>
+																					<td align="right"><a href="#"><img src="../images/arrow_right.png"></a></td>
+																				</tr>
+																				<tr>
+																					<td colspan="3"><img src="../images/cale.jpg" width="100%"></td>
+																				</tr>
+																			</table>
+																			<table border="0" cellpadding="0" cellspacing="1" bgcolor="#242424">
+																				<tr>
+																					<td><a href="#"><span class="cale_off">30</span></a></td>
+																					<td><a href="#"><span class="cale_off">30</span></a></td>
+																					<td><a href="#"><span class="cale">1</span></a></td>
+																					<td><a href="#"><span class="cale">2</span></a></td>
+																					<td><a href="#"><span class="cale_on">3</span></a></td>
+																					<td><a href="#"><span class="cale">4</span></a></td>
+																					<td><a href="#"><span class="cale">5</span></a></td>
+																				</tr>
+																				<tr>
+																					<td><a href="#"><span class="cale">6</span></a></td>
+																					<td><a href="#"><span class="cale">7</span></a></td>
+																					<td><a href="#"><span class="cale">8</span></a></td>
+																					<td><a href="#"><span class="cale">9</span></a></td>
+																					<td><a href="#"><span class="cale">01</span></a></td>
+																					<td><a href="#"><span class="cale">11</span></a></td>
+																					<td><a href="#"><span class="cale">12</span></a></td>
+																				</tr>
+																				<tr>
+																					<td><a href="#"><span class="cale">13</span></a></td>
+																					<td><a href="#"><span class="cale">14</span></a></td>
+																					<td><a href="#"><span class="cale">15</span></a></td>
+																					<td><a href="#"><span class="cale">16</span></a></td>
+																					<td><a href="#"><span class="cale">17</span></a></td>
+																					<td><a href="#"><span class="cale">18</span></a></td>
+																					<td><a href="#"><span class="cale">19</span></a></td>
+																				</tr>
+																				<tr>
+																					<td><a href="#"><span class="cale">20</span></a></td>
+																					<td><a href="#"><span class="cale">21</span></a></td>
+																					<td><a href="#"><span class="cale">22</span></a></td>
+																					<td><a href="#"><span class="cale">23</span></a></td>
+																					<td><a href="#"><span class="cale">24</span></a></td>
+																					<td><a href="#"><span class="cale">25</span></a></td>
+																					<td><a href="#"><span class="cale">26</span></a></td>
+																				</tr>
+																				<tr>
+																					<td><a href="#"><span class="cale">27</span></a></td>
+																					<td><a href="#"><span class="cale">28</span></a></td>
+																					<td><a href="#"><span class="cale">29</span></a></td>
+																					<td><a href="#"><span class="cale">30</span></a></td>
+																					<td><a href="#"><span class="cale_off">1</span></a></td>
+																					<td><a href="#"><span class="cale_off">2</span></a></td>
+																					<td><a href="#"><span class="cale_off">3</span></a></td>
+																				</tr>
+																			</table>
+																		</td>																			
+																	</tr>
+																</table>
+															</td>
+														</tr>
+													</table>
+													<div style="float:right; padding:7px 2px 7px 10px;"><a href="#" onClick="show_layer('depth1','hidden');"><img src="../images/car_close.png"></a></div>
+												</div>
+											</td>
+											<td>
+												<a href="#"><span class="btn1">검색</span></a>
+											</td>
+										</tr>
+									</table>
+								</div>
+								<div class="bet_wrap">
+									<table class="acc_list_table" cellspacing="0" cellpadding="0" width="100%">
+										<tr>
+											<td class="list_table_t" width="5%"><input type="checkbox"></td>
+											<td class="list_table_t" width="5%">NO.</td>
+											<td class="list_table_t" width="20%">일시</td>
+											<td class="list_table_t" width="10%">베팅아이디</td>
+											<td class="list_table_t" width="10%">종목</td>
+											<td class="list_table_t" width="15%">베팅금액</td>
+											<td class="list_table_t" width="5%">배당률</td>
+											<td class="list_table_t" width="15%">예상적중금액</td>
+											<td class="list_table_t" width="3%">폴더</td>
+											<td class="list_table_t">결과</td>
+										</tr>
+									</table>
+									<div class="example1">
+										<div class="panel panel-primary"><!-- 1 -->
+											<div class="panel-heading" data-acc-link="demo1">
+												<table class="acc_list_table_1" cellpadding="0" cellspacing="0" >
+													<tr>
+														<td class="acc_list_check" width="5%"><input type="checkbox"></td>
+														<td class="acc_list_num" width="5%">1</td>
+														<td class="acc_list_time" width="20%">2017-05-05 00 : 00 : 00</td>
+														<td class="acc_list_id" width="10%">asdfsadf</td>
+														<td class="acc_list_event" width="10%">야구</td>
+														<td class="acc_list_price1" width="15%"><span class="font_004">100,000,000</span>원</td>
+														<td class="acc_list_dividend" width="5%"><span class="font_001">12.12</span>배</td>
+														<td class="acc_list_price2" width="15%"><span class="font_002">100,000,000</span>원</td>
+														<td class="acc_list_folder" width="3%">3</td>
+														<td class="beting_btn">적중</td>
+													</tr>
+												</table>
+											</div>
+											<div class="panel-body acc-open" data-acc-content="demo1">
+												<div class="bet_dd_p">
+													<table class="acc_list_table_in" cellpadding="0" cellspacing="1" >
+														<tr>
+															<td class="acc_list_table_in_t" width="5%">NO.</td>
+															<td class="acc_list_table_in_t" width="15%">경기일시</td>
+															<td class="acc_list_table_in_t" width="8%">게임아이디</td>
+															<td class="acc_list_table_in_t" width="5%">종목</td>
+															<td class="acc_list_table_in_t" width="10%">리그</td>
+															<td class="acc_list_table_in_t" width="8%">타입</td>
+															<td class="acc_list_table_in_t" width="18%">홈팀</td>
+															<td class="acc_list_table_in_t" width="5%">X(무)</td>
+															<td class="acc_list_table_in_t" width="18%">원정팀</td>
+															<td class="acc_list_table_in_t" width="8%">결과</td>
+														</tr>
+														<tr>
+															<td class="bet_num">1</td>
+															<td class="bet_time">2017-05-05 00 : 00 : 00</td>
+															<td class="bet_id">sdfsdfsdf</td>
+															<td class="bet_event">야구</td>
+															<td class="bet_name">KOVO</td>
+															<td class="bet_type">핸디캡</td>
+															<td class="bet_home bet_select"><!-- 선택시 -->
+																<div class="acc_list_in_l">삼성화재</div><div class="acc_list_in_r">1.25</div>
+															</td>
+															<td class="bet_vs">X(무)</td>
+															<td class="bet_loss">
+																<div class="acc_list_in_l">삼성화재</div><div class="acc_list_in_r">1.25</div>
+															</td>
+															<td class="beting_in_btn">적중</td>
+														</tr>
+														<tr>
+															<td class="bet_num">2</td>
+															<td class="bet_time">2017-05-05 00 : 00 : 00</td>
+															<td class="bet_id">sdfsdfsdf</td>
+															<td class="bet_event">야구</td>
+															<td class="bet_name">KOVO</td>
+															<td class="bet_type">핸디캡</td>
+															<td class="bet_home">
+																<div class="acc_list_in_l">삼성화재</div><div class="acc_list_in_r">1.25</div>
+															</td>
+															<td class="bet_vs">X(무)</td>
+															<td class="bet_loss">
+																<div class="acc_list_in_l">삼성화재</div><div class="acc_list_in_r">1.25</div>
+															</td>
+															<td class="beting_in_btn"><a href="#"><span class="btn9">취소</span></a></td>
+														</tr>
+													</table>									
+												</div>
+											</div>
+										</div><!-- 1 -->
+										<div class="panel panel-primary"><!-- 1 -->
+											<div class="panel-heading" data-acc-link="demo2">
+												<table class="acc_list_table_1" cellpadding="0" cellspacing="0" >
+													<tr>
+														<td class="list_table_center" width="5%"><input type="checkbox"></td>
+														<td class="list_table_center" width="5%">1</td>
+														<td class="list_table_center" width="20%">2017-05-05 00 : 00 : 00</td>
+														<td class="list_table_center" width="10%">asdfsadf</td>
+														<td class="list_table_center" width="10%">야구</td>
+														<td class="list_table_center" width="15%"><span class="font_004">100,000,000</span>원</td>
+														<td class="list_table_center" width="5%"><span class="font_001">12.12</span>배</td>
+														<td class="list_table_center" width="15%"><span class="font_002">100,000,000</span>원</td>
+														<td class="list_table_center" width="3%">3</td>
+														<td class="list_table_center font_009">진행중</td>
+													</tr>
+												</table>
+											</div>
+											<div class="panel-body" data-acc-content="demo2">
+												<div class="bet_dd_p">
+														123
+												</div>
+											</div>
+										</div><!-- 1 -->
+										<div class="panel panel-primary"><!-- 1 -->
+											<div class="panel-heading" data-acc-link="demo3">
+												<table class="acc_list_table_1" cellpadding="0" cellspacing="0" >
+													<tr>
+														<td class="list_table_center" width="5%"><input type="checkbox"></td>
+														<td class="list_table_center" width="5%">1</td>
+														<td class="list_table_center" width="20%">2017-05-05 00 : 00 : 00</td>
+														<td class="list_table_center" width="10%">asdfsadf</td>
+														<td class="list_table_center" width="10%">야구</td>
+														<td class="list_table_center" width="15%"><span class="font_004">100,000,000</span>원</td>
+														<td class="list_table_center" width="5%"><span class="font_001">12.12</span>배</td>
+														<td class="list_table_center" width="15%"><span class="font_002">100,000,000</span>원</td>
+														<td class="list_table_center" width="3%">3</td>
+														<td class="list_table_center font_010">미적중</td>
+													</tr>
+												</table>
+											</div>
+											<div class="panel-body" data-acc-content="demo3">
+												<div class="bet_dd_p">
+														4
+												</div>
+											</div>
+										</div><!-- 1 -->
+									</div>
+									<script type="text/javascript">
+										$(function() {
+											$('.example1').accordion({ multiOpen: false });
+
+										});
+									</script>
+								</div>
+								<div class="left_btn_wrap"><a href="#"><span class="btn7">전체선택</span></a> <a href="#"><span class="btn8">선택삭제</span></a></div>
+								<div class="acc_btn_wrap_m"><a href="#"><div class="page"> >> </div></a> <a href="#"><span class="page"> > </span></a> <a href="#"><div class="page_on">1</div></a> <a href="#"><div class="page">2</div></a> <a href="#"><div class="page">3</div></a> <a href="#"><div class="page">4</div></a> <a href="#"><div class="page">5</div></a> <a href="#"><div class="page"> > </div></a> <a href="#"><div class="page"> >> </div></a></div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="acc_head"><h3>실시간/스포츠북 베팅내역</h3></div>
+						<div class="acc_content">
+							<div class="acc_content_in_2">
+								dsdfsdfsdf
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="acc_head"><h3>실시간/스포츠북 베팅내역</h3></div>
+						<div class="acc_content">
+							<div class="acc_content_in_2">
+								dsdfsdfsdf
+							</div>
+						</div>
+					</li>
+				</ul>	
+			</div>
+			<div id="tab3" class="tab_content">
+				<ul class="smk_accordion">
+					<li>
+						<div class="acc_head"><h3>1:1문의</h3></div>
+						<div class="acc_content">
+							<div class="acc_content_in_2">
+								<div class="inquiry_wrap">
+									<div class="inquiry">
+										<div class="inquiry_user">
+											<span class="user_tag"><img src="../images/user_tag.jpg"></span>
+											<div class="inquiry_text">
+											안녕하세요 안녕하세요 안녕하세요안녕하세요 안녕하세요 안녕하세요안녕하세요 안녕하세요 안녕하세요안녕하세요 안녕하세요 안녕하세요안녕하세요 안녕하세요 안녕하세요안녕하세요 안녕하세요 안녕하세요안녕하세요 안녕하세요 안녕하세요안녕하세요 안녕하세요 안녕하세요안녕하세요 안녕하세요 안녕하세요안녕하세요 안녕하세요 안녕하세요안녕하세요 안녕하세요 안녕하세요안녕하세요 안녕하세요 안녕하세요
+											</div>
+											<div class="user_date">2017-00-00 00:00:00</div>
+										</div>
+									</div>
+									<div class="inquiry">
+										<div class="inquiry_admin">
+											<span class="admin_tag"><img src="../images/admin_tag.jpg"></span>
+											<div class="inquiry_text">
+											안녕하세요 안녕하세요 안녕하세요안녕하세요 
+											</div>
+											<div class="admin_date">2017-00-00 00:00:00</div>
+										</div>
+									</div>
+									<div class="inquiry">
+										<div class="inquiry_user">
+											<span class="user_tag"><img src="../images/user_tag.jpg"></span>
+											<div class="inquiry_text">
+											물어볼께있어요
+											</div>
+											<div class="user_date">2017-00-00 00:00:00</div>
+										</div>
+									</div>
+									<div class="inquiry">
+										<div class="inquiry_admin">
+											<span class="admin_tag"><img src="../images/admin_tag.jpg"></span>
+											<div class="inquiry_text">
+											말씀하세요
+											</div>
+											<div class="admin_date">2017-00-00 00:00:00</div>
+										</div>
+									</div>
+								</div>
+								<div class="inquiry_select_wrap">
+									<table  width="100%" cellpadding="0" cellspacing="0">
+										<tr>
+											<td width="300" style="padding:0 10px 0 0">
+												<select class="inquiry_select">
+													<option>분류</option>
+													<option>분류</option>
+												</select>
+											</td>
+											<td width="700" style="padding:0 10px 0 0"><input class="inquiry_input"></td>
+											<td><a href="#"><span class="btn5">전송</span></a></td>
+										</tr>
+									</table>
+								</div>
+								<div class="acc_btn_wrap">
+									<a href="#"><span class="btn3c">확인</span></a> 
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div id="tab4" class="tab_content">
+				<ul class="smk_accordion">
+					<li>
+						<div class="acc_head"><h3>쪽지함</h3></div>
+						<div class="acc_content">
+							<div class="acc_content_in_2">
+								<table  width="100%" cellpadding="0" cellspacing="0" class="memo_table_title">
+									<tr>
+										<td width="55%">제목</td>
+										<td>보낸이</td>
+										<td width="15%">수신일시</td>
+										<td width="15%">확인일시</td>
+									</tr>
+								</table>
+								<ul class="popup_accordion">
+									<li>
+										<a>
+											<table width="100%" cellpadding="0" cellspacing="0" class="meno_table">
+												<tr>
+													<td  width="55%" class="meno_table_left">제목입니다.</td>
+													<td class="list_table_center">홍길동</td>
+													<td  width="15%" class="meno_table_center">07.07.17</td>
+													<td  width="15%" class="meno_table_center">07.07.17</td>
+												</tr>
+											</table>
+										</a>
+										<div>
+											<table width="100%" cellpadding="0" cellspacing="0" class="meno_table_in">
+												<tr>
+													<td>제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.니다. 제목입니다.제목입니다. 제목입니다. 제목</td>
+												</tr>
+											</table>
+										</div>
+									</li>
+									<li>
+										<a>
+											<table width="100%" cellpadding="0" cellspacing="0" class="meno_table">
+												<tr>
+													<td  width="55%" class="meno_table_left">제목입니다.</td>
+													<td class="list_table_center">홍길동</td>
+													<td  width="15%" class="meno_table_center">07.07.17</td>
+													<td  width="15%" class="meno_table_center">07.07.17</td>
+												</tr>
+											</table>
+										</a>
+										<div>
+											<table width="100%" cellpadding="0" cellspacing="0" class="meno_table_in">
+												<tr>
+													<td>제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제</td>
+												</tr>
+											</table>
+										</div>
+									</li>
+									<li>
+										<a>
+											<table width="100%" cellpadding="0" cellspacing="0" class="meno_table">
+												<tr>
+													<td  width="55%" class="meno_table_left">제목입니다.</td>
+													<td class="list_table_center">홍길동</td>
+													<td  width="15%" class="meno_table_center">07.07.17</td>
+													<td  width="15%" class="meno_table_center">07.07.17</td>
+												</tr>
+											</table>
+										</a>
+										<div>
+											<table width="100%" cellpadding="0" cellspacing="0" class="meno_table_in">
+												<tr>
+													<td>제목입니다. </td>
+												</tr>
+											</table>
+										</div>
+									</li>
+								</ul>
+								<script><!--아코디언-->
+									(function($) {
+										$('.popup_accordion > li:eq(0) a').addClass('active').next().slideDown();
+
+										$('.popup_accordion a').click(function(j) {
+											var dropDown = $(this).closest('li').find('div');
+
+											$(this).closest('.popup_accordion').find('div').not(dropDown).slideUp();
+
+											if ($(this).hasClass('active')) {
+												$(this).removeClass('active');
+											} else {
+												$(this).closest('.popup_accordion').find('a.active').removeClass('active');
+												$(this).addClass('active');
+											}
+
+											dropDown.stop(false, true).slideToggle();
+
+											j.preventDefault();
+										});
+									})(jQuery);
+								</script>
+								<div class="acc_btn_wrap_m">
+									<a href="#" onClick="layer_pop_mask('close','bg_mask_pop6');return false;"><span class="btn2c">확인</span></a> <a href="#"><span class="btn2">삭제</span></a>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+
+	</div>
+</div><!-- contents -->
+
+
+
+<jsp:include page="../footer.jsp" />
