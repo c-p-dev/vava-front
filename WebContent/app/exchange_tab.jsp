@@ -1,6 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@page import="net.vavasoft.dao.GameDao, java.text.DecimalFormat, java.util.*"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="net.vavasoft.bean.UserBean, net.vavasoft.dao.UserDao, java.text.DecimalFormat"%>
 <style>
 	.add-money{
 		cursor: pointer;
@@ -38,7 +36,7 @@
 	table.dataTable thead th{ 
 	    color: #ffffff!important;
 	    background: #151516!important;
-	    /*height: 40px!important;*/
+	    /*height: 40px!important;*/ 	 
 	    text-align: center!important;
 	    border-bottom: solid 1px #000000!important;
 	}
@@ -60,6 +58,16 @@
 		bean = (net.vavasoft.bean.UserBean) session.getAttribute("currentSessionUser");	
 	}
 %>
+<%
+	boolean checkSession = false;
+	UserDao user_db			= new UserDao();
+	UserBean user_data		= (UserBean)session.getAttribute("currentSessionUser");
+	UserBean currentUser 	= user_data;
+	if(session.getAttribute("currentSessionUser") != null) {
+		currentUser 		= user_db.getUserByUserId(user_data.getUserid());
+		checkSession = true;
+	}
+%>
 
 
 <ul class="smk_accordion">
@@ -71,7 +79,7 @@
 					<div class="blue_wrap">
 						<div class="cash_box">
 							<div class="cash_in">
-								<div class="cash_1"><p style="float:left">보유금액</p><p style="float:right"><span class="font_002 money_dsp" id="money"><%=dfrmt.format(bean.getMoney())%></span>원 </p></div>
+								<div class="cash_1"><p style="float:left">보유금액</p><p style="float:right"><span class="font_002 money_dsp" id="money"><%=dfrmt.format(currentUser.getMoney())%></span>원 </p></div>
 							</div>
 							<div class="cash_in">
 								<div class="cash_4">
