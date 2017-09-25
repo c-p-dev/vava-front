@@ -353,14 +353,15 @@ public class UserDao {
 		
 		UserDao user_db		= new UserDao();
 		UserBean user_data	= new UserBean(); 
-		
+		PreparedStatement pstmt = null;
 		Connection con = null;
 		Statement stmt = null;
 		int row = 0;
 		boolean result = false;
 		Date date = new Date();
+	
 		String  query = "INSERT INTO RT01.dbo.charge_lst (userid,siteid,charge_level,bank_name,bank_owner,bank_num,money_req,user_grade,regdate,chstate,ip,viewtype) "+
-				" VALUES ('"+userid+"',"+siteid+",'"+charge_level+"','"+bank_name+"','"+bank_owner+"','"+bank_num+"',"+money+",1,'"+sdf.format(date)+"','PEND','"+ip+"','Y')";
+				" VALUES (?,?,?,?,?,?,?,1,?,'PEND',?,'Y')";
 		try{
 		
 			Context initContext = new InitialContext();
@@ -368,11 +369,21 @@ public class UserDao {
 			DataSource ds = (DataSource)envContext.lookup("jdbc/vava");
 			
 		    con = ds.getConnection();		
-			stmt = con.createStatement();
-			row = stmt.executeUpdate(query); 
+		    pstmt = con.prepareStatement(query);
+		    pstmt.setString(1,userid);
+		    pstmt.setInt(2,siteid);
+		    pstmt.setString(3,charge_level);
+		    pstmt.setString(4,bank_name);
+		    pstmt.setString(5,bank_owner);
+		    pstmt.setString(6,bank_num);
+		    pstmt.setInt(7,money);
+		    pstmt.setString(8,sdf.format(date));
+		    pstmt.setString(9,ip);
+		    
+			row = pstmt.executeUpdate(); 
 			logger.debug(query);
 			logger.debug(row);
-			stmt.close();
+			pstmt.close();
 			con.close();
 			logger.debug(row);
 			
@@ -489,6 +500,7 @@ public class UserDao {
 		  		if(con!=null) con.close();
 		  	}
 	}
+	
 	public List<HashMap> getWithdrawList(String userid){
 		Gson gson = new Gson();
 		List<HashMap> list = new ArrayList<HashMap>();

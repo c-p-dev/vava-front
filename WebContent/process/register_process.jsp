@@ -64,6 +64,16 @@
 			user_profile.setBettingProfiles(bet_profiles);
 			
 			teg_resp = teg_ctrl.addPlayerAccount(user_profile);
+			
+
+			UserBean ub;
+			ub = ud.getUser(userid,passwd);
+			HttpSession user_session = request.getSession(true);	    
+			session.setMaxInactiveInterval(7200);
+	        session.setAttribute("currentSessionUser",ub);
+	        int updateSession = ud.updateUserAfterLogin(ub.getUserid(), session.getId());
+	        System.out.println(ub.getLoginStatus());	
+	        System.out.println(updateSession);	
 		}
 		
 		out.println(status);

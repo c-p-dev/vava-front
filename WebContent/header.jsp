@@ -40,29 +40,18 @@
 <script type="text/javascript" src="<%=baseUrl%>js/additional-methods.js"></script>
 <script type="text/javascript" src="<%=baseUrl%>js/jquery.serializejson.js"></script><!-- json serializer -->
 
+<link href="<%=baseUrl%>css/nice-select.css" rel="stylesheet" type="text/css"><!-- select -->
+<script type="text/javascript" src="<%=baseUrl%>js/jquery.nice-select.js"></script><!-- select -->
+
 <link href="<%=baseUrl%>css/common.css" rel="stylesheet" type="text/css"><!--공통-->
 <link href="<%=baseUrl%>css/layout.css" rel="stylesheet" type="text/css"><!--공통-->
 <link href="<%=baseUrl%>css/main.css" rel="stylesheet" type="text/css"><!-- main -->
 <link href="<%=baseUrl%>css/sub.css" rel="stylesheet" type="text/css"><!-- sub -->
 <link href="<%=baseUrl%>css/game.css" rel="stylesheet" type="text/css"><!-- game -->
 <link href="<%=baseUrl%>css/gateway.css" rel="stylesheet" type="text/css"><!-- gateway -->
+<link href="<%=baseUrl%>css/common2.css" rel="stylesheet" type="text/css"><!--공통-->
 
 </head>
-
-<style>
-	.input_warning{
-		display: none;
-	}
-	.btn3c {
-	    border-radius: 5px!important;
-	    border: none;
-	}
-	.btn3,.top_btn1 {
-		border:none!important;
-	}
-
-</style>
-
 <body id="myAnchor">
 
 <!-- top버튼 -->

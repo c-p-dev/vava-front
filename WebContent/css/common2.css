@@ -1,0 +1,90 @@
+.input_warning{
+		display: none;
+	}
+	.btn3c {
+	    border-radius: 5px!important;
+	    border: none;
+	}
+	.btn3,.top_btn1 {
+		border:none!important;
+	}
+
+	/*datatable*/
+	.dataTables_wrapper .dataTables_paginate {
+	     float: none!important; 
+	    text-align: center!important;
+	    padding-top: 20px!important;
+	}
+	.dataTables_wrapper .dataTables_paginate .paginate_button{
+		padding: 8px 12px 8px 12px!important;
+	    font-size: 12px!important;
+	    border-radius: 3px!important;
+	    display: inline-block!important;
+	    background: #2b2d2e!important;
+	    color:white!important;
+	}
+	.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+	    color: #333 !important;
+	    color: #ffffff!important;
+	    background: #0792c4!important;
+	    border:none!important;
+	}
+	.dataTables_wrapper {
+	    width: 100%!important;
+	    margin: 0 0 20px 0!important;
+	    border-top: solid 1px #0792c4!important;
+	}
+	table.dataTable thead th{ 
+	    color: #ffffff!important;
+	    background: #151516!important;
+	    /*height: 40px!important;*/
+	    text-align: center!important;
+	    border-bottom: solid 1px #000000!important;
+	}
+	table.dataTable tbody tr {
+	    background-color: transparent;
+	}
+	table.dataTable tbody td {
+	     padding: 0px; 
+	    text-align: center;
+	    border-bottom: solid 1px #2e3032;
+	  	height: 40px;
+	}
+
+	/*nice select*/
+
+	.nice-select{
+		width: 100%!important;
+	    border: solid 1px #2e3032!important;
+	    background: none!important;
+	    height: 40px!important;
+	    line-height: 40px!important;
+	    padding: 0 0 0 10px!important;
+	    color: #c1c3c4!important;
+	    border-radius: 0px!important;
+	}
+	.nice-select .list{
+		max-height: 200px!important;
+	    overflow-y: scroll!important;
+	    width: 100%!important;
+	    border-radius: 0px!important;
+	    background-color: #1c2021!important;
+	}
+	.nice-select .list li{
+		width: 100%!important;
+	    position: relative!important;
+	    height: 30px!important;
+	    line-height: 30px!important;
+	    border-bottom: 1px solid #292f30!important;
+	    background: #1c2021!important;
+	    text-align: left!important;
+	    padding: 0 10px 0 10px!important;
+	    cursor: pointer!important;
+	    background-color: !1c2!important0
+	}
+	.nice-select .option:hover, .nice-select .option.focus, .nice-select .option.selected.focus {
+	    background: #252b2b!important;
+	}
+	.nice-select:hover {
+	    border-color: #2e3032!important;
+	}
