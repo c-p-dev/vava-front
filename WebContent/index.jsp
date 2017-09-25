@@ -39,7 +39,7 @@
 				<script type="text/javascript">jssor_1_slider_init();</script>
 			</div>
 			<div class="video_wrap">
-				<img src="images/video.jpg" style="width:100%">
+				<iframe id="video1" width="100%" height="100%" src="https://www.youtube.com/embed/xZe9GsuwHqA" frameborder="0" allowtransparency="true" allowfullscreen></iframe>
 			</div>
 		</div>
         <div class="contents_in_m20">
