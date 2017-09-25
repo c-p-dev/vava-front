@@ -143,8 +143,8 @@
                 var result = 0;
                 var tickets = 0;
                 var total = 0;
-                var total_dsp = "0.00";
-                var result_dsp = "0.00";
+                var total_dsp = "0";
+                var result_dsp = "0";
                 var multiplier = 1   
                 
                 
@@ -330,13 +330,13 @@
                         if (spinr_val[ai2] > 1){
                             win.play();
                             total		+= result;
-                            total_dsp	= number_format(total, 2);
-                            result_dsp	= number_format(result, 2);
+                            total_dsp	= number_format(total, 0);
+                            result_dsp	= number_format(result, 0);
                         }
                         else {
                             total		+= result;
-                            total_dsp 	= number_format(total, 2);
-                            result_dsp 	= number_format(result, 2);
+                            total_dsp 	= number_format(total, 0);
+                            result_dsp 	= number_format(result, 0);
                         }
                         
                         drawImg();
@@ -384,7 +384,7 @@
                                         spinning    = true;
                                         lock        = false;
                                         result      = 0;
-                                        result_dsp	= "0.00";
+                                        result_dsp	= "0";
                                         
                                         window.requestAnimationFrame( anim );
                                         tickets -= 1;

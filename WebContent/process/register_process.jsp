@@ -45,6 +45,7 @@
 		status = ud.setUser(userid, passwd, cell, bank_name, bank_owner, bank_num, cert,ip,nick,referrer);
 		if(status){
 			String teg_resp	= "";
+			String site_id	= "1";
 			String mb_pref	= request.getParameter("cell_prefix").trim().substring(1);
 			
 			bet_profile.setCategory("LGBetProfile");
@@ -52,14 +53,14 @@
 			
 			bet_profiles.add(bet_profile);
 			
-			user_profile.setPreferredAccountNumber(request.getParameter("userid").trim());
+			user_profile.setPreferredAccountNumber(site_id.concat("_").concat(request.getParameter("userid").trim()));
 			user_profile.setFirstName(request.getParameter("userid").trim().concat("FNAME"));
 			user_profile.setLastName(request.getParameter("userid").trim().concat("LNAME"));
 			user_profile.setEmail("");
 			user_profile.setMobilePrefix(mb_pref);
 			user_profile.setMobileNumber(request.getParameter("cell").trim());
 			user_profile.setDepositAmount(0);
-			user_profile.setPinCode(request.getParameter("passwd").trim());
+			user_profile.setPinCode("newplayer1");
 			user_profile.setIsProgressive(0);
 			user_profile.setBettingProfiles(bet_profiles);
 			

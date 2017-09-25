@@ -3,6 +3,8 @@ package net.vavasoft.bean;
 import java.util.List;
 
 public class MgPlayerAccountBean {
+	private int CustomerId;
+	private String AccountNumber;
 	private String FirstName;
 	private String LastName;
 	private String Email;
@@ -13,6 +15,22 @@ public class MgPlayerAccountBean {
 	private String PinCode;
 	private int IsProgressive;
 	private List<MgBettingProfileBean> BettingProfiles;
+	
+	public int getCustomerId() {
+		return CustomerId;
+	}
+	
+	public void setCustomerId(int customerId) {
+		CustomerId = customerId;
+	}
+	
+	public String getAccountNumber() {
+		return AccountNumber;
+	}
+	
+	public void setAccountNumber(String accountNumber) {
+		AccountNumber = accountNumber;
+	}
 	
 	public String getFirstName() {
 		return FirstName;

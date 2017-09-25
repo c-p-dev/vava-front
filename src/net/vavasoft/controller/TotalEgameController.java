@@ -27,6 +27,7 @@ import net.vavasoft.bean.MgWithdrawAllBean;
 import net.vavasoft.bean.UserBean;
 import net.vavasoft.dao.UserDao;
 import net.vavasoft.util.NukeSSLCerts;
+import net.vavasoft.util.StringManipulator;
 
 import java.sql.*;
 import javax.sql.*;
@@ -119,26 +120,46 @@ public class TotalEgameController {
 		return srv_resp;
 	}
 	
+	public String editAccount(MgPlayerAccountBean user_profile)
+	{
+		/*	Variable Declaration	*/
+		Gson gson							= new Gson();
+		String url							= api_base+"EditAccount";
+		String json_param					= "";
+		String srv_resp						= "";
+		
+		/*	Parameters to be passed to TEG	*/
+		
+		/*	Convert parameters to JSON	*/
+		json_param		= gson.toJson(user_profile, MgPlayerAccountBean.class);
+		
+		/*--------------------------------------------------------------------
+        |	Execute HTTP POST Request to TEG
+        |-------------------------------------------------------------------*/
+		srv_resp 		= this.postToTeg(url, json_param);
+		System.out.println(srv_resp);
+		return srv_resp;
+	}
+	
 	public String userPlayCheck(String username, int game_provider)
 	{	
 		/*	Variable Declaration	*/
-		Gson gson				= new Gson();
+		Gson gson					= new Gson();
+		StringManipulator strlib	= new StringManipulator();
+				
 		String game_url_base	= "https://webservice.basestatic.net/ETILandingPage/index.aspx?";
 		String game_url_full	= "";
 		String srv_resp			= "";
+		String mg_username		= "";
+		String mg_pincode		= "";
 		double money			= 0;
 		
 		MgWithdrawAllBean withdraw_data = new MgWithdrawAllBean();
 		MgDepositBean deposit_data 		= new MgDepositBean();
+		MgPlayerAccountBean edit_data	= new MgPlayerAccountBean();
 		
 		UserBean user_profile	= new UserBean();
 		UserDao user_db			= new UserDao();
-
-		/*--------------------------------------------------------------------
-        |	Withdraw all cash from TEG System
-        |-------------------------------------------------------------------*/
-		srv_resp		= this.withdrawAll(username);
-		withdraw_data	= gson.fromJson(srv_resp, MgWithdrawAllBean.class);
 		
 		/*--------------------------------------------------------------------
         |	Query Database and Update Money
@@ -146,6 +167,13 @@ public class TotalEgameController {
 		user_profile 	= user_db.getUserByUserId(username);
 		money 			= user_profile.getMoney();
 		
+		/*--------------------------------------------------------------------
+        |	Withdraw all cash from TEG System
+        |-------------------------------------------------------------------*/
+		mg_username		= Integer.toString(user_profile.getSiteid()).concat("_").concat(username);
+		srv_resp		= this.withdrawAll(mg_username);
+		withdraw_data	= gson.fromJson(srv_resp, MgWithdrawAllBean.class);
+		System.out.println(srv_resp);
 		if (0 == withdraw_data.getStatus().getErrorCode()) {
 			
 			money 	= money + withdraw_data.getResult().getTransactionAmount();
@@ -159,18 +187,29 @@ public class TotalEgameController {
         |-------------------------------------------------------------------*/
 		if (1 == game_provider) {
 			/*	Deposit all money from VAVA to MG	*/
-			srv_resp		= this.deposit(username, money);
+			srv_resp		= this.deposit(mg_username, money);
 			deposit_data	= gson.fromJson(srv_resp, MgDepositBean.class);
-			
+			System.out.println(srv_resp);
 			if (0 == deposit_data.getStatus().getErrorCode()) {
 				/*	Update database to empty VAVA money of user	*/
 				user_db.setUserMoney(username, 0);
 				
 				/*--------------------------------------------------------------------
+		        |	Change PinCode of MG User
+		        |-------------------------------------------------------------------*/
+				/*	Get a random pincode	*/
+				mg_pincode	= strlib.getSaltString(7);
+				
+				edit_data.setAccountNumber(mg_username);
+				edit_data.setPinCode(mg_pincode);
+				
+				this.editAccount(edit_data);
+				
+				/*--------------------------------------------------------------------
 		        |	Sets the Game URL
 		        |-------------------------------------------------------------------*/
-				game_url_full	= game_url_base.concat("LoginName=").concat(username);
-				game_url_full	= game_url_full.concat("&Password=").concat(user_profile.getPasswd());
+				game_url_full	= game_url_base.concat("LoginName=").concat(mg_username);
+				game_url_full	= game_url_full.concat("&Password=").concat(mg_pincode);
 				game_url_full	= game_url_full.concat("&UL=ko-kr&CasinoID=2635&ClientID=7&BetProfileID=MobilePostLogin&StartingTab=Baccarat&BrandID=igaming&altProxy=TNG");
 			}
 		}
@@ -192,27 +231,30 @@ public class TotalEgameController {
 		MgWithdrawAllBean withdraw_data = new MgWithdrawAllBean();
 		UserBean user_profile			= new UserBean();
 		
-		String srv_resp = "";
-		double money	= 0;
-		int ret			= 0;
+		String srv_resp 	= "";
+		String mg_username	= "";
+		double money		= 0;
+		
+		/*--------------------------------------------------------------------
+        |	Query Database
+        |-------------------------------------------------------------------*/
+		user_profile 	= user_db.getUserByUserId(username);
+		mg_username		= Integer.toString(user_profile.getSiteid()).concat("_").concat(username);
 		
 		/*--------------------------------------------------------------------
         |	Withdraw all money from MG and save to database
         |-------------------------------------------------------------------*/
-		srv_resp 		= this.withdrawAll(username);
+		srv_resp 		= this.withdrawAll(mg_username);
 		withdraw_data	= gson.fromJson(srv_resp, MgWithdrawAllBean.class);
 		
 		if (0 == withdraw_data.getStatus().getErrorCode()) {
 			/*--------------------------------------------------------------------
-	        |	Query Database and Update Money
+	        |	Update Money
 	        |-------------------------------------------------------------------*/
-			user_profile 	= user_db.getUserByUserId(username);
 			money 			= user_profile.getMoney() + withdraw_data.getResult().getTransactionAmount();
 			
 			user_profile.setMoney((int)money);
 			user_db.setUserMoney(username, money);
-			
-			ret = 1;
 		}
 		
 		return user_profile;
