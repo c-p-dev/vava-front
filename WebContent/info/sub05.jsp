@@ -1,9 +1,10 @@
+<%@ include file = "../process/session_checker.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="../header.jsp" />
-<%@page import="net.vavasoft.dao.GameDao, java.text.DecimalFormat, java.util.*,net.vavasoft.dao.UserDao,net.vavasoft.bean.UserBean;"%>
 <%
 	UserBean user_data	= (UserBean)session.getAttribute("currentSessionUser");
 %>
+
 <div id="contents_wrap">
 	<div class="contents">
 		<ul class="tabs">
