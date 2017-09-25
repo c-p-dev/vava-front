@@ -322,15 +322,16 @@ public class UserDao {
 			DataSource ds = (DataSource)envContext.lookup("jdbc/vava");
 		
 		    String query = "";
-		    	query = "SELECT CONCAT(bank_low_name,' ' ,bank_low_owner,' ',bank_low_num) as bank_account from dbo.config_mst WHERE siteid="+siteid;
+		    	query = "SELECT CONCAT(bank_low_name,' ' ,bank_low_owner,' ',bank_low_num) as bank_account from dbo.config_mst WHERE siteid=?";
 		    if(charge_level == "HIGH"){
-		    	query = "SELECT CONCAT(bank_high_name,' ' ,bank_high_owner,' ',bank_high_num) as bank_account from dbo.config_mst WHERE siteid="+siteid; 
+		    	query = "SELECT CONCAT(bank_high_name,' ' ,bank_high_owner,' ',bank_high_num) as bank_account from dbo.config_mst WHERE siteid=?"; 
 			}else if(charge_level == "MIDDLE"){
-				query = "SELECT CONCAT(bank_middle_name,' ' ,bank_middle_owner,' ',bank_middle_num) as bank_account from dbo.config_mst WHERE siteid="+siteid; 
+				query = "SELECT CONCAT(bank_middle_name,' ' ,bank_middle_owner,' ',bank_middle_num) as bank_account from dbo.config_mst WHERE siteid=?"; 
 			}
 			
 		    con = ds.getConnection();			 	
 			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1,siteid);
 			rs = pstmt.executeQuery();
 			if(rs.next()){
 				bankAccount =  rs.getString("bank_account");
@@ -582,4 +583,174 @@ public class UserDao {
 		
 	}
 
+	public boolean updateUserProfile(String userid, String bank_name, String bank_owner,String bank_num, String cell){
+		boolean result = false;
+		Connection con 			= null;
+		PreparedStatement pstmt = null;
+		int sts = 0;
+		String  query 			= "UPDATE user_mst SET bank_name=? ,bank_owner = ?, bank_num = ?, cell=? WHERE userid = ?";		
+		
+		try {
+			Context initContext = new InitialContext();
+		 	Context envContext 	= (Context)initContext.lookup("java:/comp/env");
+			DataSource ds 		= (DataSource)envContext.lookup("jdbc/vava");
+			
+		    con 				= ds.getConnection();
+		    pstmt   			= con.prepareStatement(query);
+            pstmt.setString(1, bank_name);
+            pstmt.setString(2, bank_owner);
+            pstmt.setString(3, bank_num);
+            pstmt.setString(4, cell);
+            pstmt.setString(5, userid);
+			sts = pstmt.executeUpdate();
+			
+	        pstmt.close();
+	        con.close();
+	        
+		}
+		catch(Exception e) {
+			System.out.println(e);
+			logger.debug(e);
+		}
+		
+		if(sts > 0 ) result = true;
+		
+		return result;
+		
+	}
+	
+	public UserBean getUserInfoByUserid (String userid) throws SQLException{
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		UserBean uib = new UserBean();
+		String query = "SELECT * FROM RT01.dbo.user_mst WHERE userid = ?";
+		
+		try{	      
+			
+		 	Context initContext = new InitialContext();
+		 	Context envContext = (Context)initContext.lookup("java:/comp/env");
+			DataSource ds = (DataSource)envContext.lookup("jdbc/vava");
+						 	
+			con = ds.getConnection();			 	
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1,userid);
+			rs = pstmt.executeQuery();
+					   
+			if(rs.next()){
+				uib.setLoginStatus(0); //success
+				uib.setUserid(rs.getString("userid"));
+				uib.setNick(rs.getString("nick"));
+				uib.setCell(rs.getString("cell"));
+				uib.setGrade(rs.getInt("grade"));
+				uib.setWatch(rs.getString("watch"));
+				uib.setRecommend_yn(rs.getString("recommend_yn"));
+				uib.setMoney(rs.getInt("money"));
+				uib.setPoint(rs.getInt("point"));
+				uib.setBank_name(rs.getString("bank_name"));
+				uib.setBank_owner(rs.getString("bank_owner"));
+				uib.setBank_num(rs.getString("bank_num"));	
+				uib.setCharge_level(rs.getString("charge_level"));
+				uib.setSiteid(rs.getInt("siteid"));
+			}else{
+				uib.setLoginStatus(2); // no account
+			}
+			
+	        rs.close();
+	        pstmt.close();
+	        con.close();
+	  		    
+		} catch(Exception e){
+		       	e.printStackTrace();
+		
+		} finally{
+		 	  if(rs!=null) rs.close();
+		 	  if(pstmt!=null) pstmt.close();
+		 	  if(con!=null) con.close();
+		}
+  	
+	  	return uib;
+	}
+	
+	public boolean checkUserPassword(String userid, String passwd) throws SQLException{
+		boolean result = false;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		UserBean uib = new UserBean();
+		String query = "SELECT passwd FROM RT01.dbo.user_mst WHERE userid = ? and passwd = ?";
+		
+		try{	      
+			
+		 	Context initContext = new InitialContext();
+		 	Context envContext = (Context)initContext.lookup("java:/comp/env");
+			DataSource ds = (DataSource)envContext.lookup("jdbc/vava");
+						 	
+			con = ds.getConnection();			 	
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1,userid);
+			pstmt.setString(2,passwd);
+			rs = pstmt.executeQuery();
+					   
+			if(rs.next()){
+				result = true;
+			}
+			
+	        rs.close();
+	        pstmt.close();
+	        con.close();
+	  		    
+		} catch(Exception e){
+		       	e.printStackTrace();
+		
+		} finally{
+		 	  if(rs!=null) rs.close();
+		 	  if(pstmt!=null) pstmt.close();
+		 	  if(con!=null) con.close();
+		}
+  	
+		return result;
+	}
+	
+	public boolean updateUserPasswd(String userid,String current_passwd,String new_passwd) throws SQLException{
+		boolean result = false;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int sts = 0;
+		String query = "UPDATE user_mst SET passwd = ? WHERE userid = ? AND passwd = ? ";
+		
+		try{	      
+			
+		 	Context initContext = new InitialContext();
+		 	Context envContext = (Context)initContext.lookup("java:/comp/env");
+			DataSource ds = (DataSource)envContext.lookup("jdbc/vava");
+						 	
+			con = ds.getConnection();			 	
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1,new_passwd);
+			pstmt.setString(2,userid);
+			pstmt.setString(3,current_passwd);
+
+			sts = pstmt.executeUpdate();					   
+			if(sts > 0 ) result = true;
+			
+	        pstmt.close();
+	        con.close();
+	        
+		} catch(Exception e){
+			logger.debug(e);
+	       	e.printStackTrace();
+		}finally{
+			if(rs!=null) rs.close();
+			if(pstmt!=null) pstmt.close();
+			if(con!=null) con.close();
+		}
+  	
+		
+		return result;
+		
+	}
+	
 }
