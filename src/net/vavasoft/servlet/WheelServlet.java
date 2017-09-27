@@ -18,7 +18,7 @@ import net.vavasoft.controller.SpinWheelController;
 public class WheelServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
-	public static Logger logger = Logger.getLogger(UserRegister.class);
+	public static Logger logger = Logger.getLogger(WheelServlet.class);
 	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
