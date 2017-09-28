@@ -23,7 +23,7 @@ import net.vavasoft.dao.UserDao;
 public class TegServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
-	public static Logger logger = Logger.getLogger(UserRegister.class);
+	public static Logger logger = Logger.getLogger(TegServlet.class);
 	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
