@@ -11,6 +11,7 @@ public class UserBean {
 	private String regdate;
 	private String state;
 	private int grade;
+	private String ip;
 	private String watch;
 	private String recommend_yn;
 	private String charge_level;
@@ -20,6 +21,13 @@ public class UserBean {
 	private String recommand;
 	private boolean isValid;
 	private int loginStatus; //0  success //1 wrong passwrod // 2 no account 
+	
+	public String getIp() {
+		return ip;
+	}
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
 	
 	public int getLoginStatus() {
 		return loginStatus;

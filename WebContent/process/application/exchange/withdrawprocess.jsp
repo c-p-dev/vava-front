@@ -14,15 +14,14 @@
 	 	bean.setRegdate("20202020");
 		boolean result = false;
 		int withdraw = Integer.parseInt(request.getParameter("withdraw"));
-		String ip = "";
 		String xForwardedForHeader = request.getHeader("X-Forwarded-For");	 
 	    if (xForwardedForHeader == null) {
-	        ip = request.getRemoteAddr();
+	    	bean.setIp(request.getRemoteAddr());
 	    }else{
-	        ip =  new StringTokenizer(xForwardedForHeader, ",").nextToken().trim();
+	    	bean.setIp(new StringTokenizer(xForwardedForHeader, ",").nextToken().trim());  
 	    }
 	    
-		result = ud.withdraw(bean.getUserid(),bean.getSiteid(),bean.getBank_name(),bean.getBank_num(),bean.getBank_owner(),bean.getRegdate(),ip,withdraw);	
+		result = ud.withdraw(bean,withdraw);	
 		out.println(result);
 
 	}else{

@@ -22,6 +22,7 @@ import java.util.Date;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import net.vavasoft.bean.WithdrawBean;
 
 
 public class UserDao {
@@ -455,7 +456,7 @@ public class UserDao {
 		
 	}
 	
-		public boolean withdraw(String userid,int siteid,String bank_name, String bank_num, String bank_owner, String reg_date, String ip, int withdraw ) throws SQLException{
+		public boolean withdraw(UserBean trans_data,int withdraw) throws SQLException{
 
 		PreparedStatement pstmt = null;
 		Connection con = null;
@@ -474,15 +475,15 @@ public class UserDao {
 			
 		    con = ds.getConnection();		
 		    pstmt = con.prepareStatement(query);
-		    pstmt.setInt(1,siteid);
-		    pstmt.setString(2,userid);
-		    pstmt.setString(3,bank_name);
-		    pstmt.setString(4,bank_owner);
-		    pstmt.setString(5,bank_num);
+		    pstmt.setInt(1,trans_data.getSiteid());
+		    pstmt.setString(2,trans_data.getUserid());
+		    pstmt.setString(3,trans_data.getBank_name());
+		    pstmt.setString(4,trans_data.getBank_owner());
+		    pstmt.setString(5,trans_data.getBank_num());
 		    pstmt.setInt(6,withdraw);
 		    pstmt.setString(7,sdf.format(date));
 		    pstmt.setString(8,sdf.format(date));
-		    pstmt.setString(9,ip);
+		    pstmt.setString(9,trans_data.getIp());
 		    pstmt.setInt(10,withdraw);
 		    
 			row = pstmt.executeUpdate(); 
