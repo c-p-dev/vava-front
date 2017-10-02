@@ -312,6 +312,9 @@ $(".cs_close").on("click",function(e){
 	$("#ExchangeSuccesModal").popup("hide");
 
 });
+function resetformwithdraw(){
+	$("#formwithdraw")[0].reset();
+}
 $('#button1').click(function(){
 	 $("#withdraw").val("10000");
 });
