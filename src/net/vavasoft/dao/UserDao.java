@@ -391,7 +391,7 @@ public class UserDao {
 			if(row > 0) {
 				result = true;
 				user_data = user_db.getUserByUserId(userid);
-				user_db.setUserMoney(userid, user_data.getMoney() + money);
+				//user_db.setUserMoney(userid, user_data.getMoney() + money);
 			}
 			
 	  	}catch(Exception e){
