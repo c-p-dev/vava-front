@@ -141,7 +141,7 @@ public class TotalEgameController {
 		return srv_resp;
 	}
 	
-	public String userPlayCheck(String username, int game_provider)
+	public String userPlayCheck(String username, int game_provider) throws MalformedURLException, IOException
 	{	
 		/*	Variable Declaration	*/
 		Gson gson					= new Gson();
@@ -153,6 +153,8 @@ public class TotalEgameController {
 		String mg_username		= "";
 		String mg_pincode		= "";
 		double money			= 0;
+		
+		AsianGamingController ag_ctrl	= new AsianGamingController();
 		
 		MgWithdrawAllBean withdraw_data = new MgWithdrawAllBean();
 		MgDepositBean deposit_data 		= new MgDepositBean();
@@ -217,7 +219,8 @@ public class TotalEgameController {
         |	Game is from Asian Gaming
         |-------------------------------------------------------------------*/
 		else {
-			
+			String session_id	= "ABCDE12345";
+			game_url_full		= ag_ctrl.launchGame(username, session_id);
 		}
 		
 		return game_url_full;

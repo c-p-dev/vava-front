@@ -167,7 +167,8 @@
 		$(".casino_board_list li a").on("click",function(e) {
 			
 			var session 	= "<%=checkSession%>";
-
+			var gm_provdr	= $(this).data('gm_provdr');
+			
 			if ((!session)
 			|| (false == session)
 			|| ("false" == session)) {
@@ -176,11 +177,14 @@
 			else {
 				$('#fade_9').popup('show');
 				
-				$.get("TegServlet?method=1&gm_provdr="+$(this).data('gm_provdr'), function(srv_resp) {
+				$.get("TegServlet?method=1&gm_provdr="+gm_provdr, function(srv_resp) {
 					
 					if ("" != srv_resp) {
 						$('#game-pop-frame').attr('src', srv_resp);
-						$('.money_dsp').text('0.00');
+						
+						if (1 == gm_provdr) {
+							$('.money_dsp').text('0.00');
+						}
 					}
 					else {
 						$('#gm-pop-errmsg').html("An error occured. Please reload the game.");
