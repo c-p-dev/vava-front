@@ -8,31 +8,45 @@
 	net.vavasoft.bean.MgPlayerAccountBean,
 	net.vavasoft.controller.TotalEgameController,
 	com.google.gson.reflect.TypeToken,
-	java.util.StringTokenizer;" %>
+	java.util.StringTokenizer,
+	net.vavasoft.bean.JoinCodeBean,
+	net.vavasoft.dao.JoinCodeDao,
+	net.vavasoft.bean.SmsAuthBean,
+	net.vavasoft.dao.SmsDao;" %>
 <%
-	
-	String userid = request.getParameter("userid").trim();
-	String bank_name = request.getParameter("bank_name").trim();
-	String bank_num = request.getParameter("bank_num").trim();
-	String bank_owner = request.getParameter("bank_owner").trim();
-	String cell = request.getParameter("cell_prefix").trim() + request.getParameter("cell").trim();
-	String cert = request.getParameter("cert").trim();
-	String passwd = request.getParameter("passwd").trim();
-	String recommend = request.getParameter("recommend").trim();
-	String referrer = request.getParameter("referrer").trim();
-	String nick = request.getParameter("nick").trim();		
-	String ip = "";
+	UserBean post_ub = new UserBean();
+	JoinCodeBean jcBean = new JoinCodeBean();
+	JoinCodeDao jcDao = new JoinCodeDao();
+	SmsAuthBean smsBean = new SmsAuthBean();
+	SmsDao smsDao = new SmsDao();
 
 	String xForwardedForHeader = request.getHeader("X-Forwarded-For");	 
+	String ip = "";
     if (xForwardedForHeader == null) {
         ip = request.getRemoteAddr();
     }else{
-        // As of https://en.wikipedia.org/wiki/X-Forwarded-For
-        // The general format of the field is: X-Forwarded-For: client, proxy1, proxy2 ...
-        // we only want the client
         ip =  new StringTokenizer(xForwardedForHeader, ",").nextToken().trim();
     }
+	String cell = request.getParameter("cell_prefix").trim().substring(1) + request.getParameter("cell").trim();
 
+	post_ub.setUserid(request.getParameter("userid").trim());
+	post_ub.setBank_name(request.getParameter("bank_name").trim());
+	post_ub.setBank_num(request.getParameter("bank_num").trim());
+	post_ub.setBank_owner(request.getParameter("bank_owner").trim());
+	post_ub.setCell(cell);
+	post_ub.setPasswd(request.getParameter("passwd").trim());
+	post_ub.setRecommand(request.getParameter("referrer").trim());
+	post_ub.setNick(request.getParameter("nick").trim());
+	post_ub.setIp(ip);
+
+	jcBean.setUserid(request.getParameter("userid").trim());
+	jcBean.setJoincode(request.getParameter("recommend").trim());
+	jcBean.setRecommend(request.getParameter("referrer").trim());
+
+	smsBean.setUserid(request.getParameter("userid").trim());
+	smsBean.setTel(cell);
+	smsBean.setAuthcode(request.getParameter("cert").trim());
+	
     TotalEgameController teg_ctrl					= new TotalEgameController();
 	MgPlayerAccountBean user_profile 				= new MgPlayerAccountBean();
 	MgBettingProfileBean bet_profile				= new MgBettingProfileBean();
@@ -42,12 +56,19 @@
     UserDao ud = new UserDao();
     boolean status = false;
 	try {
-		status = ud.setUser(userid, passwd, cell, bank_name, bank_owner, bank_num, cert,ip,nick,referrer);
+		//status = ud.setUser(userid, passwd, cell, bank_name, bank_owner, bank_num, cert,ip,nick,referrer);
+		status = ud.setUser(post_ub);
 		if(status){
 			String teg_resp	= "";
 			String site_id	= "1";
 			String mb_pref	= request.getParameter("cell_prefix").trim().substring(1);
 			
+			boolean updateJoinCode = jcDao.updateJoinCodeRegister(jcBean);
+			boolean updateSms = smsDao.updateUserAuthSms(smsBean);
+
+			System.out.println("join code update result : " + updateJoinCode);
+			System.out.println("sms update result : " + updateSms);
+
 			bet_profile.setCategory("LGBetProfile");
 			bet_profile.setProfileId(1202);
 			
@@ -66,9 +87,10 @@
 			
 			teg_resp = teg_ctrl.addPlayerAccount(user_profile);
 			
-
+			
 			UserBean ub;
-			ub = ud.getUser(userid,passwd);
+			//ub = ud.getUser(userid,passwd);
+			ub = ud.getUser(post_ub);
 			HttpSession user_session = request.getSession(true);	    
 			session.setMaxInactiveInterval(7200);
 	        session.setAttribute("currentSessionUser",ub);

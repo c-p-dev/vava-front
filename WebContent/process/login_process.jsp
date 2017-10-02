@@ -8,16 +8,16 @@
 	 *  2 - unknown userid
 	 * */
 
-	String userid = request.getParameter("userid").trim();
-	String passwd = request.getParameter("passwd").trim();
+	UserBean post_ub = new UserBean();
+	post_ub.setUserid(request.getParameter("userid").trim());
+	post_ub.setPasswd(request.getParameter("passwd").trim());
 	int response_code = 4;
 
 	try {
 		UserBean ub;
 		UserDao userDao = new UserDao();
 		
-		
-		ub = userDao.getUser(userid,passwd);
+		ub = userDao.getUser(post_ub);
 		response_code = (int) ub.getLoginStatus();
 		
 		if(response_code == 0){

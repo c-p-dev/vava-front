@@ -23,6 +23,8 @@ import java.util.Date;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import net.vavasoft.dao.SmsDao;
+import net.vavasoft.bean.SmsAuthBean;
 
 public class UserDao {
 	
@@ -30,14 +32,15 @@ public class UserDao {
 	public static Logger logger = Logger.getLogger(BetConManager_Test2.class);
 	public UserDao(){}
 	
-	public UserBean getUser(String userid, String passwd) throws SQLException{
+	public UserBean getUser(UserBean user) throws SQLException{
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
 		UserBean uib = new UserBean();
 		String query = "SELECT * FROM RT01.dbo.user_mst WHERE userid = ?";
-		
+		System.out.println(user.getUserid());
+		System.out.println(user.getPasswd());
 		try{	      
 			
 		 	Context initContext = new InitialContext();
@@ -46,11 +49,11 @@ public class UserDao {
 						 	
 			con = ds.getConnection();			 	
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1,userid);
+			pstmt.setString(1,user.getUserid());
 			rs = pstmt.executeQuery();
 					   
 			if(rs.next()){
-				if (rs.getString("passwd").equals(passwd)){
+				if (rs.getString("passwd").equals(user.getPasswd())){
 					uib.setLoginStatus(0); //success
 					uib.setUserid(rs.getString("userid"));
 					uib.setNick(rs.getString("nick"));
@@ -89,8 +92,7 @@ public class UserDao {
 	  	return uib;
 	}
 	
-	public boolean setUser(String userid,String passwd,String cell,String bank_name,String bank_owner,String bank_num,String memotxt,String ip,String nick,String recommand) throws SQLException{
-	      
+	public boolean setUser(UserBean user) throws SQLException{      
 		  Connection con = null;
 		  Statement stmt = null;
 		  PreparedStatement pstmt = null;
@@ -108,25 +110,29 @@ public class UserDao {
 						" VALUES (?,1,?,? ,?,?,?,?,'NORMAL','N','LOW',?,?,?,?)";
 									
 			    pstmt = con.prepareStatement(query);
-			    pstmt.setString(1,userid);
-			    pstmt.setString(2,passwd);
-			    pstmt.setString(3,cell);
-			    pstmt.setString(4,bank_name);
-			    pstmt.setString(5,bank_owner);
-			    pstmt.setString(6,bank_num);
+			    pstmt.setString(1,user.getUserid());
+			    pstmt.setString(2,user.getPasswd());
+			    pstmt.setString(3,user.getCell());
+			    pstmt.setString(4,user.getBank_name());
+			    pstmt.setString(5,user.getBank_owner());
+			    pstmt.setString(6,user.getBank_num());
 			    pstmt.setString(7,sdf.format(date));
-			    pstmt.setString(8,ip);
-			    pstmt.setString(9,ip);
-			    pstmt.setString(10,nick);
-			    pstmt.setString(11,recommand);
-				
+			    pstmt.setString(8,user.getIp());
+			    pstmt.setString(9,user.getIp());
+			    pstmt.setString(10,user.getNick());
+			    pstmt.setString(11,user.getRecommand());
+			    
 				row = pstmt.executeUpdate(); 
 				logger.debug(query);
 				logger.debug(row);
 				pstmt.close();
 				con.close();
 				logger.debug(row);
-				if(row > 0) result = true;
+				if(row > 0) {
+					SmsDao sd = new SmsDao();
+					SmsAuthBean sab = new SmsAuthBean();
+					result = true;
+				}
 			
 				return result;
 	            	
@@ -752,5 +758,8 @@ public class UserDao {
 		return result;
 		
 	}
+	
+	
+	
 	
 }

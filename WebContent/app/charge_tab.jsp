@@ -238,6 +238,7 @@
 			bInfo : false,
 			lengthChange: false,
 			autowWidth:true,
+			pageLength: 10,
             columns : [
                 	{ 
                         data   : 'chid',
