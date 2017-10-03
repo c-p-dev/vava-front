@@ -22,8 +22,6 @@ import java.util.Date;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import net.vavasoft.bean.WithdrawBean;
-
 
 public class UserDao {
 	

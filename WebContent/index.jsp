@@ -39,7 +39,7 @@
 				</div>
 				<script type="text/javascript">jssor_1_slider_init();</script>
 			</div>
-			<div class="video_wrap" id="player">
+			<div class="video_wrap" id="random_player">
 			</div>
 		</div>
         <div class="contents_in_m20">

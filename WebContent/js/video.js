@@ -1,55 +1,17 @@
-	;
-(function(window, document, undefined) {
-
-    'use strict';
-
-    function removeElement(array, element) {
-        return array.filter(function(el) {
-            return el !== element
-        });
-    }
-
-    function changeVideo() {
-        if (player.getCurrentTime() >= delay) {
-            var currentVideo = player.getVideoData().video_id,
-                randomVideo = removeElement(videoPlaylist, currentVideo)[Math.floor(Math.random() * (videoPlaylist.length - 1))];
-            player.loadVideoById(randomVideo);
-        }
-    }
-
-    function onPlayerStateChange(event) {
-        clearInterval(repeat);
-        if (event.data === 1) {
-            repeat = setInterval(changeVideo, 500);
-        }
-    }
-
-    window.onYouTubeIframeAPIReady = function() {
-        var randomVideo = videoPlaylist[Math.floor(Math.random() * videoPlaylist.length)];
-        player = new YT.Player('player', {
-            height: '315',
-            width: '560',
-            videoId: randomVideo,
-            playerVars: {
-                'autoplay': 1,
-                'controls': 0,
-                'showinfo': 0,
-                'iv_load_policy': 3
-            },
-            events: {
-                'onStateChange': onPlayerStateChange
-            }
-        });
-    }
-
-    var tag = document.createElement('script'),
-        player,
-        videoPlaylist = ['SCyNP-eqS0Y', 'TD15l1RWqcI', 'mpe9w-CHsoE','c-mht1GNRMU','RtgFREbjsow','aUp4TZG8ZQs'],
-        delay = 600, // s
-        repeat;
-
-    tag.src = 'https://www.youtube.com/iframe_api';
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-})(window, document);
+ var videos =  [	 
+	 	 "https://www.youtube.com/embed/SCyNP-eqS0Y?modestbranding=1&autoplay=1&controls=0&vq=hd720",
+		 "https://www.youtube.com/embed/TD15l1RWqcI?modestbranding=1&autoplay=1&controls=0&vq=hd720",
+		 "https://www.youtube.com/embed/HfEEZDtktUk?modestbranding=1&autoplay=1&controls=0&vq=hd720",
+		 "https://https://www.youtube.com/embed/lCE_7j5quOY?modestbranding=1&autoplay=1&controls=0&vq=hd720",
+		 "https://www.youtube.com/embed/Tx15fbNMCns?modestbranding=1&autoplay=1&controls=0&vq=hd720",
+		 "https://www.youtube.com/embed/mFIOGpIQtVU?modestbranding=1&autoplay=1&controls=0&vq=hd720",	 
+		 ];
+        window.onload = function () {
+            var playerDiv = document.getElementById("random_player");
+            var player = document.createElement("IFRAME");
+            var randomVideoUrl = videos[Math.floor(Math.random() * videos.length)];
+            player.setAttribute('width', '100%');
+            player.setAttribute('height', '100%');
+            player.setAttribute('src', randomVideoUrl);
+            playerDiv.appendChild(player);
+        };
