@@ -7,6 +7,15 @@
 		margin:0px;
 		display: none;
 	}
+	input[type="text"]:-ms-input-placeholder {
+    text-align: left;
+	}
+	input[type="text"]::-webkit-input-placeholder {
+	    text-align: left;
+	}
+	input::-moz-placeholder {
+	 text-align: left;
+	}	
 	
 	/*datatable*/
 	.dataTables_wrapper .dataTables_paginate {
@@ -83,7 +92,7 @@
 							</div>
 							<div class="cash_in">
 								<div class="cash_4">
-									<input class="input_style03"  placeholder="환전금액" id="withdraw" name="withdraw">		
+									<input class="input_style03" type="text" style="text-align: right;padding-right: 5%;" placeholder="환전금액" id="withdraw" name="withdraw">		
 								</div>	
 								<div class="cash_5">
 									<span id="err-msg" style="color:orange;"></span>
@@ -317,18 +326,24 @@ $(".cs_close").on("click",function(e){
 });
 function resetformwithdraw(){
 	$("#formwithdraw")[0].reset();
+	$('#withdraw').css('border-color', '#373332');
+	$( "#err-msg" ).hide();
 }
 $('#button1').click(function(){
-	 $("#withdraw").val("10000");
+	 var num = +$("#withdraw").val() + 10000;
+	 $("#withdraw").val(num);
 });
 $('#button2').click(function(){
-	$("#withdraw").val("50000");
+	var num = +$("#withdraw").val() + 50000;
+	 $("#withdraw").val(num);
 });
 $('#button3').click(function(){
-	$("#withdraw").val("100000");
+	var num = +$("#withdraw").val() + 100000;
+	 $("#withdraw").val(num);
 });
 $('#button4').click(function(){
-	$("#withdraw").val("1000000");
+	var num = +$("#withdraw").val() + 1000000;
+	 $("#withdraw").val(num);
 });
 $('#button5').click(function(){
 	$("#withdraw").val("0");
