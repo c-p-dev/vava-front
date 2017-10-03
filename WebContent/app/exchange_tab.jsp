@@ -86,15 +86,15 @@
 									<input class="input_style03"  placeholder="환전금액" id="withdraw" name="withdraw">		
 								</div>	
 								<div class="cash_5">
-									<span id="err-msg"></span>
+									<span id="err-msg" style="color:orange;"></span>
 								</div>
 							</div>
 							<div class="cash_in">
-								<input class="btn1" type="button" value = "10000원" id="button1"> 
- 	 									<input class="btn1" type="button" value = "50000원" id="button2"> 
- 	 									<input class="btn1" type="button" value = "100000원" id="button3"> 
- 	 									<input class="btn1" type="button" value = "1000000원" id="button4">
- 	 									<input class="btn1" type="button" value = "정정" id="button5">
+										<span class="btn1" id="button1">1만원</span>
+ 	 									<span class="btn1" id="button2">5만원</span>
+ 	 									<span class="btn1" id="button3">10만원</span>
+ 	 									<span class="btn1" id="button4">100만원</span>
+ 	 									<span class="btn1" id="button5">정정</span>
 								<span><button type="submit" class="btn3c">환전신청</button></span>
 							</div>
 						</div>
@@ -255,6 +255,7 @@ $(".dt_div").on("click",function(){
 	    {
 	    	$( "#err-msg" ).text( "Enter Money" ).show();
 	    	event.preventDefault();
+	    	 $('#withdraw').css('border-color', 'red');
 	      return false;
 	    }
 	    if(withdraw.match(numbers))
@@ -264,6 +265,7 @@ $(".dt_div").on("click",function(){
 		    {
 		    	$( "#err-msg" ).text( "Minimum exchangeable amount is 10,000 won" ).show();
 		    	event.preventDefault();
+		    	 $('#withdraw').css('border-color', 'red');
 		      return false;
 		    }
 	    	
@@ -279,6 +281,7 @@ $(".dt_div").on("click",function(){
 	      {  
 	    	$( "#err-msg" ).text( "Numbers Only" ).show();
 	    	event.preventDefault();
+	    	 $('#withdraw').css('border-color', 'red');
 	      return false; 
 	      }
 	    

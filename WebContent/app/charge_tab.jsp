@@ -312,6 +312,7 @@
 			},
 			bank_owner :{
 				required:true,
+				alphanumeric: true,
 			},
 			money:{
 				required:true,
