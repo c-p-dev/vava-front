@@ -2,7 +2,7 @@
 	 	 "https://www.youtube.com/embed/SCyNP-eqS0Y?modestbranding=1&autoplay=1&controls=0&vq=hd720",
 		 "https://www.youtube.com/embed/TD15l1RWqcI?modestbranding=1&autoplay=1&controls=0&vq=hd720",
 		 "https://www.youtube.com/embed/HfEEZDtktUk?modestbranding=1&autoplay=1&controls=0&vq=hd720",
-		 "https://https://www.youtube.com/embed/lCE_7j5quOY?modestbranding=1&autoplay=1&controls=0&vq=hd720",
+		 "https://www.youtube.com/embed/lCE_7j5quOY?modestbranding=1&autoplay=1&controls=0&vq=hd720",
 		 "https://www.youtube.com/embed/Tx15fbNMCns?modestbranding=1&autoplay=1&controls=0&vq=hd720",
 		 "https://www.youtube.com/embed/mFIOGpIQtVU?modestbranding=1&autoplay=1&controls=0&vq=hd720",	 
 		 ];
