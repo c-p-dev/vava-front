@@ -10,6 +10,7 @@
 		out.print(bean.getNick());  
 	}
 %>
+<script src="js/video.js"> </script>
 <!-- header_wrap -->
 <div id="contents_wrap">
 	<div class="contents">
@@ -38,8 +39,7 @@
 				</div>
 				<script type="text/javascript">jssor_1_slider_init();</script>
 			</div>
-			<div class="video_wrap">
-				<iframe id="video1" width="100%" height="100%" src="https://www.youtube.com/embed/SCyNP-eqS0Y" frameborder="0" allowtransparency="true" allowfullscreen></iframe>
+			<div class="video_wrap" id="random_player">
 			</div>
 		</div>
         <div class="contents_in_m20">
@@ -95,6 +95,7 @@
 										<div class="main_bet_name_text">
 											<span>레알마드리드</span><br><span>FC 바르셀로나123456</span>
 										</div>
+										
 									</div>
 									<span class="main_bet_btn">베팅하기</span>
 								</div>

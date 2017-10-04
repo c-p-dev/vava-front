@@ -9,6 +9,15 @@
 	.error_cash_in{
 		margin:0px;
 		display: none;
+	}
+	input[type="text"]:-ms-input-placeholder {
+    text-align: left;
+	}
+	input[type="text"]::-webkit-input-placeholder {
+	    text-align: left;
+	}
+	input::-moz-placeholder {
+	 text-align: left;
 	}	
 
 </style>
@@ -83,7 +92,7 @@
 									<input class="input_style03"  name="bank_num" placeholder="Enter your account number" placeholder="입금자명">		
 								</div>
 								<div class="cash_4">
-									<input class="input_style03" type="number" id="money" name="money" placeholder="Charge amount" placeholder="충전금액">		
+									<input class="input_style03" type="text" style="text-align: right;padding-right: 5%;" type="number" id="money" name="money" placeholder="Charge amount" placeholder="충전금액">		
 								</div>	
 								
 							</div>
@@ -313,6 +322,7 @@
 			},
 			bank_owner :{
 				required:true,
+				alphanumeric: true,
 			},
 			money:{
 				required:true,
