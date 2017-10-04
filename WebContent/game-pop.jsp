@@ -8,7 +8,7 @@
 	<div class="bg_mask_pop9_in">
 		<div class="inquiry_wrap">
 			<div id = 'gm-pop-errmsg'></div>
-			<iframe id = 'game-pop-frame' src = '' width = "100%" height = "650px" allowFullscreen = 1></iframe>
+			<iframe id = 'game-pop-frame' src = '' width = "100%" height = "100%" allowFullscreen = 1></iframe>
 		</div>
 	</div>
 </div>

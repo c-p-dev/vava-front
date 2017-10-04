@@ -119,7 +119,7 @@ public class AsianGamingController {
 		return url_full;
 	}
 	
-	public String forwardToAg(String user_id, String session_id)
+	public String forwardToAg(String user_id, String session_id, String lnk_dsp)
 	{
 		String url_base			= "http://gci.aggdemo.com:81/forwardGame.do?";
 		String params_str		= "";
@@ -137,7 +137,7 @@ public class AsianGamingController {
 		params_str			= params_str.concat("mh5=").concat(MH5_PARAM).concat(DES_PARAM_SUFX);
 		params_str			= params_str.concat("actype=").concat(ACTYPE_PARAM).concat(DES_PARAM_SUFX);
 		params_str			= params_str.concat("lang=").concat(LANG_KR_PARAM).concat(DES_PARAM_SUFX);
-		params_str			= params_str.concat("gametype=").concat(GAME_ALL_PARAM);
+		params_str			= params_str.concat("gametype=").concat(lnk_dsp);
 		
 		/*--------------------------------------------------------------------
         |	Encrypt the Parameters
@@ -153,11 +153,11 @@ public class AsianGamingController {
 		return ag_game_url;
 	}
 	
-	public String launchGame(String user_id, String session_id) throws MalformedURLException, IOException
+	public String launchGame(String user_id, String session_id, String lnk_dsp) throws MalformedURLException, IOException
 	{
 		String ag_create_url	= checkCreateAccount(session_id);
 		String ag_sess_url		= createAgSession(user_id, session_id);
-		String ag_game_url		= forwardToAg(user_id, session_id);
+		String ag_game_url		= forwardToAg(user_id, session_id, lnk_dsp);
 		
 		InputStream  con_create	= new URL(ag_create_url).openStream();
 		InputStream  con_sess	= new URL(ag_sess_url).openStream();
@@ -186,7 +186,7 @@ public class AsianGamingController {
         |	it different request which is protection against
         |	Man-in-middle attack
         |-------------------------------------------------------------------*/
-		MessageDigest md 		= MessageDigest.getInstance(ENC_KEY_ALGO);		
+		MessageDigest md 		= MessageDigest.getInstance(ENC_KEY_ALGO);
 		String md_key 			= enc_params.concat(API_KEY);
 		
 		md.update(md_key.getBytes(), 0, md_key.length());

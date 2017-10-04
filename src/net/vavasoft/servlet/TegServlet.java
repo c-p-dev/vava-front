@@ -41,9 +41,10 @@ public class TegServlet extends HttpServlet {
 				UserBean udata_1	= (UserBean)request.getSession().getAttribute("currentSessionUser");
 				String uname_1 		= udata_1.getUserid();
 				int game_provider	= Integer.valueOf(request.getParameter("gm_provdr"));
+				String lnk_dsp		= request.getParameter("lnk_dsp");
 				String srv_resp_1	= "";
 				
-				srv_resp_1 			= teg_ctrl.userPlayCheck(uname_1, game_provider);
+				srv_resp_1 			= teg_ctrl.userPlayCheck(uname_1, game_provider, lnk_dsp);
 				output.print(srv_resp_1);
 				break;
 			

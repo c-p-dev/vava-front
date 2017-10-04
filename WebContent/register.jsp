@@ -20,8 +20,8 @@
 <!-- member registration form -->
 <div id="fade_1" class="bg_mask_pop1">
 	<div class="bg_mask_pop_title">
-		<span class="popup_logo"><img src="images/popup_logo.png"></span>
-		<span class="popup_close fade_1_close"><img src="images/popup_close.png"></span>
+		<span class="popup_logo"><img src="/images/popup_logo.png"></span>
+		<span class="popup_close fade_1_close"><img src="/images/popup_close.png"></span>
 	</div>
 	<form  id="form1" name="form1" >
 		<div class="bg_mask_pop1_in">
@@ -32,8 +32,8 @@
 					<td>
 						<table  cellpadding="0" cellspacing="0" class="popup_table01_1">
 							<tr>
-								<td width="370"><input class="input_style02 input_required" id="userid" name="userid"  placeholder="ID" placeholder="아이디" data-warn="userid-warn"></td>
-								<td><img src="images/input_mark3.jpg" class="img-validator" id="userid-img-valid" ></td>
+								<td width="370"><input class="input_style02 input_required" id="userid" name="userid"  maxlength="12" placeholder="ID" placeholder="아이디" data-warn="userid-warn"></td>
+								<td><img src="/images/input_mark3.jpg" class="img-validator" id="userid-img-valid" ></td>
 							</tr>
 							<tr>
 								<td colspan="2"><div class="input_warning" id="userid-warn">조건에 맞는 아이디를 입력해주세요.</div></td>
@@ -45,8 +45,8 @@
 					<td>
 						<table  cellpadding="0" cellspacing="0" class="popup_table01_1">
 							<tr>
-								<td width="370"><input class="input_style02 input_required" name="nick" data-warn="nickname-warn" placeholder="Nickname" placeholder="새긴 ​​금"></td>
-								<td><img src="images/input_mark3.jpg" class="img-validator" id="nick-img-valid" ></td>
+								<td width="370"><input class="input_style02 input_required" name="nick" maxlength="20" data-warn="nickname-warn" placeholder="Nickname" placeholder="새긴 ​​금"></td>
+								<td><img src="/images/input_mark3.jpg" class="img-validator" id="nick-img-valid" ></td>
 							</tr>
 							<tr>
 								<td colspan="2"><div class="input_warning" id="nick-warn">만족 조건 충족 여부</div></td>
@@ -58,8 +58,8 @@
 					<td>
 						<table  cellpadding="0" cellspacing="0" class="popup_table01_1">
 							<tr>
-								<td width="370"><input class="input_style02 input_required" type="password" name="passwd" data-warn="passwd-warn" placeholder="Password" placeholder="암호"></td>
-								<td><img src="images/input_mark3.jpg" class="img-validator" id="passwd-img-valid"></td>
+								<td width="370"><input class="input_style02 input_required" type="password" maxlength="20" name="passwd" data-warn="passwd-warn" placeholder="Password" placeholder="암호"></td>
+								<td><img src="/images/input_mark3.jpg" class="img-validator" id="passwd-img-valid"></td>
 							</tr>
 							<tr>
 								<td colspan="2"><div class="input_warning" id="passwd-warn"> 만족 조건 충족 여부</div></td>
@@ -67,48 +67,6 @@
 						</table>
 					</td>
 				</tr>
-				<!--
-				<tr>
-					<td>
-						<table  cellpadding="0" cellspacing="0" class="popup_table01_1">
-							<tr>
-								<td width="370"><input class="input_style02 input_required"  placeholder="아이디"></td>
-								<td><a href="#"><img src="images/input_mark3.jpg"></a></td>
-							</tr>
-							<tr>
-								<td colspan="2"><div class="input_warning"> 만족 조건 충족 여부</div></td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<table  cellpadding="0" cellspacing="0" class="popup_table01_1">
-							<tr>
-								<td width="370"><input class="input_style02 input_required"  placeholder="아이디"></td>
-								<td><a href="#"><img src="images/input_mark3.jpg"></a></td>
-							</tr>
-							<tr>
-								<td colspan="2"><div class="input_warning"> 만족 조건 충족 여부</div></td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<table  cellpadding="0" cellspacing="0" class="popup_table01_1">
-							<tr>
-								<td width="370"><input class="input_style02 input_required"  placeholder="아이디"></td>
-								<td><a href="#"><img src="images/input_mark3.jpg"></a></td>
-							</tr>
-							<tr>
-								<td colspan="2"><div class="input_warning">만족 조건 충족 여부</div></td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				-->
-
 				<tr>
 					<td>
 						<table  width="100%" cellpadding="0" cellspacing="0" class="popup_table01_1">
@@ -148,9 +106,9 @@
 										    <option value="IBK투자증권">IBK투자증권</option>
 									</select>
 								</td>
-								<td width="120" align="left" style="padding:0 5px 0 0"><input class="input_style02" name="bank_owner"  placeholder="Account Holder" placeholder="예금주" ></td>
+								<td width="120" align="left" style="padding:0 5px 0 0"><input class="input_style02" name="bank_owner" maxlength="20"  placeholder="Account Holder" placeholder="예금주" ></td>
 								
-								<td align="left" style="padding:0 5px 0 0"><input class="input_style02 input_required" name="bank_num" data-warn="bank-warn" placeholder="Enter your account number (without -)" placeholder="계좌번호입력(-없이 입력)" placeholder="Enter your account number (without -)"></td>
+								<td align="left" style="padding:0 5px 0 0"><input class="input_style02 input_required" name="bank_num" maxlength="20" data-warn="bank-warn" placeholder="Enter your account number (without -)" placeholder="계좌번호입력(-없이 입력)" placeholder="Enter your account number (without -)"></td>
 							</tr>
 							<tr>
 								<td colspan="3">
@@ -166,12 +124,13 @@
 						<table  width="100%" cellpadding="0" cellspacing="0" class="popup_table01_1">
 							<tr>
 								<td width="100" align="left" style="padding:0 5px 0 0">
-									<select class="input_style02" name="cell_prefix">
+									<select class="input_style02" name="cell_prefix" id="cell_prefix">
+										<option value="+63">+63(필리핀 제도)</option>
 										<option value="+82">+82(한국)</option>
 									</select>
 								</td>
-								<td width="230" align="left" style="padding:0 5px 0 0"><input class="input_style02 input_required" name="cell" data-warn="cell-warn" placeholder="Mobile Phone Number" placeholder="휴대폰번호" ></td>
-								<td><a href="#"><span class="btn5">인증</span></a></td>
+								<td width="230" align="left" style="padding:0 5px 0 0"><input class="input_style02 input_required" id="cell" name="cell" maxlength="15" data-warn="cell-warn" placeholder="Mobile Phone Number" placeholder="휴대폰번호" ></td>
+								<td><a href="#" id="mobileVerBtn"><span class="btn5">인증</span></a></td>
 							</tr>
 							<tr>
 								<td colspan="4">
@@ -187,8 +146,8 @@
 					<td>
 						<table  width="100%" cellpadding="0" cellspacing="0" class="popup_table01_1">
 							<tr>
-								<td width="335" align="left" style="padding:0 5px 0 0"><input class="input_style02 input_required" name="cert" data-warn="cert-warn" placeholder="Certification Number" placeholder="인증번호" ></td>
-								<td><a href="#"><span class="btn5">확인</span></a></td>
+								<td width="335" align="left" style="padding:0 5px 0 0"><input class="input_style02 input_required" maxlength="6" id="cert" name="cert" maxlength="20" data-warn="cert-warn" placeholder="Certification Number" placeholder="인증번호" ></td>
+								<td><a href="#" id="certBtn"><span class="btn5">확인</span></a></td>
 							</tr>
 							<tr>
 								<td colspan="2">
@@ -200,16 +159,26 @@
 				</tr>
 				<tr>
 					<td>
-						<input class="input_style02 input_required" id="referrer" name="referrer" placeholder="Referrer ID" placeholder="추천인아이디" value="" data-warn="referrer-warn">
+						<input class="input_style02 input_required" id="referrer" name="referrer" placeholder="Referrer ID" maxlength="20" placeholder="추천인아이디" value="" data-warn="referrer-warn">
 						<div class="input_warning" id="referrer-warn">입력하신 번호로 인증번호가 발송되었습니다.</div>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<input class="input_style02 input_required" name="recommend" data-warn='recommend-warn' placeholder="Recommendation code" placeholder="추천인코드" >
-						<div class="input_warning" id="recommend-warn">입력하신 번호로 인증번호가 발송되었습니다.</div>
+						<table  width="100%" cellpadding="0" cellspacing="0" class="popup_table01_1">
+							<tr>
+								<td width="335" align="left" style="padding:0 5px 0 0">
+									<input class="input_style02 input_required" id="recommend" name="recommend" data-warn='recommend-warn' maxlength="6" placeholder="Recommendation code" placeholder="추천인코드" >
+								</td>
+								<td><a href="#" id="recoVerifyBtn"><span class="btn5">확인</span></a></td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<div class="input_warning" id="recommend-warn">입력하신 번호로 인증번호가 발송되었습니다.</div>
+								</td>
+							</tr>
+						</table>
 					</td>
-					
 				</tr>
 			</table>
 			<div class="text_center">모든 항목은 필수 입력 사항 입니다.</div>
@@ -230,12 +199,12 @@
 <!-- member success info -->
 <div id="fade_2" class="bg_mask_pop2">
 	<div class="bg_mask_pop_title">
-		<span class="popup_logo"><img src="images/popup_logo.png"></span>
-		<span class="popup_close fade_2_close"><img src="images/popup_close.png"></span>
+		<span class="popup_logo"><img src="/images/popup_logo.png"></span>
+		<span class="popup_close fade_2_close"><img src="/images/popup_close.png"></span>
 	</div>
 	<div class="bg_mask_pop2_in">
 		<div class="pop_icon_center">
-			<img src="images/check_icon.png">
+			<img src="/images/check_icon.png">
 		</div>
 		<div class="pop_text">
 			회원 가입 완료!<br>
@@ -276,11 +245,6 @@
 			scrolllock: true
 		});
 
-		// $("#form1 input").on("change",function(e){
-		// 	e.preventDefault();
-		// 	$("#form1").submit();
-			
-		// });
 
 		$("#loginBtn").on("click",function(e){
 	    	e.preventDefault();
@@ -288,15 +252,229 @@
 	    	$('#fade_3').popup("show");
 	    });
 
-
 		$('select').niceSelect();
+
+		$("#form1").validate({
+			// debug: true,
+	  		errorClass: 'form1-invalid',
+	    	validClass: 'form1-valid',
+		    onfocusout: false,
+		    onkeyup :false,
+		    onclick : false,
+	  		rules: {
+			    userid :{
+					required:true,
+					minlength:4,
+					remote: {
+						url: "${baseUrl}process/userid_checker.jsp",
+						async: false,
+				        type: "post",
+				       	data: {
+				          	userid: function() {
+				            	return $( "#userid" ).val();
+				          	}
+				        }
+                    },
+	      		},
+				bank_name :{
+					required:true,
+				},
+				bank_num :{
+					required:true,
+					digits: true,
+				},
+				bank_owner :{
+					required:true,
+				},
+				cell :{
+					required:true,
+					digits: true,
+					minlength:10,
+					maxlength:13,
+			  		synchronousRemote: {
+		                url: "${baseUrl}process/verify_cellnum.jsp",
+				        type: "post",
+				        async: false,
+				       	data: {
+				          	cell_prefix: function (){
+				          		return $.trim($("#cell_prefix").val());
+				          	},
+				          	cell: function (){
+				          		return $.trim($("#cell").val());
+				          	},
+				        },
+		            }
+				},
+				cert :{
+					required:true,
+					minlength:6,
+					remote: {
+						url: "${baseUrl}process/verify_cert_num.jsp",
+				        type: "post",
+				       	data: {
+				          	cert: function (){
+				          		return $("#cert").val();
+				          	},
+				          	cell_prefix:function(){
+				          		return $("#cell_prefix").val();	
+				          	},
+				          	cell: function(){
+				          		return $("#cell").val();	
+				          	},
+				        },
+			      	},
+
+				},
+				passwd :{
+					required:true,
+					minlength:6,
+					maxlength:20,
+					
+				},
+				referrer :{
+			      	required:true,
+					remote: {
+						url: "${baseUrl}process/referrence_checker.jsp",
+						async: false,
+				        type: "post",
+				       	data: {
+				          	referrer: function() {
+				            	return $( "#referrer" ).val();
+				          	}
+				        },
+			      	},
+				},
+				recommend :{
+					required:true,
+					minlength: 6,
+					remote: {
+						url: "${baseUrl}process/joincode_checker.jsp",
+				        type: "post",
+				        async: true,
+				       	data: {
+				          	recommend: function() {
+				            	return $.trim($( "#recommend" ).val());
+				          	},
+				          	referrer : function(){
+				          		return $.trim($( "#referrer" ).val());
+				          	},
+				        },
+			      	},
+				},
+				nick :{
+					required:true,
+					
+				},
+			},
+			messages: {
+			    userid :{
+					required:"User Id is required",
+					remote:"User Id already exists",
+				},
+				bank_name :{
+					required:"Bank name is required",
+				},
+				bank_num :{
+					required:"Bank number is required",
+					digits: "Please enter only digits on Bank Number",
+				},
+				bank_owner :{
+					required:"Bank owner is required",
+				},
+				cell :{
+					required:"Mobile Number is required",
+					minlength:"Minimum length is 10",
+					synchronousRemote : "Number is already in use",
+				},
+				cert :{
+					required:"Certificate is required",
+					minlength:"Minimun Length is 6",
+					remote:"Wrong Authenication Code",
+				},
+				passwd :{
+					required:"Password is required",
+					minlength:"Minimum length is 6",
+					maxlength:"Maximum length is 20",
+				},
+				recommend :{
+					required:"Recommendation code is required",
+					minlength: "Minimun Length is 6",
+					remote: "Recommendation code is invalid",
+				},
+				referrer :{
+					required:"Referrer is required",
+					remote: "User Id doesn't Exists"
+				},
+				nick :{
+					required:"Nick name is required",
+				},
+
+			},
+			errorPlacement: function(error, element) {
+				
+				var error_label = element.attr("name");
+				console.log(error_label);
+			    if (element.attr("name") == error_label ){
+			    	$("#"+error_label+"-warn").html(error).show();
+			    	
+			    }
+			    
+			  
+			},
+			success: function(label,element){
+
+			},
+			submitHandler: function(form) {
+				var data = $("#form1").serializeJSON();
+			    submitForm(data);
+			  
+		  	},
+		  	invalidHandler: function() {
+				var error = $("#form1").validate().numberOfInvalids();
+			}
+
+		});
+
+		$("#certBtn").on("click",function(e){
+			e.preventDefault();
+			var validator = $( "#form1" ).validate();
+			var validCell = validator.element( "#cell" );
+			validator.element( "#cert" );
+		});
+
+		$("#mobileVerBtn").on("click",function(e){
+			e.preventDefault();
+			var validator = $( "#form1" ).validate();
+			valid = validator.element("#cell");
+			console.log(valid);
+			if(valid){
+				// verifyNumber();
+			}
+
+			
+		});
+
+		$("#recoVerifyBtn").on("click",function(e){
+			e.preventDefault();
+			var validator = $( "#form1" ).validate();
+			var validReferrer = validator.element( "#referrer");
+			console.log(validReferrer);
+			if(validReferrer){
+				var validRecommend = validator.element( "#recommend" );	
+			}
+			
+		});
+
+
+
 	});
 
 	$.validator.addMethod(
 	        "regex",
 	        function(value, element) {
 	        	// var pattern = "^[!@#$%&*)(+=._-]*$";
-	        	var pattern ="/^[\w&.\-]+$/";
+	        	// var pattern ="/^[\w&.\-]+$/";
+	        	var pattern = "/^[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]{6,}$/g";
 
 	            var re = new RegExp(pattern);
 	            console.log(this.optional(element));
@@ -306,152 +484,19 @@
 	        "Invalid Input"
 	);
 
-	$("#form1").validate({
-		debug: true,
-	   	submitHandler: function(form) {
-    		console.log("submit this");
-  		},
-  		errorClass: 'form1-invalid',
-    	validClass: 'form1-valid',
-    	highlight: function(element, errorClass, validClass) {
-    		console.log(element);
-	      	$(element).addClass(errorClass).removeClass(validClass);
-	    },
-	    unhighlight: function(element, errorClass, validClass) {
-	    	console.log(element);
-	      	$(element).removeClass(errorClass).addClass(validClass);
-	    },
-  		rules: {
-		    userid :{
-				required:true,
-				remote: {
-					url: "${baseUrl}process/userid_checker.jsp",
-			        type: "post",
-			       	data: {
-			          	userid: function() {
-			            	return $( "#userid" ).val();
-			          	}
-			        },
-		      	},
-		      	minlength:4,
-		      	maxlength:12,
-		      	regex:true,
-			},
-			bank_name :{
-				required:true,
-			},
-			bank_num :{
-				required:true,
-				digits: true,
-			},
-			bank_owner :{
-				required:true,
-			},
-			cell :{
-				required:true,
-				digits: true,
-				minlength:10,
-			},
-			cert :{
-				required:true,
-			},
-			passwd :{
-				required:true,
-				minlength:6,
-				maxlength:20,
-			},
-			recommend :{
-				required:true,
-			},
-			referrer :{
-				required:true,
-				remote: {
-					url: "${baseUrl}process/referrence_checker.jsp",
-			        type: "post",
-			       	data: {
-			          	userid: function() {
-			            	return $( "#referrer" ).val();
-			          	}
-			        },
-		      	}
-			},
-			nick :{
-				required:true,
-			},
-
-		},
-		messages: {
-		    userid :{
-				required:"User Id is required",
-				remote:"User Id already exists",
-			},
-			bank_name :{
-				required:"Bank name is required",
-			},
-			bank_num :{
-				required:"Bank number is required",
-				digits: "Please enter only digits on Bank Number",
-			},
-			bank_owner :{
-				required:"Bank owner is required",
-			},
-			cell :{
-				required:"Mobile Number is required",
-				minlength:"Minimum length is 10",
-			},
-			cert :{
-				required:"Certificate is required",
-			},
-			passwd :{
-				required:"Password is required",
-				minlength:"Minimum length is 6",
-				maxlength:"Maximum length is 20",
-			},
-			recommend :{
-				required:"Recommand is required",
-			},
-			referrer :{
-				required:"Referrer is required",
-				remote: "User Id doesn't Exists"
-			},
-			nick :{
-				required:"Nick name is required",
-			},
-
-		},
-		errorPlacement: function(error, element) {
-			console.log(error);
-			console.log(element);
-			$('#form1 input').css("border-color","#2e3032");
-			var error_label = element.attr("name");
-		    if (element.attr("name") == error_label ){
-		    	$("#"+error_label+"-warn").html(error).show();
-		    	$('#'+error_label).css("border-color","#d50000");
-		    }
-		  
-		},
-		submitHandler: function(form) {
-			var data = $("#form1").serializeJSON();
-			console.log(data);
-		    submitForm(data);
-		  
-	  	}
-
-	});
-
-	
-	
-	$("#userid").rules("add", { regex: "/^[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]{6,}$/g" });
 
 	function resetForm1(){
 		$('#form1 input').css("border-color","#2e3032");
-		$("#form1 .img-validator").attr("src","images/input_mark3.jpg");
+		$("#form1 .img-validator").attr("src","/images/input_mark3.jpg");
 		$("#form1")[0].reset();
 		// $('#form1 .input_warning').hide();
 		$("#form1").validate().resetForm();
 	}
 
 	function submitForm(data){
+		if(data.cell_prefix == "+63"){
+			data.cell = formatCellNum(data.cell);
+		}
 		$.ajax({
 			url : '${baseUrl}process/register_process.jsp',
 			data : data,
@@ -468,29 +513,31 @@
 		});
 	}
 
-	function regValid(){
-		var valid = false;
-		var useridTxt = $.trim($("#userid-input").val());
-		var passwordTxt = $.trim($("#passwd-input").val());
-		$("#login_modal_form .login-warn").hide();
-		$('#login_modal_form input').css("border-color","#2e3032");
+	function verifyNumber(){
+		var userid = $.trim($("#userid").val());
+		var cell_prefix = $.trim($("#cell_prefix").val());
+		var cell = $.trim($("#cell").val());
+		cell = formatCellNum(cell);
+		$.ajax({
+			url : '${baseUrl}process/send_sms.jsp',
+			data : {userid:userid,cell_prefix:cell_prefix,cell:cell},
+			method: 'POST',
+		}).done(function(data){ 
+			console.log(data);
+			if(data){
+				$("#mobileVerBtn span").html("resend");
+			}else{
+				alert("Something went wrong");
+				$("#mobileVerBtn span").html("인증");
+			}
+		});
+	}
 
-		if(useridTxt == "" || useridTxt == null){
-			$("#login_modal_form .login-warn").html("User Id is required").show();
-			$("#userid-input").css("border-color","#d50000").focus();
+	function formatCellNum(num){
+		if(num.substring(1).length == 10 && num.substring(0,1) == "0"){
+			num = num.substring(1);
 		}
-		else if(passwordTxt == "" || passwordTxt == null){
-			$("#login_modal_form .login-warn").html("Password is required").show();
-			$("#passwd-input").css("border-color","#d50000").focus();
-		}
-		else if((useridTxt == "" || useridTxt == null) && ((passwordTxt == "" || passwordTxt == null))) {
-			$("#login_modal_form .login-warn").html("User Id and Password is required").show();
-			$("#userid-input").css("border-color","#d50000").focus();
-		}else{
-			valid = true;
-		}
-
-		return valid;
+		return num;
 	}
 </script>
 

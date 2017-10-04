@@ -180,8 +180,8 @@
 .bg_mask_pop7_in{width:410px; float:left; background:#2d3232;border-radius:5px;padding:45px;}
 .bg_mask_pop8{display: none; position:absolute;z-index:10000000; width:500px;}
 .bg_mask_pop8_in{width:410px; float:left; background:#2d3232;border-radius:5px;padding:45px;}
-.bg_mask_pop9{display: none; position:absolute;z-index:10000000; width:1200px;}
-.bg_mask_pop9_in{width:1120px; float:left; background:#191a1b;border-radius:5px;padding:40px;}
+.bg_mask_pop9{display: none; position:absolute;z-index:10000000; width:90%; height: 90%;}
+.bg_mask_pop9_in{width:95%; float:left; background:#191a1b;border-radius:5px;padding:40px; height: 90%;}
 .pop_text_title {font-size:22px; color:#ffffff; text-align:center;letter-spacing:-1px;padding:0 0 15px 0;}
 .pop_text {font-size:17px; color:#ffffff; text-align:center; letter-spacing:-1px; line-height:23px; padding:0 0 35px 0;}
 .popup_table01 tr td {padding:5px 0 5px 0}

@@ -21,6 +21,8 @@ public class UserBean {
 	private String recommand;
 	private boolean isValid;
 	private int loginStatus; //0  success //1 wrong passwrod // 2 no account 
+	private String ip;
+	private String cert;
 	
 	public String getIp() {
 		return ip;
@@ -142,6 +144,18 @@ public class UserBean {
 	}
 	public void setRecommand(String recommand) {
 		this.recommand = recommand;
+	}
+	public String getIp() {
+		return ip;
+	}
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+	public String getCert() {
+		return cert;
+	}
+	public void setCert(String cert) {
+		this.cert = cert;
 	}
 
 	

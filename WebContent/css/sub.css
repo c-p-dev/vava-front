@@ -171,7 +171,7 @@ table.acc_list_table_in {width:100%;background:#202122}
 
 
 /* 1:1문의 --팝업과 공통 */
-.inquiry_wrap {width:100%; float:left;}
+.inquiry_wrap {width:100%; float:left; height: 100%;}
 .inquiry {width:100%; float:left;padding:15px 0 15px 0}
 .inquiry_user {width:100%;float:left; margin:0 0 0 8px;  width:auto; padding:20px; max-width:600px; background:#0792c4; border-radius:3px; position:relative;}
 .user_date {position:absolute; right:-140px; bottom:10px}

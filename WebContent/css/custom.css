@@ -1,0 +1,23 @@
+
+.bg_mask_pop9{
+    display:    none;
+    position:   absolute;
+    z-index:    10000000;
+    width:      90%;
+    height:     90%;
+}
+
+.bg_mask_pop9_in {
+    width:          95%;
+    float:          left;
+    background:     #191a1b;
+    border-radius:  5px;
+    padding:        40px;
+    height:         90%;
+}
+
+.bg_mask_pop9_in .inquiry_wrap {
+    width:  100%;
+    float:  left;
+    height: 100%;
+}
