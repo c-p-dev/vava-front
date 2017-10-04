@@ -18,13 +18,13 @@
 				<div id="jssor_1" style="position:relative;width:930px;height:225px;overflow:hidden;visibility:hidden;">
 					<div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:930px;height:225px;overflow:hidden;">
 						<div>
-							<a class='<%=(!checkSession) ? "fade_1_open" : ""  %>' href="#fade_1"><img src="images/visual001.jpg"/></a> 
+							<a class='<%=(!checkSession) ? "fade_1_open" : ""  %>' href="#fade_1"><img src="/images/visual001.jpg"/></a> 
 						</div>
 						<div>
-							<a class='<%=(!checkSession) ? "fade_1_open" : ""  %>' href="#fade_1"><img src="images/visual001.jpg"/></a>
+							<a class='<%=(!checkSession) ? "fade_1_open" : ""  %>' href="#fade_1"><img src="/images/visual001.jpg"/></a>
 						</div>
 						<div>
-							<a class='<%=(!checkSession) ? "fade_1_open" : ""  %>' href="#fade_1"><img src="images/visual001.jpg"/></a>
+							<a class='<%=(!checkSession) ? "fade_1_open" : ""  %>' href="#fade_1"><img src="/images/visual001.jpg"/></a>
 						</div>
 					</div>
 					<!-- Bullet Navigator -->
@@ -45,19 +45,19 @@
         <div class="contents_in_m20">
         	<div class="main_title_1">인기베팅경기</div>
 			<div id="third" class="carouseller"> 
-				<a href="javascript:void(0)" class="carouseller__left"> <img src="images/arrow_left.png"> </a> 
-				<a href="javascript:void(0)" class="carouseller__right"> <img src="images/arrow_right.png"> </a>
+				<a href="javascript:void(0)" class="carouseller__left"> <img src="/images/arrow_left.png"> </a> 
+				<a href="javascript:void(0)" class="carouseller__right"> <img src="/images/arrow_right.png"> </a>
 				<div class="carouseller__wrap"> 
 					<div class="carouseller__list">
 						<div class="car__4">
 							<a href="#">
 								<div class="main_bet_time">
-									<p class="main_bet_time_icon"><img src="images/bet_icon.png"></p>
+									<p class="main_bet_time_icon"><img src="/images/bet_icon.png"></p>
 									<p class="main_bet_time_text">2017년00월00일<br>00:00</p>
 								</div>
 								<div class="main_bet_game">
 									<div class="main_bet_name">
-										<img src="images/main_bet_name01.jpg">
+										<img src="/images/main_bet_name01.jpg">
 										<div class="main_bet_name_text">
 											<span>레알마드리드</span><br><span>FC 바르셀로나123456</span>
 										</div>
@@ -69,12 +69,12 @@
 						<div class="car__4">
 							<a href="#">
 								<div class="main_bet_time">
-									<p class="main_bet_time_icon"><img src="images/bet_icon.png"></p>
+									<p class="main_bet_time_icon"><img src="/images/bet_icon.png"></p>
 									<p class="main_bet_time_text">2017년00월00일<br>00:00</p>
 								</div>
 								<div class="main_bet_game">
 									<div class="main_bet_name">
-										<img src="images/main_bet_name02.jpg">
+										<img src="/images/main_bet_name02.jpg">
 										<div class="main_bet_name_text">
 											<span>레알마드리드</span><br><span>FC 바르셀로나123456</span>
 										</div>
@@ -86,12 +86,12 @@
 						<div class="car__4">
 							<a href="#">
 								<div class="main_bet_time">
-									<p class="main_bet_time_icon"><img src="images/bet_icon.png"></p>
+									<p class="main_bet_time_icon"><img src="/images/bet_icon.png"></p>
 									<p class="main_bet_time_text">2017년00월00일<br>00:00</p>
 								</div>
 								<div class="main_bet_game">
 									<div class="main_bet_name">
-										<img src="images/main_bet_name03.jpg">
+										<img src="/images/main_bet_name03.jpg">
 										<div class="main_bet_name_text">
 											<span>레알마드리드</span><br><span>FC 바르셀로나123456</span>
 										</div>
@@ -103,12 +103,12 @@
 						<div class="car__4">
 							<a href="#">
 								<div class="main_bet_time">
-									<p class="main_bet_time_icon"><img src="images/bet_icon.png"></p>
+									<p class="main_bet_time_icon"><img src="/images/bet_icon.png"></p>
 									<p class="main_bet_time_text">2017년00월00일<br>00:00</p>
 								</div>
 								<div class="main_bet_game">
 									<div class="main_bet_name">
-										<img src="images/main_bet_name04.jpg">
+										<img src="/images/main_bet_name04.jpg">
 										<div class="main_bet_name_text">
 											<span>레알마드리드</span><br><span>FC 바르셀로나123456</span>
 										</div>
@@ -120,12 +120,12 @@
 						<div class="car__4">
 							<a href="#">
 								<div class="main_bet_time">
-									<p class="main_bet_time_icon"><img src="images/bet_icon.png"></p>
+									<p class="main_bet_time_icon"><img src="/images/bet_icon.png"></p>
 									<p class="main_bet_time_text">2017년00월00일<br>00:00</p>
 								</div>
 								<div class="main_bet_game">
 									<div class="main_bet_name">
-										<img src="images/main_bet_name05.jpg">
+										<img src="/images/main_bet_name05.jpg">
 										<div class="main_bet_name_text">
 											<span>레알마드리드</span><br><span>FC 바르셀로나123456</span>
 										</div>
@@ -137,12 +137,12 @@
 						<div class="car__4">
 							<a href="#">
 								<div class="main_bet_time">
-									<p class="main_bet_time_icon"><img src="images/bet_icon.png"></p>
+									<p class="main_bet_time_icon"><img src="/images/bet_icon.png"></p>
 									<p class="main_bet_time_text">2017년00월00일<br>00:00</p>
 								</div>
 								<div class="main_bet_game">
 									<div class="main_bet_name">
-										<img src="images/main_bet_name06.jpg">
+										<img src="/images/main_bet_name06.jpg">
 										<div class="main_bet_name_text">
 											<span>레알마드리드</span><br><span>FC 바르셀로나123456</span>
 										</div>
@@ -303,12 +303,12 @@
 				<div class="main_title_2">실시간 경기목록</div>
 				<div id="tabs">
 					<ul>
-						<li><a href="#tabs-1" title=""><img src="images/main_icon_game01.png"> 축구</a></li>
-						<li><a href="#tabs-2" title=""><img src="images/main_icon_game02.png"> 농구</a></li>
-						<li><a href="#tabs-3" title=""><img src="images/main_icon_game03.png"> 야구</a></li>
-						<li><a href="#tabs-4" title=""><img src="images/main_icon_game04.png"> 배구</a></li>
-						<li><a href="#tabs-5" title=""><img src="images/main_icon_game05.png"> 하키</a></li>
-						<li><a href="#tabs-6" title=""><img src="images/main_icon_game06.png"> 테니스</a></li>
+						<li><a href="#tabs-1" title=""><img src="/images/main_icon_game01.png"> 축구</a></li>
+						<li><a href="#tabs-2" title=""><img src="/images/main_icon_game02.png"> 농구</a></li>
+						<li><a href="#tabs-3" title=""><img src="/images/main_icon_game03.png"> 야구</a></li>
+						<li><a href="#tabs-4" title=""><img src="/images/main_icon_game04.png"> 배구</a></li>
+						<li><a href="#tabs-5" title=""><img src="/images/main_icon_game05.png"> 하키</a></li>
+						<li><a href="#tabs-6" title=""><img src="/images/main_icon_game06.png"> 테니스</a></li>
 					</ul>
 					<div id="tabs_container">
 						<div id="tabs-1">
@@ -329,9 +329,9 @@
 										<td class="board_bet_time">00:00</td>
 										<td class="board_bet_home">바르셀로나</td>
 										<td class="board_bet_expedition">레알마드리드</td>
-										<td class="board_bet_victory"><img src="images/arrow_red.gif"> 0.22</td>
-										<td class="board_bet_draw"><img src="images/arrow_green.gif"> 3.22</td>
-										<td class="board_bet_loss"><img src="images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_victory"><img src="/images/arrow_red.gif"> 0.22</td>
+										<td class="board_bet_draw"><img src="/images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_loss"><img src="/images/arrow_green.gif"> 3.22</td>
 										<td class="board_bet_score">+1</td>
 									</tr>
 								</table>
@@ -342,9 +342,9 @@
 										<td class="board_bet_time">00:00</td>
 										<td class="board_bet_home">바르셀로나</td>
 										<td class="board_bet_expedition">레알마드리드</td>
-										<td class="board_bet_victory"><img src="images/arrow_red.gif"> 0.22</td>
-										<td class="board_bet_draw"><img src="images/arrow_green.gif"> 3.22</td>
-										<td class="board_bet_loss"><img src="images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_victory"><img src="/images/arrow_red.gif"> 0.22</td>
+										<td class="board_bet_draw"><img src="/images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_loss"><img src="/images/arrow_green.gif"> 3.22</td>
 										<td class="board_bet_score">+1</td>
 									</tr>
 								</table>
@@ -355,9 +355,9 @@
 										<td class="board_bet_time">00:00</td>
 										<td class="board_bet_home">바르셀로나</td>
 										<td class="board_bet_expedition">레알마드리드</td>
-										<td class="board_bet_victory"><img src="images/arrow_red.gif"> 0.22</td>
-										<td class="board_bet_draw"><img src="images/arrow_green.gif"> 3.22</td>
-										<td class="board_bet_loss"><img src="images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_victory"><img src="/images/arrow_red.gif"> 0.22</td>
+										<td class="board_bet_draw"><img src="/images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_loss"><img src="/images/arrow_green.gif"> 3.22</td>
 										<td class="board_bet_score">+1</td>
 									</tr>
 								</table>
@@ -368,9 +368,9 @@
 										<td class="board_bet_time">00:00</td>
 										<td class="board_bet_home">바르셀로나</td>
 										<td class="board_bet_expedition">레알마드리드</td>
-										<td class="board_bet_victory"><img src="images/arrow_red.gif"> 0.22</td>
-										<td class="board_bet_draw"><img src="images/arrow_green.gif"> 3.22</td>
-										<td class="board_bet_loss"><img src="images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_victory"><img src="/images/arrow_red.gif"> 0.22</td>
+										<td class="board_bet_draw"><img src="/images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_loss"><img src="/images/arrow_green.gif"> 3.22</td>
 										<td class="board_bet_score">+1</td>
 									</tr>
 								</table>
@@ -394,9 +394,9 @@
 										<td class="board_bet_time">00:00</td>
 										<td class="board_bet_home">바르셀로나</td>
 										<td class="board_bet_expedition">레알마드리드</td>
-										<td class="board_bet_victory"><img src="images/arrow_red.gif"> 0.22</td>
-										<td class="board_bet_draw"><img src="images/arrow_green.gif"> 3.22</td>
-										<td class="board_bet_loss"><img src="images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_victory"><img src="/images/arrow_red.gif"> 0.22</td>
+										<td class="board_bet_draw"><img src="/images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_loss"><img src="/images/arrow_green.gif"> 3.22</td>
 										<td class="board_bet_score">+1</td>
 									</tr>
 								</table>
@@ -407,9 +407,9 @@
 										<td class="board_bet_time">00:00</td>
 										<td class="board_bet_home">바르셀로나</td>
 										<td class="board_bet_expedition">레알마드리드</td>
-										<td class="board_bet_victory"><img src="images/arrow_red.gif"> 0.22</td>
-										<td class="board_bet_draw"><img src="images/arrow_green.gif"> 3.22</td>
-										<td class="board_bet_loss"><img src="images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_victory"><img src="/images/arrow_red.gif"> 0.22</td>
+										<td class="board_bet_draw"><img src="/images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_loss"><img src="/images/arrow_green.gif"> 3.22</td>
 										<td class="board_bet_score">+1</td>
 									</tr>
 								</table>
@@ -420,9 +420,9 @@
 										<td class="board_bet_time">00:00</td>
 										<td class="board_bet_home">바르셀로나</td>
 										<td class="board_bet_expedition">레알마드리드</td>
-										<td class="board_bet_victory"><img src="images/arrow_red.gif"> 0.22</td>
-										<td class="board_bet_draw"><img src="images/arrow_green.gif"> 3.22</td>
-										<td class="board_bet_loss"><img src="images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_victory"><img src="/images/arrow_red.gif"> 0.22</td>
+										<td class="board_bet_draw"><img src="/images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_loss"><img src="/images/arrow_green.gif"> 3.22</td>
 										<td class="board_bet_score">+1</td>
 									</tr>
 								</table>
@@ -433,9 +433,9 @@
 										<td class="board_bet_time">00:00</td>
 										<td class="board_bet_home">바르셀로나</td>
 										<td class="board_bet_expedition">레알마드리드</td>
-										<td class="board_bet_victory"><img src="images/arrow_red.gif"> 0.22</td>
-										<td class="board_bet_draw"><img src="images/arrow_green.gif"> 3.22</td>
-										<td class="board_bet_loss"><img src="images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_victory"><img src="/images/arrow_red.gif"> 0.22</td>
+										<td class="board_bet_draw"><img src="/images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_loss"><img src="/images/arrow_green.gif"> 3.22</td>
 										<td class="board_bet_score">+1</td>
 									</tr>
 								</table>
@@ -459,9 +459,9 @@
 										<td class="board_bet_time">00:00</td>
 										<td class="board_bet_home">바르셀로나</td>
 										<td class="board_bet_expedition">레알마드리드</td>
-										<td class="board_bet_victory"><img src="images/arrow_red.gif"> 0.22</td>
-										<td class="board_bet_draw"><img src="images/arrow_green.gif"> 3.22</td>
-										<td class="board_bet_loss"><img src="images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_victory"><img src="/images/arrow_red.gif"> 0.22</td>
+										<td class="board_bet_draw"><img src="/images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_loss"><img src="/images/arrow_green.gif"> 3.22</td>
 										<td class="board_bet_score">+1</td>
 									</tr>
 								</table>
@@ -472,9 +472,9 @@
 										<td class="board_bet_time">00:00</td>
 										<td class="board_bet_home">바르셀로나</td>
 										<td class="board_bet_expedition">레알마드리드</td>
-										<td class="board_bet_victory"><img src="images/arrow_red.gif"> 0.22</td>
-										<td class="board_bet_draw"><img src="images/arrow_green.gif"> 3.22</td>
-										<td class="board_bet_loss"><img src="images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_victory"><img src="/images/arrow_red.gif"> 0.22</td>
+										<td class="board_bet_draw"><img src="/images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_loss"><img src="/images/arrow_green.gif"> 3.22</td>
 										<td class="board_bet_score">+1</td>
 									</tr>
 								</table>
@@ -485,9 +485,9 @@
 										<td class="board_bet_time">00:00</td>
 										<td class="board_bet_home">바르셀로나</td>
 										<td class="board_bet_expedition">레알마드리드</td>
-										<td class="board_bet_victory"><img src="images/arrow_red.gif"> 0.22</td>
-										<td class="board_bet_draw"><img src="images/arrow_green.gif"> 3.22</td>
-										<td class="board_bet_loss"><img src="images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_victory"><img src="/images/arrow_red.gif"> 0.22</td>
+										<td class="board_bet_draw"><img src="/images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_loss"><img src="/images/arrow_green.gif"> 3.22</td>
 										<td class="board_bet_score">+1</td>
 									</tr>
 								</table>
@@ -498,9 +498,9 @@
 										<td class="board_bet_time">00:00</td>
 										<td class="board_bet_home">바르셀로나</td>
 										<td class="board_bet_expedition">레알마드리드</td>
-										<td class="board_bet_victory"><img src="images/arrow_red.gif"> 0.22</td>
-										<td class="board_bet_draw"><img src="images/arrow_green.gif"> 3.22</td>
-										<td class="board_bet_loss"><img src="images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_victory"><img src="/images/arrow_red.gif"> 0.22</td>
+										<td class="board_bet_draw"><img src="/images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_loss"><img src="/images/arrow_green.gif"> 3.22</td>
 										<td class="board_bet_score">+1</td>
 									</tr>
 								</table>
@@ -529,12 +529,12 @@
 				</div>
 				<div id="tabs2">
 					<ul>
-						<li><a href="#tabs-1" title=""><img src="images/main_icon_game01.png"> 축구</a></li>
-						<li><a href="#tabs-2" title=""><img src="images/main_icon_game02.png"> 농구</a></li>
-						<li><a href="#tabs-3" title=""><img src="images/main_icon_game03.png"> 야구</a></li>
-						<li><a href="#tabs-4" title=""><img src="images/main_icon_game04.png"> 배구</a></li>
-						<li><a href="#tabs-5" title=""><img src="images/main_icon_game05.png"> 하키</a></li>
-						<li><a href="#tabs-6" title=""><img src="images/main_icon_game06.png"> 테니스</a></li>
+						<li><a href="#tabs-1" title=""><img src="/images/main_icon_game01.png"> 축구</a></li>
+						<li><a href="#tabs-2" title=""><img src="/images/main_icon_game02.png"> 농구</a></li>
+						<li><a href="#tabs-3" title=""><img src="/images/main_icon_game03.png"> 야구</a></li>
+						<li><a href="#tabs-4" title=""><img src="/images/main_icon_game04.png"> 배구</a></li>
+						<li><a href="#tabs-5" title=""><img src="/images/main_icon_game05.png"> 하키</a></li>
+						<li><a href="#tabs-6" title=""><img src="/images/main_icon_game06.png"> 테니스</a></li>
 					</ul>
 					<div id="tabs_container">
 						<div id="tabs-1">
@@ -555,9 +555,9 @@
 										<td class="board_bet_time">00:00</td>
 										<td class="board_bet_home">바르셀로나</td>
 										<td class="board_bet_expedition">레알마드리드</td>
-										<td class="board_bet_victory"><img src="images/arrow_red.gif"> 0.22</td>
-										<td class="board_bet_draw"><img src="images/arrow_green.gif"> 3.22</td>
-										<td class="board_bet_loss"><img src="images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_victory"><img src="/images/arrow_red.gif"> 0.22</td>
+										<td class="board_bet_draw"><img src="/images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_loss"><img src="/images/arrow_green.gif"> 3.22</td>
 										<td class="board_bet_score">+1</td>
 									</tr>
 								</table>
@@ -568,9 +568,9 @@
 										<td class="board_bet_time">00:00</td>
 										<td class="board_bet_home">바르셀로나</td>
 										<td class="board_bet_expedition">레알마드리드</td>
-										<td class="board_bet_victory"><img src="images/arrow_red.gif"> 0.22</td>
-										<td class="board_bet_draw"><img src="images/arrow_green.gif"> 3.22</td>
-										<td class="board_bet_loss"><img src="images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_victory"><img src="/images/arrow_red.gif"> 0.22</td>
+										<td class="board_bet_draw"><img src="/images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_loss"><img src="/images/arrow_green.gif"> 3.22</td>
 										<td class="board_bet_score">+1</td>
 									</tr>
 								</table>
@@ -581,9 +581,9 @@
 										<td class="board_bet_time">00:00</td>
 										<td class="board_bet_home">바르셀로나</td>
 										<td class="board_bet_expedition">레알마드리드</td>
-										<td class="board_bet_victory"><img src="images/arrow_red.gif"> 0.22</td>
-										<td class="board_bet_draw"><img src="images/arrow_green.gif"> 3.22</td>
-										<td class="board_bet_loss"><img src="images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_victory"><img src="/images/arrow_red.gif"> 0.22</td>
+										<td class="board_bet_draw"><img src="/images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_loss"><img src="/images/arrow_green.gif"> 3.22</td>
 										<td class="board_bet_score">+1</td>
 									</tr>
 								</table>
@@ -594,9 +594,9 @@
 										<td class="board_bet_time">00:00</td>
 										<td class="board_bet_home">바르셀로나</td>
 										<td class="board_bet_expedition">레알마드리드</td>
-										<td class="board_bet_victory"><img src="images/arrow_red.gif"> 0.22</td>
-										<td class="board_bet_draw"><img src="images/arrow_green.gif"> 3.22</td>
-										<td class="board_bet_loss"><img src="images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_victory"><img src="/images/arrow_red.gif"> 0.22</td>
+										<td class="board_bet_draw"><img src="/images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_loss"><img src="/images/arrow_green.gif"> 3.22</td>
 										<td class="board_bet_score">+1</td>
 									</tr>
 								</table>
@@ -620,9 +620,9 @@
 										<td class="board_bet_time">00:00</td>
 										<td class="board_bet_home">바르셀로나</td>
 										<td class="board_bet_expedition">레알마드리드</td>
-										<td class="board_bet_victory"><img src="images/arrow_red.gif"> 0.22</td>
-										<td class="board_bet_draw"><img src="images/arrow_green.gif"> 3.22</td>
-										<td class="board_bet_loss"><img src="images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_victory"><img src="/images/arrow_red.gif"> 0.22</td>
+										<td class="board_bet_draw"><img src="/images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_loss"><img src="/images/arrow_green.gif"> 3.22</td>
 										<td class="board_bet_score">+1</td>
 									</tr>
 								</table>
@@ -633,9 +633,9 @@
 										<td class="board_bet_time">00:00</td>
 										<td class="board_bet_home">바르셀로나</td>
 										<td class="board_bet_expedition">레알마드리드</td>
-										<td class="board_bet_victory"><img src="images/arrow_red.gif"> 0.22</td>
-										<td class="board_bet_draw"><img src="images/arrow_green.gif"> 3.22</td>
-										<td class="board_bet_loss"><img src="images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_victory"><img src="/images/arrow_red.gif"> 0.22</td>
+										<td class="board_bet_draw"><img src="/images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_loss"><img src="/images/arrow_green.gif"> 3.22</td>
 										<td class="board_bet_score">+1</td>
 									</tr>
 								</table>
@@ -646,9 +646,9 @@
 										<td class="board_bet_time">00:00</td>
 										<td class="board_bet_home">바르셀로나</td>
 										<td class="board_bet_expedition">레알마드리드</td>
-										<td class="board_bet_victory"><img src="images/arrow_red.gif"> 0.22</td>
-										<td class="board_bet_draw"><img src="images/arrow_green.gif"> 3.22</td>
-										<td class="board_bet_loss"><img src="images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_victory"><img src="/images/arrow_red.gif"> 0.22</td>
+										<td class="board_bet_draw"><img src="/images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_loss"><img src="/images/arrow_green.gif"> 3.22</td>
 										<td class="board_bet_score">+1</td>
 									</tr>
 								</table>
@@ -659,9 +659,9 @@
 										<td class="board_bet_time">00:00</td>
 										<td class="board_bet_home">바르셀로나</td>
 										<td class="board_bet_expedition">레알마드리드</td>
-										<td class="board_bet_victory"><img src="images/arrow_red.gif"> 0.22</td>
-										<td class="board_bet_draw"><img src="images/arrow_green.gif"> 3.22</td>
-										<td class="board_bet_loss"><img src="images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_victory"><img src="/images/arrow_red.gif"> 0.22</td>
+										<td class="board_bet_draw"><img src="/images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_loss"><img src="/images/arrow_green.gif"> 3.22</td>
 										<td class="board_bet_score">+1</td>
 									</tr>
 								</table>
@@ -685,9 +685,9 @@
 										<td class="board_bet_time">00:00</td>
 										<td class="board_bet_home">바르셀로나</td>
 										<td class="board_bet_expedition">레알마드리드</td>
-										<td class="board_bet_victory"><img src="images/arrow_red.gif"> 0.22</td>
-										<td class="board_bet_draw"><img src="images/arrow_green.gif"> 3.22</td>
-										<td class="board_bet_loss"><img src="images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_victory"><img src="/images/arrow_red.gif"> 0.22</td>
+										<td class="board_bet_draw"><img src="/images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_loss"><img src="/images/arrow_green.gif"> 3.22</td>
 										<td class="board_bet_score">+1</td>
 									</tr>
 								</table>
@@ -698,9 +698,9 @@
 										<td class="board_bet_time">00:00</td>
 										<td class="board_bet_home">바르셀로나</td>
 										<td class="board_bet_expedition">레알마드리드</td>
-										<td class="board_bet_victory"><img src="images/arrow_red.gif"> 0.22</td>
-										<td class="board_bet_draw"><img src="images/arrow_green.gif"> 3.22</td>
-										<td class="board_bet_loss"><img src="images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_victory"><img src="/images/arrow_red.gif"> 0.22</td>
+										<td class="board_bet_draw"><img src="/images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_loss"><img src="/images/arrow_green.gif"> 3.22</td>
 										<td class="board_bet_score">+1</td>
 									</tr>
 								</table>
@@ -711,9 +711,9 @@
 										<td class="board_bet_time">00:00</td>
 										<td class="board_bet_home">바르셀로나</td>
 										<td class="board_bet_expedition">레알마드리드</td>
-										<td class="board_bet_victory"><img src="images/arrow_red.gif"> 0.22</td>
-										<td class="board_bet_draw"><img src="images/arrow_green.gif"> 3.22</td>
-										<td class="board_bet_loss"><img src="images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_victory"><img src="/images/arrow_red.gif"> 0.22</td>
+										<td class="board_bet_draw"><img src="/images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_loss"><img src="/images/arrow_green.gif"> 3.22</td>
 										<td class="board_bet_score">+1</td>
 									</tr>
 								</table>
@@ -724,9 +724,9 @@
 										<td class="board_bet_time">00:00</td>
 										<td class="board_bet_home">바르셀로나</td>
 										<td class="board_bet_expedition">레알마드리드</td>
-										<td class="board_bet_victory"><img src="images/arrow_red.gif"> 0.22</td>
-										<td class="board_bet_draw"><img src="images/arrow_green.gif"> 3.22</td>
-										<td class="board_bet_loss"><img src="images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_victory"><img src="/images/arrow_red.gif"> 0.22</td>
+										<td class="board_bet_draw"><img src="/images/arrow_green.gif"> 3.22</td>
+										<td class="board_bet_loss"><img src="/images/arrow_green.gif"> 3.22</td>
 										<td class="board_bet_score">+1</td>
 									</tr>
 								</table>

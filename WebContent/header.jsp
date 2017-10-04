@@ -7,49 +7,50 @@
 	String baseUrl = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
 	DecimalFormat dfrmt				= new DecimalFormat("#,###,###,###,###.00");
 %>
-<base href="<%=baseUrl%>" />
+<base href="<%=baseUrl%>"/>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>무제 문서</title>
 <meta name="viewport" content="width=1400,minimum-scale=0,maximum-scale=5,target-densitydpi=device-dpi">
 <script src="http://code.jquery.com/jquery-1.12.1.min.js"></script><!--공통-->
-<script type="text/javascript" src="<%=baseUrl%>js/header.js" charset="utf-8"></script><!-- header -->
-<script type="text/javascript" src="<%=baseUrl%>js/select.js" charset="utf-8"></script><!-- util_select -->
-<script type="text/javascript" src="<%=baseUrl%>js/my_select.js"></script><!-- 내정보,스포츠,실시간,경기결과 select -->
-<script type="text/javascript" src="<%=baseUrl%>js/visual_slider.js"></script><!-- VisualBanner, CasinoBanner -->
-<script type="text/javascript" src="<%=baseUrl%>js/script.js"></script><!-- VisualBanner, CasinoBanner -->
-<script type="text/javascript" src="<%=baseUrl%>js/multislider.js"></script><!-- contents_slider -->
-<script type="text/javascript" src="<%=baseUrl%>js/tabulous.js"></script><!-- MainTab -->
-<script type="text/javascript" src="<%=baseUrl%>js/accordion.js"></script><!-- sub_아코디언 -->
-<script type="text/javascript" src="<%=baseUrl%>js/sub_tab.js"></script><!-- sub_tab -->
-<script type="text/javascript" src="<%=baseUrl%>js/jquery-popover.js"></script><!-- point_popup -->
-<script type="text/javascript" src="<%=baseUrl%>js/popup.js"></script><!-- popup -->
-<script type="text/javascript" src="<%=baseUrl%>js/left_menu.js"></script><!-- left_menu -->
-<script type="text/javascript" src="<%=baseUrl%>js/gallery.js"></script><!-- 갤러리게시판 view 팝업 -->
-<script type="text/javascript" src="<%=baseUrl%>js/showid.js"></script><!-- 달력 -->
-<script type="text/javascript" src="<%=baseUrl%>js/sports_acc.js"></script><!-- 스포츠아코디언, 베팅내역 아코디언 -->
-<script type="text/javascript" src="<%=baseUrl%>js/vertical_tab.js"></script><!-- 세로탭 -->
-<script type="text/javascript" src="<%=baseUrl%>js/over.js"></script><!-- 말풍선 -->
-<script type="text/javascript" src="<%=baseUrl%>js/over_script.js"></script><!-- 말풍선 -->
-<script type="text/javascript" src="<%=baseUrl%>js/table.js"></script><!-- main_table_slide -->
-<script type="text/javascript" src="<%=baseUrl%>js/gateway.js"></script><!-- gateway -->
-<script type="text/javascript" src="<%=baseUrl%>js/img_hover.js"></script><!-- casino_hover -->
-<script type="text/javascript" src="<%=baseUrl%>js/text_slide.js"></script><!-- text_slide -->
-<script type="text/javascript" src="<%=baseUrl%>js/switch.js"></script><!-- switch -->
+<script type="text/javascript" src="/js/header.js" charset="utf-8"></script><!-- header -->
+<script type="text/javascript" src="/js/select.js" charset="utf-8"></script><!-- util_select -->
+<script type="text/javascript" src="/js/my_select.js"></script><!-- 내정보,스포츠,실시간,경기결과 select -->
+<script type="text/javascript" src="/js/visual_slider.js"></script><!-- VisualBanner, CasinoBanner -->
+<script type="text/javascript" src="/js/script.js"></script><!-- VisualBanner, CasinoBanner -->
+<script type="text/javascript" src="/js/multislider.js"></script><!-- contents_slider -->
+<script type="text/javascript" src="/js/tabulous.js"></script><!-- MainTab -->
+<script type="text/javascript" src="/js/accordion.js"></script><!-- sub_아코디언 -->
+<script type="text/javascript" src="/js/sub_tab.js"></script><!-- sub_tab -->
+<script type="text/javascript" src="/js/jquery-popover.js"></script><!-- point_popup -->
+<script type="text/javascript" src="/js/popup.js"></script><!-- popup -->
+<script type="text/javascript" src="/js/left_menu.js"></script><!-- left_menu -->
+<script type="text/javascript" src="/js/gallery.js"></script><!-- 갤러리게시판 view 팝업 -->
+<script type="text/javascript" src="/js/showid.js"></script><!-- 달력 -->
+<script type="text/javascript" src="/js/sports_acc.js"></script><!-- 스포츠아코디언, 베팅내역 아코디언 -->
+<script type="text/javascript" src="/js/vertical_tab.js"></script><!-- 세로탭 -->
+<script type="text/javascript" src="/js/over.js"></script><!-- 말풍선 -->
+<script type="text/javascript" src="/js/over_script.js"></script><!-- 말풍선 -->
+<script type="text/javascript" src="/js/table.js"></script><!-- main_table_slide -->
+<script type="text/javascript" src="/js/gateway.js"></script><!-- gateway -->
+<script type="text/javascript" src="/js/img_hover.js"></script><!-- casino_hover -->
+<script type="text/javascript" src="/js/text_slide.js"></script><!-- text_slide -->
+<script type="text/javascript" src="/js/switch.js"></script><!-- switch -->
 
-<script type="text/javascript" src="<%=baseUrl%>js/jquery.validate.js"></script> 
-<script type="text/javascript" src="<%=baseUrl%>js/additional-methods.js"></script>
-<script type="text/javascript" src="<%=baseUrl%>js/jquery.serializejson.js"></script><!-- json serializer -->
+<script type="text/javascript" src="/js/jquery.validate.js"></script> 
+<script type="text/javascript" src="/js/jqueryRemote.js"></script> 
+<script type="text/javascript" src="/js/additional-methods.js"></script>
+<script type="text/javascript" src="/js/jquery.serializejson.js"></script><!-- json serializer -->
 
-<link href="<%=baseUrl%>css/nice-select.css" rel="stylesheet" type="text/css"><!-- select -->
-<script type="text/javascript" src="<%=baseUrl%>js/jquery.nice-select.js"></script><!-- select -->
+<link href="/css/nice-select.css" rel="stylesheet" type="text/css"><!-- select -->
+<script type="text/javascript" src="/js/jquery.nice-select.js"></script><!-- select -->
 
-<link href="<%=baseUrl%>css/common.css" rel="stylesheet" type="text/css"><!--공통-->
-<link href="<%=baseUrl%>css/layout.css" rel="stylesheet" type="text/css"><!--공통-->
-<link href="<%=baseUrl%>css/main.css" rel="stylesheet" type="text/css"><!-- main -->
-<link href="<%=baseUrl%>css/sub.css" rel="stylesheet" type="text/css"><!-- sub -->
-<link href="<%=baseUrl%>css/game.css" rel="stylesheet" type="text/css"><!-- game -->
-<link href="<%=baseUrl%>css/gateway.css" rel="stylesheet" type="text/css"><!-- gateway -->
-<link href="<%=baseUrl%>css/common2.css" rel="stylesheet" type="text/css"><!--공통-->
+<link href="/css/common.css" rel="stylesheet" type="text/css"><!--공통-->
+<link href="/css/layout.css" rel="stylesheet" type="text/css"><!--공통-->
+<link href="/css/main.css" rel="stylesheet" type="text/css"><!-- main -->
+<link href="/css/sub.css" rel="stylesheet" type="text/css"><!-- sub -->
+<link href="/css/game.css" rel="stylesheet" type="text/css"><!-- game -->
+<link href="/css/gateway.css" rel="stylesheet" type="text/css"><!-- gateway -->
+<link href="/css/common2.css" rel="stylesheet" type="text/css"><!--공통-->
 
 </head>
 <body id="myAnchor">
@@ -60,26 +61,55 @@
 /*Add class when scroll down*/
 $(window).scroll(function(event){
   	var scroll = $(window).scrollTop();
-    if (scroll >= 50) {
-        $(".go-top").addClass("show");
-    } else {
-        $(".go-top").removeClass("show");
-    }
-});
-/*Animation anchor*/
-$('a').click(function(){
-    $('html, body').animate({
-        scrollTop: $( $(this).attr('href') ).offset().top
-    }, 1000);
-});
+	    if (scroll >= 50) {
+	        $(".go-top").addClass("show");
+	    } else {
+	        $(".go-top").removeClass("show");
+	    }
+	});
+	/*Animation anchor*/
+	$('a').click(function(){
+	    $('html, body').animate({
+	        scrollTop: $( $(this).attr('href') ).offset().top
+	    }, 1000);
+	});
 	
 	$(document).ready(function(){
+		$('#loginModal').popup({
+	      	transition: 'all 0.3s',
+	      	scrolllock: true,
+	      	onclose:function(){
+	    		$("#login_header")[0].reset();
+	    		$('.input_warning').hide();
+	    		location.reload();
+	    	}
+	    });
+
+	    $('#logoutModal').popup({
+	      	transition: 'all 0.3s',
+	      	scrolllock: true,
+	    });	
+
 		$("#login_header").on("submit", function(e){
 			e.preventDefault();
 			var data = $(this).serializeJSON();
-			data["action"] = "submit";
 			submitLoginHeader(data);
 		});
+
+		$(".closeLogoutBtn").on("click",function(e){
+			e.preventDefault();
+			$("#logoutModal").popup("hide");
+		});
+
+		$("#showLogoutModal").on("click",function(e){
+			$("#logoutModal").popup("show");
+		});
+
+		$(".closeloginModalBtn").on("click",function(e){
+			e.preventDefault();
+			$("#loginModal").popup("hide");
+		})
+
 	});
 
 	function submitLoginHeader(data){
@@ -93,8 +123,9 @@ $('a').click(function(){
 				$('#login_header input').css("border-color","#505455");
 				console.log(data);
 				if(data == 0 ){
-					$("#login-header-warn").html("Login Successful").show();
-					location.reload();
+					// $("#login-header-warn").html("Login Successful").show();
+					$("#loginModal").popup("show");
+					
 				}else if(data == 1 ){
 					$("#login-header-warn").html("Incorrect Password").show();
 					$("#passwd-header-input").focus();
@@ -166,9 +197,9 @@ $('a').click(function(){
                     })
                 </script>
             </li>
-            <li><a href="<%=baseUrl%>notice/sub02.jsp"><span class="util_btn">공지/이벤트</span></a></li>
-            <li><a href="<%=baseUrl%>help/sub03.jsp"><span class="util_btn">도움말</span></a></li>
-            <li><a href="<%=baseUrl%>match/sub06.jsp"><span class="util_btn">경기결과</span></a></li>
+            <li><a href="/notice/sub02.jsp"><span class="util_btn">공지/이벤트</span></a></li>
+            <li><a href="/help/sub03.jsp"><span class="util_btn">도움말</span></a></li>
+            <li><a href="/match/sub06.jsp"><span class="util_btn">경기결과</span></a></li>
         </ul>
         <% 
         	if(checkSession){
@@ -178,7 +209,7 @@ $('a').click(function(){
             <li>포인트 <span class="util_point"><%=currentUser.getPoint()%></span></li>
             <li>
 				<span class="popover-wrapper right">
-					<a href="#" data-role="popover" data-target="example-popover-2"><img src="<%=baseUrl%>images/select_mark.png"></a>
+					<a href="#" data-role="popover" data-target="example-popover-2"><img src="/images/select_mark.png"></a>
 					<div class="popover-modal example-popover-2">
 						<div class="popover-body">
 							<a href="#" data-toggle-role="close" style="position:absolute; right:20px; top:0px">×</a>
@@ -209,7 +240,7 @@ $('a').click(function(){
 		<% } %>
 		<div class="top_wrap">
             <div class="top">
-                <span class="logo"><a href="<%=baseUrl%>"><img src="<%=baseUrl%>images/logo.png"></a></span>
+                <span class="logo"><a href="/"><img src="/images/logo.png"></a></span>
              		<% 
                			if(checkSession){
       				%>
@@ -218,20 +249,20 @@ $('a').click(function(){
 							<div class="select open">
 								<button type="button" class="myValue top_value">LV.3   <%=currentUser.getNick()%></button>
 								<ul class="aList top_alist">
-									<li style="height:11px; width:152px; background:url(<%=baseUrl%>images/select_top_bg.png) no-repeat"></li>
+									<li style="height:11px; width:152px; background:url(/images/select_top_bg.png) no-repeat"></li>
 									<li><a>내 정보 <span class="select_arrow"> > </span></a></li>
 									<li><a>베팅내역 <span class="select_arrow"> > </span></a></li>
 									<li><a>1:1문의 <span class="select_arrow"> > </span></a></li>
 									<li><a>쪽지함 <span class="select_arrow"> > </span></a></li>
 									<!-- signout -->
-									<li><a href="<%=baseUrl%>process/logout_process.jsp" >로그아웃 </a></li> 
+									<li><span id="showLogoutModal" >로그아웃 </span> </li> 
 								</ul>
 							</div>				
 						</li>
-						<li><a href="<%=baseUrl%>app/sub04.jsp"><span class="top_btn1">충전신청</span></a></li>
-	                    <li><a href="<%=baseUrl%>app/sub04.jsp"><span class="top_btn1">환전신청</span></a></li>
-						<li><a href="<%=baseUrl%>app/sub04.jsp"><span class="top_btn3">머니전환</span></a></li>
-						<li><a href="<%=baseUrl%>info/sub05.jsp"><span class="top_btn2">내정보</span></a></li>
+						<li><a href="/app/sub04.jsp"><span class="top_btn1">충전신청</span></a></li>
+	                    <li><a href="/app/sub04.jsp"><span class="top_btn1">환전신청</span></a></li>
+						<li><a href="/app/sub04.jsp"><span class="top_btn3">머니전환</span></a></li>
+						<li><a href="/info/sub05.jsp"><span class="top_btn2">내정보</span></a></li>
 	                </ul>
                	<% } else{  %>
 					<ul class="top_right">
@@ -260,16 +291,59 @@ $('a').click(function(){
         <div class="nav_wrap">
 			<div class="stroke">
 				<ul>
-					<li><a href="<%=baseUrl%>realtime/bet01.jsp">실시간</a></li>
-					<li><a href="<%=baseUrl%>sports/bet02.jsp">스포츠</a></li>
-					<li><a href="<%=baseUrl%>virtual/bet03.jsp">가상게임</a></li>
-					<li><a href="<%=baseUrl%>casino/bet04.jsp">카지노</a></li>
-					<li><a href="<%=baseUrl%>racing/bet05.jsp">경마</a></li>
+					<li><a href="/realtime/bet01.jsp">실시간</a></li>
+					<li><a href="/sports/bet02.jsp">스포츠</a></li>
+					<li><a href="/virtual/bet03.jsp">가상게임</a></li>
+					<li><a href="/casino/bet04.jsp">카지노</a></li>
+					<li><a href="/racing/bet05.jsp">경마</a></li>
 				</ul>
 			</div>
         </div>
 	</div>
 </div><!-- header_wrap -->
+
+<!-- login success modal -->
+<div id="loginModal" class="bg_mask_pop2">
+	<div class="bg_mask_pop_title">
+		<span class="popup_logo"><img src="/images/popup_logo.png"></span>
+		<span class="popup_close closeloginModalBtn"><img src="/images/popup_close.png"></span>
+	</div>
+	<div class="bg_mask_pop2_in">
+		<div class="pop_icon_center">
+			<img src="/images/check_icon.png">
+		</div>
+		<div class="pop_text">
+			로그인 성공!<br>
+			IBET25에 오신것을 환영합니다. <br>
+			IBET25에서 다양한 베팅의 세계를 마음껏 경험하세요!<br>
+		</div>
+		<div class="btn_wrap">
+			<a href="${baeUrl}"><span class="btn3">확인</span></a>
+		</div>
+	</div>
+</div>
+
+<!-- logout modal -->
+<div id="logoutModal" class="bg_mask_pop2">
+	<div class="bg_mask_pop_title">
+		<span class="popup_logo"><img src="/images/popup_logo.png"></span>
+		<span class="popup_close closeLogoutBtn"><img src="/images/popup_close.png"></span>
+	</div>
+	<div class="bg_mask_pop2_in">
+		<div class="pop_icon_center">
+			<img src="/images/exclamation_icon.png">
+		</div>
+		<div class="pop_text">
+			로그인 성공!<br>
+			IBET25에 오신것을 환영합니다. <br>
+			IBET25에서 다양한 베팅의 세계를 마음껏 경험하세요!<br>
+		</div>
+		<div class="btn_wrap">
+			<a href="" class="closeLogoutBtn"><span class="btn3">취소</span></a>
+			<a href="/process/logout_process.jsp"><span class="btn3">확인</span></a>
+		</div>
+	</div>
+</div>
 
 
 <!-- jsp include -->

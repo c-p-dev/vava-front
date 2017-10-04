@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="
+	net.vavasoft.bean.ChargeBean,
 	net.vavasoft.bean.UserBean,
-	net.vavasoft.dao.UserDao,
+	net.vavasoft.dao.ChargeDao,
 	java.sql.SQLException,
 	java.util.ArrayList,
 	java.util.List,
@@ -10,16 +11,10 @@
 <%
 	if(session.getAttribute("currentSessionUser") != null){
 		Gson gson = new Gson();
-		UserBean bean = (UserBean) session.getAttribute("currentSessionUser");
-		UserDao ud = new UserDao();
-		List res = ud.getUserChargeList(bean.getUserid());
-		
+		ChargeDao cDao = new ChargeDao();
+		UserBean userBean = (UserBean) session.getAttribute("currentSessionUser");
+		List res = cDao.getUserChargeList(userBean);
 		out.println(gson.toJson(res).toString());
 	}
-
-	
-		
-
-
 	
 %>

@@ -174,12 +174,12 @@
 <!-- success -->
 <div id="chargeSuccesModal" class="bg_mask_pop2">
 	<div class="bg_mask_pop_title">
-		<span class="popup_logo"><img src="images/popup_logo.png"></span>
-		<span class="popup_close fade_2_close cs_close"><img src="images/popup_close.png"></span>
+		<span class="popup_logo"><img src="/images/popup_logo.png"></span>
+		<span class="popup_close fade_2_close cs_close"><img src="/images/popup_close.png"></span>
 	</div>
 	<div class="bg_mask_pop2_in">
 		<div class="pop_icon_center">
-			<img src="images/check_icon.png">
+			<img src="/images/check_icon.png">
 		</div>
 		<div class="pop_text">
 			Charge Application Submited<br>			
@@ -238,6 +238,7 @@
 			bInfo : false,
 			lengthChange: false,
 			autowWidth:true,
+			pageLength: 10,
             columns : [
                 	{ 
                         data   : 'chid',
