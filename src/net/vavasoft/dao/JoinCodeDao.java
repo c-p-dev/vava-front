@@ -32,7 +32,7 @@ public class JoinCodeDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 	
-		String query = "SELECT * FROM RT01.dbo.joincode_lst WHERE  joincode = ? and recommend = ?";
+		String query = "SELECT * FROM RT01.dbo.joincode_lst WHERE  joincode = ? and recommend = ? AND state = 'WAIT'";
 		
 		try{	      
 			
@@ -45,7 +45,8 @@ public class JoinCodeDao {
 			pstmt.setString(1,jcb.getJoincode());
 			pstmt.setString(2,jcb.getRecommend());
 			rs = pstmt.executeQuery();
-					   
+			System.out.println("asdasd");
+			System.out.println(rs);
 			if(rs.next()){
 				result = true;
 			}
@@ -62,7 +63,7 @@ public class JoinCodeDao {
 		 	  if(pstmt!=null) pstmt.close();
 		 	  if(con!=null) con.close();
 		}
-		
+		System.out.println(result);
 		return result;
 	}
 	

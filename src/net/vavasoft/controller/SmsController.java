@@ -22,19 +22,19 @@ public class SmsController {
     public static Logger logger = Logger.getLogger(SmsController.class);
     
     
-    public boolean verifyNumber(String userid,String tel,String ip){
+    public boolean verifyNumber(SmsAuthBean smsBean){
     	boolean result = false;
     	SmsDao sd = new SmsDao();
     	
 		try {
 			String authcode = generateRandomNumber();
-			String numberExistsAuthcode = sd.checkNumberStatus(tel);
+			String numberExistsAuthcode = sd.checkNumberStatus(smsBean);
 			System.out.println(numberExistsAuthcode);
 	    	if(numberExistsAuthcode != null){
 	    		authcode = numberExistsAuthcode;	
 	    	}
 	  
-	    	int responseGroupId = sendSms(userid,tel,authcode);
+	    	int responseGroupId = sendSms(smsBean,authcode);
 	    	
 	    	/*
 	    	 * responseGroupId 
@@ -46,7 +46,7 @@ public class SmsController {
 	    	 * */
 	    	
 	    	if((responseGroupId == 1 || responseGroupId == 3) && numberExistsAuthcode == null){
-	    		result = addSmsAuthRecord(userid,tel,authcode,ip);
+	    		result = addSmsAuthRecord(smsBean, authcode);
 	    	}else if((responseGroupId == 1 || responseGroupId == 3) && numberExistsAuthcode != null){
 	    		result = true;
 	    	}
@@ -58,15 +58,15 @@ public class SmsController {
     	return result;
     }
     
-    public int sendSms(String userid,String tel,String authcode){
+    public int sendSms(SmsAuthBean smsBean, String authcode){
     	int groupId = 0;
  
     	SendSingleTextualSms client = new SendSingleTextualSms(new BasicAuthConfiguration(BASE_URL,USERNAME, PASSWORD));
-        String MESSAGE_TEXT = "Your Certification Number is : " + authcode;
+        String MESSAGE_TEXT = " 회원가입을 하시면 보다 폭넓은 서비스 이용이 가능합니다. Your Certification Number is : " + authcode;
         	
 		SMSTextualRequest requestBody = new SMSTextualRequest();
 		requestBody.setFrom(FROM);
-		requestBody.setTo(Arrays.asList("+"+tel));
+		requestBody.setTo(Arrays.asList("+"+smsBean.getTel()));
 		requestBody.setText(MESSAGE_TEXT);
 		
 		SMSResponse response = client.execute(requestBody);
@@ -79,12 +79,12 @@ public class SmsController {
     	return groupId;
     }
     
-    public boolean addSmsAuthRecord(String userid,String tel,String authcode,String ip) throws SQLException{
+    public boolean addSmsAuthRecord(SmsAuthBean smsBean, String authcode) throws SQLException{
     	boolean result = false;
     	SmsDao sd = new SmsDao();
     	
     	try{
-    		result = sd.addSmsAuth(userid,tel,authcode,ip);
+    		result = sd.addSmsAuth(smsBean,authcode);
 		}catch(SQLException e){
 			e.printStackTrace();
 		}    	

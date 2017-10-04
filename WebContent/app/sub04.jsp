@@ -122,7 +122,7 @@
 														<option>전체</option>
 													</select>
 												</td>
-												<td><input class="input_style04"  placeholder="기간" value="2017-00-00 ~ 2017-00-00"><a href="#" onClick="show_over(this);show_layer('depth1');"><img src="../images/car_icon.jpg"></a>
+												<td><input class="input_style04"  placeholder="기간" value="2017-00-00 ~ 2017-00-00"><a href="#" onClick="show_over(this);show_layer('depth1');"><img src="/images/car_icon.jpg"></a>
 													<div id="depth1" style="display:none; width:; position:absolute; z-index:100000000; left:530px;top:130px;">
 														<table border="0" cellspacing="0" cellpadding="0" class="car_table">
 															<tr>
@@ -144,12 +144,12 @@
 																			<td>
 																				<table width="100%" border="0" cellspacing="0" cellpadding="0">
 																					<tr>
-																						<td><a href="#"><img src="../images/arrow_left.png"></a></td>
+																						<td><a href="#"><img src="/images/arrow_left.png"></a></td>
 																						<td height="30" align="center"><a href="#"><span class="font_style01">2017년 00월</span></a></td>
-																						<td align="right"><a href="#"><img src="../images/arrow_right.png"></a></td>
+																						<td align="right"><a href="#"><img src="/images/arrow_right.png"></a></td>
 																					</tr>
 																					<tr>
-																						<td colspan="3"><img src="../images/cale.jpg" width="100%"></td>
+																						<td colspan="3"><img src="/images/cale.jpg" width="100%"></td>
 																					</tr>
 																				</table>
 																				<table border="0" cellpadding="0" cellspacing="1" bgcolor="#242424">
@@ -203,12 +203,12 @@
 																			<td>
 																				<table width="100%" border="0" cellspacing="0" cellpadding="0">
 																					<tr>
-																						<td><a href="#"><img src="../images/arrow_left.png"></a></td>
+																						<td><a href="#"><img src="/images/arrow_left.png"></a></td>
 																						<td height="30" align="center"><a href="#"><span class="font_style01">2017년 00월</span></a></td>
-																						<td align="right"><a href="#"><img src="../images/arrow_right.png"></a></td>
+																						<td align="right"><a href="#"><img src="/images/arrow_right.png"></a></td>
 																					</tr>
 																					<tr>
-																						<td colspan="3"><img src="../images/cale.jpg" width="100%"></td>
+																						<td colspan="3"><img src="/images/cale.jpg" width="100%"></td>
 																					</tr>
 																				</table>
 																				<table border="0" cellpadding="0" cellspacing="1" bgcolor="#242424">
@@ -264,7 +264,7 @@
 																</td>
 															</tr>
 														</table>
-														<div style="float:right; padding:7px 2px 7px 10px;"><a href="#" onClick="show_layer('depth1','hidden');"><img src="../images/car_close.png"></a></div>
+														<div style="float:right; padding:7px 2px 7px 10px;"><a href="#" onClick="show_layer('depth1','hidden');"><img src="/images/car_close.png"></a></div>
 													</div>
 												</td>
 												<td>
@@ -349,7 +349,7 @@
 														<option>전체</option>
 													</select>
 												</td>
-												<td><input class="input_style04"  placeholder="기간" value="2017-00-00 ~ 2017-00-00"><a href="#" onClick="show_over(this);show_layer('depth2');"><img src="../images/car_icon.jpg"></a>
+												<td><input class="input_style04"  placeholder="기간" value="2017-00-00 ~ 2017-00-00"><a href="#" onClick="show_over(this);show_layer('depth2');"><img src="/images/car_icon.jpg"></a>
 													<div id="depth2" style="display:none; width:; position:absolute; z-index:100000000; left:530px;top:130px;">
 														<table border="0" cellspacing="0" cellpadding="0" class="car_table">
 															<tr>
@@ -371,12 +371,12 @@
 																			<td>
 																				<table width="100%" border="0" cellspacing="0" cellpadding="0">
 																					<tr>
-																						<td align="left" height="30" ><a href="#"><img src="../images/arrow_left.png"></a></td>
+																						<td align="left" height="30" ><a href="#"><img src="/images/arrow_left.png"></a></td>
 																						<td align="center">2017년 01월</td>
-																						<td align="right"><a href="#"><img src="../images/arrow_right.png"></a></td>
+																						<td align="right"><a href="#"><img src="/images/arrow_right.png"></a></td>
 																					</tr>
 																					<tr>
-																						<td colspan="3"><img src="../images/cale.jpg" width="100%"></td>
+																						<td colspan="3"><img src="/images/cale.jpg" width="100%"></td>
 																					</tr>
 																				</table>
 																				<table border="0" cellpadding="0" cellspacing="1" bgcolor="#242424">
@@ -430,12 +430,12 @@
 																			<td>
 																				<table width="100%" border="0" cellspacing="0" cellpadding="0">
 																					<tr>
-																						<td><a href="#"><img src="../images/arrow_left.png"></a></td>
+																						<td><a href="#"><img src="/images/arrow_left.png"></a></td>
 																						<td height="30" align="center"><a href="#"><span class="font_style01">2017년 00월</span></a></td>
-																						<td align="right"><a href="#"><img src="../images/arrow_right.png"></a></td>
+																						<td align="right"><a href="#"><img src="/images/arrow_right.png"></a></td>
 																					</tr>
 																					<tr>
-																						<td colspan="3"><img src="../images/cale.jpg" width="100%"></td>
+																						<td colspan="3"><img src="/images/cale.jpg" width="100%"></td>
 																					</tr>
 																				</table>
 																				<table border="0" cellpadding="0" cellspacing="1" bgcolor="#242424">
@@ -491,7 +491,7 @@
 																</td>
 															</tr>
 														</table>
-														<div style="float:right; padding:7px 2px 7px 10px;"><a href="#" onClick="show_layer('depth2','hidden');"><img src="../images/car_close.png"></a></div>
+														<div style="float:right; padding:7px 2px 7px 10px;"><a href="#" onClick="show_layer('depth2','hidden');"><img src="/images/car_close.png"></a></div>
 													</div>
 												</td>
 												<td>

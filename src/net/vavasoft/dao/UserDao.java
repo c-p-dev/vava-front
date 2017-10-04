@@ -146,41 +146,39 @@ public class UserDao {
 		  	}
 	}
 	
-	public boolean checkUserId(String userid) throws SQLException{
+	public boolean checkUserId(UserBean user) throws SQLException{
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
 		boolean result = false;
 		
 		try {
 			Context initContext = new InitialContext();
 		 	Context envContext = (Context)initContext.lookup("java:/comp/env");
 			DataSource ds = (DataSource)envContext.lookup("jdbc/vava");
-			
 		    con = ds.getConnection();
 			      		
-		    String  query = "SELECT userid FROM RT01.dbo.user_mst WHERE userid ='"+userid+"'" ;
-		    con = ds.getConnection();			 	
-			pstmt = con.prepareStatement(query);
+		    String  query = "SELECT userid FROM RT01.dbo.user_mst WHERE userid = ? " ;
+		    pstmt = con.prepareStatement(query);
+			pstmt.setString(1,user.getUserid());
 			rs = pstmt.executeQuery();
 			if(rs.next()){
-	
 				result = true;
 			}
-			return result;
+			
 			
 			
 		} catch(Exception e){
 			logger.debug(e);
-			return false;
+			
 		}finally {
 			if(rs!=null) rs.close();
 			if(pstmt!=null) pstmt.close();
 	  		if(con!=null) con.close();
 		}
 		
+		return result;
 	}
 	
 	public boolean checkNickname(String nickname) throws SQLException{

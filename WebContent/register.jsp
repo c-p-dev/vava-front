@@ -20,8 +20,8 @@
 <!-- member registration form -->
 <div id="fade_1" class="bg_mask_pop1">
 	<div class="bg_mask_pop_title">
-		<span class="popup_logo"><img src="images/popup_logo.png"></span>
-		<span class="popup_close fade_1_close"><img src="images/popup_close.png"></span>
+		<span class="popup_logo"><img src="/images/popup_logo.png"></span>
+		<span class="popup_close fade_1_close"><img src="/images/popup_close.png"></span>
 	</div>
 	<form  id="form1" name="form1" >
 		<div class="bg_mask_pop1_in">
@@ -32,8 +32,8 @@
 					<td>
 						<table  cellpadding="0" cellspacing="0" class="popup_table01_1">
 							<tr>
-								<td width="370"><input class="input_style02 input_required" id="userid" name="userid"  placeholder="ID" placeholder="아이디" data-warn="userid-warn"></td>
-								<td><img src="images/input_mark3.jpg" class="img-validator" id="userid-img-valid" ></td>
+								<td width="370"><input class="input_style02 input_required" id="userid" name="userid"  maxlength="12" placeholder="ID" placeholder="아이디" data-warn="userid-warn"></td>
+								<td><img src="/images/input_mark3.jpg" class="img-validator" id="userid-img-valid" ></td>
 							</tr>
 							<tr>
 								<td colspan="2"><div class="input_warning" id="userid-warn">조건에 맞는 아이디를 입력해주세요.</div></td>
@@ -45,8 +45,8 @@
 					<td>
 						<table  cellpadding="0" cellspacing="0" class="popup_table01_1">
 							<tr>
-								<td width="370"><input class="input_style02 input_required" name="nick" data-warn="nickname-warn" placeholder="Nickname" placeholder="새긴 ​​금"></td>
-								<td><img src="images/input_mark3.jpg" class="img-validator" id="nick-img-valid" ></td>
+								<td width="370"><input class="input_style02 input_required" name="nick" maxlength="20" data-warn="nickname-warn" placeholder="Nickname" placeholder="새긴 ​​금"></td>
+								<td><img src="/images/input_mark3.jpg" class="img-validator" id="nick-img-valid" ></td>
 							</tr>
 							<tr>
 								<td colspan="2"><div class="input_warning" id="nick-warn">만족 조건 충족 여부</div></td>
@@ -58,8 +58,8 @@
 					<td>
 						<table  cellpadding="0" cellspacing="0" class="popup_table01_1">
 							<tr>
-								<td width="370"><input class="input_style02 input_required" type="password" name="passwd" data-warn="passwd-warn" placeholder="Password" placeholder="암호"></td>
-								<td><img src="images/input_mark3.jpg" class="img-validator" id="passwd-img-valid"></td>
+								<td width="370"><input class="input_style02 input_required" type="password" maxlength="20" name="passwd" data-warn="passwd-warn" placeholder="Password" placeholder="암호"></td>
+								<td><img src="/images/input_mark3.jpg" class="img-validator" id="passwd-img-valid"></td>
 							</tr>
 							<tr>
 								<td colspan="2"><div class="input_warning" id="passwd-warn"> 만족 조건 충족 여부</div></td>
@@ -67,48 +67,6 @@
 						</table>
 					</td>
 				</tr>
-				<!--
-				<tr>
-					<td>
-						<table  cellpadding="0" cellspacing="0" class="popup_table01_1">
-							<tr>
-								<td width="370"><input class="input_style02 input_required"  placeholder="아이디"></td>
-								<td><a href="#"><img src="images/input_mark3.jpg"></a></td>
-							</tr>
-							<tr>
-								<td colspan="2"><div class="input_warning"> 만족 조건 충족 여부</div></td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<table  cellpadding="0" cellspacing="0" class="popup_table01_1">
-							<tr>
-								<td width="370"><input class="input_style02 input_required"  placeholder="아이디"></td>
-								<td><a href="#"><img src="images/input_mark3.jpg"></a></td>
-							</tr>
-							<tr>
-								<td colspan="2"><div class="input_warning"> 만족 조건 충족 여부</div></td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<table  cellpadding="0" cellspacing="0" class="popup_table01_1">
-							<tr>
-								<td width="370"><input class="input_style02 input_required"  placeholder="아이디"></td>
-								<td><a href="#"><img src="images/input_mark3.jpg"></a></td>
-							</tr>
-							<tr>
-								<td colspan="2"><div class="input_warning">만족 조건 충족 여부</div></td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				-->
-
 				<tr>
 					<td>
 						<table  width="100%" cellpadding="0" cellspacing="0" class="popup_table01_1">
@@ -148,9 +106,9 @@
 										    <option value="IBK투자증권">IBK투자증권</option>
 									</select>
 								</td>
-								<td width="120" align="left" style="padding:0 5px 0 0"><input class="input_style02" name="bank_owner"  placeholder="Account Holder" placeholder="예금주" ></td>
+								<td width="120" align="left" style="padding:0 5px 0 0"><input class="input_style02" name="bank_owner" maxlength="20"  placeholder="Account Holder" placeholder="예금주" ></td>
 								
-								<td align="left" style="padding:0 5px 0 0"><input class="input_style02 input_required" name="bank_num" data-warn="bank-warn" placeholder="Enter your account number (without -)" placeholder="계좌번호입력(-없이 입력)" placeholder="Enter your account number (without -)"></td>
+								<td align="left" style="padding:0 5px 0 0"><input class="input_style02 input_required" name="bank_num" maxlength="20" data-warn="bank-warn" placeholder="Enter your account number (without -)" placeholder="계좌번호입력(-없이 입력)" placeholder="Enter your account number (without -)"></td>
 							</tr>
 							<tr>
 								<td colspan="3">
@@ -171,7 +129,7 @@
 										<option value="+82">+82(한국)</option>
 									</select>
 								</td>
-								<td width="230" align="left" style="padding:0 5px 0 0"><input class="input_style02 input_required" id="cell" name="cell" data-warn="cell-warn" placeholder="Mobile Phone Number" placeholder="휴대폰번호" ></td>
+								<td width="230" align="left" style="padding:0 5px 0 0"><input class="input_style02 input_required" id="cell" name="cell" maxlength="15" data-warn="cell-warn" placeholder="Mobile Phone Number" placeholder="휴대폰번호" ></td>
 								<td><a href="#" id="mobileVerBtn"><span class="btn5">인증</span></a></td>
 							</tr>
 							<tr>
@@ -188,7 +146,7 @@
 					<td>
 						<table  width="100%" cellpadding="0" cellspacing="0" class="popup_table01_1">
 							<tr>
-								<td width="335" align="left" style="padding:0 5px 0 0"><input class="input_style02 input_required" id="cert" name="cert" data-warn="cert-warn" placeholder="Certification Number" placeholder="인증번호" ></td>
+								<td width="335" align="left" style="padding:0 5px 0 0"><input class="input_style02 input_required" maxlength="6" id="cert" name="cert" maxlength="20" data-warn="cert-warn" placeholder="Certification Number" placeholder="인증번호" ></td>
 								<td><a href="#" id="certBtn"><span class="btn5">확인</span></a></td>
 							</tr>
 							<tr>
@@ -201,7 +159,7 @@
 				</tr>
 				<tr>
 					<td>
-						<input class="input_style02 input_required" id="referrer" name="referrer" placeholder="Referrer ID" placeholder="추천인아이디" value="" data-warn="referrer-warn">
+						<input class="input_style02 input_required" id="referrer" name="referrer" placeholder="Referrer ID" maxlength="20" placeholder="추천인아이디" value="" data-warn="referrer-warn">
 						<div class="input_warning" id="referrer-warn">입력하신 번호로 인증번호가 발송되었습니다.</div>
 					</td>
 				</tr>
@@ -210,7 +168,7 @@
 						<table  width="100%" cellpadding="0" cellspacing="0" class="popup_table01_1">
 							<tr>
 								<td width="335" align="left" style="padding:0 5px 0 0">
-									<input class="input_style02 input_required" id="recommend" name="recommend" data-warn='recommend-warn' placeholder="Recommendation code" placeholder="추천인코드" >
+									<input class="input_style02 input_required" id="recommend" name="recommend" data-warn='recommend-warn' maxlength="6" placeholder="Recommendation code" placeholder="추천인코드" >
 								</td>
 								<td><a href="#" id="recoVerifyBtn"><span class="btn5">확인</span></a></td>
 							</tr>
@@ -241,12 +199,12 @@
 <!-- member success info -->
 <div id="fade_2" class="bg_mask_pop2">
 	<div class="bg_mask_pop_title">
-		<span class="popup_logo"><img src="images/popup_logo.png"></span>
-		<span class="popup_close fade_2_close"><img src="images/popup_close.png"></span>
+		<span class="popup_logo"><img src="/images/popup_logo.png"></span>
+		<span class="popup_close fade_2_close"><img src="/images/popup_close.png"></span>
 	</div>
 	<div class="bg_mask_pop2_in">
 		<div class="pop_icon_center">
-			<img src="images/check_icon.png">
+			<img src="/images/check_icon.png">
 		</div>
 		<div class="pop_text">
 			회원 가입 완료!<br>
@@ -297,6 +255,7 @@
 		$('select').niceSelect();
 
 		$("#form1").validate({
+			// debug: true,
 	  		errorClass: 'form1-invalid',
 	    	validClass: 'form1-valid',
 		    onfocusout: false,
@@ -305,6 +264,7 @@
 	  		rules: {
 			    userid :{
 					required:true,
+					minlength:4,
 					remote: {
 						url: "${baseUrl}process/userid_checker.jsp",
 						async: false,
@@ -313,12 +273,9 @@
 				          	userid: function() {
 				            	return $( "#userid" ).val();
 				          	}
-				        },
-			      	},
-			      	minlength:4,
-			      	maxlength:12,
-			      	regex:true,
-				},
+				        }
+                    },
+	      		},
 				bank_name :{
 					required:true,
 				},
@@ -334,8 +291,8 @@
 					digits: true,
 					minlength:10,
 					maxlength:13,
-					remote: {
-						url: "${baseUrl}process/verify_cellnum.jsp",
+			  		synchronousRemote: {
+		                url: "${baseUrl}process/verify_cellnum.jsp",
 				        type: "post",
 				        async: false,
 				       	data: {
@@ -346,7 +303,7 @@
 				          		return $.trim($("#cell").val());
 				          	},
 				        },
-			      	},
+		            }
 				},
 				cert :{
 					required:true,
@@ -354,7 +311,6 @@
 					remote: {
 						url: "${baseUrl}process/verify_cert_num.jsp",
 				        type: "post",
-				        async: false,
 				       	data: {
 				          	cert: function (){
 				          		return $("#cert").val();
@@ -367,12 +323,26 @@
 				          	},
 				        },
 			      	},
+
 				},
 				passwd :{
 					required:true,
 					minlength:6,
 					maxlength:20,
 					
+				},
+				referrer :{
+			      	required:true,
+					remote: {
+						url: "${baseUrl}process/referrence_checker.jsp",
+						async: false,
+				        type: "post",
+				       	data: {
+				          	referrer: function() {
+				            	return $( "#referrer" ).val();
+				          	}
+				        },
+			      	},
 				},
 				recommend :{
 					required:true,
@@ -388,19 +358,6 @@
 				          	referrer : function(){
 				          		return $.trim($( "#referrer" ).val());
 				          	},
-				        },
-			      	},
-				},
-				referrer :{
-					required:true,
-					remote: {
-						url: "${baseUrl}process/referrence_checker.jsp",
-				        type: "post",
-				        async: false,
-				       	data: {
-				          	userid: function() {
-				            	return $( "#referrer" ).val();
-				          	}
 				        },
 			      	},
 				},
@@ -427,12 +384,11 @@
 				cell :{
 					required:"Mobile Number is required",
 					minlength:"Minimum length is 10",
-					remote : "Number is already in use",
+					synchronousRemote : "Number is already in use",
 				},
 				cert :{
 					required:"Certificate is required",
 					minlength:"Minimun Length is 6",
-
 					remote:"Wrong Authenication Code",
 				},
 				passwd :{
@@ -455,20 +411,27 @@
 
 			},
 			errorPlacement: function(error, element) {
-
+				
 				var error_label = element.attr("name");
+				console.log(error_label);
 			    if (element.attr("name") == error_label ){
 			    	$("#"+error_label+"-warn").html(error).show();
-			    	// $('#'+error_label).css("border-color","#d50000");
+			    	
 			    }
+			    
 			  
+			},
+			success: function(label,element){
+
 			},
 			submitHandler: function(form) {
 				var data = $("#form1").serializeJSON();
-				console.log(data);
 			    submitForm(data);
 			  
-		  	}
+		  	},
+		  	invalidHandler: function() {
+				var error = $("#form1").validate().numberOfInvalids();
+			}
 
 		});
 
@@ -482,21 +445,26 @@
 		$("#mobileVerBtn").on("click",function(e){
 			e.preventDefault();
 			var validator = $( "#form1" ).validate();
-			var valid = validator.element( "#cell" );
+			valid = validator.element("#cell");
 			console.log(valid);
 			if(valid){
-				verifyNumber();
+				// verifyNumber();
 			}
+
+			
 		});
 
 		$("#recoVerifyBtn").on("click",function(e){
 			e.preventDefault();
 			var validator = $( "#form1" ).validate();
 			var validReferrer = validator.element( "#referrer");
-			var validRecommend = validator.element( "#recommend" );
-
-
+			console.log(validReferrer);
+			if(validReferrer){
+				var validRecommend = validator.element( "#recommend" );	
+			}
+			
 		});
+
 
 
 	});
@@ -519,13 +487,16 @@
 
 	function resetForm1(){
 		$('#form1 input').css("border-color","#2e3032");
-		$("#form1 .img-validator").attr("src","images/input_mark3.jpg");
+		$("#form1 .img-validator").attr("src","/images/input_mark3.jpg");
 		$("#form1")[0].reset();
 		// $('#form1 .input_warning').hide();
 		$("#form1").validate().resetForm();
 	}
 
 	function submitForm(data){
+		if(data.cell_prefix == "+63"){
+			data.cell = formatCellNum(data.cell);
+		}
 		$.ajax({
 			url : '${baseUrl}process/register_process.jsp',
 			data : data,
@@ -546,6 +517,7 @@
 		var userid = $.trim($("#userid").val());
 		var cell_prefix = $.trim($("#cell_prefix").val());
 		var cell = $.trim($("#cell").val());
+		cell = formatCellNum(cell);
 		$.ajax({
 			url : '${baseUrl}process/send_sms.jsp',
 			data : {userid:userid,cell_prefix:cell_prefix,cell:cell},
@@ -559,6 +531,13 @@
 				$("#mobileVerBtn span").html("인증");
 			}
 		});
+	}
+
+	function formatCellNum(num){
+		if(num.substring(1).length == 10 && num.substring(0,1) == "0"){
+			num = num.substring(1);
+		}
+		return num;
 	}
 </script>
 

@@ -3,7 +3,10 @@
 	// return false if userid exists
 	String userid = request.getParameter("userid");
 	UserDao ud = new UserDao();
-	if(ud.checkUserId(userid)){
+	UserBean uBean = new UserBean();
+	uBean.setUserid(request.getParameter("userid").trim());
+	System.out.println(ud.checkUserId(uBean));
+	if(ud.checkUserId(uBean)){
 		out.println(false);
 	}else{
 		out.println(true);

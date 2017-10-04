@@ -26,7 +26,7 @@ public class SmsDao {
 	private static final DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	public static Logger logger = Logger.getLogger(SmsDao.class);
 	
-	public boolean addSmsAuth(String userid,String tel, String authcode,String ip) throws SQLException{
+	public boolean addSmsAuth(SmsAuthBean smsBean,String authcode) throws SQLException{
 		boolean result = false;
 		Connection con = null;
 		Statement stmt = null;
@@ -45,10 +45,10 @@ public class SmsDao {
 					" VALUES (?,?,1,?,'WAIT',?,'Y')";
 								
 		    pstmt = con.prepareStatement(query);
-		    pstmt.setString(1,tel);
+		    pstmt.setString(1,smsBean.getTel());
 		    pstmt.setString(2,authcode);
 		    pstmt.setString(3,sdf.format(date));
-		    pstmt.setString(4,ip);
+		    pstmt.setString(4,smsBean.getIp());
 			row = pstmt.executeUpdate(); 
 			pstmt.close();
 			con.close();
@@ -68,7 +68,7 @@ public class SmsDao {
 		return result;
 	}
 	
-	public String checkNumberStatus(String tel) throws SQLException{
+	public String checkNumberStatus(SmsAuthBean smsBean) throws SQLException{
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -84,7 +84,7 @@ public class SmsDao {
 		    String  query = "SELECT * FROM RT01.dbo.sms_auth WHERE tel = ? AND state = 'WAIT'";
 		    con = ds.getConnection();			 	
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1,tel.toString());
+			pstmt.setString(1,smsBean.getTel());
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()){

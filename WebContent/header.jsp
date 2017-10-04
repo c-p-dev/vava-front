@@ -37,6 +37,7 @@
 <script type="text/javascript" src="/js/switch.js"></script><!-- switch -->
 
 <script type="text/javascript" src="/js/jquery.validate.js"></script> 
+<script type="text/javascript" src="/js/jqueryRemote.js"></script> 
 <script type="text/javascript" src="/js/additional-methods.js"></script>
 <script type="text/javascript" src="/js/jquery.serializejson.js"></script><!-- json serializer -->
 
@@ -74,12 +75,41 @@ $(window).scroll(function(event){
 	});
 	
 	$(document).ready(function(){
+		$('#loginModal').popup({
+	      	transition: 'all 0.3s',
+	      	scrolllock: true,
+	      	onclose:function(){
+	    		$("#login_header")[0].reset();
+	    		$('.input_warning').hide();
+	    		location.reload();
+	    	}
+	    });
+
+	    $('#logoutModal').popup({
+	      	transition: 'all 0.3s',
+	      	scrolllock: true,
+	    });	
+
 		$("#login_header").on("submit", function(e){
 			e.preventDefault();
 			var data = $(this).serializeJSON();
-			data["action"] = "submit";
 			submitLoginHeader(data);
 		});
+
+		$(".closeLogoutBtn").on("click",function(e){
+			e.preventDefault();
+			$("#logoutModal").popup("hide");
+		});
+
+		$("#showLogoutModal").on("click",function(e){
+			$("#logoutModal").popup("show");
+		});
+
+		$(".closeloginModalBtn").on("click",function(e){
+			e.preventDefault();
+			$("#loginModal").popup("hide");
+		})
+
 	});
 
 	function submitLoginHeader(data){
@@ -93,8 +123,9 @@ $(window).scroll(function(event){
 				$('#login_header input').css("border-color","#505455");
 				console.log(data);
 				if(data == 0 ){
-					$("#login-header-warn").html("Login Successful").show();
-					location.reload();
+					// $("#login-header-warn").html("Login Successful").show();
+					$("#loginModal").popup("show");
+					
 				}else if(data == 1 ){
 					$("#login-header-warn").html("Incorrect Password").show();
 					$("#passwd-header-input").focus();
@@ -224,7 +255,7 @@ $(window).scroll(function(event){
 									<li><a>1:1문의 <span class="select_arrow"> > </span></a></li>
 									<li><a>쪽지함 <span class="select_arrow"> > </span></a></li>
 									<!-- signout -->
-									<li><a href="/process/logout_process.jsp" >로그아웃 </a></li> 
+									<li><span id="showLogoutModal" >로그아웃 </span> </li> 
 								</ul>
 							</div>				
 						</li>
@@ -270,6 +301,49 @@ $(window).scroll(function(event){
         </div>
 	</div>
 </div><!-- header_wrap -->
+
+<!-- login success modal -->
+<div id="loginModal" class="bg_mask_pop2">
+	<div class="bg_mask_pop_title">
+		<span class="popup_logo"><img src="/images/popup_logo.png"></span>
+		<span class="popup_close closeloginModalBtn"><img src="/images/popup_close.png"></span>
+	</div>
+	<div class="bg_mask_pop2_in">
+		<div class="pop_icon_center">
+			<img src="/images/check_icon.png">
+		</div>
+		<div class="pop_text">
+			로그인 성공!<br>
+			IBET25에 오신것을 환영합니다. <br>
+			IBET25에서 다양한 베팅의 세계를 마음껏 경험하세요!<br>
+		</div>
+		<div class="btn_wrap">
+			<a href="${baeUrl}"><span class="btn3">확인</span></a>
+		</div>
+	</div>
+</div>
+
+<!-- logout modal -->
+<div id="logoutModal" class="bg_mask_pop2">
+	<div class="bg_mask_pop_title">
+		<span class="popup_logo"><img src="/images/popup_logo.png"></span>
+		<span class="popup_close closeLogoutBtn"><img src="/images/popup_close.png"></span>
+	</div>
+	<div class="bg_mask_pop2_in">
+		<div class="pop_icon_center">
+			<img src="/images/exclamation_icon.png">
+		</div>
+		<div class="pop_text">
+			로그인 성공!<br>
+			IBET25에 오신것을 환영합니다. <br>
+			IBET25에서 다양한 베팅의 세계를 마음껏 경험하세요!<br>
+		</div>
+		<div class="btn_wrap">
+			<a href="" class="closeLogoutBtn"><span class="btn3">취소</span></a>
+			<a href="/process/logout_process.jsp"><span class="btn3">확인</span></a>
+		</div>
+	</div>
+</div>
 
 
 <!-- jsp include -->
