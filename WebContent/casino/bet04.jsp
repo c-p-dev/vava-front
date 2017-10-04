@@ -22,13 +22,13 @@
 			<div id="jssor_1" style="position:relative;width:1330px;height:270px;overflow:hidden;visibility:hidden;">
 				<div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:1330px;height:270px;overflow:hidden;">
 					<div>
-						<img src="images/casino_visual001.jpg" />
+						<img src="/images/casino_visual001.jpg" />
 					</div>
 					<div>
-						<img src="images/casino_visual001.jpg" />
+						<img src="/images/casino_visual001.jpg" />
 					</div>
 					<div>
-						<img src="images/casino_visual001.jpg" />
+						<img src="/images/casino_visual001.jpg" />
 					</div>
 				</div>
 				<!-- Bullet Navigator -->
@@ -45,7 +45,7 @@
 		<div class="casino_left">
 			<div class="left_search_wrap">
 				<div class="left_search">
-					<input class="input_style05" placeholder="게임찾기"><a href="#"><img src="images/search_icon.jpg"></a>
+					<input class="input_style05" placeholder="게임찾기"><a href="#"><img src="/images/search_icon.jpg"></a>
 				</div>
 			</div>
 			<ul class="l_tabs">
@@ -79,7 +79,7 @@
 								<li>
 									<a href="#" data-gm-provdr = '<%=cur_game.getGame_provider()%>' data-link-dsp = '<%=cur_game.getLink_dsp()%>'>
 										<div class="img casino_board_img">
-											<img src="images/<%=cur_game.getGame_img()%>" style = 'width: 320px; height: 195px;'>
+											<img src="/images/<%=cur_game.getGame_img()%>" style = 'width: 320px; height: 195px;'>
 											<div class="overlay">
 												 <span class="expand">Play now</span>
 											</div>

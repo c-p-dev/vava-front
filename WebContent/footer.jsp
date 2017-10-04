@@ -41,16 +41,16 @@
 			</div>
 			<div class="f_site_partner">
 				<ul>
-					<li><img src="images/partner_1.jpg"></li>
-					<li><img src="images/partner_2.jpg"></li>
-					<li><img src="images/partner_3.jpg"></li>
-					<li><img src="images/partner_4.jpg"></li>
+					<li><img src="/images/partner_1.jpg"></li>
+					<li><img src="/images/partner_2.jpg"></li>
+					<li><img src="/images/partner_3.jpg"></li>
+					<li><img src="/images/partner_4.jpg"></li>
 				</ul>
 				<ul>
-					<li><img src="images/partner_1.jpg"></li>
-					<li><img src="images/partner_2.jpg"></li>
-					<li><img src="images/partner_3.jpg"></li>
-					<li><img src="images/partner_4.jpg"></li>
+					<li><img src="/images/partner_1.jpg"></li>
+					<li><img src="/images/partner_2.jpg"></li>
+					<li><img src="/images/partner_3.jpg"></li>
+					<li><img src="/images/partner_4.jpg"></li>
 				</ul>
 			</div>
 		</div>
