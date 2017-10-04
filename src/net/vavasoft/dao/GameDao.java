@@ -38,6 +38,8 @@ public class GameDao {
             	game_data.setGame_id(rs.getInt("game_id"));
             	game_data.setGame_name(rs.getString("game_name"));
             	game_data.setGame_provider(rs.getInt("game_provider"));
+            	game_data.setGame_type(rs.getInt("game_type"));
+            	game_data.setLink_dsp(rs.getString("link_dsp"));
             	game_data.setGame_img(rs.getString("game_img"));
             	game_data.setDate_added(rs.getString("date_added"));
             	

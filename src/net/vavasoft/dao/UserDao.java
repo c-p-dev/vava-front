@@ -11,7 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import net.arnx.jsonic.JSON;
+import net.vavasoft.bean.MgBettingProfileBean;
+import net.vavasoft.bean.MgPlayerAccountBean;
+import net.vavasoft.bean.MgWithdrawAllBean;
 import net.vavasoft.bean.UserBean;
+import net.vavasoft.controller.TotalEgameController;
 import test.BetConManager_Test2;
 
 import java.text.DateFormat;
@@ -554,6 +558,7 @@ public class UserDao {
 	
 	public int updateUserAfterLogin(String userid,String sessionId){
 		
+		Gson gson				= new Gson();
 		Connection con 			= null;
 		PreparedStatement pstmt = null;
 		int sts = 0;
@@ -572,6 +577,54 @@ public class UserDao {
 			
 	        pstmt.close();
 	        con.close();
+	        
+	        /*--------------------------------------------------------------------
+	        |	Withdraw all money from MG
+	        |-------------------------------------------------------------------*/
+	        ArrayList<MgBettingProfileBean> bet_profls	= new ArrayList<MgBettingProfileBean>();
+			MgPlayerAccountBean mg_user		= new MgPlayerAccountBean();
+			MgBettingProfileBean bet_profl	= new MgBettingProfileBean();
+			UserBean user_data				= this.getUserByUserId(userid);
+			double money					= user_data.getMoney();
+			
+	        TotalEgameController teg_ctrl 	= new TotalEgameController();
+	        MgWithdrawAllBean withdraw_data = new MgWithdrawAllBean();
+	        String mg_username				= Integer.toString(user_data.getSiteid()).concat("_").concat(userid);
+	        
+	        String withdraw_resp			= teg_ctrl.withdrawAll(mg_username);
+	        withdraw_data					= gson.fromJson(withdraw_resp, MgWithdrawAllBean.class);
+	        
+	        switch (withdraw_data.getStatus().getErrorCode()) {
+		        /*	MG Account does not Exist	*/
+		        case 46:
+		        	/*	Create account for MG	*/
+					bet_profl.setCategory("LGBetProfile");
+					bet_profl.setProfileId(1202);
+					
+					bet_profls.add(bet_profl);
+					
+					mg_user.setPreferredAccountNumber(mg_username);
+					mg_user.setFirstName(user_data.getUserid().trim().concat("FNAME"));
+					mg_user.setLastName(user_data.getUserid().trim().concat("LNAME"));
+					mg_user.setEmail("");
+					mg_user.setMobilePrefix(user_data.getCell().substring(1, 3));
+					mg_user.setMobileNumber(user_data.getCell().substring(3));
+					mg_user.setDepositAmount(0);
+					mg_user.setPinCode("newplayer1");
+					mg_user.setIsProgressive(0);
+					mg_user.setBettingProfiles(bet_profls);
+					teg_ctrl.addPlayerAccount(mg_user);
+	        		break;
+	        		
+	        	case 0:
+	        		money 	= money + withdraw_data.getResult().getTransactionAmount();
+	    			
+	        		user_data.setMoney((int)money);
+	    			this.setUserMoney(userid, money);
+	        	default:
+	        		break;
+	        }
+	        
 	        
 		}
 		catch(Exception e) {

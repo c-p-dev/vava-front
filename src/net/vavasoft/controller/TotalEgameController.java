@@ -43,6 +43,9 @@ public class TotalEgameController {
 	public String charset		= "UTF-8";
 	public String content_type	= "application/json";
 	
+	/*	Error Codes	*/
+	public static final int	ACCOUNT_NOT_EXIST	= 46;
+	
 	//-----------------------------------------------------
     //  TotalEgameController constructor
     //      Initialize Object Properties
@@ -141,7 +144,7 @@ public class TotalEgameController {
 		return srv_resp;
 	}
 	
-	public String userPlayCheck(String username, int game_provider) throws MalformedURLException, IOException
+	public String userPlayCheck(String username, int game_provider, String lnk_dsp) throws MalformedURLException, IOException
 	{	
 		/*	Variable Declaration	*/
 		Gson gson					= new Gson();
@@ -160,6 +163,10 @@ public class TotalEgameController {
 		MgDepositBean deposit_data 		= new MgDepositBean();
 		MgPlayerAccountBean edit_data	= new MgPlayerAccountBean();
 		
+		ArrayList<MgBettingProfileBean> bet_profls	= new ArrayList<MgBettingProfileBean>();
+		MgPlayerAccountBean mg_user		= new MgPlayerAccountBean();
+		MgBettingProfileBean bet_profl	= new MgBettingProfileBean();
+				
 		UserBean user_profile	= new UserBean();
 		UserDao user_db			= new UserDao();
 		
@@ -182,6 +189,32 @@ public class TotalEgameController {
 			
 			user_profile.setMoney((int)money);
 			user_db.setUserMoney(username, money);
+		}
+		else {
+			
+			switch (withdraw_data.getStatus().getErrorCode()) {
+				/*	MG Account does not Exist	*/
+				case ACCOUNT_NOT_EXIST:
+					/*	Create account for MG	*/
+					bet_profl.setCategory("LGBetProfile");
+					bet_profl.setProfileId(1202);
+					
+					bet_profls.add(bet_profl);
+					
+					mg_user.setPreferredAccountNumber(mg_username);
+					mg_user.setFirstName(user_profile.getUserid().trim().concat("FNAME"));
+					mg_user.setLastName(user_profile.getUserid().trim().concat("LNAME"));
+					mg_user.setEmail("");
+					mg_user.setMobilePrefix(user_profile.getCell().substring(1, 3));
+					mg_user.setMobileNumber(user_profile.getCell().substring(3));
+					mg_user.setDepositAmount(0);
+					mg_user.setPinCode("newplayer1");
+					mg_user.setIsProgressive(0);
+					mg_user.setBettingProfiles(bet_profls);
+					this.addPlayerAccount(mg_user);
+					break;
+			}
+			
 		}
 		
 		/*--------------------------------------------------------------------
@@ -212,7 +245,9 @@ public class TotalEgameController {
 		        |-------------------------------------------------------------------*/
 				game_url_full	= game_url_base.concat("LoginName=").concat(mg_username);
 				game_url_full	= game_url_full.concat("&Password=").concat(mg_pincode);
-				game_url_full	= game_url_full.concat("&UL=ko-kr&CasinoID=2635&ClientID=7&BetProfileID=MobilePostLogin&StartingTab=Baccarat&BrandID=igaming&altProxy=TNG");
+				game_url_full	= game_url_full.concat("&UL=ko-kr&CasinoID=2635&ClientID=7&BetProfileID=MobilePostLogin&StartingTab=");
+				game_url_full	= game_url_full.concat(lnk_dsp);
+				game_url_full	= game_url_full.concat("Baccarat&BrandID=igaming&altProxy=TNG");
 			}
 		}
 		/*--------------------------------------------------------------------
@@ -220,7 +255,7 @@ public class TotalEgameController {
         |-------------------------------------------------------------------*/
 		else {
 			String session_id	= "ABCDE12345";
-			game_url_full		= ag_ctrl.launchGame(username, session_id);
+			game_url_full		= ag_ctrl.launchGame(username, session_id, lnk_dsp);
 		}
 		
 		return game_url_full;

@@ -45,12 +45,12 @@ public class AsianGamingServlet extends HttpServlet {
 				break;
 			
 			case 3:
-				String srv_resp_3	= ag_ctrl.forwardToAg(username, session_id);
+				String srv_resp_3	= ag_ctrl.forwardToAg(username, session_id, "22");
 				output.print(srv_resp_3);
 				break;
 			
 			case 4:
-				String srv_resp_4	= ag_ctrl.launchGame(username, session_id);
+				String srv_resp_4	= ag_ctrl.launchGame(username, session_id, "22");
 				output.print(srv_resp_4);
 				break;
 				

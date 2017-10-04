@@ -77,7 +77,7 @@
 										GameBean cur_game = game_list.get(i);
 								%>
 								<li>
-									<a href="#" data-gm_provdr = '<%=cur_game.getGame_provider()%>'>
+									<a href="#" data-gm-provdr = '<%=cur_game.getGame_provider()%>' data-link-dsp = '<%=cur_game.getLink_dsp()%>'>
 										<div class="img casino_board_img">
 											<img src="images/<%=cur_game.getGame_img()%>" style = 'width: 320px; height: 195px;'>
 											<div class="overlay">
@@ -167,7 +167,8 @@
 		$(".casino_board_list li a").on("click",function(e) {
 			
 			var session 	= "<%=checkSession%>";
-			var gm_provdr	= $(this).data('gm_provdr');
+			var gm_provdr	= $(this).data('gm-provdr');
+			var lnk_dsp		= $(this).data('link-dsp');
 			
 			if ((!session)
 			|| (false == session)
@@ -177,7 +178,7 @@
 			else {
 				$('#fade_9').popup('show');
 				
-				$.get("TegServlet?method=1&gm_provdr="+gm_provdr, function(srv_resp) {
+				$.get("TegServlet?method=1&gm_provdr="+gm_provdr+"&lnk_dsp="+lnk_dsp, function(srv_resp) {
 					
 					if ("" != srv_resp) {
 						$('#game-pop-frame').attr('src', srv_resp);

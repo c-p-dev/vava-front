@@ -5,7 +5,9 @@ public class GameBean {
 	private int game_id;
 	private String game_name;
 	private int game_provider;
-	private String game_img; 
+	private int game_type;
+	private String link_dsp;
+	private String game_img;
 	private String date_added;
 	
 	public int getGame_id() {
@@ -30,6 +32,22 @@ public class GameBean {
 	
 	public void setGame_provider(int game_provider) {
 		this.game_provider = game_provider;
+	}
+	
+	public int getGame_type() {
+		return game_type;
+	}
+	
+	public void setGame_type(int game_type) {
+		this.game_type = game_type;
+	}
+	
+	public String getLink_dsp() {
+		return link_dsp;
+	}
+	
+	public void setLink_dsp(String link_dsp) {
+		this.link_dsp = link_dsp;
 	}
 	
 	public String getGame_img() {
