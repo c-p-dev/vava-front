@@ -31,8 +31,11 @@ import net.vavasoft.util.StringManipulator;
 
 public class BetConstructController {
 	
+	public static final String PARTNER_ID	= "1";
 	public static final String SHARED_KEY	= "IamIronMan";
 	public static final String HASH_TYPE	= "SHA-256";
+	public static final String GAME_LANG	= "kr";
+	public static final String OPEN_TYPE	= "real";
 	
 	public boolean verifyParamHash(String json_param) throws NoSuchAlgorithmException
 	{
@@ -43,6 +46,28 @@ public class BetConstructController {
 		md.update(md_key.getBytes(), 0, md_key.length());
 		System.out.println(new BigInteger(1,md.digest()).toString(16));
 		return false;
+	}
+	
+	public String launchGame(String username, String game_id)
+	{
+		StringManipulator str_lib	= new StringManipulator();
+		
+		String base_url		= "http:casinoapi.betconstruct.com/authorization.php?";
+		String game_url		= "";
+		String params_str	= "";
+		String token		= str_lib.getSaltString(15);
+		
+		/*--------------------------------------------------------------------
+        |	Build the GET Parameter String
+        |-------------------------------------------------------------------*/
+		params_str			= params_str.concat("gameId=").concat(game_id).concat("&");
+		params_str			= params_str.concat("token=").concat(token).concat("&");
+		params_str			= params_str.concat("partnerId=").concat(PARTNER_ID).concat("&");
+		params_str			= params_str.concat("tableId=").concat("1").concat("&");
+		params_str			= params_str.concat("language=").concat(GAME_LANG).concat("&");
+		params_str			= params_str.concat("openType=").concat(OPEN_TYPE);
+		
+		return game_url.concat(params_str);
 	}
 	
 	public String authentication(String json_input)

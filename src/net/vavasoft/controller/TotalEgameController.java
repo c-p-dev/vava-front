@@ -155,10 +155,11 @@ public class TotalEgameController {
 		String srv_resp			= "";
 		String mg_username		= "";
 		String mg_pincode		= "";
+		String session_id		= "";
 		double money			= 0;
 		
 		AsianGamingController ag_ctrl	= new AsianGamingController();
-		
+		BetConstructController bc_ctrl	= new BetConstructController();
 		MgWithdrawAllBean withdraw_data = new MgWithdrawAllBean();
 		MgDepositBean deposit_data 		= new MgDepositBean();
 		MgPlayerAccountBean edit_data	= new MgPlayerAccountBean();
@@ -253,9 +254,12 @@ public class TotalEgameController {
 		/*--------------------------------------------------------------------
         |	Game is from Asian Gaming
         |-------------------------------------------------------------------*/
+		else if (2 == game_provider) {
+			game_url_full		= ag_ctrl.launchGame(username, lnk_dsp);
+		}
 		else {
-			String session_id	= "ABCDE12345";
-			game_url_full		= ag_ctrl.launchGame(username, session_id, lnk_dsp);
+			session_id			= "ABCDE12345";
+			game_url_full		= bc_ctrl.launchGame(username, lnk_dsp);
 		}
 		
 		return game_url_full;
