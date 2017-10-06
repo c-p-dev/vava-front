@@ -182,7 +182,7 @@ public class TotalEgameController {
 		mg_username		= Integer.toString(user_profile.getSiteid()).concat("_").concat(username);
 		srv_resp		= this.withdrawAll(mg_username);
 		withdraw_data	= gson.fromJson(srv_resp, MgWithdrawAllBean.class);
-		System.out.println(srv_resp);
+		
 		if (0 == withdraw_data.getStatus().getErrorCode()) {
 			
 			money 	= money + withdraw_data.getResult().getTransactionAmount();

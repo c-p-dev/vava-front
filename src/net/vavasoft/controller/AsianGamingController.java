@@ -34,10 +34,11 @@ public class AsianGamingController {
 	public static final String CURRENCY_PARAM	= "KRW";
 	public static final String PROD_ID_PARAM	= "BQ0";
 	public static final String AG_DM_PARAM		= "m.vava21.com";
+	//public static final String AG_DM_PARAM		= "2deceb53.ngrok.io";
 	public static final String MH5_PARAM		= "n";
 	
 	public static final String LANG_EN_PARAM	= "3";
-	public static final String LANG_KR_PARAM	= "5";
+	public static final String LANG_KR_PARAM	= "3";
 
 	public static final String GAME_ALL_PARAM	= "0";	
 	public static final String GAME_AGQ_PARAM	= "1";

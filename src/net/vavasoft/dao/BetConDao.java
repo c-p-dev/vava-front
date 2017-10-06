@@ -24,7 +24,7 @@ public class BetConDao {
 		Connection con 			= null;
 		PreparedStatement pstmt = null;
 		ResultSet rs 			= null;
-		String  query 			= "SELECT TOP 1000 * FROM betcon_user_lst JOIN user_mst ON betcon_user_lst.username = user_mst.userid WHERE player_id = ?" ;
+		String  query 			= "SELECT TOP 1 * FROM betcon_user_lst JOIN user_mst ON betcon_user_lst.username = user_mst.userid WHERE player_id = ?" ;
 		
 		try {
 			Context initContext = new InitialContext();
@@ -41,6 +41,46 @@ public class BetConDao {
             if (rs.next()) {
             	user_data.setUserid(rs.getString("userid"));
             	user_data.setMoney(rs.getInt("money"));
+            	user_data.setNick(rs.getString("nick"));
+            	user_data.setIp(rs.getString("ip"));
+            }
+            
+            rs.close();
+	        pstmt.close();
+	        con.close();
+		}
+		catch(Exception e) {
+			
+		}
+		
+		return user_data;
+	}
+	
+	public BetConUserBean getUserByInitToken(String token)
+	{
+		BetConUserBean user_data	= new BetConUserBean();
+		
+		Connection con 			= null;
+		PreparedStatement pstmt = null;
+		ResultSet rs 			= null;
+		String  query 			= "SELECT TOP 1 * FROM betcon_user_lst  WHERE init_token = ?" ;
+		
+		try {
+			Context initContext = new InitialContext();
+		 	Context envContext 	= (Context)initContext.lookup("java:/comp/env");
+			DataSource ds 		= (DataSource)envContext.lookup("jdbc/vava");
+			
+		    con 				= ds.getConnection();
+		    
+		    pstmt   			= con.prepareStatement(query);
+            pstmt.setString(1, token);
+			
+			rs 					= pstmt.executeQuery();
+            
+            if (rs.next()) {
+            	user_data.setPlayerId(rs.getInt("player_id"));
+            	user_data.setSession_token(rs.getString("session_token"));
+            	user_data.setUsername(rs.getString("username"));
             }
             
             rs.close();

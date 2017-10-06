@@ -1,13 +1,30 @@
 package net.vavasoft.betconstruct;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class WithdrawAndDepositOutput {
 	
+	@SerializedName("HasError")
+    @Expose
 	private boolean hasError;
+	@SerializedName("ErrorId")
+    @Expose
 	private int errorId;
+	@SerializedName("ErrorDescription")
+    @Expose
 	private String errorDescription;
+	@SerializedName("PlayerId")
+    @Expose
 	private int playerId;
+	@SerializedName("Token")
+    @Expose
 	private String token;
-	private double TotalBalance;
+	@SerializedName("TotalBalance")
+    @Expose
+	private double totalBalance;
+	@SerializedName("PlatformTransactionId")
+    @Expose
 	private int platformTransactionId;
 	
 	public boolean isHasError() {
@@ -51,11 +68,11 @@ public class WithdrawAndDepositOutput {
 	}
 	
 	public double getTotalBalance() {
-		return TotalBalance;
+		return totalBalance;
 	}
 	
 	public void setTotalBalance(double totalBalance) {
-		TotalBalance = totalBalance;
+		this.totalBalance = totalBalance;
 	}
 	
 	public int getPlatformTransactionId() {
