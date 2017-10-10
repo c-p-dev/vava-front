@@ -1,12 +1,25 @@
 package net.vavasoft.betconstruct;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class RollbackOutput {
 	
+	@SerializedName("HasError")
+    @Expose
 	private boolean hasError;
+	@SerializedName("ErrorId")
+    @Expose
 	private int errorId;
+	@SerializedName("ErrorDescription")
+    @Expose
 	private String errorDescription;
-	private double TotalBalance;
-	private String Token;
+	@SerializedName("TotalBalance")
+    @Expose
+	private double totalBalance;
+	@SerializedName("Token")
+    @Expose
+	private String token;
 	
 	public boolean isHasError() {
 		return hasError;
@@ -33,19 +46,19 @@ public class RollbackOutput {
 	}
 	
 	public double getTotalBalance() {
-		return TotalBalance;
+		return totalBalance;
 	}
 	
 	public void setTotalBalance(double totalBalance) {
-		TotalBalance = totalBalance;
+		this.totalBalance = totalBalance;
 	}
 	
 	public String getToken() {
-		return Token;
+		return token;
 	}
 	
 	public void setToken(String token) {
-		Token = token;
+		this.token = token;
 	}
 	
 }

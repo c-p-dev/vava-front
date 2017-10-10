@@ -1,18 +1,45 @@
 package net.vavasoft.betconstruct;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class WithdrawAndDeposit {
 	
+	@SerializedName("OperatorId")
+    @Expose
 	private int operatorId;
+	@SerializedName("PlayerId")
+    @Expose
 	private int playerId;
+	@SerializedName("Token")
+    @Expose
 	private String token;
+	@SerializedName("WithdrawAmount")
+    @Expose
 	private double withdrawAmount;
+	@SerializedName("DepositAmount")
+    @Expose
 	private double depositAmount;
+	@SerializedName("Currency")
+    @Expose
 	private String currency;
+	@SerializedName("GameId")
+    @Expose
 	private int gameId;
+	@SerializedName("RGSTransactionId")
+    @Expose
 	private int rgsTransactionId;
+	@SerializedName("RGSRelatedTransactionId")
+    @Expose
 	private int rgsRelatedTransactionId;
+	@SerializedName("TypeId")
+    @Expose
 	private int typeId;
+	@SerializedName("BonusDefId")
+    @Expose
 	private int bonusDefId;
+	@SerializedName("PublicKey")
+    @Expose
 	private String publicKey;
 	
 	public int getOperatorId() {

@@ -1,11 +1,26 @@
 package net.vavasoft.betconstruct;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class Rollback {
+	@SerializedName("OperatorId")
+    @Expose
 	private int operatorId;
+	@SerializedName("PlayerId")
+    @Expose
 	private int playerId;
+	@SerializedName("Token")
+    @Expose
 	private String token;
+	@SerializedName("RGSTransactionId")
+    @Expose
 	private int rgsTransactionId;
+	@SerializedName("GameId")
+    @Expose
 	private int gameId;
+	@SerializedName("PublicKey")
+    @Expose
 	private String publicKey;
 	
 	public int getOperatorId() {

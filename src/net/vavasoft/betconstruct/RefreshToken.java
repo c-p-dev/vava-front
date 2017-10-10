@@ -1,9 +1,18 @@
 package net.vavasoft.betconstruct;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class RefreshToken {
-	
+
+	@SerializedName("OperatorId")
+    @Expose
 	private int operatorId;
+	@SerializedName("Token")
+    @Expose
 	private String token;
+	@SerializedName("PublicKey")
+    @Expose
 	private String publicKey;
 	
 	public int getOperatorId() {

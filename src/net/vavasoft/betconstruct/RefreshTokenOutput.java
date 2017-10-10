@@ -1,10 +1,21 @@
 package net.vavasoft.betconstruct;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class RefreshTokenOutput {
 	
+	@SerializedName("HasError")
+    @Expose
 	private boolean hasError;
+	@SerializedName("ErrorID")
+    @Expose
 	private int errorId;
+	@SerializedName("ErrorDescription")
+    @Expose
 	private String errorDescription;
+	@SerializedName("Token")
+    @Expose
 	private String token;
 	
 	public boolean isHasError() {

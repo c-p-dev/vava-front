@@ -1,15 +1,36 @@
 package net.vavasoft.betconstruct;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class GetBalanceOutput {
 	
+	@SerializedName("HasError")
+    @Expose
 	private boolean has_error;
+	@SerializedName("ErrorId")
+    @Expose
 	private int error_id;
+	@SerializedName("ErrorDescription")
+    @Expose
 	private String error_description;
+	@SerializedName("PlayerId")
+    @Expose
 	private int player_id;
+	@SerializedName("TotalBalance")
+    @Expose
 	private double total_balance;
+	@SerializedName("BonusWin")
+    @Expose
 	private double bonus_win;
+	@SerializedName("BonusMoney")
+    @Expose
 	private double bonus_money;
+	@SerializedName("FrozenMoney")
+    @Expose
 	private double frozen_money;
+	@SerializedName("Token")
+    @Expose
 	private String token;
 	
 	public boolean isHas_error() {

@@ -13,8 +13,11 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import org.apache.log4j.Logger;
+
 import net.vavasoft.bean.BcTransactionLogBean;
 import net.vavasoft.bean.GameBean;
+import test.BetConManager_Test2;
 
 public class BcTransactionLogDao {
 	
@@ -25,7 +28,7 @@ public class BcTransactionLogDao {
 		Connection con 			= null;
 		PreparedStatement pstmt = null;
 		ResultSet rs 			= null;
-		String  query 			= "SELECT TOP 1000 * FROM bc_transaction_log WHERE player_id = ?" ;
+		String  query 			= "SELECT TOP 1 * FROM bc_transaction_log WHERE player_id = ?" ;
 		
 		BcTransactionLogBean trans_data	= new BcTransactionLogBean();
 		
@@ -65,7 +68,7 @@ public class BcTransactionLogDao {
 		Connection con 			= null;
 		PreparedStatement pstmt = null;
 		ResultSet rs 			= null;
-		String  query 			= "SELECT TOP 1000 * FROM bc_transaction_log WHERE rgs_id = ?" ;
+		String  query 			= "SELECT TOP 1 * FROM bc_transaction_log WHERE rgs_id = ?" ;
 		
 		BcTransactionLogBean trans_data	= new BcTransactionLogBean();
 		
@@ -84,8 +87,14 @@ public class BcTransactionLogDao {
             if (rs.next()) {
             	
             	trans_data.setTransaction_id(rs.getInt("transaction_id"));
+            	trans_data.setPlayerId(rs.getInt("player_id"));
+            	trans_data.setRgs_id(rs.getInt("rgs_id"));
+            	trans_data.setRgs_related_id(rs.getInt("rgs_related_id"));
+            	trans_data.setToken(rs.getString("token"));
             	trans_data.setWithdraw_amount(rs.getDouble("withdraw_amount"));
             	trans_data.setDeposit_amount(rs.getDouble("deposit_amount"));
+            	trans_data.setTransaction_type(rs.getInt("transaction_type"));
+            	trans_data.setCurrency(rs.getString("currency"));
             	trans_data.setTransaction_type(rs.getInt("transaction_type"));
             	trans_data.setStatus(rs.getInt("status"));
             }
@@ -108,7 +117,7 @@ public class BcTransactionLogDao {
 		PreparedStatement pstmt = null;
 		int result 				= 0;
 		String query 			= "INSERT INTO bc_transaction_log "
-				+ "(player_id, rgs_id, rgs_related_id, token, currency, withdraw_amount, deposit_amount, transaction_type, date_added, status"
+				+ "(player_id, rgs_id, rgs_related_id, token, currency, withdraw_amount, deposit_amount, transaction_type, date_added, status) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		try {
@@ -136,7 +145,8 @@ public class BcTransactionLogDao {
 	        con.close();
 		}
 		catch(Exception e) {
-			
+			e.printStackTrace();
+	  		return 0;
 		}
 		
 		return result;
@@ -148,9 +158,9 @@ public class BcTransactionLogDao {
 		Connection con 			= null;
 		PreparedStatement pstmt = null;
 		int result 				= 0;
-		String query 			= "UPDATE bc_transaction_log SET"
-				+ "(player_id = ?, rgs_id = ?, rgs_related_id = ?, token = ?, currency = ?,"
-				+ "withdraw_amount = ?, deposit_amount = ?, transaction_type = ?, date_added = ?, status = ?"
+		String query 			= "UPDATE bc_transaction_log SET "
+				+ "player_id = ?, rgs_id = ?, rgs_related_id = ?, token = ?, currency = ?, "
+				+ "withdraw_amount = ?, deposit_amount = ?, transaction_type = ?, date_added = ?, status = ? "
 				+ "WHERE transaction_id = ?";
 		
 		try {
@@ -179,7 +189,8 @@ public class BcTransactionLogDao {
 	        con.close();
 		}
 		catch(Exception e) {
-			
+			e.printStackTrace();
+	  		return 0;
 		}
 		
 		return result;

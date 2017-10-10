@@ -254,6 +254,21 @@
 
 		$('select').niceSelect();
 
+		$.validator.addMethod("checkReferrer", function(value, element) {
+	    	var x = $.ajax({
+		        url:'${baseUrl}process/referrence_checker.jsp',
+		        async: false,
+		        type: 'post',
+		        data: {
+		          	referrer: function() {
+		            	return $( "#referrer" ).val();
+		          	}
+		        },
+	    	}).responseText;
+	    	if(x.trim() =="true") return true;
+	    	else return false;
+	    });
+
 		$("#form1").validate({
 			// debug: true,
 	  		errorClass: 'form1-invalid',
@@ -333,16 +348,7 @@
 				},
 				referrer :{
 			      	required:true,
-					remote: {
-						url: "${baseUrl}process/referrence_checker.jsp",
-						async: false,
-				        type: "post",
-				       	data: {
-				          	referrer: function() {
-				            	return $( "#referrer" ).val();
-				          	}
-				        },
-			      	},
+			  		checkReferrer:true,
 				},
 				recommend :{
 					required:true,
@@ -403,7 +409,8 @@
 				},
 				referrer :{
 					required:"Referrer is required",
-					remote: "User Id doesn't Exists"
+					// remote: "User Id doesn't Exists"
+					checkReferrer: "User Id doesn't Exists",
 				},
 				nick :{
 					required:"Nick name is required",
@@ -413,7 +420,7 @@
 			errorPlacement: function(error, element) {
 				
 				var error_label = element.attr("name");
-				console.log(error_label);
+				// console.log(error_label);
 			    if (element.attr("name") == error_label ){
 			    	$("#"+error_label+"-warn").html(error).show();
 			    	

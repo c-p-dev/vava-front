@@ -50,7 +50,7 @@ public class AsianGamingServlet extends HttpServlet {
 				break;
 			
 			case 4:
-				String srv_resp_4	= ag_ctrl.launchGame(username, session_id, "22");
+				String srv_resp_4	= ag_ctrl.launchGame(username, "22");
 				output.print(srv_resp_4);
 				break;
 				

@@ -16,6 +16,7 @@ import javax.crypto.spec.SecretKeySpec;
 import net.vavasoft.bean.UserBean;
 import net.vavasoft.dao.UserDao;
 import net.vavasoft.util.DesEncrypter;
+import net.vavasoft.util.StringManipulator;
 
 public class AsianGamingController {
 	
@@ -34,10 +35,11 @@ public class AsianGamingController {
 	public static final String CURRENCY_PARAM	= "KRW";
 	public static final String PROD_ID_PARAM	= "BQ0";
 	public static final String AG_DM_PARAM		= "m.vava21.com";
+	//public static final String AG_DM_PARAM		= "2deceb53.ngrok.io";
 	public static final String MH5_PARAM		= "n";
 	
 	public static final String LANG_EN_PARAM	= "3";
-	public static final String LANG_KR_PARAM	= "5";
+	public static final String LANG_KR_PARAM	= "3";
 
 	public static final String GAME_ALL_PARAM	= "0";	
 	public static final String GAME_AGQ_PARAM	= "1";
@@ -133,7 +135,7 @@ public class AsianGamingController {
 		params_str			= params_str.concat("loginname=").concat(SITE_ID).concat("_").concat(user_id).concat(DES_PARAM_SUFX);
 		params_str			= params_str.concat("password=").concat(SITE_ID).concat("_").concat(user_id).concat(DES_PARAM_SUFX);
 		params_str			= params_str.concat("dm=").concat(AG_DM_PARAM).concat(DES_PARAM_SUFX);
-		params_str			= params_str.concat("sid=").concat(CAGENT_PARAM).concat("0123456789123").concat(DES_PARAM_SUFX);
+		params_str			= params_str.concat("sid=").concat(CAGENT_PARAM).concat(session_id).concat(DES_PARAM_SUFX);
 		params_str			= params_str.concat("mh5=").concat(MH5_PARAM).concat(DES_PARAM_SUFX);
 		params_str			= params_str.concat("actype=").concat(ACTYPE_PARAM).concat(DES_PARAM_SUFX);
 		params_str			= params_str.concat("lang=").concat(LANG_KR_PARAM).concat(DES_PARAM_SUFX);
@@ -153,9 +155,12 @@ public class AsianGamingController {
 		return ag_game_url;
 	}
 	
-	public String launchGame(String user_id, String session_id, String lnk_dsp) throws MalformedURLException, IOException
+	public String launchGame(String user_id, String lnk_dsp) throws MalformedURLException, IOException
 	{
-		String ag_create_url	= checkCreateAccount(session_id);
+		StringManipulator str_lib	= new StringManipulator();
+		
+		String session_id		= str_lib.getSaltString(14);
+		String ag_create_url	= checkCreateAccount(user_id);
 		String ag_sess_url		= createAgSession(user_id, session_id);
 		String ag_game_url		= forwardToAg(user_id, session_id, lnk_dsp);
 		

@@ -128,6 +128,8 @@ public class ChargeDao {
 			System.out.println(e);
 			e.printStackTrace();
 		} 
+		
+		System.out.println(list);
 	  	return list;
 		
 	}
