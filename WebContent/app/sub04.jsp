@@ -19,45 +19,7 @@
 				<jsp:include page="exchange_tab.jsp" />
 			</div>
 			<div id="tab3" class="tab_content">
-				<ul class="smk_accordion">
-					<li>
-						<div class="accordion_title"><h3>포인트전환</h3></div>
-						<div class="acc_content">
-							<div class="acc_content_in_2">
-								<div class="blue_wrap">
-									<div class="float_inline">
-										<div class="point_box">
-											<div class="cash_in">
-												<div class="cash_1"><p style="float:left">보유포인트</p><p style="float:right" class="font_002">10,000,000</p></div>
-											</div>
-											<div class="cash_in">
-												<div class="cash_6">
-													<input class="input_style03"  placeholder="입금자명">		
-												</div>
-												<div class="cash_3">
-													<a href="#"><span class="btn5">정정</span></a>	
-												</div>	
-												
-											</div>
-											<div class="cash_in">
-												<div class="cash_7">
-													 최소 전환 가능 포인트는 1,000 포인트입니다.
-												</div>
-											</div>
-											<div class="cash_in">
-												<a href="#"><span class="btn3c">전환신청</span></a>	
-											</div>
-
-										</div>
-										<div class="point_banner">
-											배너배너배너
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</li>
-				</ul>
+				<jsp:include page="switch_points.jsp" />
 			</div>
 			<div id="tab4" class="tab_content">
 				<ul class="smk_accordion">
