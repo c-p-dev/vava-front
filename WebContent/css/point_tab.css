@@ -1,0 +1,98 @@
+/*global css*/
+@font-face {
+    font-family: passfont;
+    src: url(../css/font/ArialMT.woff);
+}
+.password{
+	font-family: passfont;
+	font-size: 14px;
+}
+
+
+/*point tab css*/
+.pika-single {
+    background: #303030!important;
+    border: none!important; 
+}
+.pika-row{
+	background: #303030!important;
+}
+.pika-label {
+    background-color: #303030!important;
+}
+.pika-prev{
+	background-image: url(../images/arrow_left.png)!important;
+}
+.pika-next {
+	background-image: url(../images/arrow_right.png)!important;
+}
+.pika-prev, .pika-next {
+	background-size: auto!important;
+}
+.pika-button {
+    background: none!important;
+    width: 28px!important;
+	height: 28px!important;
+    display: inline-block!important;
+    width: 28px!important;
+    height: 28px!important;
+    line-height: 0px!important;
+    color: #a3a3a3!important;
+    text-align: center!important;
+}
+.is-selected .pika-button, .has-event .pika-button {
+    color: #fff!important;
+    font-weight: bold;
+    background: #33aaff!important;
+    box-shadow: inset 0 1px 3px #178fe5;
+    border-radius: 0px!important;
+}	
+.pika-button:hover, .pika-row.pick-whole-week:hover .pika-button {
+    border-radius: 0px!important;
+    background: #3d3d3d!important;
+}
+.pika-lendar {
+    width: 204px!important;
+}
+.pika-table {
+    background-color: #242424!important;
+    border-collapse: separate!important;
+	border-spacing: 1px!important;
+}
+.car_table{
+	min-height: 281px!important;
+}
+.showDatePkr,.closePikaday{
+	cursor:pointer;
+}
+
+.smk_accordion .acc_section.acc_active > .acc_head{
+	background: #222727 url(/images/accordion-opened.png) no-repeat 1300px center!important;	
+}
+.smk_accordion .acc_section .acc_head{
+	background: #222727  url(/images/accordion-closed.png) no-repeat 1300px center!important;
+}
+.dataTables_wrapper .dataTables_paginate .ellipsis {
+	color:white;
+}
+
+/*charge tab*/
+
+.add-money{
+	cursor: pointer;
+}
+.error_cash_in{
+	margin:0px;
+	display: none;
+}
+input[type="text"]:-ms-input-placeholder {
+text-align: left;
+}
+input[type="text"]::-webkit-input-placeholder {
+    text-align: left;
+}
+input::-moz-placeholder {
+ text-align: left;
+}	
+
+
