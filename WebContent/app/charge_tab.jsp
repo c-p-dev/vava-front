@@ -2,25 +2,6 @@
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script><!-- switch -->
 <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"><!-- gateway -->
 <%@page import="net.vavasoft.dao.GameDao, java.text.DecimalFormat, java.util.*,net.vavasoft.dao.UserDao,net.vavasoft.bean.UserBean;"%>
-<style>
-	.add-money{
-		cursor: pointer;
-	}
-	.error_cash_in{
-		margin:0px;
-		display: none;
-	}
-	input[type="text"]:-ms-input-placeholder {
-    text-align: left;
-	}
-	input[type="text"]::-webkit-input-placeholder {
-	    text-align: left;
-	}
-	input::-moz-placeholder {
-	 text-align: left;
-	}	
-
-</style>
 <%
 	DecimalFormat dfrmt				= new DecimalFormat("#,###,###,###,###.00");
 	boolean checkSession = false;

@@ -41,6 +41,7 @@
 <script type="text/javascript" src="/js/additional-methods.js"></script>
 <script type="text/javascript" src="/js/jquery.serializejson.js"></script><!-- json serializer -->
 
+
 <link href="/css/nice-select.css" rel="stylesheet" type="text/css"><!-- select -->
 <script type="text/javascript" src="/js/jquery.nice-select.js"></script><!-- select -->
 
@@ -51,8 +52,31 @@
 <link href="/css/game.css" rel="stylesheet" type="text/css"><!-- game -->
 <link href="/css/gateway.css" rel="stylesheet" type="text/css"><!-- gateway -->
 <link href="/css/common2.css" rel="stylesheet" type="text/css"><!--공통-->
+<link href="/css/point_tab.css" rel="stylesheet" type="text/css"><!--공통-->
 
 </head>
+<style>
+	#toast-container.toast-top-full-width > div, #toast-container.toast-bottom-full-width > div {
+		width: 30%!important;
+		text-align: center;
+	}
+	#toast-container > .toast-success{
+		background-image :none!important;
+
+	}
+	.toast-success {
+	    background-color: #191a1b;
+	}
+	.toast-title {
+    	font-weight: bold;
+    	font-size: 18px;
+	}
+	.toast-message {
+    	font-size: 16px;
+	}
+
+</style>
+
 <body id="myAnchor">
 
 <!-- top버튼 -->
@@ -73,8 +97,9 @@ $(window).scroll(function(event){
 	        scrollTop: $( $(this).attr('href') ).offset().top
 	    }, 1000);
 	});
-	
+
 	$(document).ready(function(){
+
 		$('#loginModal').popup({
 	      	transition: 'all 0.3s',
 	      	scrolllock: true,
@@ -108,7 +133,17 @@ $(window).scroll(function(event){
 		$(".closeloginModalBtn").on("click",function(e){
 			e.preventDefault();
 			$("#loginModal").popup("hide");
-		})
+		});
+
+		$("#passwd-header-input").on("focus",function(){
+			$(this).addClass("password");
+		});
+
+		$("#passwd-header-input").on("blur",function(){
+			if($(this).val() == ""){
+				$(this).removeClass("password");	
+			}
+		});
 
 	});
 
@@ -123,9 +158,8 @@ $(window).scroll(function(event){
 				$('#login_header input').css("border-color","#505455");
 				console.log(data);
 				if(data == 0 ){
-					// $("#login-header-warn").html("Login Successful").show();
+					$("#login-header-warn").html("Login Successful").show();
 					$("#loginModal").popup("show");
-					
 				}else if(data == 1 ){
 					$("#login-header-warn").html("Incorrect Password").show();
 					$("#passwd-header-input").focus();
@@ -269,7 +303,7 @@ $(window).scroll(function(event){
 						<form id="login_header">
 							<li><input id="userid-header-input" type="text" class="input_style01" name="userid" placeholder="ID"><img class="login-img-validator" id="userid-img" src="images/input_mark.png"></li>
 							<!-- input_blue 인풋활성화 -->
-		                    <li><input id="passwd-header-input" type="password" class="input_style01 " name="passwd" placeholder="PW"><img class="login-img-validator" id="passwd-img" src="images/input_mark.png"></li>
+		                    <li><input id="passwd-header-input" type="password" class="input_style01" name="passwd" placeholder="PW"><img class="login-img-validator" id="passwd-img" src="images/input_mark.png"></li>
 		                     <li><div class="input_warning login-warn" id="login-header-warn" >조건에 맞는 아이디를 입력해주세요.</div></li>
 		                    <!-- input_red 인풋조건미충족 -->
 		                    <li>
