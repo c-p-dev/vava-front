@@ -5,7 +5,7 @@
 <%
 	String url = request.getRequestURL().toString(); 
 	String baseUrl = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
-	DecimalFormat dfrmt				= new DecimalFormat("#,###,###,###,###.00");
+	DecimalFormat dfrmt				= new DecimalFormat("#,###,###,###,###");
 %>
 <base href="<%=baseUrl%>"/>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
