@@ -176,6 +176,7 @@
 				$('#fade_3').popup('show');
 			}
 			else {
+				$('.hdr-money-row').hide();
 				$('#fade_9').popup('show');
 				
 				$.get("TegServlet?method=1&gm_provdr="+gm_provdr+"&lnk_dsp="+lnk_dsp, function(srv_resp) {

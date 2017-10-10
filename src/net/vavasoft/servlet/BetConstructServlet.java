@@ -42,7 +42,7 @@ public class BetConstructServlet extends HttpServlet {
 			
 			case 2:
 				try {
-					boolean srv_resp_2	= bc_ctrl.verifyParamHash(reader.readLine());
+					boolean srv_resp_2	= bc_ctrl.verifyParamHash(reader.readLine(), "ABC");
 				} catch (NoSuchAlgorithmException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -83,7 +83,8 @@ public class BetConstructServlet extends HttpServlet {
 			
 			case 2:
 				try {
-					boolean srv_resp_2	= bc_ctrl.verifyParamHash(reader.readLine());
+					boolean srv_resp_2	= bc_ctrl.verifyParamHash(reader.readLine(), "ABC");
+					output.print(srv_resp_2);
 				} catch (NoSuchAlgorithmException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -92,30 +93,37 @@ public class BetConstructServlet extends HttpServlet {
 			
 			case 3:
 				String srv_resp_3	= bc_ctrl.getBalance(reader.readLine());
+				output.print(srv_resp_3);
 				break;
 			
 			case 4:
 				String srv_resp_4	= bc_ctrl.withdrawAndDeposit(reader.readLine(), 1);
+				output.print(srv_resp_4);
 				break;
 			
 			case 5:
 				String srv_resp_5	= bc_ctrl.withdrawAndDeposit(reader.readLine(), 2);
+				output.print(srv_resp_5);
 				break;
 			
 			case 6:
 				String srv_resp_6	= bc_ctrl.withdrawAndDeposit(reader.readLine(), 3);
+				output.print(srv_resp_6);
 				break;
 			
 			case 7:
 				String srv_resp_7	= bc_ctrl.rollback(reader.readLine());
+				output.print(srv_resp_7);
 				break;
 				
 			case 8:
 				String srv_resp_8	= bc_ctrl.refreshToken(reader.readLine());
+				output.print(srv_resp_8);
 				break;
 				
 			case 0:
 				String srv_resp_0	= bc_ctrl.authentication(reader.readLine());
+				output.print(srv_resp_0);
 				break;
 				
 			default:

@@ -4,12 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import net.vavasoft.bean.BcTransactionLogBean;
 import net.vavasoft.bean.BetConUserBean;
 import net.vavasoft.bean.GameBean;
 import net.vavasoft.bean.UserBean;
@@ -56,14 +58,14 @@ public class BetConDao {
 		return user_data;
 	}
 	
-	public BetConUserBean getUserByInitToken(String token)
+	public BetConUserBean getUserBySessionToken(String token)
 	{
 		BetConUserBean user_data	= new BetConUserBean();
 		
 		Connection con 			= null;
 		PreparedStatement pstmt = null;
 		ResultSet rs 			= null;
-		String  query 			= "SELECT TOP 1 * FROM betcon_user_lst  WHERE init_token = ?" ;
+		String  query 			= "SELECT TOP 1 * FROM betcon_user_lst  WHERE session_token = ?" ;
 		
 		try {
 			Context initContext = new InitialContext();
@@ -92,5 +94,78 @@ public class BetConDao {
 		}
 		
 		return user_data;
+	}
+	
+	public BetConUserBean getUserByUsername(String username)
+	{
+		BetConUserBean user_data	= new BetConUserBean();
+		
+		Connection con 			= null;
+		PreparedStatement pstmt = null;
+		ResultSet rs 			= null;
+		String  query 			= "SELECT TOP 1 * FROM betcon_user_lst WHERE username = ?" ;
+		
+		try {
+			Context initContext = new InitialContext();
+		 	Context envContext 	= (Context)initContext.lookup("java:/comp/env");
+			DataSource ds 		= (DataSource)envContext.lookup("jdbc/vava");
+			
+		    con 				= ds.getConnection();
+		    
+		    pstmt   			= con.prepareStatement(query);
+            pstmt.setString(1, username);
+			
+			rs 					= pstmt.executeQuery();
+            
+            if (rs.next()) {
+            	user_data.setPlayerId(rs.getInt("player_id"));
+            	user_data.setInit_token(rs.getString("init_token"));
+            	user_data.setSession_token(rs.getString("session_token"));
+            	user_data.setUsername(rs.getString("username"));
+            }
+            
+            rs.close();
+	        pstmt.close();
+	        con.close();
+		}
+		catch(Exception e) {
+			
+		}
+		
+		return user_data;
+	}
+	
+	public int updateBcSessionByUsername(String username, String token) 
+	{
+		
+		Connection con 			= null;
+		PreparedStatement pstmt = null;
+		int result 				= 0;
+		String query 			= "UPDATE betcon_user_lst SET "
+				+ "session_token = ? "
+				+ "WHERE username = ?";
+		
+		try {
+			Context initContext = new InitialContext();
+		 	Context envContext 	= (Context)initContext.lookup("java:/comp/env");
+			DataSource ds 		= (DataSource)envContext.lookup("jdbc/vava");
+			
+		    con 				= ds.getConnection();
+		    
+		    pstmt   			= con.prepareStatement(query);
+            pstmt.setString(1, token);
+            pstmt.setString(2, username);
+			
+            result	= pstmt.executeUpdate();
+            
+	        pstmt.close();
+	        con.close();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+	  		return 0;
+		}
+		
+		return result;
 	}
 }
