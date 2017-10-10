@@ -239,8 +239,8 @@ $(window).scroll(function(event){
         	if(checkSession){
         %>
 		<ul class="util_right">
-			<li class = 'hdr-money-row'>머니 <span class="util_money money_dsp"><%=dfrmt.format(currentUser.getMoney())%></span></li>
-            <li>포인트 <span class="util_point"><%=currentUser.getPoint()%></span></li>
+        <li class = 'hdr-money-row'>머니 <span class="util_money money_dsp"><%=dfrmt.format(currentUser.getMoney())%></span></li>
+        <li>포인트 <span class="util_point point_dsp"><%=dfrmt.format(currentUser.getPoint())%></span></li>
             <li>
 				<span class="popover-wrapper right">
 					<a href="#" data-role="popover" data-target="example-popover-2"><img src="/images/select_mark.png"></a>

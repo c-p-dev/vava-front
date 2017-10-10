@@ -22,7 +22,7 @@ public class UserBean {
 	private boolean isValid;
 	private int loginStatus; //0  success //1 wrong passwrod // 2 no account 
 	private String cert;
-	
+  
 	public int getLoginStatus() {
 		return loginStatus;
 	}

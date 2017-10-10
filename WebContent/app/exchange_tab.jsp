@@ -252,11 +252,11 @@ $(".dt_div").on("click",function(){
 
 	$('.acc_content_in_2').on('submit', '#formwithdraw', function(){
 		console.log('aww');
-		validateForm();
+		validateForm1();
 		return false;
 	});
 	
-	function validateForm()
+	function validateForm1()
 	{	
 		var numbers = /^[0-9]+$/;
 		var withdraw = document.formwithdraw.withdraw.value;
@@ -281,7 +281,8 @@ $(".dt_div").on("click",function(){
 	    	else {
 	    		console.log(withdraw);
 	    	var withdraw = {withdraw : withdraw};
-	    	submitForm(withdraw);
+	    	submitForm1(withdraw);
+	    	console.log('pepe');
 	      	return true;
 	    	}
 	    }
@@ -296,7 +297,7 @@ $(".dt_div").on("click",function(){
 	    
 	}
 	
-function submitForm(withdraw){
+function submitForm1(withdraw){
 	$.ajax({
 		url : 'process/application/exchange/withdrawprocess.jsp',
 		data : withdraw,

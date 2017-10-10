@@ -709,6 +709,98 @@ public class UserDao {
 	}
 	
 	
+	public boolean switchpoints(UserBean trans_data,int money,int point,int points) throws SQLException{
+
+		PreparedStatement pstmt = null;
+		Connection con = null;
+		Statement stmt = null;
+		int row = 0;
+		boolean result = false;
+		Date date = new Date();
+	
+		String  query = "INSERT INTO RT01.dbo.account_lst (userid,siteid,job,jobid,title,moneypoint,money,regdate,remain_money,remain_point,adminid) "+
+				" VALUES (?,?,'POINT2MONEY','','','P',?,?,?,?,'')," + 
+				"(?,?,'POINT2MONEY','','','M',?,?,?,?,'')";
+		try{
+		
+			Context initContext = new InitialContext();
+		 	Context envContext = (Context)initContext.lookup("java:/comp/env");
+			DataSource ds = (DataSource)envContext.lookup("jdbc/vava");
+			
+		    con = ds.getConnection();		
+		    pstmt = con.prepareStatement(query);
+		    pstmt.setString(1,trans_data.getUserid());
+		    pstmt.setInt(2,trans_data.getSiteid());
+		    pstmt.setInt(3,(points*-1));
+		    pstmt.setString(4,sdf.format(date));
+		    pstmt.setInt(5,(money+points));
+		    pstmt.setInt(6,(point-points));
+		    pstmt.setString(7,trans_data.getUserid());
+		    pstmt.setInt(8,trans_data.getSiteid());
+		    pstmt.setInt(9,points);
+		    pstmt.setString(10,sdf.format(date));
+		    pstmt.setInt(11,(money+points));
+		    pstmt.setInt(12,(point-points));
+			row = pstmt.executeUpdate(); 
+			logger.debug(query);
+			logger.debug(row);
+			pstmt.close();
+			con.close();
+			logger.debug(row);
+			System.out.println("pasok sa app");
+	  	}catch(Exception e){
+	  		logger.debug(query);
+	  		e.printStackTrace();
+	  
+	  	}finally{
+	  		if(stmt!=null) stmt.close();
+	  		if(con!=null) con.close();
+	  	}
+		
+		return result;
+			
+	}
+	
+	public boolean userpoints(UserBean trans_data,int money,int point,int points) throws SQLException{
+
+		PreparedStatement pstmt = null;
+		Connection con = null;
+		Statement stmt = null;
+		int row = 0;
+		boolean result = false;
+		Date date = new Date();
+	
+		String  query = "UPDATE RT01.dbo.user_mst SET money = ?, point = ? where  userid =?";
+		try{
+		
+			Context initContext = new InitialContext();
+		 	Context envContext = (Context)initContext.lookup("java:/comp/env");
+			DataSource ds = (DataSource)envContext.lookup("jdbc/vava");
+			
+		    con = ds.getConnection();		
+		    pstmt = con.prepareStatement(query);
+		    pstmt.setInt(1,(money+points));
+		    pstmt.setInt(2,(point-points));
+		    pstmt.setString(3,trans_data.getUserid());
+			row = pstmt.executeUpdate(); 
+			logger.debug(query);
+			logger.debug(row);
+			pstmt.close();
+			con.close();
+			logger.debug(row);
+			
+	  	}catch(Exception e){
+	  		logger.debug(query);
+	  		e.printStackTrace();
+	  
+	  	}finally{
+	  		if(stmt!=null) stmt.close();
+	  		if(con!=null) con.close();
+	  	}
+		
+		return result;
+			
+	}
 	
 	
 }
