@@ -7,5 +7,4 @@
 	boolean res  = ud.checkUserId(uBean);
 	System.out.println(res);
 	out.println(res);
-	
 %>
