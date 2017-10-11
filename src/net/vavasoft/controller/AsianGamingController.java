@@ -32,7 +32,7 @@ public class AsianGamingController {
 	public static final String CAGENT_PARAM		= "BQ0_AGIN";
 	public static final String METHOD_PARAM		= "lg";
 	public static final String ACTYPE_PARAM		= "1";
-	public static final String CURRENCY_PARAM	= "KRW";
+	public static final String CURRENCY_PARAM	= "CNY";
 	public static final String PROD_ID_PARAM	= "BQ0";
 	public static final String AG_DM_PARAM		= "m.vava21.com";
 	//public static final String AG_DM_PARAM		= "2deceb53.ngrok.io";

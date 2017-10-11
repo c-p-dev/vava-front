@@ -5,7 +5,7 @@ public class BetConUserBean {
 	private int playerId;
 	private String username;
 	private String session_token;
-	private String init_token;
+	private String date_added;
 	
 	public int getPlayerId() {
 		return playerId;
@@ -30,13 +30,13 @@ public class BetConUserBean {
 	public void setSession_token(String session_token) {
 		this.session_token = session_token;
 	}
-	
-	public String getInit_token() {
-		return init_token;
+
+	public String getDate_added() {
+		return date_added;
 	}
-	
-	public void setInit_token(String init_token) {
-		this.init_token = init_token;
+
+	public void setDate_added(String date_added) {
+		this.date_added = date_added;
 	}
 	
 }

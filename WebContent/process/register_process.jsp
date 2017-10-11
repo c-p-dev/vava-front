@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="
 	net.vavasoft.bean.UserBean,
+	net.vavasoft.bean.UserBean,
+	net.vavasoft.bean.BetConUserBean,
 	net.vavasoft.dao.UserDao,
+	net.vavasoft.dao.BetConDao,
 	java.sql.SQLException,
 	java.util.ArrayList,
 	java.util.List,
@@ -14,12 +17,16 @@
 	net.vavasoft.bean.SmsAuthBean,
 	net.vavasoft.dao.SmsDao;" %>
 <%
-	UserBean post_ub = new UserBean();
-	JoinCodeBean jcBean = new JoinCodeBean();
-	JoinCodeDao jcDao = new JoinCodeDao();
-	SmsAuthBean smsBean = new SmsAuthBean();
-	SmsDao smsDao = new SmsDao();
-
+	UserBean post_ub 		= new UserBean();
+	JoinCodeBean jcBean 	= new JoinCodeBean();
+	SmsAuthBean smsBean 	= new SmsAuthBean();
+	BetConUserBean bc_user	= new BetConUserBean();
+	
+	UserDao ud 			= new UserDao();
+	JoinCodeDao jcDao 	= new JoinCodeDao();
+	SmsDao smsDao 		= new SmsDao();
+	BetConDao bc_db		= new BetConDao();
+	
 	String xForwardedForHeader = request.getHeader("X-Forwarded-For");	 
 	String ip = "";
     if (xForwardedForHeader == null) {
@@ -52,8 +59,6 @@
 	MgBettingProfileBean bet_profile				= new MgBettingProfileBean();
 	ArrayList<MgBettingProfileBean> bet_profiles	= new ArrayList<MgBettingProfileBean>();
 
-
-    UserDao ud = new UserDao();
     boolean status = false;
 	try {
 		//status = ud.setUser(userid, passwd, cell, bank_name, bank_owner, bank_num, cert,ip,nick,referrer);
@@ -68,7 +73,14 @@
 
 			System.out.println("join code update result : " + updateJoinCode);
 			System.out.println("sms update result : " + updateSms);
-
+			
+			UserBean ub = new UserBean();
+			ub = ud.getUser(post_ub);
+			
+			/*--------------------------------------------------------------------
+	        |	Add user to Microgaming System
+	        |-------------------------------------------------------------------*/
+	        /*	Configure MG User parameters	*/
 			bet_profile.setCategory("LGBetProfile");
 			bet_profile.setProfileId(1202);
 			
@@ -87,16 +99,24 @@
 			
 			teg_resp = teg_ctrl.addPlayerAccount(user_profile);
 			
+			/*--------------------------------------------------------------------
+	        |	Add User to Asian Gaming
+	        |-------------------------------------------------------------------*/
 			
-			UserBean ub;
-			//ub = ud.getUser(userid,passwd);
-			ub = ud.getUser(post_ub);
+			/*--------------------------------------------------------------------
+	        |	Add User to Betconstruct Table
+	        |-------------------------------------------------------------------*/
+	        bc_user.setUsername(Integer.toString(ub.getSiteid()).concat("_").concat(ub.getUserid()));
+	        bc_user.setSession_token(Integer.toString(ub.getSiteid()).concat("_").concat(ub.getUserid()));
+			
+	        bc_db.addNewBcUser(bc_user);
+	        
 			HttpSession user_session = request.getSession(true);	    
 			session.setMaxInactiveInterval(7200);
 	        session.setAttribute("currentSessionUser",ub);
 	        int updateSession = ud.updateUserAfterLogin(ub.getUserid(), session.getId());
 	        System.out.println(ub.getLoginStatus());	
-	        System.out.println(updateSession);	
+	        System.out.println(updateSession);
 		}
 		
 		out.println(status);

@@ -83,7 +83,6 @@ public class ChargeDao {
 	  	}
 		
 		return result;
-			
 	}
 	
 	public List<HashMap> getUserChargeList(UserBean uBean){

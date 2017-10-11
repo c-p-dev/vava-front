@@ -97,11 +97,12 @@ public class BetConstructController {
 		UserBean user_data	= user_db.getUserByUserId(username);
 		String token		= Integer.toString(user_data.getSiteid()).concat("_").concat(username).concat(str_lib.getSaltString(SESS_SALT_LEN));
 		int create_token	= 0;
+		String mg_uname		= Integer.toString(user_data.getSiteid()).concat("_").concat(username);
 		
 		/*--------------------------------------------------------------------
         |	Update Database with generated Token
         |-------------------------------------------------------------------*/
-		create_token	= betcon_db.updateBcSessionByUsername(username, token);
+		create_token	= betcon_db.updateBcSessionByUsername(mg_uname, token);
 		
 		/*--------------------------------------------------------------------
         |	Token Successfully Created

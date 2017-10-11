@@ -3,6 +3,8 @@ package net.vavasoft.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,6 +20,8 @@ import net.vavasoft.bean.UserBean;
 import net.vavasoft.betconstruct.GetBalanceOutput;
 
 public class BetConDao {
+	
+	private static final DateFormat dfrmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
 	public UserBean getUserByPlayerId(int player_id)
 	{
@@ -119,7 +123,6 @@ public class BetConDao {
             
             if (rs.next()) {
             	user_data.setPlayerId(rs.getInt("player_id"));
-            	user_data.setInit_token(rs.getString("init_token"));
             	user_data.setSession_token(rs.getString("session_token"));
             	user_data.setUsername(rs.getString("username"));
             }
@@ -156,6 +159,40 @@ public class BetConDao {
             pstmt.setString(1, token);
             pstmt.setString(2, username);
 			
+            result	= pstmt.executeUpdate();
+            
+	        pstmt.close();
+	        con.close();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+	  		return 0;
+		}
+		
+		return result;
+	}
+	
+	public int addNewBcUser(BetConUserBean user_data) {
+		
+		Date date				= new Date();
+		Connection con 			= null;
+		PreparedStatement pstmt = null;
+		int result 				= 0;
+		String query 			= "INSERT INTO betcon_user_lst "
+				+ "(username, session_token, date_added) "
+				+ "VALUES (?, ?, ?)";
+		
+		try {
+			Context initContext = new InitialContext();
+		 	Context envContext 	= (Context)initContext.lookup("java:/comp/env");
+			DataSource ds 		= (DataSource)envContext.lookup("jdbc/vava");
+			
+		    con 				= ds.getConnection();
+		    
+		    pstmt   			= con.prepareStatement(query);
+            pstmt.setString(1, user_data.getUsername());
+            pstmt.setString(2, user_data.getSession_token());
+            pstmt.setString(3, dfrmt.format(date));
             result	= pstmt.executeUpdate();
             
 	        pstmt.close();

@@ -258,7 +258,6 @@ public class TotalEgameController {
 			game_url_full		= ag_ctrl.launchGame(username, lnk_dsp);
 		}
 		else {
-			session_id			= "ABCDE12345";
 			game_url_full		= bc_ctrl.launchGame(username, lnk_dsp);
 		}
 		
