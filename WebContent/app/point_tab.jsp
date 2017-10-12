@@ -210,7 +210,6 @@
 									</div>
 								</td>
 								<td>
-									<!-- <a href="#"><span class="btn1">검색</span></a> -->
 									<span class="btn1" id="searchPointBtn">검색</span>
 								</td>
 							</tr>

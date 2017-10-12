@@ -27,19 +27,19 @@ import net.vavasoft.betconstruct.AuthenticationOutput;
 public class AccountDao {
 	private static final DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	
-	public List<HashMap> getPointHistory(AccountListBean alBean){
+	public List<HashMap> getPointHistory(String userid, String job, String fromDate, String toDate){
 		List<HashMap> data = new ArrayList<HashMap>();
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-	
+
 		String dataQuery = "SELECT regdate, acid,job, remain_point, case when money  < 0 then money else null end deduct_point, "
 				+ "case when money > 0  then money else null end added_point From account_lst "
 				+ " WHERE userid = ? "
 				+ "AND cast ([regdate] as date) BETWEEN ? AND ? "
 				+ "AND moneypoint = 'P' ";
-		if(!alBean.getJob().equals("ALL")){
+		if(!job.equals("ALL")){
 			dataQuery  = dataQuery + "AND job = ?";
 		}
 					
@@ -48,8 +48,8 @@ public class AccountDao {
 		try{
 			
 			
-			Date dateFrom = sdf.parse(alBean.getFromDate());
-			Date dateTo = sdf.parse(alBean.getToDate());
+			Date dateFrom = sdf.parse(fromDate);
+			Date dateTo = sdf.parse(toDate);
 			
 		 	Context initContext = new InitialContext();
 		 	Context envContext = (Context)initContext.lookup("java:/comp/env");
@@ -57,11 +57,11 @@ public class AccountDao {
 						 	
 			con = ds.getConnection();			 	
 			pstmt = con.prepareStatement(dataQuery);
-			pstmt.setString(1,alBean.getUserid());
+			pstmt.setString(1,userid);
 			pstmt.setString(2,sdf.format(dateFrom) );
 			pstmt.setObject(3,sdf.format(dateTo));
-			if(!alBean.getJob().equals("ALL")){
-				pstmt.setObject(4,alBean.getJob());
+			if(!job.equals("ALL")){
+				pstmt.setObject(4,job);
 			}
 
 			rs = pstmt.executeQuery();
@@ -91,7 +91,7 @@ public class AccountDao {
 		
 	}
 	
-	public List<HashMap> getMoneyUseHistory(AccountListBean alBean){
+	public List<HashMap> getMoneyUseHistory(String userid,String job, String moneypoint, String fromDate, String toDate){
 		Gson gson = new Gson();
 		List<HashMap> list = new ArrayList<HashMap>();
 		String result = "";
@@ -105,12 +105,12 @@ public class AccountDao {
 				+ "WHERE userid = ? "
 				+ "AND cast ([regdate] as date) BETWEEN ? AND ? ";
 			
-		if(!alBean.getJob().equals("ALL")){
+		if(!job.equals("ALL")){
 			query  = query + " AND job = ?";
 		}else{
 			query  = query + " AND '1' = ?";
 		}
-		if(!alBean.getMoneypoint().equals("ALL")){
+		if(!moneypoint.equals("ALL")){
 			query  = query + " AND moneypoint = ?";
 		}else{
 			query  = query + " AND '1' = ?";
@@ -121,8 +121,8 @@ public class AccountDao {
 		
 		try{	      
 			
-			Date dateFrom = sdf.parse(alBean.getFromDate());
-			Date dateTo = sdf.parse(alBean.getToDate());
+			Date dateFrom = sdf.parse(fromDate);
+			Date dateTo = sdf.parse(toDate);
 			
 		 	Context initContext = new InitialContext();
 		 	Context envContext = (Context)initContext.lookup("java:/comp/env");
@@ -130,11 +130,11 @@ public class AccountDao {
 						 	
 			con = ds.getConnection();			 	
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1,alBean.getUserid());
+			pstmt.setString(1,userid);
 			pstmt.setString(2,sdf.format(dateFrom) );
 			pstmt.setObject(3,sdf.format(dateTo));
-			pstmt.setString(4,(alBean.getJob().equals("ALL") ? "1" : alBean.getJob()));
-			pstmt.setString(5,(alBean.getMoneypoint().equals("ALL") ? "1" : alBean.getMoneypoint()));
+			pstmt.setString(4,(job.equals("ALL") ? "1" : job));
+			pstmt.setString(5,(moneypoint.equals("ALL") ? "1" : moneypoint));
 			
 			System.out.println(query.toString());
 			rs = pstmt.executeQuery();

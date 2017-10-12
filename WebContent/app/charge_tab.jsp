@@ -1,6 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script><!-- switch -->
-<link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"><!-- gateway -->
 <%@page import="net.vavasoft.dao.GameDao, java.text.DecimalFormat, java.util.*,net.vavasoft.dao.UserDao,net.vavasoft.bean.UserBean;"%>
 <%
 	DecimalFormat dfrmt				= new DecimalFormat("#,###,###,###,###.00");

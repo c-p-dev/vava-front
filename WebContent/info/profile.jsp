@@ -2,6 +2,9 @@
 <%@page import="net.vavasoft.dao.GameDao, java.text.DecimalFormat, java.util.*,net.vavasoft.dao.UserDao,net.vavasoft.bean.UserBean;"%>
 <%
 	UserBean user_data	= (UserBean)session.getAttribute("currentSessionUser");
+	UserDao user_db	= new UserDao();
+	UserBean currentUser = user_db.getUserByUserId(user_data.getUserid());
+
 %>
 
 <ul class="smk_accordion">
@@ -18,7 +21,7 @@
 								</td>
 								<td class="my_center"></td>
 								<td class="my_info">
-									<span class="my_left">예금주</span><span class="my_right"><%=user_data.getBank_owner()%></span>
+									<span class="my_left">예금주</span><span class="my_right"><%=currentUser.getBank_owner()%></span>
 								</td>
 							<tr>
 							<tr>
@@ -26,11 +29,11 @@
 							</tr>
 							<tr>
 								<td class="my_info">
-									<span class="my_left">닉네임 </span><span class="my_right"><%=user_data.getNick()%></span>
+									<span class="my_left">닉네임 </span><span class="my_right"><%=currentUser.getNick()%></span>
 								</td>
 								<td class="my_center"></td>
 								<td class="my_info">
-									<span class="my_left">은행명 </span><span class="my_right"><%=user_data.getBank_name()%> </span>
+									<span class="my_left">은행명 </span><span class="my_right"><%=currentUser.getBank_name()%> </span>
 								</td>
 							<tr>
 							<tr>
@@ -38,11 +41,11 @@
 							</tr>
 							<tr>
 								<td class="my_info">
-									<span class="my_left">휴대폰 번호</span><span class="my_right"><%=user_data.getCell()%></span>
+									<span class="my_left">휴대폰 번호</span><span class="my_right"><%=currentUser.getCell()%></span>
 								</td>
 								<td class="my_center"></td>
 								<td class="my_info">
-									<span class="my_left">계좌번호</span><span class="my_right"><%=user_data.getBank_num()%></span>
+									<span class="my_left">계좌번호</span><span class="my_right"><%=currentUser.getBank_num()%></span>
 								</td>
 							<tr>
 						</table>
@@ -117,6 +120,7 @@
 										<tr>
 											<td width="100" align="left" style="padding:0 5px 0 0">
 												<select class="input_style02" name="cell_prefix" id="new_cell_prefix">
+													<option value="+63">+63(필리핀 제도)</option>
 													<option value="+82">+82(한국)</option>
 												</select>
 											</td>
@@ -315,7 +319,7 @@
 	        	console.log("value: "+value);
 	        	console.log("element: "+element);
 	        	var prefix = $("#new_cell_prefix").val();
-	        	var number = "<%=user_data.getCell()%>";
+	        	var number = "<%=currentUser.getCell()%>";
 	        	console.log("number: "+element);
 	        	console.log("new num: " + prefix+value);
 	        	if(number == prefix+value){

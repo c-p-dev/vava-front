@@ -130,7 +130,10 @@
 									</select>
 								</td>
 								<td width="230" align="left" style="padding:0 5px 0 0"><input class="input_style02 input_required" id="cell" name="cell" maxlength="15" data-warn="cell-warn" placeholder="Mobile Phone Number" placeholder="휴대폰번호" ></td>
-								<td><a href="#" id="mobileVerBtn"><span class="btn5">인증</span></a></td>
+								<td>
+									<!-- <a href="#" id="mobileVerBtn"><span class="btn5">인증</span></a> -->
+									<button id="mobileVerBtn" class="btn5">인증</button>
+								</td>
 							</tr>
 							<tr>
 								<td colspan="4">
@@ -455,7 +458,7 @@
 			valid = validator.element("#cell");
 			console.log(valid);
 			if(valid){
-				// verifyNumber();
+				verifyNumber();
 			}
 
 			
@@ -525,18 +528,23 @@
 		var cell_prefix = $.trim($("#cell_prefix").val());
 		var cell = $.trim($("#cell").val());
 		cell = formatCellNum(cell);
+		
+		$("#mobileVerBtn").prop("disabled",true);
 		$.ajax({
 			url : '${baseUrl}process/send_sms.jsp',
 			data : {userid:userid,cell_prefix:cell_prefix,cell:cell},
 			method: 'POST',
 		}).done(function(data){ 
 			console.log(data);
-			if(data){
-				$("#mobileVerBtn span").html("resend");
-			}else{
-				alert("Something went wrong");
-				$("#mobileVerBtn span").html("인증");
-			}
+			setTimeout(function() {
+			  	if(data){
+					$("#mobileVerBtn span").html("resend");
+				}else{
+					alert("Something went wrong");
+					$("#mobileVerBtn span").html("인증");
+				}
+				$("#mobileVerBtn").prop("disabled",false);
+			}, 5000);
 		});
 	}
 

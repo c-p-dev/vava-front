@@ -34,13 +34,14 @@
     }else{
         ip =  new StringTokenizer(xForwardedForHeader, ",").nextToken().trim();
     }
-	String cell = request.getParameter("cell_prefix").trim().substring(1) + request.getParameter("cell").trim();
+	// String cell = request.getParameter("cell_prefix").trim().substring(1) + request.getParameter("cell").trim();
 
 	post_ub.setUserid(request.getParameter("userid").trim());
 	post_ub.setBank_name(request.getParameter("bank_name").trim());
 	post_ub.setBank_num(request.getParameter("bank_num").trim());
 	post_ub.setBank_owner(request.getParameter("bank_owner").trim());
-	post_ub.setCell(cell);
+	post_ub.setCell(request.getParameter("cell"));
+	post_ub.setCell_prefix(request.getParameter("cell_prefix"));
 	post_ub.setPasswd(request.getParameter("passwd").trim());
 	post_ub.setRecommand(request.getParameter("referrer").trim());
 	post_ub.setNick(request.getParameter("nick").trim());
@@ -51,7 +52,9 @@
 	jcBean.setRecommend(request.getParameter("referrer").trim());
 
 	smsBean.setUserid(request.getParameter("userid").trim());
-	smsBean.setTel(cell);
+	// smsBean.setTel(cell);
+	smsBean.setCell(request.getParameter("cell"));
+	smsBean.setCell_prefix(request.getParameter("cell_prefix"));
 	smsBean.setAuthcode(request.getParameter("cert").trim());
 	
     TotalEgameController teg_ctrl					= new TotalEgameController();
@@ -61,7 +64,7 @@
 
     boolean status = false;
 	try {
-		//status = ud.setUser(userid, passwd, cell, bank_name, bank_owner, bank_num, cert,ip,nick,referrer);
+		
 		status = ud.setUser(post_ub);
 		if(status){
 			String teg_resp	= "";
@@ -75,7 +78,7 @@
 			System.out.println("sms update result : " + updateSms);
 			
 			UserBean ub = new UserBean();
-			ub = ud.getUser(post_ub);
+			ub = ud.getUser(request.getParameter("userid"),request.getParameter("passwd"));
 			
 			/*--------------------------------------------------------------------
 	        |	Add user to Microgaming System

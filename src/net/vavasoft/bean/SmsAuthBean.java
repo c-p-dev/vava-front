@@ -9,7 +9,21 @@ public class SmsAuthBean {
 	private String regdate;
 	private String usedate;
 	private String state;
+	private String cell;
+	private String cell_prefix;
 	
+	public String getCell() {
+		return cell;
+	}
+	public void setCell(String cell) {
+		this.cell = cell;
+	}
+	public String getCell_prefix() {
+		return cell_prefix;
+	}
+	public void setCell_prefix(String cell_prefix) {
+		this.cell_prefix = cell_prefix;
+	}
 	public int getSmsid() {
 		return smsid;
 	}

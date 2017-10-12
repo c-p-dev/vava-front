@@ -26,12 +26,12 @@ public class JoinCodeDao {
 	public static Logger logger = Logger.getLogger(JoinCodeDao.class);
 	Date date = new Date();
 	
-	public boolean checkJoinCode(JoinCodeBean jcb) throws SQLException{
+	public boolean checkJoinCode(String recommend, String joincode) throws SQLException{
 		boolean result = false;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-	
+
 		String query = "SELECT * FROM RT01.dbo.joincode_lst WHERE  joincode = ? and recommend = ? AND state = 'WAIT'";
 		
 		try{	      
@@ -42,11 +42,10 @@ public class JoinCodeDao {
 						 	
 			con = ds.getConnection();			 	
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1,jcb.getJoincode());
-			pstmt.setString(2,jcb.getRecommend());
+			pstmt.setString(1,joincode);
+			pstmt.setString(2,recommend);
 			rs = pstmt.executeQuery();
-			System.out.println("asdasd");
-			System.out.println(rs);
+			
 			if(rs.next()){
 				result = true;
 			}
