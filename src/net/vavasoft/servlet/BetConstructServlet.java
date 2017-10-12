@@ -18,14 +18,14 @@ import net.vavasoft.controller.BetConstructController;
 @WebServlet("/betcon-webhook/*")
 public class BetConstructServlet extends HttpServlet {
 	
-	private static final long serialVersionUID = 1L;
-	public static final String BC_WEBHOOK_AUTH		= "/betcon-webhook/Authentication";
-	public static final String BC_WEBHOOK_GETBAL	= "/betcon-webhook/GetBalance";
-	public static final String BC_WEBHOOK_WITHDRAW	= "/betcon-webhook/Withdraw";
-	public static final String BC_WEBHOOK_DEPOSIT	= "/betcon-webhook/Deposit";
-	public static final String BC_WEBHOOK_WITHDEPO	= "/betcon-webhook/WithdrawAndDeposit";
-	public static final String BC_WEBHOOK_ROLLBCK	= "/betcon-webhook/Rollback";
-	public static final String BC_WEBHOOK_REFTOK	= "/betcon-webhook/RefreshToken";
+	private static final long serialVersionUID 		= 1L;
+	public static final String BC_WEBHOOK_AUTH		= "/Authentication";
+	public static final String BC_WEBHOOK_GETBAL	= "/GetBalance";
+	public static final String BC_WEBHOOK_WITHDRAW	= "/Withdraw";
+	public static final String BC_WEBHOOK_DEPOSIT	= "/Deposit";
+	public static final String BC_WEBHOOK_WITHDEPO	= "/WithdrawAndDeposit";
+	public static final String BC_WEBHOOK_ROLLBCK	= "/Rollback";
+	public static final String BC_WEBHOOK_REFTOK	= "/RefreshToken";
 	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -39,7 +39,7 @@ public class BetConstructServlet extends HttpServlet {
 		
 		BetConstructController bc_ctrl	= new BetConstructController();
 		PrintWriter output				= response.getWriter();
-		System.out.println(request.getRequestURI());
+		System.out.println(request.getPathInfo());
 		
 		
 		output.flush();
@@ -51,7 +51,7 @@ public class BetConstructServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		Gson gson						= new Gson();
-		String method 					= request.getRequestURI();
+		String method 					= request.getPathInfo();
 		String session_id				= request.getSession().getId();
 		BufferedReader reader			= request.getReader();
 		
