@@ -1,64 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="net.vavasoft.bean.UserBean, net.vavasoft.dao.UserDao, java.text.DecimalFormat"%>
-<style>
-	.add-money{
-		cursor: pointer;
-	}
-	.error_cash_in{
-		margin:0px;
-		display: none;
-	}
-	input[type="text"]:-ms-input-placeholder {
-    text-align: left;
-	}
-	input[type="text"]::-webkit-input-placeholder {
-	    text-align: left;
-	}
-	input::-moz-placeholder {
-	 text-align: left;
-	}	
-	
-	/*datatable*/
-	.dataTables_wrapper .dataTables_paginate {
-	     float: none!important; 
-	    text-align: center!important;
-	    padding-top: 20px!important;
-	}
-	.dataTables_wrapper .dataTables_paginate .paginate_button{
-		padding: 8px 12px 8px 12px!important;
-	    font-size: 12px!important;
-	    border-radius: 3px!important;
-	    display: inline-block!important;
-	    background: #2b2d2e!important;
-	    color:white!important;
-	}
-	.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
-	    color: #333 !important;
-	    color: #ffffff!important;
-	    background: #0792c4!important;
-	    border:none!important;
-	}
-	.dataTables_wrapper {
-	    width: 100%!important;
-	    margin: 0 0 20px 0!important;
-	    border-top: solid 1px #0792c4!important;
-	}
-	table.dataTable thead th{ 
-	    color: #ffffff!important;
-	    background: #151516!important;
-	    /*height: 40px!important;*/ 	 
-	    text-align: center!important;
-	    border-bottom: solid 1px #000000!important;
-	}
-	table.dataTable tbody tr {
-	    background-color: transparent;
-	}
-	table.dataTable tbody td {
-	     padding: 0px; 
-	    text-align: center;
-	    border-bottom: solid 1px #2e3032;
-	    height: 40px;
-	}
-</style>
 <jsp:useBean id="bean" class="net.vavasoft.bean.UserBean" />
 <%
 	DecimalFormat dfrmt				= new DecimalFormat("#,###,###,###,###.00");
@@ -77,7 +17,6 @@
 		checkSession = true;
 	}
 %>
-
 
 <ul class="smk_accordion">
 		<li>
@@ -184,71 +123,71 @@
 	</div>
 </div>
 <script>
-$dataTable1 = $('#dataTable2').DataTable({
-	ajax : 'process/application/exchange/getWithdrawList.jsp',
-	bProcessing: true,
-	sAjaxDataProp:"",
-	searching: false,
-	bInfo : false,
-	lengthChange: false,
-	autowWidth:true,
-    columns : [
-        	{ 
-                data   : 'wdid',
-                title  : '번호',
+	$dataTable1 = $('#dataTable2').DataTable({
+		ajax : 'process/application/exchange/getWithdrawList.jsp',
+		bProcessing: true,
+		sAjaxDataProp:"",
+		searching: false,
+		bInfo : false,
+		lengthChange: false,
+		autowWidth:true,
+	    columns : [
+	        	{ 
+	                data   : 'wdid',
+	                title  : '번호',
 
-            },
-            { 
-                data   : 'regdate',
-                title  : '신청일시',
-            },
-            { 
-                data   : 'money',
-                title  : '금액',
-                render : function(data,type,row,meta){
-                	var html = '<span class="font_002">'+data+'</span> 원';
-                	return html;
-                }
-            },
-            { 
-                data   : 'wdstate',
-                title  : '상태',
-               	render : function(data,type,row,meta){
-                	var html = '<span class="font_009">신청<span>'; // pending
-                	if(data == "DONE"){
-                		html = '<span>완료</span>'; // complete
-                	}else if(data=="WAIT"){
-                		html = '<span class="font_010">대기</span>';
-                	}
-                	return html;
-                }
-               
-            },
-        ],
-	pagingType: "full_numbers",
-    language: {
-	    paginate: {
-	      	previous: "<",
-	      	next: ">",
-	      	first: "<<",
-	      	last: ">>",
+	            },
+	            { 
+	                data   : 'regdate',
+	                title  : '신청일시',
+	            },
+	            { 
+	                data   : 'money',
+	                title  : '금액',
+	                render : function(data,type,row,meta){
+	                	var html = '<span class="font_002">'+data+'</span> 원';
+	                	return html;
+	                }
+	            },
+	            { 
+	                data   : 'wdstate',
+	                title  : '상태',
+	               	render : function(data,type,row,meta){
+	                	var html = '<span class="font_009">신청<span>'; // pending
+	                	if(data == "DONE"){
+	                		html = '<span>완료</span>'; // complete
+	                	}else if(data=="WAIT"){
+	                		html = '<span class="font_010">대기</span>';
+	                	}
+	                	return html;
+	                }
+	               
+	            },
+	        ],
+		pagingType: "full_numbers",
+	    language: {
+		    paginate: {
+		      	previous: "<",
+		      	next: ">",
+		      	first: "<<",
+		      	last: ">>",
+		    }
+		},
+	    rowCallback : function(row , data , index) {
+	        
+	    },
+	    drawCallback: function( settings ) {
+	        
 	    }
-	},
-    rowCallback : function(row , data , index) {
-        
-    },
-    drawCallback: function( settings ) {
-        
-    }
-});
+	});
 
 
-$(".dt_div").on("click",function(){
-	
-	setTimeout(function() {
-	  	$dataTable1.columns.adjust().draw();
-	}, 100);
-});
+	$(".dt_div").on("click",function(){
+		
+		setTimeout(function() {
+		  	$dataTable1.columns.adjust().draw();
+		}, 100);
+	});
 
 	$('.acc_content_in_2').on('submit', '#formwithdraw', function(){
 		console.log('aww');
@@ -297,56 +236,56 @@ $(".dt_div").on("click",function(){
 	    
 	}
 	
-function submitForm1(withdraw){
-	$.ajax({
-		url : 'process/application/exchange/withdrawprocess.jsp',
-		data : withdraw,
-		method: 'POST',
-	}).done(function(data){ 
-		$("#ExchangeSuccesModal").popup("show");
-		//var mmm = parseInt($('#money').text());
-		//var newmmmm = mmm - parseInt($('#withdraw').val());
-		//$('#money').text(newmmmm);
-		//console.log(newmmmm)
-	});
-}
-$('#ExchangeSuccesModal').popup({
-  	transition: 'all 0.3s',
-  	scrolllock: true,
-  	onclose:function(){
-  		resetformwithdraw();
+	function submitForm1(withdraw){
+		$.ajax({
+			url : 'process/application/exchange/withdrawprocess.jsp',
+			data : withdraw,
+			method: 'POST',
+		}).done(function(data){ 
+			$("#ExchangeSuccesModal").popup("show");
+			//var mmm = parseInt($('#money').text());
+			//var newmmmm = mmm - parseInt($('#withdraw').val());
+			//$('#money').text(newmmmm);
+			//console.log(newmmmm)
+		});
 	}
-});
+	$('#ExchangeSuccesModal').popup({
+	  	transition: 'all 0.3s',
+	  	scrolllock: true,
+	  	onclose:function(){
+	  		resetformwithdraw();
+		}
+	});
 
-$(".cs_close").on("click",function(e){
-	e.preventDefault();
-	$dataTable1.ajax.reload();
-	$dataTable1.columns.adjust().draw();
-	$("#ExchangeSuccesModal").popup("hide");
+	$(".cs_close").on("click",function(e){
+		e.preventDefault();
+		$dataTable1.ajax.reload();
+		$dataTable1.columns.adjust().draw();
+		$("#ExchangeSuccesModal").popup("hide");
 
-});
-function resetformwithdraw(){
-	$("#formwithdraw")[0].reset();
-	$('#withdraw').css('border-color', '#373332');
-	$( "#err-msg" ).hide();
-}
-$('#button1').click(function(){
-	 var num = +$("#withdraw").val() + 10000;
-	 $("#withdraw").val(num);
-});
-$('#button2').click(function(){
-	var num = +$("#withdraw").val() + 50000;
-	 $("#withdraw").val(num);
-});
-$('#button3').click(function(){
-	var num = +$("#withdraw").val() + 100000;
-	 $("#withdraw").val(num);
-});
-$('#button4').click(function(){
-	var num = +$("#withdraw").val() + 1000000;
-	 $("#withdraw").val(num);
-});
-$('#button5').click(function(){
-	$("#withdraw").val("0");
-});
+	});
+	function resetformwithdraw(){
+		$("#formwithdraw")[0].reset();
+		$('#withdraw').css('border-color', '#373332');
+		$( "#err-msg" ).hide();
+	}
+	$('#button1').click(function(){
+		 var num = +$("#withdraw").val() + 10000;
+		 $("#withdraw").val(num);
+	});
+	$('#button2').click(function(){
+		var num = +$("#withdraw").val() + 50000;
+		 $("#withdraw").val(num);
+	});
+	$('#button3').click(function(){
+		var num = +$("#withdraw").val() + 100000;
+		 $("#withdraw").val(num);
+	});
+	$('#button4').click(function(){
+		var num = +$("#withdraw").val() + 1000000;
+		 $("#withdraw").val(num);
+	});
+	$('#button5').click(function(){
+		$("#withdraw").val("0");
+	});
 </script> 

@@ -85,7 +85,7 @@ public class ChargeDao {
 		return result;
 	}
 	
-	public List<HashMap> getUserChargeList(UserBean uBean){
+	public List<HashMap> getUserChargeList(String userid){
 		Gson gson = new Gson();
 		List<HashMap> list = new ArrayList<HashMap>();
 		String result = "";
@@ -104,7 +104,7 @@ public class ChargeDao {
 						 	
 			con = ds.getConnection();			 	
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1,uBean.getUserid());
+			pstmt.setString(1,userid);
 			rs = pstmt.executeQuery();
 					   
 			while(rs.next()){

@@ -36,15 +36,15 @@ public class UserDao {
 	public static Logger logger = Logger.getLogger(BetConManager_Test2.class);
 	public UserDao(){}
 	
-	public UserBean getUser(UserBean user) throws SQLException{
+	public UserBean getUser(String userid,String password) throws SQLException{
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
 		UserBean uib = new UserBean();
 		String query = "SELECT * FROM RT01.dbo.user_mst WHERE userid = ?";
-		System.out.println(user.getUserid());
-		System.out.println(user.getPasswd());
+		System.out.println(userid);
+		System.out.println(password);
 		try{	      
 			
 		 	Context initContext = new InitialContext();
@@ -53,25 +53,14 @@ public class UserDao {
 						 	
 			con = ds.getConnection();			 	
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1,user.getUserid());
+			pstmt.setString(1,userid);
 			rs = pstmt.executeQuery();
 					   
 			if(rs.next()){
-				if (rs.getString("passwd").equals(user.getPasswd())){
+				if (rs.getString("passwd").equals(password)){
 					uib.setLoginStatus(0); //success
 					uib.setUserid(rs.getString("userid"));
 					uib.setNick(rs.getString("nick"));
-					uib.setCell(rs.getString("cell"));
-					uib.setGrade(rs.getInt("grade"));
-					uib.setWatch(rs.getString("watch"));
-					uib.setRecommend_yn(rs.getString("recommend_yn"));
-					uib.setMoney(rs.getInt("money"));
-					uib.setPoint(rs.getInt("point"));
-					uib.setBank_name(rs.getString("bank_name"));
-					uib.setBank_owner(rs.getString("bank_owner"));
-					uib.setBank_num(rs.getString("bank_num"));	
-					uib.setCharge_level(rs.getString("charge_level"));
-					uib.setSiteid(rs.getInt("siteid"));
 					
 				}else{
 					uib.setLoginStatus(1); // wrong password
@@ -104,7 +93,8 @@ public class UserDao {
 		  boolean result = false;
 		  
 			try{
-			
+				SmsDao sd = new SmsDao();
+				String mobile_no = sd.formatCellNumber(user.getCell_prefix(), user.getCell());
 				Context initContext = new InitialContext();
 			 	Context envContext = (Context)initContext.lookup("java:/comp/env");
 				DataSource ds = (DataSource)envContext.lookup("jdbc/vava");
@@ -116,7 +106,7 @@ public class UserDao {
 			    pstmt = con.prepareStatement(query);
 			    pstmt.setString(1,user.getUserid());
 			    pstmt.setString(2,user.getPasswd());
-			    pstmt.setString(3,user.getCell());
+			    pstmt.setString(3,mobile_no);
 			    pstmt.setString(4,user.getBank_name());
 			    pstmt.setString(5,user.getBank_owner());
 			    pstmt.setString(6,user.getBank_num());
@@ -133,8 +123,7 @@ public class UserDao {
 				con.close();
 				logger.debug(row);
 				if(row > 0) {
-					SmsDao sd = new SmsDao();
-					SmsAuthBean sab = new SmsAuthBean();
+
 					result = true;
 				}
 			
@@ -358,7 +347,7 @@ public class UserDao {
 		
 	}
 	
-		public boolean withdraw(UserBean trans_data,int withdraw) throws SQLException{
+	public boolean withdraw(UserBean trans_data,int withdraw) throws SQLException{
 
 		PreparedStatement pstmt = null;
 		Connection con = null;

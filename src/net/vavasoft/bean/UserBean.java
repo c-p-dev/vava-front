@@ -22,7 +22,14 @@ public class UserBean {
 	private boolean isValid;
 	private int loginStatus; //0  success //1 wrong passwrod // 2 no account 
 	private String cert;
+	private String cell_prefix;
   
+	public String getCell_prefix() {
+		return cell_prefix;
+	}
+	public void setCell_prefix(String cell_prefix) {
+		this.cell_prefix = cell_prefix;
+	}
 	public int getLoginStatus() {
 		return loginStatus;
 	}
