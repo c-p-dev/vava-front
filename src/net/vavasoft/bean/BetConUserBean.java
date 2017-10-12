@@ -4,6 +4,7 @@ public class BetConUserBean {
 	
 	private int playerId;
 	private String username;
+	private int site_id;
 	private String session_token;
 	private String date_added;
 	
@@ -19,6 +20,14 @@ public class BetConUserBean {
 		return username;
 	}
 	
+	public int getSite_id() {
+		return site_id;
+	}
+
+	public void setSite_id(int site_id) {
+		this.site_id = site_id;
+	}
+
 	public void setUsername(String username) {
 		this.username = username;
 	}

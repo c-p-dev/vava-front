@@ -39,7 +39,7 @@ public class AsianGamingController {
 	public static final String MH5_PARAM		= "n";
 	
 	public static final String LANG_EN_PARAM	= "3";
-	public static final String LANG_KR_PARAM	= "3";
+	public static final String LANG_KR_PARAM	= "5";
 
 	public static final String GAME_ALL_PARAM	= "0";	
 	public static final String GAME_AGQ_PARAM	= "1";
@@ -138,7 +138,7 @@ public class AsianGamingController {
 		params_str			= params_str.concat("sid=").concat(CAGENT_PARAM).concat(session_id).concat(DES_PARAM_SUFX);
 		params_str			= params_str.concat("mh5=").concat(MH5_PARAM).concat(DES_PARAM_SUFX);
 		params_str			= params_str.concat("actype=").concat(ACTYPE_PARAM).concat(DES_PARAM_SUFX);
-		params_str			= params_str.concat("lang=").concat(LANG_KR_PARAM).concat(DES_PARAM_SUFX);
+		params_str			= params_str.concat("lang=").concat(LANG_EN_PARAM).concat(DES_PARAM_SUFX);
 		params_str			= params_str.concat("gametype=").concat(lnk_dsp);
 		
 		/*--------------------------------------------------------------------

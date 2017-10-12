@@ -97,12 +97,11 @@ public class BetConstructController {
 		UserBean user_data	= user_db.getUserByUserId(username);
 		String token		= Integer.toString(user_data.getSiteid()).concat("_").concat(username).concat(str_lib.getSaltString(SESS_SALT_LEN));
 		int create_token	= 0;
-		String mg_uname		= Integer.toString(user_data.getSiteid()).concat("_").concat(username);
 		
 		/*--------------------------------------------------------------------
         |	Update Database with generated Token
         |-------------------------------------------------------------------*/
-		create_token	= betcon_db.updateBcSessionByUsername(mg_uname, token);
+		create_token	= betcon_db.updateBcSessionByUsername(username, token, user_data.getSiteid());
 		
 		/*--------------------------------------------------------------------
         |	Token Successfully Created
@@ -477,13 +476,18 @@ public class BetConstructController {
 		BetConUserBean bc_user		= new BetConUserBean();
 		String json_output			= "";
 		String token				= "";
+		String vava_uname			= "";
+		int uname_idx				= 0;
 		
 		/*--------------------------------------------------------------------
         |	Get user information from database
         |-------------------------------------------------------------------*/
-		bc_user	= betcon_db.getUserBySessionToken(json_data.getToken());
+		bc_user		= betcon_db.getUserBySessionToken(json_data.getToken());
 		
 		if (null != bc_user.getUsername()) {
+			uname_idx	= bc_user.getUsername().indexOf("_") + 1;
+			vava_uname	= bc_user.getUsername().substring(uname_idx);
+			System.out.println(vava_uname);
 			/*--------------------------------------------------------------------
 	        |	Create a random character token
 	        |-------------------------------------------------------------------*/
@@ -492,7 +496,7 @@ public class BetConstructController {
 			/*--------------------------------------------------------------------
 	        |	Update Database with generated Token
 	        |-------------------------------------------------------------------*/
-			betcon_db.updateBcSessionByUsername(bc_user.getUsername(), token);
+			betcon_db.updateBcSessionByUsername(vava_uname, token, bc_user.getSite_id());
 			
 			bc_token.setHasError(false);
 			bc_token.setErrorId(BC_ERR_NONE);

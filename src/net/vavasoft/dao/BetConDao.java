@@ -49,6 +49,7 @@ public class BetConDao {
             	user_data.setMoney(rs.getInt("money"));
             	user_data.setNick(rs.getString("nick"));
             	user_data.setIp(rs.getString("ip"));
+            	user_data.setSiteid(rs.getInt("site_id"));
             }
             
             rs.close();
@@ -87,6 +88,7 @@ public class BetConDao {
             	user_data.setPlayerId(rs.getInt("player_id"));
             	user_data.setSession_token(rs.getString("session_token"));
             	user_data.setUsername(rs.getString("username"));
+            	user_data.setSite_id(rs.getInt("site_id"));
             }
             
             rs.close();
@@ -100,14 +102,14 @@ public class BetConDao {
 		return user_data;
 	}
 	
-	public BetConUserBean getUserByUsername(String username)
+	public BetConUserBean getUserByUsername(String username, int site_id)
 	{
 		BetConUserBean user_data	= new BetConUserBean();
 		
 		Connection con 			= null;
 		PreparedStatement pstmt = null;
 		ResultSet rs 			= null;
-		String  query 			= "SELECT TOP 1 * FROM betcon_user_lst WHERE username = ?" ;
+		String  query 			= "SELECT TOP 1 * FROM betcon_user_lst WHERE username = ? AND site_id = ?" ;
 		
 		try {
 			Context initContext = new InitialContext();
@@ -118,6 +120,7 @@ public class BetConDao {
 		    
 		    pstmt   			= con.prepareStatement(query);
             pstmt.setString(1, username);
+            pstmt.setInt(2, site_id);
 			
 			rs 					= pstmt.executeQuery();
             
@@ -125,6 +128,7 @@ public class BetConDao {
             	user_data.setPlayerId(rs.getInt("player_id"));
             	user_data.setSession_token(rs.getString("session_token"));
             	user_data.setUsername(rs.getString("username"));
+            	user_data.setSite_id(rs.getInt("site_id"));
             }
             
             rs.close();
@@ -138,7 +142,7 @@ public class BetConDao {
 		return user_data;
 	}
 	
-	public int updateBcSessionByUsername(String username, String token) 
+	public int updateBcSessionByUsername(String username, String token, int site_id) 
 	{
 		
 		Connection con 			= null;
@@ -146,7 +150,8 @@ public class BetConDao {
 		int result 				= 0;
 		String query 			= "UPDATE betcon_user_lst SET "
 				+ "session_token = ? "
-				+ "WHERE username = ?";
+				+ "WHERE username = ? "
+				+ "AND site_id = ?";
 		
 		try {
 			Context initContext = new InitialContext();
@@ -158,6 +163,7 @@ public class BetConDao {
 		    pstmt   			= con.prepareStatement(query);
             pstmt.setString(1, token);
             pstmt.setString(2, username);
+            pstmt.setInt(3, site_id);
 			
             result	= pstmt.executeUpdate();
             
@@ -179,8 +185,8 @@ public class BetConDao {
 		PreparedStatement pstmt = null;
 		int result 				= 0;
 		String query 			= "INSERT INTO betcon_user_lst "
-				+ "(username, session_token, date_added) "
-				+ "VALUES (?, ?, ?)";
+				+ "(username, session_token, site_id, date_added) "
+				+ "VALUES (?, ?, ?, ?)";
 		
 		try {
 			Context initContext = new InitialContext();
@@ -192,7 +198,8 @@ public class BetConDao {
 		    pstmt   			= con.prepareStatement(query);
             pstmt.setString(1, user_data.getUsername());
             pstmt.setString(2, user_data.getSession_token());
-            pstmt.setString(3, dfrmt.format(date));
+            pstmt.setInt(3, user_data.getSite_id());
+            pstmt.setString(4, dfrmt.format(date));
             result	= pstmt.executeUpdate();
             
 	        pstmt.close();

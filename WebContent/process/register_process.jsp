@@ -106,8 +106,9 @@
 			/*--------------------------------------------------------------------
 	        |	Add User to Betconstruct Table
 	        |-------------------------------------------------------------------*/
-	        bc_user.setUsername(Integer.toString(ub.getSiteid()).concat("_").concat(ub.getUserid()));
+	        bc_user.setUsername(ub.getUserid());
 	        bc_user.setSession_token(Integer.toString(ub.getSiteid()).concat("_").concat(ub.getUserid()));
+	        bc_user.setSite_id(ub.getSiteid());
 			
 	        bc_db.addNewBcUser(bc_user);
 	        
