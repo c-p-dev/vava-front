@@ -36,7 +36,7 @@
 		// Defaults
 		var settings = $.extend({
 			closeAble:  false, // Allow self close.
-			closeOther: true, // Close other sections.
+			closeOther: false, // Close other sections.
 			slideSpeed: 150, // Animation Speed.
 			activeIndex: 1  // The section open on first init.
 		}, options );
@@ -179,21 +179,25 @@
 				
 				var s_parent = $(this).parent(); 
 				
-				// Close other sections when this section is opened
-				if( s_parent.hasClass('acc_active') === false && settings.closeOther ){
-					plugin.closeSection( plugin.children() );
-				}
+				var childElementLength = s_parent.parent('ul')[0].childElementCount;
+				if(childElementLength > 1 ){
 
-				// Allow to close itself
-				if( s_parent.hasClass('acc_active') ){
-					if( false !== settings.closeAble || plugin.children().length === 1 ){
-						plugin.closeSection( s_parent );
+					// Close other sections when this section is opened
+					if( s_parent.hasClass('acc_active') === false && settings.closeOther ){
+						plugin.closeSection( plugin.children() );
 					}
-				}
 
-				// Default behavior
-				else{
-					plugin.openSection( s_parent );
+					// Allow to close itself
+					if( s_parent.hasClass('acc_active') ){
+						if( false !== settings.closeAble || plugin.children().length === 1 ){
+							plugin.closeSection( s_parent );
+						}
+					}
+
+					// Default behavior
+					else{
+						plugin.openSection( s_parent );
+					}
 				}
 
 			});

@@ -1,12 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="
-	net.vavasoft.bean.ChargeBean,
-	net.vavasoft.dao.ChargeDao,
-	net.vavasoft.bean.UserBean,
-	java.sql.SQLException,
-	java.util.ArrayList,
-	java.util.List,
-	com.google.gson.reflect.TypeToken,
-	java.util.StringTokenizer;" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<%@ page import = "net.vavasoft.bean.ChargeBean" %>
+<%@ page import = "net.vavasoft.dao.ChargeDao" %>
+<%@ page import = "net.vavasoft.bean.UserBean" %>
+<%@ page import = "java.sql.SQLException" %>
+<%@ page import = "java.util.ArrayList" %>
+<%@ page import = "java.util.List" %>
+<%@ page import = "com.google.gson.reflect.TypeToken" %>
+<%@ page import = "java.util.StringTokenizer" %>
+
 <%
 	if(session.getAttribute("currentSessionUser") != null){
 		UserBean bean = (UserBean) session.getAttribute("currentSessionUser");
@@ -35,8 +37,15 @@
 		response.sendRedirect("index.jsp");
 		return;
 	}
-		
+			
+%>
 
 
 	
-%>
+	
+	
+	
+	
+	
+	
+	

@@ -58,7 +58,7 @@
 					<td>
 						<table  cellpadding="0" cellspacing="0" class="popup_table01_1">
 							<tr>
-								<td width="370"><input class="input_style02 input_required" type="password" maxlength="20" name="passwd" data-warn="passwd-warn" placeholder="Password" placeholder="암호"></td>
+								<td width="370"><input class="input_style02 input_required password" type="password" maxlength="20" name="passwd" data-warn="passwd-warn" placeholder="Password" placeholder="암호"></td>
 								<td><img src="/images/input_mark3.jpg" class="img-validator" id="passwd-img-valid"></td>
 							</tr>
 							<tr>

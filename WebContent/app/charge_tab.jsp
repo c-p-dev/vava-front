@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@page import="net.vavasoft.dao.GameDao, java.text.DecimalFormat, java.util.*,net.vavasoft.dao.UserDao,net.vavasoft.bean.UserBean;"%>
+
+<%@page import="net.vavasoft.dao.GameDao"%> 
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="java.util.*"%>
+<%@page import="net.vavasoft.dao.UserDao"%>
+<%@page import="net.vavasoft.bean.UserBean"%>
+
 <%
 	DecimalFormat dfrmt				= new DecimalFormat("#,###,###,###,###.00");
 	boolean checkSession = false;
