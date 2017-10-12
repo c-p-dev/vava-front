@@ -2,13 +2,12 @@
 <%
 	
 	UserDao ud = new UserDao();
-	JoinCodeBean jcbean = new JoinCodeBean();
 	JoinCodeDao jcDao = new JoinCodeDao();
-	jcbean.setJoincode(request.getParameter("recommend").trim());
-	jcbean.setRecommend(request.getParameter("referrer").trim());
-	
-	boolean result = jcDao.checkJoinCode(jcbean);
+	String recommend = request.getParameter("referrer").trim();
+	String joincode = request.getParameter("recommend").trim();
 
+
+	boolean result = jcDao.checkJoinCode(recommend, joincode);
 	System.out.println(result);
 	out.println(result);
 %>

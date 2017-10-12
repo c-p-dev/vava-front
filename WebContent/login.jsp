@@ -14,7 +14,7 @@
 					<!-- <td><img class="login-img-validator" id="userid-img" src="images/input_mark2.jpg"></td> -->
 				</tr>
 				<tr>
-					<td width="370"><input class="input_style02 login_input" id="passwd-input" name="passwd" type="password"  placeholder="Password" placeholder="패스워드"></td>
+					<td width="370"><input class="input_style02 login_input password" id="passwd-input" name="passwd" type="password"  placeholder="Password" placeholder="패스워드"></td>
 					<!-- <td><img class="login-img-validator" id="passwd-img" src="images/input_mark2.jpg"></td> -->
 				</tr>
 				<tr>
@@ -83,6 +83,8 @@
 				}else if(data == 2){
 					$("#login_modal_form .login-warn").html("Unknown User Id").show();
 					$("#userid-input").focus();
+				}else{
+					alert("Something went wrong. Try again.");
 				}
 			});
 		}

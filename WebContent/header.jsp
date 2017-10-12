@@ -35,6 +35,7 @@
 <script type="text/javascript" src="/js/img_hover.js"></script><!-- casino_hover -->
 <script type="text/javascript" src="/js/text_slide.js"></script><!-- text_slide -->
 <script type="text/javascript" src="/js/switch.js"></script><!-- switch -->
+<script type="text/javascript" src="/js/common.js"></script><!-- switch -->
 
 <script type="text/javascript" src="/js/jquery.validate.js"></script> 
 <script type="text/javascript" src="/js/jqueryRemote.js"></script> 
@@ -45,6 +46,9 @@
 <link href="/css/nice-select.css" rel="stylesheet" type="text/css"><!-- select -->
 <script type="text/javascript" src="/js/jquery.nice-select.js"></script><!-- select -->
 
+<script type="text/javascript" src="/js/jquery.dataTables.min.js"></script><!-- switch -->
+<link href="/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"><!-- gateway -->
+
 <link href="/css/common.css" rel="stylesheet" type="text/css"><!--공통-->
 <link href="/css/layout.css" rel="stylesheet" type="text/css"><!--공통-->
 <link href="/css/main.css" rel="stylesheet" type="text/css"><!-- main -->
@@ -52,7 +56,7 @@
 <link href="/css/game.css" rel="stylesheet" type="text/css"><!-- game -->
 <link href="/css/gateway.css" rel="stylesheet" type="text/css"><!-- gateway -->
 <link href="/css/common2.css" rel="stylesheet" type="text/css"><!--공통-->
-<link href="/css/point_tab.css" rel="stylesheet" type="text/css"><!--공통-->
+
 
 </head>
 <style>
@@ -166,6 +170,8 @@ $(window).scroll(function(event){
 				}else if(data == 2){
 					$("#login-header-warn").html("Unknown User Id").show();
 					$("#userid-header-input").focus();
+				}else{
+					alert("Something went wrong. Try again.");
 				}
 			});
 		}
@@ -284,18 +290,34 @@ $(window).scroll(function(event){
 								<button type="button" class="myValue top_value">LV.3   <%=currentUser.getNick()%></button>
 								<ul class="aList top_alist">
 									<li style="height:11px; width:152px; background:url(/images/select_top_bg.png) no-repeat"></li>
-									<li><a>내 정보 <span class="select_arrow"> > </span></a></li>
-									<li><a>베팅내역 <span class="select_arrow"> > </span></a></li>
-									<li><a>1:1문의 <span class="select_arrow"> > </span></a></li>
-									<li><a>쪽지함 <span class="select_arrow"> > </span></a></li>
+									<li>
+										<a href="/info/sub05.jsp?tab=tab1">내 정보 
+											<!-- <span class="select_arrow"> > </span> -->
+										</a>
+									</li>
+									<li>
+										<a href="/info/sub05.jsp?tab=tab2">베팅내역 
+											<!-- <span class="select_arrow"> > </span> -->
+										</a>
+									</li>
+									<li>
+										<a href="/info/sub05.jsp?tab=tab3">1:1문의 
+											<!-- <span class="select_arrow"> > </span> -->
+										</a>
+									</li>
+									<li>
+										<a href="/info/sub05.jsp?tab=tab4">쪽지함 
+											<!-- <span class="select_arrow"> > </span> -->
+										</a>
+									</li>
 									<!-- signout -->
 									<li><span id="showLogoutModal" >로그아웃 </span> </li> 
 								</ul>
 							</div>				
 						</li>
-						<li><a href="/app/sub04.jsp"><span class="top_btn1">충전신청</span></a></li>
-	                    <li><a href="/app/sub04.jsp"><span class="top_btn1">환전신청</span></a></li>
-						<li><a href="/app/sub04.jsp"><span class="top_btn3">머니전환</span></a></li>
+						<li><a href="/app/sub04.jsp?tab=tab1"><span class="top_btn1">충전신청</span></a></li>
+	                    <li><a href="/app/sub04.jsp?tab=tab2"><span class="top_btn1">환전신청</span></a></li>
+						<li><a href="/app/sub04.jsp?tab=tab4"><span class="top_btn3">머니전환</span></a></li>
 						<li><a href="/info/sub05.jsp"><span class="top_btn2">내정보</span></a></li>
 	                </ul>
                	<% } else{  %>
