@@ -40,7 +40,8 @@ public class MessageDao {
 		try {
 
 			Context initContext = new InitialContext();
-			con = DBConnector.getInstance().getConnection();
+			DBConnector.getInstance();
+			con = DBConnector.getConnection();
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, userid);
 			pstmt.setString(2, userid);
@@ -90,7 +91,8 @@ public class MessageDao {
 
 		try {
 
-			con = DBConnector.getInstance().getConnection();
+			DBConnector.getInstance();
+			con = DBConnector.getConnection();
 			Date date = new Date();
 			String query = "INSERT INTO RT01.dbo.msg_lst (send_siteid,send_userid,gubun,viewtype,send_date,txt) "
 			        + " VALUES (1,?,'MSG','N',?,?)";
@@ -133,7 +135,8 @@ public class MessageDao {
 		Date date = new Date();
 		try {
 			Context initContext = new InitialContext();
-			con = DBConnector.getInstance().getConnection();
+			DBConnector.getInstance();
+			con = DBConnector.getConnection();
 		    pstmt   			= con.prepareStatement(query);
             pstmt.setString(1, sdf.format(date));
             pstmt.setString(2, userid);
