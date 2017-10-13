@@ -25,7 +25,8 @@ public class GameDao {
 		List<GameBean>	game_list = new ArrayList<>();
 		
 		try {
-			con 				= DBConnector.getInstance().getConnection();
+			DBConnector.getInstance();
+			con 				= DBConnector.getConnection();
 		    pstmt   			= con.prepareStatement(query);
 			rs 					= pstmt.executeQuery();
             

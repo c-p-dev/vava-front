@@ -46,7 +46,8 @@ public class UserDao {
 		String query = "SELECT * FROM RT01.dbo.user_mst WHERE userid = ?";
 
 		try {
-			con = DBConnector.getInstance().getConnection();
+			DBConnector.getInstance();
+			con = DBConnector.getConnection();
 			
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1,userid);
@@ -89,7 +90,8 @@ public class UserDao {
 		  boolean result = false;
 		  
 			try {
-				con = DBConnector.getInstance().getConnection();
+				DBConnector.getInstance();
+				con = DBConnector.getConnection();
 				
 				SmsDao sd = new SmsDao();
 				String mobile_no = sd.formatCellNumber(user.getCell_prefix(), user.getCell());
@@ -141,7 +143,8 @@ public class UserDao {
 		boolean result = false;
 		
 		try {
-			con = DBConnector.getInstance().getConnection();
+			DBConnector.getInstance();
+			con = DBConnector.getConnection();
 			      		
 		    String  query = "SELECT userid FROM RT01.dbo.user_mst WHERE userid = ? " ;
 		    pstmt = con.prepareStatement(query);
@@ -174,7 +177,8 @@ public class UserDao {
 		boolean result = false;
 		
 		try {
-			con = DBConnector.getInstance().getConnection();
+			DBConnector.getInstance();
+			con = DBConnector.getConnection();
 			      		
 		    String  query = "SELECT nick FROM RT01.dbo.user_mst WHERE nick ='"+nickname+"'" ;
 		    
@@ -221,7 +225,8 @@ public class UserDao {
 		UserBean user_data		= new UserBean();
 		
 		try {
-			con = DBConnector.getInstance().getConnection();
+			DBConnector.getInstance();
+			con = DBConnector.getConnection();
 		    
 		    pstmt   			= con.prepareStatement(query);
             pstmt.setString(1, user_id);
@@ -267,7 +272,8 @@ public class UserDao {
 		String  query 			= "UPDATE user_mst SET money = ? WHERE userid = ?";		
 		
 		try {
-			con = DBConnector.getInstance().getConnection();
+			DBConnector.getInstance();
+			con = DBConnector.getConnection();
 		    
 		    pstmt   			= con.prepareStatement(query);
             pstmt.setDouble(1, money);
@@ -293,7 +299,8 @@ public class UserDao {
 		
 		try {
 			
-			con = DBConnector.getInstance().getConnection();
+			DBConnector.getInstance();
+			con = DBConnector.getConnection();
 		
 		    String query = "";
 		    	query = "SELECT CONCAT(bank_low_name,' ' ,bank_low_owner,' ',bank_low_num) as bank_account from dbo.config_mst WHERE siteid=?";
@@ -336,7 +343,8 @@ public class UserDao {
 				" VALUES (?,?,?,?,?,?,?,?,'PEND',?,'y',?)";
 		try{
 		
-			con = DBConnector.getInstance().getConnection();
+			DBConnector.getInstance();
+			con = DBConnector.getConnection();
 			
 		    pstmt = con.prepareStatement(query);
 		    pstmt.setInt(1,trans_data.getSiteid());
@@ -385,7 +393,8 @@ public class UserDao {
 		
 		try{	      
 			
-			con = DBConnector.getInstance().getConnection();
+			DBConnector.getInstance();
+			con = DBConnector.getConnection();
 			
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1,userid);
@@ -426,7 +435,8 @@ public class UserDao {
 		String  query 			= "UPDATE user_mst SET sess  = ?, login_cnt = login_cnt + 1 WHERE userid = ?";		
 		
 		try {
-			con = DBConnector.getInstance().getConnection();
+			DBConnector.getInstance();
+			con = DBConnector.getConnection();
 			
 		    pstmt   			= con.prepareStatement(query);
             pstmt.setString(1, sessionId);
@@ -502,7 +512,8 @@ public class UserDao {
 		String  query 			= "UPDATE user_mst SET bank_name=? ,bank_owner = ?, bank_num = ?, cell=? WHERE userid = ?";		
 		
 		try {
-			con = DBConnector.getInstance().getConnection();
+			DBConnector.getInstance();
+			con = DBConnector.getConnection();
 			
 		    pstmt   			= con.prepareStatement(query);
             pstmt.setString(1, bank_name);
@@ -536,7 +547,8 @@ public class UserDao {
 		
 		try{	      
 			
-			con = DBConnector.getInstance().getConnection();	 	
+			DBConnector.getInstance();
+			con = DBConnector.getConnection();	 	
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1,userid);
 			rs = pstmt.executeQuery();
@@ -587,7 +599,8 @@ public class UserDao {
 		
 		try{	      
 			
-			con = DBConnector.getInstance().getConnection();	 	
+			DBConnector.getInstance();
+			con = DBConnector.getConnection();	 	
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1,userid);
 			pstmt.setString(2,passwd);
@@ -623,7 +636,8 @@ public class UserDao {
 		
 		try{	      
 			
-			con = DBConnector.getInstance().getConnection();			 	
+			DBConnector.getInstance();
+			con = DBConnector.getConnection();			 	
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1,new_passwd);
 			pstmt.setString(2,userid);
@@ -664,7 +678,8 @@ public class UserDao {
 				"(?,?,'POINT2MONEY','','','M',?,?,?,?,'')";
 		try{
 		
-			con = DBConnector.getInstance().getConnection();
+			DBConnector.getInstance();
+			con = DBConnector.getConnection();
 		    pstmt = con.prepareStatement(query);
 		    pstmt.setString(1,trans_data.getUserid());
 		    pstmt.setInt(2,trans_data.getSiteid());
@@ -710,7 +725,8 @@ public class UserDao {
 		String  query = "UPDATE RT01.dbo.user_mst SET money = ?, point = ? where  userid =?";
 		try{
 		
-			con = DBConnector.getInstance().getConnection();
+			DBConnector.getInstance();
+			con = DBConnector.getConnection();
 		    pstmt = con.prepareStatement(query);
 		    pstmt.setInt(1,(money+points));
 		    pstmt.setInt(2,(point-points));

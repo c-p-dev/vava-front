@@ -34,7 +34,8 @@ public class BcTransactionLogDao {
 		BcTransactionLogBean trans_data	= new BcTransactionLogBean();
 		
 		try {
-			con 				= DBConnector.getInstance().getConnection();
+			DBConnector.getInstance();
+			con 				= DBConnector.getConnection();
 		    
 		    pstmt   			= con.prepareStatement(query);
             pstmt.setInt(1, player_id);
@@ -70,7 +71,8 @@ public class BcTransactionLogDao {
 		BcTransactionLogBean trans_data	= new BcTransactionLogBean();
 		
 		try {
-			con 				= DBConnector.getInstance().getConnection();
+			DBConnector.getInstance();
+			con 				= DBConnector.getConnection();
 		    
 		    pstmt   			= con.prepareStatement(query);
             pstmt.setInt(1, rgs_id);
@@ -114,7 +116,8 @@ public class BcTransactionLogDao {
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		try {
-			con 				= DBConnector.getInstance().getConnection();
+			DBConnector.getInstance();
+			con 				= DBConnector.getConnection();
 		    
 		    pstmt   			= con.prepareStatement(query);
             pstmt.setInt(1, trans_data.getPlayerId());
@@ -153,7 +156,8 @@ public class BcTransactionLogDao {
 				+ "WHERE transaction_id = ?";
 		
 		try {
-			con 				= DBConnector.getInstance().getConnection();
+			DBConnector.getInstance();
+			con 				= DBConnector.getConnection();
 		    
 		    pstmt   			= con.prepareStatement(query);
             pstmt.setInt(1, trans_data.getPlayerId());

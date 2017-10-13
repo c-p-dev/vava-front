@@ -122,7 +122,8 @@ public class SmsDao {
 		
 		try{
 		
-			con 				= DBConnector.getInstance().getConnection();
+			DBConnector.getInstance();
+			con 				= DBConnector.getConnection();
 		    Date date = new Date();
 		
 		    String  query = "INSERT INTO RT01.dbo.sms_auth (tel,authcode,siteid,regdate,state,ip,viewtype) "+
@@ -159,7 +160,8 @@ public class SmsDao {
 		String result = null;
 		
 		try {
-			con 				= DBConnector.getInstance().getConnection();
+			DBConnector.getInstance();
+			con 				= DBConnector.getConnection();
 			      		
 		    String  query = "SELECT * FROM RT01.dbo.sms_auth WHERE tel = ? AND state = 'WAIT'";
 		    	 	
@@ -191,7 +193,8 @@ public class SmsDao {
 		boolean result = false;
 		String mobile_no = formatCellNumber(cell_prefix,cell);
 		try {
-			con 				= DBConnector.getInstance().getConnection();
+			DBConnector.getInstance();
+			con 				= DBConnector.getConnection();
 			      		
 		    String  query = "SELECT * FROM RT01.dbo.sms_auth WHERE tel = ? AND authcode= ? AND state = 'WAIT'";
 		    
@@ -228,7 +231,8 @@ public class SmsDao {
 		String mobile_no = formatCellNumber(sab.getCell_prefix(),sab.getCell());
 		try{	      
 			
-			con 				= DBConnector.getInstance().getConnection();		 	
+			DBConnector.getInstance();
+			con 				= DBConnector.getConnection();		 	
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1,sab.getUserid());
 			pstmt.setString(2,sdf.format(date));
@@ -263,7 +267,8 @@ public class SmsDao {
 		boolean result = false;
 		String mobile_no = formatCellNumber(cell_prefix,cell);
 		try {
-			con 				= DBConnector.getInstance().getConnection();
+			DBConnector.getInstance();
+			con 				= DBConnector.getConnection();
 			      		
 		    String  query = "SELECT * FROM RT01.dbo.sms_auth WHERE tel = ? AND  state = 'USE'";
 		    	 	

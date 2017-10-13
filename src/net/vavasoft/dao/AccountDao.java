@@ -52,7 +52,8 @@ public class AccountDao {
 			Date dateFrom = sdf.parse(fromDate);
 			Date dateTo = sdf.parse(toDate);
 			
-			con 				= DBConnector.getInstance().getConnection(); 	
+			DBConnector.getInstance();
+			con 				= DBConnector.getConnection(); 	
 			pstmt = con.prepareStatement(dataQuery);
 			pstmt.setString(1,userid);
 			pstmt.setString(2,sdf.format(dateFrom) );
@@ -121,7 +122,8 @@ public class AccountDao {
 			Date dateFrom = sdf.parse(fromDate);
 			Date dateTo = sdf.parse(toDate);
 			
-			con 				= DBConnector.getInstance().getConnection();	 	
+			DBConnector.getInstance();
+			con 				= DBConnector.getConnection();	 	
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1,userid);
 			pstmt.setString(2,sdf.format(dateFrom) );

@@ -45,7 +45,8 @@ public class ChargeDao {
 				" VALUES (?,?,?,?,?,?,?,1,?,'PEND',?,'Y')";
 		try{
 		
-			con 				= DBConnector.getInstance().getConnection();
+			DBConnector.getInstance();
+			con 				= DBConnector.getConnection();
 		    pstmt = con.prepareStatement(query);
 		    pstmt.setString(1,uBean.getUserid());
 		    pstmt.setInt(2,uBean.getSiteid());
@@ -95,7 +96,8 @@ public class ChargeDao {
 		
 		try{	      
 			
-			con 				= DBConnector.getInstance().getConnection();
+			DBConnector.getInstance();
+			con 				= DBConnector.getConnection();
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1,userid);
 			rs = pstmt.executeQuery();

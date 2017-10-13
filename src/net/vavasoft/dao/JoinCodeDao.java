@@ -37,7 +37,8 @@ public class JoinCodeDao {
 		
 		try{	      
 			
-			con 				= DBConnector.getInstance().getConnection();
+			DBConnector.getInstance();
+			con 				= DBConnector.getConnection();
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1,joincode);
 			pstmt.setString(2,recommend);
@@ -73,7 +74,8 @@ public class JoinCodeDao {
 		
 		try{	      
 			
-			con 				= DBConnector.getInstance().getConnection();
+			DBConnector.getInstance();
+			con 				= DBConnector.getConnection();
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1,jcb.getUserid());
 			pstmt.setString(2,sdf.format(date));
