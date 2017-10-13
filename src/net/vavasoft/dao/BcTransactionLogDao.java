@@ -17,6 +17,7 @@ import org.apache.log4j.Logger;
 
 import net.vavasoft.bean.BcTransactionLogBean;
 import net.vavasoft.bean.GameBean;
+import net.vavasoft.util.DBConnector;
 import test.BetConManager_Test2;
 
 public class BcTransactionLogDao {
@@ -33,11 +34,7 @@ public class BcTransactionLogDao {
 		BcTransactionLogBean trans_data	= new BcTransactionLogBean();
 		
 		try {
-			Context initContext = new InitialContext();
-		 	Context envContext 	= (Context)initContext.lookup("java:/comp/env");
-			DataSource ds 		= (DataSource)envContext.lookup("jdbc/vava");
-			
-		    con 				= ds.getConnection();
+			con 				= DBConnector.getInstance().getConnection();
 		    
 		    pstmt   			= con.prepareStatement(query);
             pstmt.setInt(1, player_id);
@@ -73,11 +70,7 @@ public class BcTransactionLogDao {
 		BcTransactionLogBean trans_data	= new BcTransactionLogBean();
 		
 		try {
-			Context initContext = new InitialContext();
-		 	Context envContext 	= (Context)initContext.lookup("java:/comp/env");
-			DataSource ds 		= (DataSource)envContext.lookup("jdbc/vava");
-			
-		    con 				= ds.getConnection();
+			con 				= DBConnector.getInstance().getConnection();
 		    
 		    pstmt   			= con.prepareStatement(query);
             pstmt.setInt(1, rgs_id);
@@ -121,11 +114,7 @@ public class BcTransactionLogDao {
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		try {
-			Context initContext = new InitialContext();
-		 	Context envContext 	= (Context)initContext.lookup("java:/comp/env");
-			DataSource ds 		= (DataSource)envContext.lookup("jdbc/vava");
-			
-		    con 				= ds.getConnection();
+			con 				= DBConnector.getInstance().getConnection();
 		    
 		    pstmt   			= con.prepareStatement(query);
             pstmt.setInt(1, trans_data.getPlayerId());
@@ -164,11 +153,7 @@ public class BcTransactionLogDao {
 				+ "WHERE transaction_id = ?";
 		
 		try {
-			Context initContext = new InitialContext();
-		 	Context envContext 	= (Context)initContext.lookup("java:/comp/env");
-			DataSource ds 		= (DataSource)envContext.lookup("jdbc/vava");
-			
-		    con 				= ds.getConnection();
+			con 				= DBConnector.getInstance().getConnection();
 		    
 		    pstmt   			= con.prepareStatement(query);
             pstmt.setInt(1, trans_data.getPlayerId());

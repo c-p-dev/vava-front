@@ -14,6 +14,7 @@ import org.apache.log4j.Logger;
 import net.arnx.jsonic.JSON;
 import net.vavasoft.bean.ChargeBean;
 import net.vavasoft.bean.UserBean;
+import net.vavasoft.util.DBConnector;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
@@ -44,11 +45,7 @@ public class ChargeDao {
 				" VALUES (?,?,?,?,?,?,?,1,?,'PEND',?,'Y')";
 		try{
 		
-			Context initContext = new InitialContext();
-		 	Context envContext = (Context)initContext.lookup("java:/comp/env");
-			DataSource ds = (DataSource)envContext.lookup("jdbc/vava");
-			
-		    con = ds.getConnection();		
+			con 				= DBConnector.getInstance().getConnection();
 		    pstmt = con.prepareStatement(query);
 		    pstmt.setString(1,uBean.getUserid());
 		    pstmt.setInt(2,uBean.getSiteid());
@@ -98,11 +95,7 @@ public class ChargeDao {
 		
 		try{	      
 			
-		 	Context initContext = new InitialContext();
-		 	Context envContext = (Context)initContext.lookup("java:/comp/env");
-			DataSource ds = (DataSource)envContext.lookup("jdbc/vava");
-						 	
-			con = ds.getConnection();			 	
+			con 				= DBConnector.getInstance().getConnection();
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1,userid);
 			rs = pstmt.executeQuery();

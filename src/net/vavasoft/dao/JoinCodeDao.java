@@ -17,6 +17,7 @@ import javax.sql.DataSource;
 import org.apache.log4j.Logger;
 
 import net.vavasoft.bean.UserBean;
+import net.vavasoft.util.DBConnector;
 import net.vavasoft.bean.JoinCodeBean;
 import net.vavasoft.bean.SmsAuthBean;
 import test.BetConManager_Test2;
@@ -36,11 +37,7 @@ public class JoinCodeDao {
 		
 		try{	      
 			
-		 	Context initContext = new InitialContext();
-		 	Context envContext = (Context)initContext.lookup("java:/comp/env");
-			DataSource ds = (DataSource)envContext.lookup("jdbc/vava");
-						 	
-			con = ds.getConnection();			 	
+			con 				= DBConnector.getInstance().getConnection();
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1,joincode);
 			pstmt.setString(2,recommend);
@@ -76,11 +73,7 @@ public class JoinCodeDao {
 		
 		try{	      
 			
-		 	Context initContext = new InitialContext();
-		 	Context envContext = (Context)initContext.lookup("java:/comp/env");
-			DataSource ds = (DataSource)envContext.lookup("jdbc/vava");
-						 	
-			con = ds.getConnection();			 	
+			con 				= DBConnector.getInstance().getConnection();
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1,jcb.getUserid());
 			pstmt.setString(2,sdf.format(date));

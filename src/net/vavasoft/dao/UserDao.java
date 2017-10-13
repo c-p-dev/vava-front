@@ -28,6 +28,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import net.vavasoft.dao.SmsDao;
+import net.vavasoft.util.DBConnector;
 import net.vavasoft.bean.SmsAuthBean;
 
 public class UserDao {
@@ -43,15 +44,10 @@ public class UserDao {
 		
 		UserBean uib = new UserBean();
 		String query = "SELECT * FROM RT01.dbo.user_mst WHERE userid = ?";
-		System.out.println(userid);
-		System.out.println(password);
-		try{	      
+
+		try {
+			con = DBConnector.getInstance().getConnection();
 			
-		 	Context initContext = new InitialContext();
-		 	Context envContext = (Context)initContext.lookup("java:/comp/env");
-			DataSource ds = (DataSource)envContext.lookup("jdbc/vava");
-						 	
-			con = ds.getConnection();			 	
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1,userid);
 			rs = pstmt.executeQuery();
@@ -92,14 +88,12 @@ public class UserDao {
 		  int row = 0;
 		  boolean result = false;
 		  
-			try{
+			try {
+				con = DBConnector.getInstance().getConnection();
+				
 				SmsDao sd = new SmsDao();
 				String mobile_no = sd.formatCellNumber(user.getCell_prefix(), user.getCell());
-				Context initContext = new InitialContext();
-			 	Context envContext = (Context)initContext.lookup("java:/comp/env");
-				DataSource ds = (DataSource)envContext.lookup("jdbc/vava");
-			    con = ds.getConnection();
-			    Date date = new Date();
+				Date date = new Date();
 			    String  query = "INSERT INTO RT01.dbo.user_mst (userid,siteid,passwd,cell,bank_name,bank_owner,bank_num,regdate,state,watch,charge_level,ip,reg_ip,nick,recommand) "+
 						" VALUES (?,1,?,? ,?,?,?,?,'NORMAL','N','LOW',?,?,?,?)";
 									
@@ -147,10 +141,7 @@ public class UserDao {
 		boolean result = false;
 		
 		try {
-			Context initContext = new InitialContext();
-		 	Context envContext = (Context)initContext.lookup("java:/comp/env");
-			DataSource ds = (DataSource)envContext.lookup("jdbc/vava");
-		    con = ds.getConnection();
+			con = DBConnector.getInstance().getConnection();
 			      		
 		    String  query = "SELECT userid FROM RT01.dbo.user_mst WHERE userid = ? " ;
 		    pstmt = con.prepareStatement(query);
@@ -183,14 +174,10 @@ public class UserDao {
 		boolean result = false;
 		
 		try {
-			Context initContext = new InitialContext();
-		 	Context envContext = (Context)initContext.lookup("java:/comp/env");
-			DataSource ds = (DataSource)envContext.lookup("jdbc/vava");
-			
-		    con = ds.getConnection();
+			con = DBConnector.getInstance().getConnection();
 			      		
 		    String  query = "SELECT nick FROM RT01.dbo.user_mst WHERE nick ='"+nickname+"'" ;
-		    con = ds.getConnection();			 	
+		    
 			pstmt = con.prepareStatement(query);
 			rs = pstmt.executeQuery();
 			logger.debug("this is rs: " + rs);
@@ -234,11 +221,7 @@ public class UserDao {
 		UserBean user_data		= new UserBean();
 		
 		try {
-			Context initContext = new InitialContext();
-		 	Context envContext 	= (Context)initContext.lookup("java:/comp/env");
-			DataSource ds 		= (DataSource)envContext.lookup("jdbc/vava");
-			
-		    con 				= ds.getConnection();
+			con = DBConnector.getInstance().getConnection();
 		    
 		    pstmt   			= con.prepareStatement(query);
             pstmt.setString(1, user_id);
@@ -284,11 +267,7 @@ public class UserDao {
 		String  query 			= "UPDATE user_mst SET money = ? WHERE userid = ?";		
 		
 		try {
-			Context initContext = new InitialContext();
-		 	Context envContext 	= (Context)initContext.lookup("java:/comp/env");
-			DataSource ds 		= (DataSource)envContext.lookup("jdbc/vava");
-			
-		    con 				= ds.getConnection();
+			con = DBConnector.getInstance().getConnection();
 		    
 		    pstmt   			= con.prepareStatement(query);
             pstmt.setDouble(1, money);
@@ -314,9 +293,7 @@ public class UserDao {
 		
 		try {
 			
-			Context initContext = new InitialContext();
-		 	Context envContext = (Context)initContext.lookup("java:/comp/env");
-			DataSource ds = (DataSource)envContext.lookup("jdbc/vava");
+			con = DBConnector.getInstance().getConnection();
 		
 		    String query = "";
 		    	query = "SELECT CONCAT(bank_low_name,' ' ,bank_low_owner,' ',bank_low_num) as bank_account from dbo.config_mst WHERE siteid=?";
@@ -326,7 +303,6 @@ public class UserDao {
 				query = "SELECT CONCAT(bank_middle_name,' ' ,bank_middle_owner,' ',bank_middle_num) as bank_account from dbo.config_mst WHERE siteid=?"; 
 			}
 			
-		    con = ds.getConnection();			 	
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1,siteid);
 			rs = pstmt.executeQuery();
@@ -360,11 +336,8 @@ public class UserDao {
 				" VALUES (?,?,?,?,?,?,?,?,'PEND',?,'y',?)";
 		try{
 		
-			Context initContext = new InitialContext();
-		 	Context envContext = (Context)initContext.lookup("java:/comp/env");
-			DataSource ds = (DataSource)envContext.lookup("jdbc/vava");
+			con = DBConnector.getInstance().getConnection();
 			
-		    con = ds.getConnection();		
 		    pstmt = con.prepareStatement(query);
 		    pstmt.setInt(1,trans_data.getSiteid());
 		    pstmt.setString(2,trans_data.getUserid());
@@ -412,11 +385,8 @@ public class UserDao {
 		
 		try{	      
 			
-		 	Context initContext = new InitialContext();
-		 	Context envContext = (Context)initContext.lookup("java:/comp/env");
-			DataSource ds = (DataSource)envContext.lookup("jdbc/vava");
-						 	
-			con = ds.getConnection();			 	
+			con = DBConnector.getInstance().getConnection();
+			
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1,userid);
 			rs = pstmt.executeQuery();
@@ -456,11 +426,8 @@ public class UserDao {
 		String  query 			= "UPDATE user_mst SET sess  = ?, login_cnt = login_cnt + 1 WHERE userid = ?";		
 		
 		try {
-			Context initContext = new InitialContext();
-		 	Context envContext 	= (Context)initContext.lookup("java:/comp/env");
-			DataSource ds 		= (DataSource)envContext.lookup("jdbc/vava");
+			con = DBConnector.getInstance().getConnection();
 			
-		    con 				= ds.getConnection();
 		    pstmt   			= con.prepareStatement(query);
             pstmt.setString(1, sessionId);
             pstmt.setString(2, userid);
@@ -535,11 +502,8 @@ public class UserDao {
 		String  query 			= "UPDATE user_mst SET bank_name=? ,bank_owner = ?, bank_num = ?, cell=? WHERE userid = ?";		
 		
 		try {
-			Context initContext = new InitialContext();
-		 	Context envContext 	= (Context)initContext.lookup("java:/comp/env");
-			DataSource ds 		= (DataSource)envContext.lookup("jdbc/vava");
+			con = DBConnector.getInstance().getConnection();
 			
-		    con 				= ds.getConnection();
 		    pstmt   			= con.prepareStatement(query);
             pstmt.setString(1, bank_name);
             pstmt.setString(2, bank_owner);
@@ -572,11 +536,7 @@ public class UserDao {
 		
 		try{	      
 			
-		 	Context initContext = new InitialContext();
-		 	Context envContext = (Context)initContext.lookup("java:/comp/env");
-			DataSource ds = (DataSource)envContext.lookup("jdbc/vava");
-						 	
-			con = ds.getConnection();			 	
+			con = DBConnector.getInstance().getConnection();	 	
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1,userid);
 			rs = pstmt.executeQuery();
@@ -627,11 +587,7 @@ public class UserDao {
 		
 		try{	      
 			
-		 	Context initContext = new InitialContext();
-		 	Context envContext = (Context)initContext.lookup("java:/comp/env");
-			DataSource ds = (DataSource)envContext.lookup("jdbc/vava");
-						 	
-			con = ds.getConnection();			 	
+			con = DBConnector.getInstance().getConnection();	 	
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1,userid);
 			pstmt.setString(2,passwd);
@@ -667,11 +623,7 @@ public class UserDao {
 		
 		try{	      
 			
-		 	Context initContext = new InitialContext();
-		 	Context envContext = (Context)initContext.lookup("java:/comp/env");
-			DataSource ds = (DataSource)envContext.lookup("jdbc/vava");
-						 	
-			con = ds.getConnection();			 	
+			con = DBConnector.getInstance().getConnection();			 	
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1,new_passwd);
 			pstmt.setString(2,userid);
@@ -712,11 +664,7 @@ public class UserDao {
 				"(?,?,'POINT2MONEY','','','M',?,?,?,?,'')";
 		try{
 		
-			Context initContext = new InitialContext();
-		 	Context envContext = (Context)initContext.lookup("java:/comp/env");
-			DataSource ds = (DataSource)envContext.lookup("jdbc/vava");
-			
-		    con = ds.getConnection();		
+			con = DBConnector.getInstance().getConnection();
 		    pstmt = con.prepareStatement(query);
 		    pstmt.setString(1,trans_data.getUserid());
 		    pstmt.setInt(2,trans_data.getSiteid());
@@ -762,11 +710,7 @@ public class UserDao {
 		String  query = "UPDATE RT01.dbo.user_mst SET money = ?, point = ? where  userid =?";
 		try{
 		
-			Context initContext = new InitialContext();
-		 	Context envContext = (Context)initContext.lookup("java:/comp/env");
-			DataSource ds = (DataSource)envContext.lookup("jdbc/vava");
-			
-		    con = ds.getConnection();		
+			con = DBConnector.getInstance().getConnection();
 		    pstmt = con.prepareStatement(query);
 		    pstmt.setInt(1,(money+points));
 		    pstmt.setInt(2,(point-points));

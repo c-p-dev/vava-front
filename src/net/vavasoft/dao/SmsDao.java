@@ -26,6 +26,7 @@ import infobip.api.model.sms.mt.send.SMSResponseDetails;
 import infobip.api.model.sms.mt.send.textual.SMSTextualRequest;
 import net.vavasoft.bean.GameBean;
 import net.vavasoft.bean.UserBean;
+import net.vavasoft.util.DBConnector;
 import net.vavasoft.bean.SmsAuthBean;
 
 import test.BetConManager_Test2;
@@ -121,10 +122,7 @@ public class SmsDao {
 		
 		try{
 		
-			Context initContext = new InitialContext();
-		 	Context envContext = (Context)initContext.lookup("java:/comp/env");
-			DataSource ds = (DataSource)envContext.lookup("jdbc/vava");
-		    con = ds.getConnection();
+			con 				= DBConnector.getInstance().getConnection();
 		    Date date = new Date();
 		
 		    String  query = "INSERT INTO RT01.dbo.sms_auth (tel,authcode,siteid,regdate,state,ip,viewtype) "+
@@ -161,14 +159,10 @@ public class SmsDao {
 		String result = null;
 		
 		try {
-			Context initContext = new InitialContext();
-		 	Context envContext = (Context)initContext.lookup("java:/comp/env");
-			DataSource ds = (DataSource)envContext.lookup("jdbc/vava");
-			
-		    con = ds.getConnection();
+			con 				= DBConnector.getInstance().getConnection();
 			      		
 		    String  query = "SELECT * FROM RT01.dbo.sms_auth WHERE tel = ? AND state = 'WAIT'";
-		    con = ds.getConnection();			 	
+		    	 	
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1,cell);
 			rs = pstmt.executeQuery();
@@ -197,14 +191,10 @@ public class SmsDao {
 		boolean result = false;
 		String mobile_no = formatCellNumber(cell_prefix,cell);
 		try {
-			Context initContext = new InitialContext();
-		 	Context envContext = (Context)initContext.lookup("java:/comp/env");
-			DataSource ds = (DataSource)envContext.lookup("jdbc/vava");
-			
-		    con = ds.getConnection();
+			con 				= DBConnector.getInstance().getConnection();
 			      		
 		    String  query = "SELECT * FROM RT01.dbo.sms_auth WHERE tel = ? AND authcode= ? AND state = 'WAIT'";
-		    con = ds.getConnection();			 	
+		    
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1,mobile_no);
 			pstmt.setString(2,authcode);
@@ -238,11 +228,7 @@ public class SmsDao {
 		String mobile_no = formatCellNumber(sab.getCell_prefix(),sab.getCell());
 		try{	      
 			
-		 	Context initContext = new InitialContext();
-		 	Context envContext = (Context)initContext.lookup("java:/comp/env");
-			DataSource ds = (DataSource)envContext.lookup("jdbc/vava");
-						 	
-			con = ds.getConnection();			 	
+			con 				= DBConnector.getInstance().getConnection();		 	
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1,sab.getUserid());
 			pstmt.setString(2,sdf.format(date));
@@ -277,14 +263,10 @@ public class SmsDao {
 		boolean result = false;
 		String mobile_no = formatCellNumber(cell_prefix,cell);
 		try {
-			Context initContext = new InitialContext();
-		 	Context envContext = (Context)initContext.lookup("java:/comp/env");
-			DataSource ds = (DataSource)envContext.lookup("jdbc/vava");
-			
-		    con = ds.getConnection();
+			con 				= DBConnector.getInstance().getConnection();
 			      		
 		    String  query = "SELECT * FROM RT01.dbo.sms_auth WHERE tel = ? AND  state = 'USE'";
-		    con = ds.getConnection();			 	
+		    	 	
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1,mobile_no);
 			rs = pstmt.executeQuery();

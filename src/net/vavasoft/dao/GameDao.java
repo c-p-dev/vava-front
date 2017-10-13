@@ -12,6 +12,7 @@ import javax.sql.DataSource;
 
 import net.vavasoft.bean.GameBean;
 import net.vavasoft.bean.UserBean;
+import net.vavasoft.util.DBConnector;
 
 public class GameDao {
 	
@@ -24,11 +25,7 @@ public class GameDao {
 		List<GameBean>	game_list = new ArrayList<>();
 		
 		try {
-			Context initContext = new InitialContext();
-		 	Context envContext 	= (Context)initContext.lookup("java:/comp/env");
-			DataSource ds 		= (DataSource)envContext.lookup("jdbc/vava");
-			
-		    con 				= ds.getConnection();
+			con 				= DBConnector.getInstance().getConnection();
 		    pstmt   			= con.prepareStatement(query);
 			rs 					= pstmt.executeQuery();
             

@@ -18,6 +18,7 @@ import net.vavasoft.bean.BetConUserBean;
 import net.vavasoft.bean.GameBean;
 import net.vavasoft.bean.UserBean;
 import net.vavasoft.betconstruct.GetBalanceOutput;
+import net.vavasoft.util.DBConnector;
 
 public class BetConDao {
 	
@@ -33,11 +34,7 @@ public class BetConDao {
 		String  query 			= "SELECT TOP 1 * FROM betcon_user_lst JOIN user_mst ON betcon_user_lst.username = user_mst.userid WHERE player_id = ?" ;
 		
 		try {
-			Context initContext = new InitialContext();
-		 	Context envContext 	= (Context)initContext.lookup("java:/comp/env");
-			DataSource ds 		= (DataSource)envContext.lookup("jdbc/vava");
-			
-		    con 				= ds.getConnection();
+			con 				= DBConnector.getInstance().getConnection();
 		    
 		    pstmt   			= con.prepareStatement(query);
             pstmt.setInt(1, player_id);
@@ -73,11 +70,7 @@ public class BetConDao {
 		String  query 			= "SELECT TOP 1 * FROM betcon_user_lst  WHERE session_token = ?" ;
 		
 		try {
-			Context initContext = new InitialContext();
-		 	Context envContext 	= (Context)initContext.lookup("java:/comp/env");
-			DataSource ds 		= (DataSource)envContext.lookup("jdbc/vava");
-			
-		    con 				= ds.getConnection();
+			con 				= DBConnector.getInstance().getConnection();
 		    
 		    pstmt   			= con.prepareStatement(query);
             pstmt.setString(1, token);
@@ -112,11 +105,7 @@ public class BetConDao {
 		String  query 			= "SELECT TOP 1 * FROM betcon_user_lst WHERE username = ? AND site_id = ?" ;
 		
 		try {
-			Context initContext = new InitialContext();
-		 	Context envContext 	= (Context)initContext.lookup("java:/comp/env");
-			DataSource ds 		= (DataSource)envContext.lookup("jdbc/vava");
-			
-		    con 				= ds.getConnection();
+			con 				= DBConnector.getInstance().getConnection();
 		    
 		    pstmt   			= con.prepareStatement(query);
             pstmt.setString(1, username);
@@ -154,11 +143,7 @@ public class BetConDao {
 				+ "AND site_id = ?";
 		
 		try {
-			Context initContext = new InitialContext();
-		 	Context envContext 	= (Context)initContext.lookup("java:/comp/env");
-			DataSource ds 		= (DataSource)envContext.lookup("jdbc/vava");
-			
-		    con 				= ds.getConnection();
+			con 				= DBConnector.getInstance().getConnection();
 		    
 		    pstmt   			= con.prepareStatement(query);
             pstmt.setString(1, token);
@@ -189,12 +174,8 @@ public class BetConDao {
 				+ "VALUES (?, ?, ?, ?)";
 		
 		try {
-			Context initContext = new InitialContext();
-		 	Context envContext 	= (Context)initContext.lookup("java:/comp/env");
-			DataSource ds 		= (DataSource)envContext.lookup("jdbc/vava");
+			con 				= DBConnector.getInstance().getConnection();
 			
-		    con 				= ds.getConnection();
-		    
 		    pstmt   			= con.prepareStatement(query);
             pstmt.setString(1, user_data.getUsername());
             pstmt.setString(2, user_data.getSession_token());

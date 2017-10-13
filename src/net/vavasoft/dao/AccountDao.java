@@ -22,6 +22,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import net.vavasoft.bean.AccountListBean;
 import net.vavasoft.betconstruct.AuthenticationOutput;
+import net.vavasoft.util.DBConnector;
 
 
 public class AccountDao {
@@ -51,11 +52,7 @@ public class AccountDao {
 			Date dateFrom = sdf.parse(fromDate);
 			Date dateTo = sdf.parse(toDate);
 			
-		 	Context initContext = new InitialContext();
-		 	Context envContext = (Context)initContext.lookup("java:/comp/env");
-			DataSource ds = (DataSource)envContext.lookup("jdbc/vava");
-						 	
-			con = ds.getConnection();			 	
+			con 				= DBConnector.getInstance().getConnection(); 	
 			pstmt = con.prepareStatement(dataQuery);
 			pstmt.setString(1,userid);
 			pstmt.setString(2,sdf.format(dateFrom) );
@@ -124,11 +121,7 @@ public class AccountDao {
 			Date dateFrom = sdf.parse(fromDate);
 			Date dateTo = sdf.parse(toDate);
 			
-		 	Context initContext = new InitialContext();
-		 	Context envContext = (Context)initContext.lookup("java:/comp/env");
-			DataSource ds = (DataSource)envContext.lookup("jdbc/vava");
-						 	
-			con = ds.getConnection();			 	
+			con 				= DBConnector.getInstance().getConnection();	 	
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1,userid);
 			pstmt.setString(2,sdf.format(dateFrom) );
