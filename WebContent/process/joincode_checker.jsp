@@ -1,4 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="net.vavasoft.bean.UserBean,net.vavasoft.dao.UserDao,java.sql.SQLException,net.vavasoft.bean.JoinCodeBean,net.vavasoft.dao.JoinCodeDao;" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<%@ page import = "net.vavasoft.bean.UserBean" %>
+<%@ page import = "net.vavasoft.dao.UserDao" %>
+<%@ page import = "java.sql.SQLException" %>
+<%@ page import = "net.vavasoft.bean.JoinCodeBean" %>
+<%@ page import = "net.vavasoft.dao.JoinCodeDao" %>
+
 <%
 	
 	UserDao ud = new UserDao();
@@ -11,3 +18,8 @@
 	System.out.println(result);
 	out.println(result);
 %>
+
+
+
+
+

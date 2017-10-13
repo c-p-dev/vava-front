@@ -92,11 +92,20 @@ table.dataTable tbody td {
 /*accordion*/
 
 .smk_accordion .acc_section.acc_active > .acc_head{
-	background: #222727 url(/images/accordion-opened.png) no-repeat 1300px center!important;	
+	background: #2d3232 url(/images/accordion-opened.png) no-repeat 1300px center!important;	
 }
 .smk_accordion .acc_section .acc_head{
-	background: #222727  url(/images/accordion-closed.png) no-repeat 1300px center!important;
+	background: #2d3232  url(/images/accordion-closed.png) no-repeat 1300px center!important;
 }
+
+.smk_accordion .acc_section:only-child .acc_head {
+    background: #2d3232!important;   
+}
+
+.smk_accordion li:only-child > .acc_head{
+    background: none!important;    
+}
+
 .dataTables_wrapper .dataTables_paginate .ellipsis {
 	color:white;
 }

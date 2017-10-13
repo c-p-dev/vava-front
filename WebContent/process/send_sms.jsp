@@ -15,12 +15,6 @@
     String userid = request.getParameter("userid").trim();
 	String cell = request.getParameter("cell").trim();
 	String cell_prefix = request.getParameter("cell_prefix").trim();
-
-    // if(cell.substring(1).length() == 10 && cell.substring(0,1).equals("0") && cell_prefix.equals("+63")){
-    //     cell = cell.substring(1);
-    // }
-
-    String cell_no = cell_prefix+cell;
 	
     boolean res = sd.sendSms(userid,cell_prefix,cell,ip);
 	out.println(res);

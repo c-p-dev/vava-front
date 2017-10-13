@@ -245,7 +245,8 @@
 	        	console.log(pickerTo.minDate);
 	            pickerTo.setMinDate(this.getDate());
 	            pickerTo.setDate(this.getDate());
-	        }
+	        },
+	        minDate : moment().subtract(30,'days').toDate()
 		});
 
        	var pickerTo = new Pikaday({ 

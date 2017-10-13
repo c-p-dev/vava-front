@@ -1,12 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="
-	net.vavasoft.bean.UserBean,
-	net.vavasoft.dao.UserDao,
-	java.sql.SQLException,
-	java.util.ArrayList,
-	java.util.List,
-	com.google.gson.reflect.TypeToken,
-	java.util.StringTokenizer,
-	com.google.gson.Gson;" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"  %>
+
+<%@ page import = "net.vavasoft.bean.UserBean" %>
+<%@ page import = "net.vavasoft.dao.UserDao" %>
+<%@ page import = "java.sql.SQLException" %>
+<%@ page import = "java.util.ArrayList" %>
+<%@ page import = "java.util.List" %>
+<%@ page import = "com.google.gson.reflect.TypeToken" %>
+<%@ page import = "java.util.StringTokenizer" %>
+<%@ page import = "com.google.gson.Gson" %>
+
 <%
 	if(session.getAttribute("currentSessionUser") != null){
 		Gson gson = new Gson();
@@ -15,11 +17,7 @@
 		List res = ud.getWithdrawList(bean.getUserid());
 		
 		out.println(gson.toJson(res).toString());
-	}
-
-	
-		
-
-
-	
+	}	
 %>
+
+

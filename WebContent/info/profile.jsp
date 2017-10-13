@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@page import="net.vavasoft.dao.GameDao, java.text.DecimalFormat, java.util.*,net.vavasoft.dao.UserDao,net.vavasoft.bean.UserBean;"%>
+<%@ page import = "net.vavasoft.dao.GameDao"%>
+<%@ page import = "java.text.DecimalFormat"%>
+<%@ page import = "java.util.*"%>
+<%@ page import = "net.vavasoft.dao.UserDao"%>
+<%@ page import = "net.vavasoft.bean.UserBean"%>
 <%
 	UserBean user_data	= (UserBean)session.getAttribute("currentSessionUser");
 	UserDao user_db	= new UserDao();
 	UserBean currentUser = user_db.getUserByUserId(user_data.getUserid());
-
 %>
 
 <ul class="smk_accordion">
@@ -165,7 +168,7 @@
 							</tr>
 							<tr>
 								<td class="my_pass">
-									<input class="input_style03" id="new_passowrd" name="new_passowrd" placeholder="New Password" placeholder="새 비밀번호">
+									<input class="input_style03 password" id="new_passowrd" name="new_passowrd" placeholder="New Password" placeholder="새 비밀번호">
 								</td>
 								<td class="my_text input_warning" id="new_passowrd-update-warn" >비밀번호는 최소 6자 이상으로 설정해주세요</td>
 							<tr>
@@ -174,7 +177,7 @@
 							</tr>
 							<tr>
 								<td class="my_pass">
-									<input class="input_style03" id="confirm_new_passowrd" name="confirm_new_passowrd" placeholder="Confirm New Password" placeholder="새 비밀번호 확인">
+									<input class="input_style03 password" id="confirm_new_passowrd" name="confirm_new_passowrd" placeholder="Confirm New Password" placeholder="새 비밀번호 확인">
 								</td>
 								<td class="my_text input_warning" id="confirm_new_passowrd-update-warn" >비밀번호가 일치하지 않습니다</td>
 							<tr>

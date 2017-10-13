@@ -1,8 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" 
-	import="net.vavasoft.bean.ChargeBean,
-	net.vavasoft.dao.ChargeDao,
-	net.vavasoft.bean.UserBean,
-	net.vavasoft.dao.UserDao,java.sql.SQLException;" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"  %>
+<%@ page import ="net.vavasoft.bean.ChargeBean" %>
+<%@ page import ="net.vavasoft.dao.ChargeDao" %>
+<%@ page import ="net.vavasoft.bean.UserBean" %>
+<%@ page import ="net.vavasoft.dao.UserDao,java.sql.SQLException" %>
+
 <%
 	if(session.getAttribute("currentSessionUser") != null){
 		UserBean userBean = (UserBean) session.getAttribute("currentSessionUser");	
