@@ -257,6 +257,7 @@
 
 		$('select').niceSelect();
 
+
 		$.validator.addMethod("checkReferrer", function(value, element) {
 	    	var x = $.ajax({
 		        url:'${baseUrl}process/referrence_checker.jsp',

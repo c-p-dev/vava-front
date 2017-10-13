@@ -35,7 +35,7 @@
 }
 table.dataTable thead th{ 
     color: white!important;
-    background: #151516!important;
+    /*background: #151516!important;*/
     /*height: 40px!important;*/
     text-align: center!important;
     border-bottom: solid 1px #000000!important;
@@ -49,6 +49,7 @@ table.dataTable tbody td {
     border-bottom: solid 1px #2e3032!important;
   	height: 40px!important;
 }
+
 
 /*nice select*/
 
@@ -64,10 +65,11 @@ table.dataTable tbody td {
 }
 .nice-select .list{
 	max-height: 200px!important;
-    overflow-y: scroll!important;
     width: 100%!important;
     border-radius: 0px!important;
     background-color: #1c2021!important;
+    /*overflow-x:hidden!important;*/
+    overflow-y:auto!important;
 }
 .nice-select .list li{
 	width: 100%!important;
@@ -206,3 +208,4 @@ input[type="text"]::-webkit-input-placeholder {
 input::-moz-placeholder {
  text-align: left;
 }	
+

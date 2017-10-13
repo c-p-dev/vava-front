@@ -21,7 +21,7 @@
 				<jsp:include page="betting_history.jsp" />
 			</div>
 			<div id="tab3" class="tab_content">
-				<ul class="smk_accordion">
+				<!-- <ul class="smk_accordion">
 					<li>
 						<div class="acc_head"><h3>1:1문의</h3></div>
 						<div class="acc_content">
@@ -84,7 +84,8 @@
 							</div>
 						</div>
 					</li>
-				</ul>
+				</ul> -->
+				<jsp:include page="contact.jsp" />
 			</div>
 			<div id="tab4" class="tab_content">
 				<ul class="smk_accordion">
