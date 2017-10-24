@@ -16,6 +16,24 @@
 	.form1-invalid {
 		border-color:#d50000!important;
 	}
+
+	.qtip{
+		z-index: 99999999!important;
+	}
+
+	.qtip-default {
+	    border: 1px solid #2e3233;
+	    /*background-color: #191a1b;*/
+	    background-color:#2e3233;
+	    color: #404654;
+	    padding: 8px;
+    	border-radius: 8px;
+	}
+	.qtip-content .form1-invalid{
+		color:white!important;
+	}
+
+	
 </style>
 <!-- member registration form -->
 <div id="fade_1" class="bg_mask_pop1">
@@ -30,10 +48,9 @@
 			<table  width="100%" cellpadding="0" cellspacing="0" class="popup_table01">
 				<tr>
 					<td>
-						<table  cellpadding="0" cellspacing="0" class="popup_table01_1">
+						<table  cellpadding="0" width="100%" cellspacing="0" class="popup_table01_1">
 							<tr>
-								<td width="370"><input class="input_style02 input_required" id="userid" name="userid"  maxlength="12" placeholder="ID" placeholder="아이디" data-warn="userid-warn"></td>
-								<td><img src="/images/input_mark3.jpg" class="img-validator" id="userid-img-valid" ></td>
+								<td><input class="input_style02 input_required" id="userid" name="userid"  maxlength="12" placeholder="아이디" data-warn="userid-warn" tabindex="1"></td>
 							</tr>
 							<tr>
 								<td colspan="2"><div class="input_warning" id="userid-warn">조건에 맞는 아이디를 입력해주세요.</div></td>
@@ -43,10 +60,10 @@
 				</tr>
 				<tr>
 					<td>
-						<table  cellpadding="0" cellspacing="0" class="popup_table01_1">
+						<table  cellpadding="0" width="100%" cellspacing="0" class="popup_table01_1">
 							<tr>
-								<td width="370"><input class="input_style02 input_required" name="nick" maxlength="20" data-warn="nickname-warn" placeholder="Nickname" placeholder="새긴 ​​금"></td>
-								<td><img src="/images/input_mark3.jpg" class="img-validator" id="nick-img-valid" ></td>
+								<td><input class="input_style02 input_required" id="nick" name="nick" maxlength="20" data-warn="nickname-warn" placeholder="별명" tabindex="2"></td>
+								
 							</tr>
 							<tr>
 								<td colspan="2"><div class="input_warning" id="nick-warn">만족 조건 충족 여부</div></td>
@@ -56,13 +73,24 @@
 				</tr>
 				<tr>
 					<td>
-						<table  cellpadding="0" cellspacing="0" class="popup_table01_1">
+						<table  cellpadding="0" width="100%" cellspacing="0" class="popup_table01_1">
 							<tr>
-								<td width="370"><input class="input_style02 input_required password" type="password" maxlength="20" name="passwd" data-warn="passwd-warn" placeholder="Password" placeholder="암호"></td>
-								<td><img src="/images/input_mark3.jpg" class="img-validator" id="passwd-img-valid"></td>
+								<td><input class="input_style02 input_required pd" type="password" maxlength="20" id="passwd" name="passwd" data-warn="pd-warn" placeholder="비밀번호" tabindex="3"></td>
 							</tr>
 							<tr>
-								<td colspan="2"><div class="input_warning" id="passwd-warn"> 만족 조건 충족 여부</div></td>
+								<td ><div class="input_warning" id="passwd-warn"> 만족 조건 충족 여부</div></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<table  cellpadding="0" width="100%" cellspacing="0" class="popup_table01_1">
+							<tr>
+								<td><input class="input_style02 input_required pd" type="password" maxlength="20" id="conf_passwd" name="conf_passwd" data-warn="pd-warn" placeholder="비밀번호" tabindex="4"></td>
+							</tr>
+							<tr>
+								<td ><div class="input_warning" id="conf_passwd-warn"> 만족 조건 충족 여부</div></td>
 							</tr>
 						</table>
 					</td>
@@ -72,7 +100,7 @@
 						<table  width="100%" cellpadding="0" cellspacing="0" class="popup_table01_1">
 							<tr>
 								<td width="100" align="left" style="padding:0 5px 0 0">
-									<select class="input_style02" name="bank_name">
+									<select class="input_style02" id="form1bank_name" name="bank_name">
 										 	<option value="국민은행" selected>국민은행</option>
 										    <option value="기업은행">기업은행</option>
 										    <option value="경남은행">경남은행</option>
@@ -104,11 +132,21 @@
 										    <option value="한국투자은행">한국투자은행</option>
 										    <option value="HMC투자증권">HMC투자증권</option>
 										    <option value="IBK투자증권">IBK투자증권</option>
+										    <option value="카카오뱅크">카카오뱅크</option>
 									</select>
 								</td>
-								<td width="120" align="left" style="padding:0 5px 0 0"><input class="input_style02" name="bank_owner" maxlength="20"  placeholder="Account Holder" placeholder="예금주" ></td>
-								
-								<td align="left" style="padding:0 5px 0 0"><input class="input_style02 input_required" name="bank_num" maxlength="20" data-warn="bank-warn" placeholder="Enter your account number (without -)" placeholder="계좌번호입력(-없이 입력)" placeholder="Enter your account number (without -)"></td>
+								<td width="120" align="left" style="padding:0 0px 0 0"><input class="input_style02" id="form1bank_owner" name="bank_owner" maxlength="20"  placeholder="예금주" tabindex="5" ></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+						<table  width="100%" cellpadding="0" cellspacing="0" class="popup_table01_1">
+							<tr>
+
+								<td align="left" style="padding:0 0px 0 0"><input class="input_style02 input_required" id="form1bank_num" name="bank_num" maxlength="20" data-warn="bank-warn" placeholder="계좌번호입력(-없이 입력)" tabindex="6" ></td>
 							</tr>
 							<tr>
 								<td colspan="3">
@@ -119,17 +157,18 @@
 						</table>
 					</td>
 				</tr>
+				
 				<tr>
 					<td>
 						<table  width="100%" cellpadding="0" cellspacing="0" class="popup_table01_1">
 							<tr>
-								<td width="100" align="left" style="padding:0 5px 0 0">
+								<td width="150" align="left" style="padding:0 5px 0 0">
 									<select class="input_style02" name="cell_prefix" id="cell_prefix">
-										<option value="+63">+63(필리핀 제도)</option>
+										<option value="+63">+63(필리핀)</option>
 										<option value="+82">+82(한국)</option>
 									</select>
 								</td>
-								<td width="230" align="left" style="padding:0 5px 0 0"><input class="input_style02 input_required" id="cell" name="cell" maxlength="15" data-warn="cell-warn" placeholder="Mobile Phone Number" placeholder="휴대폰번호" ></td>
+								<td width="180" align="left" style="padding:0 5px 0 0"><input class="input_style02 input_required" id="cell" name="cell" maxlength="15" data-warn="cell-warn"  placeholder="휴대폰번호" tabindex="7" ></td>
 								<td>
 									<!-- <a href="#" id="mobileVerBtn"><span class="btn5">인증</span></a> -->
 									<button id="mobileVerBtn" class="btn5">인증</button>
@@ -149,7 +188,7 @@
 					<td>
 						<table  width="100%" cellpadding="0" cellspacing="0" class="popup_table01_1">
 							<tr>
-								<td width="335" align="left" style="padding:0 5px 0 0"><input class="input_style02 input_required" maxlength="6" id="cert" name="cert" maxlength="20" data-warn="cert-warn" placeholder="Certification Number" placeholder="인증번호" ></td>
+								<td width="335" align="left" style="padding:0 5px 0 0"><input class="input_style02 input_required" maxlength="6" id="cert" name="cert" maxlength="20" data-warn="cert-warn"  placeholder="인증번호"  tabindex="8" ></td>
 								<td><a href="#" id="certBtn"><span class="btn5">확인</span></a></td>
 							</tr>
 							<tr>
@@ -162,7 +201,7 @@
 				</tr>
 				<tr>
 					<td>
-						<input class="input_style02 input_required" id="referrer" name="referrer" placeholder="Referrer ID" maxlength="20" placeholder="추천인아이디" value="" data-warn="referrer-warn">
+						<input class="input_style02 input_required" id="referrer" name="referrer"  maxlength="20" placeholder="추천인아이디" value="" data-warn="referrer-warn" tabindex="9">
 						<div class="input_warning" id="referrer-warn">입력하신 번호로 인증번호가 발송되었습니다.</div>
 					</td>
 				</tr>
@@ -171,7 +210,7 @@
 						<table  width="100%" cellpadding="0" cellspacing="0" class="popup_table01_1">
 							<tr>
 								<td width="335" align="left" style="padding:0 5px 0 0">
-									<input class="input_style02 input_required" id="recommend" name="recommend" data-warn='recommend-warn' maxlength="6" placeholder="Recommendation code" placeholder="추천인코드" >
+									<input class="input_style02 input_required" id="recommend" name="recommend" data-warn='recommend-warn' maxlength="6"  placeholder="추천인코드" tabindex="10" >
 								</td>
 								<td><a href="#" id="recoVerifyBtn"><span class="btn5">확인</span></a></td>
 							</tr>
@@ -187,7 +226,7 @@
 			<div class="text_center">모든 항목은 필수 입력 사항 입니다.</div>
 			<!-- <div class="btn_wrap"><a href="#"><span class="btn3c">회원가입</span></a></div> -->
 			<div class="btn_wrap">
-				<input type="submit" id="registerBtn" class="btn3c" value="회원가입">
+				<input type="submit" id="registerBtn" class="btn3c" value="회원가입" >
 			</div>
 
 			<div class="text_center">이미 회원이라면? 로그인 후 이용해 주시기 바랍니다.</div>
@@ -215,14 +254,17 @@
 			IBET25에서 다양한 베팅의 세계를 마음껏 경험하세요!<br>
 		</div>
 		<div class="btn_wrap">
-			<a href="${baseUrl}app/sub04.jsp"><span class="btn3c">충전하기</span></a> 
-			<a href="${baeUrl}"><span class="btn3">확인</span></a>
+			<a href="app/sub04.jsp"><span class="btn3c">충전하기</span></a> 
+			<a href="/"><span class="btn3">확인</span></a>
 		</div>
 	</div>
 </div>
 
+
+
+
 <script>
-	
+
 	$(document).ready(function () {
 
 	    $('#fade_1').popup({
@@ -232,6 +274,11 @@
 	      	blur: false,
 	      	onclose:function(){
 	      		resetForm1();
+	      		$("#form1 input").qtip("hide");
+	    	},
+	    	onopen: function(){
+	    		resetForm1();
+	    		$("#form1 input").qtip("hide");
 	    	}
 	    });
 
@@ -240,7 +287,29 @@
 			scrolllock: true,
 			onclose:function(){
 	      		location.reload();
-	    	}
+	    	},
+	    	onopen : function(){
+				var oldHtml  =  $("#fade_2 .bg_mask_pop2_in").html();
+	    		var spin = '<div id="spin_clive" class="sk-circle ng-scope" style="">';
+					spin += '<div class="sk-circle1 sk-child"></div>';
+					spin += '<div class="sk-circle2 sk-child"></div>';
+					spin += '<div class="sk-circle3 sk-child"></div>';
+					spin += '<div class="sk-circle4 sk-child"></div>';
+					spin += '<div class="sk-circle5 sk-child"></div>';
+					spin += '<div class="sk-circle6 sk-child"></div>';
+					spin += '<div class="sk-circle7 sk-child"></div>';
+					spin += '<div class="sk-circle8 sk-child"></div>';
+					spin += '<div class="sk-circle9 sk-child"></div>';
+					spin += '<div class="sk-circle10 sk-child"></div>';
+					spin += '<div class="sk-circle11 sk-child"></div>';
+					spin += '<div class="sk-circle12 sk-child"></div>';
+					spin += '</div>';
+
+				$("#fade_2 .bg_mask_pop2_in").html(spin);
+		  		setTimeout(function(){
+			  		$("#fade_2 .bg_mask_pop2_in").html(oldHtml);
+				}, 1500);
+	    	},
 		});
 
 	    $('#fade_3').popup({
@@ -248,19 +317,43 @@
 			scrolllock: true
 		});
 
-
 		$("#loginBtn").on("click",function(e){
 	    	e.preventDefault();
 	    	$('#fade_1').popup("hide");
 	    	$('#fade_3').popup("show");
 	    });
 
+		$("#registerBtn").on("click",function(e){
+			e.preventDefault();
+			if($("#form1").valid()){
+				var data = $("#form1").serializeJSON();
+			    submitForm(data);
+			}
+		});
+
+		$("#form1 input").on("blur",function(e){
+			e.preventDefault();
+			var validator = $( "#form1" ).validate(); 
+			var id = $(this).attr("id");
+			var valid = validator.element("#"+id);
+			$(this).qtip("hide");
+			console.log(valid);
+			if(!valid && !valid){
+				$(this).focusin();
+			}			
+		});
+
 		$('select').niceSelect();
+		$("ul.list").mCustomScrollbar();
+
+		jQuery.validator.addMethod("alphanumeric", function(value, element) {
+			return this.optional(element) || /^\w+$/i.test(value);
+		}, "Letters, numbers or underscores only please");  
 
 
 		$.validator.addMethod("checkReferrer", function(value, element) {
 	    	var x = $.ajax({
-		        url:'${baseUrl}process/referrence_checker.jsp',
+		        url:'process/referrence_checker.jsp',
 		        async: false,
 		        type: 'post',
 		        data: {
@@ -273,8 +366,18 @@
 	    	else return false;
 	    });
 
+		$.validator.addMethod( "nowhitespace", function( value, element ) {
+			return this.optional( element ) || /^\S+$/i.test( value );
+		}, "No white space please" );
+
+		$.validator.addMethod( "noHangul", function( value, element ) {
+			var hangul = new RegExp("[\u1100-\u11FF|\u3130-\u318F|\uA960-\uA97F|\uAC00-\uD7AF|\uD7B0-\uD7FF]"); 
+			console.log(hangul.test(value));
+			return   this.optional( element ) || !hangul.test(value);
+		}, "No Hangul allowed" );
+
+
 		$("#form1").validate({
-			// debug: true,
 	  		errorClass: 'form1-invalid',
 	    	validClass: 'form1-valid',
 		    onfocusout: false,
@@ -282,10 +385,13 @@
 		    onclick : false,
 	  		rules: {
 			    userid :{
-					required:true,
+			    	required:true,
+			    	noHangul: true,
+			    	nowhitespace:true,
+                    alphanumeric:true,
 					minlength:4,
 					remote: {
-						url: "${baseUrl}process/userid_checker.jsp",
+						url: "process/userid_checker.jsp",
 						async: false,
 				        type: "post",
 				       	data: {
@@ -297,13 +403,16 @@
 	      		},
 				bank_name :{
 					required:true,
+					nowhitespace:true,
 				},
 				bank_num :{
 					required:true,
 					digits: true,
+					nowhitespace:true,
 				},
 				bank_owner :{
 					required:true,
+					nowhitespace:true,
 				},
 				cell :{
 					required:true,
@@ -311,7 +420,7 @@
 					minlength:10,
 					maxlength:13,
 			  		synchronousRemote: {
-		                url: "${baseUrl}process/verify_cellnum.jsp",
+		                url: "process/verify_cellnum.jsp",
 				        type: "post",
 				        async: false,
 				       	data: {
@@ -322,13 +431,14 @@
 				          		return $.trim($("#cell").val());
 				          	},
 				        },
-		            }
+		            },
+		            nowhitespace:true,
 				},
 				cert :{
 					required:true,
 					minlength:6,
 					remote: {
-						url: "${baseUrl}process/verify_cert_num.jsp",
+						url: "process/verify_cert_num.jsp",
 				        type: "post",
 				       	data: {
 				          	cert: function (){
@@ -342,23 +452,32 @@
 				          	},
 				        },
 			      	},
+			      	nowhitespace:true,
 
 				},
 				passwd :{
 					required:true,
 					minlength:6,
 					maxlength:20,
-					
+					nowhitespace:true,
+				},
+				conf_passwd :{
+					required:true,
+					minlength:6,
+					maxlength:20,
+					nowhitespace:true,
+					equalTo: "#passwd",					
 				},
 				referrer :{
 			      	required:true,
 			  		checkReferrer:true,
+			  		nowhitespace:true,
 				},
 				recommend :{
 					required:true,
 					minlength: 6,
 					remote: {
-						url: "${baseUrl}process/joincode_checker.jsp",
+						url: "process/joincode_checker.jsp",
 				        type: "post",
 				        async: true,
 				       	data: {
@@ -370,80 +489,104 @@
 				          	},
 				        },
 			      	},
+			      	nowhitespace:true,
 				},
 				nick :{
 					required:true,
+					nowhitespace:true,
 					
 				},
 			},
 			messages: {
 			    userid :{
-					required:"User Id is required",
-					remote:"User Id already exists",
+					required:"아이디를 입력해 주세요",
+					remote:"이미 사용중인 아이디 입니다.",
 				},
 				bank_name :{
-					required:"Bank name is required",
+					required:"은행은 선택해 주세요.",
 				},
 				bank_num :{
-					required:"Bank number is required",
-					digits: "Please enter only digits on Bank Number",
+					required:"계좌번호를 입력해 주세요.",
+					digits: "계좌번호를 숫자로 입력해 주세요.",
 				},
 				bank_owner :{
-					required:"Bank owner is required",
+					required:"예금주를 입력해 주세요.",
 				},
 				cell :{
-					required:"Mobile Number is required",
-					minlength:"Minimum length is 10",
-					synchronousRemote : "Number is already in use",
+					required:"핸드폰 번호를 입력해 주세요",
+					minlength:"핸드폰 번호를 확인 후 다시 입력해 주세요.",
+					synchronousRemote : "이미 사용중인 핸드폰 번호 입니다.",
 				},
 				cert :{
-					required:"Certificate is required",
-					minlength:"Minimun Length is 6",
-					remote:"Wrong Authenication Code",
+					required:"인증번호를 입력해 주세요",
+					minlength:"인증번호를 확인 후 다시 입력해 주세요",
+					remote:"잘못된 인증번호 입니다.",
 				},
 				passwd :{
-					required:"Password is required",
-					minlength:"Minimum length is 6",
-					maxlength:"Maximum length is 20",
+					required:"비밀번호를 입력 해 주세요.",
+					minlength:"비밀번호를 6자리 이상 입력 해 주세요.",
+					maxlength:"비밀번호를 20자리 이하로 입력 해 주세요",
+				},
+				conf_passwd :{
+					required:"비밀번호를 입력 해 주세요.",
+					minlength:"비밀번호를 6자리 이상 입력 해 주세요.",
+					maxlength:"비밀번호를 20자리 이하로 입력 해 주세요",
+					equalTo: "Confirm Password must be equal to Password",
+
 				},
 				recommend :{
-					required:"Recommendation code is required",
-					minlength: "Minimun Length is 6",
-					remote: "Recommendation code is invalid",
+					required:"추천 코드를 입력해 주세요.",
+					minlength: "추천 코드를 확인 후 다시 입력해 주세요.",
+					remote: "잘못된 추천 코드 입니다.",
 				},
 				referrer :{
-					required:"Referrer is required",
-					// remote: "User Id doesn't Exists"
-					checkReferrer: "User Id doesn't Exists",
+					required:"추천인 아이디를 입력해 주세요.",
+					checkReferrer: "존재하지 않는 추천인 아이디 입니다.",
 				},
 				nick :{
-					required:"Nick name is required",
+					required:"별명을 입력해 주세요.",
 				},
-
+			
 			},
 			errorPlacement: function(error, element) {
 				
 				var error_label = element.attr("name");
-				// console.log(error_label);
-			    if (element.attr("name") == error_label ){
-			    	$("#"+error_label+"-warn").html(error).show();
-			    	
-			    }
+				var id = element.attr("id");
+				
+			    if(error.text() != ""){
+			    	element.qtip({ 
+					    overwrite: true,
+					    content: {
+					        text: error,
+					        tooltipanchor: $(this),
+					    },
+					    show: {
+				            when: false,
+				            ready: true, 
+				            event:false,
+				        },
+				        hide:{
+				        	fixed:true,
+				        	event:false,
+				        },
+				        position: {
+					        container: $("#fade_1_wrapper"),
+					        at: 'right center ',
+					        my: 'left center', 
+					        adjust : {
+					        	method : 'shift none',
+					        }
+					    }
+					});
 			    
+				}else{
+					element.qtip("hide");
+				}
 			  
 			},
-			success: function(label,element){
-
-			},
-			submitHandler: function(form) {
-				var data = $("#form1").serializeJSON();
-			    submitForm(data);
-			  
-		  	},
-		  	invalidHandler: function() {
+		  	invalidHandler: function(event, validator) {
 				var error = $("#form1").validate().numberOfInvalids();
 			}
-
 		});
 
 		$("#certBtn").on("click",function(e){
@@ -457,44 +600,21 @@
 			e.preventDefault();
 			var validator = $( "#form1" ).validate();
 			valid = validator.element("#cell");
-			console.log(valid);
 			if(valid){
 				verifyNumber();
 			}
-
-			
 		});
 
 		$("#recoVerifyBtn").on("click",function(e){
 			e.preventDefault();
 			var validator = $( "#form1" ).validate();
 			var validReferrer = validator.element( "#referrer");
-			console.log(validReferrer);
 			if(validReferrer){
 				var validRecommend = validator.element( "#recommend" );	
 			}
-			
 		});
 
-
-
 	});
-
-	$.validator.addMethod(
-	        "regex",
-	        function(value, element) {
-	        	// var pattern = "^[!@#$%&*)(+=._-]*$";
-	        	// var pattern ="/^[\w&.\-]+$/";
-	        	var pattern = "/^[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]{6,}$/g";
-
-	            var re = new RegExp(pattern);
-	            console.log(this.optional(element));
-	            console.log(!re.test(value));
-	            return !re.test(value);
-	        },
-	        "Invalid Input"
-	);
-
 
 	function resetForm1(){
 		$('#form1 input').css("border-color","#2e3032");
@@ -505,21 +625,19 @@
 	}
 
 	function submitForm(data){
-		if(data.cell_prefix == "+63"){
-			data.cell = formatCellNum(data.cell);
-		}
 		$.ajax({
-			url : '${baseUrl}process/register_process.jsp',
+			url : 'process/register_process.jsp',
 			data : data,
 			method: 'POST',
 		}).done(function(data){ 
-			console.log(data);
-			if(data){
+			data = $.trim(data);
+			if(data == 'true'){
 				$('#fade_1').popup('hide');
 				$("#fade_2").popup('show');
 				resetForm1();
+				$("#form1 input").qtip("hide");
 			}else{
-				alert("something went wrong");
+				toastr.success("something went wrong");
 			}
 		});
 	}
@@ -528,33 +646,25 @@
 		var userid = $.trim($("#userid").val());
 		var cell_prefix = $.trim($("#cell_prefix").val());
 		var cell = $.trim($("#cell").val());
-		cell = formatCellNum(cell);
 		
 		$("#mobileVerBtn").prop("disabled",true);
 		$.ajax({
-			url : '${baseUrl}process/send_sms.jsp',
+			url : 'process/send_sms.jsp',
 			data : {userid:userid,cell_prefix:cell_prefix,cell:cell},
 			method: 'POST',
 		}).done(function(data){ 
-			console.log(data);
 			setTimeout(function() {
 			  	if(data){
-					$("#mobileVerBtn span").html("resend");
+					$("#mobileVerBtn").html("resend");
 				}else{
 					alert("Something went wrong");
-					$("#mobileVerBtn span").html("인증");
+					$("#mobileVerBtn").html("인증");
 				}
 				$("#mobileVerBtn").prop("disabled",false);
 			}, 5000);
 		});
 	}
 
-	function formatCellNum(num){
-		if(num.substring(1).length == 10 && num.substring(0,1) == "0"){
-			num = num.substring(1);
-		}
-		return num;
-	}
 </script>
 
 

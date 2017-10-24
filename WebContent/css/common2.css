@@ -64,7 +64,7 @@ table.dataTable tbody td {
     border-radius: 0px!important;
 }
 .nice-select .list{
-	max-height: 200px!important;
+	max-height: 300px!important;
     width: 100%!important;
     border-radius: 0px!important;
     background-color: #1c2021!important;
@@ -74,8 +74,9 @@ table.dataTable tbody td {
 .nice-select .list li{
 	width: 100%!important;
     position: relative!important;
-    height: 30px!important;
-    line-height: 30px!important;
+    height: 25px!important;
+    min-height: 25px!important;
+    line-height: 25px!important;
     border-bottom: 1px solid #292f30!important;
     background: #1c2021!important;
     text-align: left!important;
@@ -176,9 +177,9 @@ table.dataTable tbody td {
     font-family: passfont;
     src: url(../css/font/ArialMT.woff);
 }
-.password{
-	font-family: passfont;
-	font-size: 14px;
+.password, .pd{
+	font-family: passfont!important;
+	font-size: 14px!important;
 }
 
 /*menu*/

@@ -34,7 +34,7 @@ import net.vavasoft.bean.SmsAuthBean;
 public class UserDao {
 	
 	private static final DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	public static Logger logger = Logger.getLogger(BetConManager_Test2.class);
+	public static Logger logger = Logger.getLogger(UserDao.class);
 	public UserDao(){}
 	
 	public UserBean getUser(String userid,String password) throws SQLException{
@@ -96,7 +96,7 @@ public class UserDao {
 				SmsDao sd = new SmsDao();
 				String mobile_no = sd.formatCellNumber(user.getCell_prefix(), user.getCell());
 				Date date = new Date();
-			    String  query = "INSERT INTO RT01.dbo.user_mst (userid,siteid,passwd,cell,bank_name,bank_owner,bank_num,regdate,state,watch,charge_level,ip,reg_ip,nick,recommand) "+
+			    String  query = "INSERT INTO RT01.dbo.user_mst (userid,siteid,passwd,cell,bank_name,bank_owner,bank_num,regdate,state,watch,charge_level,ip,reg_ip,nick,recommend) "+
 						" VALUES (?,1,?,? ,?,?,?,?,'NORMAL','N','LOW',?,?,?,?)";
 									
 			    pstmt = con.prepareStatement(query);
@@ -110,7 +110,7 @@ public class UserDao {
 			    pstmt.setString(8,user.getIp());
 			    pstmt.setString(9,user.getIp());
 			    pstmt.setString(10,user.getNick());
-			    pstmt.setString(11,user.getRecommand());
+			    pstmt.setString(11,user.getRecommend());
 			    
 				row = pstmt.executeUpdate(); 
 				logger.debug(query);
@@ -180,9 +180,9 @@ public class UserDao {
 			DBConnector.getInstance();
 			con = DBConnector.getConnection();
 			      		
-		    String  query = "SELECT nick FROM RT01.dbo.user_mst WHERE nick ='"+nickname+"'" ;
-		    
+		    String  query = "SELECT nick FROM RT01.dbo.user_mst WHERE nick = ? " ;
 			pstmt = con.prepareStatement(query);
+			pstmt.setString(1,nickname);
 			rs = pstmt.executeQuery();
 			logger.debug("this is rs: " + rs);
 			if(rs.next()){
@@ -250,7 +250,7 @@ public class UserDao {
             	user_data.setBank_name(rs.getString("bank_name"));
             	user_data.setBank_owner(rs.getString("bank_owner"));
             	user_data.setBank_num(rs.getString("bank_num"));
-            	user_data.setRecommand(rs.getString("recommand"));
+            	user_data.setRecommend(rs.getString("recommend"));
             }
             
             rs.close();
@@ -663,7 +663,6 @@ public class UserDao {
 		
 	}
 	
-	
 	public boolean switchpoints(UserBean trans_data,int money,int point,int points) throws SQLException{
 
 		PreparedStatement pstmt = null;
@@ -751,5 +750,234 @@ public class UserDao {
 			
 	}
 	
+	public boolean checkCellNumByNick(String nickname,String cell_prefix,String cell ) throws SQLException{
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		SmsDao sd = new SmsDao();
+		boolean result = false;
+		System.out.println(cell);
+		try {
+			DBConnector.getInstance();
+			con = DBConnector.getConnection();
+			String mobile_no = sd.formatCellNumber(cell_prefix,cell);
+		    String  query = "SELECT * FROM RT01.dbo.user_mst WHERE nick = ? AND cell = ?";
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1,nickname);
+			pstmt.setString(2,mobile_no);
+			rs = pstmt.executeQuery();			
+			if(rs.next()){
+				result = true;
+			}
+			
+			return result;
+			
+			
+		} catch(Exception e){
+			logger.debug(e);
+			return false;
+		}finally {
+			if(rs!=null) rs.close();
+			if(pstmt!=null) pstmt.close();
+	  		if(con!=null) con.close();
+		}
+		
+	}
 	
+	public boolean checkCellNumByUseridNick(String userid, String nickname,String cell_prefix,String cell ) throws SQLException{
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		SmsDao sd = new SmsDao();
+		boolean result = false;
+		System.out.println(cell);
+		try {
+			DBConnector.getInstance();
+			con = DBConnector.getConnection();
+			String mobile_no = sd.formatCellNumber(cell_prefix,cell);
+		    String  query = "SELECT * FROM RT01.dbo.user_mst WHERE nick = ? AND cell = ? AND userid = ?";
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1,nickname);
+			pstmt.setString(2,mobile_no);
+			pstmt.setString(3,userid);
+			rs = pstmt.executeQuery();			
+			if(rs.next()){
+				result = true;
+			}
+			
+			return result;
+			
+			
+		} catch(Exception e){
+			logger.debug(e);
+			return false;
+		}
+		
+	}
+	
+	public String getUserIdByBank(String bank_owner,String bank_name, String bank_num, String cell_prefix, String cell) throws SQLException{
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String result = null;
+		
+		try {
+			DBConnector.getInstance();
+			con 				= DBConnector.getConnection();
+			SmsDao sd = new SmsDao();
+			String mobile_no =  sd.formatCellNumber(cell_prefix, cell);      		
+		    String query = "SELECT userid FROM RT01.dbo.user_mst " + 
+		    		"WHERE bank_owner = ? " + 
+		    		"AND  bank_name = ? " + 
+		    		"AND bank_num = ? " + 
+		    		"AND cell = ? ";
+		    	 	
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1,bank_owner);
+			pstmt.setString(2,bank_name);
+			pstmt.setString(3,bank_num);
+			pstmt.setString(4,mobile_no);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				result = rs.getString("userid");
+			}
+			
+			return result;
+		} catch(Exception e){
+			logger.debug(e);
+			return null;
+		}
+		
+		
+		
+	}
+
+	public boolean getUserIdPassByBank (String bank_owner,String bank_name, String bank_num, String cell_prefix, String cell) throws SQLException{
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		boolean result = false;
+		
+		try {
+			
+			DBConnector.getInstance();
+			con 				= DBConnector.getConnection();
+			SmsDao sd = new SmsDao();
+			String mobile_no =  sd.formatCellNumber(cell_prefix, cell);      		
+		    String query = "SELECT userid FROM RT01.dbo.user_mst " + 
+		    		"WHERE bank_owner = ? " + 
+		    		"AND  bank_name = ? " + 
+		    		"AND bank_num = ? " + 
+		    		"AND cell = ? ";
+		    
+		    System.out.println(bank_owner);
+		    System.out.println(bank_name);
+		    System.out.println(bank_num);
+		    System.out.println(cell_prefix);
+		    System.out.println(cell);
+		    
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1,bank_owner);
+			pstmt.setString(2,bank_name);
+			pstmt.setString(3,bank_num);
+			pstmt.setString(4,mobile_no);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				result = true;
+			}
+
+			
+			return result;
+		} catch(Exception e){
+			logger.debug(e);
+			return false;
+		}
+		
+		
+		
+	}
+	
+	public boolean forgotPasswordUpdate1(UserBean ub, SmsAuthBean sb)throws SQLException{
+		boolean result = false;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int sts = 0;
+		
+		
+		String query = "UPDATE u SET u.passwd = ? FROM user_mst u "
+				+ "LEFT JOIN sms_auth s ON u.userid = s.userid "
+				+ "WHERE u.userid = ?  AND u.nick = ? AND u.cell = ?  AND s.authcode = ? ";
+		
+		try{	      
+			SmsDao sd = new SmsDao();
+			String mobile_no = sd.formatCellNumber(ub.getCell_prefix(), ub.getCell());
+	
+			DBConnector.getInstance();
+			con = DBConnector.getConnection();			 	
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1,ub.getPasswd());
+			pstmt.setString(2,ub.getUserid());
+			pstmt.setString(3,ub.getNick());
+			pstmt.setString(4,mobile_no);
+			pstmt.setString(5,sb.getAuthcode());
+
+			sts = pstmt.executeUpdate();					   
+			if(sts > 0 ) result = true;
+			
+	        pstmt.close();
+	        con.close();
+	        
+		} catch(Exception e){
+			logger.debug(e);
+	       	e.printStackTrace();
+	       	result = false;
+		}
+  	
+		
+		return result;
+	}
+	
+	public boolean forgotPasswordUpdate2(UserBean ub)throws SQLException{
+		boolean result = false;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int sts = 0;
+		
+		String query = "UPDATE user_mst SET passwd = ?  "
+				+ "WHERE bank_owner = ?  AND bank_name  = ? AND bank_num = ?  AND cell = ? ";
+		try{	      
+			SmsDao sd = new SmsDao();
+			String mobile_no = sd.formatCellNumber(ub.getCell_prefix(), ub.getCell());
+	
+			DBConnector.getInstance();
+			con = DBConnector.getConnection();			 	
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1,ub.getPasswd());
+			pstmt.setString(2,ub.getBank_owner());
+			pstmt.setString(3,ub.getBank_name());
+			pstmt.setString(4,ub.getBank_num());
+			pstmt.setString(5,mobile_no);
+
+			sts = pstmt.executeUpdate();					   
+			if(sts > 0 ) result = true;
+			
+	        pstmt.close();
+	        con.close();
+	        
+		} catch(Exception e){
+			logger.debug(e);
+	       	e.printStackTrace();
+	       	result = false;
+		}
+  	
+		
+		return result;
+	}
+
 }

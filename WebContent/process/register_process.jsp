@@ -43,7 +43,7 @@
 	post_ub.setCell(request.getParameter("cell"));
 	post_ub.setCell_prefix(request.getParameter("cell_prefix"));
 	post_ub.setPasswd(request.getParameter("passwd").trim());
-	post_ub.setRecommand(request.getParameter("referrer").trim());
+	post_ub.setRecommend(request.getParameter("referrer").trim());
 	post_ub.setNick(request.getParameter("nick").trim());
 	post_ub.setIp(ip);
 

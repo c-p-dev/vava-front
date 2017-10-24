@@ -18,7 +18,7 @@ public class UserBean {
 	private String bank_name;
 	private String bank_owner;
 	private String bank_num;
-	private String recommand;
+	private String recommend;
 	private boolean isValid;
 	private int loginStatus; //0  success //1 wrong passwrod // 2 no account 
 	private String cert;
@@ -138,11 +138,11 @@ public class UserBean {
 	public void setBank_num(String bank_num) {
 		this.bank_num = bank_num;
 	}
-	public String getRecommand() {
-		return recommand;
+	public String getRecommend() {
+		return recommend;
 	}
-	public void setRecommand(String recommand) {
-		this.recommand = recommand;
+	public void setRecommend(String recommend) {
+		this.recommend = recommend;
 	}
 	public String getIp() {
 		return ip;
