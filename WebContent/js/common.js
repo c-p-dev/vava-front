@@ -1,7 +1,7 @@
 
 $.urlParam = function(name){
     var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
-    console.log(results);
+    // console.log(results);
     if (results==null){
        return null;
     }
@@ -11,7 +11,7 @@ $.urlParam = function(name){
 }
 
 function setTabActive(tab){
-	console.log(tab);
+	// console.log(tab);
 	if(tab != null ){
 		$("ul.tabs li:first").removeClass("active");
 		$(".tab_content").hide(); //Hide all content

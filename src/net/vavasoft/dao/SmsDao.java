@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -18,6 +19,8 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
+
+import com.google.gson.Gson;
 
 import infobip.api.client.SendSingleTextualSms;
 import infobip.api.config.BasicAuthConfiguration;
@@ -40,7 +43,7 @@ public class SmsDao {
 	public static Logger logger = Logger.getLogger(SmsDao.class);
 	
 	public boolean sendSms(String userid, String cell_prefix, String cell,String ip){
-
+		
 	   boolean result = false;
 	   try {
 		   	String authcode = "";
@@ -96,7 +99,7 @@ public class SmsDao {
     	int groupId = 0;
  
     	SendSingleTextualSms client = new SendSingleTextualSms(new BasicAuthConfiguration(BASE_URL,USERNAME, PASSWORD));
-        String MESSAGE_TEXT = " 회원가입을 하시면 보다 폭넓은 서비스 이용이 가능합니다. Your Certification Number is : " + authcode;
+        String MESSAGE_TEXT = "귀하의 인증 번호는  : " + authcode;
         	
 		SMSTextualRequest requestBody = new SMSTextualRequest();
 		requestBody.setFrom(FROM);
@@ -301,9 +304,154 @@ public class SmsDao {
 			}
 			
 			mobile_no = cell_prefix.substring(1) + cell;
+		}else{
+			mobile_no = cell_prefix + cell;
 		}
 		 
 		System.out.println(mobile_no);
 		return mobile_no;
 	}
+	
+	public String getUserAuthCodeByTel(String cell) throws SQLException{
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String result = null;
+		
+		try {
+			DBConnector.getInstance();
+			con 				= DBConnector.getConnection();
+			      		
+		    String  query = "SELECT * FROM RT01.dbo.sms_auth WHERE tel = ? AND state = 'USE'";
+		    	 	
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1,cell);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				result = rs.getString("authcode");
+			}
+			
+		} catch(Exception e){
+			logger.debug(e);
+			
+		}finally {
+			if(rs!=null) rs.close();
+			if(pstmt!=null) pstmt.close();
+	  		if(con!=null) con.close();
+		}
+		
+		return result;
+	}
+	
+	public boolean sendSmsByNickname(String nick, String cell_prefix, String cell ){
+		boolean result = false;
+	
+		try {
+		   	
+		   	String mobile_no = formatCellNumber(cell_prefix,cell);
+			String numberExistsAuthcode = getUserAuthCodeByTel(mobile_no);
+			String authcode = getUserAuthCodeByTel(mobile_no);
+	    	if(authcode != null || !authcode.equals(null)){
+	    		
+	    		int responseGroupId = sendTextInfoBIP(nick, mobile_no, authcode);
+		    	
+		    	/*
+		    	 * responseGroupId 
+		    	 * 1 - pending
+		    	 * 2 - sent 
+		    	 * 
+		    	 * reference  https://dev.infobip.com/v1/docs/response-codes
+		    	 * 
+		    	 * */
+		    	if((responseGroupId == 1 || responseGroupId == 3)){
+
+		    		result = true;
+		    	}
+	    	}
+	    	
+	  
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return result;
+		}
+ 
+		return result;
+		
+	}
+	
+	public String checkAuthCodeByNickname(String nick,String cell_prefix, String cell,String authcode) throws SQLException{
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String result = null;
+		String mobile_no = formatCellNumber(cell_prefix,cell); 
+		try {
+			DBConnector.getInstance();
+			con 				= DBConnector.getConnection();
+			      		
+		    String query = "SELECT u.userid from sms_auth  s   " +
+		    		"LEFT JOIN user_mst  u ON  s.userid = u.userid  " + 
+		    		"WHERE u.nick = ? " + 
+		    		"AND s.tel = ? " + 
+		    		"AND s.authcode = ?";
+		    
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1,nick);
+			pstmt.setString(2,mobile_no);
+			pstmt.setString(3,authcode);
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				result = rs.getString("userid");
+			
+			}
+			
+			return result;
+			
+		} catch(Exception e){
+			logger.debug(e);
+			System.out.println(e);
+			return null;	
+		}
+	}
+	
+	public boolean checkAuthCodeByUseridNick(String userid, String nick,String cell_prefix, String cell,String authcode) throws SQLException{
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		boolean result = false;
+
+		String mobile_no = formatCellNumber(cell_prefix,cell);
+		try {
+			DBConnector.getInstance();
+			con 				= DBConnector.getConnection();
+		    
+		    String query = "SELECT u.userid,u.passwd FROM sms_auth s " + 
+		    		"LEFT JOIN user_mst u ON s.userid = u.userid " + 
+		    		"WHERE u.nick = ? " + 
+		    		"AND u.userid =  ? " + 
+		    		"AND s.tel = ? " + 
+		    		"AND s.authcode = ?";
+		    
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1,nick);
+			pstmt.setString(2,userid);
+			pstmt.setString(3,mobile_no);
+			pstmt.setString(4,authcode);
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				result = true;
+			}
+			
+			return result;
+			
+		} catch(Exception e){
+			logger.debug(e);
+			System.out.println(e);
+			return false;	
+		}
+	}
+	
+	
+	
 }

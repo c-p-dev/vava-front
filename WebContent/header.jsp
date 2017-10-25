@@ -61,6 +61,17 @@
 <link href="/css/game.css" rel="stylesheet" type="text/css"><!-- game -->
 <link href="/css/gateway.css" rel="stylesheet" type="text/css"><!-- gateway -->
 <link href="/css/common2.css" rel="stylesheet" type="text/css"><!--공통-->
+<link href="/css/spin.css" rel="stylesheet" type="text/css"><!--공통-->
+
+<!-- toaster test  -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css" />
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/jquery.qtip.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/jquery.qtip.js"></script>
 
 
 </head>
@@ -68,6 +79,7 @@
 	#toast-container.toast-top-full-width > div, #toast-container.toast-bottom-full-width > div {
 		width: 30%!important;
 		text-align: center;
+	    top: 15px;
 	}
 	#toast-container > .toast-success{
 		background-image :none!important;
@@ -83,7 +95,12 @@
 	.toast-message {
     	font-size: 16px;
 	}
-
+	.mCSB_inside>.mCSB_container {
+    	margin-right: 15px!important;
+	}
+	.login-img-validator{
+		cursor: pointer;
+	}
 </style>
 
 <body id="myAnchor">
@@ -154,6 +171,36 @@ $(window).scroll(function(event){
 			}
 		});
 
+		toastr.options = {
+			closeButton: true,
+			debug: false,
+			newestOnTop: false,
+			progressBar: false,
+			positionClass: "toast-top-full-width",
+			preventDuplicates: true,
+			onclick: null,
+			showDuration: "3000",
+			hideDuration: "1000",
+			timeOut: "5000",
+			extendedTimeOut: "1000",
+			showEasing: "swing",
+			hideEasing: "linear",
+			showMethod: "fadeIn",
+			hideMethod: "fadeOut",
+			onHidden: function() {
+				
+				$('#userid-header-input').css("border-color","#505455");
+				$('#passwd-header-input').css("border-color","#505455");
+
+			}
+		}
+
+		$(".login-img-validator").on("click",function(){
+			var tab = $(this).attr('data-tab');
+			$("#acc_input").val(tab);
+			$("#accTabForm").submit();
+		});
+
 	});
 
 	function submitLoginHeader(data){
@@ -167,45 +214,53 @@ $(window).scroll(function(event){
 				$('#login_header input').css("border-color","#505455");
 				console.log(data);
 				if(data == 0 ){
-					$("#login-header-warn").html("Login Successful").show();
+					// $("#login-header-warn").html("Login Successful").show();
+					toastr.success('Login Successful');
 					$("#loginModal").popup("show");
 				}else if(data == 1 ){
-					$("#login-header-warn").html("Incorrect Password").show();
+					// $("#login-header-warn").html("Incorrect Password").show();
+					toastr.success('Incorrect Password');
 					$("#passwd-header-input").focus();
 				}else if(data == 2){
-					$("#login-header-warn").html("Unknown User Id").show();
+					// $("#login-header-warn").html("Unknown User Id").show();
+					toastr.success('Unknown User Id');
 					$("#userid-header-input").focus();
 				}else{
 					alert("Something went wrong. Try again.");
 				}
 			});
 		}
-		
 	}
 
 	function loginheaderValid(){
 		var valid = false;
 		var useridTxt = $.trim($("#userid-header-input").val());
 		var passwordTxt = $.trim($("#passwd-header-input").val());
-		$("#login-header-warn").hide();
+		// $("#login-header-warn").hide();
 		$('#login_modal_form input').css("border-color","#2e3032");
-
+		toastr.clear();
 		if(useridTxt == "" || useridTxt == null){
-			$("#login-header-warn").html("User Id is required").show();
+			// $("#login-header-warn").html("User Id is required").show();
+			toastr.success('User Id is required');
 			$("#userid-header-input").css("border-color","#d50000").focus();
 		}
 		else if(passwordTxt == "" || passwordTxt == null){
-			$("#login-header-warn").html("Password is required").show();
+			// $("#login-header-warn").html("Password is required").show();
+			toastr.success('Password is required');
+			$('#userid-header-input').css("border-color","#505455");
 			$("#passwd-header-input").css("border-color","#d50000").focus();
 		}
 		else if((useridTxt == "" || useridTxt == null) && ((passwordTxt == "" || passwordTxt == null))) {
-			$("#login-header-warn").html("User Id and Password is required").show();
+			// $("#login-header-warn").html("User Id and Password is required").show();
+			toastr.success('"User Id and Password is required');
 			$("#userid-header-input").css("border-color","#d50000").focus();
 		}else{
 			valid = true;
 		}
 		return valid;
 	}
+
+
 
 
 </script>
@@ -328,9 +383,9 @@ $(window).scroll(function(event){
                	<% } else{  %>
 					<ul class="top_right">
 						<form id="login_header">
-							<li><input id="userid-header-input" type="text" class="input_style01" name="userid" placeholder="ID"><img class="login-img-validator" id="userid-img" src="images/input_mark.png"></li>
+							<li><input id="userid-header-input" type="text" class="input_style01" name="userid" placeholder="ID"><img class="login-img-validator" data-tab="tab1" id="userid-img" src="images/input_mark.png"></li>
 							<!-- input_blue 인풋활성화 -->
-		                    <li><input id="passwd-header-input" type="password" class="input_style01" name="passwd" placeholder="PW"><img class="login-img-validator" id="passwd-img" src="images/input_mark.png"></li>
+		                    <li><input id="passwd-header-input" type="password" class="input_style01" name="passwd" placeholder="PW" style="width: 158px;"><img class="login-img-validator" data-tab="tab2" id="passwd-img" src="images/input_mark.png"></li>
 		                     <li><div class="input_warning login-warn" id="login-header-warn" >조건에 맞는 아이디를 입력해주세요.</div></li>
 		                    <!-- input_red 인풋조건미충족 -->
 		                    <li>
@@ -362,6 +417,13 @@ $(window).scroll(function(event){
         </div>
 	</div>
 </div><!-- header_wrap -->
+
+<!-- try redirect -->
+<div class="hidden" id="acc_redirect">
+	<form action="process/account_redirect.jsp" method="post" accept-charset="utf-8" id="accTabForm">
+		<input type="hidden" id="acc_input" name="tab" value="tab1">
+	</form>	
+</div>
 
 <!-- login success modal -->
 <div id="loginModal" class="bg_mask_pop2">
