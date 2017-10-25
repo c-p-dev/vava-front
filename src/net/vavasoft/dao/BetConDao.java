@@ -167,7 +167,8 @@ public class BetConDao {
 		return result;
 	}
 	
-	public int addNewBcUser(BetConUserBean user_data) {
+	public int addNewBcUser(BetConUserBean user_data) 
+	{
 		
 		Date date				= new Date();
 		Connection con 			= null;

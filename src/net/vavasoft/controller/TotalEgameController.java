@@ -72,7 +72,7 @@ public class TotalEgameController {
         |	Execute HTTP POST Request to TEG
         |-------------------------------------------------------------------*/
 		srv_resp 	= this.postToTeg(url, json_param);
-		System.out.println(srv_resp);
+		
 		return srv_resp;
 	}
 	

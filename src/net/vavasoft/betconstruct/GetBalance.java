@@ -10,12 +10,12 @@ public class GetBalance {
 	@SerializedName("PlayerId")
     @Expose
 	private int playerId;
-	@SerializedName("Token")
-    @Expose
-	private String token;
 	@SerializedName("PublicKey")
     @Expose
 	private String publicKey;
+	@SerializedName("Token")
+    @Expose
+	private String token;
 	
 	public int getOperatorId() {
 		return operatorId;

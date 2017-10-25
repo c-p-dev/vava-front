@@ -59,31 +59,73 @@ public class BetConstructServlet extends HttpServlet {
 		PrintWriter output				= response.getWriter();
 		
 		if (method.equals(BC_WEBHOOK_AUTH)) {
-			String srv_resp_1	= bc_ctrl.authentication(reader.readLine());
+			String srv_resp_1 = "";
+			try {
+				srv_resp_1 = bc_ctrl.authentication(reader.readLine());
+			} catch (NoSuchAlgorithmException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			output.print(srv_resp_1);
 		}
 		else if (method.equals(BC_WEBHOOK_GETBAL)) {
-			String srv_resp_2	= bc_ctrl.getBalance(reader.readLine());
+			String srv_resp_2 = "";
+			try {
+				srv_resp_2 = bc_ctrl.getBalance(reader.readLine());
+			} catch (NoSuchAlgorithmException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			output.print(srv_resp_2);
 		}
 		else if (method.equals(BC_WEBHOOK_WITHDRAW)) {
-			String srv_resp_3	= bc_ctrl.withdrawAndDeposit(reader.readLine(), 1);
+			String srv_resp_3 = "";;
+			try {
+				srv_resp_3 = bc_ctrl.withdrawAndDeposit(reader.readLine(), 1);
+			} catch (NoSuchAlgorithmException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			output.print(srv_resp_3);
 		}
 		else if (method.equals(BC_WEBHOOK_DEPOSIT)) {
-			String srv_resp_4	= bc_ctrl.withdrawAndDeposit(reader.readLine(), 2);
+			String srv_resp_4 = "";;
+			try {
+				srv_resp_4 = bc_ctrl.withdrawAndDeposit(reader.readLine(), 2);
+			} catch (NoSuchAlgorithmException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			output.print(srv_resp_4);
 		}
 		else if (method.equals(BC_WEBHOOK_WITHDEPO)) {
-			String srv_resp_5	= bc_ctrl.withdrawAndDeposit(reader.readLine(), 3);
+			String srv_resp_5 = "";;
+			try {
+				srv_resp_5 = bc_ctrl.withdrawAndDeposit(reader.readLine(), 3);
+			} catch (NoSuchAlgorithmException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			output.print(srv_resp_5);
 		}
 		else if (method.equals(BC_WEBHOOK_ROLLBCK)) {
-			String srv_resp_6	= bc_ctrl.rollback(reader.readLine());
+			String srv_resp_6 = "";;
+			try {
+				srv_resp_6 = bc_ctrl.rollback(reader.readLine());
+			} catch (NoSuchAlgorithmException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			output.print(srv_resp_6);
 		}
 		else if (method.equals(BC_WEBHOOK_REFTOK)) {
-			String srv_resp_7	= bc_ctrl.refreshToken(reader.readLine());
+			String srv_resp_7 = "";;
+			try {
+				srv_resp_7 = bc_ctrl.refreshToken(reader.readLine());
+			} catch (NoSuchAlgorithmException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			output.print(srv_resp_7);
 		}
 		else {
