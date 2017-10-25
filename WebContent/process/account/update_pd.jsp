@@ -19,16 +19,13 @@
 
 	boolean result = false;
 
-
 	ub.setCell_prefix(cell_prefix);
 	ub.setCell(cell);
 	ub.setPasswd(new_passwd);
 	
 	if(form.equals("f1")){
-		System.out.println("form1");
-
+	
 		String authcode = request.getParameter("ac");
-		
 		String nick = request.getParameter("nk");
 		String userid = request.getParameter("ud");
 
@@ -38,9 +35,7 @@
 
 		result = ud.forgotPasswordUpdate1(ub,sb);
 
-	}else{
-		System.out.println("form2");
-
+	}else if(form.equals("f2")){
 		String bank_owner = request.getParameter("bo");
 		String bank_name = request.getParameter("bn");
 		String bank_number = request.getParameter("bnn");
@@ -51,8 +46,6 @@
 
 		result = ud.forgotPasswordUpdate2(ub);
 	}
-	// form 1 
-	
 	
 	hsm.put("result",result);
 	out.println(gson.toJson(hsm).toString());

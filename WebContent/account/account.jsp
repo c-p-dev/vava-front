@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <jsp:include page="../header.jsp" />
+<%
+	if(session.getAttribute("currentSessionUser") != null){
+		response.sendRedirect("/index.jsp"); 
+	}
+%>
+<style>
+	#pwmodal .pop_text{
+		padding:0px!important;
+	}
+</style>
 <div id="contents_wrap">
 	<div class="contents">
 		<ul class="tabs">
@@ -14,34 +24,35 @@
 						<div class="acc_content">
 							<div class="acc_content_in_1">
 								<div class="login_center">
-									<form id="findIdForm1">
+									<form id="fid1">
+										<input type="hidden" name="method" value="by_phone">
 										<table cellpadding="0" cellspacing="0" class="login_table">
 											<tr>
-												<td><input class="input_style02" id="findIdNickname" name="nickname" placeholder="Name" placeholder="이름"></td>
+												<td><input class="input_style02" id="fid1nk" name="nk" placeholder="Name" placeholder="이름"></td>
 											</tr>
 											<tr>
-												<td><div class="input_warning" id="nickname-findid-warn">입력하신 번호로 인증번호가 발송되었습니다.</div></td>
+												<td><div class="input_warning" id="nk-fid1-warn">입력하신 번호로 인증번호가 발송되었습니다.</div></td>
 											</tr>
 											<tr>
 												<td>
 													<table  width="100%" cellpadding="0" cellspacing="0" class="login_table_in">
 														<tr>
 															<td width="112" style="padding:0 10px 0 0">
-																<select class="input_style02" id="findIdCell_prefix" name="cell_prefix">
+																<select class="input_style02" id="fid1cp" name="cp">
 																	<option value="+63" selected>+63</option>
 																	<option value="+82">+82</option>
 																</select>
 															</td>
 															<td width="158" style="padding:0 10px 0 0">
-																<input class="input_style02" id="findIdCell" name="cell" placeholder="Mobile Phone Number" placeholder="휴대폰번호">
+																<input class="input_style02" id="fidcll" name="cll" placeholder="Mobile Phone Number" placeholder="휴대폰번호">
 															</td>
 															<td>
 														
-																<span id="FindIdSendBtn" class="btn5">인증</span>
+																<span id="fSndBtn" class="btn5">인증</span>
 															</td>
 														</tr>
 														<tr>
-															<td colspan="3"><div class="input_warning" id="cell-findid-warn">입력하신 번호로 인증번호가 발송되었습니다.</div></td>
+															<td colspan="3"><div class="input_warning" id="cll-fid1-warn">입력하신 번호로 인증번호가 발송되었습니다.</div></td>
 														</tr>
 													</table>
 												</td>
@@ -51,11 +62,11 @@
 													<table  width="100%" cellpadding="0" cellspacing="0" class="login_table_in">
 														<tr>
 															<td width="280" style="padding:0 10px 0 0">
-																<input class="input_style02" id="findIdCert" name="cert" placeholder="Certification Number"  maxlength="6" placeholder="인증번호">
+																<input class="input_style02" id="findIdCert" name="ac" placeholder="Certification Number"  maxlength="6" placeholder="인증번호">
 															</td>
 														</tr>
 														<tr>
-															<td ><div class="input_warning" id="cert-findid-warn">인증이 완료되었습니다.</div></td>
+															<td ><div class="input_warning" id="ac-fid1-warn">인증이 완료되었습니다.</div></td>
 														</tr>
 													</table>
 												</td>
@@ -65,10 +76,7 @@
 											<input type="submit" class="btn3c" value="아이디확인">
 										</div>
 									</form>
-									
-
 								</div>
-								
 							</div>
 						</div>
 					</li>
@@ -77,7 +85,8 @@
 						<div class="acc_content">
 							<div class="acc_content_in_1">
 								<div class="login_center">
-									<form id="findIdForm2">
+									<form id="fid2">
+										<input type="hidden" name="method" value="by_bank">
 										<table cellpadding="0" cellspacing="0" class="login_table">
 											<tr>
 												<td><input class="input_style02" id="findIdBank_owner" name="bo"  placeholder="Name (Account Holder)" placeholder="이름(예금주)"></td>
@@ -142,13 +151,13 @@
 													<table  width="100%" cellpadding="0" cellspacing="0" class="login_table_in">
 														<tr>
 															<td width="112" style="padding:0 10px 0 0">
-																<select class="input_style02" id="findIdcell_prefix2" name="cp">
+																<select class="input_style02" id="fid1cp2" name="cp">
 																	<option value="+63" selected>+63</option>
 																	<option value="+82">+82</option>
 																</select>
 															</td>
 															<td width="158" style="padding:0 10px 0 0">
-																<input class="input_style02" id="findIdcell2" name="cll" placeholder="휴대폰번호">
+																<input class="input_style02" id="fidcll2" name="cll" placeholder="휴대폰번호">
 															</td>
 														</tr>
 														<tr>
@@ -180,6 +189,7 @@
 							<div class="acc_content_in_1">
 								<div class="login_center">
 									<form id="fp1">
+										<input type="hidden" name="method" value="by_phone">
 										<table cellpadding="0" cellspacing="0" class="login_table">
 											<tr>
 												<td><input class="input_style02" id="fp1ud" name="ud"  placeholder="아이디"></td>
@@ -204,7 +214,7 @@
 																</select>
 															</td>
 															<td width="158" style="padding:0 10px 0 0"><input class="input_style02" id="fp1cll" name="cll" maxlength="15" placeholder="휴대폰번호"></td>
-															<td><span class="btn5" id="fp1cllBtn">인증</span></td>
+															<td><span class="btn5" id="fSndBtn2">인증</span></td>
 														</tr>
 													</table>
 												</td>
@@ -241,6 +251,7 @@
 							<div class="acc_content_in_1">
 								<div class="login_center">
 									<form id="fp3">
+										<input type="hidden" name="method" value="by_bank">
 										<table cellpadding="0" cellspacing="0" class="login_table">
 											<tr>
 												<td><input class="input_style02"  id="fp3bo" name="bo"  placeholder="이름(예금주)"></td>
@@ -329,6 +340,7 @@
 	</div>
 </div>
 
+<!-- show userid modal -->
 <div id="modalShowUserId" class="bg_mask_pop2">
 	<div class="bg_mask_pop_title">
 		<span class="popup_logo"><img src="/images/popup_logo.png"></span>
@@ -341,12 +353,10 @@
 		<div class="pop_text">
 			<p class="login_text01">회원님의 아이디는 <span class="font_004" id="findIdUserid">000000</span>입니다.</p>
 			<div class="acc_btn_wrap">
+				<a href="/"><span class="btn3c">확인</span></a>
 			</div>
 		</div>
-		<div class="btn_wrap">
-			<a href="/app/sub04.jsp" class="popup_close"><span class="btn3c">충전하기</span></a> 
-			<a href="/" class="popup_close" ><span class="btn3">확인</span></a>
-		</div>
+		
 	</div>
 </div>
 
@@ -357,14 +367,11 @@
 		<span class="popup_close fade_2_close"><img src="/images/popup_close.png"></span>
 	</div>
 	<div class="bg_mask_pop2_in">
-		<div class="pop_icon_center">
-			<img src="/images/check_icon.png">
-		</div>
 		<div class="pop_text">
 			<p class="login_text01">Change Password</p>
 			<div class="acc_btn_wrap">
 				<form id="fp2">
-					<input type="hidde" name="form" value="f1">
+					<input type="hidden" name="form" value="f1">
 					<div class="login_center">
 						<table cellpadding="0" cellspacing="0" class="login_table">
 							<tr>
@@ -408,13 +415,11 @@
 		</div>
 		<div class="pop_text">
 			<p class="login_text01">Password Change Successfully.</p>
-				<div class="btn_wrap">
-					<a href="/" class=""><span class="btn3c">확인</span></a>
-				</div>
+			<div class="btn_wrap">
+				<a href="/" class=""><span class="btn3c">확인</span></a>
 			</div>
 		</div>
-		
-	</div>
+	</div>	
 </div>
 
 
@@ -426,42 +431,40 @@
 			$("ul.tabs li a[href='#tab2']").click();
 		}
 
-		$("#findIdForm1").on("submit",function(e){
+		$("#fid1").on("submit",function(e){
 			e.preventDefault();
-			if($("#findIdForm1").valid()){
+			if($("#fid1").valid()){
 				var data = $(this).serializeJSON();
-
 				$.ajax({
-					url : '/process/account/verify_authcode.jsp',
+					url : '/process/account/find_id.jsp',
 					data : data,
 					method: 'POST',
 				}).done(function(data){
-					data = $.trim(data);
-					console.log(data);
-					if(data == null || data == "null" || data == ""){
+					var obj = JSON.parse(data);
+					if(obj.userid == null || obj.userid == "null"){
 						toastr.success('Incorrect Authenication Code');
 					}else{
-						$("#findIdUserid").html(data);
+						toastr.clear();
+						$("#findIdUserid").html(obj.userid);
 						$("#modalShowUserId").popup("show");
 					}
 				});
 			}
 		});
 
-		$("#findIdForm1").validate({
+		$("#fid1").validate({
 	  		errorClass: 'form1-invalid',
 	    	validClass: 'form1-valid',
 		    onfocusout: false,
 		    onkeyup :false,
 		    onclick : false,
 	  		rules: {
-			    nickname :{
+			    nk :{
 					required:true,
 					minlength:4,
 					nowhitespace:true,
-
 	      		},
-				cell :{
+				cll :{
 					required:true,
 					digits: true,
 					minlength:10,
@@ -469,7 +472,7 @@
 					nowhitespace:true,
 					
 				},
-				cert :{
+				ac :{
 					required:true,
 					minlength:6,
 					nowhitespace:true,
@@ -477,14 +480,14 @@
 				
 			},
 			messages: {
-			    nickname :{
+			    nk :{
 					required:"Nickname is required",
 				},
-				cell :{
+				cll :{
 					required:"Mobile Number is required",
 					minlength:"Minimum length is 10",
 				},
-				cert :{
+				ac :{
 					required:"Certificate is required",
 					minlength:"Minimun Length is 6",
 				},
@@ -493,59 +496,41 @@
 			errorPlacement: function(error, element) {
 				var error_label = element.attr("name");
 			    if (element.attr("name") == error_label ){
-			    	$("#"+error_label+"-findid-warn").html(error).show();	
+			    	$("#"+error_label+"-fid1-warn").html(error).show();	
 			    }
 			},
 		  	invalidHandler: function() {
-				var error = $("#findIdForm1").validate().numberOfInvalids();
+				var error = $("#fid1").validate().numberOfInvalids();
 			}
 		});
 
-		$("#FindIdSendBtn").on("click",function(e){
-			var validator = $( "#findIdForm1" ).validate();
-			var validNickname = validator.element("#findIdNickname");
-			var validCell = validator.element("#findIdCell");
-			if(validNickname && validCell){
-				var x =  $.ajax({
-			        url:'/process/account/verify_cellnum_nickname.jsp',
-			        async: false,
-			        type: 'post',
-			        data: {
-			          	cell_prefix:function(){
-			          		return $("#findIdCell_prefix").val();	
-			          	},
-			          	cell: function(){
-			          		return $("#findIdCell").val();	
-			          	},
-			          	nick: function(){
-			          		return $("#findIdNickname").val();	
-			          	},
-			        },
-				}).responseText;
+		$("#fSndBtn").on("click",function(e){
+			var validator = $( "#fid1" ).validate();
+			var validNickname = validator.element("#fid1nk");
+			var validCell = validator.element("#fidcll");
+			var validCp = validator.element("#fid1cp");
+			if(validNickname && validCell && validCp ){
 
-				if(x.trim() =="true"){
-					var nick = $.trim($("#findIdNickname").val());
-					var cell_prefix = $.trim($("#findIdCell_prefix").val());
-					var cell = $.trim($("#findIdCell").val());
+				var nk = $.trim($("#fid1nk").val());
+				var cp = $.trim($("#fid1cp").val());
+				var cll = $.trim($("#fidcll").val());
+				var frm = 'f1';
 
-					$("#FindIdSendBtn").prop("disabled",true);
-					
-					$.ajax({
-						url : '/process/account/sendAuthCode.jsp',
-						data : {nick:nick,cell_prefix:cell_prefix,cell:cell},
-						method: 'POST',
-					}).done(function(data){
-						console.log(data);
-						$("#FindIdSendBtn").prop("disabled",false);
-					});
-
-					$("#FindIdSendBtn").prop("disabled",false);
-				} 
-	    		else{
-	    			toastr.success("Unknown Account");
-	    			$("#findIdNickname").focus();
-	    		}  
-			}
+				$("#fSndBtn").prop("disabled",true);
+				
+				$.ajax({
+					url : '/process/account/send_code.jsp',
+					data : {nk:nk,cp:cp,cll:cll,method:frm},
+					method: 'POST',
+				}).done(function(data){
+					var obj = JSON.parse(data);
+					if(!obj.result){
+						toastr.success("Unknown Account");
+						$("#fid1nk").focus();
+					}
+					$("#fSndBtn").prop("disabled",false);
+				});	
+			} 
 		});
 
 		$("#modalShowUserId").popup({
@@ -554,7 +539,9 @@
 	      	escape: false,
 	      	blur: false,
 	      	onclose:function(){
-	      		resetfindIdForm1();
+	      		resetfid1();
+	      		resetfid2();
+
 	    	}
 	    });
 
@@ -567,8 +554,6 @@
 	      		resetfp1();
 	      		resetfp2();
 	      		resetfp3();
-	      		
-
 	    	}
 	    });
 
@@ -596,7 +581,7 @@
 	    	$("#modalPdSs").popup("hide");
 		});
 
-	    $("#findIdForm2").validate({
+	    $("#fid2").validate({
 	    	errorClass: 'form1-invalid',
 	    	validClass: 'form1-valid',
 		    onfocusout: false,
@@ -652,22 +637,21 @@
 			}
 	    });
 
-	    $("#findIdForm2").on("submit",function(e){
+	    $("#fid2").on("submit",function(e){
 	    	e.preventDefault();
-	    	console.log($("#findIdForm2").valid());
-	    	if($("#findIdForm2").valid()){
+	    	if($("#fid2").valid()){
 	    		var data = $(this).serializeJSON();
 	    		$.ajax({
-					url : '/process/account/verify_bank.jsp',
+					url: '/process/account/find_id.jsp',
 					data : data,
 					method: 'POST',
 				}).done(function(data){
-					data = $.trim(data);
-					if(data == null || data =="null"){
+					var obj = JSON.parse(data);
+					if(obj.userid == null || obj.userid == "null"){
 						toastr.success('No UserId Found ');
 					}else{
 						toastr.clear();
-						$("#findIdUserid").html(data);
+						$("#findIdUserid").html(obj.userid);
 						$("#modalShowUserId").popup("show");
 					}					
 					
@@ -727,29 +711,20 @@
 				var error_label = element.attr("name");
 			    if (element.attr("name") == error_label ){
 			    	$("#"+error_label+"-fp1-warn").html(error).show();
-			    	
 			    }
 			},
-			invalidHandler: function(form, validator) {
-		        var errors = validator.numberOfInvalids();
-		        if (errors) {                    
-		            // validator.errorList[0].element.focus();
-		        }
-		    } 
 		});
 
 		$('#fp1').on("submit",function(e){
 			e.preventDefault();
 			if($(this).valid()){
 				var data = $(this).serializeJSON();
-				console.log(data);
 				$.ajax({
-					url : '/process/account/verify_authcode_password.jsp',
+					url : '/process/account/verify_pd.jsp',
 					data : data,
 					method: 'POST',
 				}).done(function(data){
 					var obj = JSON.parse(data);
-					console.log(obj);
 					if(obj.result){
 						$("#pwmodal").popup("show");
 					}else{
@@ -763,9 +738,7 @@
 			e.preventDefault();
 			if($(this).valid()){
 				var data = $(this).serializeJSON();
-				console.log(data);
 				if(data['form'] == 'f1'){
-					console.log("form1");
 					var fp1data = $("#fp1").serializeJSON();
 					$.extend(data,fp1data);
 					$.ajax({
@@ -780,14 +753,11 @@
 						}else{
 							$("#pwmodal").popup("hide");
 							toastr.success("Something went wrong try again");
-
 						}
 					});
-				}else{
-					console.log("form2");
+				}else if(data['form'] == 'f2'){
 					var fp2data = $("#fp3").serializeJSON();
 					$.extend(data,fp2data);
-					console.log(data);
 					$.ajax({
 						url : 'process/account/update_pd.jsp',
 						data : data,
@@ -800,15 +770,15 @@
 						}else{
 							$("#pwmodal").popup("hide");
 							toastr.success("Something went wrong try again");
-
 						}
 					});
+				}
+				else{
+
+					$("#pwmodal").popup("hide");
+					toastr.success("Something went wrong try again");
 
 				}
-
-				
-
-				
 			}
 		});
 
@@ -916,9 +886,8 @@
 			e.preventDefault();
 			if($(this).valid()){
 				var data = $(this).serializeJSON();
-				console.log(data);
 				$.ajax({
-					url : '/process/account/verify_bank_pd.jsp',
+					url : '/process/account/verify_pd.jsp',
 					data : data,
 					method: 'POST',
 				}).done(function(data){
@@ -936,61 +905,50 @@
 			}
 		});
 
-		$("#fp1cllBtn").on("click",function(e){
+		$("#fSndBtn2").on("click",function(e){
+			
 			var validator = $( "#fp1" ).validate();
 			var vU = validator.element("#fp1ud");
 			var vNk = validator.element("#fp1nk");
 			var vCll = validator.element("#fp1cll");
-			if(vU && vNk && vCll){
-				var x =  $.ajax({
-			        url:'/process/account/verify_cellnum_ud_nk.jsp',
-			        async: false,
-			        type: 'post',
-			        data: {
-			          	cp:function(){
-			          		return $("#fp1cp").val();	
-			          	},
-			          	cll: function(){
-			          		return $("#fp1cll").val();	
-			          	},
-			          	nk: function(){
-			          		return $("#fp1nk").val();	
-			          	},
-			          	ud:function(){
-			          		return $("#fp1ud").val();		
-			          	}
-			        },
-				}).responseText;
+			var vCp = validator.element("#fp1cp");
 
-				if(x.trim() =="true"){
-					var nk = $.trim($("#fp1nk").val());
-					var cp = $.trim($("#fp1cp").val());
-					var cll = $.trim($("#fp1cll").val());
+			if(vU && vNk && vCll && vCp){
 
-					$("#fp1cllBtn").prop("disabled",true);
-					
-					$.ajax({
-						url : '/process/account/sendAuthCode.jsp',
-						data : {nick:nk,cell_prefix:cp,cell:cll},
-						method: 'POST',
-					}).done(function(data){
-						console.log(data);
-						$("#fp1cllBtn").prop("disabled",false);
-					});
-				} 
-	    		else{
-	    			toastr.success("Unknown User Account");
-	    			$("#fp1ud").focus();
-	    		}
-			}
+				var nk = $.trim($("#fp1nk").val());
+				var cp = $.trim($("#fp1cp").val());
+				var cll = $.trim($("#fp1cll").val());
+				var ud = $.trim($("#fp1ud").val());
+				var frm = 'f2';
 
+				$("#fSndBtn2").prop("disabled",true);
+				
+				$.ajax({
+					url : '/process/account/send_code.jsp',
+					data : {nk:nk,cp:cp,cll:cll,ud:ud,method:frm},
+					method: 'POST',
+				}).done(function(data){
+					var obj = JSON.parse(data);
+					if(!obj.result){
+						toastr.success("Unknown Account");
+						$("#fp1ud").focus();
+					}
+
+					$("#fSndBtn2").prop("disabled",false);
+				});	
+			} 
 		});
 
 	});
 
-	function resetfindIdForm1(){
-		$("#findIdForm1")[0].reset();
-		$("#findIdForm1").validate().resetForm();
+	function resetfid1(){
+		$("#fid1")[0].reset();
+		$("#fid1").validate().resetForm();
+	}
+
+	function resetfid2(){
+		$("#fid2")[0].reset();
+		$("#fid2").validate().resetForm();
 	}
 
 	function resetfp1(){

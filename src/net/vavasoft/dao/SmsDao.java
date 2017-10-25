@@ -99,7 +99,7 @@ public class SmsDao {
     	int groupId = 0;
  
     	SendSingleTextualSms client = new SendSingleTextualSms(new BasicAuthConfiguration(BASE_URL,USERNAME, PASSWORD));
-        String MESSAGE_TEXT = " 회원가입을 하시면 보다 폭넓은 서비스 이용이 가능합니다. Your Certification Number is : " + authcode;
+        String MESSAGE_TEXT = "귀하의 인증 번호는  : " + authcode;
         	
 		SMSTextualRequest requestBody = new SMSTextualRequest();
 		requestBody.setFrom(FROM);
