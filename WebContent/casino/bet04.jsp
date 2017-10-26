@@ -2,7 +2,6 @@
 <jsp:include page="../header.jsp" />
 <jsp:useBean id="bean" class="net.vavasoft.bean.UserBean" />
 <%@page import="net.vavasoft.dao.GameDao, net.vavasoft.bean.GameBean, java.util.*"%>
-
 <%
 	boolean checkSession = false;
 	// UserBean currentUser = (UserBean) session.getAttribute("currentSessionUser");
@@ -54,6 +53,7 @@
 				<li><a href="#l-tab3">에볼루션 카지노</a></li>
 				<li><a href="#l-tab4">벳컨스트럭트</a></li>
 				<li><a href="#l-tab4">오리엔탈 게임</a></li>
+				<li><a href="#l-tab6">조작</a></li>
 			</ul>
 		</div>
 
@@ -157,6 +157,9 @@
 			</div>
 			<div id="l-tab5" class="left_tab_con">
 				업체명
+			</div>
+			<div id="l-tab6" class="left_tab_con">
+				<jsp:include page="manual.jsp" /> 
 			</div>
 		</div>
 	</div>

@@ -61,7 +61,7 @@
 <link href="/css/game.css" rel="stylesheet" type="text/css"><!-- game -->
 <link href="/css/gateway.css" rel="stylesheet" type="text/css"><!-- gateway -->
 <link href="/css/common2.css" rel="stylesheet" type="text/css"><!--공통-->
-
+<link href="/css/manual.css" rel="stylesheet" type="text/css"><!--slide-->
 
 </head>
 <style>
