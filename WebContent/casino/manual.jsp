@@ -48,7 +48,7 @@ div.tab button.active {
 padding: 1px 0 0 0;
 }
 </style>
-<ul class="tabs">
+<ul class="mtabs tabs">
 	<li class="liclass"><a href="#main">메인화면 구성</a></li>
 	<li class="liclass"><a href="#dragon_tiger">드래곤타이거</a></li>
 	<li class="liclass"><a href="#gen_bac">일반 바카라</a></li>
@@ -109,7 +109,7 @@ padding: 1px 0 0 0;
 			</div>
 		</div>
 		<div id="dragon_tiger" class="tab_content tabpadding">
-			<div class="tab" style="padding-left: 14%;">
+			<div class="tab" style="padding-left: 12%;">
 			  <button class="tablinks" style="position: relative;" onclick="openOption(event, 'dtrules')" id="defaultOpen">게임규칙</button>
 			  <button class="tablinks" style="position: relative;" onclick="openOption(event, 'dtplay')">게임방법</button>
 			</div>
@@ -156,7 +156,7 @@ padding: 1px 0 0 0;
 			</div>
 		</div>
 		<div id="gen_bac" class="tab_content tabpadding">
-			<div class="tab" style="padding-left: 27%;">
+			<div class="tab" style="padding-left: 24%;">
 			  <button class="tablinks" onclick="openOption(event, 'gbrules')" id="defaultOpen">게임규칙</button>
 			  <button class="tablinks" onclick="openOption(event, 'gbplay')">게임방법</button>
 			</div>
@@ -237,7 +237,7 @@ padding: 1px 0 0 0;
 			</div>
 		</div>
 		<div id="vip_bac" class="tab_content tabpadding">
-			<div class="tab" style="padding-left: 40%;">
+			<div class="tab" style="padding-left: 36%;">
 			  <button class="tablinks" onclick="openOption(event, 'vbrules')" id="defaultOpen">게임규칙</button>
 			  <button class="tablinks" onclick="openOption(event, 'vbplay')">게임방법</button>
 			</div>
@@ -318,7 +318,7 @@ padding: 1px 0 0 0;
 			</div>
 		</div>
 		<div id="bid_bac" class="tab_content tabpadding">
-			<div class="tab" style="padding-left:54%;">
+			<div class="tab" style="padding-left:48%;">
 			  <button class="tablinks" onclick="openOption(event, 'bbrules')" id="defaultOpen">게임규칙</button>
 			  <button class="tablinks" onclick="openOption(event, 'bbplay')">게임방법</button>
 			</div>
@@ -403,7 +403,7 @@ padding: 1px 0 0 0;
 			</div>
 		</div>
 		<div id="roulette" class="tab_content tabpadding">
-			<div class="tab" style="padding-left:68%;">
+			<div class="tab" style="padding-left:61%;">
 			  <button class="tablinks" onclick="openOption(event, 'rrules')" id="defaultOpen">게임규칙</button>
 			  <button class="tablinks" onclick="openOption(event, 'rplay')">게임방법</button>
 			</div>
@@ -480,7 +480,7 @@ padding: 1px 0 0 0;
 			</div>
 		</div>
 		<div id="seo_bo" class="tab_content tabpadding">
-			<div class="tab" style="padding-left:81%;">
+			<div class="tab" style="padding-left:73%;">
 			  <button class="tablinks" onclick="openOption(event, 'srules')" id="defaultOpen">게임규칙</button>
 			  <button class="tablinks" onclick="openOption(event, 'splay')">게임방법</button>
 			</div>
