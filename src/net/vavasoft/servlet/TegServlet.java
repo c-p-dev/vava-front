@@ -3,6 +3,7 @@ package net.vavasoft.servlet;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +16,7 @@ import org.apache.log4j.Logger;
 import com.google.gson.Gson;
 
 import net.vavasoft.bean.UserBean;
+import net.vavasoft.controller.SpinCubeController;
 import net.vavasoft.controller.TotalEgameController;
 import net.vavasoft.dao.UserDao;
 
@@ -32,6 +34,7 @@ public class TegServlet extends HttpServlet {
 	{
 		Gson gson						= new Gson();
 		TotalEgameController teg_ctrl	= new TotalEgameController();
+		
 		String method 					= request.getParameter("method");
 		
 		PrintWriter output				= response.getWriter();
@@ -44,7 +47,13 @@ public class TegServlet extends HttpServlet {
 				String lnk_dsp		= request.getParameter("lnk_dsp");
 				String srv_resp_1	= "";
 				
-				srv_resp_1 			= teg_ctrl.userPlayCheck(uname_1, game_provider, lnk_dsp);
+				try {
+					srv_resp_1 			= teg_ctrl.userPlayCheck(uname_1, game_provider, lnk_dsp);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 				output.print(srv_resp_1);
 				break;
 			
@@ -53,7 +62,16 @@ public class TegServlet extends HttpServlet {
 				String uname_2 		= udata_2.getUserid();
 				String srv_resp_2	= "";
 				
+				SpinCubeController sc_ctrl		= new SpinCubeController(Integer.toString(udata_2.getSiteid()).concat("_").concat(udata_2.getUserid()));
+				
 				srv_resp_2 			= gson.toJson(teg_ctrl.transferMoneyToVava(uname_2), UserBean.class);
+				
+				try {
+					srv_resp_2 			= gson.toJson(sc_ctrl.transferMoneyToVava(uname_2), UserBean.class);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 				response.setContentType("application/json");
 				output.print(srv_resp_2);

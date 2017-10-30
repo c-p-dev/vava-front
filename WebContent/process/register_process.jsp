@@ -10,6 +10,7 @@
 	net.vavasoft.bean.MgBettingProfileBean,
 	net.vavasoft.bean.MgPlayerAccountBean,
 	net.vavasoft.controller.TotalEgameController,
+	net.vavasoft.controller.SpinCubeController,
 	com.google.gson.reflect.TypeToken,
 	java.util.StringTokenizer,
 	net.vavasoft.bean.JoinCodeBean,
@@ -57,7 +58,11 @@
 	smsBean.setCell_prefix(request.getParameter("cell_prefix"));
 	smsBean.setAuthcode(request.getParameter("cert").trim());
 	
+	String teg_resp	= "";
+	String site_id	= "1";
+	
     TotalEgameController teg_ctrl					= new TotalEgameController();
+    SpinCubeController sc_ctrl						= new SpinCubeController(site_id.concat("_").concat(request.getParameter("userid")));
 	MgPlayerAccountBean user_profile 				= new MgPlayerAccountBean();
 	MgBettingProfileBean bet_profile				= new MgBettingProfileBean();
 	ArrayList<MgBettingProfileBean> bet_profiles	= new ArrayList<MgBettingProfileBean>();
@@ -67,8 +72,6 @@
 		
 		status = ud.setUser(post_ub);
 		if(status){
-			String teg_resp	= "";
-			String site_id	= "1";
 			String mb_pref	= request.getParameter("cell_prefix").trim().substring(1);
 			
 			boolean updateJoinCode = jcDao.updateJoinCodeRegister(jcBean);
@@ -103,10 +106,6 @@
 			teg_resp = teg_ctrl.addPlayerAccount(user_profile);
 			
 			/*--------------------------------------------------------------------
-	        |	Add User to Asian Gaming
-	        |-------------------------------------------------------------------*/
-			
-			/*--------------------------------------------------------------------
 	        |	Add User to Betconstruct Table
 	        |-------------------------------------------------------------------*/
 	        bc_user.setUsername(ub.getUserid());
@@ -121,6 +120,11 @@
 	        int updateSession = ud.updateUserAfterLogin(ub.getUserid(), session.getId());
 	        System.out.println(ub.getLoginStatus());	
 	        System.out.println(updateSession);
+	        
+	        /*--------------------------------------------------------------------
+	        |	Add User to SpinCube
+	        |-------------------------------------------------------------------*/
+	        sc_ctrl.createPlayer();
 		}
 		
 		out.println(status);

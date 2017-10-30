@@ -5,42 +5,42 @@ import com.google.gson.annotations.SerializedName;
 
 public class WithdrawAndDeposit {
 	
+	@SerializedName("BonusDefId")
+    @Expose
+	private Integer bonusDefId;
+	@SerializedName("Currency")
+    @Expose
+	private String currency;
+	@SerializedName("DepositAmount")
+    @Expose
+	private Double depositAmount;
+	@SerializedName("GameId")
+    @Expose
+	private int gameId;
 	@SerializedName("OperatorId")
     @Expose
 	private int operatorId;
 	@SerializedName("PlayerId")
     @Expose
 	private int playerId;
-	@SerializedName("Token")
-    @Expose
-	private String token;
-	@SerializedName("WithdrawAmount")
-    @Expose
-	private double withdrawAmount;
-	@SerializedName("DepositAmount")
-    @Expose
-	private double depositAmount;
-	@SerializedName("Currency")
-    @Expose
-	private String currency;
-	@SerializedName("GameId")
-    @Expose
-	private int gameId;
-	@SerializedName("RGSTransactionId")
-    @Expose
-	private int rgsTransactionId;
-	@SerializedName("RGSRelatedTransactionId")
-    @Expose
-	private int rgsRelatedTransactionId;
-	@SerializedName("TypeId")
-    @Expose
-	private int typeId;
-	@SerializedName("BonusDefId")
-    @Expose
-	private int bonusDefId;
 	@SerializedName("PublicKey")
     @Expose
 	private String publicKey;
+	@SerializedName("RGSRelatedTransactionId")
+    @Expose
+	private Integer rgsRelatedTransactionId;
+	@SerializedName("RGSTransactionId")
+    @Expose
+	private int rgsTransactionId;
+	@SerializedName("Token")
+    @Expose
+	private String token;
+	@SerializedName("TypeId")
+    @Expose
+	private int typeId;
+	@SerializedName("WithdrawAmount")
+    @Expose
+	private Double withdrawAmount;
 	
 	public int getOperatorId() {
 		return operatorId;
@@ -66,7 +66,7 @@ public class WithdrawAndDeposit {
 		this.token = token;
 	}
 	
-	public double getWithdrawAmount() {
+	public Double getWithdrawAmount() {
 		return withdrawAmount;
 	}
 	
@@ -74,7 +74,7 @@ public class WithdrawAndDeposit {
 		this.withdrawAmount = withdrawAmount;
 	}
 	
-	public double getDepositAmount() {
+	public Double getDepositAmount() {
 		return depositAmount;
 	}
 	
@@ -106,7 +106,7 @@ public class WithdrawAndDeposit {
 		this.rgsTransactionId = rgsTransactionId;
 	}
 	
-	public int getRgsRelatedTransactionId() {
+	public Integer getRgsRelatedTransactionId() {
 		return rgsRelatedTransactionId;
 	}
 	
@@ -122,7 +122,7 @@ public class WithdrawAndDeposit {
 		this.typeId = typeId;
 	}
 	
-	public int getBonusDefId() {
+	public Integer getBonusDefId() {
 		return bonusDefId;
 	}
 	

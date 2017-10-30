@@ -184,4 +184,49 @@ public class BcTransactionLogDao {
 		
 		return result;
 	}
+	
+	public BcTransactionLogBean getLogByUserToken(int player_id, String token)
+	{
+		Connection con 			= null;
+		PreparedStatement pstmt = null;
+		ResultSet rs 			= null;
+		String  query 			= "SELECT TOP 1 * FROM bc_transaction_log WHERE player_id = ? AND token = ?" ;
+		
+		BcTransactionLogBean trans_data	= new BcTransactionLogBean();
+		
+		try {
+			DBConnector.getInstance();
+			con 				= DBConnector.getConnection();
+		    
+		    pstmt   			= con.prepareStatement(query);
+            pstmt.setInt(1, player_id);
+            pstmt.setString(2, token);
+			
+            rs 					= pstmt.executeQuery();
+            
+            if (rs.next()) {
+            	
+            	trans_data.setTransaction_id(rs.getInt("transaction_id"));
+            	trans_data.setPlayerId(rs.getInt("player_id"));
+            	trans_data.setRgs_id(rs.getInt("rgs_id"));
+            	trans_data.setRgs_related_id(rs.getInt("rgs_related_id"));
+            	trans_data.setToken(rs.getString("token"));
+            	trans_data.setWithdraw_amount(rs.getDouble("withdraw_amount"));
+            	trans_data.setDeposit_amount(rs.getDouble("deposit_amount"));
+            	trans_data.setTransaction_type(rs.getInt("transaction_type"));
+            	trans_data.setCurrency(rs.getString("currency"));
+            	trans_data.setTransaction_type(rs.getInt("transaction_type"));
+            	trans_data.setStatus(rs.getInt("status"));
+            }
+            
+            rs.close();
+	        pstmt.close();
+	        con.close();
+		}
+		catch(Exception e) {
+			
+		}
+		
+		return trans_data;
+	}
 }

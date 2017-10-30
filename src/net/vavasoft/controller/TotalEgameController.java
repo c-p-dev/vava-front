@@ -7,6 +7,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
@@ -24,6 +25,7 @@ import net.vavasoft.bean.MgDepositBean;
 import net.vavasoft.bean.MgPlayerAccountBean;
 import net.vavasoft.bean.MgResponseStatusBean;
 import net.vavasoft.bean.MgWithdrawAllBean;
+import net.vavasoft.bean.ScTransactionBean;
 import net.vavasoft.bean.UserBean;
 import net.vavasoft.dao.UserDao;
 import net.vavasoft.util.NukeSSLCerts;
@@ -72,7 +74,7 @@ public class TotalEgameController {
         |	Execute HTTP POST Request to TEG
         |-------------------------------------------------------------------*/
 		srv_resp 	= this.postToTeg(url, json_param);
-		System.out.println(srv_resp);
+		
 		return srv_resp;
 	}
 	
@@ -144,7 +146,7 @@ public class TotalEgameController {
 		return srv_resp;
 	}
 	
-	public String userPlayCheck(String username, int game_provider, String lnk_dsp) throws MalformedURLException, IOException
+	public String userPlayCheck(String username, int game_provider, String lnk_dsp) throws MalformedURLException, IOException, ParseException
 	{	
 		/*	Variable Declaration	*/
 		Gson gson					= new Gson();
@@ -153,6 +155,7 @@ public class TotalEgameController {
 		String game_url_base	= "https://webservice.basestatic.net/ETILandingPage/index.aspx?";
 		String game_url_full	= "";
 		String srv_resp			= "";
+		String sc_resp			= "";		
 		String mg_username		= "";
 		String mg_pincode		= "";
 		String session_id		= "";
@@ -160,6 +163,7 @@ public class TotalEgameController {
 		
 		AsianGamingController ag_ctrl	= new AsianGamingController();
 		BetConstructController bc_ctrl	= new BetConstructController();
+		SpinCubeController sc_ctrl		= null;
 		MgWithdrawAllBean withdraw_data = new MgWithdrawAllBean();
 		MgDepositBean deposit_data 		= new MgDepositBean();
 		MgPlayerAccountBean edit_data	= new MgPlayerAccountBean();
@@ -167,6 +171,7 @@ public class TotalEgameController {
 		ArrayList<MgBettingProfileBean> bet_profls	= new ArrayList<MgBettingProfileBean>();
 		MgPlayerAccountBean mg_user		= new MgPlayerAccountBean();
 		MgBettingProfileBean bet_profl	= new MgBettingProfileBean();
+		ScTransactionBean sc_trans_data	= new ScTransactionBean();
 				
 		UserBean user_profile	= new UserBean();
 		UserDao user_db			= new UserDao();
@@ -176,11 +181,11 @@ public class TotalEgameController {
         |-------------------------------------------------------------------*/
 		user_profile 	= user_db.getUserByUserId(username);
 		money 			= user_profile.getMoney();
+		mg_username		= Integer.toString(user_profile.getSiteid()).concat("_").concat(username);
 		
 		/*--------------------------------------------------------------------
         |	Withdraw all cash from TEG System
         |-------------------------------------------------------------------*/
-		mg_username		= Integer.toString(user_profile.getSiteid()).concat("_").concat(username);
 		srv_resp		= this.withdrawAll(mg_username);
 		withdraw_data	= gson.fromJson(srv_resp, MgWithdrawAllBean.class);
 		
@@ -216,6 +221,20 @@ public class TotalEgameController {
 					break;
 			}
 			
+		}
+		
+		/*--------------------------------------------------------------------
+        |	Withdraw all cash from SpinCube System
+        |-------------------------------------------------------------------*/
+		sc_ctrl			= new SpinCubeController(mg_username);
+		sc_resp			= sc_ctrl.makeTransaction(null, "withdraw");
+		sc_trans_data	= gson.fromJson(sc_resp, ScTransactionBean.class);
+		
+		if (0 < sc_trans_data.getAmount()) {
+			money 	= money + sc_trans_data.getAmount();
+			
+			user_profile.setMoney((int)money);
+			user_db.setUserMoney(username, money);
 		}
 		
 		/*--------------------------------------------------------------------
@@ -256,6 +275,17 @@ public class TotalEgameController {
         |-------------------------------------------------------------------*/
 		else if (2 == game_provider) {
 			game_url_full		= ag_ctrl.launchGame(username, lnk_dsp);
+		}
+		/*--------------------------------------------------------------------
+        |	Game is from SpinCube
+        |-------------------------------------------------------------------*/
+		else if (4 == game_provider) {
+			sc_ctrl.makeTransaction(money, "deposit");
+			
+			/*	Update database to empty VAVA money of user	*/
+			user_db.setUserMoney(username, 0);
+			
+			game_url_full		= sc_ctrl.getGameUrl(lnk_dsp);
 		}
 		else {
 			game_url_full		= bc_ctrl.launchGame(username, lnk_dsp);

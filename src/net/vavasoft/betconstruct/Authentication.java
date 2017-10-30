@@ -8,21 +8,18 @@ public class Authentication {
 	@SerializedName("OperatorId")
     @Expose
 	private int operatorId;
-	@SerializedName("Token")
-    @Expose
-	private String token;
-	@SerializedName("ClientRfid")
-    @Expose
-	private String clientRfid;
-	@SerializedName("UserName")
-    @Expose
-	private String userName;
 	@SerializedName("Password")
     @Expose
 	private String password;
 	@SerializedName("PublicKey")
     @Expose
 	private String publicKey;
+	@SerializedName("Token")
+    @Expose
+	private String token;
+	@SerializedName("UserName")
+    @Expose
+	private String userName;
 	
 	public int getOperatorId() {
 		return operatorId;
@@ -38,14 +35,6 @@ public class Authentication {
 	
 	public void setToken(String token) {
 		this.token = token;
-	}
-	
-	public String getClientRfid() {
-		return clientRfid;
-	}
-	
-	public void setClientRfid(String clientRfid) {
-		this.clientRfid = clientRfid;
 	}
 	
 	public String getUserName() {

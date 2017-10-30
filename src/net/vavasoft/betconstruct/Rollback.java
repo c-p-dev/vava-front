@@ -4,24 +4,25 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Rollback {
+	
+	@SerializedName("GameId")
+    @Expose
+	private int gameId;
 	@SerializedName("OperatorId")
     @Expose
 	private int operatorId;
 	@SerializedName("PlayerId")
     @Expose
 	private int playerId;
-	@SerializedName("Token")
-    @Expose
-	private String token;
-	@SerializedName("RGSTransactionId")
-    @Expose
-	private int rgsTransactionId;
-	@SerializedName("GameId")
-    @Expose
-	private int gameId;
 	@SerializedName("PublicKey")
     @Expose
 	private String publicKey;
+	@SerializedName("RGSTransactionId")
+    @Expose
+	private int rgsTransactionId;
+	@SerializedName("Token")
+    @Expose
+	private String token;
 	
 	public int getOperatorId() {
 		return operatorId;
