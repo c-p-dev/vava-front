@@ -28,7 +28,7 @@ html ul.mtabs li.active a  {background: #1c2021;color:#00afed ;border: 1px solid
 .prev, .next {
   cursor: pointer;
   position: absolute;
-  top: 50%;
+  top: 40%;
   width: auto;
   margin-top: -22px;
   padding: 16px;
@@ -98,6 +98,52 @@ html ul.mtabs li.active a  {background: #1c2021;color:#00afed ;border: 1px solid
   animation-name: fade;
   animation-duration: 1.5s;
 }
+div.tab {
+	height: 40px;
+    overflow: hidden;
+    background-color: #252929;
+   	color: #6b7a7a;
+}
+
+/* Style the buttons inside the tab */
+div.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 10px 10px;
+    transition: 0.3s;
+    font-size: 15px;
+    color: #6b7a7a;
+}
+
+/* Change background color of buttons on hover */
+div.tab button:hover {
+    background-color: #2d3232;
+}
+
+/* Create an active/current tablink class */
+div.tab button.active {
+	border: 1px solid #2d3232;
+    background-color: #1f2121;
+    color: #00afed
+}
+
+/* Style the tab content */
+.tabcontent{
+    display: none;
+    border-top: none;
+	
+}
+.tabcontent2{
+    display: none;
+    border-top: none;
+	padding: 10px 0 0 0;
+}
+.tabpadding{
+padding: 1px 0 0 0;
+}
 
 @-webkit-keyframes fade {
   from {opacity: .4}
@@ -108,4 +154,5 @@ html ul.mtabs li.active a  {background: #1c2021;color:#00afed ;border: 1px solid
   from {opacity: .4}
   to {opacity: 1}
 }
+
 

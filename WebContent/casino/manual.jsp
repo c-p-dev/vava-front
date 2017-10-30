@@ -1,53 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<style>
-/* Style the tab */
-div.tab {
-	height: 40px;
-    overflow: hidden;
-    background-color: #252929;
-   	color: #6b7a7a;
-}
-
-/* Style the buttons inside the tab */
-div.tab button {
-    background-color: inherit;
-    float: left;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    padding: 10px 10px;
-    transition: 0.3s;
-    font-size: 15px;
-    color: #6b7a7a;
-}
-
-/* Change background color of buttons on hover */
-div.tab button:hover {
-    background-color: #2d3232;
-}
-
-/* Create an active/current tablink class */
-div.tab button.active {
-	border: 1px solid #2d3232;
-    background-color: #1f2121;
-    color: #00afed
-}
-
-/* Style the tab content */
-.tabcontent{
-    display: none;
-    border-top: none;
-	
-}
-.tabcontent2{
-    display: none;
-    border-top: none;
-	padding: 10px 0 0 0;
-}
-.tabpadding{
-padding: 1px 0 0 0;
-}
-</style>
 <ul class="mtabs tabs">
 	<li class="liclass"><a href="#main">메인화면 구성</a></li>
 	<li class="liclass"><a href="#dragon_tiger">드래곤타이거</a></li>
@@ -91,8 +42,8 @@ padding: 1px 0 0 0;
 			      <img src="/images/main/010.jpg" style="width:100%">
 			    </div>
 			
-			    <a class="prev">&#10094;</a>
-			    <a class="next">&#10095;</a>
+			    <a class="prev" style="color: #00afed; font-size: 80px;">&#10094;</a>
+			    <a class="next" style="color: #00afed; font-size: 80px;">&#10095;</a>
 			
 			  <div style="text-align:center">
 			    <span class="dot"></span>
@@ -140,8 +91,8 @@ padding: 1px 0 0 0;
 				    <div class="mySlides fade">
 				      <img src="/images/dragon_tiger/007.jpg" style="width:100%">
 				    </div>
-				    <a class="prev">&#10094;</a>
-				    <a class="next">&#10095;</a>
+				    <a class="prev" style="color: #00afed;font-size: 80px;">&#10094;</a>
+				    <a class="next" style="color: #00afed;font-size: 80px;">&#10095;</a>
 				
 				  <div style="text-align:center">
 				    <span class="dot"></span>
@@ -156,7 +107,7 @@ padding: 1px 0 0 0;
 			</div>
 		</div>
 		<div id="gen_bac" class="tab_content tabpadding">
-			<div class="tab" style="padding-left: 24%;">
+			<div class="tab" style="padding-left: 24.5%;">
 			  <button class="tablinks" onclick="openOption(event, 'gbrules')" id="defaultOpen">게임규칙</button>
 			  <button class="tablinks" onclick="openOption(event, 'gbplay')">게임방법</button>
 			</div>
@@ -177,8 +128,8 @@ padding: 1px 0 0 0;
 				    <div class="mySlides fade">
 				      <img src="/images/game_rule/b5.jpg" style="width:100%">
 				    </div>
-				    <a class="prev">&#10094;</a>
-				    <a class="next">&#10095;</a>
+				    <a class="prev" style="color: #00afed;font-size: 80px;">&#10094;</a>
+				    <a class="next" style="color: #00afed;font-size: 80px;">&#10095;</a>
 				
 				  <div style="text-align:center">
 				    <span class="dot"></span>
@@ -219,8 +170,8 @@ padding: 1px 0 0 0;
 				    <div class="mySlides fade">
 				      <img src="/images/baccarat/009.jpg" style="width:100%">
 				    </div>
-				    <a class="prev">&#10094;</a>
-				    <a class="next">&#10095;</a>
+				    <a class="prev" style="color: #00afed;font-size: 80px;">&#10094;</a>
+				    <a class="next" style="color: #00afed;font-size: 80px;">&#10095;</a>
 				
 				  <div style="text-align:center">
 				    <span class="dot"></span>
@@ -237,7 +188,7 @@ padding: 1px 0 0 0;
 			</div>
 		</div>
 		<div id="vip_bac" class="tab_content tabpadding">
-			<div class="tab" style="padding-left: 36%;">
+			<div class="tab" style="padding-left: 36.6%;">
 			  <button class="tablinks" onclick="openOption(event, 'vbrules')" id="defaultOpen">게임규칙</button>
 			  <button class="tablinks" onclick="openOption(event, 'vbplay')">게임방법</button>
 			</div>
@@ -261,8 +212,8 @@ padding: 1px 0 0 0;
 				    <div class="mySlides fade">
 				      <img src="/images/game_rule/vb6.jpg" style="width:100%">
 				    </div>
-				    <a class="prev">&#10094;</a>
-				    <a class="next">&#10095;</a>
+				    <a class="prev" style="color: #00afed;font-size: 80px;">&#10094;</a>
+				    <a class="next" style="color: #00afed;font-size: 80px;">&#10095;</a>
 				
 				  <div style="text-align:center">
 				    <span class="dot"></span>
@@ -301,8 +252,8 @@ padding: 1px 0 0 0;
 				    <div class="mySlides fade">
 				      <img src="/images/vip_baccarat/008.jpg" style="width:100%">
 				    </div>
-				    <a class="prev">&#10094;</a>
-				    <a class="next">&#10095;</a>
+				    <a class="prev" style="color: #00afed;font-size: 80px;">&#10094;</a>
+				    <a class="next" style="color: #00afed;font-size: 80px;">&#10095;</a>
 				
 				  <div style="text-align:center">
 				    <span class="dot"></span>
@@ -318,7 +269,7 @@ padding: 1px 0 0 0;
 			</div>
 		</div>
 		<div id="bid_bac" class="tab_content tabpadding">
-			<div class="tab" style="padding-left:48%;">
+			<div class="tab" style="padding-left:48.8%;">
 			  <button class="tablinks" onclick="openOption(event, 'bbrules')" id="defaultOpen">게임규칙</button>
 			  <button class="tablinks" onclick="openOption(event, 'bbplay')">게임방법</button>
 			</div>
@@ -342,8 +293,8 @@ padding: 1px 0 0 0;
 				    <div class="mySlides fade">
 				      <img src="/images/game_rule/bb6.jpg" style="width:100%">
 				    </div>
-				    <a class="prev">&#10094;</a>
-				    <a class="next">&#10095;</a>
+				    <a class="prev" style="color: #00afed;font-size: 80px;">&#10094;</a>
+				    <a class="next" style="color: #00afed;font-size: 80px;">&#10095;</a>
 				
 				  <div style="text-align:center">
 				    <span class="dot"></span>
@@ -385,8 +336,8 @@ padding: 1px 0 0 0;
 				    <div class="mySlides fade">
 				      <img src="/images/bid_baccarat/009.jpg" style="width:100%">
 				    </div>
-				    <a class="prev">&#10094;</a>
-				    <a class="next">&#10095;</a>
+				    <a class="prev" style="color: #00afed;font-size: 80px;">&#10094;</a>
+				    <a class="next" style="color: #00afed;font-size: 80px;">&#10095;</a>
 				
 				  <div style="text-align:center">
 				    <span class="dot"></span>
@@ -421,8 +372,8 @@ padding: 1px 0 0 0;
 				    <div class="mySlides fade">
 				      <img src="/images/game_rule/r4.jpg" style="width:100%">
 				    </div>
-				    <a class="prev">&#10094;</a>
-				    <a class="next">&#10095;</a>
+				    <a class="prev" style="color: #00afed;font-size: 80px;">&#10094;</a>
+				    <a class="next" style="color: #00afed;font-size: 80px;">&#10095;</a>
 				
 				  <div style="text-align:center">
 				    <span class="dot"></span>
@@ -462,8 +413,8 @@ padding: 1px 0 0 0;
 				    <div class="mySlides fade">
 				      <img src="/images/roulette/009.jpg" style="width:100%">
 				    </div>
-				    <a class="prev">&#10094;</a>
-				    <a class="next">&#10095;</a>
+				    <a class="prev" style="color: #00afed;font-size: 80px;">&#10094;</a>
+				    <a class="next" style="color: #00afed;font-size: 80px;">&#10095;</a>
 				
 				  <div style="text-align:center">
 				    <span class="dot"></span>
@@ -498,8 +449,8 @@ padding: 1px 0 0 0;
 				    <div class="mySlides fade">
 				      <img src="/images/game_rule/s3.jpg" style="width:100%">
 				    </div>
-				    <a class="prev">&#10094;</a>
-				    <a class="next">&#10095;</a>
+				    <a class="prev" style="color: #00afed;font-size: 80px;">&#10094;</a>
+				    <a class="next" style="color: #00afed;font-size: 80px;">&#10095;</a>
 				
 				  <div style="text-align:center">
 				    <span class="dot"></span>
@@ -533,8 +484,8 @@ padding: 1px 0 0 0;
 				    <div class="mySlides fade">
 				      <img src="/images/sicbo/007.jpg" style="width:100%">
 				    </div>
-				    <a class="prev">&#10094;</a>
-				    <a class="next">&#10095;</a>
+				    <a class="prev" style="color: #00afed;font-size: 80px;">&#10094;</a>
+				    <a class="next" style="color: #00afed;font-size: 80px;">&#10095;</a>
 				
 				  <div style="text-align:center">
 				    <span class="dot"></span>

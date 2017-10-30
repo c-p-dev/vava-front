@@ -117,12 +117,12 @@
 	}
 
 	function drawMessages(data){
-		// alert("load Messages");
+		
 		var data = data.trim();
 		var obj = JSON.parse(data);
 		$(".inquiry_wrap").html("");
 		$.each( obj, function(index, el) {
-			console.log(index);
+			
 			var html  = '<div class="inquiry"> <div class="inquiry_admin"> <span class="admin_tag"><img src="../images/admin_tag.jpg"></span> <div class="inquiry_text">' + el.txt+ '</div> <div class="admin_date">'+el.send_date+'</div></div></div>'; 
 			if(el.class_name == "inquiry_user"){
 				html = '<div class="inquiry"> <div class="inquiry_user"> <span class="user_tag"><img src="../images/user_tag.jpg"></span> <div class="inquiry_text"> '+el.txt+' </div> <div class="user_date">'+el.send_date+'</div> </div> </div>'; 

@@ -1,53 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<style>
-/* Style the tab */
-div.tab {
-	height: 40px;
-    overflow: hidden;
-    background-color: #252929;
-   	color: #6b7a7a;
-}
-
-/* Style the buttons inside the tab */
-div.tab button {
-    background-color: inherit;
-    float: left;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    padding: 10px 10px;
-    transition: 0.3s;
-    font-size: 15px;
-    color: #6b7a7a;
-}
-
-/* Change background color of buttons on hover */
-div.tab button:hover {
-    background-color: #2d3232;
-}
-
-/* Create an active/current tablink class */
-div.tab button.active {
-	border: 1px solid #2d3232;
-    background-color: #1f2121;
-    color: #00afed
-}
-
-/* Style the tab content */
-.tabcontent{
-    display: none;
-    border-top: none;
-	
-}
-.tabcontent2{
-    display: none;
-    border-top: none;
-	padding: 10px 0 0 0;
-}
-.tabpadding{
-padding: 1px 0 0 0;
-}
-</style>
 <ul class="mtabs tabs">
 	<li class="liclass"><a href="#mgTab1">메인화면 구성</a></li>
 	<li class="liclass"><a href="#mgTab2">바카라</a></li>
@@ -64,6 +15,7 @@ padding: 1px 0 0 0;
 			  <button class="tablinks" style="position: relative;" onclick="MGoption(event, 'MGmain2')">게임로비</button>
 			</div>
 			<div id="MGmain1" class="tabcontent2">
+				
 			  	<div class="slideshow-container">
 				    <div class="mySlides fade">
 				      <img src="/images/main/mg1.png" style="width:100%;height:600px">
@@ -77,9 +29,8 @@ padding: 1px 0 0 0;
 				    <div class="mySlides fade">
 				      <img src="/images/main/mg4.png" style="width:100%;height:600px">
 				    </div>
-				
-				    <a class="prev">&#10094;</a>
-				    <a class="next">&#10095;</a>
+					<a class="prev" style="color: #00afed;font-size: 80px;">&#10094;</a>
+					<a class="next" style="color: #00afed;font-size: 80px;">&#10095;</a>				    
 				
 				  <div style="text-align:center">
 				    <span class="dot"></span>
@@ -107,8 +58,8 @@ padding: 1px 0 0 0;
 				      <img src="/images/main/cf5.png" style="width:100%;height:600px">
 				    </div>
 				
-				    <a class="prev">&#10094;</a>
-				    <a class="next">&#10095;</a>
+				    <a class="prev" style="color: #00afed;font-size: 80px;">&#10094;</a>
+				    <a class="next" style="color: #00afed;font-size: 80px;">&#10095;</a>
 				
 				  <div style="text-align:center">
 				    <span class="dot"></span>
@@ -121,7 +72,7 @@ padding: 1px 0 0 0;
 			</div>
 		</div>
 		<div id="mgTab2" class="tab_content tabpadding">
-			<div class="tab">
+			<div class="tab" style="padding-left: 12%;">
 			  <button class="tablinks" style="position: relative;" onclick="MGoption(event, 'bacca1')" id="defaultOpen">게임규칙</button>
 			  <button class="tablinks" style="position: relative;" onclick="MGoption(event, 'bacca2')">게임방법</button>
 			</div>
@@ -142,8 +93,8 @@ padding: 1px 0 0 0;
 				    <div class="mySlides fade">
 				      <img src="/images/game_rule/b5.jpg" style="width:100%;height:600px">
 				    </div>
-				    <a class="prev">&#10094;</a>
-				    <a class="next">&#10095;</a>
+				    <a class="prev" style="color: #00afed;font-size: 80px;">&#10094;</a>
+				    <a class="next" style="color: #00afed;font-size: 80px;">&#10095;</a>
 				
 				  <div style="text-align:center">
 				    <span class="dot"></span>
@@ -159,7 +110,7 @@ padding: 1px 0 0 0;
 			</div>
 		</div>
 		<div id="mgTab3" class="tab_content tabpadding">
-			<div class="tab">
+			<div class="tab" style="padding-left: 24.5%;">
 			  <button class="tablinks" style="position: relative;" onclick="MGoption(event, 'bbacca1')" id="defaultOpen">게임규칙</button>
 			  <button class="tablinks" style="position: relative;" onclick="MGoption(event, 'bbacca2')">게임방법</button>
 			</div>
@@ -180,8 +131,8 @@ padding: 1px 0 0 0;
 				    <div class="mySlides fade">
 				      <img src="/images/game_rule/b5.jpg" style="width:100%;height:600px">
 				    </div>
-				    <a class="prev">&#10094;</a>
-				    <a class="next">&#10095;</a>
+				    <a class="prev" style="color: #00afed;font-size: 80px;">&#10094;</a>
+				    <a class="next" style="color: #00afed;font-size: 80px;">&#10095;</a>
 				
 				  <div style="text-align:center">
 				    <span class="dot"></span>
@@ -197,7 +148,7 @@ padding: 1px 0 0 0;
 			</div>
 		</div>	
 		<div id="mgTab4" class="tab_content tabpadding">
-			<div class="tab">
+			<div class="tab" style="padding-left: 36.4%;">
 			  <button class="tablinks" style="position: relative;" onclick="MGoption(event, 'mbacca1')" id="defaultOpen">게임규칙</button>
 			  <button class="tablinks" style="position: relative;" onclick="MGoption(event, 'mbacca2')">게임방법</button>
 			</div>
@@ -218,8 +169,8 @@ padding: 1px 0 0 0;
 				    <div class="mySlides fade">
 				      <img src="/images/game_rule/b5.jpg" style="width:100%;height:600px">
 				    </div>
-				    <a class="prev">&#10094;</a>
-				    <a class="next">&#10095;</a>
+				    <a class="prev" style="color: #00afed;font-size: 80px;">&#10094;</a>
+				    <a class="next" style="color: #00afed;font-size: 80px;">&#10095;</a>
 				
 				  <div style="text-align:center">
 				    <span class="dot"></span>
@@ -238,8 +189,8 @@ padding: 1px 0 0 0;
 					<div class="mySlides fade">
 				      <img src="/images/mg/mb2.png" style="width:100%;height:600px">
 				    </div>
-				    <a class="prev">&#10094;</a>
-				    <a class="next">&#10095;</a>
+				    <a class="prev" style="color: #00afed;font-size: 80px;">&#10094;</a>
+				    <a class="next" style="color: #00afed;font-size: 80px;">&#10095;</a>
 				
 				  <div style="text-align:center">
 				    <span class="dot"></span>
@@ -249,7 +200,7 @@ padding: 1px 0 0 0;
 			</div>
 		</div>
 		<div id="mgTab5" class="tab_content tabpadding">
-			<div class="tab">
+			<div class="tab" style="padding-left: 48.8%;">
 			  <button class="tablinks" style="position: relative;" onclick="MGoption(event, 'mgroulette1')" id="defaultOpen">게임규칙</button>
 			  <button class="tablinks" style="position: relative;" onclick="MGoption(event, 'mgroulette2')">게임방법</button>
 			</div>
@@ -268,8 +219,8 @@ padding: 1px 0 0 0;
 				      <img src="/images/game_rule/r4.jpg" style="width:100%;height:600px">
 				    </div>
 				    
-				    <a class="prev">&#10094;</a>
-				    <a class="next">&#10095;</a>
+				    <a class="prev" style="color: #00afed;font-size: 80px;">&#10094;</a>
+				    <a class="next" style="color: #00afed;font-size: 80px;">&#10095;</a>
 				
 				  <div style="text-align:center">
 				    <span class="dot"></span>
@@ -284,7 +235,7 @@ padding: 1px 0 0 0;
 			</div>
 		</div>
 		<div id="mgTab6" class="tab_content tabpadding">
-			<div class="tab">
+			<div class="tab" style="padding-left: 61%;">
 			  <button class="tablinks" style="position: relative;" onclick="MGoption(event, 'mgsbo1')" id="defaultOpen">게임규칙</button>
 			  <button class="tablinks" style="position: relative;" onclick="MGoption(event, 'mgsbo2')">게임방법</button>
 			</div>
@@ -303,8 +254,8 @@ padding: 1px 0 0 0;
 				      <img src="/images/game_rule/s3.jpg" style="width:100%;height:600px">
 				    </div>
 				    
-				    <a class="prev">&#10094;</a>
-				    <a class="next">&#10095;</a>
+				    <a class="prev" style="color: #00afed;font-size: 80px;">&#10094;</a>
+				    <a class="next" style="color: #00afed;font-size: 80px;">&#10095;</a>
 				
 				  <div style="text-align:center">
 				    <span class="dot"></span>
@@ -357,8 +308,8 @@ padding: 1px 0 0 0;
 				      <img src="/images/mobile_mg/12.png" style="width:100%;height:650px">
 				    </div>
 					
-				    <a class="prev">&#10094;</a>
-				    <a class="next">&#10095;</a>
+				    <a class="prev" style="color: #00afed;font-size: 80px;">&#10094;</a>
+				    <a class="next" style="color: #00afed;font-size: 80px;">&#10095;</a>
 				
 				  <div style="text-align:center">
 				    <span class="dot"></span>
