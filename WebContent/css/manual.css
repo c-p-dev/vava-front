@@ -1,0 +1,158 @@
+.sub_left {width:260px; float:left; margin:0 10px 0 0}
+.sub_right {width:1060px; float:left;}
+.l_mmtabs {width:100%; float:left;}
+.l_mmtabs li{ width:240px; padding:0 0 0 20px; margin:0 0 1px 0;height:40px;background:#262a2b;  line-height:40px;}
+.l_mmtabs li a {width:100%;display:inline-block;}
+.l_mmtabs li:hover{background:#2a2e2f}
+ul.l_mmtabs li.active a {color:#ffffff}
+ul.l_mmtabs li.active, ul.l_mmtabs li.active a:hover {background: #00afed; }
+.left_tab_con {width:100%; }
+
+ul.mtabs {float: left; height: 40px; border-bottom: 1px solid #2d3232; width: 100%;}
+ul.mtabs li {float: left;height: 40px;line-height: 40px;margin-bottom: -1px;margin-right: 2px;background: #252929;overflow: hidden;position: relative;width:12%; height:40px;text-align:center;font-size:14px; font-weight:bold;display:inline-block;}
+ul.mtabs li a {background: #252929;color:#6b7a7a; width:100%; height:40px;display:inline-block;}	
+ul.mtabs li a:hover {background: #2d3232;color:#6b7a7a; width:100%; height:40px;display:inline-block;}	
+html ul.mtabs li.active a:hover{background: #2d3232;color:#00afed ;width:100%; height:40px;display:inline-block;border: 1px solid #2d3232;border-bottom: none;}
+html ul.mtabs li.active a  {background: #1c2021;color:#00afed ;border: 1px solid #2d3232;border-bottom: none;width:100%; height:40px;display:inline-block;}
+.tab_container {clear: both; float: left; width: 100%;}
+.tab_content {padding: 20px 0 0 0;}
+/* slide show style */
+
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 40%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 40px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom:20px;
+  width: 100%;
+  text-align: center;
+}
+.mySlides {
+  display:none;
+}
+.active-slide {
+  display:block;
+}
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor:pointer;
+  height: 13px;
+  width: 13px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+div.tab {
+	height: 40px;
+    overflow: hidden;
+    background-color: #252929;
+   	color: #6b7a7a;
+}
+
+/* Style the buttons inside the tab */
+div.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 10px 10px;
+    transition: 0.3s;
+    font-size: 15px;
+    color: #6b7a7a;
+}
+
+/* Change background color of buttons on hover */
+div.tab button:hover {
+    background-color: #2d3232;
+}
+
+/* Create an active/current tablink class */
+div.tab button.active {
+	border: 1px solid #2d3232;
+    background-color: #1f2121;
+    color: #00afed
+}
+
+/* Style the tab content */
+.tabcontent{
+    display: none;
+    border-top: none;
+	
+}
+.tabcontent2{
+    display: none;
+    border-top: none;
+	padding: 10px 0 0 0;
+}
+.tabpadding{
+padding: 1px 0 0 0;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+

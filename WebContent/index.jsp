@@ -39,7 +39,10 @@
 				</div>
 				<script type="text/javascript">jssor_1_slider_init();</script>
 			</div>
-			<div class="video_wrap" id="random_player">
+			<div class="video_wrap">
+			<video width="100%" height="100%" controls loop autoplay>
+				  <source src="video/vid_1.mp4" type="video/mp4">
+				</video>
 			</div>
 		</div>
         <div class="contents_in_m20">

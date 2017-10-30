@@ -2,7 +2,6 @@
 <jsp:include page="../header.jsp" />
 <jsp:useBean id="bean" class="net.vavasoft.bean.UserBean" />
 <%@page import="net.vavasoft.dao.GameDao, net.vavasoft.bean.GameBean, java.util.*"%>
-
 <%
 	boolean checkSession = false;
 	// UserBean currentUser = (UserBean) session.getAttribute("currentSessionUser");
@@ -50,10 +49,12 @@
 			</div>
 			<ul class="l_tabs">
 				<li><a href="#l-tab1">전체</a></li>
-				<li><a href="#l-tab2">타이샨</a></li>
-				<li><a href="#l-tab3">에볼루션 카지노</a></li>
-				<li><a href="#l-tab4">벳컨스트럭트</a></li>
-				<li><a href="#l-tab4">오리엔탈 게임</a></li>
+				<li><a href="#l-tab2">AG Casino</a></li>
+				<li><a href="#l-tab3">AG Manual</a></li>
+				<li><a href="#l-tab4">MG Casino</a></li>
+				<li><a href="#l-tab5">MG Manual</a></li>
+				<li><a href="#l-tab6">Betconstruct Casino</a></li>
+				<li><a href="#l-tab=7">Betconstruct Manual</a></li>
 			</ul>
 		</div>
 
@@ -147,16 +148,22 @@
 				</div>
 			</div>
 			<div id="l-tab2" class="left_tab_con">
-				업체명
+				ag casino
 			</div>
 			<div id="l-tab3" class="left_tab_con">
-				업체명
+				<jsp:include page="manual.jsp" /> 
 			</div>
 			<div id="l-tab4" class="left_tab_con">
 				업체명
 			</div>
 			<div id="l-tab5" class="left_tab_con">
-				업체명
+				<jsp:include page="manual2.jsp" />
+			</div>
+			<div id="l-tab6" class="left_tab_con">
+				beng
+			</div>
+			<div id="l-tab7" class="left_tab_con">
+				beng
 			</div>
 		</div>
 	</div>
