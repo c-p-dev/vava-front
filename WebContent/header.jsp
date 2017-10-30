@@ -62,6 +62,7 @@
 <link href="/css/gateway.css" rel="stylesheet" type="text/css"><!-- gateway -->
 <link href="/css/common2.css" rel="stylesheet" type="text/css"><!--공통-->
 <link href="/css/spin.css" rel="stylesheet" type="text/css"><!--공통-->
+<link href="/css/custom.css" rel="stylesheet" type="text/css"><!--공통-->
 
 <!-- toaster test  -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css" rel="stylesheet" type="text/css">

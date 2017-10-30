@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,6 +23,9 @@ public class SpinCubeServlet extends HttpServlet {
 	public static final String SC_METHOD_GET_TOKEN		= "/GetToken";
 	public static final String SC_METHOD_CREATE_PLAYER	= "/CreatePlayer";
 	public static final String SC_METHOD_LAUNCH_GAME	= "/GetGameUrl";
+	public static final String SC_METHOD_DEPOSIT		= "/Deposit";
+	public static final String SC_METHOD_WITHDRAW		= "/Withdraw";
+	public static final String SC_METHOD_LOCK_STS		= "/UpdUserLock";
 
 	
 	/**
@@ -34,7 +38,7 @@ public class SpinCubeServlet extends HttpServlet {
 		String session_id				= request.getSession().getId();
 		BufferedReader reader			= request.getReader();
 		
-		SpinCubeController sc_ctrl		= new SpinCubeController("agent007");
+		SpinCubeController sc_ctrl		= new SpinCubeController("1_agent007");
 		PrintWriter output				= response.getWriter();
 		
 		if (method.equals(SC_METHOD_GET_TOKEN)) {
@@ -44,14 +48,57 @@ public class SpinCubeServlet extends HttpServlet {
 		}
 		else if (method.equals(SC_METHOD_CREATE_PLAYER)) {
 			String srv_resp_2 	= "";
-			srv_resp_2 			= sc_ctrl.createPlayer();
+			try {
+				srv_resp_2 			= sc_ctrl.createPlayer();
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			output.print(srv_resp_2);
 		}
 		else if (method.equals(SC_METHOD_LAUNCH_GAME)) {
 			String srv_resp_3 	= "";
 			String game_name	= "SVS_instant_greyhounds";
-			srv_resp_3 			= sc_ctrl.getGameUrl(game_name);
+			try {
+				srv_resp_3 			= sc_ctrl.getGameUrl(game_name);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			output.print(srv_resp_3);
+		}
+		else if (method.equals(SC_METHOD_DEPOSIT)) {
+			String srv_resp_3 	= "";
+			double amount	= 10000;
+			try {
+				srv_resp_3 			= sc_ctrl.makeTransaction(amount, "deposit");
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			output.print(srv_resp_3);
+		}
+		else if (method.equals(SC_METHOD_WITHDRAW)) {
+			String srv_resp_4 	= "";
+			Double amount	= null;
+			try {
+				srv_resp_4 			= sc_ctrl.makeTransaction(amount, "withdraw");
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			output.print(srv_resp_4);
+		}
+		else if (method.equals(SC_METHOD_LOCK_STS)) {
+			String srv_resp_5 	= "";
+			boolean lock_sts	= true;
+			try {
+				srv_resp_5 			= sc_ctrl.lockUser(lock_sts);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			output.print(srv_resp_5);
 		}
 		else {
 			String srv_resp_0	= "Invalid Method";

@@ -35,7 +35,7 @@
 			session.setMaxInactiveInterval(7200);
 	        session.setAttribute("currentSessionUser",ub);
 	        int updateSession = userDao.updateUserAfterLogin(ub.getUserid(), session.getId());
-	        System.out.println(updateSession);	
+	        System.out.println(updateSession);
 		}	
 	
 	} catch (SQLException e) {

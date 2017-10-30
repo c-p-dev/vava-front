@@ -21,3 +21,14 @@
     float:  left;
     height: 100%;
 }
+
+.casino_board_list li:nth-child(12),
+.casino_board_list li:nth-child(15),
+.casino_board_list li:nth-child(18),
+.casino_board_list li:nth-child(21),
+.casino_board_list li:nth-child(24),
+.casino_board_list li:nth-child(27),
+.casino_board_list li:nth-child(30) {margin:0}
+
+.racing_board_list li {float:left; margin:0 40px 40px 0; width:290px;}
+.racing_board_img {width:290px; height:195px; clear:both;}

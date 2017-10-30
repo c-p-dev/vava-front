@@ -15,6 +15,7 @@ import net.vavasoft.bean.MgBettingProfileBean;
 import net.vavasoft.bean.MgPlayerAccountBean;
 import net.vavasoft.bean.MgWithdrawAllBean;
 import net.vavasoft.bean.UserBean;
+import net.vavasoft.controller.SpinCubeController;
 import net.vavasoft.controller.TotalEgameController;
 import test.BetConManager_Test2;
 
@@ -56,6 +57,7 @@ public class UserDao {
 			if(rs.next()){
 				if (rs.getString("passwd").equals(password)){
 					uib.setLoginStatus(0); //success
+					uib.setSiteid(rs.getInt("siteid"));
 					uib.setUserid(rs.getString("userid"));
 					uib.setNick(rs.getString("nick"));
 					
@@ -453,6 +455,8 @@ public class UserDao {
 			MgPlayerAccountBean mg_user		= new MgPlayerAccountBean();
 			MgBettingProfileBean bet_profl	= new MgBettingProfileBean();
 			UserBean user_data				= this.getUserByUserId(userid);
+			SpinCubeController sc_ctrl		= new SpinCubeController(Integer.toString(user_data.getSiteid()).concat("_").concat(userid));
+			
 			double money					= user_data.getMoney();
 			
 	        TotalEgameController teg_ctrl 	= new TotalEgameController();
@@ -493,7 +497,7 @@ public class UserDao {
 	        		break;
 	        }
 	        
-	        
+	        sc_ctrl.transferMoneyToVava(userid);
 		}
 		catch(Exception e) {
 			System.out.println(e);

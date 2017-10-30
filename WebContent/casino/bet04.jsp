@@ -13,7 +13,7 @@
 	}
 	
 	GameDao game_dao			= new GameDao();
-	List<GameBean> game_list	= game_dao.getAllGames();
+	List<GameBean> game_list	= game_dao.getCasinoGames();
 %>
 
 <div id="contents_wrap">
