@@ -88,7 +88,7 @@ html ul.mtabs li.active a  {background: #1c2021;color:#00afed ;border: 1px solid
 }
 
 .active, .dot:hover {
-  background-color: #717171;
+  background-color: #00afed;
 }
 
 /* Fading animation */

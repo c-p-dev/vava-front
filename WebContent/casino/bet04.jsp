@@ -54,7 +54,7 @@
 				<li><a href="#l-tab4">MG Casino</a></li>
 				<li><a href="#l-tab5">MG Manual</a></li>
 				<li><a href="#l-tab6">Betconstruct Casino</a></li>
-				<li><a href="#l-tab=7">Betconstruct Manual</a></li>
+				<li><a href="#l-tab7">Betconstruct Manual</a></li>
 			</ul>
 		</div>
 
@@ -160,10 +160,10 @@
 				<jsp:include page="manual2.jsp" />
 			</div>
 			<div id="l-tab6" class="left_tab_con">
-				beng
+				betconstruct casino
 			</div>
 			<div id="l-tab7" class="left_tab_con">
-				beng
+				betconstrict Manual
 			</div>
 		</div>
 	</div>
