@@ -130,6 +130,7 @@
 </ul>
 <script>
 	$(document).ready(function(){
+
 		var $qnaDt;
 		$qnaDt = $('#qnaDt').DataTable({
 			ajax : 'process/info/getQnaList.jsp',
@@ -178,11 +179,14 @@
             		var thisRow = $qnaDt.row(row);
             		thisRow.child(childRowFormat(data.txt),'dt-txt').show();
             		$(thisRow.child()).find('.slider').show();
-
             	}
         	}
         });
 
+		setTimeout(function() {
+		  	$qnaDt.columns.adjust().draw();
+		}, 100);
+		
         $('#qnaDt tbody').on('click', 'tr', function () {
 	        var row = $qnaDt.row(this);
 	        if(!$(this).hasClass('dt-txt')){
@@ -193,12 +197,12 @@
 	        	row.child(childRowFormat(row.data().txt),'dt-txt').show();
     			$(row.child()).find('.slider').stop(false, true).slideToggle();
 	        }
-
-
-
 	    });
 
+
 	});
+
+
 	function childRowFormat(d){
 		return '<div class="slider">' + d + '</div>';
 	}

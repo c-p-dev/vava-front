@@ -5,10 +5,11 @@
 <%@ page import = "net.vavasoft.dao.SmsDao"%>
 <%
 	SmsDao sd = new SmsDao();
-	String cell = request.getParameter("cell").trim();
-	String cell_prefix = request.getParameter("cell_prefix").trim();
-	String authcode = request.getParameter("cert").trim();
-
-	boolean result = sd.checkAuthCode(cell_prefix,cell,authcode);
+	String cell = request.getParameter("cell");
+	String cell_prefix = request.getParameter("cell_prefix");
+	String authcode = request.getParameter("cert");
+	boolean rSend = Boolean.parseBoolean(request.getParameter("rSnd"));
+	
+	boolean result = sd.checkAuthCode(cell_prefix,cell,authcode,rSend);
 	out.println(result);
 %>

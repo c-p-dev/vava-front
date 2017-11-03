@@ -19,8 +19,22 @@
 		String cell_prefix = request.getParameter("cp");
 		String nickname = request.getParameter("nk");
 		String userid = request.getParameter("ud");
-
+		// int site_id = request.getParameter("sd");
+		int site_id = 1;
+		
 		result = sd.checkAuthCodeByUseridNick(userid, nickname,cell_prefix,cell,authcode);
+
+		String mobile_no = sd.formatCellNumber(cell_prefix, cell);
+
+		if(result){
+			
+			sd.updateValidSmsDeliveryLog(mobile_no,"Y");
+		
+		}else{
+			
+			sd.saveSmsAuthLog(mobile_no,authcode,site_id);
+		}
+		
 
 	}else if(method.equals("by_bank")){
 		

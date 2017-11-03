@@ -65,11 +65,27 @@
 <link href="/css/manual.css" rel="stylesheet" type="text/css"><!--slide-->
 <link href="/css/custom.css" rel="stylesheet" type="text/css"><!--공통-->
 
+<link href="/css/spin.css" rel="stylesheet" type="text/css"> <!-- spin css -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css" rel="stylesheet" type="text/css"><!-- toaster test  -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.js"></script><!-- custom scrollbar -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/jquery.qtip.css" /><!-- tooltip -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/jquery.qtip.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script><!-- moment js -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.js"></script><!-- pickaday -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.css" rel="stylesheet" type="text/css">
+
+
+
+
+
 </head>
 <style>
 	#toast-container.toast-top-full-width > div, #toast-container.toast-bottom-full-width > div {
 		width: 30%!important;
 		text-align: center;
+		top: 15px;
 	}
 	#toast-container > .toast-success{
 		background-image :none!important;
@@ -84,6 +100,17 @@
 	}
 	.toast-message {
     	font-size: 16px;
+	}
+
+
+	.mCSB_inside>.mCSB_container {
+    	margin-right: 15px!important;
+	}
+	.login-img-validator{
+		cursor: pointer;
+	}
+	a.top_btn1,a.top_btn3{
+		color:#fff;
 	}
 
 </style>
@@ -126,11 +153,32 @@ $(window).scroll(function(event){
 	      	scrolllock: true,
 	    });	
 
-		$("#login_header").on("submit", function(e){
+		$("#lginHderBtn").on("click", function(e){
 			e.preventDefault();
-			var data = $(this).serializeJSON();
-			submitLoginHeader(data);
+
+			toastr.clear();
+			
+			var validator = $( "#login_header" ).validate(); 
+			var vUser = validator.element("#userid-header-input");
+			var vPass = validator.element("#passwd-header-input");
+			console.log(!vUser);
+			console.log(!vPass);
+			if(!vUser && !vPass){
+				toastr.success("Please complete the form");
+			}else if (vUser && !vPass){
+				toastr.success("Password is required");
+			}else if (!vUser && vPass){
+				toastr.success("Userid is required");
+			}else{
+
+				var data = $("#login_header").serializeJSON();
+			    submitLoginHeader(data);
+			}
+
+
+	
 		});
+
 
 		$(".closeLogoutBtn").on("click",function(e){
 			e.preventDefault();
@@ -156,59 +204,134 @@ $(window).scroll(function(event){
 			}
 		});
 
+
+		toastr.options = {
+			closeButton: true,
+			debug: false,
+			newestOnTop: false,
+			progressBar: false,
+			positionClass: "toast-top-full-width",
+			preventDuplicates: true,
+			onclick: null,
+			showDuration: "3000",
+			hideDuration: "1000",
+			timeOut: "5000",
+			extendedTimeOut: "1000",
+			showEasing: "swing",
+			hideEasing: "linear",
+			showMethod: "fadeIn",
+			hideMethod: "fadeOut",
+			onHidden: function() {
+				
+				$('#userid-header-input').css("border-color","#505455");
+				$('#passwd-header-input').css("border-color","#505455");
+
+			}
+		}
+
+		$(".login-img-validator").on("click",function(){
+			var tab = $(this).attr('data-tab');
+			$("#ftb input[name=pge]").val("acc");
+			$("#ftb input[name=tb]").val(tab);
+			$("#ftb").submit();
+		});
+
+		$("#user_menu_lst li a").on("click",function(e){
+			e.preventDefault();
+			var tab = $(this).attr('data-tab');
+			var pg = $(this).attr('data-pg');
+			$("#ftb input[name=pge]").val(pg);
+			$("#ftb input[name=tb]").val(tab);
+			$("#ftb").submit();
+
+		});
+
+		$("#user_popup_menu div a").on("click",function(e){
+			e.preventDefault();
+			var tab = $(this).attr('data-tab');
+			var pg = $(this).attr('data-pg');
+			$("#ftb input[name=pge]").val(pg);
+			$("#ftb input[name=tb]").val(tab);
+			$("#ftb").submit();
+
+		});
+
+		$("#login_header").validate({
+	  		errorClass: 'form1-invalid',
+	    	validClass: 'header-login-valid',
+		    onfocusout: false,
+		    onkeyup :false,
+		    onclick : false,
+		    groups: {
+			    username: "userid passwd"
+			},
+	  		rules: {
+			    userid :{
+			    	required:true,
+			    	// noHangul: true,
+			    	// nowhitespace:true,
+                    // alphanumeric:true,
+					// minlength:4,
+	      		},
+				
+				passwd :{
+					required:true,
+					// minlength:6,
+					// maxlength:20,
+					// nowhitespace:true,
+				},
+			},
+			messages: {
+			    userid :{
+					required:"User Id is required",
+					remote:"이미 사용중인 아이디 입니다.",
+				},
+				passwd :{
+					required:"Password is required",
+					minlength:"비밀번호를 6자리 이상 입력 해 주세요.",
+					maxlength:"비밀번호를 20자리 이하로 입력 해 주세요",
+				},
+
+			},
+			errorPlacement: function(error, element) {
+							
+				// var error_label = element.attr("name");
+				// var id = element.attr("id");
+				// toastr.success(error);
+			 
+			},
+		  	
+		});
+
 	});
 
 	function submitLoginHeader(data){
-		if(loginheaderValid()){
-			$.ajax({
-				url : '${baseUrl}process/login_process.jsp',
-				data : data,
-				method: 'POST',
-			}).done(function(data){
-				$("#login-header-warn").hide();
-				$('#login_header input').css("border-color","#505455");
-				console.log(data);
-				if(data == 0 ){
-					$("#login-header-warn").html("Login Successful").show();
-					$("#loginModal").popup("show");
-				}else if(data == 1 ){
-					$("#login-header-warn").html("Incorrect Password").show();
-					$("#passwd-header-input").focus();
-				}else if(data == 2){
-					$("#login-header-warn").html("Unknown User Id").show();
-					$("#userid-header-input").focus();
-				}else{
-					alert("Something went wrong. Try again.");
-				}
-			});
-		}
-		
+		$.ajax({
+			url : '${baseUrl}process/login_process.jsp',
+			data : data,
+			method: 'POST',
+		}).done(function(data){
+			if(data == 0 ){
+
+				toastr.success('Login Successful');
+				$("#loginModal").popup("show");
+
+			}else if(data == 1 ){
+
+				toastr.success('Incorrect Password');
+				$("#passwd-header-input").focus();
+
+			}else if(data == 2){
+	
+				toastr.success('Unknown User Id');
+				$("#userid-header-input").focus();
+
+			}else{
+				toastr.success('Something went wrong. Try again.');
+			}
+		});
+
 	}
-
-	function loginheaderValid(){
-		var valid = false;
-		var useridTxt = $.trim($("#userid-header-input").val());
-		var passwordTxt = $.trim($("#passwd-header-input").val());
-		$("#login-header-warn").hide();
-		$('#login_modal_form input').css("border-color","#2e3032");
-
-		if(useridTxt == "" || useridTxt == null){
-			$("#login-header-warn").html("User Id is required").show();
-			$("#userid-header-input").css("border-color","#d50000").focus();
-		}
-		else if(passwordTxt == "" || passwordTxt == null){
-			$("#login-header-warn").html("Password is required").show();
-			$("#passwd-header-input").css("border-color","#d50000").focus();
-		}
-		else if((useridTxt == "" || useridTxt == null) && ((passwordTxt == "" || passwordTxt == null))) {
-			$("#login-header-warn").html("User Id and Password is required").show();
-			$("#userid-header-input").css("border-color","#d50000").focus();
-		}else{
-			valid = true;
-		}
-		return valid;
-	}
-
 
 </script>
 <%
@@ -258,7 +381,7 @@ $(window).scroll(function(event){
 				<span class="popover-wrapper right">
 					<a href="#" data-role="popover" data-target="example-popover-2"><img src="/images/select_mark.png"></a>
 					<div class="popover-modal example-popover-2">
-						<div class="popover-body">
+						<div class="popover-body" >
 							<a href="#" data-toggle-role="close" style="position:absolute; right:20px; top:0px">×</a>
 							<div class="popover-body-in">
 								<!-- <span class="popover_t">보유머니</span> <span class="popover_money">10,000,000</span> -->
@@ -270,10 +393,19 @@ $(window).scroll(function(event){
 								<span class="popover_t">보유포인트</span> <span class="popover_money"><%=currentUser.getPoint()%></span>
 
 							</div>
-							<div class="popover-body-btn">
-								<div class="popover-body-btn_in"><a href="#"><span class="popover_btn">충전신청</span></a> <a href="#"><span class="popover_btn">환전신청</span></a></div>
-								<div class="popover-body-btn_in"><a href="#"><span class="popover_btn">포인트전환</span></a> <a href="#"><span class="popover_btn">포인트사용내역</span></a></div>
-								<div class="popover-body-btn_in"><a href="#"><span class="popover_btn">머니전환</span></a> <a href="#"><span class="popover_btn">머니사용내역</span></a></div>
+							<div class="popover-body-btn" id="user_popup_menu">
+								<div class="popover-body-btn_in">
+									<a href="/app/sub04.jsp" data-pg="sb4" data-tab="tab1" ><span class="popover_btn">충전신청</span></a> 
+									<a href="/app/sub04.jsp"  data-pg="sb4" data-tab="tab2" ><span class="popover_btn">환전신청</span></a>
+								</div>
+								<div class="popover-body-btn_in">
+									<a href="/app/sub04.jsp" data-pg="sb4" data-tab="tab3" ><span class="popover_btn">포인트전환</span></a> 
+									<a href="/app/sub04.jsp" data-pg="sb4" data-tab="tab3"><span class="popover_btn">포인트사용내역</span></a>
+								</div>
+								<div class="popover-body-btn_in">
+									<a href="/app/sub04.jsp" data-pg="sb4" data-tab="tab4" ><span class="popover_btn">머니전환</span></a> 
+									<a href="/app/sub04.jsp" data-pg="sb4" data-tab="tab6"><span class="popover_btn">머니사용내역</span></a>
+								</div>
 							</div>
 						</div>
 						<script>
@@ -291,29 +423,29 @@ $(window).scroll(function(event){
              		<% 
                			if(checkSession){
       				%>
-	                <ul class="top_right">
+	                <ul class="top_right" id="user_menu_lst">
 	                    <li>
 							<div class="select open">
 								<button type="button" class="myValue top_value">LV.3   <%=currentUser.getNick()%></button>
 								<ul class="aList top_alist">
 									<li style="height:11px; width:152px; background:url(/images/select_top_bg.png) no-repeat"></li>
 									<li>
-										<a href="/info/sub05.jsp?tab=tab1">내 정보 
+										<a href="/info/sub05.jsp" data-pg="sb5" data-tab="tab1" >내 정보 
 											<!-- <span class="select_arrow"> > </span> -->
 										</a>
 									</li>
 									<li>
-										<a href="/info/sub05.jsp?tab=tab2">베팅내역 
+										<a href="/info/sub05.jsp" data-pg="sb5" data-tab="tab2" >베팅내역 
 											<!-- <span class="select_arrow"> > </span> -->
 										</a>
 									</li>
 									<li>
-										<a href="/info/sub05.jsp?tab=tab3">1:1문의 
+										<a href="/info/sub05.jsp" data-pg="sb5" data-tab="tab3" >1:1문의 
 											<!-- <span class="select_arrow"> > </span> -->
 										</a>
 									</li>
 									<li>
-										<a href="/info/sub05.jsp?tab=tab4">쪽지함 
+										<a href="/info/sub05.jsp" data-pg="sb5" data-tab="tab4" >쪽지함 
 											<!-- <span class="select_arrow"> > </span> -->
 										</a>
 									</li>
@@ -322,21 +454,25 @@ $(window).scroll(function(event){
 								</ul>
 							</div>				
 						</li>
-						<li><a href="/app/sub04.jsp?tab=tab1"><span class="top_btn1">충전신청</span></a></li>
-	                    <li><a href="/app/sub04.jsp?tab=tab2"><span class="top_btn1">환전신청</span></a></li>
-						<li><a href="/app/sub04.jsp?tab=tab4"><span class="top_btn3">머니전환</span></a></li>
-						<li><a href="/info/sub05.jsp"><span class="top_btn2">내정보</span></a></li>
+						<li><a href="/app/sub04.jsp" data-pg="sb4" data-tab="tab1" class="top_btn1" > <!-- <span class="top_btn1">충전신청</span> --> 충전신청  </a></li>
+
+	                    <li><a href="/app/sub04.jsp" data-pg="sb4" data-tab="tab2" class="top_btn1" > <!-- <span class="top_btn1">환전신청</span> --> 환전신청  </a></li>
+						<li><a href="/app/sub04.jsp" data-pg="sb4" data-tab="tab4" class="top_btn3" > <!-- <span class="top_btn3">머니전환</span> --> 머니전환  </a></li>
+
+						<li><a href="/info/sub05.jsp" data-pg="sb5" data-tab="tab1" ><span class="top_btn2">내정보</span></a></li>
 	                </ul>
                	<% } else{  %>
 					<ul class="top_right">
 						<form id="login_header">
-							<li><input id="userid-header-input" type="text" class="input_style01" name="userid" placeholder="ID"><img class="login-img-validator" id="userid-img" src="images/input_mark.png"></li>
+							<li><input id="userid-header-input" type="text" class="input_style01" name="userid" placeholder="ID"><img class="login-img-validator" data-tab="tab1" id="userid-img" src="images/input_mark.png"></li>
 							<!-- input_blue 인풋활성화 -->
-		                    <li><input id="passwd-header-input" type="password" class="input_style01" name="passwd" placeholder="PW"><img class="login-img-validator" id="passwd-img" src="images/input_mark.png"></li>
+		                    <li>
+		                    	<input id="passwd-header-input" type="password" class="input_style01" name="passwd" placeholder="PW" style="width: 158px;"><img class="login-img-validator" data-tab="tab2" id="passwd-img" src="images/input_mark.png">
+		                    </li>
 		                     <li><div class="input_warning login-warn" id="login-header-warn" >조건에 맞는 아이디를 입력해주세요.</div></li>
 		                    <!-- input_red 인풋조건미충족 -->
 		                    <li>
-		                    	<input type="submit" class="top_btn1" value="로그인" >
+		                    	<input type="submit" class="top_btn1" id="lginHderBtn" value="로그인" >
 		                    </li>
 		                    <li><span class="top_btn2 fade_1_open" >회원가입</span></li>
 
@@ -365,6 +501,13 @@ $(window).scroll(function(event){
 	</div>
 </div><!-- header_wrap -->
 
+
+<div class="hidden" id="tb_redirect">
+	<form action="process/tab_route.jsp" method="post" accept-charset="utf-8" id="ftb">
+		<input type="hidden" name="tb" value="">
+		<input type="hidde" name="pge" value="">
+	</form>	
+</div>
 <!-- login success modal -->
 <div id="loginModal" class="bg_mask_pop2">
 	<div class="bg_mask_pop_title">

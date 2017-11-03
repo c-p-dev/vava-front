@@ -30,8 +30,15 @@
 	</div>
 </div><!-- contents -->
 <script>
+	
+
 	$(document).ready(function(){
-		setTabActive($.urlParam("tab"));
+		// setTabActive($.urlParam("tab"));
+
+		var tab = '<%=session.getAttribute("tb")%>';
+		if(tab != ""){
+			$("ul.tabs li a[href='#"+tab+"']").click();
+		}
 	});
 </script>
 <jsp:include page="../footer.jsp" />

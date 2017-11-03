@@ -10,6 +10,25 @@ public class GameBean {
 	private String game_img;
 	private String date_added;
 	
+	private String provider_name;
+	private String game_type_name;
+	
+	public String getGame_type_name() {
+		return game_type_name;
+	}
+
+	public void setGame_type_name(String game_type_name) {
+		this.game_type_name = game_type_name;
+	}
+
+	public String getProvider_name() {
+		return provider_name;
+	}
+
+	public void setProvider_name(String provider_name) {
+		this.provider_name = provider_name;
+	}
+
 	public int getGame_id() {
 		return game_id;
 	}
