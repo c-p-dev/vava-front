@@ -48,11 +48,11 @@
 				</div>
 			</div>
 			<ul class="l_tabs">
-				<li><a href="#l-tab1">전체</a></li>
+				<li><a class="all" href="#l-tab1">전체</a></li>
 				<li><a href="#l-tab2">AG Casino</a></li>
-				<li><a href="#l-tab3">AG Manual</a></li>
+				<li><a class="agtab" href="#l-tab3">AG Manual</a></li>
 				<li><a href="#l-tab4">MG Casino</a></li>
-				<li><a href="#l-tab5">MG Manual</a></li>
+				<li><a class="mgtab" href="#l-tab5">MG Manual</a></li>
 				<li><a href="#l-tab6">Betconstruct Casino</a></li>
 				<li><a href="#l-tab7">Betconstruct Manual</a></li>
 			</ul>
@@ -61,7 +61,7 @@
 		<div class="casino_right">
 			<div id="l-tab1" class="left_tab_con">
 				<ul class="tabs">
-					<li><a href="#tab1">전체</a></li>
+					<li><a class="allgames" href="#tab1">전체</a></li>
 					<li><a href="#tab2">드래곤타이거</a></li>
 					<li><a href="#tab3">바카라</a></li>
 					<li><a href="#tab4">룰렛</a></li>

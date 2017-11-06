@@ -47,9 +47,10 @@
 <script type="text/javascript" src="/js/additional-methods.js"></script>
 <script type="text/javascript" src="/js/jquery.serializejson.js"></script><!-- json serializer -->
 <script type="text/javascript" src="/js/manual.js"></script>
+<script type="text/javascript" src="/js/slides.js"></script>
 
 
-<link href="/css/nice-select.css" rel="stylesheet" type="text/css"><!-- select -->
+<link href="/css/nice-select.css" rel="stylesheet" type="text/css"><!-- select --> 
 <script type="text/javascript" src="/js/jquery.nice-select.js"></script><!-- select -->
 
 <script type="text/javascript" src="/js/jquery.dataTables.min.js"></script><!-- switch -->

@@ -25,7 +25,7 @@ html ul.mtabs li.active a  {background: #1c2021;color:#00afed ;border: 1px solid
 }
 
 /* Next & previous buttons */
-.prev, .next {
+.mprev, .mnext {
   cursor: pointer;
   position: absolute;
   top: 40%;
@@ -40,13 +40,13 @@ html ul.mtabs li.active a  {background: #1c2021;color:#00afed ;border: 1px solid
 }
 
 /* Position the "next button" to the right */
-.next {
+.mnext {
   right: 0;
   border-radius: 3px 0 0 3px;
 }
 
 /* On hover, add a black background color with a little bit see-through */
-.prev:hover, .next:hover {
+.mprev:hover, .mnext:hover {
   background-color: rgba(0,0,0,0.8);
 }
 
