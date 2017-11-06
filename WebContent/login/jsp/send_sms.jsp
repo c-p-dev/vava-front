@@ -12,11 +12,13 @@
         ip =  new StringTokenizer(xForwardedForHeader, ",").nextToken().trim();
     }
 
-    String userid = request.getParameter("userid").trim();
-	String cell = request.getParameter("cell").trim();
-	String cell_prefix = request.getParameter("cell_prefix").trim();
-	
-    boolean res = sd.sendSms(userid,cell_prefix,cell,ip);
+    int site_id = 1;
+    String userid = request.getParameter("userid");
+	String cell = request.getParameter("cell");
+	String cell_prefix = request.getParameter("cell_prefix");
+	boolean rSnd = Boolean.parseBoolean(request.getParameter("rSnd"));
+
+    boolean res = sd.sendSms(userid,cell_prefix,cell,ip,site_id,rSnd);
 	out.println(res);
 
 

@@ -124,7 +124,7 @@
 </div>
 <script>
 	$dataTable1 = $('#dataTable2').DataTable({
-		ajax : 'process/application/exchange/getWithdrawList.jsp',
+		ajax : 'jsp/getWithdrawList.jsp',
 		bProcessing: true,
 		sAjaxDataProp:"",
 		searching: false,
@@ -238,7 +238,7 @@
 	
 	function submitForm1(withdraw){
 		$.ajax({
-			url : 'process/application/exchange/withdrawprocess.jsp',
+			url : 'jsp/withdrawprocess.jsp',
 			data : withdraw,
 			method: 'POST',
 		}).done(function(data){ 

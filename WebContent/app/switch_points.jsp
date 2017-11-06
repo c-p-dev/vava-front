@@ -135,7 +135,7 @@ function validateForm()
 }
 function submitForm(point){
 	$.ajax({
-		url : 'process/application/switch_points/switchPoints.jsp',
+		url : 'jsp/switchPoints.jsp',
 		data : point,
 		dataType: 'JSON',
 		method: 'POST',

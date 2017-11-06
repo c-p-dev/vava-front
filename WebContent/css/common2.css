@@ -183,7 +183,7 @@ table.dataTable tbody td {
 }
 
 /*menu*/
-.select ul.top_alist li a {
+.select ul.top_alist li a, .select ul.top_alist li span {
     margin: 0px; display: block; width: 100%; height: 100%; 
 }
 
@@ -210,3 +210,45 @@ input::-moz-placeholder {
  text-align: left;
 }	
 
+/*disabled btn test*/
+button.btn5:disabled {
+    background: #1c2021!important;
+}
+
+
+/*qtips*/
+.qtip{
+    z-index: 99999999!important;
+}
+
+.qtip-default {
+    border: 1px solid #2e3233!important;
+    /*background-color: #191a1b;*/
+    background-color:#2e3233!important;
+    color: #404654!important;
+    padding: 8px!important;
+    border-radius: 8px!important;
+}
+
+.qtip-content .form1-invalid{
+    color:white!important;
+}
+
+
+/*forms*/
+
+.form1-valid {
+    border-color:#2e3032!important;
+}
+.form1-invalid {
+    /*border-color:#d50000!important;*/
+    border-color:#ff8a00!important;
+}
+
+.header-login-valid {
+    border-color: #505455!important;
+}
+
+.input_warning{
+    display: none;
+}

@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <div id="fade_9" class="bg_mask_pop9">
 	<div class="bg_mask_pop_title">
-		<span class="popup_logo"><img src="images/popup_logo.png"></span>
-		<span class="popup_close fade_9_close"><img src="images/popup_close.png"></span>
+		<span class="popup_logo"><img src="../images/popup_logo.png"></span>
+		<span class="popup_close fade_9_close"><img src="../images/popup_close.png"></span>
 	</div>
 	
 	<div class="bg_mask_pop9_in">

@@ -3,6 +3,8 @@
 <%@ page import = "net.vavasoft.bean.UserBean" %>
 <%@ page import = "net.vavasoft.dao.UserDao" %>
 <%@ page import = "java.sql.SQLException" %>
+<%@ page import = "com.google.gson.Gson" %>
+<%@ page import ="java.util.HashMap" %>
 
 <%
 
@@ -16,6 +18,8 @@
 	// UserBean post_ub = new UserBean();
 	// post_ub.setUserid(request.getParameter("userid").trim());
 	// post_ub.setPasswd(request.getParameter("passwd").trim());
+	Gson gson = new Gson();
+	HashMap<String, Object> hsm = new HashMap<String, Object>();
 
 	String userid = request.getParameter("userid").trim();
 	String passwd = request.getParameter("passwd").trim();
@@ -45,5 +49,6 @@
 
 	
 
-	out.println(response_code);
+	hsm.put("result",response_code);
+	out.println(gson.toJson(hsm).toString());
 %>

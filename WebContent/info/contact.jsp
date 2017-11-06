@@ -12,7 +12,7 @@
 			<div class="acc_content_in_2">
 				<div class="inquiry_wrap">
 				</div>
-				<div class="inquiry_select_wrap">
+				<div class="inquiry_select_wrap" id="inquiry_select_wrap_contact">
 					<form id="messageFrom">
 						<table  width="100%" cellpadding="0" cellspacing="0">
 							<tr>
@@ -94,7 +94,36 @@
 				},
 			},
 			errorPlacement: function(error, element) {
-
+				if(error.text() != ""){
+			    	element.qtip({ 
+					    overwrite: true,
+					    content: {
+					        text: error,
+					        tooltipanchor: $(this),
+					        button: 'Close',
+					    },
+					    show: {
+				            when: false,
+				            ready: true, 
+				            event:false,
+				        },
+				        hide:{
+				        	fixed:true,
+				        	event:false,
+				        },
+				        position: {
+					        container: $(".inquiry_select_wrap_contact"),
+					        at: 'top center ',
+					        my: 'bottom center', 
+					        adjust : {
+					        	method : 'shift none',
+					        }
+					    }
+					});
+			    
+				}else{
+					element.qtip("hide");
+				}
 			},
 			submitHandler: function(form) {
 				var data = $("#messageFrom").serializeJSON();
@@ -107,7 +136,7 @@
 
 	function loadMessage(){
 		$.ajax({
-			url : '${baseUrl}process/info/getMessages.jsp',
+			url : 'jsp/getMessages.jsp',
 			data : {},
 			method: 'POST',
 		}).done(function(data){ 
@@ -134,7 +163,7 @@
 
 	function submitMessage(data){
 		$.ajax({
-			url : '${baseUrl}process/info/setMessage.jsp',
+			url : 'jsp/setMessage.jsp',
 			data : data,
 			method: 'POST',
 		}).done(function(data){

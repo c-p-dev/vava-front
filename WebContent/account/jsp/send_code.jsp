@@ -10,14 +10,19 @@
 	HashMap<String,Object> hsm = new HashMap<String,Object>();
 	UserDao ud = new UserDao();
 
-	String cell = request.getParameter("cll").trim();
-	String cell_prefix = request.getParameter("cp").trim();
-	String nick = request.getParameter("nk").trim();
+	String cell = request.getParameter("cll");
+	String cell_prefix = request.getParameter("cp");
+	String nick = request.getParameter("nk");
+	// int site_id = request.getParameter("sd");
+	boolean rSend = Boolean.parseBoolean(request.getParameter("rSend"));
+	int site_id = 1;
+
 
 	boolean userExists = false;
 	String message = "Sms failed";
 	boolean sent = false;
 
+	
 	if(method.equals("f1")){
 		userExists = ud.checkCellNumByNick(nick,cell_prefix,cell);
 	}else if (method.equals("f2")){
@@ -28,7 +33,8 @@
 	//send sms
 	if(userExists) {
 		SmsDao sd = new SmsDao();
-		sent = sd.sendSmsByNickname(nick,cell_prefix,cell);
+
+		sent = sd.sendSmsByNickname(nick, cell_prefix, cell, site_id, rSend);
 		if(sent){
 			message = "Sms sent";
 		}
