@@ -21,7 +21,7 @@
 	<li>
 		<div class="acc_head"><h3>충전신청</h3></div>
 		<div class="acc_content">
-			<div class="acc_content_in_2">
+			<div class="acc_content_in_2" id="acc_content_in_chargetb">
 				<div class="blue_wrap">
 					<div class="cash_box">
 						<div class="cash_in">
@@ -194,7 +194,7 @@
 
 		$("#bankInfoBtn").on("click",function(){
 			$.ajax({
-				url:'process/application/charge/getBankAccount.jsp',
+				url:'jsp/getBankAccount.jsp',
 				data:{},
 				type:'POST'
 			}).done(function(data){
@@ -225,7 +225,7 @@
 		});
 
 		$dataTable1 = $('#dataTable1').DataTable({
-			ajax : 'process/application/charge/getChargeList.jsp',
+			ajax : 'jsp/getChargeList.jsp',
 			bProcessing: true,
 			sAjaxDataProp:"",
 			searching: false,
@@ -336,18 +336,46 @@
 
 		},
 		errorPlacement: function(error, element) {
-			$('#chargeForm input').css("border-color","#2e3032");
+
 			var error_label = element.attr("name");
-		    if (element.attr("name") == error_label ){
-		    	$("#"+error_label+"-charge-warn").html(error).show();
-		    	$('#'+error_label).css("border-color","#d50000");
-		    }
+			var id = element.attr("id");
+	
+			
+		    if(error.text() != ""){
+		    	element.qtip({ 
+				    overwrite: true,
+				    content: {
+				        text: error,
+				        tooltipanchor: $(this),
+				        button: 'Close',
+				    },
+				    show: {
+			            when: false,
+			            ready: true, 
+			            event:false,
+			        },
+			        hide:{
+			        	fixed:true,
+			        	event:false,
+			        },
+			        position: {
+				        container: $("#acc_content_in_chargetb"),
+				        at: 'top center ',
+				        my: 'bottom center', 
+				        adjust : {
+				        	method : 'shift none',
+				        }
+				    }
+				});
+		    
+			}else{
+				element.qtip("hide");
+			}
+
 		},
 		submitHandler: function(form) {
 			var data = $("#chargeForm").serializeJSON();
 		    submitCharge(data);
-		
-
 	  	}
 	});
 
@@ -379,7 +407,7 @@
 	function submitCharge(data){
 		console.log(data);
 		$.ajax({
-			url:'process/application/charge/setChargeApplication.jsp',
+			url:'jsp/setChargeApplication.jsp',
 			data:data,
 			type:'POST'
 		}).done(function(data){

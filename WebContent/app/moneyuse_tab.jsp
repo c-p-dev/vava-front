@@ -117,7 +117,7 @@
 
 		$moneyUseTable = $('#moneyUseTable').DataTable({
 			ajax: {
-			    url: 'process/application/getMoneyHistory.jsp',
+			    url: 'jsp/getMoneyHistory.jsp',
 			    type: 'post',
 			    data: {
 			       	job : function(){

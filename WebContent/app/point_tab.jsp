@@ -263,7 +263,7 @@
 
 		$pointUseTable = $('#pointUseTable').DataTable({
 			ajax: {
-			    url: 'process/application/getPointUsed.jsp',
+			    url: 'jsp/getPointUsed.jsp',
 			    type: 'post',
 			    data: {
 			       	job : function(){

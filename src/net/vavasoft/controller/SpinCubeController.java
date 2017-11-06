@@ -7,9 +7,12 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -17,12 +20,15 @@ import javax.net.ssl.HttpsURLConnection;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 
 import net.vavasoft.bean.MgPlayerAccountBean;
 import net.vavasoft.bean.MgWithdrawAllBean;
+import net.vavasoft.bean.ScBetBean;
 import net.vavasoft.bean.ScTokenLogBean;
 import net.vavasoft.bean.ScTransactionBean;
 import net.vavasoft.bean.UserBean;
+import net.vavasoft.dao.ScBetLogDao;
 import net.vavasoft.dao.ScTokenLog;
 import net.vavasoft.dao.UserDao;
 import net.vavasoft.util.NukeSSLCerts;
@@ -242,6 +248,38 @@ public class SpinCubeController {
 		return srv_resp;
 	}
 	
+	public String getBetDetails() throws ParseException
+	{
+		/*	Variable Declaration	*/
+		
+		StringManipulator str_lib	= new StringManipulator();
+		ScBetLogDao sc_db			= new ScBetLogDao();
+		
+		ScBetBean last_bet_data	= new ScBetBean();
+		String url				= SC_BASE_URL.concat("agents/").concat(SC_AGENT_UNAME).concat("/bets").concat("?");
+		String srv_resp			= "";
+		String last_buid		= "";
+		
+		/*--------------------------------------------------------------------
+        |	Get the last Bet saved from the database
+        |-------------------------------------------------------------------*/
+		last_bet_data	= sc_db.getLastBetLog();
+		
+		if (null != last_bet_data.getBetUID()) {
+			last_buid	= last_bet_data.getBetUID();
+		}
+		
+		/*	Formats the query parameters on the URL	*/
+		url	= url.concat("limit=100&").concat("startingAfter=").concat(last_buid);
+		
+		/*--------------------------------------------------------------------
+        |	Execute HTTP POST Request to TEG
+        |-------------------------------------------------------------------*/
+		srv_resp 	= this.getToSc(url, "application/x-www-form-urlencoded");
+		
+		return srv_resp;
+	}
+	
 	public UserBean transferMoneyToVava(String username) throws ParseException
 	{
 		Gson gson				= new Gson();
@@ -275,6 +313,86 @@ public class SpinCubeController {
 		user_db.setUserMoney(username, money);
 
 		return user_profile;
+	}
+	
+	public String saveBetList() throws ParseException {
+		
+		Gson gson					= new Gson();
+		ScBetLogDao sc_db			= new ScBetLogDao();
+		
+		List<ScBetBean> bet_list	= new ArrayList<ScBetBean>();
+		String json_data		= "";
+		
+		/*--------------------------------------------------------------------
+        |	Get the last Bet saved from the database
+        |-------------------------------------------------------------------*/
+		json_data 	= this.getBetDetails();
+		
+		/*--------------------------------------------------------------------
+        |	Save Bet details to database
+        |-------------------------------------------------------------------*/
+		/*	Convert server response to Object	*/
+		bet_list	= gson.fromJson(json_data, new TypeToken<List<ScBetBean>>(){}.getType());
+		
+		for (int idx = 0; idx < bet_list.size(); idx++) {
+			sc_db.addNewTransactionLog(bet_list.get(idx));
+		}
+		
+		return json_data;
+	}
+	
+	public String getToSc(String url, String content_type) throws ParseException
+	{
+		/*	Variable Declaration	*/
+		String responseBody = "";
+		String bearer_auth	= "";
+		
+		ScTokenLog sc_db			= new ScTokenLog();
+		ScTokenLogBean token_data	= sc_db.getLatestToken();
+		
+		boolean token_sts	= this.checkTokenExpiration();
+		
+		if (false == token_sts) {
+			bearer_auth	= this.getToken();
+		}
+		else {
+			bearer_auth	= token_data.getToken();
+		}
+		
+		try {
+			/*	Remove SSL check	*/
+			NukeSSLCerts.nuke();
+			
+			/*--------------------------------------------------------------------
+	        |	Make POST Request to TEG
+	        |-------------------------------------------------------------------*/
+			URL url_conn 					= new URL(url);
+			HttpsURLConnection connection	= (HttpsURLConnection)url_conn.openConnection();
+			
+			/*	Configure POST Request	*/ 
+			connection.setRequestProperty("Authorization", "Bearer "+bearer_auth);
+			connection.setRequestProperty("Content-Type", content_type);
+			connection.setDoOutput(true); 
+			connection.setDoInput(true);
+			
+			/*	Get SpinCube response		*/
+			InputStream response = connection.getInputStream();
+			
+			try (Scanner scanner = new Scanner(response)) {
+				responseBody = scanner.useDelimiter("\\A").next();
+			}
+			
+		}
+		catch (MalformedURLException e) {
+			/*	Auto-generated catch block	*/
+			e.printStackTrace();
+		}
+		catch (IOException e) {
+			/*	Auto-generated catch block	*/
+			e.printStackTrace();
+		}
+		
+		return responseBody;
 	}
 	
 	public String postToSc(String url, String post_param, String content_type) throws ParseException

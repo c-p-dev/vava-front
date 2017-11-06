@@ -61,7 +61,7 @@
 		<!-- profile -->
 		<div class="acc_head"><h3>프로필 변경</h3></div>
 		<div class="acc_content">
-			<div class="acc_content_in_2">
+			<div class="acc_content_in_2" id="acc_content_in_2_profile">
 				<div class="blue_wrap">
 					<form name="updateProfileForm" id="updateProfileForm">
 						<table width="60%" cellpadding="0" cellspacing="0" class="popup_table01">
@@ -153,7 +153,7 @@
 	<li>
 		<div class="acc_head"><h3>비밀번호 변경</h3></div>
 		<div class="acc_content">
-			<div class="acc_content_in_2">
+			<div class="acc_content_in_2" id="acc_content_in_2_pass">
 				<div class="blue_wrap">
 					<form id="updatePasswordForm" name="updatePasswordForm">
 						<table cellspacing="0" cellpadding="0" class="my_table">
@@ -168,7 +168,7 @@
 							</tr>
 							<tr>
 								<td class="my_pass">
-									<input class="input_style03 password" id="new_passowrd" name="new_passowrd" placeholder="New Password" placeholder="새 비밀번호">
+									<input class="input_style03  cp" id="new_passowrd" name="new_passowrd" placeholder="New Password" placeholder="새 비밀번호">
 								</td>
 								<td class="my_text input_warning" id="new_passowrd-update-warn" >비밀번호는 최소 6자 이상으로 설정해주세요</td>
 							<tr>
@@ -177,7 +177,7 @@
 							</tr>
 							<tr>
 								<td class="my_pass">
-									<input class="input_style03 password" id="confirm_new_passowrd" name="confirm_new_passowrd" placeholder="Confirm New Password" placeholder="새 비밀번호 확인">
+									<input class="input_style03  cp" id="confirm_new_passowrd" name="confirm_new_passowrd" placeholder="Confirm New Password" placeholder="새 비밀번호 확인">
 								</td>
 								<td class="my_text input_warning" id="confirm_new_passowrd-update-warn" >비밀번호가 일치하지 않습니다</td>
 							<tr>
@@ -384,12 +384,42 @@
 			errorPlacement: function(error, element) {
 				// console.log(error);
 				// console.log(element);
-				$('#updateProfileForm input').css("border-color","#2e3032");
-				var error_label = element.attr("name");
-			    if (element.attr("name") == error_label ){
-			    	$("#"+error_label+"-update-warn").html(error).show();
-			    	$('#'+error_label).css("border-color","#d50000");
-			    }
+				// $('#updateProfileForm input').css("border-color","#2e3032");
+				// var error_label = element.attr("name");
+			 //    if (element.attr("name") == error_label ){
+			 //    	$("#"+error_label+"-update-warn").html(error).show();
+			 //    	$('#'+error_label).css("border-color","#d50000");
+			 //    }
+				if(error.text() != ""){
+			    	element.qtip({ 
+					    overwrite: true,
+					    content: {
+					        text: error,
+					        tooltipanchor: $(this),
+					        button: 'Close',
+					    },
+					    show: {
+				            when: false,
+				            ready: true, 
+				            event:false,
+				        },
+				        hide:{
+				        	fixed:true,
+				        	event:false,
+				        },
+				        position: {
+					        container: $("#acc_content_in_2_profile"),
+					        at: 'top center ',
+					        my: 'bottom center', 
+					        adjust : {
+					        	method : 'shift none',
+					        }
+					    }
+					});
+			    
+				}else{
+					element.qtip("hide");
+				}
 			  
 			},
 			submitHandler: function(form) {
@@ -418,7 +448,7 @@
 					maxlength:20,
 					// minlength:6,
 					remote: {
-						url: "${baseUrl}process/info/passwordChecker.jsp",
+						url: "jsp/passwordChecker.jsp",
 				        type: "post",
 				       	data: {
 				          	passwd: function() {
@@ -454,12 +484,42 @@
 
 			},
 			errorPlacement: function(error, element) {
-				$('#updatePasswordForm input').css("border-color","#2e3032");
-				var error_label = element.attr("name");
-			    if (element.attr("name") == error_label ){
-			    	$("#"+error_label+"-update-warn").html(error).show();
-			    	$('#'+error_label).css("border-color","#d50000");
-			    }
+				// $('#updatePasswordForm input').css("border-color","#2e3032");
+				// var error_label = element.attr("name");
+			 //    if (element.attr("name") == error_label ){
+			 //    	$("#"+error_label+"-update-warn").html(error).show();
+			 //    	$('#'+error_label).css("border-color","#d50000");
+			 //    }
+			 	if(error.text() != ""){
+			    	element.qtip({ 
+					    overwrite: true,
+					    content: {
+					        text: error,
+					        tooltipanchor: $(this),
+					        button: 'Close',
+					    },
+					    show: {
+				            when: false,
+				            ready: true, 
+				            event:false,
+				        },
+				        hide:{
+				        	fixed:true,
+				        	event:false,
+				        },
+				        position: {
+					        container: $("#acc_content_in_2_pass"),
+					        at: 'top center ',
+					        my: 'bottom center', 
+					        adjust : {
+					        	method : 'shift none',
+					        }
+					    }
+					});
+			    
+				}else{
+					element.qtip("hide");
+				}
 			  
 			},
 			submitHandler: function(form) {
@@ -470,14 +530,28 @@
 		  	}
 		});
 
-		
+		$(".cp").on("keypress",function(){
+			if($(this).val() == ""){
+				$(this).removeClass("password");	
+			}else{
+				$(this).addClass("password");	
+			}
+		});
+
+		$(".cp").on("focus",function(){
+			if($(this).val() == ""){
+				$(this).removeClass("password");	
+			}else{
+				$(this).addClass("password");	
+			}
+		});
 
 
 	});
 
 	function submitProfileChanges(data){
 		$.ajax({
-			url : '${baseUrl}process/info/updateProfile.jsp',
+			url : 'jsp/updateProfile.jsp',
 			data : data,
 			method: 'POST',
 		}).done(function(data){ 
@@ -500,7 +574,7 @@
 
 	function submitPasswrdChanges(data){
 		$.ajax({
-			url : '${baseUrl}process/info/updateUserPassword.jsp',
+			url : 'jsp/updateUserPassword.jsp',
 			data : data,
 			method: 'POST',
 		}).done(function(data){ 
