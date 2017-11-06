@@ -1,12 +1,24 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<jsp:include page="../header.jsp" />
-
+<%@ include file="/inc/main_header.jsp"%>
+<%@ include file="/inc/session.jsp"%>
+<%@ include file="/inc/header.jsp"%>
+<script>
+	var logged = "<%=checkSession%>";
+	console.log(logged);
+	if(logged == "true"){
+		window.location = "../index.jsp";
+	}
+</script>
 <style>
 	#pwmodal .pop_text{
 		padding:0px!important;
 	}
+	.hidden_cntdwn{
+		padding-top: 8px;
+    	padding-bottom: 8px;
+    	display: none;
+	}
 </style>
-<div id="contents_wrap">
+<div id="contents_wrap" class="accnt_pg">
 	<div class="contents">
 		<ul class="tabs">
 			<li><a href="#tab1">아이디찾기</a></li>
@@ -18,16 +30,13 @@
 					<li>
 						<div class="acc_head"><h3>회원가입시 등록한 휴대폰 번호로 찾기</h3></div>
 						<div class="acc_content">
-							<div class="acc_content_in_1">
+							<div class="acc_content_in_1  " id="acc_content_in_1_fid1">
 								<div class="login_center">
 									<form id="fid1">
 										<input type="hidden" name="method" value="by_phone">
 										<table cellpadding="0" cellspacing="0" class="login_table">
 											<tr>
 												<td><input class="input_style02" id="fid1nk" name="nk" placeholder="Name" placeholder="이름"></td>
-											</tr>
-											<tr>
-												<td><div class="input_warning" id="nk-fid1-warn">입력하신 번호로 인증번호가 발송되었습니다.</div></td>
 											</tr>
 											<tr>
 												<td>
@@ -43,12 +52,13 @@
 																<input class="input_style02" id="fidcll" name="cll" placeholder="Mobile Phone Number" placeholder="휴대폰번호">
 															</td>
 															<td>
-														
-																<span id="fSndBtn" class="btn5">인증</span>
+																<button id="fSndBtn" class="btn5">인증</button>
 															</td>
 														</tr>
 														<tr>
-															<td colspan="3"><div class="input_warning" id="cll-fid1-warn">입력하신 번호로 인증번호가 발송되었습니다.</div></td>
+															<td colspan="3">
+																<div id="f1cdt" class="hidden_cntdwn"></div>
+															</td>
 														</tr>
 													</table>
 												</td>
@@ -57,7 +67,7 @@
 												<td>
 													<table  width="100%" cellpadding="0" cellspacing="0" class="login_table_in">
 														<tr>
-															<td width="280" style="padding:0 10px 0 0">
+															<td width="280" style="padding:0 0px 0 0">
 																<input class="input_style02" id="findIdCert" name="ac" placeholder="Certification Number"  maxlength="6" placeholder="인증번호">
 															</td>
 														</tr>
@@ -79,18 +89,13 @@
 					<li>
 						<div class="acc_head"><h3>회원가입시 등록한 계좌 정보로 찾기</h3></div>
 						<div class="acc_content">
-							<div class="acc_content_in_1">
+							<div class="acc_content_in_1" id="acc_content_in_1_fid2">
 								<div class="login_center">
 									<form id="fid2">
 										<input type="hidden" name="method" value="by_bank">
 										<table cellpadding="0" cellspacing="0" class="login_table">
 											<tr>
 												<td><input class="input_style02" id="findIdBank_owner" name="bo"  placeholder="Name (Account Holder)" placeholder="이름(예금주)"></td>
-											</tr>
-											<tr>
-												<td>
-													<div class="input_warning"  id="bo-findId-warn">- 를 제외하고 입력해주세요</div>
-												</td>
 											</tr>
 											<tr>
 												<td>
@@ -133,11 +138,6 @@
 															</td>
 															<td width="158" style="padding:0 10px 0 0"><input class="input_style02" name="bnn"  placeholder="Account number entered at the time of registration" placeholder="가입시 입력한 계좌번호"></td>
 															
-														</tr>
-														<tr>
-															<td colspan="2">
-																<div class="input_warning"  id="bnn-findId-warn">- 를 제외하고 입력해주세요</div>
-															</td>
 														</tr>	
 													</table>
 												</td>
@@ -154,11 +154,6 @@
 															</td>
 															<td width="158" style="padding:0 10px 0 0">
 																<input class="input_style02" id="fidcll2" name="cll" placeholder="휴대폰번호">
-															</td>
-														</tr>
-														<tr>
-															<td>
-																<div class="input_warning"  id="cll-findId-warn">- 를 제외하고 입력해주세요</div>
 															</td>
 														</tr>
 													</table>
@@ -182,7 +177,7 @@
 					<li>
 						<div class="acc_head"><h3>회원가입시 등록한 휴대폰 번호로 찾기</h3></div>
 						<div class="acc_content">
-							<div class="acc_content_in_1">
+							<div class="acc_content_in_1" id="acc_content_in_fp1">
 								<div class="login_center">
 									<form id="fp1">
 										<input type="hidden" name="method" value="by_phone">
@@ -191,13 +186,7 @@
 												<td><input class="input_style02" id="fp1ud" name="ud"  placeholder="아이디"></td>
 											</tr>
 											<tr>
-												<td><div class="input_warning" id="ud-fp1-warn">조건에 맞는 아이디를 입력해주세요.</div></td>
-											</tr>
-											<tr>
 												<td><input class="input_style02" id="fp1nk" name="nk"  placeholder="이름"></td>
-											</tr>
-											<tr>
-												<td><div class="input_warning" id="nk-fp1-warn">조건에 맞는 아이디를 입력해주세요.</div></td>
 											</tr>
 											<tr>
 												<td>
@@ -210,13 +199,17 @@
 																</select>
 															</td>
 															<td width="158" style="padding:0 10px 0 0"><input class="input_style02" id="fp1cll" name="cll" maxlength="15" placeholder="휴대폰번호"></td>
-															<td><span class="btn5" id="fSndBtn2">인증</span></td>
+															<td>
+																<button class="btn5" id="fSndBtn2">인증</button>
+															</td>
 														</tr>
 													</table>
 												</td>
 											</tr>
 											<tr>
-												<td><div class="input_warning" id="cll-fp1-warn">조건에 맞는 아이디를 입력해주세요.</div></td>
+												<td>
+													<div id="fcdt" class="hidden_cntdwn"></div>
+												</td>
 											</tr>
 											<tr>
 												<td>
@@ -227,11 +220,7 @@
 													</table>
 												</td>
 											</tr>
-											<tr>
-												<td>
-													<div class="input_warning" id="ac-fp1-warn">조건에 맞는 아이디를 입력해주세요.</div>
-												</td>
-											</tr>
+
 										</table>
 										<div class="acc_btn_wrap">
 											<input type="submit" class="btn3c" value="비밀번호 설정">
@@ -244,7 +233,7 @@
 					<li>
 						<div class="acc_head"><h3>회원가입시 등록한 계좌 정보로 찾기</h3></div>
 						<div class="acc_content">
-							<div class="acc_content_in_1">
+							<div class="acc_content_in_1" id ="acc_content_in_fp3">
 								<div class="login_center">
 									<form id="fp3">
 										<input type="hidden" name="method" value="by_bank">
@@ -420,8 +409,15 @@
 
 
 <script>
+	var f1cntr; 
+	var f1rSnd = false;
+	
+	var f2cntr; 
+	var f2rSnd = false;
+
+
 	$(document).ready(function(){
-		var tab = '<%=session.getAttribute("account_tab")%>';
+		var tab = '<%=session.getAttribute("tb")%>';
 
 		if(tab != "tab1"){
 			$("ul.tabs li a[href='#tab2']").click();
@@ -431,8 +427,9 @@
 			e.preventDefault();
 			if($("#fid1").valid()){
 				var data = $(this).serializeJSON();
+				data['sd'] = "<%=SITEID%>";
 				$.ajax({
-					url : '/process/account/find_id.jsp',
+					url : 'jsp/find_id.jsp',
 					data : data,
 					method: 'POST',
 				}).done(function(data){
@@ -491,9 +488,38 @@
 			},
 			errorPlacement: function(error, element) {
 				var error_label = element.attr("name");
-			    if (element.attr("name") == error_label ){
-			    	$("#"+error_label+"-fid1-warn").html(error).show();	
-			    }
+				var id = element.attr("id");
+				
+			    if(error.text() != ""){
+			    	element.qtip({ 
+					    overwrite: true,
+					    content: {
+					        text: error,
+					        tooltipanchor: $(this),
+					        button: 'Close',
+					    },
+					    show: {
+				            when: false,
+				            ready: true, 
+				            event:false,
+				        },
+				        hide:{
+				        	fixed:true,
+				        	event:false,
+				        },
+				        position: {
+					        container: $("#acc_content_in_1_fid1"),
+					        at: 'right center ',
+					        my: 'left center', 
+					        adjust : {
+					        	method : 'shift none',
+					        }
+					    }
+					});
+			    
+				}else{
+					element.qtip("hide");
+				}
 			},
 		  	invalidHandler: function() {
 				var error = $("#fid1").validate().numberOfInvalids();
@@ -501,6 +527,7 @@
 		});
 
 		$("#fSndBtn").on("click",function(e){
+
 			var validator = $( "#fid1" ).validate();
 			var validNickname = validator.element("#fid1nk");
 			var validCell = validator.element("#fidcll");
@@ -512,20 +539,23 @@
 				var cll = $.trim($("#fidcll").val());
 				var frm = 'f1';
 
-				$("#fSndBtn").prop("disabled",true);
-				
 				$.ajax({
-					url : '/process/account/send_code.jsp',
-					data : {nk:nk,cp:cp,cll:cll,method:frm},
+					url : 'jsp/send_code.jsp',
+					data : {nk:nk,cp:cp,cll:cll,method:frm,rSend:f1rSnd},
 					method: 'POST',
 				}).done(function(data){
 					var obj = JSON.parse(data);
-					if(!obj.result){
+					if(obj.result){
+						f1cntdwn();
+					}else{
 						toastr.success("Unknown Account");
 						$("#fid1nk").focus();
 					}
-					$("#fSndBtn").prop("disabled",false);
+					
 				});	
+
+
+				
 			} 
 		});
 
@@ -626,10 +656,38 @@
 			},
 			errorPlacement: function(error, element) {
 				var error_label = element.attr("name");
-			    if (element.attr("name") == error_label ){
-			    	$("#"+error_label+"-findId-warn").html(error).show();
-			    	
-			    }
+				var id = element.attr("id");
+				
+			    if(error.text() != ""){
+			    	element.qtip({ 
+					    overwrite: true,
+					    content: {
+					        text: error,
+					        tooltipanchor: $(this),
+					        button: 'Close',
+					    },
+					    show: {
+				            when: false,
+				            ready: true, 
+				            event:false,
+				        },
+				        hide:{
+				        	fixed:true,
+				        	event:false,
+				        },
+				        position: {
+					        container: $("#acc_content_in_1_fid2"),
+					        at: 'right center ',
+					        my: 'left center', 
+					        adjust : {
+					        	method : 'shift none',
+					        }
+					    }
+					});
+			    
+				}else{
+					element.qtip("hide");
+				}
 			}
 	    });
 
@@ -637,8 +695,9 @@
 	    	e.preventDefault();
 	    	if($("#fid2").valid()){
 	    		var data = $(this).serializeJSON();
+	    		data['sd'] = "<%=SITEID%>";
 	    		$.ajax({
-					url: '/process/account/find_id.jsp',
+					url: 'jsp/find_id.jsp',
 					data : data,
 					method: 'POST',
 				}).done(function(data){
@@ -705,9 +764,38 @@
 			},
 			errorPlacement: function(error, element) {
 				var error_label = element.attr("name");
-			    if (element.attr("name") == error_label ){
-			    	$("#"+error_label+"-fp1-warn").html(error).show();
-			    }
+				var id = element.attr("id");
+				
+			    if(error.text() != ""){
+			    	element.qtip({ 
+					    overwrite: true,
+					    content: {
+					        text: error,
+					        tooltipanchor: $(this),
+					        button: 'Close',
+					    },
+					    show: {
+				            when: false,
+				            ready: true, 
+				            event:false,
+				        },
+				        hide:{
+				        	fixed:true,
+				        	event:false,
+				        },
+				        position: {
+					        container: $("#acc_content_in_fp1"),
+					        at: 'right center ',
+					        my: 'left center', 
+					        adjust : {
+					        	method : 'shift none',
+					        }
+					    }
+					});
+			    
+				}else{
+					element.qtip("hide");
+				}
 			},
 		});
 
@@ -715,8 +803,9 @@
 			e.preventDefault();
 			if($(this).valid()){
 				var data = $(this).serializeJSON();
+				data['sd'] = "<%=SITEID%>";
 				$.ajax({
-					url : '/process/account/verify_pd.jsp',
+					url : 'jsp/verify_pd.jsp',
 					data : data,
 					method: 'POST',
 				}).done(function(data){
@@ -738,7 +827,7 @@
 					var fp1data = $("#fp1").serializeJSON();
 					$.extend(data,fp1data);
 					$.ajax({
-						url : 'process/account/update_pd.jsp',
+						url : 'jsp/update_pd.jsp',
 						data : data,
 						method: 'POST',
 					}).done(function(data){ 
@@ -755,7 +844,7 @@
 					var fp2data = $("#fp3").serializeJSON();
 					$.extend(data,fp2data);
 					$.ajax({
-						url : 'process/account/update_pd.jsp',
+						url : 'jsp/update_pd.jsp',
 						data : data,
 						method: 'POST',
 					}).done(function(data){ 
@@ -815,10 +904,38 @@
 			},
 			errorPlacement: function(error, element) {
 				var error_label = element.attr("name");
-			    if (element.attr("name") == error_label ){
-			    	$("#"+error_label+"-fp2-warn").html(error).show();
-			    	
-			    }
+				var id = element.attr("id");
+				
+			    if(error.text() != ""){
+			    	element.qtip({ 
+					    overwrite: true,
+					    content: {
+					        text: error,
+					        tooltipanchor: $(this),
+					        button: 'Close',
+					    },
+					    show: {
+				            when: false,
+				            ready: true, 
+				            event:false,
+				        },
+				        hide:{
+				        	fixed:true,
+				        	event:false,
+				        },
+				        position: {
+					        container: $(".acc_section .acc_active"),
+					        at: 'right center ',
+					        my: 'left center', 
+					        adjust : {
+					        	method : 'shift none',
+					        }
+					    }
+					});
+			    
+				}else{
+					element.qtip("hide");
+				}
 			}
 		});
 
@@ -871,10 +988,38 @@
 			},
 			errorPlacement: function(error, element) {
 				var error_label = element.attr("name");
-			    if (element.attr("name") == error_label ){
-			    	$("#"+error_label+"-fp3-warn").html(error).show();
-			    	
-			    }
+				var id = element.attr("id");
+				
+			    if(error.text() != ""){
+			    	element.qtip({ 
+					    overwrite: true,
+					    content: {
+					        text: error,
+					        tooltipanchor: $(this),
+					        button: 'Close',
+					    },
+					    show: {
+				            when: false,
+				            ready: true, 
+				            event:false,
+				        },
+				        hide:{
+				        	fixed:true,
+				        	event:false,
+				        },
+				        position: {
+					        container: $("#acc_content_in_fp3"),
+					        at: 'right center ',
+					        my: 'left center', 
+					        adjust : {
+					        	method : 'shift none',
+					        }
+					    }
+					});
+			    
+				}else{
+					element.qtip("hide");
+				}
 			}
 		});
 
@@ -882,8 +1027,9 @@
 			e.preventDefault();
 			if($(this).valid()){
 				var data = $(this).serializeJSON();
+				data['sd'] = "<%=SITEID%>";
 				$.ajax({
-					url : '/process/account/verify_pd.jsp',
+					url : 'jsp/verify_pd.jsp',
 					data : data,
 					method: 'POST',
 				}).done(function(data){
@@ -917,24 +1063,47 @@
 				var ud = $.trim($("#fp1ud").val());
 				var frm = 'f2';
 
-				$("#fSndBtn2").prop("disabled",true);
+
 				
 				$.ajax({
-					url : '/process/account/send_code.jsp',
-					data : {nk:nk,cp:cp,cll:cll,ud:ud,method:frm},
+					url : 'jsp/send_code.jsp',
+					data : {nk:nk,cp:cp,cll:cll,ud:ud,method:frm,rSend:f2rSnd},
 					method: 'POST',
 				}).done(function(data){
 					var obj = JSON.parse(data);
-					if(!obj.result){
+					if(obj.result){
+						f2cntdwn();
+					}else{
 						toastr.success("Unknown Account");
 						$("#fp1ud").focus();
 					}
+				});
 
-					$("#fSndBtn2").prop("disabled",false);
-				});	
+		
+
+				
 			} 
 		});
 
+		$(".accnt_pg ul.tabs li a").on("click",function(){
+			resetfid1();
+			resetfid2();
+			resetfp1();
+			resetfp2();
+			resetfp3();
+
+			clearInterval(f1cntr);
+			clearInterval(f2cntr);
+
+			f1rSnd = false;
+			f2rSnd = false;
+
+			$("#fSndBtn").html("인증");
+			$("#fSndBtn2").html("인증");
+
+			$('*').qtip('hide');
+
+		});
 	});
 
 	function resetfid1(){
@@ -963,6 +1132,64 @@
   		$("#fp3").validate().resetForm();
 	}
 
+	function f1cntdwn(){
+	
+
+		var tc = 180;
+		var td = moment.duration(tc * 1000, 'milliseconds');
+		var ti = 1000;
+
+		$("#f1cdt").text("Time Left to Verify : " + moment(td.asMilliseconds()).format('mm:ss')).show();
+		$("#fSndBtn").prop("disabled",true);
+
+		f1cntr = setInterval(function(){
+			td = moment.duration(td.asMilliseconds() - ti, 'milliseconds');
+    		if(td >= 0){
+				$("#f1cdt").text("Time Left to Verify : " + moment(td.asMilliseconds()).format('mm:ss'));
+			}else{
+				
+		    	$("#f1cdt").text(" ").hide();
+		    	clearInterval(f1cntr);
+		    	toastr.success("Verification Timed Out. Try Again");
+		    	$("#fSndBtn").html("Resend");
+		    	f1rSnd = true;
+		    	$("#fSndBtn").prop("disabled",false);		
+		    	// $("#fade_1").popup("hide");
+    		}
+		},ti);
+	}
+
+	
+
+
+	function f2cntdwn(){
+		
+		var tc = 180;
+		var td = moment.duration(tc * 1000, 'milliseconds');
+		var ti = 1000;
+
+		$("#fSndBtn2").prop("disabled",true);
+		$("#fcdt").text("Time Left to Verify : " + moment(td.asMilliseconds()).format('mm:ss ')).show();
+
+		f2cntr = setInterval(function(){
+			td = moment.duration(td.asMilliseconds() - ti, 'milliseconds');
+    		if(td >= 0){
+				$("#fcdt").text("Time Left to Verify : " + moment(td.asMilliseconds()).format('mm:ss '));
+			}else{
+				
+		    	$("#fcdt").text(" ").hide();
+		    	clearInterval(f2cntr);
+		    	toastr.success("Verification Timed Out. Try Again");
+		    	$("#fSndBtn2").html("Resend");
+		    	f2rSnd = true;
+		    	$("#fSndBtn2").prop("disabled",false);		
+		    	// $("#fade_1").popup("hide");
+    		}
+		},ti);
+	}
+
 
 </script>
-<jsp:include page="../footer.jsp" />
+<%@ include file="/inc/footer.jsp"%>
+</body>
+</html>

@@ -42,20 +42,27 @@ public class SmsDao {
 	private static final DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	public static Logger logger = Logger.getLogger(SmsDao.class);
 	
-	public boolean sendSms(String userid, String cell_prefix, String cell,String ip){
+	public boolean sendSms(String userid, String cell_prefix, String cell,String ip, int site_id,boolean rSend){
 		
 	   boolean result = false;
 	   try {
 		   	String authcode = "";
 		   	String mobile_no = formatCellNumber(cell_prefix,cell);
 			String numberExistsAuthcode = checkNumberStatus(mobile_no);
+			HashMap hsm;
+			
 	    	if(numberExistsAuthcode != null){
 	    		authcode = numberExistsAuthcode;	
 	    	}else{
 	    		authcode = generateRandomNumber();
 	    	}
 	
-	    	int responseGroupId = sendTextInfoBIP(userid, mobile_no, authcode);
+	    	hsm = sendTextInfoBIP(userid, mobile_no, authcode);
+	    	int responseGroupId = (int) hsm.get("group_id");
+	    	
+	    	String message_id =  (String) hsm.get("message_id");
+	    	int status_id = (int) hsm.get("status_id");
+	    	String status_name = (String) hsm.get("status_name");
 	    	
 	    	/*
 	    	 * responseGroupId 
@@ -66,22 +73,47 @@ public class SmsDao {
 	    	 * 
 	    	 * */
 	    	
-	    	if((responseGroupId == 1 || responseGroupId == 3) && numberExistsAuthcode == null){
-	    		SmsAuthBean sab = new SmsAuthBean();
-	    		sab.setUserid(userid);
-	    		sab.setTel(mobile_no);
-	    		sab.setIp(ip);
-	    		sab.setAuthcode(authcode);
-	    		addSmsAuth(sab);
+	    	if(responseGroupId == 1 || responseGroupId == 3){
+	    			    		
+	    		if(numberExistsAuthcode == null){
+	    			
+	    			SmsAuthBean sab = new SmsAuthBean();
+		    		sab.setUserid(userid);
+		    		sab.setTel(mobile_no);
+		    		sab.setIp(ip);
+		    		sab.setAuthcode(authcode);
+		    		result = addSmsAuth(sab);
+
+	    		}else{
+	    			
+	    			result = true;				
+	    		}
+	    		
+	 
+	    		if(result && rSend){
+	    			
+	    			updateResendSmsDeliveryLog(mobile_no);
+	    			
+	    		}else if(result && !rSend){
+	    			
+	    			saveSmsDeliveryLog(site_id, mobile_no,message_id,status_id,status_name);
+	    			
+	    		}
 	    		
 	    	}
 	    	
-	    	result = true;
+	    	
+	    	
+	    	
+	   
 	  
 	    	
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	   	
+	  
+	  
  
 	   return result;
    }
@@ -95,9 +127,13 @@ public class SmsDao {
     	return code;
     }
 
-	public int sendTextInfoBIP(String userid,String cell, String authcode){
+	
+	public HashMap sendTextInfoBIP(String userid,String cell, String authcode){
     	int groupId = 0;
- 
+    	boolean savelog = false;
+    	
+    	HashMap<String,Object> hsm = new HashMap<String,Object>();
+    	
     	SendSingleTextualSms client = new SendSingleTextualSms(new BasicAuthConfiguration(BASE_URL,USERNAME, PASSWORD));
         String MESSAGE_TEXT = "귀하의 인증 번호는  : " + authcode;
         	
@@ -108,12 +144,34 @@ public class SmsDao {
 		
 		SMSResponse response = client.execute(requestBody);
 		SMSResponseDetails sentMessageInfo = response.getMessages().get(0);
+    	
+		String message_id = sentMessageInfo.getMessageId();
+		int status_id = sentMessageInfo.getStatus().getId();
+		String status_name = sentMessageInfo.getStatus().getName();
 		System.out.println(response);
 		System.out.println(sentMessageInfo);
-		
 		groupId = sentMessageInfo.getStatus().getGroupId();
-         
-    	return groupId;
+
+    	
+
+
+    	
+    	
+//      Sample Response
+//		String message_id = "2093640665371631338";
+//		int status_id = 7;
+//		String status_name = "PENDING_ENROUTE";
+//        groupId = 1;
+
+    	
+    	hsm.put("message_id",message_id);
+    	hsm.put("status_id",status_id);
+    	hsm.put("status_name",status_name);
+    	hsm.put("group_id",groupId);
+    	
+	
+    	System.out.println(hsm);
+    	return hsm;
     }
 	
 	public boolean addSmsAuth(SmsAuthBean smsBean) throws SQLException{
@@ -188,14 +246,19 @@ public class SmsDao {
 		return result;
 	}
 	
-	public boolean checkAuthCode(String cell_prefix, String cell, String authcode) throws SQLException{
+	
+	public boolean checkAuthCode(String cell_prefix, String cell, String authcode, boolean rSend) throws SQLException{
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		boolean result = false;
-		String mobile_no = formatCellNumber(cell_prefix,cell);
+		boolean saveLog = false;
+		
+		
 		try {
+			
+			String mobile_no = formatCellNumber(cell_prefix,cell);
 			DBConnector.getInstance();
 			con 				= DBConnector.getConnection();
 			      		
@@ -210,6 +273,11 @@ public class SmsDao {
 				result = true;
 			}
 			
+			if(result){
+				updateValidSmsDeliveryLog(mobile_no,"Y");
+			}else{
+				saveSmsAuthLog(mobile_no,authcode,1);
+			}
 			
 		} catch(Exception e){
 			logger.debug(e);
@@ -219,6 +287,9 @@ public class SmsDao {
 			if(pstmt!=null) pstmt.close();
 	  		if(con!=null) con.close();
 		}
+		
+		
+		System.out.println("SMS AUTH LOG STAT: " + saveLog);
 		
 		return result;
 	}
@@ -344,7 +415,7 @@ public class SmsDao {
 		return result;
 	}
 	
-	public boolean sendSmsByNickname(String nick, String cell_prefix, String cell ){
+	public boolean sendSmsByNickname(String nick, String cell_prefix, String cell, int site_id,boolean rSend){
 		boolean result = false;
 	
 		try {
@@ -352,9 +423,16 @@ public class SmsDao {
 		   	String mobile_no = formatCellNumber(cell_prefix,cell);
 			String numberExistsAuthcode = getUserAuthCodeByTel(mobile_no);
 			String authcode = getUserAuthCodeByTel(mobile_no);
+			HashMap hsm;
 	    	if(authcode != null || !authcode.equals(null)){
 	    		
-	    		int responseGroupId = sendTextInfoBIP(nick, mobile_no, authcode);
+	    		hsm = sendTextInfoBIP(nick, mobile_no, authcode);
+		    	int responseGroupId = (int) hsm.get("group_id");
+		    	
+		    	String message_id =  (String) hsm.get("message_id");
+		    	int status_id = (int) hsm.get("status_id");
+		    	String status_name = (String) hsm.get("status_name");
+		    	
 		    	
 		    	/*
 		    	 * responseGroupId 
@@ -367,6 +445,14 @@ public class SmsDao {
 		    	if((responseGroupId == 1 || responseGroupId == 3)){
 
 		    		result = true;
+		    	
+		    	}
+		    	
+		    	
+		    	if(result && rSend){
+		    		updateResendSmsDeliveryLog(mobile_no);
+		    	}else if(result && !rSend){
+		    		saveSmsDeliveryLog(site_id, mobile_no,message_id,status_id,status_name);
 		    	}
 	    	}
 	    	
@@ -379,6 +465,7 @@ public class SmsDao {
 		return result;
 		
 	}
+	
 	
 	public String checkAuthCodeByNickname(String nick,String cell_prefix, String cell,String authcode) throws SQLException{
 		Connection con = null;
@@ -414,6 +501,7 @@ public class SmsDao {
 			return null;	
 		}
 	}
+	
 	
 	public boolean checkAuthCodeByUseridNick(String userid, String nick,String cell_prefix, String cell,String authcode) throws SQLException{
 		Connection con = null;
@@ -452,6 +540,166 @@ public class SmsDao {
 		}
 	}
 	
+	public boolean saveSmsDeliveryLog(int site_id,String mobile_no,String message_id,int status_id,String status_name) throws SQLException {
+
+		boolean result = false;
+		Connection con = null;
+		Statement stmt = null;
+		PreparedStatement pstmt = null;
+		int row = 0;
+		
+		try{
+			
+			System.out.println(mobile_no);
+			DBConnector.getInstance();
+			con = DBConnector.getConnection();
+		    Date date = new Date();
+		   
+	    	String  query = "INSERT INTO RT01.dbo.sms_delivery_log (site_id,tel,state,message_id,status_id,status_name,regdate,valid) "+
+					" VALUES (?,?,?,?,?,?,?,?)";
+	    	
+	    	pstmt = con.prepareStatement(query);
+		    pstmt.setInt(1,site_id);
+		    pstmt.setString(2,mobile_no);
+		    pstmt.setString(3,"FIRST");
+		    pstmt.setString(4,message_id);
+		    pstmt.setInt(5,status_id);
+		    pstmt.setString(6,status_name);
+		    pstmt.setString(7,sdf.format(date));
+		    pstmt.setString(8,"N");
+		    
+			row = pstmt.executeUpdate(); 
+
+			pstmt.close();
+			con.close();
+		
+			if(row > 0) result = true;
+		
+		    	
+		}catch(Exception e){
+			e.printStackTrace();
+			logger.debug(e);
+		
+		}finally{
+			if(stmt!=null) stmt.close();
+			if(con!=null) con.close();
+		}
+			
+		return result;
+	}
+
 	
+	public boolean updateResendSmsDeliveryLog(String mobile_no){
+		
+		boolean result = false;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		int row = 0;
+		
+		try{
+			
+			System.out.println(mobile_no);
+			DBConnector.getInstance();
+			con = DBConnector.getConnection();
+		    Date date = new Date();
+		   
+		    String query = "UPDATE RT01.dbo.sms_delivery_log SET state = 'RESEND' WHERE sms_delivery_log_id = (SELECT MAX(sms_delivery_log_id) FROM RT01.dbo.sms_delivery_log WHERE tel = ?)";
+		    
+	    	pstmt = con.prepareStatement(query);
+		    pstmt.setString(1,mobile_no);		    
+			row = pstmt.executeUpdate(); 
+
+			pstmt.close();
+			con.close();
+		
+			if(row > 0) result = true;
+		
+		    	
+		}catch(Exception e){
+			e.printStackTrace();
+			logger.debug(e);
+		
+		}
+			
+		return result;
+	}
+	
+	public boolean updateValidSmsDeliveryLog(String mobile_no, String valid){
+		
+		boolean result = false;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		int row = 0;
+		
+		try{
+			
+			System.out.println(mobile_no);
+			DBConnector.getInstance();
+			con = DBConnector.getConnection();
+		    Date date = new Date();
+		   
+		    String query = "UPDATE RT01.dbo.sms_delivery_log SET valid = ? WHERE sms_delivery_log_id = (SELECT MAX(sms_delivery_log_id) FROM RT01.dbo.sms_delivery_log WHERE tel = ?)";
+		    
+	    	pstmt = con.prepareStatement(query);
+	    	pstmt.setString(1,valid);
+	    	pstmt.setString(2,mobile_no);		    
+			row = pstmt.executeUpdate(); 
+
+			pstmt.close();
+			con.close();
+		
+			if(row > 0) result = true;
+		
+		    	
+		}catch(Exception e){
+			e.printStackTrace();
+			logger.debug(e);
+		
+		}
+			
+		return result;
+	}
+	
+	public boolean saveSmsAuthLog(String mobile_no,String authcode,int site_id) throws SQLException{
+		boolean result = false;
+		Connection con = null;
+		Statement stmt = null;
+		PreparedStatement pstmt = null;
+		int row = 0;
+		String state = "INCORRECT CODE";
+		try{
+			
+			System.out.println(mobile_no);
+			DBConnector.getInstance();
+			con 				= DBConnector.getConnection();
+		    Date date = new Date();
+		    
+		    String  query = "INSERT INTO RT01.dbo.sms_auth_log (tel,authcode,site_id,state,regdate) "+
+					" VALUES (?,?,?,?,?)";
+								
+		    pstmt = con.prepareStatement(query);
+		    pstmt.setString(1,mobile_no);
+		    pstmt.setString(2,authcode);
+		    pstmt.setInt(3,site_id);
+		    pstmt.setString(4,state);
+		    pstmt.setString(5,sdf.format(date));
+			row = pstmt.executeUpdate(); 
+			pstmt.close();
+			con.close();
+		
+			if(row > 0) result = true;
+		
+		    	
+		}catch(Exception e){
+			e.printStackTrace();
+			logger.debug(e);
+		
+		}finally{
+			if(stmt!=null) stmt.close();
+			if(con!=null) con.close();
+		}
+			
+		return result;
+	}
 	
 }

@@ -24,7 +24,7 @@
 
 		boolean result = false;
 
-		result = ud.updateUserProfile(bean.getUserid(), bank_name, bank_owner,bank_num, cell_prefix+cell);
+		result = ud.updateUserProfile(bean.getUserid(), bank_name, bank_owner,bank_num, cell_prefix,cell);
 		if(result){
 			//override session here
 			HttpSession user_session = request.getSession(true);	    

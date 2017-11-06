@@ -1,39 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <style>
-	.input_warning{
-		display: none;
+	#cdt{
+		color:#5f6060;
+		padding: 7px 0 0 5px;
 	}
-	.btn3c {
-	    border-radius: 5px!important;
-	    border: none;
-	}
-	.btn3{
-		border:none!important;
-	}
-	.form1-valid {
-		border-color:#2e3032!important;
-	}
-	.form1-invalid {
-		border-color:#d50000!important;
-	}
-
-	.qtip{
-		z-index: 99999999!important;
-	}
-
-	.qtip-default {
-	    border: 1px solid #2e3233;
-	    /*background-color: #191a1b;*/
-	    background-color:#2e3233;
-	    color: #404654;
-	    padding: 8px;
-    	border-radius: 8px;
-	}
-	.qtip-content .form1-invalid{
-		color:white!important;
-	}
-
-	
 </style>
 <!-- member registration form -->
 <div id="fade_1" class="bg_mask_pop1">
@@ -150,8 +120,8 @@
 							</tr>
 							<tr>
 								<td colspan="3">
-									<div class="input_warning" id="bank_owner-warn">입력하신 번호로 인증번호가 발송되었습니다.</div>
-									<div class="input_warning" id="bank_num-warn">입력하신 번호로 인증번호가 발송되었습니다.</div>	
+									<div class="input_warning" id="bank_owner-warn"></div>
+									<div class="input_warning" id="bank_num-warn"></div>	
 								</td>
 							</tr>
 						</table>
@@ -170,13 +140,12 @@
 								</td>
 								<td width="180" align="left" style="padding:0 5px 0 0"><input class="input_style02 input_required" id="cell" name="cell" maxlength="15" data-warn="cell-warn"  placeholder="휴대폰번호" tabindex="7" ></td>
 								<td>
-									<!-- <a href="#" id="mobileVerBtn"><span class="btn5">인증</span></a> -->
 									<button id="mobileVerBtn" class="btn5">인증</button>
 								</td>
 							</tr>
 							<tr>
 								<td colspan="4">
-									<div class="input_warning" id="cell-warn">입력하신 번호로 인증번호가 발송되었습니다.</div>	
+									<div class="input_warning" id="cell-warn"></div>	
 								</td>
 								
 							</tr>
@@ -193,7 +162,7 @@
 							</tr>
 							<tr>
 								<td colspan="2">
-									<div class="input_warning" id="cert-warn">입력하신 번호로 인증번호가 발송되었습니다.</div>	
+									<div class="input_warning" id="cert-warn"></div>	
 								</td>
 							</tr>
 						</table>
@@ -202,7 +171,7 @@
 				<tr>
 					<td>
 						<input class="input_style02 input_required" id="referrer" name="referrer"  maxlength="20" placeholder="추천인아이디" value="" data-warn="referrer-warn" tabindex="9">
-						<div class="input_warning" id="referrer-warn">입력하신 번호로 인증번호가 발송되었습니다.</div>
+						<div class="input_warning" id="referrer-warn"></div>
 					</td>
 				</tr>
 				<tr>
@@ -216,7 +185,7 @@
 							</tr>
 							<tr>
 								<td colspan="2">
-									<div class="input_warning" id="recommend-warn">입력하신 번호로 인증번호가 발송되었습니다.</div>
+									<div class="input_warning" id="recommend-warn"></div>
 								</td>
 							</tr>
 						</table>
@@ -265,6 +234,8 @@
 
 <script>
 
+	var SmsCounter; 
+	var rSnd = false;
 	$(document).ready(function () {
 
 	    $('#fade_1').popup({
@@ -277,6 +248,7 @@
 	      		$("#form1 input").qtip("hide");
 	    	},
 	    	onopen: function(){
+	    		toastr.clear();
 	    		resetForm1();
 	    		$("#form1 input").qtip("hide");
 	    	}
@@ -352,7 +324,7 @@
 
 		$.validator.addMethod("checkReferrer", function(value, element) {
 	    	var x = $.ajax({
-		        url:'process/referrence_checker.jsp',
+		        url:'../login/jsp/referrence_checker.jsp',
 		        async: false,
 		        type: 'post',
 		        data: {
@@ -390,7 +362,7 @@
                     alphanumeric:true,
 					minlength:4,
 					remote: {
-						url: "process/userid_checker.jsp",
+						url: "../login/jsp/userid_checker.jsp",
 						async: false,
 				        type: "post",
 				       	data: {
@@ -419,7 +391,7 @@
 					minlength:10,
 					maxlength:13,
 			  		synchronousRemote: {
-		                url: "process/verify_cellnum.jsp",
+		                url: "../login/jsp/verify_cellnum.jsp",
 				        type: "post",
 				        async: false,
 				       	data: {
@@ -437,7 +409,7 @@
 					required:true,
 					minlength:6,
 					remote: {
-						url: "process/verify_cert_num.jsp",
+						url: "../login/jsp/verify_cert_num.jsp",
 				        type: "post",
 				       	data: {
 				          	cert: function (){
@@ -449,6 +421,7 @@
 				          	cell: function(){
 				          		return $("#cell").val();	
 				          	},
+				          	rSnd:rSnd,
 				        },
 			      	},
 			      	nowhitespace:true,
@@ -476,7 +449,7 @@
 					required:true,
 					minlength: 6,
 					remote: {
-						url: "process/joincode_checker.jsp",
+						url: "../login/jsp/joincode_checker.jsp",
 				        type: "post",
 				        async: true,
 				       	data: {
@@ -558,6 +531,7 @@
 					    content: {
 					        text: error,
 					        tooltipanchor: $(this),
+					        button: 'Close',
 					    },
 					    show: {
 				            when: false,
@@ -600,6 +574,7 @@
 			var validator = $( "#form1" ).validate();
 			valid = validator.element("#cell");
 			if(valid){
+				countdown();
 				verifyNumber();
 			}
 		});
@@ -613,6 +588,15 @@
 			}
 		});
 
+		$('#form1').on('keyup keypress', function(e) {
+			var keyCode = e.keyCode || e.which;
+				if (keyCode === 13) { 
+				e.preventDefault();
+				alert("no entering");
+				return false;
+			}
+		});
+
 	});
 
 	function resetForm1(){
@@ -620,12 +604,17 @@
 		$("#form1 .img-validator").attr("src","/images/input_mark3.jpg");
 		$("#form1")[0].reset();
 		// $('#form1 .input_warning').hide();
+		$("#mobileVerBtn").html('인증');
+		$("#cdt").remove();
+    	clearInterval(SmsCounter);
+    	$("#mobileVerBtn").prop('disabled', false);
+    	rSnd = false;
 		$("#form1").validate().resetForm();
 	}
 
 	function submitForm(data){
 		$.ajax({
-			url : 'process/register_process.jsp',
+			url : '../login/jsp/register_process.jsp',
 			data : data,
 			method: 'POST',
 		}).done(function(data){ 
@@ -645,23 +634,57 @@
 		var userid = $.trim($("#userid").val());
 		var cell_prefix = $.trim($("#cell_prefix").val());
 		var cell = $.trim($("#cell").val());
+	
 		
-		$("#mobileVerBtn").prop("disabled",true);
 		$.ajax({
-			url : 'process/send_sms.jsp',
-			data : {userid:userid,cell_prefix:cell_prefix,cell:cell},
+			url : '../login/jsp/send_sms.jsp',
+			data : {userid:userid,cell_prefix:cell_prefix,cell:cell,rSnd:rSnd},
 			method: 'POST',
 		}).done(function(data){ 
-			setTimeout(function() {
-			  	if(data){
-					$("#mobileVerBtn").html("resend");
-				}else{
-					alert("Something went wrong");
-					$("#mobileVerBtn").html("인증");
-				}
-				$("#mobileVerBtn").prop("disabled",false);
-			}, 5000);
+
 		});
+	}
+
+	function countdown(){
+		
+		var time = 180;
+		var duration = moment.duration(time * 1000, 'milliseconds');
+		var interval = 1000;
+
+		$("#mobileVerBtn").prop("disabled",true);
+		$('#cell-warn').after('<div id="cdt"></div>');
+
+		SmsCounter = setInterval(function(){
+			duration = moment.duration(duration.asMilliseconds() - interval, 'milliseconds');
+    		if(duration >= 0){
+				$("#cdt").text("Time Left to Verify : " + moment(duration.asMilliseconds()).format('mm:ss '));
+			}else{
+				
+		    	$("#cdt").remove();
+		    	clearInterval(SmsCounter);
+		    	toastr.success("Verification Timed Out. Try Again");
+		    	$("#mobileVerBtn").html("Resend");
+		    	rSnd = true;
+		    	$("#mobileVerBtn").prop("disabled",false);		
+		    	// $("#fade_1").popup("hide");
+    		}
+		},interval);
+	}
+
+	function sLog(){
+		var validator = $( "#form1" ).validate();
+		valid = validator.element("#cell");
+		if(valid){
+			var cp = $("#cell_prefix").val();
+			var cll = $("#cell").val();
+			$.ajax({
+				url : '../login/jsp/sms_log.jsp',
+				data : {cp:cp,cll:cll},
+				method: 'POST',
+			})
+
+		}
+		
 	}
 
 </script>
