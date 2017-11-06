@@ -1,16 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<jsp:include page="../header.jsp" />
-<jsp:useBean id="bean" class="net.vavasoft.bean.UserBean" />
-<%@page import="net.vavasoft.dao.GameDao, net.vavasoft.bean.GameBean, java.util.*"%>
-
+<%@ include file="/inc/main_header.jsp"%>
+<%@ include file="/inc/session.jsp"%>
+<%@ include file="/inc/header.jsp"%>
 <%
-	boolean checkSession = false;
-	// UserBean currentUser = (UserBean) session.getAttribute("currentSessionUser");
-	bean = (net.vavasoft.bean.UserBean) session.getAttribute("currentSessionUser");
-	if(session.getAttribute("currentSessionUser") != null){
-		checkSession = true;
-		out.print(bean.getNick());  
-	}
 	
 	GameDao game_dao			= new GameDao();
 	List<GameBean> game_list	= game_dao.getRacingGames();
@@ -156,5 +147,6 @@
 		})
 	});
 </script>
-
-<jsp:include page="../footer.jsp" />
+<%@ include file="/inc/footer.jsp"%>
+</body>
+</html>

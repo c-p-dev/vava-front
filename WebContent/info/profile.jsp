@@ -448,7 +448,7 @@
 					maxlength:20,
 					// minlength:6,
 					remote: {
-						url: "${baseUrl}process/info/passwordChecker.jsp",
+						url: "jsp/passwordChecker.jsp",
 				        type: "post",
 				       	data: {
 				          	passwd: function() {
@@ -551,7 +551,7 @@
 
 	function submitProfileChanges(data){
 		$.ajax({
-			url : '${baseUrl}process/info/updateProfile.jsp',
+			url : 'jsp/updateProfile.jsp',
 			data : data,
 			method: 'POST',
 		}).done(function(data){ 
@@ -574,7 +574,7 @@
 
 	function submitPasswrdChanges(data){
 		$.ajax({
-			url : '${baseUrl}process/info/updateUserPassword.jsp',
+			url : 'jsp/updateUserPassword.jsp',
 			data : data,
 			method: 'POST',
 		}).done(function(data){ 

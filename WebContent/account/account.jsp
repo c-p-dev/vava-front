@@ -1,6 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<jsp:include page="../header.jsp" />
-
+<%@ include file="/inc/main_header.jsp"%>
+<%@ include file="/inc/session.jsp"%>
+<%@ include file="/inc/header.jsp"%>
+<script>
+	var logged = "<%=checkSession%>";
+	console.log(logged);
+	if(logged == "true"){
+		window.location = "../index.jsp";
+	}
+</script>
 <style>
 	#pwmodal .pop_text{
 		padding:0px!important;
@@ -420,8 +427,9 @@
 			e.preventDefault();
 			if($("#fid1").valid()){
 				var data = $(this).serializeJSON();
+				data['sd'] = "<%=SITEID%>";
 				$.ajax({
-					url : '/process/account/find_id.jsp',
+					url : 'jsp/find_id.jsp',
 					data : data,
 					method: 'POST',
 				}).done(function(data){
@@ -532,7 +540,7 @@
 				var frm = 'f1';
 
 				$.ajax({
-					url : '/process/account/send_code.jsp',
+					url : 'jsp/send_code.jsp',
 					data : {nk:nk,cp:cp,cll:cll,method:frm,rSend:f1rSnd},
 					method: 'POST',
 				}).done(function(data){
@@ -687,8 +695,9 @@
 	    	e.preventDefault();
 	    	if($("#fid2").valid()){
 	    		var data = $(this).serializeJSON();
+	    		data['sd'] = "<%=SITEID%>";
 	    		$.ajax({
-					url: '/process/account/find_id.jsp',
+					url: 'jsp/find_id.jsp',
 					data : data,
 					method: 'POST',
 				}).done(function(data){
@@ -794,8 +803,9 @@
 			e.preventDefault();
 			if($(this).valid()){
 				var data = $(this).serializeJSON();
+				data['sd'] = "<%=SITEID%>";
 				$.ajax({
-					url : '/process/account/verify_pd.jsp',
+					url : 'jsp/verify_pd.jsp',
 					data : data,
 					method: 'POST',
 				}).done(function(data){
@@ -817,7 +827,7 @@
 					var fp1data = $("#fp1").serializeJSON();
 					$.extend(data,fp1data);
 					$.ajax({
-						url : 'process/account/update_pd.jsp',
+						url : 'jsp/update_pd.jsp',
 						data : data,
 						method: 'POST',
 					}).done(function(data){ 
@@ -834,7 +844,7 @@
 					var fp2data = $("#fp3").serializeJSON();
 					$.extend(data,fp2data);
 					$.ajax({
-						url : 'process/account/update_pd.jsp',
+						url : 'jsp/update_pd.jsp',
 						data : data,
 						method: 'POST',
 					}).done(function(data){ 
@@ -1017,8 +1027,9 @@
 			e.preventDefault();
 			if($(this).valid()){
 				var data = $(this).serializeJSON();
+				data['sd'] = "<%=SITEID%>";
 				$.ajax({
-					url : '/process/account/verify_pd.jsp',
+					url : 'jsp/verify_pd.jsp',
 					data : data,
 					method: 'POST',
 				}).done(function(data){
@@ -1055,7 +1066,7 @@
 
 				
 				$.ajax({
-					url : '/process/account/send_code.jsp',
+					url : 'jsp/send_code.jsp',
 					data : {nk:nk,cp:cp,cll:cll,ud:ud,method:frm,rSend:f2rSnd},
 					method: 'POST',
 				}).done(function(data){
@@ -1124,7 +1135,7 @@
 	function f1cntdwn(){
 	
 
-		var tc = 3;
+		var tc = 180;
 		var td = moment.duration(tc * 1000, 'milliseconds');
 		var ti = 1000;
 
@@ -1148,26 +1159,12 @@
 		},ti);
 	}
 
-	function f1sLog(){
-		var validator = $( "#form1" ).validate();
-		valid = validator.element("#cell");
-		if(valid){
-			var cp = $("#cell_prefix").val();
-			var cll = $("#cell").val();
-			$.ajax({
-				url : 'process/sms_log.jsp',
-				data : {cp:cp,cll:cll},
-				method: 'POST',
-			})
-
-		}
-		
-	}
+	
 
 
 	function f2cntdwn(){
 		
-		var tc = 3;
+		var tc = 180;
 		var td = moment.duration(tc * 1000, 'milliseconds');
 		var ti = 1000;
 
@@ -1193,4 +1190,6 @@
 
 
 </script>
-<jsp:include page="../footer.jsp" />
+<%@ include file="/inc/footer.jsp"%>
+</body>
+</html>

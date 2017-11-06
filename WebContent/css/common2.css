@@ -183,7 +183,7 @@ table.dataTable tbody td {
 }
 
 /*menu*/
-.select ul.top_alist li a {
+.select ul.top_alist li a, .select ul.top_alist li span {
     margin: 0px; display: block; width: 100%; height: 100%; 
 }
 

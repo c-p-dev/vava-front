@@ -4,9 +4,9 @@
 
 	String manual = request.getParameter("man");
 	if(manual.equals("manual")){
-		response.sendRedirect("../casino/manual.jsp");
+		response.sendRedirect("../manual.jsp");
 	}else if(manual.equals("manual2")){
-		response.sendRedirect("../casino/manual2.jsp");
+		response.sendRedirect("../manual2.jsp");
 	}
 	
 

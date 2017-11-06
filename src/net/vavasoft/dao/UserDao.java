@@ -508,7 +508,7 @@ public class UserDao {
 		
 	}
 
-	public boolean updateUserProfile(String userid, String bank_name, String bank_owner,String bank_num, String cell){
+	public boolean updateUserProfile(String userid, String bank_name, String bank_owner,String bank_num, String cell_prefix, String cell){
 		boolean result = false;
 		Connection con 			= null;
 		PreparedStatement pstmt = null;
@@ -518,12 +518,13 @@ public class UserDao {
 		try {
 			DBConnector.getInstance();
 			con = DBConnector.getConnection();
-			
+			SmsDao sd = new SmsDao();
+			String mobile_no = sd.formatCellNumber(cell_prefix, cell);
 		    pstmt   			= con.prepareStatement(query);
             pstmt.setString(1, bank_name);
             pstmt.setString(2, bank_owner);
             pstmt.setString(3, bank_num);
-            pstmt.setString(4, cell);
+            pstmt.setString(4, mobile_no);
             pstmt.setString(5, userid);
 			sts = pstmt.executeUpdate();
 			

@@ -20,8 +20,7 @@
 		String cell_prefix = request.getParameter("cp").trim();
 		String nick = request.getParameter("nk").trim();
 		String authcode = request.getParameter("ac").trim();
-		// int site_id = request.getParameter("sd");
-		int site_id = 1;
+		int site_id = Integer.parseInt(request.getParameter("sd"));
 		
 		userid = sd.checkAuthCodeByNickname(nick,cell_prefix,cell,authcode);
 

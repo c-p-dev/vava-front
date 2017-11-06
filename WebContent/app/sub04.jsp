@@ -1,7 +1,6 @@
-<%@ include file = "../process/session_checker.jsp" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<jsp:include page="../header.jsp" />
-
+<%@ include file="/inc/main_header.jsp"%>
+<%@ include file="/inc/session.jsp"%>
+<%@ include file="/inc/header.jsp"%>
 <div id="contents_wrap">
 	<div class="contents">
 		<ul class="tabs">
@@ -83,4 +82,6 @@
 		}
 	});
 </script>
-<jsp:include page="../footer.jsp" />
+<%@ include file="/inc/footer.jsp"%>
+</body>
+</html>

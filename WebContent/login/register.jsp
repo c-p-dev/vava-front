@@ -325,7 +325,7 @@
 
 		$.validator.addMethod("checkReferrer", function(value, element) {
 	    	var x = $.ajax({
-		        url:'process/referrence_checker.jsp',
+		        url:'../login/jsp/referrence_checker.jsp',
 		        async: false,
 		        type: 'post',
 		        data: {
@@ -363,7 +363,7 @@
                     alphanumeric:true,
 					minlength:4,
 					remote: {
-						url: "process/userid_checker.jsp",
+						url: "../login/jsp/userid_checker.jsp",
 						async: false,
 				        type: "post",
 				       	data: {
@@ -392,7 +392,7 @@
 					minlength:10,
 					maxlength:13,
 			  		synchronousRemote: {
-		                url: "process/verify_cellnum.jsp",
+		                url: "../login/jsp/verify_cellnum.jsp",
 				        type: "post",
 				        async: false,
 				       	data: {
@@ -410,7 +410,7 @@
 					required:true,
 					minlength:6,
 					remote: {
-						url: "process/verify_cert_num.jsp",
+						url: "../login/jsp/verify_cert_num.jsp",
 				        type: "post",
 				       	data: {
 				          	cert: function (){
@@ -450,7 +450,7 @@
 					required:true,
 					minlength: 6,
 					remote: {
-						url: "process/joincode_checker.jsp",
+						url: "../login/jsp/joincode_checker.jsp",
 				        type: "post",
 				        async: true,
 				       	data: {
@@ -615,7 +615,7 @@
 
 	function submitForm(data){
 		$.ajax({
-			url : 'process/register_process.jsp',
+			url : '../login/jsp/register_process.jsp',
 			data : data,
 			method: 'POST',
 		}).done(function(data){ 
@@ -638,7 +638,7 @@
 	
 		
 		$.ajax({
-			url : 'process/send_sms.jsp',
+			url : '../login/jsp/send_sms.jsp',
 			data : {userid:userid,cell_prefix:cell_prefix,cell:cell,rSnd:rSnd},
 			method: 'POST',
 		}).done(function(data){ 
@@ -679,7 +679,7 @@
 			var cp = $("#cell_prefix").val();
 			var cll = $("#cell").val();
 			$.ajax({
-				url : 'process/sms_log.jsp',
+				url : '../login/jsp/sms_log.jsp',
 				data : {cp:cp,cll:cll},
 				method: 'POST',
 			})

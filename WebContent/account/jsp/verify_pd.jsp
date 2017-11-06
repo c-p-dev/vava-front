@@ -19,8 +19,7 @@
 		String cell_prefix = request.getParameter("cp");
 		String nickname = request.getParameter("nk");
 		String userid = request.getParameter("ud");
-		// int site_id = request.getParameter("sd");
-		int site_id = 1;
+		int site_id = Integer.parseInt(request.getParameter("sd"));
 		
 		result = sd.checkAuthCodeByUseridNick(userid, nickname,cell_prefix,cell,authcode);
 

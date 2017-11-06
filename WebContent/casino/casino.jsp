@@ -1,17 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ include file="/inc/main_header.jsp"%>
+<%@ include file="/inc/session.jsp"%>
+<%@ include file="/inc/header.jsp"%>
+
 <%@ page import ="net.vavasoft.dao.GameDao"%>
 <%@ page import ="net.vavasoft.bean.GameBean"%>
 <%@ page import ="net.vavasoft.bean.UserBean"%>
 <%@ page import ="java.util.*" %>
-<%
-	boolean checkSession = false;
-	// UserBean currentUser = (UserBean) session.getAttribute("currentSessionUser");
-	UserBean bean = (net.vavasoft.bean.UserBean) session.getAttribute("currentSessionUser");
-	if(session.getAttribute("currentSessionUser") != null){
-		checkSession = true;
-		out.print(bean.getNick());  
-	}
-	
+<%	
 	GameDao game_dao			= new GameDao();
 	List<GameBean> game_list	= game_dao.getAllGames();
 	List<GameBean> game_providers = game_dao.getGameProviders();
@@ -55,7 +50,6 @@ ul.casino_board_list  + .btn_wrap{
 }*/
 
 </style>
-<jsp:include page="../header.jsp" />
 <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/list.pagination.js/0.1.1/list.pagination.min.js"></script>
 <div id="contents_wrap">
@@ -173,7 +167,7 @@ ul.casino_board_list  + .btn_wrap{
 				$('.hdr-money-row').hide();
 				$('#fade_9').popup('show');
 				
-				$.get("TegServlet?method=1&gm_provdr="+gm_provdr+"&lnk_dsp="+lnk_dsp, function(srv_resp) {
+				$.get("../TegServlet?method=1&gm_provdr="+gm_provdr+"&lnk_dsp="+lnk_dsp, function(srv_resp) {
 					
 					if ("" != srv_resp) {
 						$('#game-pop-frame').attr('src', srv_resp);
@@ -195,7 +189,7 @@ ul.casino_board_list  + .btn_wrap{
 			e.preventDefault();
 			var gp = $(this).attr("data-val");
 			$.ajax({
-				url : '/process/get_game.jsp',
+				url : 'jsp/get_game.jsp',
 				data : {gp:gp},
 				method: 'GET',
 			}).done(function(data){
@@ -211,7 +205,7 @@ ul.casino_board_list  + .btn_wrap{
 			e.preventDefault();
 			var man = $(this).attr('data-val');
 			$.ajax({
-				url : '/process/get_manual.jsp',
+				url : 'jsp/get_manual.jsp',
 				data : {man:man},
 				method: 'GET',
 			}).done(function(data){
@@ -389,5 +383,6 @@ ul.casino_board_list  + .btn_wrap{
 
 
 </script>
-
-<jsp:include page="../footer.jsp" />
+<%@ include file="/inc/footer.jsp"%>
+</body>
+</html>

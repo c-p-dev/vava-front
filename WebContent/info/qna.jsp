@@ -133,7 +133,7 @@
 
 		var $qnaDt;
 		$qnaDt = $('#qnaDt').DataTable({
-			ajax : 'process/info/getQnaList.jsp',
+			ajax : 'jsp/getQnaList.jsp',
 			sAjaxDataProp:"",
 			searching: false,
 			bInfo : false,
@@ -183,10 +183,13 @@
         	}
         });
 
-		setTimeout(function() {
-		  	$qnaDt.columns.adjust().draw();
-		}, 100);
-		
+		$(".dt-qna-tab").on("click",function(){
+			setTimeout(function() {
+   			  	$qnaDt.columns.adjust().draw();
+			}, 100);
+			
+		});
+
         $('#qnaDt tbody').on('click', 'tr', function () {
 	        var row = $qnaDt.row(this);
 	        if(!$(this).hasClass('dt-txt')){

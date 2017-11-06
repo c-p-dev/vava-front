@@ -136,7 +136,7 @@
 
 	function loadMessage(){
 		$.ajax({
-			url : '${baseUrl}process/info/getMessages.jsp',
+			url : 'jsp/getMessages.jsp',
 			data : {},
 			method: 'POST',
 		}).done(function(data){ 
@@ -163,7 +163,7 @@
 
 	function submitMessage(data){
 		$.ajax({
-			url : '${baseUrl}process/info/setMessage.jsp',
+			url : 'jsp/setMessage.jsp',
 			data : data,
 			method: 'POST',
 		}).done(function(data){

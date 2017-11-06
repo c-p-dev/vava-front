@@ -194,7 +194,7 @@
 
 		$("#bankInfoBtn").on("click",function(){
 			$.ajax({
-				url:'process/application/charge/getBankAccount.jsp',
+				url:'jsp/getBankAccount.jsp',
 				data:{},
 				type:'POST'
 			}).done(function(data){
@@ -225,7 +225,7 @@
 		});
 
 		$dataTable1 = $('#dataTable1').DataTable({
-			ajax : 'process/application/charge/getChargeList.jsp',
+			ajax : 'jsp/getChargeList.jsp',
 			bProcessing: true,
 			sAjaxDataProp:"",
 			searching: false,
@@ -407,7 +407,7 @@
 	function submitCharge(data){
 		console.log(data);
 		$.ajax({
-			url:'process/application/charge/setChargeApplication.jsp',
+			url:'jsp/setChargeApplication.jsp',
 			data:data,
 			type:'POST'
 		}).done(function(data){
