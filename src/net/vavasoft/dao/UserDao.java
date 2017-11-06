@@ -60,6 +60,7 @@ public class UserDao {
 					uib.setSiteid(rs.getInt("siteid"));
 					uib.setUserid(rs.getString("userid"));
 					uib.setNick(rs.getString("nick"));
+					uib.setCharge_level(rs.getString("charge_level"));
 					
 				}else{
 					uib.setLoginStatus(1); // wrong password
