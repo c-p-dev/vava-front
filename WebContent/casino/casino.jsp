@@ -209,7 +209,7 @@ ul.casino_board_list  + .btn_wrap{
 				data : {man:man},
 				method: 'GET',
 			}).done(function(data){
-				console.log(data);
+				//console.log(data);
 				loadManual(data);
 			});
 
@@ -360,7 +360,7 @@ ul.casino_board_list  + .btn_wrap{
 
 		var hackerList = new List('contents_wrap', options);
 
-		console.log(hackerList);
+		//console.log(hackerList);
 	}
 
 	function addPgBtn(){
@@ -384,5 +384,6 @@ ul.casino_board_list  + .btn_wrap{
 
 </script>
 <%@ include file="/inc/footer.jsp"%>
+
 </body>
 </html>

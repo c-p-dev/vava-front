@@ -500,3 +500,5 @@
 			</div>
 		</div>
 	</div>
+<script type="text/javascript" src="/js/manual.js"></script>
+<script type="text/javascript" src="/js/slides.js"> </script>
