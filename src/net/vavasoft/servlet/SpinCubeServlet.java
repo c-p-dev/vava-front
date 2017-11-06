@@ -26,6 +26,7 @@ public class SpinCubeServlet extends HttpServlet {
 	public static final String SC_METHOD_DEPOSIT		= "/Deposit";
 	public static final String SC_METHOD_WITHDRAW		= "/Withdraw";
 	public static final String SC_METHOD_LOCK_STS		= "/UpdUserLock";
+	public static final String SC_METHOD_GET_BETS		= "/GetBetDetails";
 
 	
 	/**
@@ -99,6 +100,17 @@ public class SpinCubeServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			output.print(srv_resp_5);
+		}
+		else if (method.equals(SC_METHOD_GET_BETS)) {
+			String srv_resp_6 	= "";
+			
+			try {
+				srv_resp_6 			= sc_ctrl.saveBetList();
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			output.print(srv_resp_6);
 		}
 		else {
 			String srv_resp_0	= "Invalid Method";

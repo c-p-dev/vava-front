@@ -8,9 +8,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -22,11 +24,13 @@ import com.google.gson.reflect.TypeToken;
 
 import net.vavasoft.bean.MgBettingProfileBean;
 import net.vavasoft.bean.MgDepositBean;
+import net.vavasoft.bean.MgLiveGamesTransBean;
 import net.vavasoft.bean.MgPlayerAccountBean;
 import net.vavasoft.bean.MgResponseStatusBean;
 import net.vavasoft.bean.MgWithdrawAllBean;
 import net.vavasoft.bean.ScTransactionBean;
 import net.vavasoft.bean.UserBean;
+import net.vavasoft.dao.MgLiveTransLogDao;
 import net.vavasoft.dao.UserDao;
 import net.vavasoft.util.NukeSSLCerts;
 import net.vavasoft.util.StringManipulator;
@@ -144,6 +148,81 @@ public class TotalEgameController {
 		srv_resp 		= this.postToTeg(url, json_param);
 		System.out.println(srv_resp);
 		return srv_resp;
+	}
+	
+	public String getLiveGamesTransaction(String start_date, String end_date)
+	{
+		/*	Variable Declaration	*/
+		Gson gson							= new Gson();
+		String url							= api_base+"GetLiveGamesTransactions";
+		String json_param					= "";
+		String srv_resp						= "";
+		HashMap<String, Object>	teg_param	= new HashMap<String, Object>();
+		
+		/*	Parameters to be passed to TEG	*/
+		teg_param.put("FromDate", start_date);
+		teg_param.put("ToDAte", end_date);
+		
+		/*	Convert parameters to JSON	*/
+		json_param		= gson.toJson(teg_param, new TypeToken<HashMap<String, Object>>(){}.getType());
+		
+		/*--------------------------------------------------------------------
+        |	Execute HTTP POST Request to TEG
+        |-------------------------------------------------------------------*/
+		srv_resp 	= this.postToTeg(url, json_param);
+		
+		return srv_resp;
+	}
+	
+	public String getSpinBySpinData()
+	{
+		/*	Variable Declaration	*/
+		Gson gson							= new Gson();
+		String url							= api_base+"GetSpinBySpinData";
+		String json_param					= "";
+		String srv_resp						= "";
+		HashMap<String, Object>	teg_param	= new HashMap<String, Object>();
+		
+		/*	Parameters to be passed to TEG	*/
+		teg_param.put("LastRowId", "42439271547");
+		
+		/*	Convert parameters to JSON	*/
+		json_param		= gson.toJson(teg_param, new TypeToken<HashMap<String, Object>>(){}.getType());
+		
+		/*--------------------------------------------------------------------
+        |	Execute HTTP POST Request to TEG
+        |-------------------------------------------------------------------*/
+		srv_resp 	= this.postToTeg(url, json_param);
+		System.out.println(srv_resp);
+		return srv_resp;
+	}
+	
+	public void extractLiveGameTransactions()
+	{
+		SimpleDateFormat dfrmt_start	= new SimpleDateFormat("yyyy-MM-dd 00:00:00");
+		SimpleDateFormat dfrmt_end		= new SimpleDateFormat("yyyy-MM-dd 23:59:59");
+		
+		Gson gson						= new Gson();
+		String json_resp				= "";
+		MgLiveGamesTransBean trans_list	= new MgLiveGamesTransBean();
+		MgLiveTransLogDao mg_db			= new MgLiveTransLogDao();
+		
+		Calendar cal_start				= Calendar.getInstance();
+		Calendar cal_end				= Calendar.getInstance();
+		
+		cal_start.add(Calendar.DATE, -1);
+		cal_end.add(Calendar.DATE, -1);
+		
+		String start_date	= dfrmt_start.format(cal_start.getTime());
+		String end_date		= dfrmt_end.format(cal_end.getTime());
+		
+		json_resp	= this.getLiveGamesTransaction(start_date, end_date);
+		
+		trans_list	= gson.fromJson(json_resp, MgLiveGamesTransBean.class);
+		
+		for (int ctr = 0; ctr < trans_list.getResult().size(); ctr++) {
+			mg_db.addNewTransactionLog(trans_list.getResult().get(ctr));
+		}
 	}
 	
 	public String userPlayCheck(String username, int game_provider, String lnk_dsp) throws MalformedURLException, IOException, ParseException

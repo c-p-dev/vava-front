@@ -88,6 +88,11 @@ public class TegServlet extends HttpServlet {
 				response.setContentType("application/json");
 				output.print(srv_resp_3);
 				break;
+			
+			case 4:
+				teg_ctrl.extractLiveGameTransactions();
+				break;
+				
 			case 0:
 			default:
 				break;
