@@ -95,11 +95,11 @@ ul.casino_board_list  + .btn_wrap{
 
 						if(providers.getProvider_name().equals("AG Casino")){
 							
-							html +=("<li><a href='#l-tab3' class='get-manual' data-val='manual'  >AG Manual</a></li>");
+							html +=("<li><a href='#l-tab3' class='get-manual agtab' data-val='manual'  >AG Manual</a></li>");
 						
 						}else if(providers.getProvider_name().equals("MG Casino")){
 							
-							html +=("<li><a href='#l-tab5' class='get-manual' data-val='manual2'  >MG Manual</a></li>");
+							html +=("<li><a href='#l-tab5' class='get-manual mgtab' data-val='manual2'  >MG Manual</a></li>");
 						
 						}else if(providers.getProvider_name().equals("Betconstruct Casino")){
 							
@@ -209,7 +209,7 @@ ul.casino_board_list  + .btn_wrap{
 				data : {man:man},
 				method: 'GET',
 			}).done(function(data){
-				console.log(data);
+				//console.log(data);
 				loadManual(data);
 			});
 
@@ -360,7 +360,7 @@ ul.casino_board_list  + .btn_wrap{
 
 		var hackerList = new List('contents_wrap', options);
 
-		console.log(hackerList);
+		//console.log(hackerList);
 	}
 
 	function addPgBtn(){
@@ -384,5 +384,6 @@ ul.casino_board_list  + .btn_wrap{
 
 </script>
 <%@ include file="/inc/footer.jsp"%>
+
 </body>
 </html>

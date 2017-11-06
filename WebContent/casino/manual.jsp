@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <ul class="mtabs tabs">
-	<li class="liclass"><a href="#main">메인화면 구성</a></li>
-	<li class="liclass"><a href="#dragon_tiger">드래곤타이거</a></li>
-	<li class="liclass"><a href="#gen_bac">일반 바카라</a></li>
-	<li class="liclass"><a href="#vip_bac">VIP바카라</a></li>
-	<li class="liclass"><a href="#bid_bac">BID바카라</a></li>
-	<li class="liclass"><a href="#roulette">룰렛</a></li>
-	<li class="liclass"><a href="#seo_bo">식보</a></li>
+	<li class="liclass mainag"><a href="#main">메인화면 구성</a></li>
+	<li class="liclass a2"><a href="#dragon_tiger">드래곤타이거</a></li>
+	<li class="liclass a3"><a href="#gen_bac">일반 바카라</a></li>
+	<li class="liclass a4"><a href="#vip_bac">VIP바카라</a></li>
+	<li class="liclass a5"><a href="#bid_bac">BID바카라</a></li>
+	<li class="liclass a6"><a href="#roulette">룰렛</a></li>
+	<li class="liclass a7"><a href="#seo_bo">식보</a></li>
 </ul>
 	<div class="tab_container">
 		<div id="main" class="tab_content">
@@ -42,8 +42,8 @@
 			      <img src="/images/main/010.jpg" style="width:100%">
 			    </div>
 			
-			    <a class="prev" style="color: #00afed; font-size: 80px;">&#10094;</a>
-			    <a class="next" style="color: #00afed; font-size: 80px;">&#10095;</a>
+			    <a class="mprev" style="color: #00afed; font-size: 80px;">&#10094;</a>
+			    <a class="mnext" style="color: #00afed; font-size: 80px;">&#10095;</a>
 			
 			  <div style="text-align:center">
 			    <span class="dot"></span>
@@ -91,8 +91,8 @@
 				    <div class="mySlides fade">
 				      <img src="/images/dragon_tiger/007.jpg" style="width:100%">
 				    </div>
-				    <a class="prev" style="color: #00afed;font-size: 80px;">&#10094;</a>
-				    <a class="next" style="color: #00afed;font-size: 80px;">&#10095;</a>
+				    <a class="mprev" style="color: #00afed;font-size: 80px;">&#10094;</a>
+				    <a class="mnext" style="color: #00afed;font-size: 80px;">&#10095;</a>
 				
 				  <div style="text-align:center">
 				    <span class="dot"></span>
@@ -128,8 +128,8 @@
 				    <div class="mySlides fade">
 				      <img src="/images/game_rule/b5.jpg" style="width:100%">
 				    </div>
-				    <a class="prev" style="color: #00afed;font-size: 80px;">&#10094;</a>
-				    <a class="next" style="color: #00afed;font-size: 80px;">&#10095;</a>
+				    <a class="mprev" style="color: #00afed;font-size: 80px;">&#10094;</a>
+				    <a class="mnext" style="color: #00afed;font-size: 80px;">&#10095;</a>
 				
 				  <div style="text-align:center">
 				    <span class="dot"></span>
@@ -170,8 +170,8 @@
 				    <div class="mySlides fade">
 				      <img src="/images/baccarat/009.jpg" style="width:100%">
 				    </div>
-				    <a class="prev" style="color: #00afed;font-size: 80px;">&#10094;</a>
-				    <a class="next" style="color: #00afed;font-size: 80px;">&#10095;</a>
+				    <a class="mprev" style="color: #00afed;font-size: 80px;">&#10094;</a>
+				    <a class="mnext" style="color: #00afed;font-size: 80px;">&#10095;</a>
 				
 				  <div style="text-align:center">
 				    <span class="dot"></span>
@@ -212,8 +212,8 @@
 				    <div class="mySlides fade">
 				      <img src="/images/game_rule/vb6.jpg" style="width:100%">
 				    </div>
-				    <a class="prev" style="color: #00afed;font-size: 80px;">&#10094;</a>
-				    <a class="next" style="color: #00afed;font-size: 80px;">&#10095;</a>
+				    <a class="mprev" style="color: #00afed;font-size: 80px;">&#10094;</a>
+				    <a class="mnext" style="color: #00afed;font-size: 80px;">&#10095;</a>
 				
 				  <div style="text-align:center">
 				    <span class="dot"></span>
@@ -252,8 +252,8 @@
 				    <div class="mySlides fade">
 				      <img src="/images/vip_baccarat/008.jpg" style="width:100%">
 				    </div>
-				    <a class="prev" style="color: #00afed;font-size: 80px;">&#10094;</a>
-				    <a class="next" style="color: #00afed;font-size: 80px;">&#10095;</a>
+				    <a class="mprev" style="color: #00afed;font-size: 80px;">&#10094;</a>
+				    <a class="mnext" style="color: #00afed;font-size: 80px;">&#10095;</a>
 				
 				  <div style="text-align:center">
 				    <span class="dot"></span>
@@ -293,8 +293,8 @@
 				    <div class="mySlides fade">
 				      <img src="/images/game_rule/bb6.jpg" style="width:100%">
 				    </div>
-				    <a class="prev" style="color: #00afed;font-size: 80px;">&#10094;</a>
-				    <a class="next" style="color: #00afed;font-size: 80px;">&#10095;</a>
+				    <a class="mprev" style="color: #00afed;font-size: 80px;">&#10094;</a>
+				    <a class="mnext" style="color: #00afed;font-size: 80px;">&#10095;</a>
 				
 				  <div style="text-align:center">
 				    <span class="dot"></span>
@@ -336,8 +336,8 @@
 				    <div class="mySlides fade">
 				      <img src="/images/bid_baccarat/009.jpg" style="width:100%">
 				    </div>
-				    <a class="prev" style="color: #00afed;font-size: 80px;">&#10094;</a>
-				    <a class="next" style="color: #00afed;font-size: 80px;">&#10095;</a>
+				    <a class="mprev" style="color: #00afed;font-size: 80px;">&#10094;</a>
+				    <a class="mnext" style="color: #00afed;font-size: 80px;">&#10095;</a>
 				
 				  <div style="text-align:center">
 				    <span class="dot"></span>
@@ -372,8 +372,8 @@
 				    <div class="mySlides fade">
 				      <img src="/images/game_rule/r4.jpg" style="width:100%">
 				    </div>
-				    <a class="prev" style="color: #00afed;font-size: 80px;">&#10094;</a>
-				    <a class="next" style="color: #00afed;font-size: 80px;">&#10095;</a>
+				    <a class="mprev" style="color: #00afed;font-size: 80px;">&#10094;</a>
+				    <a class="mnext" style="color: #00afed;font-size: 80px;">&#10095;</a>
 				
 				  <div style="text-align:center">
 				    <span class="dot"></span>
@@ -413,8 +413,8 @@
 				    <div class="mySlides fade">
 				      <img src="/images/roulette/009.jpg" style="width:100%">
 				    </div>
-				    <a class="prev" style="color: #00afed;font-size: 80px;">&#10094;</a>
-				    <a class="next" style="color: #00afed;font-size: 80px;">&#10095;</a>
+				    <a class="mprev" style="color: #00afed;font-size: 80px;">&#10094;</a>
+				    <a class="mnext" style="color: #00afed;font-size: 80px;">&#10095;</a>
 				
 				  <div style="text-align:center">
 				    <span class="dot"></span>
@@ -449,8 +449,8 @@
 				    <div class="mySlides fade">
 				      <img src="/images/game_rule/s3.jpg" style="width:100%">
 				    </div>
-				    <a class="prev" style="color: #00afed;font-size: 80px;">&#10094;</a>
-				    <a class="next" style="color: #00afed;font-size: 80px;">&#10095;</a>
+				    <a class="mprev" style="color: #00afed;font-size: 80px;">&#10094;</a>
+				    <a class="mnext" style="color: #00afed;font-size: 80px;">&#10095;</a>
 				
 				  <div style="text-align:center">
 				    <span class="dot"></span>
@@ -484,8 +484,8 @@
 				    <div class="mySlides fade">
 				      <img src="/images/sicbo/007.jpg" style="width:100%">
 				    </div>
-				    <a class="prev" style="color: #00afed;font-size: 80px;">&#10094;</a>
-				    <a class="next" style="color: #00afed;font-size: 80px;">&#10095;</a>
+				    <a class="mprev" style="color: #00afed;font-size: 80px;">&#10094;</a>
+				    <a class="mnext" style="color: #00afed;font-size: 80px;">&#10095;</a>
 				
 				  <div style="text-align:center">
 				    <span class="dot"></span>
@@ -500,103 +500,5 @@
 			</div>
 		</div>
 	</div>
-<script>
-function openOption(evt, optionName) {
-    var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tabcontent2");
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-    }
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-    document.getElementById(optionName).style.display = "block";
-    evt.currentTarget.className += " active";
-}
-
-// Get the element with id="defaultOpen" and click on it
-document.getElementById("defaultOpen").click();
-</script>
-<script>
-  (function() {
-
-  init(); //on page load - show first slide, hidethe rest
-
-  function init() {
-
-    parents = document.getElementsByClassName('slideshow-container');
-
-    for (j = 0; j < parents.length; j++) {
-      var slides = parents[j].getElementsByClassName("mySlides");
-      var dots = parents[j].getElementsByClassName("dot");
-      slides[0].classList.add('active-slide');
-      dots[0].classList.add('active');
-    }
-  }
-
-  dots = document.getElementsByClassName('dot'); //dots functionality
-
-  for (i = 0; i < dots.length; i++) {
-
-    dots[i].onclick = function() {
-
-      slides = this.parentNode.parentNode.getElementsByClassName("mySlides");
-
-      for (j = 0; j < this.parentNode.children.length; j++) {
-        this.parentNode.children[j].classList.remove('active');
-        slides[j].classList.remove('active-slide');
-        if (this.parentNode.children[j] == this) {
-          index = j;
-        }
-      }
-      this.classList.add('active');
-      slides[index].classList.add('active-slide');
-
-    }
-  }
-//prev/next functionality
-  links = document.querySelectorAll('.slideshow-container a');
-
-  for (i = 0; i < links.length; i++) {
-    links[i].onclick = function() {
-      current = this.parentNode;
-
-      var slides = current.getElementsByClassName("mySlides");
-      var dots = current.getElementsByClassName("dot");
-      curr_slide = current.getElementsByClassName('active-slide')[0];
-      curr_dot = current.getElementsByClassName('active')[0];
-      curr_slide.classList.remove('active-slide');
-      curr_dot.classList.remove('active');
-      if (this.className == 'next') {
-
-        if (curr_slide.nextElementSibling.classList.contains('mySlides')) {
-          curr_slide.nextElementSibling.classList.add('active-slide');
-          curr_dot.nextElementSibling.classList.add('active');
-        } else {
-          slides[0].classList.add('active-slide');
-          dots[0].classList.add('active');
-        }
-
-      }
-
-      if (this.className == 'prev') {
-
-        if (curr_slide.previousElementSibling) {
-          curr_slide.previousElementSibling.classList.add('active-slide');
-          curr_dot.previousElementSibling.classList.add('active');
-        } else {
-          slides[slides.length - 1].classList.add('active-slide');
-          dots[slides.length - 1].classList.add('active');
-        }
-
-      }
-
-    }
-
-  }
-})();
-  </script>
-	
-
-
+<script type="text/javascript" src="/js/manual.js"></script>
+<script type="text/javascript" src="/js/slides.js"> </script>
