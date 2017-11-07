@@ -34,7 +34,7 @@
 			<ul class="smk_accordion">
 					<li>
 						<div class="accordion_title"><h3>포인트전환</h3></div>
-						<div class="acc_content">
+						<div class="acc_content" id="acc_content_in_pointtb">
 							<div class="acc_content_in_2">
 								<div class="blue_wrap">
 								<form id="pointform">
@@ -45,7 +45,7 @@
 												</div>
 												<div class="cash_in">
 													<div class="cash_6">
-														<input class="input_style03" id="point" placeholder="입금자명">		
+														<input class="input_style03" id="point" name="point" placeholder="입금자명">		
 													</div>
 													<div class="cash_3">
 														<span class="btn5" id="reset">정정</span>
@@ -90,53 +90,71 @@
 					</div>
 				</div>
 <script>
-$( "#pointform" ).submit(function( event ) {
-	  validateForm();
-	  return false;
-	});
-function validateForm()
-{	
-	
-	var numbers = /^[0-9]+$/;
-	var point = $('#point').val();
-	var avail_point = $('#showpoint').val();
-	
-    if(point=="")
-    {
-    	$( "#err-msg1" ).text( "Enter Point" ).show();
-    	event.preventDefault();
-    	 $('#point').css('border-color', 'red');
-      return false;
-    }
-    if(point.match(numbers))
-    {	    	
-    	if(point <= 999)
-	    {
-	    	$( "#err-msg1" ).text( "최소 전환 가능 포인트는 1,000 포인트입니다" ).show();
-	    	event.preventDefault();
-	    	 $('#point').css('border-color', 'red');
-	      return false;
-	    }
-    	else {
-    		console.log(point);
-    		var point = {point : point};
-	    	submitForm(point);
-	      	return true;
-    	}
-    }
-    
-    else  
-      {  
-    	$( "#err-msg1" ).text( "Numbers Only" ).show();
-    	event.preventDefault();
-    	 $('#point').css('border-color', 'red');
-      return false; 
-      }
-}
-function submitForm(point){
+$("#pointform").validate({
+	errorClass: 'form1-invalid',
+	validClass: 'form1-valid',
+	errorContainer: ".error_cash_in",
+		rules: {
+			point :{
+			required:true,
+			digits: true,
+			min: 1000,
+		},
+	},
+	messages: {
+		point :{
+			required:"Input is required.",
+			digits: "Input must be numbers",
+			range:"The minimum exchangable amount is 1000.",
+		},
+	},
+	errorPlacement: function(error, element) {
+
+		var error_label = element.attr("name");
+		var id = element.attr("id");
+
+		
+	    if(error.text() != ""){
+	    	element.qtip({ 
+			    overwrite: true,
+			    content: {
+			        text: error,
+			        tooltipanchor: $(this),
+			        button: 'Close',
+			    },
+			    show: {
+		            when: false,
+		            ready: true, 
+		            event:false,
+		        },
+		        hide:{
+		        	fixed:true,
+		        	event:false,
+		        },
+		        position: {
+			        container: $("#acc_content_in_pointtb"),
+			        at: 'top center ',
+			        my: 'bottom center', 
+			        adjust : {
+			        	method : 'shift none',
+			        }
+			    }
+			});
+	    
+		}else{
+			element.qtip("hide");
+		}
+
+	},
+	submitHandler: function(form) {
+		var data = $("#pointform").serializeJSON();
+	    submitPoint(data);
+  	}
+});
+function submitPoint(data){
 	$.ajax({
 		url : 'jsp/switchPoints.jsp',
-		data : point,
+		data : data,
 		dataType: 'JSON',
 		method: 'POST',
 	}).done(function(data){ 
