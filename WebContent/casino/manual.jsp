@@ -61,8 +61,8 @@
 		</div>
 		<div id="dragon_tiger" class="tab_content tabpadding">
 			<div class="tab" style="padding-left: 12%;">
-			  <button class="tablinks" style="position: relative;" onclick="openOption(event, 'dtrules')" id="defaultOpen">게임규칙</button>
-			  <button class="tablinks" style="position: relative;" onclick="openOption(event, 'dtplay')">게임방법</button>
+			  <button class="tablinks" style="position: relative;" data-rules = 'dtrules' id="defaultOpen">게임규칙</button>
+			  <button class="tablinks" style="position: relative;" data-rules = 'dtplay'>게임방법</button>
 			</div>
 			
 			<div id="dtrules" class="tabcontent2">
@@ -108,8 +108,8 @@
 		</div>
 		<div id="gen_bac" class="tab_content tabpadding">
 			<div class="tab" style="padding-left: 24.5%;">
-			  <button class="tablinks" onclick="openOption(event, 'gbrules')" id="defaultOpen">게임규칙</button>
-			  <button class="tablinks" onclick="openOption(event, 'gbplay')">게임방법</button>
+			  <button class="tablinks" data-rules = 'gbrules' id="defaultOpen">게임규칙</button>
+			  <button class="tablinks" data-rules = 'gbplay' >게임방법</button>
 			</div>
 			<div id="gbrules" class="tabcontent2">
 			  <div class="slideshow-container">
@@ -189,8 +189,8 @@
 		</div>
 		<div id="vip_bac" class="tab_content tabpadding">
 			<div class="tab" style="padding-left: 36.6%;">
-			  <button class="tablinks" onclick="openOption(event, 'vbrules')" id="defaultOpen">게임규칙</button>
-			  <button class="tablinks" onclick="openOption(event, 'vbplay')">게임방법</button>
+			  <button class="tablinks" data-rules = 'vbrules' id="defaultOpen">게임규칙</button>
+			  <button class="tablinks" data-rules = 'vbplay'>게임방법</button>
 			</div>
 			<div id="vbrules" class="tabcontent2">
 			  <div class="slideshow-container">
@@ -270,8 +270,8 @@
 		</div>
 		<div id="bid_bac" class="tab_content tabpadding">
 			<div class="tab" style="padding-left:48.8%;">
-			  <button class="tablinks" onclick="openOption(event, 'bbrules')" id="defaultOpen">게임규칙</button>
-			  <button class="tablinks" onclick="openOption(event, 'bbplay')">게임방법</button>
+			  <button class="tablinks" data-rules = 'bbrules' id="defaultOpen">게임규칙</button>
+			  <button class="tablinks" data-rules = 'bbplay'>게임방법</button>
 			</div>
 			<div id="bbrules" class="tabcontent2">
 			  <div class="slideshow-container">
@@ -355,8 +355,8 @@
 		</div>
 		<div id="roulette" class="tab_content tabpadding">
 			<div class="tab" style="padding-left:61%;">
-			  <button class="tablinks" onclick="openOption(event, 'rrules')" id="defaultOpen">게임규칙</button>
-			  <button class="tablinks" onclick="openOption(event, 'rplay')">게임방법</button>
+			  <button class="tablinks" data-rules = 'rrules' id="defaultOpen">게임규칙</button>
+			  <button class="tablinks" data-rules = 'rplay' >게임방법</button>
 			</div>
 			<div id="rrules" class="tabcontent2">
 			  <div class="slideshow-container">
@@ -432,8 +432,8 @@
 		</div>
 		<div id="seo_bo" class="tab_content tabpadding">
 			<div class="tab" style="padding-left:73%;">
-			  <button class="tablinks" onclick="openOption(event, 'srules')" id="defaultOpen">게임규칙</button>
-			  <button class="tablinks" onclick="openOption(event, 'splay')">게임방법</button>
+			  <button class="tablinks" data-rules = 'srules' id="defaultOpen">게임규칙</button>
+			  <button class="tablinks" data-rules = 'splay' >게임방법</button>
 			</div>
 			<div id="srules" class="tabcontent2">
 			  <div class="slideshow-container">
@@ -500,5 +500,4 @@
 			</div>
 		</div>
 	</div>
-<script type="text/javascript" src="/js/manual.js"></script>
 <script type="text/javascript" src="/js/slides.js"> </script>

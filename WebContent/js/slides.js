@@ -1,5 +1,17 @@
 $(document).ready(function() {
-
+	$('.mtabs').on('click', '.liclass', function() {
+		console.log('shitface');
+		var cntr	= $(this).find('a').attr('href');
+		var btn1	= $(cntr).find('.tablinks:first');
+		
+		btn1.click();
+	});
+	
+	$('.tab_container').on('click', '.tablinks', function(event) {
+		console.log(event);
+		openOption(event, $(this).data('rules'));
+	});
+	
   init(); //on page load - show first slide, hidethe rest
 
   function init() {

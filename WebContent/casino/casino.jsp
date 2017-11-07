@@ -108,8 +108,6 @@ ul.casino_board_list  + .btn_wrap{
 						}
 
 						out.print(html);
-						
-					
 
 				%>
 					
@@ -196,21 +194,6 @@ ul.casino_board_list  + .btn_wrap{
 				var obj = JSON.parse(data);
 				console.log(obj);
 				doList(obj,gp);
-			});
-
-			
-		});
-
-		$("#game-cat li a.get-manual").on("click",function(e){
-			e.preventDefault();
-			var man = $(this).attr('data-val');
-			$.ajax({
-				url : 'jsp/get_manual.jsp',
-				data : {man:man},
-				method: 'GET',
-			}).done(function(data){
-				//console.log(data);
-				loadManual(data);
 			});
 
 			
@@ -371,18 +354,8 @@ ul.casino_board_list  + .btn_wrap{
 	}
 
 
-	function loadManual(data){
-
-		var final_div = '<div id="l-tab1" class="left_tab_con">'+ data + '</div>';
-		$(".casino_right").html(spin);
-		setTimeout(function(){
-			$(".casino_right").hide().html(final_div).fadeIn();
-		}, 100);
-
-	}
-
-
 </script>
+<script type="text/javascript" src="/js/manual.js"></script>
 <%@ include file="/inc/footer.jsp"%>
 
 </body>

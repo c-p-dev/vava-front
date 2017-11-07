@@ -11,8 +11,8 @@
 	<div class="tab_container" id="t">
 		<div id="mgTab1" class="tab_content tabpadding">
 			<div class="tab">
-			  <button class="tablinks" style="position: relative;" onclick="MGoption(event, 'MGmain1')" >공통기능</button>
-			  <button class="tablinks" style="position: relative;" onclick="MGoption(event, 'MGmain2')">게임로비</button>
+			  <button class="tablinks" style="position: relative;" data-rules = 'MGmain1'>공통기능</button>
+			  <button class="tablinks" style="position: relative;" data-rules = 'MGmain2'>게임로비</button>
 			</div>
 			<div id="MGmain1" class="tabcontent2">
 				<div class="slideshow-container">
@@ -73,8 +73,8 @@
 		</div>
 		<div id="mgTab2" class="tab_content tabpadding">
 			<div class="tab" style="padding-left: 12%;">
-			  <button class="tablinks" style="position: relative;" onclick="MGoption(event, 'bacca1')" >게임규칙</button>
-			  <button class="tablinks" style="position: relative;" onclick="MGoption(event, 'bacca2')">게임방법</button>
+			  <button class="tablinks" style="position: relative;" data-rules = 'bacca1' >게임규칙</button>
+			  <button class="tablinks" style="position: relative;" data-rules = 'bacca2' >게임방법</button>
 			</div>
 			<div id="bacca1" class="tabcontent2">
 			  	<div class="slideshow-container">
@@ -111,8 +111,8 @@
 		</div>
 		<div id="mgTab3" class="tab_content tabpadding">
 			<div class="tab" style="padding-left: 24.5%;">
-			  <button class="tablinks" style="position: relative;" onclick="MGoption(event, 'bbacca1')" >게임규칙</button>
-			  <button class="tablinks" style="position: relative;" onclick="MGoption(event, 'bbacca2')">게임방법</button>
+			  <button class="tablinks" style="position: relative;" data-rules = 'bbacca1' >게임규칙</button>
+			  <button class="tablinks" style="position: relative;" data-rules = 'bbacca2' >게임방법</button>
 			</div>
 			<div id="bbacca1" class="tabcontent2">
 			  	<div class="slideshow-container">
@@ -149,8 +149,8 @@
 		</div>	
 		<div id="mgTab4" class="tab_content tabpadding">
 			<div class="tab" style="padding-left: 36.4%;">
-			  <button class="tablinks" style="position: relative;" onclick="MGoption(event, 'mbacca1')" >게임규칙</button>
-			  <button class="tablinks" style="position: relative;" onclick="MGoption(event, 'mbacca2')">게임방법</button>
+			  <button class="tablinks" style="position: relative;" data-rules = 'mbacca1' >게임규칙</button>
+			  <button class="tablinks" style="position: relative;" data-rules = 'mbacca2' >게임방법</button>
 			</div>
 			<div id="mbacca1" class="tabcontent2">
 			  	<div class="slideshow-container">
@@ -201,8 +201,8 @@
 		</div>
 		<div id="mgTab5" class="tab_content tabpadding">
 			<div class="tab" style="padding-left: 48.8%;">
-			  <button class="tablinks" style="position: relative;" onclick="MGoption(event, 'mgroulette1')" >게임규칙</button>
-			  <button class="tablinks" style="position: relative;" onclick="MGoption(event, 'mgroulette2')">게임방법</button>
+			  <button class="tablinks" style="position: relative;" data-rules = 'mgroulette1' >게임규칙</button>
+			  <button class="tablinks" style="position: relative;" data-rules = 'mgroulette2' >게임방법</button>
 			</div>
 			<div id="mgroulette1" class="tabcontent2">
 			  	<div class="slideshow-container">
@@ -236,8 +236,8 @@
 		</div>
 		<div id="mgTab6" class="tab_content tabpadding">
 			<div class="tab" style="padding-left: 61%;">
-			  <button class="tablinks" style="position: relative;" onclick="MGoption(event, 'mgsbo1')" >게임규칙</button>
-			  <button class="tablinks" style="position: relative;" onclick="MGoption(event, 'mgsbo2')">게임방법</button>
+			  <button class="tablinks" style="position: relative;" data-rules = 'mgsbo1' >게임규칙</button>
+			  <button class="tablinks" style="position: relative;" data-rules = 'mgsbo2' >게임방법</button>
 			</div>
 			<div id="mgsbo1" class="tabcontent2">
 			  	<div class="slideshow-container">
@@ -328,5 +328,4 @@
 				</div>
 		</div>
 	</div>
-<script type="text/javascript" src="/js/manual.js"></script>
 <script type="text/javascript" src="/js/slides.js"> </script>
