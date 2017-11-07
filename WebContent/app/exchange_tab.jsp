@@ -21,7 +21,7 @@
 <ul class="smk_accordion">
 		<li>
 			<div class="acc_head"><h3>환전신청 </h3></div>
-			<div class="acc_content">
+			<div class="acc_content" id="acc_content_in_withdrawtb">
 				<div class="acc_content_in_2">
 				<form name="formwithdraw" id="formwithdraw" method="post">
 					<div class="blue_wrap">
@@ -188,66 +188,82 @@
 		  	$dataTable1.columns.adjust().draw();
 		}, 100);
 	});
+	
+	$("#formwithdraw").validate({
+  		errorClass: 'form1-invalid',
+    	validClass: 'form1-valid',
+    	errorContainer: ".error_cash_in",
+  		rules: {
+			withdraw :{
+				required:true,
+				digits: true,
+				min: 10000
+			},
+		},
+		messages: {
+			withdraw :{
+				required:"Input is required.",
+				digits: "Input must be numbers",
+				min:"The minimum exchangable amount is 10,000.",
+			},
+		},
+		errorPlacement: function(error, element) {
 
-	$('.acc_content_in_2').on('submit', '#formwithdraw', function(){
-		console.log('aww');
-		validateForm1();
-		return false;
+			var error_label = element.attr("name");
+			var id = element.attr("id");
+	
+			
+		    if(error.text() != ""){
+		    	element.qtip({ 
+				    overwrite: true,
+				    content: {
+				        text: error,
+				        tooltipanchor: $(this),
+				        button: 'Close',
+				    },
+				    show: {
+			            when: false,
+			            ready: true, 
+			            event:false,
+			        },
+			        hide:{
+			        	fixed:true,
+			        	event:false,
+			        },
+			        position: {
+				        container: $("#acc_content_in_withdrawtb"),
+				        at: 'top center ',
+				        my: 'bottom center', 
+				        adjust : {
+				        	method : 'shift none',
+				        }
+				    }
+				});
+		    
+			}else{
+				element.qtip("hide");
+			}
+
+		},
+		submitHandler: function(form) {
+			var data = $("#formwithdraw").serializeJSON();
+		    submitWithdraw(data);
+	  	}
 	});
-	
-	function validateForm1()
-	{	
-		var numbers = /^[0-9]+$/;
-		var withdraw = document.formwithdraw.withdraw.value;
-	    if(withdraw=="")
-	    {
-	    	$( "#err-msg" ).text( "Enter Money" ).show();
-	    	event.preventDefault();
-	    	 $('#withdraw').css('border-color', 'red');
-	      return false;
-	    }
-	    if(withdraw.match(numbers))
-	    {
-	    	
-	    	if(withdraw <= 9999)
-		    {
-		    	$( "#err-msg" ).text( "Minimum exchangeable amount is 10,000 won" ).show();
-		    	event.preventDefault();
-		    	 $('#withdraw').css('border-color', 'red');
-		      return false;
-		    }
-	    	
-	    	else {
-	    		console.log(withdraw);
-	    	var withdraw = {withdraw : withdraw};
-	    	submitForm1(withdraw);
-	    	console.log('pepe');
-	      	return true;
-	    	}
-	    }
-	    
-	    else  
-	      {  
-	    	$( "#err-msg" ).text( "Numbers Only" ).show();
-	    	event.preventDefault();
-	    	 $('#withdraw').css('border-color', 'red');
-	      return false; 
-	      }
-	    
-	}
-	
-	function submitForm1(withdraw){
+
+	function submitWithdraw(data){
+		console.log(data);
 		$.ajax({
-			url : 'jsp/withdrawprocess.jsp',
-			data : withdraw,
-			method: 'POST',
-		}).done(function(data){ 
-			$("#ExchangeSuccesModal").popup("show");
-			//var mmm = parseInt($('#money').text());
-			//var newmmmm = mmm - parseInt($('#withdraw').val());
-			//$('#money').text(newmmmm);
-			//console.log(newmmmm)
+			url:'jsp/withdrawprocess.jsp',
+			data:data,
+			type:'POST'
+		}).done(function(data){
+			console.log(data);
+			if(data){
+				$("#ExchangeSuccesModal").popup("show");
+			}
 		});
+		
 	}
 	$('#ExchangeSuccesModal').popup({
 	  	transition: 'all 0.3s',

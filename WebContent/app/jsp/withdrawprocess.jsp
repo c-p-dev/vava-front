@@ -11,6 +11,7 @@
 	if(session.getAttribute("currentSessionUser") != null){
 		UserBean bean = (UserBean) session.getAttribute("currentSessionUser");
 	 	UserDao ud = new UserDao();
+	 	UserBean bean2 = ud.getUserByUserId(bean.getUserid()); 
 	 	bean.setRegdate("20202020");
 		boolean result = false;
 		int withdraw = Integer.parseInt(request.getParameter("withdraw"));
@@ -21,7 +22,7 @@
 	    	bean.setIp(new StringTokenizer(xForwardedForHeader, ",").nextToken().trim());  
 	    }
 	    
-		result = ud.withdraw(bean,withdraw);	
+		result = ud.withdraw(bean2,withdraw);	
 		out.println(result);
 
 	}else{
