@@ -30,5 +30,6 @@
 	}
 	
 	DecimalFormat dfrmt	= new DecimalFormat("#,###,###,###,###");
+	DecimalFormat dfrmt2= new DecimalFormat("#,###,###,###,###");
 %>
 
