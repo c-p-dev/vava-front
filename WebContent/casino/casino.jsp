@@ -192,7 +192,7 @@ ul.casino_board_list  + .btn_wrap{
 				method: 'GET',
 			}).done(function(data){
 				var obj = JSON.parse(data);
-				console.log(obj);
+				// console.log(obj);
 				doList(obj,gp);
 			});
 

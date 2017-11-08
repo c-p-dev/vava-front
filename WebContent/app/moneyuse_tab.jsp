@@ -94,9 +94,9 @@
 	        defaultDate: moment().toDate(),
 	        setDefaultDate : moment().toDate(),
 	        onSelect: function() {
-	        	console.log(this.getDate());
-	        	console.log(moneyPickerTo);
-	        	console.log(moneyPickerTo.minDate);
+	        	// console.log(this.getDate());
+	        	// console.log(moneyPickerTo);
+	        	// console.log(moneyPickerTo.minDate);
 	            moneyPickerTo.setMinDate(this.getDate());
 	            moneyPickerTo.setDate(this.getDate());
 	        },
@@ -117,7 +117,7 @@
 
 		$moneyUseTable = $('#moneyUseTable').DataTable({
 			ajax: {
-			    url: 'jsp/getMoneyHistory.jsp',
+			    url: '/app/jsp/getMoneyHistory.jsp',
 			    type: 'post',
 			    data: {
 			       	job : function(){
@@ -189,7 +189,8 @@
 			      	next: ">",
 			      	first: "<<",
 			      	last: ">>",
-			    }
+			    },
+			    emptyTable: "결과가 없습니다.",
 			},
             rowCallback : function(row , data , index) {
                 

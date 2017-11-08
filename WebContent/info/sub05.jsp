@@ -1,6 +1,8 @@
-<%@ include file="/inc/main_header.jsp"%>
 <%@ include file="/inc/session.jsp"%>
+<%@ include file="/inc/session_checker.jsp" %>
+<%@ include file="/inc/main_header.jsp"%>
 <%@ include file="/inc/header.jsp"%>
+
 <div id="contents_wrap">
 	<div class="contents">
 		<ul class="tabs">
@@ -14,7 +16,7 @@
 				<jsp:include page="profile.jsp" />
 			</div>
 			<div id="tab2" class="tab_content">
-				<jsp:include page="betting_history.jsp" />
+				<jsp:include page="bet_history.jsp" />
 			</div>
 			<div id="tab3" class="tab_content">
 				<jsp:include page="contact.jsp" />
@@ -27,7 +29,6 @@
 </div><!-- contents -->
 <script>
 	
-
 	$(document).ready(function(){
 		// setTabActive($.urlParam("tab"));
 

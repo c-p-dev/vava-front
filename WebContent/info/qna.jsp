@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <style>
 	.dt-txt{
 		overflow-y: scroll!important;
@@ -24,105 +25,9 @@
 		<div class="acc_head"><h3>쪽지함</h3></div>
 		<div class="acc_content">
 			<div class="acc_content_in_2">
-				<table id="qnaDt" cellspacing="0" cellpadding="0" data-scroll-x="true" style="width: 100%!important;">
+				<table id="qnaDt" class="table table-striped table-bordered" cellspacing="0" cellpadding="0" data-scroll-x="true" style="width: 100%!important;">
             	</table>
-				<!-- <table  width="100%" cellpadding="0" cellspacing="0" class="memo_table_title">
-					<tr>
-						<td width="55%">제목</td>
-						<td>보낸이</td>
-						<td width="15%">수신일시</td>
-						<td width="15%">확인일시</td>
-					</tr>
-				</table>
-				<ul class="popup_accordion">
-					<li>
-						<a>
-							<table width="100%" cellpadding="0" cellspacing="0" class="meno_table">
-								<tr>
-									<td  width="55%" class="meno_table_left">제목입니다.</td>
-									<td class="list_table_center">홍길동</td>
-									<td  width="15%" class="meno_table_center">07.07.17</td>
-									<td  width="15%" class="meno_table_center">07.07.17</td>
-								</tr>
-							</table>
-						</a>
-						<div>
-							<table width="100%" cellpadding="0" cellspacing="0" class="meno_table_in">
-								<tr>
-									<td>제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.니다. 제목입니다.제목입니다. 제목입니다. 제목</td>
-								</tr>
-							</table>
-						</div>
-					</li>
-					<li>
-						<a>
-							<table width="100%" cellpadding="0" cellspacing="0" class="meno_table">
-								<tr>
-									<td  width="55%" class="meno_table_left">제목입니다.</td>
-									<td class="list_table_center">홍길동</td>
-									<td  width="15%" class="meno_table_center">07.07.17</td>
-									<td  width="15%" class="meno_table_center">07.07.17</td>
-								</tr>
-							</table>
-						</a>
-						<div>
-							<table width="100%" cellpadding="0" cellspacing="0" class="meno_table_in">
-								<tr>
-									<td>제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제목입니다. 제목입니다. 제목입니다. 제목입니다.제</td>
-								</tr>
-							</table>
-						</div>
-					</li>
-					<li>
-						<a>
-							<table width="100%" cellpadding="0" cellspacing="0" class="meno_table">
-								<tr>
-									<td  width="55%" class="meno_table_left">제목입니다.</td>
-									<td class="list_table_center">홍길동</td>
-									<td  width="15%" class="meno_table_center">07.07.17</td>
-									<td  width="15%" class="meno_table_center">07.07.17</td>
-								</tr>
-							</table>
-						</a>
-						<div>
-							<table width="100%" cellpadding="0" cellspacing="0" class="meno_table_in">
-								<tr>
-									<td>제목입니다. </td>
-								</tr>
-							</table>
-						</div>
-					</li>
-				</ul> -->
-				<!-- <script>
-					
-					(function($) {
-						$('.popup_accordion > li:eq(0) a').addClass('active').next().slideDown();
-
-						$('.popup_accordion a').click(function(j) {
-							var dropDown = $(this).closest('li').find('div');
-
-							$(this).closest('.popup_accordion').find('div').not(dropDown).slideUp();
-
-							if ($(this).hasClass('active')) {
-								$(this).removeClass('active');
-							} else {
-								$(this).closest('.popup_accordion').find('a.active').removeClass('active');
-								$(this).addClass('active');
-							}
-
-							dropDown.stop(false, true).slideToggle();
-
-							j.preventDefault();
-						});
-					})(jQuery);
-				</script> -->
 				<div class="acc_btn_wrap_m">
-					<!-- <a href="#" onClick="layer_pop_mask('close','bg_mask_pop6');return false;">
-						<span class="btn2c">확인</span>
-					</a> 
-					<a href="#">
-						<span class="btn2">삭제</span>
-					</a> -->
 				</div>
 			</div>
 		</div>
@@ -133,7 +38,7 @@
 
 		var $qnaDt;
 		$qnaDt = $('#qnaDt').DataTable({
-			ajax : 'jsp/getQnaList.jsp',
+			ajax : '/info/jsp/getQnaList.jsp',
 			sAjaxDataProp:"",
 			searching: false,
 			bInfo : false,
@@ -166,7 +71,8 @@
 			      	next: ">",
 			      	first: "<<",
 			      	last: ">>",
-			    }
+			    },
+			    emptyTable: "결과가 없습니다.",
 			},
             rowCallback : function(row , data , index) {
 

@@ -58,7 +58,7 @@
     <div class="f_copy_wrap">
 		Gambling can be addictive. Play responsibly.           www.gamblingtherapy.org & www.gamblersanonymous.org<br>
 		© 2017 IBET25.COM. ALL RIGHTS RESERVED. | +18  <br>
-		<img src="images/f_logo.jpg" style="margin:20px 0 0 0">
+		<img src="/images/f_logo.jpg" style="margin:20px 0 0 0">
 	</div>
 </div>
 

@@ -319,12 +319,12 @@
 		$.validator.addMethod(
 	        "sameCell",
 	        function(value, element) {
-	        	console.log("value: "+value);
-	        	console.log("element: "+element);
+	        	// // console.log("value: "+value);
+	        	// // console.log("element: "+element);
 	        	var prefix = $("#new_cell_prefix").val();
 	        	var number = "<%=currentUser.getCell()%>";
-	        	console.log("number: "+element);
-	        	console.log("new num: " + prefix+value);
+	        	// console.log("number: "+element);
+	        	// console.log("new num: " + prefix+value);
 	        	if(number == prefix+value){
 	        		return false
 	        	}else{
@@ -339,11 +339,11 @@
 	  		errorClass: 'form1-invalid',
 	    	validClass: 'form1-valid',
 	    	highlight: function(element, errorClass, validClass) {
-	    		// console.log(element);
+	    		// // console.log(element);
 		      	$(element).addClass(errorClass).removeClass(validClass);
 		    },
 		    unhighlight: function(element, errorClass, validClass) {
-		    	// console.log(element);
+		    	// // console.log(element);
 		      	$(element).removeClass(errorClass).addClass(validClass);
 		    },
 	  		rules: {
@@ -382,8 +382,8 @@
 
 			},
 			errorPlacement: function(error, element) {
-				// console.log(error);
-				// console.log(element);
+				// // console.log(error);
+				// // console.log(element);
 				// $('#updateProfileForm input').css("border-color","#2e3032");
 				// var error_label = element.attr("name");
 			 //    if (element.attr("name") == error_label ){
@@ -424,7 +424,7 @@
 			},
 			submitHandler: function(form) {
 				var data = $("#updateProfileForm").serializeJSON();
-				console.log(data);
+				// console.log(data);
 			    submitProfileChanges(data);
 			  
 		  	}
@@ -435,11 +435,11 @@
 	  		errorClass: 'form1-invalid',
 	    	validClass: 'form1-valid',
 	    	highlight: function(element, errorClass, validClass) {
-	    		// console.log(element);
+	    		// // console.log(element);
 		      	$(element).addClass(errorClass).removeClass(validClass);
 		    },
 		    unhighlight: function(element, errorClass, validClass) {
-		    	// console.log(element);
+		    	// // console.log(element);
 		      	$(element).removeClass(errorClass).addClass(validClass);
 		    },
 	  		rules: {
@@ -448,7 +448,7 @@
 					maxlength:20,
 					// minlength:6,
 					remote: {
-						url: "jsp/passwordChecker.jsp",
+						url: "/jsp/passwordChecker.jsp",
 				        type: "post",
 				       	data: {
 				          	passwd: function() {
@@ -524,7 +524,7 @@
 			},
 			submitHandler: function(form) {
 				var data = $("#updatePasswordForm").serializeJSON();
-				console.log(data);
+				// console.log(data);
 			    submitPasswrdChanges(data);
 			  
 		  	}
@@ -551,11 +551,11 @@
 
 	function submitProfileChanges(data){
 		$.ajax({
-			url : 'jsp/updateProfile.jsp',
+			url : '/jsp/updateProfile.jsp',
 			data : data,
 			method: 'POST',
 		}).done(function(data){ 
-			console.log(data);
+			// console.log(data);
 			if(data){
 				resetupdateProfileForm();
 				$('#updateProfileModal').popup('show');
@@ -574,11 +574,11 @@
 
 	function submitPasswrdChanges(data){
 		$.ajax({
-			url : 'jsp/updateUserPassword.jsp',
+			url : '/jsp/updateUserPassword.jsp',
 			data : data,
 			method: 'POST',
 		}).done(function(data){ 
-			console.log(data);
+			// console.log(data);
 			if(data){
 				resetupdatePasswordForm();
 				$('#updatePasswordModal').popup('show');

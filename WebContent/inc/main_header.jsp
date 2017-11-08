@@ -62,14 +62,22 @@
 <link href="/css/font-awesome.css" rel="stylesheet" type="text/css">
 <link href="/css/spin.css" rel="stylesheet" type="text/css">
 <link href="/css/nice-select.css" rel="stylesheet" type="text/css"><!-- select -->
-<link href="/css/common2.css" rel="stylesheet" type="text/css"><!--공통-->
+<link href="/css/common2.css" rel="stylesheet" type="text/css">
 <link href="/css/manual.css" rel="stylesheet" type="text/css"><!--slide-->
 <link href="/css/custom.css" rel="stylesheet" type="text/css"><!--공통-->
 <link href="/css/spin.css" rel="stylesheet" type="text/css"> <!-- spin css -->
 
 <!-- test libraries -->
-<script type="text/javascript" src="/js/jquery.dataTables.min.js"></script><!-- datatable -->
-<link href="/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
+<script src="/js/bootstrap/dist/js/bootstrap.js"></script>
+<script type="text/javascript" src="/js/datatables/jquery.dataTables.js"></script><!-- datatable -->
+<!-- <link href="/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"> -->
+
+<!-- datatable bootstrap -->
+<!-- <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js" ></script> -->
+<link rel="stylesheet" href="/css/datatables.net-bs/css/bootstrap-simple.css" /> 
+<link rel="stylesheet" href="/css/datatables.net-bs/css/dataTables.bootstrap.css">
+
+
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css" rel="stylesheet" type="text/css"><!-- toaster test  -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>

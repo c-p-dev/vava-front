@@ -1,6 +1,8 @@
-<%@ include file="/inc/main_header.jsp"%>
 <%@ include file="/inc/session.jsp"%>
+<%@ include file="/inc/session_checker.jsp"%>
+<%@ include file="/inc/main_header.jsp"%>
 <%@ include file="/inc/header.jsp"%>
+
 <div id="contents_wrap">
 	<div class="contents">
 		<ul class="tabs">
@@ -13,13 +15,13 @@
 		</ul>
 		<div class="tab_container">
 			<div id="tab1" class="tab_content">
-				<jsp:include page="charge_tab.jsp" /> 
+				<jsp:include page="/app/charge_tab.jsp" /> 
 			</div>
 			<div id="tab2" class="tab_content">
-				<jsp:include page="exchange_tab.jsp" />
+				<jsp:include page="/app/exchange_tab.jsp" />
 			</div>
 			<div id="tab3" class="tab_content">
-				<jsp:include page="switch_points.jsp" />
+				<jsp:include page="/app/switch_points.jsp" />
 			</div>
 			<div id="tab4" class="tab_content">
 				<ul class="smk_accordion">
@@ -65,10 +67,10 @@
 				</ul>
 			</div>
 			<div id="tab5" class="tab_content">
-				<jsp:include page="point_tab.jsp" /> 
+				<jsp:include page="/app/point_tab.jsp" /> 
 			</div>
 			<div id="tab6" class="tab_content">
-				<jsp:include page="moneyuse_tab.jsp" /> 
+				<jsp:include page="/app/moneyuse_tab.jsp" /> 
 			</div>
 		</div>
 	</div>

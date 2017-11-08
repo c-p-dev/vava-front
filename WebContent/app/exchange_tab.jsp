@@ -124,7 +124,7 @@
 </div>
 <script>
 	$dataTable1 = $('#dataTable2').DataTable({
-		ajax : 'jsp/getWithdrawList.jsp',
+		ajax : '/app/jsp/getWithdrawList.jsp',
 		bProcessing: true,
 		sAjaxDataProp:"",
 		searching: false,
@@ -171,7 +171,8 @@
 		      	next: ">",
 		      	first: "<<",
 		      	last: ">>",
-		    }
+		    },
+		    emptyTable: "결과가 없습니다.",
 		},
 	    rowCallback : function(row , data , index) {
 	        
@@ -252,13 +253,13 @@
 	});
 
 	function submitWithdraw(data){
-		console.log(data);
+		// console.log(data);
 		$.ajax({
 			url:'jsp/withdrawprocess.jsp',
 			data:data,
 			type:'POST'
 		}).done(function(data){
-			console.log(data);
+			// console.log(data);
 			if(data){
 				$("#ExchangeSuccesModal").popup("show");
 			}
