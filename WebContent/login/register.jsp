@@ -309,7 +309,7 @@
 			var id = $(this).attr("id");
 			var valid = validator.element("#"+id);
 			$(this).qtip("hide");
-			console.log(valid);
+			// console.log(valid);
 			if(!valid && !valid){
 				$(this).focusin();
 			}			
@@ -324,7 +324,7 @@
 
 		$.validator.addMethod("checkReferrer", function(value, element) {
 	    	var x = $.ajax({
-		        url:'../login/jsp/referrence_checker.jsp',
+		        url:'/login/jsp/referrence_checker.jsp',
 		        async: false,
 		        type: 'post',
 		        data: {
@@ -343,7 +343,7 @@
 
 		$.validator.addMethod( "noHangul", function( value, element ) {
 			var hangul = new RegExp("[\u1100-\u11FF|\u3130-\u318F|\uA960-\uA97F|\uAC00-\uD7AF|\uD7B0-\uD7FF]"); 
-			console.log(hangul.test(value));
+			// console.log(hangul.test(value));
 			return   this.optional( element ) || !hangul.test(value);
 		}, "No Hangul allowed" );
 
@@ -362,7 +362,7 @@
                     alphanumeric:true,
 					minlength:4,
 					remote: {
-						url: "../login/jsp/userid_checker.jsp",
+						url: "/login/jsp/userid_checker.jsp",
 						async: false,
 				        type: "post",
 				       	data: {
@@ -391,7 +391,7 @@
 					minlength:10,
 					maxlength:13,
 			  		synchronousRemote: {
-		                url: "../login/jsp/verify_cellnum.jsp",
+		                url: "/login/jsp/verify_cellnum.jsp",
 				        type: "post",
 				        async: false,
 				       	data: {
@@ -409,7 +409,7 @@
 					required:true,
 					minlength:6,
 					remote: {
-						url: "../login/jsp/verify_cert_num.jsp",
+						url: "/login/jsp/verify_cert_num.jsp",
 				        type: "post",
 				       	data: {
 				          	cert: function (){
@@ -449,7 +449,7 @@
 					required:true,
 					minlength: 6,
 					remote: {
-						url: "../login/jsp/joincode_checker.jsp",
+						url: "/login/jsp/joincode_checker.jsp",
 				        type: "post",
 				        async: true,
 				       	data: {
@@ -614,7 +614,7 @@
 
 	function submitForm(data){
 		$.ajax({
-			url : '../login/jsp/register_process.jsp',
+			url : '/login/jsp/register_process.jsp',
 			data : data,
 			method: 'POST',
 		}).done(function(data){ 
@@ -637,7 +637,7 @@
 	
 		
 		$.ajax({
-			url : '../login/jsp/send_sms.jsp',
+			url : '/login/jsp/send_sms.jsp',
 			data : {userid:userid,cell_prefix:cell_prefix,cell:cell,rSnd:rSnd},
 			method: 'POST',
 		}).done(function(data){ 
@@ -678,7 +678,7 @@
 			var cp = $("#cell_prefix").val();
 			var cll = $("#cell").val();
 			$.ajax({
-				url : '../login/jsp/sms_log.jsp',
+				url : '/login/jsp/sms_log.jsp',
 				data : {cp:cp,cll:cll},
 				method: 'POST',
 			})

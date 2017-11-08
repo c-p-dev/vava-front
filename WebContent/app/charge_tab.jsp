@@ -194,7 +194,7 @@
 
 		$("#bankInfoBtn").on("click",function(){
 			$.ajax({
-				url:'jsp/getBankAccount.jsp',
+				url:'/app/jsp/getBankAccount.jsp',
 				data:{},
 				type:'POST'
 			}).done(function(data){
@@ -225,7 +225,7 @@
 		});
 
 		$dataTable1 = $('#dataTable1').DataTable({
-			ajax : 'jsp/getChargeList.jsp',
+			ajax : '/app/jsp/getChargeList.jsp',
 			bProcessing: true,
 			sAjaxDataProp:"",
 			searching: false,
@@ -273,7 +273,8 @@
 			      	next: ">",
 			      	first: "<<",
 			      	last: ">>",
-			    }
+			    },
+			    emptyTable: "결과가 없습니다.",
 			},
             rowCallback : function(row , data , index) {
                 
@@ -405,13 +406,13 @@
 	}
 
 	function submitCharge(data){
-		console.log(data);
+		// console.log(data);
 		$.ajax({
-			url:'jsp/setChargeApplication.jsp',
+			url:'/app/jsp/setChargeApplication.jsp',
 			data:data,
 			type:'POST'
 		}).done(function(data){
-			console.log(data);
+			// console.log(data);
 			if(data){
 				$("#chargeSuccesModal").popup("show");
 				

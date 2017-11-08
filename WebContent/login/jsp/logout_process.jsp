@@ -7,6 +7,6 @@
 <%
 	HttpSession user_session = request.getSession(true);	    
 	session.invalidate(); 
-	response.sendRedirect("../../index.jsp");
+	response.sendRedirect("/index.jsp");
 %>
 

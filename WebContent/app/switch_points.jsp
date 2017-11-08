@@ -153,13 +153,13 @@ $("#pointform").validate({
 });
 function submitPoint(data){
 	$.ajax({
-		url : 'jsp/switchPoints.jsp',
+		url : '/app/jsp/switchPoints.jsp',
 		data : data,
 		dataType: 'JSON',
 		method: 'POST',
 	}).done(function(data){ 
-		console.log(data);
-		console.log(data.money);
+		// console.log(data);
+		// console.log(data.money);
 		$('.money_dsp').text(number_format(data.money, 2));
 		$('.point_dsp').text(number_format(data.point, 2));
 		$('.pointavail').text(number_format(data.point, 2));

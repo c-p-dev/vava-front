@@ -240,9 +240,9 @@
 	        defaultDate: moment().toDate(),
 	        setDefaultDate : moment().toDate(),
 	        onSelect: function() {
-	        	console.log(this.getDate());
-	        	console.log(pickerTo);
-	        	console.log(pickerTo.minDate);
+	        	// console.log(this.getDate());
+	        	// console.log(pickerTo);
+	        	// console.log(pickerTo.minDate);
 	            pickerTo.setMinDate(this.getDate());
 	            pickerTo.setDate(this.getDate());
 	        },
@@ -263,7 +263,7 @@
 
 		$pointUseTable = $('#pointUseTable').DataTable({
 			ajax: {
-			    url: 'jsp/getPointUsed.jsp',
+			    url: '/app/jsp/getPointUsed.jsp',
 			    type: 'post',
 			    data: {
 			       	job : function(){
@@ -329,7 +329,8 @@
 			      	next: ">",
 			      	first: "<<",
 			      	last: ">>",
-			    }
+			    },
+			    emptyTable: "결과가 없습니다.",
 			},
             rowCallback : function(row , data , index) {
                 

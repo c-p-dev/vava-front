@@ -41,7 +41,7 @@
 /*Add class when scroll down*/
 var lgMsg = '<div class="bg_mask_pop_title">'
 	lgMsg += '	<span class="popup_logo"><img src="/images/popup_logo.png"></span>';
-	lgMsg += '	<span class="popup_close closeloginModalBtn"><img src="/images/popup_close.png"></span>';
+	lgMsg += '	<span class="popup_close closeloginModalBtn"><img src="/images/popup_close.png" class="closeloginModalBtn"></span>';
 	lgMsg += '</div>';
 	lgMsg += '<div class="bg_mask_pop2_in">';
 	lgMsg += '	<div class="pop_icon_center">';
@@ -88,7 +88,7 @@ $(window).scroll(function(event){
 	});
 
 	$(document).ready(function(){
-
+		
 		$('#loginModal').popup({
 	      	transition: 'all 0.3s',
 	      	scrolllock: true,
@@ -141,7 +141,7 @@ $(window).scroll(function(event){
 			$("#logoutModal").popup("show");
 		});
 
-		$(".closeloginModalBtn").on("click",function(e){
+		$("body").on("click",".closeloginModalBtn",function(e){
 			e.preventDefault();
 			$("#loginModal").popup("hide");
 			location.reload();
