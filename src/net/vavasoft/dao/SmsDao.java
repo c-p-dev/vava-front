@@ -127,7 +127,6 @@ public class SmsDao {
     	return code;
     }
 
-	
 	public HashMap sendTextInfoBIP(String userid,String cell, String authcode){
     	int groupId = 0;
     	boolean savelog = false;
@@ -245,8 +244,7 @@ public class SmsDao {
 		
 		return result;
 	}
-	
-	
+		
 	public boolean checkAuthCode(String cell_prefix, String cell, String authcode, boolean rSend) throws SQLException{
 		
 		Connection con = null;
@@ -466,7 +464,6 @@ public class SmsDao {
 		
 	}
 	
-	
 	public String checkAuthCodeByNickname(String nick,String cell_prefix, String cell,String authcode) throws SQLException{
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -501,7 +498,6 @@ public class SmsDao {
 			return null;	
 		}
 	}
-	
 	
 	public boolean checkAuthCodeByUseridNick(String userid, String nick,String cell_prefix, String cell,String authcode) throws SQLException{
 		Connection con = null;
@@ -588,7 +584,6 @@ public class SmsDao {
 		return result;
 	}
 
-	
 	public boolean updateResendSmsDeliveryLog(String mobile_no){
 		
 		boolean result = false;

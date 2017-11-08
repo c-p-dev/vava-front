@@ -63,8 +63,8 @@
 			var validator = $( "#login_modal_form" ).validate(); 
 			var vUser = validator.element("#userid-input");
 			var vPass = validator.element("#passwd-input");
-			console.log(!vUser);
-			console.log(!vPass);
+			// console.log(!vUser);
+			// console.log(!vPass);
 			if(!vUser && !vPass){
 				toastr.success("Please complete the form");
 			}else if (vUser && !vPass){
@@ -132,8 +132,8 @@
 
 	function submitLoginModalForm(data){
 		var fd3 = $("#fade_3").html();
-		console.log(lgSpin);
-		console.log(fd3);
+		// console.log(lgSpin);
+		// console.log(fd3);
 
 		$("#fd3_spn").html(lgSpin);
 		$("#fd3_spn").show();
@@ -141,12 +141,12 @@
 
 		
 		$.ajax({
-			url : '../login/jsp/login_process.jsp', //jsp				
+			url : '/login/jsp/login_process.jsp', //jsp				
 			data : data,
 			method: 'POST',
 		}).done(function(data){
 			var obj = JSON.parse(data);
-			console.log(obj);
+			// console.log(obj);
 			if(obj.result == 0 ){
 
 				toastr.success('Login Successful');

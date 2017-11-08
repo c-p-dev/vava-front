@@ -1,13 +1,9 @@
-<%@ include file="/inc/main_header.jsp"%>
 <%@ include file="/inc/session.jsp"%>
+<%@ include file="/inc/session_checker2.jsp"%>
+<%@ include file="/inc/main_header.jsp"%>
 <%@ include file="/inc/header.jsp"%>
-<script>
-	var logged = "<%=checkSession%>";
-	console.log(logged);
-	if(logged == "true"){
-		window.location = "../index.jsp";
-	}
-</script>
+
+
 <style>
 	#pwmodal .pop_text{
 		padding:0px!important;
@@ -429,7 +425,7 @@
 				var data = $(this).serializeJSON();
 				data['sd'] = "<%=SITEID%>";
 				$.ajax({
-					url : 'jsp/find_id.jsp',
+					url : '/jsp/find_id.jsp',
 					data : data,
 					method: 'POST',
 				}).done(function(data){
@@ -540,7 +536,7 @@
 				var frm = 'f1';
 
 				$.ajax({
-					url : 'jsp/send_code.jsp',
+					url : '/jsp/send_code.jsp',
 					data : {nk:nk,cp:cp,cll:cll,method:frm,rSend:f1rSnd},
 					method: 'POST',
 				}).done(function(data){
@@ -697,7 +693,7 @@
 	    		var data = $(this).serializeJSON();
 	    		data['sd'] = "<%=SITEID%>";
 	    		$.ajax({
-					url: 'jsp/find_id.jsp',
+					url: '/jsp/find_id.jsp',
 					data : data,
 					method: 'POST',
 				}).done(function(data){
@@ -805,7 +801,7 @@
 				var data = $(this).serializeJSON();
 				data['sd'] = "<%=SITEID%>";
 				$.ajax({
-					url : 'jsp/verify_pd.jsp',
+					url : '/jsp/verify_pd.jsp',
 					data : data,
 					method: 'POST',
 				}).done(function(data){
@@ -827,7 +823,7 @@
 					var fp1data = $("#fp1").serializeJSON();
 					$.extend(data,fp1data);
 					$.ajax({
-						url : 'jsp/update_pd.jsp',
+						url : '/jsp/update_pd.jsp',
 						data : data,
 						method: 'POST',
 					}).done(function(data){ 
@@ -844,7 +840,7 @@
 					var fp2data = $("#fp3").serializeJSON();
 					$.extend(data,fp2data);
 					$.ajax({
-						url : 'jsp/update_pd.jsp',
+						url : '/jsp/update_pd.jsp',
 						data : data,
 						method: 'POST',
 					}).done(function(data){ 
@@ -1029,7 +1025,7 @@
 				var data = $(this).serializeJSON();
 				data['sd'] = "<%=SITEID%>";
 				$.ajax({
-					url : 'jsp/verify_pd.jsp',
+					url : '/jsp/verify_pd.jsp',
 					data : data,
 					method: 'POST',
 				}).done(function(data){
@@ -1066,7 +1062,7 @@
 
 				
 				$.ajax({
-					url : 'jsp/send_code.jsp',
+					url : '/jsp/send_code.jsp',
 					data : {nk:nk,cp:cp,cll:cll,ud:ud,method:frm,rSend:f2rSnd},
 					method: 'POST',
 				}).done(function(data){

@@ -27,5 +27,6 @@
 	}
 	
 	DecimalFormat dfrmt	= new DecimalFormat("#,###,###,###,###.00");
+	DecimalFormat dfrmt2= new DecimalFormat("#,###,###,###,###");
 %>
 
