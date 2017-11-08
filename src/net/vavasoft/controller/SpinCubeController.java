@@ -40,7 +40,6 @@ public class SpinCubeController {
 	public static final String SC_TOKEN_URL		= "https://sts.k2net.io/connect/token";
 	public static final String SC_AGENT_UNAME	= "testagent212555";
 	public static final String SC_AGENT_KEY		= "a4e94b08753842fdbbcd9a2aedcc80";
-	
 	public static final String SC_BASE_URL		= "https://api-vavasoft.k2net.io/api/v1/";
 	
 	//-----------------------------------------------------
@@ -228,6 +227,7 @@ public class SpinCubeController {
 		String post_param		= "";
 		String srv_resp			= "";
 		String idem_key			= this.player_id.concat(str_lib.getSaltString(9));
+		boolean allow_trans		= false;
 		
 		/*	Convert parameters to JSON	*/
 		if (null != amount) {
@@ -241,9 +241,25 @@ public class SpinCubeController {
 		post_param	= post_param.concat("productId=SVS");
 		
 		/*--------------------------------------------------------------------
+        |	Check if transaction is allowed
+        |-------------------------------------------------------------------*/
+		if (("deposit".equals(type))
+		&& (0 < amount)) {
+			allow_trans = true;
+		}
+		else if ("withdraw".equals(type)) {
+			allow_trans	= true;
+		}
+		else {
+			allow_trans	= false;
+		}
+		
+		/*--------------------------------------------------------------------
         |	Execute HTTP POST Request to TEG
         |-------------------------------------------------------------------*/
-		srv_resp 	= this.postToSc(url, post_param, "application/x-www-form-urlencoded");
+		if (true == allow_trans) {
+			srv_resp 	= this.postToSc(url, post_param, "application/x-www-form-urlencoded");
+		}
 		
 		return srv_resp;
 	}

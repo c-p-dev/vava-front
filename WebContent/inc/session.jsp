@@ -13,8 +13,11 @@
 	int UBAL = 0;
 	int UPOINT = 0;
 	
-	if(session.getAttribute("currentSessionUser") != null){		
-		UserBean bean =  (UserBean) session.getAttribute("currentSessionUser");	
+	if(session.getAttribute("currentSessionUser") != null){
+		UserDao user_db 	=  new UserDao();
+		UserBean sess_data 	=  (UserBean) session.getAttribute("currentSessionUser");
+		UserBean bean 		=  user_db.getUserByUserId(sess_data.getUserid());
+		
 		checkSession = true;
 		SITEID = String.valueOf(bean.getSiteid());
 		UID = bean.getUserid();		
@@ -26,6 +29,6 @@
 		//out.print(bean.getNick());  
 	}
 	
-	DecimalFormat dfrmt	= new DecimalFormat("#,###,###,###,###.00");
+	DecimalFormat dfrmt	= new DecimalFormat("#,###,###,###,###");
 %>
 

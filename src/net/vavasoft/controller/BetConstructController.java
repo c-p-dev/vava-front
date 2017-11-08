@@ -6,6 +6,8 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 
 import javax.crypto.SecretKey;
@@ -715,6 +717,8 @@ public class BetConstructController {
 	public String refreshToken(String json_input) throws NoSuchAlgorithmException, UnsupportedEncodingException
 	{
 		Gson gson					= new Gson();
+		SimpleDateFormat dfrmt 		= new SimpleDateFormat("yyyyMMddHHmmss");
+		Calendar cal_now			= Calendar.getInstance();
 		StringManipulator str_lib	= new StringManipulator();
 		BetConDao betcon_db			= new BetConDao();
 		
@@ -733,7 +737,7 @@ public class BetConstructController {
         |-------------------------------------------------------------------*/
 		pubkey		= json_data.getPublicKey();
 		json_data.setPublicKey(null);
-		json_body	= gson.toJson(json_data, GetBalance.class);
+		json_body	= gson.toJson(json_data, RefreshToken.class);
 		json_data.setPublicKey(pubkey);
 		
 		/*--------------------------------------------------------------------
@@ -750,11 +754,11 @@ public class BetConstructController {
 			if (null != bc_user.getUsername()) {
 				uname_idx	= bc_user.getUsername().indexOf("_") + 1;
 				vava_uname	= bc_user.getUsername().substring(uname_idx);
-				System.out.println(vava_uname);
+				
 				/*--------------------------------------------------------------------
 		        |	Create a random character token
 		        |-------------------------------------------------------------------*/
-				token	= bc_user.getUsername().concat(str_lib.getSaltString(SESS_SALT_LEN));
+				token	= Integer.toString(bc_user.getSite_id()).concat("_").concat(bc_user.getUsername()).concat("T").concat(dfrmt.format(cal_now.getTime()));
 				
 				/*--------------------------------------------------------------------
 		        |	Update Database with generated Token

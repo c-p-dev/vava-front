@@ -124,7 +124,12 @@ public class TotalEgameController {
 		/*--------------------------------------------------------------------
         |	Execute HTTP POST Request to TEG
         |-------------------------------------------------------------------*/
-		srv_resp 	= this.postToTeg(url, json_param);
+		if (0 < money) {
+			srv_resp 	= this.postToTeg(url, json_param);
+		}
+		else {
+			srv_resp	= "{Status:{ErrorCode:0}}";
+		}
 		
 		return srv_resp;
 	}
@@ -323,7 +328,7 @@ public class TotalEgameController {
 			/*	Deposit all money from VAVA to MG	*/
 			srv_resp		= this.deposit(mg_username, money);
 			deposit_data	= gson.fromJson(srv_resp, MgDepositBean.class);
-			System.out.println(srv_resp);
+			
 			if (0 == deposit_data.getStatus().getErrorCode()) {
 				/*	Update database to empty VAVA money of user	*/
 				user_db.setUserMoney(username, 0);

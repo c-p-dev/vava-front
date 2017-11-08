@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	$('.mtabs').on('click', '.liclass', function() {
-		console.log('shitface');
+
 		var cntr	= $(this).find('a').attr('href');
 		var btn1	= $(cntr).find('.tablinks:first');
 		
@@ -8,7 +8,6 @@ $(document).ready(function() {
 	});
 	
 	$('.tab_container').on('click', '.tablinks', function(event) {
-		console.log(event);
 		openOption(event, $(this).data('rules'));
 	});
 	

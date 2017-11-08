@@ -161,7 +161,7 @@
 				$('.hdr-money-row').hide();
 				$('#fade_9').popup('show');
 				
-				$.get("TegServlet?method=1&gm_provdr="+gm_provdr+"&lnk_dsp="+lnk_dsp, function(srv_resp) {
+				$.get("/TegServlet?method=1&gm_provdr="+gm_provdr+"&lnk_dsp="+lnk_dsp, function(srv_resp) {
 					
 					if ("" != srv_resp) {
 						$('#game-pop-frame').attr('src', srv_resp);
