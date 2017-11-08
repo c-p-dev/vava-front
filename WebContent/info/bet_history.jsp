@@ -21,8 +21,12 @@ Gson gson = new Gson();
 Type type = new TypeToken<List<BettingListBean>>() {}.getType();
 Type type2 = new TypeToken<List<BettingSName>>() {}.getType();
 
- String blj = gson.toJson(bl, type);      
- String bsj = gson.toJson(bs, type);   
+
+
+String blj = gson.toJson(bl, type);      
+
+String bsj = gson.toJson(bs, type);   
+
  
 %>
 
@@ -41,7 +45,7 @@ Type type2 = new TypeToken<List<BettingSName>>() {}.getType();
 			
 			$scope.table = table;		
 			
-			console.log($scope.BSJ);
+			
 			
 			$scope.updateSport = function(item) {
 				console.log(item);
@@ -232,7 +236,7 @@ Type type2 = new TypeToken<List<BettingSName>>() {}.getType();
 		display: none; 
 	}
 </style>
-	<ul class="smk_accordion">
+	<ul class="smk_accordion" ng-app="Vava" ng-controller="mc">
 		<li>
 			<div class="acc_head"><h3>실시간 / 스포츠 베팅내역 [{{BLJ.length}}]</h3></div>
 			<div class="acc_content">
@@ -259,7 +263,7 @@ Type type2 = new TypeToken<List<BettingSName>>() {}.getType();
 								</td> -->
 								<td>
 									<input class="input_style04" id="bd1" placeholder="기간" value="2017-00-00 ~ 2017-00-00" readonly>
-									<span class="showdp1"><img src="../images/car_icon.jpg"></span>
+									<span class="showdp1"><img src="/images/car_icon.jpg"></span>
 									<div id="bet-depth1" style="display:none; width:; position:absolute; z-index:100000000; left: 230px; top:130px;">
 										<table border="0" cellspacing="0" cellpadding="0" class="car_table">
 											<tr>
@@ -274,7 +278,7 @@ Type type2 = new TypeToken<List<BettingSName>>() {}.getType();
 										</table>
 										<div style="float:right; padding:7px 2px 7px 10px;">
 											<span id="closeMoneyPikaday" class="bclose1" >
-												<img src="../images/car_close.png" class="bclose1">
+												<img src="/images/car_close.png" class="bclose1">
 											</span>
 										</div>
 									</div>
@@ -520,7 +524,7 @@ Type type2 = new TypeToken<List<BettingSName>>() {}.getType();
 							<tr>
 								<td>
 									<input class="input_style04" id="bd2" placeholder="기간" value="2017-00-00 ~ 2017-00-00" readonly>
-									<span class="showdp2"><img src="../images/car_icon.jpg"></span>
+									<span class="showdp2"><img src="/images/car_icon.jpg"></span>
 									<div id="bet-depth2" style="display:none; width:; position:absolute; z-index:100000000; left: 230px; top:889px;">
 										<table border="0" cellspacing="0" cellpadding="0" class="car_table">
 											<tr>
@@ -535,7 +539,7 @@ Type type2 = new TypeToken<List<BettingSName>>() {}.getType();
 										</table>
 										<div style="float:right; padding:7px 2px 7px 10px;">
 											<span id="closeMoneyPikaday" class="bclose2" >
-												<img src="../images/car_close.png" class="bclose2">
+												<img src="/images/car_close.png" class="bclose2">
 											</span>
 										</div>
 									</div>
@@ -732,7 +736,7 @@ Type type2 = new TypeToken<List<BettingSName>>() {}.getType();
 							<tr>
 								<td>
 									<input class="input_style04" id="bd3" placeholder="기간" value="2017-00-00 ~ 2017-00-00" readonly>
-									<span class="showdp3"><img src="../images/car_icon.jpg"></span>
+									<span class="showdp3"><img src="/images/car_icon.jpg"></span>
 									<div id="bet-depth3" style="display:none; width:; position:absolute; z-index:100000000; left: 230px; top:1646px;">
 										<table border="0" cellspacing="0" cellpadding="0" class="car_table">
 											<tr>
@@ -747,7 +751,7 @@ Type type2 = new TypeToken<List<BettingSName>>() {}.getType();
 										</table>
 										<div style="float:right; padding:7px 2px 7px 10px;">
 											<span id="closeMoneyPikaday" class="bclose3" >
-												<img src="../images/car_close.png" class="bclose3">
+												<img src="/images/car_close.png" class="bclose3">
 											</span>
 										</div>
 									</div>
@@ -921,7 +925,7 @@ Type type2 = new TypeToken<List<BettingSName>>() {}.getType();
 							<tr>
 								<td>
 									<input class="input_style04" id="bd4" placeholder="기간" value="2017-00-00 ~ 2017-00-00" readonly>
-									<span class="showdp4"><img src="../images/car_icon.jpg"></span>
+									<span class="showdp4"><img src="/images/car_icon.jpg"></span>
 									<div id="bet-depth4" style="display:none; width:; position:absolute; z-index:100000000; left: 230px; top:2405px;">
 										<table border="0" cellspacing="0" cellpadding="0" class="car_table">
 											<tr>
@@ -936,7 +940,7 @@ Type type2 = new TypeToken<List<BettingSName>>() {}.getType();
 										</table>
 										<div style="float:right; padding:7px 2px 7px 10px;">
 											<span id="closeMoneyPikaday" class="bclose4" >
-												<img src="../images/car_close.png" class="bclose4">
+												<img src="/images/car_close.png" class="bclose4">
 											</span>
 										</div>
 									</div>

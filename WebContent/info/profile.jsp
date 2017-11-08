@@ -244,19 +244,19 @@
 <!-- update profile success modal -->
 <div id="updateProfileModal" class="bg_mask_pop2">
 	<div class="bg_mask_pop_title">
-		<span class="popup_logo"><img src="images/popup_logo.png"></span>
-		<span class="popup_close fade_2_close"><img src="images/popup_close.png"></span>
+		<span class="popup_logo"><img src="/images/popup_logo.png"></span>
+		<span class="popup_close fade_2_close"><img src="/images/popup_close.png"></span>
 	</div>
 	<div class="bg_mask_pop2_in">
 		<div class="pop_icon_center">
-			<img src="images/check_icon.png">
+			<img src="/images/check_icon.png">
 		</div>
 		<div class="pop_text">
 			Update Profile Success
 		</div>
 		<div class="btn_wrap">
-			<a href="${baseUrl}app/sub04.jsp" class="close-updateProfileModal"><span class="btn3c ">충전하기</span></a> 
-			<a href="${baeUrl}" class="close-updateProfileModal"><span class="btn3">확인</span></a>
+			<a href="/app/sub04.jsp" class="close-updateProfileModal"><span class="btn3c ">충전하기</span></a> 
+			<a href="/" class="close-updateProfileModal"><span class="btn3">확인</span></a>
 		</div>
 	</div>
 </div>
@@ -264,19 +264,19 @@
 <!-- update modal success modal -->
 <div id="updatePasswordModal" class="bg_mask_pop2">
 	<div class="bg_mask_pop_title">
-		<span class="popup_logo"><img src="images/popup_logo.png"></span>
-		<span class="popup_close fade_2_close"><img src="images/popup_close.png"></span>
+		<span class="popup_logo"><img src="/images/popup_logo.png"></span>
+		<span class="popup_close fade_2_close"><img src="/images/popup_close.png"></span>
 	</div>
 	<div class="bg_mask_pop2_in">
 		<div class="pop_icon_center">
-			<img src="images/check_icon.png">
+			<img src="/images/check_icon.png">
 		</div>
 		<div class="pop_text">
 			Update Password Success
 		</div>
 		<div class="btn_wrap">
-			<a href="${baseUrl}app/sub04.jsp" class="close-updatePasswordModal"><span class="btn3c ">충전하기</span></a> 
-			<a href="${baeUrl}" class="close-updatePasswordModal"><span class="btn3">확인</span></a>
+			<a href="/app/sub04.jsp" class="close-updatePasswordModal"><span class="btn3c ">충전하기</span></a> 
+			<a href="/" class="close-updatePasswordModal"><span class="btn3">확인</span></a>
 		</div>
 	</div>
 </div>
