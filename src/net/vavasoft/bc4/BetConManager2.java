@@ -1,4 +1,4 @@
-package net.vavasoft.dao;
+package net.vavasoft.bc4;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;

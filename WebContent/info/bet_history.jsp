@@ -6,7 +6,7 @@
 <%@page import="java.lang.reflect.Type"%>
 <%@page import="com.google.gson.reflect.TypeToken"%>
 
-<jsp:useBean id="bm" class="net.vavasoft.dao.BetConManager2" />
+<jsp:useBean id="bm" class="net.vavasoft.bc4.BetConManager2" />
 
 	
 <%
@@ -244,7 +244,7 @@ String bsj = gson.toJson(bs, type);
 					<div class="bet_search_wrap">
 						<table cellspacing="0" cellpadding="0" class="my_search_select">
 							<tr>
-								<!-- <td>
+								<td>
 									<select ng-model="selectedItem" ng-change="updateSport(selectedItem)" clas">
 										<option value=""> 종목</option>	
 										<option value=""> 전체</option>	
@@ -252,7 +252,7 @@ String bsj = gson.toJson(bs, type);
 									</select>
 								</td>
 								
-								<td>
+								<!-- <td>
 									<select clas">
 										<option value="-1">기간</option>	
 										<option value="-1">전체</option>	
@@ -342,26 +342,26 @@ String bsj = gson.toJson(bs, type);
 							%>
 									
 									<td class="beting_btn" style="border-right:solid 1px #2e3032;" onClick="selBat('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>"><span class="font_002">적중</span></td>
-									<td class="acc_list_price1"  style="border-right:solid 1px #2e3032;" onClick="selBat('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>"><span class="font_002"><%=dfrmt2.format(Integer.parseInt(blb.getBmoney()))%></span> 원</td>
+									<td class="acc_list_price1"  style="border-right:solid 1px #2e3032;" onClick="selBat('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>"><span class="font_002"><%=dfrmt.format(Integer.parseInt(blb.getBmoney()))%></span> 원</td>
 									<td class="acc_list_dividend"  style="border-right:solid 1px #2e3032;" onClick="selBat('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>"><span class="font_002"><%=blb.getErate()%></span> 배</td>
-									<td class="acc_list_price2" style="border-right:solid 1px #2e3032;" onClick="selBat('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>"><span class="font_002"><%=dfrmt2.format(Integer.parseInt(blb.getEmoney()))%></span> 원</td>
+									<td class="acc_list_price2" style="border-right:solid 1px #2e3032;" onClick="selBat('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>"><span class="font_002"><%=dfrmt.format(Integer.parseInt(blb.getEmoney()))%></span> 원</td>
 							
 							<%
 									} else if(blb.getBresult().equals("NO")){
 							%>
 									<td class="beting_btn" style="border-right:solid 1px #2e3032;" onClick="selBat('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>"><span class="font_004">미적중</span></td>
-									<td class="acc_list_price1"  style="border-right:solid 1px #2e3032;" onClick="selBat('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>"><span class="font_004"><%=dfrmt2.format(Integer.parseInt(blb.getBmoney()))%></span> 원</td>
+									<td class="acc_list_price1"  style="border-right:solid 1px #2e3032;" onClick="selBat('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>"><span class="font_004"><%=dfrmt.format(Integer.parseInt(blb.getBmoney()))%></span> 원</td>
 									<td class="acc_list_dividend"  style="border-right:solid 1px #2e3032;" onClick="selBat('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>"><span class="font_004"><%=blb.getErate()%></span> 배</td>
-									<td class="acc_list_price2" style="border-right:solid 1px #2e3032;" onClick="selBat('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>"><span class="font_004"><%=dfrmt2.format(Integer.parseInt(blb.getEmoney()))%></span> 원</td>
+									<td class="acc_list_price2" style="border-right:solid 1px #2e3032;" onClick="selBat('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>"><span class="font_004"><%=dfrmt.format(Integer.parseInt(blb.getEmoney()))%></span> 원</td>
 							
 							<%
 									} else if(blb.getBresult().equals("CANCEL")){
 							%>
 									
 									<td class="beting_btn" style="border-right:solid 1px #2e3032;" onClick="selBat('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>">취소</td>
-									<td class="acc_list_price1"  style="border-right:solid 1px #2e3032;" onClick="selBat('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>"><%=dfrmt2.format(Integer.parseInt(blb.getBmoney()))%> 원</td>
+									<td class="acc_list_price1"  style="border-right:solid 1px #2e3032;" onClick="selBat('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>"><%=dfrmt.format(Integer.parseInt(blb.getBmoney()))%> 원</td>
 									<td class="acc_list_dividend"  style="border-right:solid 1px #2e3032;" onClick="selBat('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>"><%=blb.getErate()%> 배</td>
-									<td class="acc_list_price2" style="border-right:solid 1px #2e3032;" onClick="selBat('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>"><%=dfrmt2.format(Integer.parseInt(blb.getEmoney()))%> 원</td>
+									<td class="acc_list_price2" style="border-right:solid 1px #2e3032;" onClick="selBat('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>"><%=dfrmt.format(Integer.parseInt(blb.getEmoney()))%> 원</td>
 							<%
 							}
 							%>	
@@ -583,21 +583,21 @@ String bsj = gson.toJson(bs, type);
 									if(blb_ag.getJob().equals("WIN")){
 							%>
 									<td class="acc_list_time" style="border-right:solid 1px #2e3032;"><span class="font_002">승<span></td>
-									<td style="text-align:right; border-right:solid 1px #2e3032;"><span class="font_002"><%=dfrmt2.format(Integer.parseInt(blb_ag.getBmoney()))%></span> 원</td>
-									<td class="acc_list_price1" style="border-right:solid 1px #2e3032;"><span class="font_002"><%=dfrmt2.format(Integer.parseInt(blb_ag.getRmoney()))%></span> 원</td>
+									<td style="text-align:right; border-right:solid 1px #2e3032;"><span class="font_002"><%=dfrmt.format(Integer.parseInt(blb_ag.getBmoney()))%></span> 원</td>
+									<td class="acc_list_price1" style="border-right:solid 1px #2e3032;"><span class="font_002"><%=dfrmt.format(Integer.parseInt(blb_ag.getRmoney()))%></span> 원</td>
 							<%		
 									} else if(blb_ag.getJob().equals("LOSE")){ 
 							%>
 									<td class="acc_list_time" style="border-right:solid 1px #2e3032;"><span class="font_004">패<span></td>
-									<td class="acc_list_price1_1" style="border-right:solid 1px #2e3032;"><span class="font_004"><%=dfrmt2.format(Integer.parseInt(blb_ag.getBmoney()))%></span> 원</td>
-									<td class="acc_list_price1_1" style="border-right:solid 1px #2e3032;"><span class="font_004"><%=dfrmt2.format(Integer.parseInt(blb_ag.getRmoney()))%></span> 원</td>
+									<td class="acc_list_price1_1" style="border-right:solid 1px #2e3032;"><span class="font_004"><%=dfrmt.format(Integer.parseInt(blb_ag.getBmoney()))%></span> 원</td>
+									<td class="acc_list_price1_1" style="border-right:solid 1px #2e3032;"><span class="font_004"><%=dfrmt.format(Integer.parseInt(blb_ag.getRmoney()))%></span> 원</td>
 							
 							<%		
 									} else if(blb_ag.getJob().equals("BET")){ 
 							%>
 									<td class="acc_list_time" style="border-right:solid 1px #2e3032;"><span class="font_004">배팅<span></td>
-									<td class="acc_list_price1" style="border-right:solid 1px #2e3032;"><span class="font_004"><%=dfrmt2.format(Integer.parseInt(blb_ag.getBmoney()))%></span> 원</td>
-									<td class="acc_list_price1" style="border-right:solid 1px #2e3032;"><span class="font_004"><%=dfrmt2.format(Integer.parseInt(blb_ag.getRmoney()))%></span> 원</td>
+									<td class="acc_list_price1" style="border-right:solid 1px #2e3032;"><span class="font_004"><%=dfrmt.format(Integer.parseInt(blb_ag.getBmoney()))%></span> 원</td>
+									<td class="acc_list_price1" style="border-right:solid 1px #2e3032;"><span class="font_004"><%=dfrmt.format(Integer.parseInt(blb_ag.getRmoney()))%></span> 원</td>
 							<%		
 									}
 							%>				
@@ -789,7 +789,7 @@ String bsj = gson.toJson(bs, type);
 									<td class="acc_list_num" width="7%"><%=blb_sc.getBgid()%></td>
 									<td class="acc_list_time"  width="7%"><%=blb_sc.getRegdt()%></td>
 									<td class="acc_list_time"  width="21%"><%=blb_sc.getJob()%></td>
-									<td class="acc_list_price1"  width="16%"><span class="font_002"><%=dfrmt2.format(Integer.parseInt(blb_sc.getBmoney()))%></span> 원</td>
+									<td class="acc_list_price1"  width="16%"><span class="font_002"><%=dfrmt.format(Integer.parseInt(blb_sc.getBmoney()))%></span> 원</td>
 								</tr>
 											
 						<%
@@ -978,7 +978,7 @@ String bsj = gson.toJson(bs, type);
 									<td class="acc_list_num" width="7%" ><%=blb_mg.getBgid()%></td>
 									<td class="acc_list_time"  width="7%" ><%=blb_mg.getRegdt()%></td>
 									<td class="acc_list_time"  width="21%" ><%=blb_mg.getJob()%></td>
-									<td class="acc_list_price1"  width="16%" ><span class="font_002"><%=dfrmt2.format(Integer.parseInt(blb_mg.getBmoney()))%></span> 원</td>
+									<td class="acc_list_price1"  width="16%" ><span class="font_002"><%=dfrmt.format(Integer.parseInt(blb_mg.getBmoney()))%></span> 원</td>
 								</tr>
 											
 						<%

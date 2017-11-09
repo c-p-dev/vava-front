@@ -8,7 +8,7 @@
 <%@page import="com.google.gson.reflect.TypeToken"%>
 
 
-<jsp:useBean id="bm" class="net.vavasoft.dao.BetConManager2" />
+<jsp:useBean id="bm" class="net.vavasoft.bc4.BetConManager2" />
 	
 <%
 String bid="";

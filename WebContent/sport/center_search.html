@@ -1,0 +1,65 @@
+﻿
+<div id="spin_cmarket" class="sk-circle">
+  <div class="sk-circle1 sk-child"></div>
+  <div class="sk-circle2 sk-child"></div>
+  <div class="sk-circle3 sk-child"></div>
+  <div class="sk-circle4 sk-child"></div>
+  <div class="sk-circle5 sk-child"></div>
+  <div class="sk-circle6 sk-child"></div>
+  <div class="sk-circle7 sk-child"></div>
+  <div class="sk-circle8 sk-child"></div>
+  <div class="sk-circle9 sk-child"></div>
+  <div class="sk-circle10 sk-child"></div>
+  <div class="sk-circle11 sk-child"></div>
+  <div class="sk-circle12 sk-child"></div>
+</div>
+
+<div ng-init="cmarket_load()" style="display:none;" id="cmarket" class="animate-bottom">
+	{{MK}}
+	<div ng-include="topLive">				
+	</div>
+
+			<div class="sports_dd_p">
+				
+				<v-accordion class="vAccordion--default" multiple>
+    			<v-pane expanded="true" ng-if="tabMkId == value[0].Id || tabMkId == 0" ng-repeat="(key,value) in MK|filter:{Sus:false,Vis:true} | orderBy:['MTyId','Id','Sq'] | groupBy:'MTyId' ">
+					<v-pane-header><div class="accordion-header_1B_1" style="margin-top:3px;">{{value[0].Nm}}({{value.length}})</div></v-pane-header>
+						<v-pane-content expanded="true" ng-show="true">	
+							
+						<!--	<v-pane expanded="true" ng-repeat="sel2 in (MK|filter:{MarketTypeId:value[0].MarketTypeId})"> -->
+						<v-pane expanded="true" ng-show="true" ng-repeat="sel2 in value | orderBy:'Id' ">								
+								<v-pane-header>
+									<div>	
+							 		<ul class="nav-tabs">              					 
+        					  <li class="soprts_in_acc_2" ng-click="addBet(sel.Id,sel.MkId,value[0].Nm,sel.Nm,(LS|filter:{MId:tabMId})[0].HT,(LS|filter:{MId:tabMId})[0].AT,sel.P,sel.P)" 
+        					  	 ng-style="{'width' : {{getWidth(value[0].Se.length)}}+'%'}" ng-repeat="sel in sel2.Se | orderBy:'MkId' "> 	
+											<div>{{sel.Nm}}
+							  				<div ng-show="sel.BP<sel.P" class="sports_v_r_1" ><i class="fa fa-fw fa-chevron-up" style="color:green"></i><b ng-bind="sel.P"></b> <i style="color:grey;font-size:10px;"> (<del>{{sel.BP}}</del>)</i> </div>
+												<div ng-show="sel.BP>sel.P" class="sports_v_r_1" ><i class="fa fa-fw fa-chevron-down" style="color:red"></i><b ng-bind="sel.P">{{sel.Price}}</b> <i style="color:grey;font-size:10px;"> (<del>{{sel.BP}}</del>)</i> </div>
+												<div ng-show="sel.BP==sel.P" class="sports_v_r_1"><b>{{sel.P}}<i style="color:grey;font-size:10px;"> (<del>{{sel.BP}}</del>)</i></b></div>
+											</div>				
+										</li>																										
+									</ul>
+									</div>	
+										
+								</v-pane-header>	
+								 <v-pane-content>
+								 	
+								 </v-pane-content>
+							</v-pane>	
+										
+						</v-pane-content>								
+					</v-pane>							
+				</v-accordion>
+
+			</div>
+					
+   											
+
+
+</div>
+		
+
+
+
+				

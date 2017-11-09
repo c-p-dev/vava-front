@@ -9,7 +9,7 @@
 			<li><a href="#tab1">충전신청</a></li>
 			<li><a href="#tab2">환전신청</a></li>
 			<li><a href="#tab3">포인트전환</a></li>
-			<li><a href="#tab4">머니전환</a></li>
+			<!-- <li><a href="#tab4">머니전환</a></li> -->
 			<li><a href="#tab5" class="dt-point-tab">포인트 사용 내역</a></li>
 			<li><a href="#tab6" class="dt-money-use">머니 사용 내역</a></li>
 		</ul>
@@ -23,7 +23,7 @@
 			<div id="tab3" class="tab_content">
 				<jsp:include page="/app/switch_points.jsp" />
 			</div>
-			<div id="tab4" class="tab_content">
+			<!-- <div id="tab4" class="tab_content">
 				<ul class="smk_accordion">
 					<li>
 						<div class="accordion_title"><h3>머니전환</h3></div>
@@ -65,7 +65,7 @@
 						</div>
 					</li>
 				</ul>
-			</div>
+			</div> -->
 			<div id="tab5" class="tab_content">
 				<jsp:include page="/app/point_tab.jsp" /> 
 			</div>

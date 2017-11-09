@@ -1,0 +1,194 @@
+﻿
+<div id="spin_llive" class="sk-circle">
+  <div class="sk-circle1 sk-child"></div>
+  <div class="sk-circle2 sk-child"></div>
+  <div class="sk-circle3 sk-child"></div>
+  <div class="sk-circle4 sk-child"></div>
+  <div class="sk-circle5 sk-child"></div>
+  <div class="sk-circle6 sk-child"></div>
+  <div class="sk-circle7 sk-child"></div>
+  <div class="sk-circle8 sk-child"></div>
+  <div class="sk-circle9 sk-child"></div>
+  <div class="sk-circle10 sk-child"></div>
+  <div class="sk-circle11 sk-child"></div>
+  <div class="sk-circle12 sk-child"></div>
+</div>
+
+<div ng-init="llive_load()" style="display:none;" id="myDiv" class="w3-animate-opacity">
+
+	<div class="left_search_wrap">	
+		
+		<div class="left_search">
+			<input   id="pop" class="input_style05" ng-model="s" placeholder=" 리그 이름">
+				<span  id="popo" class="popover-wrapper">
+					<a href="#" data-role="popover" data-target="example-popover">
+						<img src="/images/search_icon.jpg">
+					</a>
+									
+					<div class="popover-modal example-popover">
+					
+						<div class="popover-body">
+							<div class="example-body-in">
+						
+								<table ng-show= "(PM|filter:{CN:s}).length == 0" class="example_table_1" cellpadding="0" cellspacing="0">
+											<tr>
+												<td width="100%" align="center" style="padding:15px 0 15px 0"> 검색 결과가 없습니다.
+												</td>
+											</tr>
+								</table>
+										
+								<div  ng-repeat="(key,value) in PM|filter:{CN:s} |orderBy:['SId','RId','CId'] | groupBy:'CN'">
+												
+									<table class="example_table_1" cellpadding="0" cellspacing="0" ng-click="getMaketbyCid(lm[1].l,lm[1].c,value[0].CId)">
+										<tr>
+											<td align="left"  style="padding:8px 7px 0 10px"> <a href="#"><img width="15" src="/images/sport_s/{{value[0].SId}}.png"> &nbsp; {{value[0].SN}}  </a>
+											</td>
+										</tr>
+
+										<tr>
+											<td align="left" style="padding:8px 0 7px 10px"><a href="#" ng-click="getMaketbyCid(lm[1].l,lm[1].c,value[0].CId)">{{value[0].CN.substring(0,25)}}</a></td>
+										</tr>
+									</table>	
+							
+								</div>
+							</div>
+						</div>
+					
+					</div>
+				</span>
+			<script>
+				$('[data-role="popover"]').popover();
+
+				$('#pop').on('keydown',function(e){
+		    	if(e.which==13){
+		    		document.getElementById("popo").setAttribute('class', 'popover-wrapper open'); //.popover(show);popover-wrapper open
+		   	  }else{
+		   	  	document.getElementById("popo").setAttribute('class', 'popover-wrapper'); //.popover(show);popover-wrapper open
+		    	}
+				});
+			</script>
+		</div>
+		
+	</div>
+
+	<div class="left_tab_wrap">
+		<a href="#" ng-click="goLiveMatch(lm[0].l,lm[0].c)"><div class="left_tab_1" style="margin:0 2px 0 0">
+			<div class="left_tab_l_1" ng-bind="lm[0].t"></div><div class="menu_count_on"  ng-bind="LMc.length"></div>
+		</div></a>
+		<div class="left_tab_on_1">
+			<div class="left_tab_l_1"	ng-bind="lm[1].t"></div><div class="menu_count_on"  ng-bind="PM.length"></div>
+		</div>
+	</div>
+	<!--
+	<div class="bookmark_wrap">
+		<img src="/images/icon_bookmark_on.png"> &nbsp;&nbsp;<span class="font_002">즐겨찾기</span>
+	</div>
+	-->
+	
+	<div class="left_menu_wrap">
+	<v-accordion class="vAccordion--default" multiple>	
+		<v-pane expanded="false">  			          	              
+	  	<v-pane-header>	    		
+					<table class="accordion-header" ng-class="{'open' : $pane.isExpanded() }">
+						<tr>
+							<td width="100%">
+								<img style="vertical-align:middle;width:15px;" src="/images/icon_bookmark_on.png">&nbsp;<span class="font_002">즐겨찾기</span>
+							</td>
+							<td style="float:right; border-radius:10px;background:#1b1d1e;margin:7px 7px 0 0; line-height:20px; padding: 0 7px 0 7px;" ><div>{{favM.length}}</div></td>
+						</tr>
+						</table>
+							</v-pane-header>				
+									<v-pane-content expanded="true" ng-show="true">			
+										<v-pane  ng-repeat="fm in favM" expanded="true" >  
+							        <v-pane-header ng-show="false"></v-pane-header>   
+							        	<v-pane-content	expanded="true" ng-show="true">				
+
+													<div ng-if="(LMc|filter:{MId:fm.Id}).length>0">
+														<table class="left_menu_in_2" ng-click="goMatchMarketfromPre('center_market.html',fm.SId,fm.Id)">					
+
+															<tr>
+															<td class="left_menu_in_2_l_1"> <img width="15" src="/images/sport_s/{{fm.SId}}.png"/>&nbsp;{{fm.SN}} 
+																<a href="#"  class="left_menu_in_1_r_1" ng-click="us(fm.Id)"><i id="{{fm.Id}}" class="fa fa-star"></i></a>
+															</td>																	
+															</tr>				
+															<tr>
+															<td class="left_menu_in_2_l_1"><a href="#" ng-click="goMatchMarket('center_favorite.html',fm.SId,fm.Id)">{{fm.CN.substring(0,25)}}</a></td>
+															</tr>						
+															<tr>								
+															<td colspan="2" class="left_menu_in_2_l_1"><a href="#" ng-click="goMatchMarket('center_favorite.html',fm.SId,fm.Id)"><span class="font_002">{{fm.HT}}</span>&nbsp;<span class="5c7785">vs</span>&nbsp;<span class="font_002">{{fm.AT}}</span></a></td>
+															</tr>									
+															<tr>
+															<td colspan="2" class="left_menu_in_2_l_1"><a href="#" ng-click="goMatchMarket('center_favorite.html',fm.SId,fm.Id)">{{fm.Dt}}</a></td>
+															</tr>
+														</table>								
+													</div>	
+													
+													<div ng-if="(LMc|filter:{MId:fm.Id}).length<1">
+														<table class="left_menu_in_2"  ng-click="loadPop(fm.SId,fm.Id)">					
+
+															<tr>
+															<td class="left_menu_in_2_l_1"> <img width="15" src="/images/sport_s/{{fm.SId}}.png"/>&nbsp;{{fm.SN}} 
+																<a href="#"  class="left_menu_in_1_r_1" ng-click="us(fm.Id)"><i id="{{fm.Id}}" class="fa fa-star"></i></a>
+															</td>																	
+															</tr>				
+															<tr>
+															<td class="left_menu_in_2_l_1"><a href="#" ng-click="loadPop(fm.SId,fm.Id)">{{fm.CN.substring(0,25)}}</a></td>
+															</tr>						
+															<tr>								
+															<td colspan="2" class="left_menu_in_2_l_1"><a href="#"  ng-click="loadPop(fm.SId,fm.Id)"><span class="font_002">{{fm.HT}}</span>&nbsp;<span class="5c7785">vs</span>&nbsp;<span class="font_002">{{fm.AT}}</span></a></td>
+															</tr>									
+															<tr>
+															<td colspan="2" class="left_menu_in_2_l_1"><a href="#"  ng-click="loadPop(fm.SId,fm.Id)">{{fm.Dt}}</a></td>
+															</tr>
+														</table>								
+													</div>	
+													
+												</v-pane-content>
+										</v-pane>  
+									</v-pane-content>	     
+						</v-pane>         							
+			</v-accordion>	
+		</div>
+		
+	<div class="left_menu_wrap">
+		
+		<v-accordion class="vAccordion--default" multiple >
+		
+   		<v-pane expanded="true" ng-repeat="(key_pm,value_pm) in PM | orderBy:'SId' | groupBy:'SN'"> 
+    	              
+      	<v-pane-header>
+					<div class="accordion-header" ng-class="{'open' : $pane.isExpanded() }">
+						<img width="15" src="/images/sport_s/{{value_pm[0].SId}}.png">&nbsp;{{key_pm}}
+					<div class="left_menu_count"><!--{{value_pm.length}}--></div>
+					</div>
+				</v-pane-header>
+
+      		<v-pane-content expanded="true" ng-show="true">	  
+      												
+        		<v-pane expanded="false" ng-repeat="(key_rg,value_rg) in value_pm | orderBy:'RId' | groupBy:'RN' "> 	              		
+        			<v-pane-header>		              			
+        				<div class="accordion-header" ng-class="{'open' : $pane.isExpanded() }">
+        					<img width="15" height="10" src="/images/region_s/{{value_rg[0].RId}}.png">&nbsp;{{key_rg}}
+									<div class="left_menu_count">{{value_rg.length}}</div>
+								</div>										
+        			</v-pane-header>	              	
+      					<v-pane-content expanded="true" ng-show="true">
+      						
+      						<v-pane expanded="true" ng-repeat="(key_cp, value_cp ) in value_rg | orderBy:'CId' | groupBy:'CN' ">		              		
+              			<v-pane-header>					              			
+              				<div class="accordion-header3_1" ng-click="getMaketbyCid(lm[1].l,lm[1].c,value_cp[0].CId)">&nbsp;{{key_cp.substring(0,25)}} 
+												<div class="left_menu_count">{{value_cp.length}}</div>
+											</div>																	
+              					<v-pane-content expanded="true">		
+              					</v-pane-content>
+              			</v-pane-header>
+		              </v-pane>	
+            		</v-pane-content>
+            </v-pane>
+          </v-pane-content>
+      </v-pane>	
+    </v-accordion>  	
+    
+	</div>
+
+</div>						

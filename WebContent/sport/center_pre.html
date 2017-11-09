@@ -1,0 +1,203 @@
+﻿
+<!--
+<div id="spin_pre" class="sk-circle">
+  <div class="sk-circle1 sk-child"></div>
+  <div class="sk-circle2 sk-child"></div>
+  <div class="sk-circle3 sk-child"></div>
+  <div class="sk-circle4 sk-child"></div>
+  <div class="sk-circle5 sk-child"></div>
+  <div class="sk-circle6 sk-child"></div>
+  <div class="sk-circle7 sk-child"></div>
+  <div class="sk-circle8 sk-child"></div>
+  <div class="sk-circle9 sk-child"></div>
+  <div class="sk-circle10 sk-child"></div>
+  <div class="sk-circle11 sk-child"></div>
+  <div class="sk-circle12 sk-child"></div>
+</div>
+
+<div ng-init="pre_load()" style="display:none;" id="pmatch">
+	-->
+				
+<div class="game_center_wrap">
+					
+	<v-accordion class="vAccordion--default" >
+		
+  <div class="sports_tab_wrap">
+	<div class="sports_tab_table">
+		<div class="sports_row">
+			
+		<div id="selsport" class="sports_more select" href="#" ng-click="openSel()">
+			<button class="sports_tab_select_t" type="button"><span id="selsport1">종목선택</span> <img src="/images/arrow_bottom.png"></button>
+			<ul class="aList sports_tab_select">
+				<li ng-click="selSport(key,value[0].SN)" ng-repeat="(key,value) in PM|orderBy:'SId'|groupBy:'SId'"><a>{{value[0].SN}} ({{value.length}})</a></li>
+			</ul>
+		</div>
+
+		<div id="selcomp" class="sports_more select" href="#" ng-click="openComp()">
+			<button class="sports_tab_select_t" type="button"><span id="selcomp1">리그선택</span> <img src="/images/arrow_bottom.png"></button>
+			<ul class="aList sports_tab_select">
+				<li ng-click="selComp(key,value[0].CN)" ng-repeat="(key,value) in PM|where:{SId:selectedSId} |orderBy:'CN'|groupBy:'CId'"><a>{{value[0].CN}}</a></li>
+			</ul>
+		</div>
+
+
+		<a href="#" ng-click="preMatchDate(lm[1].l,'center_pre.html',CID,'0')" ng-class="{live_tab_on:tabDate=='0',live_tab:tabDate != '0'}" >
+			<span class="live_tab_text">전체일정</span><span class="live_tab_count"> {{ (PM|filter:{CId:tabCId}).length }}</span>
+		</a>	
+									
+			<a href="#" ng-class="{live_tab_on:tabDate == key,live_tab:tabDate != key}" ng-click="preMatchDate(lm[1].l,'center_pre.html',CID,key)" 
+				ng-repeat="(key,value) in PMk | orderBy:'Dt.substring(0,10)' |  groupBy:'Dt.substring(0,10)'" >
+				<span class="sports_tab_text">{{key}}</span> <span class="live_tab_count">{{value.length}}</span>
+			</a>
+			
+		</div>
+	</div>
+  </div>
+		
+	<div class="sports_wrap">
+		
+		<v-pane expanded="true"> 
+
+		<v-pane-header expanded="true" ng-show="false"></v-pane-header>
+		
+			<v-pane-content expanded="false" ng-show="true">  
+				
+					<table class="sports_title_table_1" cellpadding="0" cellspacing="0" >
+						<tr>
+							<td width="3%"></td>
+							<td width="7%">종목</td>
+							<td width="13%">경기시각</td>
+							<td width="7%">국가</td>
+							<td width="13%">리그</td>
+							<td>경기</td>
+							<td width="9%">승</td>
+							<td width="9%">무</td>
+							<td width="9%">패</td>
+							<td width="6%">더보기</td>
+						</tr>
+					</table>
+			
+								<!-- <v-accordion multiple id="my-accordion" onexpand="expandCallback()" oncollapse="collapseCallback()">  -->
+								<v-accordion multiple id="my-accordion">
+										
+								<v-pane expanded="true" style="font-size:13px;" ng-if="tabDate == sp.Dt.substring(0,10) || tabDate == 0"  ng-repeat="sp in PMk | orderBy:'Dt' ">
+      							<div style="display:none">{{l=(PMkC|filter:{M:sp.MId,S:false,V:true}).length}}</div>
+    							<v-pane-header ng-show="false"></v-pane-header>		    								
+									<v-pane-content expanded="true">	
+										<div ng-switch="sp.Sus"> <!-- market suspended -->																																				
+												<div ng-switch-when="true">														
+													<table class="sports_table" cellpadding="0" cellspacing="0" >
+														<tr>															
+															<td  class="live_0_0">																
+																<a href="#" ng-click="us(sp.MId)">
+																	<i ng-if="(favMatch|filter:{Id:sp.MId})[0].SId == undefined" id="{{sp.MId}}" class="fa fa-star-o"></i>
+																	<i ng-if="(favMatch|filter:{Id:sp.MId})[0].SId !== undefined" id="{{sp.MId}}" class="fa fa-star"></i>
+																</a> 
+															</td>																	
+															<td class="sports_2_1" ng-bind="sp.SN"></td>
+															<td class="sports_3_1" ng-bind="sp.Dt"></td>
+															<td class="sports_4_1" ng-bind="sp.RN"></td>
+															<!--<td class="sports_5_1" ng-bind="sp.CN.substring(0,20)" inactive></td> -->
+															<td class="sports_5_1" ng-bind="sp.CN.substring(0,20)"></td> 
+															
+															<td class="sports_6_1">
+																<div ng-if="l=='0'">
+																<div class="live_victory">{{sp.HT.substring(0,20)}}<span class="live_vs_1">&nbsp;&nbsp;vs&nbsp;&nbsp;</span>{{sp.AT.substring(0,20)}} </div>
+																</div>
+																<div ng-if="l!='0'"><a href="#" ng-click="goPreMatchMarket('center_pre.html',sp.HT,sp.AT,sp.SId,sp.MId,$index)">
+																	<div class="live_victory">{{sp.HT.substring(0,20)}}<span class="live_vs_1">&nbsp;&nbsp;vs&nbsp;&nbsp;</span>{{sp.AT.substring(0,20)}}</a> </div>
+																</div>
+															</td>
+															
+															<td class="sports_7_1"> <i class='fa fa-fw fa-lock'></i> </td>
+															<td class="sports_8_1"> <i class='fa fa-fw fa-lock'></i> </td>
+															<td class="sports_9_1"> <i class='fa fa-fw fa-lock'></i> </td>
+															<td class="sports_10_1">
+																<div ng-if="l == '0'"> <i class='fa fa-fw fa-lock'></i> </div>
+																<div ng-if="l != '0'" ng-click="goPreMatchMarket('center_pre.html',sp.HT,sp.AT,sp.SId,sp.MId,$index)">+{{l}}&nbsp;&nbsp;<img src="/images/arrow_right.png"></div>
+																</td>
+														</tr>
+													</table>
+												</div>
+																			
+												<div ng-switch-default>
+													<table class="sports_table" cellpadding="0" cellspacing="0">
+														<tr>															
+															<td  class="live_0_0">																
+																<a href="#" ng-click="us(sp.MId)">
+																	<i ng-if="(favMatch|filter:{Id:sp.MId})[0].SId == undefined" id="{{sp.MId}}" class="fa fa-star-o"></i>
+																	<i ng-if="(favMatch|filter:{Id:sp.MId})[0].SId !== undefined" id="{{sp.MId}}" class="fa fa-star"></i>
+																</a> 
+															</td>																
+															<td class="sports_2_1" a href="#" ng-click="goPreMatchMarket('center_pre.html',sp.HT,sp.AT,sp.SId,sp.MId,$index)" ng-bind="sp.SN"></td>
+															<td class="sports_3_1" a href="#" ng-click="goPreMatchMarket('center_pre.html',sp.HT,sp.AT,sp.SId,sp.MId,$index)" ng-bind="sp.Dt"></td>
+															<td class="sports_4_1" a href="#" ng-click="goPreMatchMarket('center_pre.html',sp.HT,sp.AT,sp.SId,sp.MId,$index)" ng-bind="sp.RN"></td>
+															<!--<td class="sports_5_1" a href="#" ng-click="goPreMatchMarket('center_pre.html',sp.HT,sp.AT,sp.SId,sp.MId,$index)" ng-disabled="true" ng-bind="sp.CN.substring(0,20)"></td>  -->
+															<td class="sports_5_1" a href="#" ng-click="goPreMatchMarket('center_pre.html',sp.HT,sp.AT,sp.SId,sp.MId,$index)" ng-bind="sp.CN.substring(0,20)"></td>
+															
+															<td class="sports_6_1">
+																<div ng-if="l=='0'">
+																<div class="live_victory">{{sp.HT.substring(0,20)}}<span class="live_vs_1">&nbsp;&nbsp;vs&nbsp;&nbsp;</span>{{sp.AT.substring(0,20)}} </div>
+																</div>
+																<div ng-if="l!='0'"><a href="#" ng-click="goPreMatchMarket('center_pre.html',sp.HT,sp.AT,sp.SId,sp.MId,$index)">
+																<div class="live_victory">{{sp.HT.substring(0,20)}}<span class="live_vs_1">&nbsp;&nbsp;vs&nbsp;&nbsp;</span>{{sp.AT.substring(0,20)}} </div>
+																</div>
+															</td>
+															
+															<td class="sports_7_1" ng-class="{'sel' : (bet|where:{Sd:sp.W1SD}).length>0}">
+															
+															<div ng-click="addBet(sp.W1SD,sp.MkId,'승무패',sp.HT,sp.HT,sp.AT,sp.W1P,sp.BW1P)">		
+																		<div ng-show="sp.BW1P<sp.W1P"><i class="fa fa-fw fa-chevron-up" style="color:green"></i><b class="font_002">{{sp.W1P}}</b><i class="sel_old">(<del>{{sp.BW1P}}</del>)</i></div>
+																		<div ng-show="sp.BW1P>sp.W1P"><i class="fa fa-fw fa-chevron-down" style="color:red"></i><b class="font_002">{{sp.W1P}}</b><i class="sel_old">(<del>{{sp.BW1P}}</del>)</i> </div>
+																		<div ng-show="sp.BW1P==sp.W1P"><b class="font_002"> {{sp.W1P}} </b> </div>	
+			              					</div>
+			              						
+															</td>
+															<td class="sports_8_1" ng-class="{'sel' : (bet|where:{Sd:sp.XSD}).length>0}">
+																
+																<div ng-click="addBet(sp.XSD,sp.MkId,'승무패',sp.HT,sp.HT,sp.AT,sp.XP,sp.BXP)">		
+			              						   <div ng-show="sp.BXP<sp.XP"><i class="fa fa-fw fa-chevron-up" style="color:green"></i><b class="font_002">{{sp.XP}}</b><i class="sel_old">(<del>{{sp.BXP}}</del>)</i></div>
+																   <div ng-show="sp.BXP>sp.XP"><i class="fa fa-fw fa-chevron-down" style="color:red"></i><b class="font_002">{{sp.XP}}</b><i class="sel_old">(<del>{{sp.BXP}}</del>)</i> </div>
+															     <div ng-show="sp.BXP==sp.XP"><b class="font_002"> {{sp.XP}} </b> </div>		
+																</div>
+															
+															</td>
+															<td class="sports_9_1" ng-class="{'sel' : (bet|where:{Sd:sp.W2SD}).length>0}">
+																
+																<div ng-click="addBet(sp.W2SD,sp.MkId,'승무패',sp.HT,sp.HT,sp.AT,sp.W2P,sp.BW2P)">			
+			              						   <div ng-show="sp.BW2P<sp.W2P"><i class="fa fa-fw fa-chevron-up" style="color:green"></i><b class="font_002">{{sp.W2P}}</b><i class="sel_old">(<del>{{sp.BW2P}}</del>)</i> </div>
+																   <div ng-show="sp.BW2P>sp.W2P"><i class="fa fa-fw fa-chevron-down" style="color:red"></i><b class="font_002">{{sp.W2P}}</b><i class="sel_old">(<del>{{sp.BW2P}}</del>)</i> </div>
+															     <div ng-show="sp.BW2P==sp.W2P"><b class="font_002"> {{sp.W2P}} </b> </div>
+																</div>
+																																
+															</td>
+															<td class="sports_10_1">
+																<div ng-if="l=='0'"> <i class='fa fa-fw fa-lock'></i> </div>
+																<div ng-if="l!='0'" ng-click="goPreMatchMarket('center_pre.html',sp.HT,sp.AT,sp.SId,sp.MId,$index)">+{{l}}&nbsp;&nbsp;<img src="/images/arrow_right.png"></div>
+															</td>
+														</tr>
+													</table>
+												</div>
+												
+										</div>	
+										
+										<div ng-include src="innerTab[$index]">											
+										</div> 
+																
+										</div>
+										</v-pane-content>		
+																				
+									</v-pane>	
+
+				</v-accordion>
+			
+			</v-pane-content>
+			</v-pane>
+			</div>
+			</v-accordion>
+			 
+		
+</div>
+<!--
+</div>
+-->			

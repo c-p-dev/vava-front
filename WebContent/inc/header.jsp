@@ -316,7 +316,7 @@ $(window).scroll(function(event){
             </li>
             <li><a href="/notice/sub02.jsp"><span class="util_btn">공지/이벤트</span></a></li>
             <li><a href="/help/sub03.jsp"><span class="util_btn">도움말</span></a></li>
-            <li><a href="/match/sub06.jsp"><span class="util_btn">경기결과</span></a></li>
+            <li><a href="/match/result.jsp"><span class="util_btn">경기결과</span></a></li>
         </ul>
        	<% 
         	if(checkSession){
@@ -427,7 +427,7 @@ $(window).scroll(function(event){
 					<li><a href="/sport/prematch.jsp">스포츠</a></li>
 					<li><a href="/virtual/bet03.jsp">가상게임</a></li>
 					<li><a href="/casino/casino.jsp">카지노</a></li>
-					<li><a href="/racing/bet05.jsp">경마</a></li>
+					<li><a href="#">경마</a></li>
 				</ul>
 			</div>
         </div>

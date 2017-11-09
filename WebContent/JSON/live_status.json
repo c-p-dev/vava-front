@@ -1,0 +1,111 @@
+﻿{ 
+  "Objects": [
+  				{ "EventTypeId": -1,
+  				  "EName": "",
+  				  "KName": ""
+  				},
+  				{ "EventTypeId": 1,
+  				  "EName": "goal",
+  				  "KName": "골인"
+  				},
+  				{ "EventTypeId": 4,
+  				  "EName": "corner",
+  				  "KName": "코너킥"
+  				},
+  				{ "EventTypeId": 6,
+  				  "EName": "substitution",
+  				  "KName": "선수 교체"
+  				},
+  				{ "EventTypeId": 11,
+  					"EName": "period",
+  					"KName": "세트 승"
+  				},
+  				{ "EventTypeId": 12,
+  					"EName": "3",
+  					"KName": "세트"
+  				},
+  				{ "EventTypeId": 20,
+  					"EName": "ballSafe",
+  					"KName": "볼 세이프"
+  				},
+  				{ "EventTypeId": 21,
+  					"EName": "dangerous_attack",
+  					"KName": "위험한 공격"
+  				},
+  				{ "EventTypeId": 22,
+  					"EName": "kick_off",
+  					"KName": "킥 오프"
+  				},
+  				{ "EventTypeId": 23,
+  					"EName": "goal_kick",
+  					"KName": "골킥"
+  				},
+  				{ "EventTypeId": 24,
+  					"EName": "free_kick",
+  					"KName": "프리킥"
+  				},  				
+  				{ "EventTypeId": 25,
+  					"EName": "throw_in",
+  					"KName": "드로인"
+  				},  				
+  				{ "EventTypeId": 108,
+  					"EName": "Finished",
+  					"KName": "경기 종료"
+  				},
+  				{ "EventTypeId": 205,
+  					"EName": "point",
+  					"KName": "득점"
+  				},
+  				{ "EventTypeId": 206,
+  					"EName": "ballInPlay",
+  					"KName": "서브"
+  				},
+  				{ "EventTypeId": 207,
+  					"EName": "serviceFault",
+  					"KName": "서브 폴트"
+  				},  				
+  				{ "EventTypeId": 217,
+  					"EName": "game",
+  					"KName": "게임 승"
+  				},
+  				{ "EventTypeId": 218,
+  					"EName": "set",
+  					"KName": "세트 승"
+  				},
+  				{ "EventTypeId": 320,
+  					"EName": "foul",
+  					"KName": "파올"
+  				},
+  				{ "EventTypeId": 325,
+  					"EName": "missedFreeThrow",
+  					"KName": "자유투 실패"
+  				},
+  				{ "EventTypeId": 326,
+  					"EName": "attack",
+  					"KName": "공격"
+  				},
+  				{ "EventTypeId": 327,
+  					"EName": "OnePoints",
+  					"KName": "1점 득점"
+  				},
+  				{ "EventTypeId": 328,
+  					"EName": "TwoPoints",
+  					"KName": "2점 득점"
+  				},
+  				{ "EventTypeId": 329,
+  					"EName": "ThreePoints",
+  					"KName": "3점 득점"
+  				},
+  				{ "EventTypeId": 410,
+  					"EName": "timerStatus",
+  					"KName": "타이머"
+  				},
+  				{ "EventTypeId": 421,
+  					"EName": "suspersionOver",
+  					"KName": "오버"
+  				}
+  				
+  				]
+ }
+
+
