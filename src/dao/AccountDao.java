@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import net.arnx.jsonic.JSON;
+import util.DBConnector;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
@@ -23,7 +24,6 @@ import com.google.gson.reflect.TypeToken;
 
 import bean.AccountListBean;
 import betconstruct.AuthenticationOutput;
-import net.vavasoft.util.DBConnector;
 
 
 public class AccountDao {

@@ -8,7 +8,7 @@ import java.util.Date;
 import bean.ScBetBean;
 import bean.ScTokenLogBean;
 import bean.MgLiveGamesTransBean.MgLiveGamesTransData;
-import net.vavasoft.util.DBConnector;
+import util.DBConnector;
 
 public class ScBetLogDao {
 	

@@ -7,7 +7,7 @@ import java.util.Date;
 
 import bean.BcTransactionLogBean;
 import bean.ScTokenLogBean;
-import net.vavasoft.util.DBConnector;
+import util.DBConnector;
 
 public class ScTokenLog {
 	

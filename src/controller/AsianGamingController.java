@@ -15,8 +15,8 @@ import javax.crypto.spec.SecretKeySpec;
 
 import bean.UserBean;
 import dao.UserDao;
-import net.vavasoft.util.DesEncrypter;
-import net.vavasoft.util.StringManipulator;
+import util.DesEncrypter;
+import util.StringManipulator;
 
 public class AsianGamingController {
 	

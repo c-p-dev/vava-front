@@ -14,7 +14,7 @@ import javax.sql.DataSource;
 import bean.GameBean;
 import bean.GameMenuBean;
 import bean.UserBean;
-import net.vavasoft.util.DBConnector;
+import util.DBConnector;
 
 public class GameDao {
 	

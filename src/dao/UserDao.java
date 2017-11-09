@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import net.arnx.jsonic.JSON;
-
+import util.DBConnector;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
@@ -30,7 +30,6 @@ import bean.UserBean;
 import controller.SpinCubeController;
 import controller.TotalEgameController;
 import dao.SmsDao;
-import net.vavasoft.util.DBConnector;
 
 public class UserDao {
 	

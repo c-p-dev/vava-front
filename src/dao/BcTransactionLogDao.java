@@ -17,7 +17,7 @@ import org.apache.log4j.Logger;
 
 import bean.BcTransactionLogBean;
 import bean.GameBean;
-import net.vavasoft.util.DBConnector;
+import util.DBConnector;
 
 
 public class BcTransactionLogDao {

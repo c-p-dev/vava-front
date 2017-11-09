@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import net.arnx.jsonic.JSON;
+import util.DBConnector;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
@@ -24,7 +25,6 @@ import com.google.gson.reflect.TypeToken;
 
 import bean.MessageBean;
 import bean.UserBean;
-import net.vavasoft.util.DBConnector;
 
 public class MessageDao {
 	private static final DateFormat	sdf		= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

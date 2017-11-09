@@ -16,7 +16,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import bean.*;
-import net.vavasoft.util.DBConnector;
+import util.DBConnector;
 public class BetConManager2 {
 
 	Context		initContext;

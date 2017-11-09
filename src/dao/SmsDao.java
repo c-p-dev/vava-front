@@ -30,7 +30,7 @@ import infobip.api.config.BasicAuthConfiguration;
 import infobip.api.model.sms.mt.send.SMSResponse;
 import infobip.api.model.sms.mt.send.SMSResponseDetails;
 import infobip.api.model.sms.mt.send.textual.SMSTextualRequest;
-import net.vavasoft.util.DBConnector;
+import util.DBConnector;
 
 public class SmsDao {
 	private String BASE_URL = "https://api.infobip.com/";

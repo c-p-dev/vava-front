@@ -31,8 +31,8 @@ import bean.UserBean;
 import dao.ScBetLogDao;
 import dao.ScTokenLog;
 import dao.UserDao;
-import net.vavasoft.util.NukeSSLCerts;
-import net.vavasoft.util.StringManipulator;
+import util.NukeSSLCerts;
+import util.StringManipulator;
 
 public class SpinCubeController {
 	private String player_id	= "";

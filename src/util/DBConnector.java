@@ -1,4 +1,4 @@
-package net.vavasoft.util;
+package util;
 
 import java.sql.Connection;
 

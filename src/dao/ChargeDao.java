@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import net.arnx.jsonic.JSON;
-import net.vavasoft.util.DBConnector;
+import util.DBConnector;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;

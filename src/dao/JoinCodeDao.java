@@ -19,7 +19,7 @@ import org.apache.log4j.Logger;
 import bean.JoinCodeBean;
 import bean.SmsAuthBean;
 import bean.UserBean;
-import net.vavasoft.util.DBConnector;
+import util.DBConnector;
 
 public class JoinCodeDao {
 	

@@ -18,7 +18,7 @@ import bean.BetConUserBean;
 import bean.GameBean;
 import bean.UserBean;
 import betconstruct.GetBalanceOutput;
-import net.vavasoft.util.DBConnector;
+import util.DBConnector;
 
 public class BetConDao {
 	

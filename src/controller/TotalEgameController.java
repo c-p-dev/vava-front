@@ -32,8 +32,8 @@ import bean.ScTransactionBean;
 import bean.UserBean;
 import dao.MgLiveTransLogDao;
 import dao.UserDao;
-import net.vavasoft.util.NukeSSLCerts;
-import net.vavasoft.util.StringManipulator;
+import util.NukeSSLCerts;
+import util.StringManipulator;
 
 import java.sql.*;
 import javax.sql.*;

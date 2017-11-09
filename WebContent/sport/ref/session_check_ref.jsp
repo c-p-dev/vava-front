@@ -1,5 +1,5 @@
 <%@ page import="java.util.*"%>
-<%@ page import="net.vavasoft.util.*"%>
+<%@ page import="util.*"%>
 
 
 <%!

@@ -33,7 +33,7 @@ import betconstruct.WithdrawAndDepositOutput;
 import dao.BcTransactionLogDao;
 import dao.BetConDao;
 import dao.UserDao;
-import net.vavasoft.util.StringManipulator;
+import util.StringManipulator;
 
 public class BetConstructController {
 	
