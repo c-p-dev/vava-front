@@ -1,12 +1,12 @@
 ﻿<%@ include file="/inc/session.jsp"%>
-<%@page import="net.vavasoft.bean.*"%>
-<%@page import="net.vavasoft.dao.*"%>
+<%@page import="bean.*"%>
+<%@page import="dao.*"%>
 <%@page import="java.util.*"%>
 <%@page import="com.google.gson.Gson"%>
 <%@page import="java.lang.reflect.Type"%>
 <%@page import="com.google.gson.reflect.TypeToken"%>
 
-<jsp:useBean id="bm" class="net.vavasoft.bc4.BetConManager2" />
+<jsp:useBean id="bm" class="bc4.BetConManager2" />
 
 	
 <%

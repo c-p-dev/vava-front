@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import = "net.vavasoft.dao.GameDao"%>
+<%@ page import = "dao.GameDao"%>
 <%@ page import = "java.text.DecimalFormat"%>
 <%@ page import = "java.util.*"%>
-<%@ page import = "net.vavasoft.dao.UserDao"%>
-<%@ page import = "net.vavasoft.bean.UserBean"%>
+<%@ page import = "dao.UserDao"%>
+<%@ page import = "bean.UserBean"%>
 <%
 	UserBean user_data	= (UserBean)session.getAttribute("currentSessionUser");
 	UserDao user_db	= new UserDao();

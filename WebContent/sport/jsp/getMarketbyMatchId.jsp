@@ -1,5 +1,5 @@
 <%@page contentType="text/html;charset=UTF-8"%>
-<jsp:useBean id="bm" class="net.vavasoft.bc4.BetConManager2" />
+<jsp:useBean id="bm" class="bc4.BetConManager2" />
 <%
 String mid="";
 if(request.getParameter("mid") != null && request.getParameter("mid").trim().length() > 0){

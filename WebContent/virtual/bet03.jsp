@@ -1,8 +1,8 @@
 <%@ include file="/inc/main_header.jsp"%>
 <%@ include file="/inc/session.jsp"%>
 <%@ include file="/inc/header.jsp"%>
-<jsp:useBean id="bean" class="net.vavasoft.bean.UserBean" />
-<%@page import="net.vavasoft.dao.GameDao, net.vavasoft.bean.GameBean, java.util.*"%>
+<jsp:useBean id="bean" class="bean.UserBean" />
+<%@page import="dao.GameDao, bean.GameBean, java.util.*"%>
 
 <%
 	GameDao game_dao			= new GameDao();

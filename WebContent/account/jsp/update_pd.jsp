@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import = "net.vavasoft.bean.UserBean" %>
-<%@ page import = "net.vavasoft.bean.SmsAuthBean" %>
-<%@ page import = "net.vavasoft.dao.UserDao" %>
+<%@ page import = "bean.UserBean" %>
+<%@ page import = "bean.SmsAuthBean" %>
+<%@ page import = "dao.UserDao" %>
 <%@ page import = "java.sql.SQLException" %>
 <%@ page import ="java.util.HashMap" %>
 <%@ page import="com.google.gson.Gson" %>

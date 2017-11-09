@@ -2,8 +2,8 @@
 
 <%@page import="java.text.DecimalFormat"%> 
 <%@page import="java.util.*"%>
-<%@page import="net.vavasoft.dao.UserDao"%>
-<%@page import="net.vavasoft.bean.UserBean"%>
+<%@page import="dao.UserDao"%>
+<%@page import="bean.UserBean"%>
 
 <%--
 	 ********************************

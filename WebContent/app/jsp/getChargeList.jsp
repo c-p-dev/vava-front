@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import = "net.vavasoft.bean.ChargeBean "%>
-<%@ page import = "net.vavasoft.bean.UserBean "%>
-<%@ page import = "net.vavasoft.dao.ChargeDao "%>
+<%@ page import = "bean.ChargeBean "%>
+<%@ page import = "bean.UserBean "%>
+<%@ page import = "dao.ChargeDao "%>
 <%@ page import = "java.sql.SQLException "%>
 <%@ page import = "java.util.ArrayList "%>
 <%@ page import = "java.util.List "%>

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="net.vavasoft.bean.UserBean" %>
-<%@ page import="net.vavasoft.dao.AccountDao" %>
+<%@ page import="bean.UserBean" %>
+<%@ page import="dao.AccountDao" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.google.gson.Gson" %>
 <%@ page import="com.google.gson.reflect.TypeToken" %>

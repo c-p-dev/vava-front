@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="
-	net.vavasoft.bean.UserBean,
-	net.vavasoft.dao.UserDao,
+	bean.UserBean,
+	dao.UserDao,
 	java.sql.SQLException,
 	java.util.ArrayList,
 	java.util.List,

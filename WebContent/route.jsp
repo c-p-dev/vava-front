@@ -1,5 +1,5 @@
 <%@page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<%@page import="net.vavasoft.controller.*, java.util.HashMap"%>
+<%@page import="controller.*, java.util.HashMap"%>
 <%@page import="java.lang.reflect.InvocationTargetException, java.lang.reflect.Method, java.io.BufferedReader"%>
 
 <%
