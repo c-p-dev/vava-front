@@ -124,7 +124,7 @@
 </div>
 <script>
 	$dataTable1 = $('#dataTable2').DataTable({
-		ajax : '/app/jsp/getWithdrawList.jsp',
+		ajax : '/cash/jsp/getWithdrawList.jsp',
 		bProcessing: true,
 		sAjaxDataProp:"",
 		searching: false,

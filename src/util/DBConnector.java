@@ -23,7 +23,7 @@ public class DBConnector {
 		try {
 
 			context = new InitialContext();
-			dataSource = (DataSource) context.lookup("java:comp/env/jdbc/vava");
+			dataSource = (DataSource) context.lookup("java:comp/env/jdbc/ibet");
 
 		} catch (Exception ex) {
 

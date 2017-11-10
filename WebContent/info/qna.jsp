@@ -2,7 +2,7 @@
 
 <style>
 	.dt-txt{
-		overflow-y: scroll!important;
+		/*overflow-y: scroll!important;*/
 	    height: 100px!important;
 	    background: #202122!important;
 	    /*padding: 25px 10px 25px 10px!important;*/
@@ -19,15 +19,23 @@
 	#qnaDt tbody tr{
 		cursor: pointer;
 	}
+	#qnaDt tbody tr td.dt-txt {
+	    text-align: left!important;
+    	padding-left: 10px!important;
+	}
 </style>
 <ul class="smk_accordion">
 	<li>
 		<div class="acc_head"><h3>쪽지함</h3></div>
 		<div class="acc_content">
 			<div class="acc_content_in_2">
-				<table id="qnaDt" class="table table-striped table-bordered" cellspacing="0" cellpadding="0" data-scroll-x="true" style="width: 100%!important;">
-            	</table>
-				<div class="acc_btn_wrap_m">
+				<div class="float_inline">
+					<div class="my_search_wrap">						
+					</div>
+					<div class="my_search_list" id="qna-div" style="margin:0px" >
+						<table id="qnaDt" class="" cellspacing="0" cellpadding="0" data-scroll-x="true" style="width: 100%!important;">
+            			</table>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -80,32 +88,65 @@
             drawCallback: function( settings ) {
                 
             },
-            createdRow: function ( row, data, index ) {       
-            	if(index == 0){
-            		var thisRow = $qnaDt.row(row);
-            		thisRow.child(childRowFormat(data.txt),'dt-txt').show();
-            		$(thisRow.child()).find('.slider').show();
-            	}
+            createdRow: function ( row, data, index ) {  
+            	console.log(row);
+            	$(row).addClass('s_close');
+            	// if(index == 0){
+            	// 	var thisRow = $qnaDt.row(row);
+            	// 	thisRow.child(childRowFormat(data.txt),'dt-txt').show();
+            	// 	$(thisRow.child()).find('.slider').show();
+            	// }
         	}
         });
 
-		$(".dt-qna-tab").on("click",function(){
-			setTimeout(function() {
-   			  	$qnaDt.columns.adjust().draw();
-			}, 100);
+		// $(".dt-qna-tab").on("click",function(){
+		// 	setTimeout(function() {
+  //  			  	$qnaDt.columns.adjust().draw();
+		// 	}, 100);
 			
+		// });
+
+
+		$("#qna-div").hide();
+   		$("#qna-div").before('<div class="spn" id="qna-div-spn" style="width:100%!important;">'+lgSpin+'</div>');
+
+   		$("#tab4").on("fadeInComplete", function() {
+    		setTimeout(function() {
+    			$("#qna-div-spn").remove();
+    			$("#qna-div").show();
+			  	$qnaDt.columns.adjust().draw();
+			}, 300);
+    		
 		});
 
         $('#qnaDt tbody').on('click', 'tr', function () {
 	        var row = $qnaDt.row(this);
-	        if(!$(this).hasClass('dt-txt')){
-	        	$('#qnaDt tbody').find('.slider').slideUp(function(){
-					$(this).closest('tr').hide();
-	        	});
+	        if($(this).hasClass('s_close')){
 
 	        	row.child(childRowFormat(row.data().txt),'dt-txt').show();
     			$(row.child()).find('.slider').stop(false, true).slideToggle();
+
+    			$(this).removeClass('s_close');
+    			$(this).addClass('s_open');
+
+	        }else{
+
+	        	row.child(childRowFormat(row.data().txt),'dt-txt').hide();
+	        	$(row.child()).find('.slider').stop(false, true).slideToggle();
+
+	        	$(this).removeClass('s_open');
+    			$(this).addClass('s_close');
 	        }
+
+	        // if(!$(this).hasClass('dt-txt'))
+	        // if(!$(this).hasClass('dt-txt')){
+	        	// $('#qnaDt tbody').find('.slider').slideUp(function(){
+					// $(this).closest('tr').hide();
+	        	// });
+
+	        	// row.child(childRowFormat(row.data().txt),'dt-txt').show();
+    			// $(row.child()).find('.slider').stop(false, true).slideToggle();
+	        // }
 	    });
 
 
@@ -113,6 +154,8 @@
 
 
 	function childRowFormat(d){
-		return '<div class="slider">' + d + '</div>';
+		// return '<div class="slider">' + d + '</div>';
+		return  d;
+
 	}
 </script>

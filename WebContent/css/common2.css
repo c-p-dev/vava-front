@@ -23,6 +23,7 @@
     background: #2b2d2e!important;
     color:white!important;
     margin: 2px!important;
+    cursor: pointer;
 }
 .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
     color: white!important;
@@ -98,9 +99,10 @@ div.dataTables_wrapper div.dataTables_processing{
     padding: 0 0 0 10px!important;
     color: #c1c3c4!important;
     border-radius: 0px!important;
+    font-size: 12px!important;
 }
 .nice-select .list{
-	max-height: 300px!important;
+	max-height: 350px!important;
     width: 100%!important;
     border-radius: 0px!important;
     background-color: #1c2021!important;

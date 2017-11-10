@@ -10,10 +10,7 @@
 	 *  HTML CODE STARTS FROM HERE  *
 	 ********************************
 --%>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.js"></script><!-- pickaday -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.css" rel="stylesheet" type="text/css"><!-- pickaday -->
-<ul class="smk_accordion dt-tab">
+<ul class="smk_accordion">
 	<li>
 		<div clas "><h3>포인트사용내역</h3></div>
 		<div class="acc_content">
@@ -43,7 +40,7 @@
 								</td>
 								<td>
 									<input class="input_style04" id="dateSearch" placeholder="기간" value="2017-00-00 ~ 2017-00-00" readonly>
-									<span class="showDatePkr"><img src="../images/car_icon.jpg"></span>
+									<span class="showDatePkr"><img src="/images/car_icon.jpg"></span>
 									<div id="depth2" style="display:none; width:; position:absolute; z-index:100000000; left:530px;top:130px;">
 										<table border="0" cellspacing="0" cellpadding="0" class="car_table">
 											<tr>
@@ -58,7 +55,7 @@
 										</table>
 										<div style="float:right; padding:7px 2px 7px 10px;">
 											<span id="closePikaday" class="closePikaday" >
-												<img src="../images/car_close.png" class="closePikaday">
+												<img src="/images/car_close.png" class="closePikaday">
 											</span>
 										</div>
 									</div>
@@ -70,7 +67,7 @@
 						</table>
 						
 					</div>
-					<div class="my_search_list">
+					<div class="my_search_list" id="point-use" >
 						<table id="pointUseTable" cellspacing="0" cellpadding="0" data-scroll-x="true" style="width: 100%!important;">
             			</table>
 					</div>
@@ -117,7 +114,7 @@
 
 		$pointUseTable = $('#pointUseTable').DataTable({
 			ajax: {
-			    url: '/app/jsp/getPointUsed.jsp',
+			    url: '/cash/jsp/getPointUsed.jsp',
 			    type: 'post',
 			    data: {
 			       	job : function(){
@@ -194,13 +191,19 @@
             }
         });
 
-        $(".dt-point-tab ").on("click",function(e){
 
-  			setTimeout(function() {
+
+   		$("#point-use").hide();
+   		$("#point-use").before('<div class="spn" id="point-use-spn" style="width:100%!important;">'+lgSpin+'</div>');
+
+   		$("#tab5").on("fadeInComplete", function() {
+    		setTimeout(function() {
+    			$("#point-use-spn").remove();
+    			$("#point-use").show();
 			  	$pointUseTable.columns.adjust().draw();
-			}, 100);
-        	
-        });
+			}, 300);
+    		
+		});
 
         $("#showCalendarBtn").on("click",function(e){
         	e.preventDefault();

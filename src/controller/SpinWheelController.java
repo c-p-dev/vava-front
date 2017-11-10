@@ -164,7 +164,7 @@ public class SpinWheelController {
 			
 		 	Context initContext = new InitialContext();
 		 	Context envContext  = (Context)initContext.lookup("java:/comp/env");
-			DataSource ds       = (DataSource)envContext.lookup("jdbc/vava");
+			DataSource ds       = (DataSource)envContext.lookup("jdbc/ibet");
             
 			con     = ds.getConnection();
             
@@ -331,7 +331,7 @@ public class SpinWheelController {
 			
 		 	Context initContext = new InitialContext();
 		 	Context envContext  = (Context)initContext.lookup("java:/comp/env");
-			DataSource ds       = (DataSource)envContext.lookup("jdbc/vava");
+			DataSource ds       = (DataSource)envContext.lookup("jdbc/ibet");
             
 			con     = ds.getConnection();
 			pstmt   = con.prepareStatement(query);
@@ -376,7 +376,7 @@ public class SpinWheelController {
 			
 		 	Context initContext = new InitialContext();
 		 	Context envContext  = (Context)initContext.lookup("java:/comp/env");
-			DataSource ds       = (DataSource)envContext.lookup("jdbc/vava");
+			DataSource ds       = (DataSource)envContext.lookup("jdbc/ibet");
             
 			con     = ds.getConnection();
 			pstmt   = con.prepareStatement(query);

@@ -73,7 +73,7 @@
 							</tr>
 						</table>
 					</div>
-					<div class="my_search_list">
+					<div class="my_search_list " id="money-use">
 						<table id="moneyUseTable" cellspacing="0" cellpadding="0" data-scroll-x="true" style="width: 100%!important;">
             			</table>
 					</div>
@@ -117,7 +117,7 @@
 
 		$moneyUseTable = $('#moneyUseTable').DataTable({
 			ajax: {
-			    url: '/app/jsp/getMoneyHistory.jsp',
+			    url: '/cash/jsp/getMoneyHistory.jsp',
 			    type: 'post',
 			    data: {
 			       	job : function(){
@@ -201,12 +201,17 @@
 
         });
 
-		$(".dt-money-use, .accordion_title.acc_head").on("click",function(){
-  			setTimeout(function() {
+   		$("#money-use").hide();
+   		$("#money-use").before('<div class="spn" id="money-use-spn" style="width:100%!important;">'+lgSpin+'</div>');
+
+   		$("#tab6").on("fadeInComplete", function() {
+    		setTimeout(function() {
+    			$("#money-use-spn").remove();
+    			$("#money-use").show();
 			  	$moneyUseTable.columns.adjust().draw();
-			}, 100);
-        	
-        });
+			}, 300);
+    		
+		});
 
         $(".money_pikaday_input").on("change",function(e){
         	getMoneyDate();

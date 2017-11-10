@@ -29,7 +29,7 @@ public class BetConManager2 {
 			initContext = new InitialContext();
 
 			envContext = (Context) initContext.lookup("java:/comp/env");
-			ds = (DataSource) envContext.lookup("jdbc/vava");
+			ds = (DataSource) envContext.lookup("jdbc/ibet");
 
 		} catch (NamingException e) {
 			// TODO Auto-generated catch block
