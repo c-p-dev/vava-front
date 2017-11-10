@@ -1,0 +1,27 @@
+﻿<v-accordion multiple class="vAccordion--default" >		
+	
+<v-pane expanded="true" ng-repeat="(key,value) in markets | orderBy:'MarketTypeId' | groupBy:'MarketTypeId'">
+											
+<v-pane-header class="soprts_in_acc_1">{{value[0].Name}}</v-pane-header>
+	<v-pane-content expanded="true" ng-show="true">		
+				
+				<v-pane expanded="true">    
+					
+				<v-pane-header ng-show="true" >{{getWidth(value[0].Selections.length)}}</v-pane-header>	
+				 	<v-pane-content expanded="true">    			
+				 		
+				 		<ul class="nav-tabs">              					 
+    					  <li class="soprts_in_acc_2" ng-repeat="sel in value[0].Selections"> 	
+									<div ng-style="{'width' : selWidth}" >{{ sel.Name }}
+					  				<div ng-show="sel.BPrice < sel.Price" class="sports_v_r"><i class="fa fa-fw fa-chevron-up" style="color:green"></i>  {{sel.Price}} (<del>{{sel.BPrice}}</del>) </div>
+										<div ng-show="sel.BPrice > sel.Price" class="sports_v_r"><i class="fa fa-fw fa-chevron-down" style="color:red"></i>  {{sel.Price}} (<del>{{sel.BPrice}}</del>) </div>
+										<div ng-show="sel.BPrice == sel.Price" class="sports_v_r">{{sel.Price}} (<del>{{sel.BPrice}}</del>)</div>
+									</div>				
+								</li>																										
+							</ul>		
+																					    	
+					</v-pane-content>								
+				</v-pane>																		
+	</v-pane-content>		
+</v-pane>	
+</v-accordion>		

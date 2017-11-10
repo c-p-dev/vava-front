@@ -149,7 +149,7 @@
 			// console.log(obj);
 			if(obj.result == 0 ){
 
-				toastr.success('Login Successful');
+				// toastr.success('Login Successful');
 				$("#fade_3").popup("hide");
 				$("#loginModal").popup("show");
 				

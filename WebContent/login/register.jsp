@@ -316,6 +316,7 @@
 		});
 
 		$('select').niceSelect();
+		$("ul.list").mCustomScrollbar();
 
 		jQuery.validator.addMethod("alphanumeric", function(value, element) {
 			return this.optional(element) || /^\w+$/i.test(value);

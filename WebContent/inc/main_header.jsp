@@ -35,6 +35,7 @@
 <script type="text/javascript" src="/js/switch.js"></script><!-- switch -->
 <script type="text/javascript" src="/js/sports_acc.js"></script><!-- 스포츠아코디언, 베팅내역 아코디언 -->
 <script type="text/javascript" src="/js/angular.js"></script> 
+<script type="text/javascript" src="/js/lmatch.js"></script>
 <script type="text/javascript" src="/js/angular-animate.min.js"></script> 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.16/angular-filter.js"></script>    
 <script type="text/javascript" src="/js/fade.js"></script><!-- switch -->
@@ -42,7 +43,7 @@
 <script type="text/javascript" src="/js/v-accordion.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28//angular-route.min.js"></script>
 <script type="text/javascript" src="/js/accordion.js"></script><!-- sub_아코디언 -->
-<script type="text/javascript" src="/js/showid.js"></script>
+
 <script type="text/javascript" src="/js/common.js"></script>
 
 <script type="text/javascript" src="/js/jquery.validate.js"></script> 
@@ -65,10 +66,10 @@
 <link href="/css/common2.css" rel="stylesheet" type="text/css">
 <link href="/css/manual.css" rel="stylesheet" type="text/css"><!--slide-->
 <link href="/css/custom.css" rel="stylesheet" type="text/css"><!--공통-->
-<link href="/css/spin.css" rel="stylesheet" type="text/css"> <!-- spin css -->
+
 
 <!-- test libraries -->
-<script src="/js/bootstrap/dist/js/bootstrap.js"></script>
+<!-- <script src="/js/bootstrap/dist/js/bootstrap.js"></script> -->
 <script type="text/javascript" src="/js/datatables/jquery.dataTables.js"></script><!-- datatable -->
 <!-- <link href="/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"> -->
 
@@ -93,7 +94,11 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.js"></script><!-- pickaday -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.css" rel="stylesheet" type="text/css">
 
+<!-- custom scrollbar test -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css" />
 
+</head>
 
 
 

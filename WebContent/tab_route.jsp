@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import = "net.vavasoft.bean.UserBean" %>
+<%@ page import = "bean.UserBean" %>
 <%
 	String tab = "tab1";
 	String pge = request.getParameter("pge");
@@ -14,12 +14,12 @@
 	
 	}else if(pge.equals("sb5")){
 
-		location = "/info/sub05.jsp";
+		location = "/info/info.jsp";
 		tab = request.getParameter("tb");
 		
 	}else if(pge.equals("sb4")){
 		
-		location = "/app/sub04.jsp";
+		location = "/cash/cash.jsp";
 		tab = request.getParameter("tb");
 		
 	}

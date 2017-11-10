@@ -1,0 +1,18 @@
+
+
+<script >
+   var customerJson = '{"fname":"Alex",
+                        "lname":"Smith",
+                        "phones":[
+                            "212-555-1212",
+                            "565-493-0909"
+                        ]
+                       }';
+
+   var customer=JSON.parse(customerJson);
+
+   alert("Parsed customer data: fname=" + customer.fname +
+                      " lname=" + customer.lname +
+                      " home phone=" + customer.phones[0] +
+                      " cell phone=" + customer.phones[1]);
+</script>

@@ -1,0 +1,8 @@
+﻿
+Order Deny,Allow
+Deny from all
+
+<Files /sport/bet01.jsp>
+Order Allow,Deny
+Allow from all
+</Files>

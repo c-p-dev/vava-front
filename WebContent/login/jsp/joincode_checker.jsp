@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
-<%@ page import = "net.vavasoft.bean.UserBean" %>
-<%@ page import = "net.vavasoft.dao.UserDao" %>
+<%@ page import = "bean.UserBean" %>
+<%@ page import = "dao.UserDao" %>
 <%@ page import = "java.sql.SQLException" %>
-<%@ page import = "net.vavasoft.bean.JoinCodeBean" %>
-<%@ page import = "net.vavasoft.dao.JoinCodeDao" %>
+<%@ page import = "bean.JoinCodeBean" %>
+<%@ page import = "dao.JoinCodeDao" %>
 
 <%
 	

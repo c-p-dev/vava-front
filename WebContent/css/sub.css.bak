@@ -1,0 +1,276 @@
+@charset "utf-8"; 
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+/* sub_tab,카지노공통 */
+ul.tabs {float: left; height: 40px; border-bottom: 1px solid #2d3232; width: 100%;}
+ul.tabs li {float: left;height: 40px;line-height: 40px;margin-bottom: -1px;margin-right: 2px;background: #252929;overflow: hidden;position: relative;width:160px; height:40px;text-align:center;font-size:14px; font-weight:bold;display:inline-block;}
+ul.tabs li a {background: #252929;color:#6b7a7a; width:100%; height:40px;display:inline-block;}	
+ul.tabs li a:hover {background: #2d3232;color:#6b7a7a; width:100%; height:40px;display:inline-block;}	
+html ul.tabs li.active a:hover{background: #2d3232;color:#00afed ;width:158px; height:40px;display:inline-block;border: 1px solid #2d3232;border-bottom: none;}
+html ul.tabs li.active a  {background: #1c2021;color:#00afed ;border: 1px solid #2d3232;border-bottom: none;width:158px; height:40px;display:inline-block;}
+.tab_container {clear: both; float: left; width: 100%;}
+.tab_content {padding: 20px 0 0 0;}
+
+/* accordion */
+.smk_accordion { width:100%; position: relative; }
+.smk_accordion .acc_section .acc_head {position: relative;background: #2d3232;padding:10px 0 10px 0;display: block;cursor: pointer; width:100%; text-indent:10px}
+.smk_accordion .acc_section .acc_head h3 {line-height: 1;margin: 5px 0; font-size:14px; font-weight:700}
+.smk_accordion .acc_section .acc_content {background:#191a1b; }
+.smk_accordion .acc_section.acc_active > .acc_head {background: #222727;}
+.smk_accordion li{margin:0 0 1px 0}
+.acc_content_in_1 {padding:60px; background:#191a1b;}
+.acc_content_in_2 {padding:40px; background:#191a1b; }
+.acc_btn_wrap {width:100%;text-align:center; margin:20px 0 0 0 }
+
+
+
+/* sub01 */
+.login_center {width:410px; margin:0px auto;}
+.login_table {margin:0 0 20px 0; width:100% }
+.login_table tr td {padding:5px 0 5px 0}
+.login_table_in tr td {padding:0}
+.login_text01 {font-size:28px; color:#ffffff; letter-spacing:-1px; text-align:center; margin:0 0 40px 0}
+.login_text02 {font-size:17px; color:#ffffff; text-align:center; letter-spacing:-1px; line-height:35px; margin:0 0 30px 0 }
+
+
+/* sub02 */
+
+.notice_img{width:300px; height:180px; display: block;}
+.notice_img img{width:300px; height:180px;}
+.notice_text {text-align:center; width:280px;padding:0 10px 0 10px;  display: block;}
+.notice_text_t {color:#ffffff; margin:20px 0 0 0}
+.notice_text_c { margin:10px 0 0 0}
+.view_c_in_img {margin:0 30px 0 0; float:left;}
+.view_c_in_t {width:100%; margin:0 0 20px 0; float:left;}
+.view_c_in {width:100%;}
+.view_title {float:left; padding:30px 0 0 0 }
+.view_t {font-size:30px; color:#ffffff; letter-spacing:-1px; line-height:35px; text-align:left}
+.view_center {width:1330px; margin:0px auto}
+.view_date {margin:10px 0 0 0; text-align:left}
+.view_c_in_text { text-align:left}
+.viewchange .resultitem {vertical-align: top;display: block; margin: 10px 12px 0;position: relative;text-align:center}
+.viewchange .resultitem .box {vertical-align: top;display: block;overflow: hidden;background: transparent url() no-repeat 50%;background-size: cover; position: relative;cursor: pointer;}
+.viewchange .resultitem>.box>a.clickevent { position: absolute;top: 0px; bottom: 0px;left: 0px;right: 0px;height: auto;}
+.picflex {display: flex; flex-wrap: wrap;}
+.picflex .resultitem {position: static;width: auto;border: 0;height: 260px;flex-grow: 1;}
+.picflex .resultitem .box {border: none;width: 300px; height: 260px;line-height: normal; }
+.picflex .resultitem.open {height: 675px;}
+.picflex .resultitem.open:after {content: "";font-size: 0px;width: 0;height: 0;border-style: solid;border-width: 0px 20px 20px 20px; border-color: transparent transparent #121516 transparent; top: -10px;position: relative;}
+.picflex .detailview {display: none; background: #121516;height: 395px;position: absolute;left: 0;right: 0;margin-top: 20px;overflow: auto;}
+.picflex .resultitem.open .detailview {display: block;}
+.controllers {text-align: right;}
+.controllers a {display: inline-block;margin:30px 0 0 0;}
+
+
+
+/* sub03, 카지노공통 */
+.sub_left {width:260px; float:left; margin:0 10px 0 0}
+.sub_right {width:1060px; float:left;}
+.l_tabs {width:100%; float:left;}
+.l_tabs li{ width:240px; padding:0 0 0 20px; margin:0 0 1px 0;height:40px;background:#262a2b;  line-height:40px;}
+.l_tabs li a {width:100%;display:inline-block;}
+.l_tabs li:hover{background:#2a2e2f}
+ul.l_tabs li.active a {color:#ffffff}
+ul.l_tabs li.active, ul.l_tabs li.active a:hover {background: #00afed; }
+.left_tab_con {width:100%; }
+
+.quovolve-nav:before, .quovolve-nav:after {content: "\0020";display: block;height: 0; visibility: hidden;}
+.quovolve-nav:after { clear: both; }
+.quovolve-nav {margin: 10px 0;line-height: 30px;zoom: 1;}
+.quovolve-nav-above { margin-bottom: 20px; }
+.quovolve-nav-below { margin-top: 20px; }
+.quovolve-nav span {float: left; margin-right: 5px;}
+.quovolve-nav a {background: #868686;line-height: 20px;color: #fff;display: block;
+  padding: 0px 15px;border: 0 none; text-align: center;-webkit-border-radius: 15px;
+  -moz-border-radius: 15px;border-radius: 15px; -moz-box-shadow: inset 0 1px 2px rgba(0,0,0, 0.15);
+  -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0, 0.15); box-shadow: inset 0 1px 2px rgba(0,0,0, 0.15);
+  margin:5px 0 0 0;}
+.quovolve-nav a:hover { background: #0792c4; }
+.nav-numbers {list-style: none;margin: 5px 0 0 0;float: right;}
+.nav-numbers li {float: left;margin: 0 0 0 5px; }
+.nav-numbers li a {padding-left: 0;padding-right: 0;padding-top: 0;padding-bottom: 0;width: 20px; border-radius:20px;}
+.nav-numbers li.active a, .nav-numbers li a:hover { background: #0792c4; }
+.nav-text {}
+
+
+
+
+/* sub04, sub05 */
+.blue_wrap {border-top:solid 1px #0792c4;padding:30px; background:#202122; border-bottom:solid 1px #2e3032; width:1190px;}
+.cash_box {width:960px; display:block}
+.my_box {width:100%; display:block; }
+.cash_in {width:100%; display:inline-block; margin:0 0 10px 0}
+.cash_1 {width:388px; height:38px; margin:0 10px 0 0; line-height:38px; background:#191a1b; padding:0 10px 0 10px;float:left; border:solid 1px #2e3032}
+.cash_2 {float:left;width:410px; height:40px;margin:0 10px 0 0; }
+.cash_3 {float:left; width:120px; }
+.cash_4 {width:200px; height:40px; margin:0 10px 0 0; float:left; }
+.cash_5 { float:left; color:#6b7f7f; line-height:40px;}
+.cash_6 {width:280px; height:40px; margin:0 10px 0 0; float:left; }
+.cash_7 {float:left; color:#ffa800}
+.cash_8 {width:410px; float:left; height:40px;  color:#ffa800; margin:0 10px 0 0}
+.cash_warning {line-height:25px; width:100%; margin:0 0 30px 0}
+.cash_bank {width:100%;}
+.back_table {width:100%;border-top:solid 1px #2e3032; margin:20px 0 0 0 }
+.bank_name {width:25%;color:#ffffff; background:#151516;border-bottom:solid 1px #2e3032; text-align:center; border-right:solid 1px #2e3032;height:40px }
+.bank_time {width:25%;color:#ffa800; background:#191a1b;border-bottom:solid 1px #2e3032; text-align:center;height:40px; border-right:solid 1px #2e3032;height:40px  }
+.b_left {border-left:solid 1px #2e3032}
+.point_box {width:410px; float:left; margin:0 40px 0 0}
+.point_banner {width:740px; height:200px; float:left; background:#000000}
+.float_inline {display:inline-block;}
+.my_table {margin:0 0 20px 0}
+.my_search_wrap {width:100%; float:left;}
+.my_search_select {}
+.my_search_select tr td {width: 235px; padding:0 10px 0 0}
+.my_search_list {width:100%; float:left; margin:40px 0 0 0}
+.my_info {padding:0 10px 0 10px; border:solid 1px #2e3032 ; background:#191a1b; width:580px; height:40px;}
+.my_pass {padding:0 10px 0 0;width:580px; height:40px;}
+.my_center {width:10px;}
+.my_left {float:left;}
+.my_right {float:right; color:#ffffff}
+.my_text {height:40px; color:#ffa800}
+.car_table {width:100%}
+.car_table tr td {padding:0}
+
+
+.bet_search_wrap {width:100%; margin:0 0 20px 0}
+.bet_wrap {width:100%;}
+.bet_dd_p {padding:15px; background:#202122}
+table.acc_list_table {width:100%;border-top:solid 1px #0792c4; }
+table.acc_list_table_1 {width:100%;-webkit-transition: all .2s ease-in-out;-moz-transition: all .2s ease-in-out;-o-transition: all .2s ease-in-out;-ms-transition: all .2s ease-in-out;transition: all .2s ease-in-out; background:#191a1b}
+table.acc_list_table_1:hover {background:#151617}
+.acc_list_table_t { color:#ffffff; background:#151516; height:40px;  text-align:center; border-bottom:solid 1px #000000;}
+.acc_list_check { height:40px; text-align:center;  border-bottom:solid 1px #2e3032}
+.acc_list_num { height:40px; text-align:center;  border-bottom:solid 1px #2e3032}
+.acc_list_time { height:40px; text-align:center;  border-bottom:solid 1px #2e3032}
+.acc_list_id { height:40px; text-align:center;  border-bottom:solid 1px #2e3032}
+.acc_list_event { height:40px; text-align:center;  border-bottom:solid 1px #2e3032}
+.acc_list_price1 { height:40px; text-align:center;  border-bottom:solid 1px #2e3032}
+.acc_list_dividend { height:40px; text-align:center;  border-bottom:solid 1px #2e3032}
+.acc_list_price2 { height:40px; text-align:center;  border-bottom:solid 1px #2e3032}
+.acc_list_folder { height:40px; text-align:center;  border-bottom:solid 1px #2e3032}
+.beting_btn { height:40px; text-align:center;  border-bottom:solid 1px #2e3032; color:#ffa800}
+table.acc_list_table_in {width:100%;background:#202122}
+.acc_list_table_in_t {color:#ffffff; background:#293133; height:40px;  text-align:center; }
+.bet_num {background:#262a2b; height:40px;  text-align:center; cursor:pointer;}
+.bet_time {background:#262a2b; height:40px;  text-align:center; cursor:pointer;}
+.bet_id {background:#262a2b; height:40px;  text-align:center; cursor:pointer;}
+.bet_event {background:#262a2b; height:40px;  text-align:center; cursor:pointer;}
+.bet_name {background:#262a2b; height:40px;  text-align:center; cursor:pointer;}
+.bet_type {background:#262a2b; height:40px;  text-align:center; cursor:pointer;}
+.bet_home {background:#262a2b; height:40px;  text-align:center; cursor:pointer;}
+.bet_vs {background:#262a2b; height:40px;  text-align:center; cursor:pointer;}
+.bet_loss {background:#262a2b; height:40px;  text-align:center; cursor:pointer;}
+.beting_in_btn {background:#262a2b; color:#ffa800; height:40px;  text-align:center; cursor:pointer;}
+.bet_select {background:#2e3334;}
+.bet_time:hover { }
+.acc_list_in_l {float:left; padding:0 0 0 10px}
+.acc_list_in_r {float:right; padding:0 10px 0 0; color:#00afed}
+
+
+
+
+
+/* 1:1문의 --팝업과 공통 */
+.inquiry_wrap {width:100%; float:left; height: 100%;}
+.inquiry {width:100%; float:left;padding:15px 0 15px 0}
+.inquiry_user {width:100%;float:left; margin:0 0 0 8px;  width:auto; padding:20px; max-width:600px; background:#0792c4; border-radius:3px; position:relative;}
+.user_date {position:absolute; right:-140px; bottom:10px}
+.user_tag {position:absolute; top:5px; left:-8px}
+.inquiry_admin {width:100%; float:right; margin:0 0 0 8px;  width:auto; padding:20px; max-width:600px; background:#30363c; border-radius:3px; position:relative;}
+.inquiry_text {color:#ffffff;line-height:20px}
+.admin_tag {position:absolute; top:5px; right:-7px}
+.admin_date {position:absolute; left:-140px; bottom:10px}
+.inquiry_select {width:100%; height:38px; background:#191a1b;  border:solid 1px #2e3032 ;padding:0 0 0 10px;}
+.inquiry_select_wrap {width:100%; float:left; margin:30px 0 20px 0}
+.inquiry_input {width:100%; height:38px; background:#191a1b; border:solid 1px #2e3032; padding:0 0 0 10px ;color:#c1c3c4  }
+
+
+/* 쪽지 --팝업과 공통 */
+.popup_accordion {list-style:none; padding:0;	}
+.popup_accordion li {position: relative;}
+.popup_accordion li div {display: none;}
+.popup_accordion a {width: 100%;display: block;cursor: pointer;user-select: none;}
+.popup_accordion div {overflow-y:scroll; height:100px;  background:#202122; padding:25px 10px 25px 10px; border-bottom:solid 1px #2e3032;line-height:30px; vertical-align: top;border-bottom:solid 1px #2e3032;  }
+.memo_table_title {width:100%}
+.memo_table_title tr td {color:#ffffff; border-top:solid 1px #0792c4; background:#151516; height:40px;  text-align:center; border-bottom:solid 1px #000000;}
+.meno_table {width:100%;}
+.meno_table_left { height:40px;  text-align:left;text-indent:10px;border-bottom:solid 1px #2e3032;}
+.meno_table_center { height:40px; text-align:center;  border-bottom:solid 1px #2e3032}
+.meno_table_in{}
+
+
+
+/* 게시판list */
+.list_table {width:100%; margin:0 0 20px 0; border-top:solid 1px #0792c4; }
+.list_table_left { height:40px;  text-align:left;text-indent:10px;border-bottom:solid 1px #2e3032;}
+.list_table_center { height:40px; text-align:center;  border-bottom:solid 1px #2e3032}
+.list_click {cursor:pointer}
+.list_table_in {background:#202122; padding:25px 10px 25px 10px; min-height:300px;line-height:30px; vertical-align: top;border-bottom:solid 1px #2e3032;}
+.list_table_t {color:#ffffff; background:#151516; height:40px;  text-align:center; border-bottom:solid 1px #000000;}
+
+
+/*달력*/
+.cale {  display:inline-block;width:28px; height:28px; line-height:28px; background:#2a2a2a; color:#a3a3a3; text-align:center;}
+.cale:hover {background:#3d3d3d;}
+.cale_off {  display:inline-block;width:28px; height:28px; line-height:28px; background:#191919; color:#565656; text-align:center;}
+.cale_on {  display:inline-block;width:28px; height:28px; line-height:28px; background:#0792c4; color:#ffffff; text-align:center;}
+.car_period {text-align:center; width:100%;}
+.car_period li {display:inline-block; margin:0 10px 0 10px; font-weight:bold; padding:5px}
+.car_period li.select {color:#ffffff; border-bottom:solid 2px #0792c4}
+
+
+
+
+
+/*-------------------------------------------------------------------------------------*
+ *  경기결과                                                                              *
+ *-------------------------------------------------------------------------------------*/
+.effect_tab_wrap {width:100%; float:left; background:#2d3232; margin:0 0 10px 0 }
+.effect_tab_table {display:table; clear:both}
+.effect_row {display:table-row}
+.effect_tab_on {display:table-cell ; vertical-align:middle; padding:10px 30px 10px 30px; border:solid 1px #0792c4;background:#293133; }
+.effect_tab {padding:10px 30px 10px 30px; background:#293133; display:table-cell ; vertical-align:middle; border-right:solid 1px #262a2b}
+.effect_tab_on .sports_tab_text {float:left; color:#0792c4}
+.effect_tab .sports_tab_text {float:left; color:#c1c3c4}
+.effect_tab:hover {background:#2f383a}
+.effect_tab_count {border-radius:10px; padding:1px 7px 2px 7px ; background:#384447; color:#f6f6f6;  margin:0 0 0 7px; float:right;}
+.effect_more { background:#293133; display:table-cell ; vertical-align:middle; border-right:solid 1px #262a2b}
+.effect_tab_arrow {float:right;}
+
+
+
+/* more */
+.select{ position:relative; }
+.select button.effect_tab_select_t{ position:relative;z-index:2; cursor:pointer; padding:13px 10px 10px 10px; border:none; background:none; outline:none; color:#c1c3c4; width:150px;clear:both }
+.select button.effect_tab_select_t span{ float:left;}
+.select button.effect_tab_select_t img{ float:right;}
+.select ul.effect_tab_select{ display:none; position:absolute; top:41px; left:0; width:132px; z-index:10;}
+.select.open ul.effect_tab_select{display:block;}
+.select ul.effect_tab_select li{width:100%; position:relative; overflow:hidden; height:30px; line-height:30px; border-bottom:1px solid #292f30;  background:#1c2021; text-align:left; padding:0 10px 0 10px; cursor:pointer}
+.select ul.effect_tab_select li:hover { background:#252b2b; }
+.select ul.effect_tab_select li:hover a{ color:#ffffff;}
+.select_arrow {font-size:10px; float:right; color:#494d4d}
+.select ul.effect_tab_select li:hover .select_arrow{ }
+
+
+.effect_wrap {width:100%; float:left;}
+.effect_table {width:100%; }
+.effect_table tr td {cursor:pointer; height:34px;}
+.effect_table_t{background:#222627; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021; height:34px;text-align:center}
+.effect_time {width:12%;text-align:center; background:#262a2b; border-right:solid 1px #1c2021; border-bottom:solid 1px #1c2021}
+.effect_name {width:7%;text-align:center; background:#262a2b; border-right:solid 1px #1c2021; border-bottom:solid 1px #1c2021}
+.effect_nation {width:8%;text-align:center; background:#262a2b; border-right:solid 1px #1c2021; border-bottom:solid 1px #1c2021}
+.effect_league {width:10%;text-align:center; background:#262a2b; border-right:solid 1px #1c2021; border-bottom:solid 1px #1c2021}
+.effect_effect {width:7%;color:#ffa800; text-align:center; background:#262a2b; border-right:solid 1px #1c2021; border-bottom:solid 1px #1c2021}
+.effect_home {width:16%;  background:#262a2b; border-right:solid 1px #1c2021; border-bottom:solid 1px #1c2021;}
+.effect_vs {width:16%;text-align:center; background:#262a2b; border-right:solid 1px #1c2021; border-bottom:solid 1px #1c2021;}
+.effect_loss {width:16%;background:#262a2b; border-right:solid 1px #1c2021; border-bottom:solid 1px #1c2021;}
+.effect_m {width:8%;text-align:center;background:#262a2b;border-bottom:solid 1px #1c2021;-webkit-transition: all .2s ease-in-out;-moz-transition: all .2s ease-in-out;-o-transition: all .2s ease-in-out;-ms-transition: all .2s ease-in-out;transition: all .2s ease-in-out;}
+.effect_left {float:left; padding:0 0 0 10px;color:#00afed;}
+.effect_right {float:right; padding:0 10px 0 0;}
+.effect_m:hover {background:#37393b;}
+.effect_in_t{width:100%;background: #2d3232;text-align: left;text-indent:15px; cursor: pointer;height:40px; line-height:40px;}
+.effect_table_in_t {text-align:center;background:#222627; border-right:solid 1px #1c2021; border-bottom:solid 1px #1c2021; height:34px;}
+.effect_table_in  {cursor:pointer; padding:0 15px 0 15px;text-align:center;background:#262a2b; border-right:solid 1px #1c2021; border-bottom:solid 1px #1c2021; height:34px;}
+.effect_in_left {float:left;}
+.effect_in_right {float:right;}

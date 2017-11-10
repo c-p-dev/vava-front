@@ -259,7 +259,7 @@ $(window).scroll(function(event){
 			var obj = JSON.parse(data);
 			if(obj.result == 0 ){
 
-				toastr.success('Login Successful');
+				// toastr.success('Login Successful');
 				$("#loginModal").html(lgMsg);
 
 			}else if(obj.result == 1 ){
@@ -316,7 +316,7 @@ $(window).scroll(function(event){
             </li>
             <li><a href="/notice/sub02.jsp"><span class="util_btn">공지/이벤트</span></a></li>
             <li><a href="/help/sub03.jsp"><span class="util_btn">도움말</span></a></li>
-            <li><a href="/match/sub06.jsp"><span class="util_btn">경기결과</span></a></li>
+            <li><a href="/match/result.jsp"><span class="util_btn">경기결과</span></a></li>
         </ul>
        	<% 
         	if(checkSession){
@@ -338,16 +338,16 @@ $(window).scroll(function(event){
 							</div>
 							<div class="popover-body-btn" id="user_popup_menu">
 								<div class="popover-body-btn_in">
-									<a href="/app/sub04.jsp" data-pg="sb4" data-tab="tab1" ><span class="popover_btn">충전신청</span></a> 
-									<a href="/app/sub04.jsp"  data-pg="sb4" data-tab="tab2" ><span class="popover_btn">환전신청</span></a>
+									<a href="/cash/cash.jsp" data-pg="sb4" data-tab="tab1" ><span class="popover_btn">충전신청</span></a> 
+									<a href="/cash/cash.jsp"  data-pg="sb4" data-tab="tab2" ><span class="popover_btn">환전신청</span></a>
 								</div>
 								<div class="popover-body-btn_in">
-									<a href="/app/sub04.jsp" data-pg="sb4" data-tab="tab3" ><span class="popover_btn">포인트전환</span></a> 
-									<a href="/app/sub04.jsp" data-pg="sb4" data-tab="tab3"><span class="popover_btn">포인트사용내역</span></a>
+									<a href="/cash/cash.jsp" data-pg="sb4" data-tab="tab3" ><span class="popover_btn">포인트전환</span></a> 
+									<a href="/cash/cash.jsp" data-pg="sb4" data-tab="tab3"><span class="popover_btn">포인트사용내역</span></a>
 								</div>
 								<div class="popover-body-btn_in">
-									<a href="/app/sub04.jsp" data-pg="sb4" data-tab="tab4" ><span class="popover_btn">머니전환</span></a> 
-									<a href="/app/sub04.jsp" data-pg="sb4" data-tab="tab6"><span class="popover_btn">머니사용내역</span></a>
+									<a href="/cash/cash.jsp" data-pg="sb4" data-tab="tab4" ><span class="popover_btn">머니전환</span></a> 
+									<a href="/cash/cash.jsp" data-pg="sb4" data-tab="tab6"><span class="popover_btn">머니사용내역</span></a>
 								</div>
 							</div>
 						</div>
@@ -373,26 +373,26 @@ $(window).scroll(function(event){
 								<ul class="aList top_alist">
 									<li style="height:11px; width:152px; background:url(/images/select_top_bg.png) no-repeat"></li>
 									<li>
-										<a href="/info/sub05.jsp" data-pg="sb5" data-tab="tab1" >내 정보 </a>
+										<a href="/info/info.jsp" data-pg="sb5" data-tab="tab1" >내 정보 </a>
 									</li>
 									<li>
-										<a href="/info/sub05.jsp" data-pg="sb5" data-tab="tab2" >베팅내역 </a>
+										<a href="/info/info.jsp" data-pg="sb5" data-tab="tab2" >베팅내역 </a>
 									</li>
 									<li>
-										<a href="/info/sub05.jsp" data-pg="sb5" data-tab="tab3" >1:1문의 </a>
+										<a href="/info/info.jsp" data-pg="sb5" data-tab="tab3" >1:1문의 </a>
 									</li>
 									<li>
-										<a href="/info/sub05.jsp" data-pg="sb5" data-tab="tab4" >쪽지함 </a>
+										<a href="/info/info.jsp" data-pg="sb5" data-tab="tab4" >쪽지함 </a>
 									</li>
 									
 									<li><span id="showLogoutModal" >로그아웃 </span> </li> 
 								</ul>
 							</div>				
 						</li>
-						<li><a href="/app/sub04.jsp" data-pg="sb4" data-tab="tab1" class="top_btn1" >  충전신청  </a></li>
-	                    <li><a href="/app/sub04.jsp" data-pg="sb4" data-tab="tab2" class="top_btn1" > 환전신청  </a></li>
-						<li><a href="/app/sub04.jsp" data-pg="sb4" data-tab="tab4" class="top_btn3" > 머니전환  </a></li>
-						<li><a href="/info/sub05.jsp" data-pg="sb5" data-tab="tab1" ><span class="top_btn2">내정보</span></a></li>
+						<li><a href="/cash/cash.jsp" data-pg="sb4" data-tab="tab1" class="top_btn1" >  충전신청  </a></li>
+	                    <li><a href="/cash/cash.jsp" data-pg="sb4" data-tab="tab2" class="top_btn1" > 환전신청  </a></li>
+						<li><a href="/cash/cash.jsp" data-pg="sb4" data-tab="tab4" class="top_btn3" > 머니전환  </a></li>
+						<li><a href="/info/info.jsp" data-pg="sb5" data-tab="tab1" ><span class="top_btn2">내정보</span></a></li>
 	                </ul>
                	<% } else{  %>
 					<ul class="top_right">
@@ -425,9 +425,9 @@ $(window).scroll(function(event){
 				<ul>
 					<li><a href="/sport/livematch.jsp">실시간</a></li>
 					<li><a href="/sport/prematch.jsp">스포츠</a></li>
-					<li><a href="/virtual/bet03.jsp">가상게임</a></li>
+					<li><a href="/virtual/vgaming.jsp">가상게임</a></li>
 					<li><a href="/casino/casino.jsp">카지노</a></li>
-					<li><a href="/racing/bet05.jsp">경마</a></li>
+					<li><a href="#">경마</a></li>
 				</ul>
 			</div>
         </div>

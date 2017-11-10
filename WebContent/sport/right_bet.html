@@ -1,0 +1,222 @@
+﻿
+	<div class="game_right_wrap">
+		<div class="slip_title_wrap">
+			<p>베팅슬립</p>
+			<ul>
+				<li>배당변경자동적용</li>
+				<li>
+					<input type="checkbox" id="cb" name="checkboxName" class="checkbox" />
+					<script>
+						$(document).ready(function(){
+							$(".checkbox").Sswitch({
+								onSwitchChange: function() {
+									// Your magic									
+									console.log("aa : " + document.getElementById("cb").checked);
+								}
+							});
+						});
+					</script>
+				</li>
+			</ul>
+		</div>
+		
+		<div  ng-show="!betE" style="width:100%; height:40px; line-height:40px; margin:5px 0 1px 0;text-align:center;">
+			베팅을 원하시면<br>	원하시는 경기의 배당을 선택해 주세요.
+		</div>
+		
+		
+		<div class="slip_tab_wrap" ng-show="betE">
+			<ul>
+				
+				<div ng-switch="bet.length">
+					<div ng-switch-when="0">	
+						<li><a href="#"><span class="slip_tab_on">싱글</span></a></li>
+						<li><a href="#"><span class="slip_tab">다폴더</span></a></li>
+					</div>
+					
+					<div ng-switch-when="1">	
+						<li><a href="#"><span class="slip_tab_on">싱글</span></a></li>
+						<li><a href="#"><span class="slip_tab">다폴더</span></a></li>
+					</div>
+					
+					<div ng-switch-default>	 
+						<li><a href="#"><span class="slip_tab">싱글</span></a></li>
+						<li><a href="#"><span class="slip_tab_on">다폴더</span></a></li>
+					</div>
+					
+				</div>
+				
+				<li class="slip_tab_icon"><a href="#" ng-click="delAllBet()"><img src="/images/waste.jpg"></a></li>
+			</ul>
+		</div>
+	
+		<div ng-switch="betA"> <!-- market suspended -->			
+																																		
+			<div ng-switch-when="true">	
+				
+				<div class="slip_bet_end" ng-show="betE" ng-repeat="bet in bet">
+			
+					<div class="slip_bet_in">
+						<div class="slip_bet_row">
+							<div class="end_bet_cell_l_1">{{bet.HT}}<span style="color:#5c7785"> vs </span>	<br>{{bet.AT}}</div>
+							<div class="end_bet_cell_r_1">
+								<a href="#" ng-click="delBet(bet.Sd)" class="notify-close-btn"><img src="/images/ing_close.jpg"></a>
+							</div>
+						</div>
+						<div class="slip_bet_row">
+							<div class="end_bet_cell_l_1" ng-bind="bet.Sn">
+								
+							</div>
+							<div class="end_bet_cell_r_1">{{bet.BP}}</div>
+						</div>
+						<div class="slip_bet_row">
+							<div class="end_bet_cell_l_1">
+								<span>{{bet.ST}}</span>
+							</div>
+							<div class="end_bet_cell_r_1 font_002">{{bet.P}}</div>
+						</div>
+					</div>
+						
+				</div>
+		
+			</div>
+			
+			<div ng-switch-default>	
+				
+				<div class="slip_bet_ing" ng-show="betE" ng-repeat="bet in bet">
+			
+					<div class="slip_bet_in">
+						<div class="slip_bet_row">
+							<div class="slip_bet_cell_l">{{bet.HT}}<span style="color:#5c7785"> vs </span><br>{{bet.AT}}</div>
+							<div class="slip_bet_cell_r">
+								<a href="#" ng-click="delBet(bet.Sd)" class="notify-close-btn"><img src="/images/ing_close.jpg"></a>
+							</div>
+						</div>
+						<div class="slip_bet_row">
+							<div class="slip_bet_cell_l" ng-bind="bet.Sn">
+								
+							</div>
+							<div class="slip_bet_cell_r" ng-show="bet.P != bet.BP" >  <i style="color:grey;">(<del ng-bind="bet.BP"></del>)</i> </div>
+						</div>
+						<div class="slip_bet_row">
+							<div class="slip_bet_cell_l">
+								<span class="font_002" ng-bind="bet.ST"></span>
+							</div>
+							<div class="slip_bet_cell_r font_002" ng-bind="bet.P"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	
+
+	<!--	
+		<div class="slip_bet_end">
+			<div class="slip_bet_in">
+				<div class="slip_bet_row">
+					<div class="end_bet_cell_l">
+						AC밀란    <span style="color:#43525a"> vs </span>     유벤투스
+					</div>
+					<div class="end_bet_cell_r">
+						<a href="#" class="notify-close-btn"><img src="images/end_close.jpg"></a>
+					</div>
+				</div>
+				<div class="slip_bet_row">
+					<div class="end_bet_cell_l">
+						승무패
+					</div>
+					<div class="end_bet_cell_r">
+						1.23
+					</div>
+				</div>
+				<div class="slip_bet_row">
+					<div class="end_bet_cell_l">
+						<span style="color:#4f3400">유벤투스</span>
+					</div>
+					<div class="end_bet_cell_r">
+						1.23
+					</div>
+				</div>
+			</div>
+			<div class="slip_bet_in">
+				<div class="slip_bet_row">
+					<div class="end_bet_cell_ll">
+						베팅금액 
+					</div>
+					<div class="end_bet_cell_cc">
+						<input class="input_style06">
+					</div>
+					<div class="end_bet_cell_rr">
+						<a href="#"><span class="btn11">맥스</span></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		-->
+		
+		<div class="slip_bet_table_wrap"  ng-show="betE">
+	
+			<div class="bet_table_wrap">
+				<div class="bet_table">
+					<div class="bet_table_row">
+						<div class="bet_table_cell_l">배당률</div>
+					<div id="betPrice" class="bet_table_cell_r" ng-bind="gBP()"></div> 
+					</div>
+				</div>
+				<div class="bet_table">
+					<div class="bet_table_row">
+						<div class="bet_table_cell_ll">베팅금액</div>
+						<div class="bet_table_cell_cc_1">
+							<!--<input onkeydown="onlyNumber(this)" ng-model="betAmt" class="input_style06" style="text-align: right;">-->
+							 <input onkeyup="inputNumberFormat(this)" ng-model="betAmt" class="input_style06" style="text-align: right;">
+						</div>
+						<div class="bet_table_cell_rr">
+							<a href="#"><span class="btn10">맥스</span></a>
+						</div>
+					</div>
+				</div>
+				<div class="bet_table">
+					<div class="bet_table_row">
+						<div class="bet_table_cell_l">예상당첨</div>
+						<div class="bet_table_cell_r"><span id="exptAmt" class="font_002">{{ betPrice*rCom(betAmt)|number:2 }}</span> 원</div>
+					</div>
+				</div>
+			</div>
+
+	<!--	
+			<table class="bet_table_2" cellpadding="0" cellspacing="0">
+				<tr>
+					<td><img src="images/icon_ck.png"></td>
+				</tr>
+				<tr>
+					<td>베팅금액은 보유머니를 초과할 수 없습니다.</td>
+				</tr>
+			</table>
+  -->
+	 
+			<table class="bet_table_2" cellpadding="0" cellspacing="0"  ng-show="betA">
+				<tr>
+					<td><img src="/images/icon_ck.png"></td>
+				</tr>
+				<tr>
+					<td>이미 선택하셨습니다.</td>
+				</tr>
+				<tr>
+					<td><a href="#"><span class="btn9"  ng-click="conAlert(1)">확인</span></a></td>
+				</tr>
+			</table>
+		
+			<div class="bet_btn_wrap" ng-show="!betA"><a href="#"><span class="bet_btn">베팅하기</span></a></div>
+			
+			
+		 </div>
+		<!--
+		<div class="bet_banner_wrap">
+			배너
+		</div>
+		<div class="bet_banner_wrap">
+			배너
+		</div>
+	  -->
+	</div>

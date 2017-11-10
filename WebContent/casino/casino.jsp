@@ -2,9 +2,9 @@
 <%@ include file="/inc/session.jsp"%>
 <%@ include file="/inc/header.jsp"%>
 
-<%@ page import ="net.vavasoft.dao.GameDao"%>
-<%@ page import ="net.vavasoft.bean.GameBean"%>
-<%@ page import ="net.vavasoft.bean.UserBean"%>
+<%@ page import ="dao.GameDao"%>
+<%@ page import ="bean.GameBean"%>
+<%@ page import ="bean.UserBean"%>
 <%@ page import ="java.util.*" %>
 <%	
 	GameDao game_dao			= new GameDao();

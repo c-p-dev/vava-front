@@ -163,7 +163,7 @@
 
 	function submitMessage(data){
 		$.ajax({
-			url : '/jsp/setMessage.jsp',
+			url : '/info/jsp/setMessage.jsp',
 			data : data,
 			method: 'POST',
 		}).done(function(data){

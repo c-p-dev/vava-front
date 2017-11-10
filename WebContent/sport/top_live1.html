@@ -1,0 +1,53 @@
+﻿
+	<div style="display:none">{{ht=(LS|filter:{MId:tabMId})[0].HT}} {{at=(LS|filter:{MId:tabMId})[0].AT}}</div>
+
+		<div class="soccer_wrap">
+		<div class="soccer_bg" style="background:url('/images/live_bg_1.jpg')";>
+			<div class="soccer_state">
+				<div class="soccer_row"><a href="#" class="live_sport_b" ng-click="goLiveMatch(lm[0].l,lm[0].c)"> <<< </a>
+					<div class="soccer_cell_left">
+						<div class="soccer_team_left">
+							<p>{{ht}}</p>
+						</div>
+						<div class="soccer_goalin_left">
+							<ul>
+								<li ng-show="liveTop[0].Side == 1"> {{ (liveS|filter:{EventTypeId:liveTop[0].EventTypeId})[0].KName }} </li>
+							</ul>
+						</div>
+					</div>
+					<div class="soccer_cell_center">
+						<table  class="soccer_score_wrap" cellpadding="0" cellspacing="0" align="center"> 
+							<tr>
+								<td class="soccer_score_t">{{(periodName|where:{Id:liveTop[0].SId,P:liveTop[0].Period})[0].KN}} <span class="soccer_score_time">{{liveTop[0].CurrentMinute}} 분</span></td>
+							</tr>
+							<tr>
+								<td>
+									<table class="soccer_score_in" cellpadding="0" cellspacing="0" align="center"> 
+										<tr>
+											<td class="soccer_score_in_bg">{{ liveTop[0].Score.split(':')[0] }}</td>
+											<td class="soccer_score_in_c">:</td>
+											<td class="soccer_score_in_bg">{{ liveTop[0].Score.split(':')[1] }}</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div class="soccer_cell_right">
+						<div class="soccer_team_right">
+							<p>{{at}}</p>
+						</div>
+						<div class="soccer_goalin_right">
+							<ul>
+								<li ng-show="liveTop[0].Side == 2">  {{ (liveS|filter:{EventTypeId:liveTop[0].EventTypeId})[0].KName }}</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	</div>
+	

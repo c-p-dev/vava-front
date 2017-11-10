@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import = "net.vavasoft.dao.GameDao"%>
+<%@ page import = "dao.GameDao"%>
 <%@ page import = "java.text.DecimalFormat"%>
 <%@ page import = "java.util.*"%>
-<%@ page import = "net.vavasoft.dao.UserDao"%>
-<%@ page import = "net.vavasoft.bean.UserBean"%>
+<%@ page import = "dao.UserDao"%>
+<%@ page import = "bean.UserBean"%>
 <%
 	UserBean user_data	= (UserBean)session.getAttribute("currentSessionUser");
 	UserDao user_db	= new UserDao();
@@ -255,7 +255,7 @@
 			Update Profile Success
 		</div>
 		<div class="btn_wrap">
-			<a href="/app/sub04.jsp" class="close-updateProfileModal"><span class="btn3c ">충전하기</span></a> 
+			<a href="/cash/cash.jsp" class="close-updateProfileModal"><span class="btn3c ">충전하기</span></a> 
 			<a href="/" class="close-updateProfileModal"><span class="btn3">확인</span></a>
 		</div>
 	</div>
@@ -275,7 +275,7 @@
 			Update Password Success
 		</div>
 		<div class="btn_wrap">
-			<a href="/app/sub04.jsp" class="close-updatePasswordModal"><span class="btn3c ">충전하기</span></a> 
+			<a href="/cash/cash.jsp" class="close-updatePasswordModal"><span class="btn3c ">충전하기</span></a> 
 			<a href="/" class="close-updatePasswordModal"><span class="btn3">확인</span></a>
 		</div>
 	</div>
@@ -448,7 +448,7 @@
 					maxlength:20,
 					// minlength:6,
 					remote: {
-						url: "/jsp/passwordChecker.jsp",
+						url: "/info/jsp/passwordChecker.jsp",
 				        type: "post",
 				       	data: {
 				          	passwd: function() {
@@ -574,7 +574,7 @@
 
 	function submitPasswrdChanges(data){
 		$.ajax({
-			url : '/jsp/updateUserPassword.jsp',
+			url : '/info/jsp/updateUserPassword.jsp',
 			data : data,
 			method: 'POST',
 		}).done(function(data){ 

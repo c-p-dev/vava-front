@@ -1,0 +1,8 @@
+﻿{ 
+  "pp":	[
+  		{"PID":0,"u":"center_live.html"},
+  		{"PID":1,"u":"left_live.html"},
+  		{"PID":2,"u":"right_bet.html"},
+  		{"PID":3,"u":"ws://10.30.42.116:7071"}
+  		]
+}

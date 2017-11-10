@@ -23,18 +23,28 @@
 			var that = this;
 
 			// add css style to link
-			$('[data-acc-link]').css({ 'cursor': 'pointer' });
+			//$('[data-acc-link]').css({ 'cursor': 'pointer' });
 
 			// hide content by default except content has class "acc-open"
 			$('[data-acc-content]').not('.acc-open').css({ 'display': 'none' });
 
 			// bind click event
 			el.on('click', '[data-acc-link]', function(e) {
+				
+				//$(this).css({ back: url("/images/arrow_bottom.png") ;padding-right: 5px;float:right;} );
+				
+				$(this).toggleClass("active");
 				e.preventDefault();
 				that.options = options;
 				var linkName = $(this).data('acc-link');
 				var contentObj = $('[data-acc-content='+linkName+']');
+				//$('[data-acc-link='+linkName+']').css({ background: #ffffff });
 				that.toggle(contentObj, el);
+				//$('[data-acc-link]').css({background: #000000;content: url("/images/arrow_top.png") });
+				//alert("ss");
+				//pre_load(linkName);
+				//console.log(linkName);
+				
 			});
 		},
 

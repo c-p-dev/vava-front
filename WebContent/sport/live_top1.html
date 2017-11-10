@@ -1,0 +1,990 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>무제 문서</title>
+<meta name="viewport" content="width=1400,minimum-scale=0,maximum-scale=5,target-densitydpi=device-dpi">
+<script src="http://code.jquery.com/jquery-1.12.1.min.js"></script><!--공통-->
+<script type="text/javascript" src="js/header.js" charset="utf-8"></script><!-- header -->
+<script type="text/javascript" src="js/select.js" charset="utf-8"></script><!-- util_select -->
+<script type="text/javascript" src="js/my_select.js"></script><!-- 내정보,스포츠,실시간,경기결과 select -->
+<script type="text/javascript" src="js/visual_slider.js"></script><!-- VisualBanner, CasinoBanner -->
+<script type="text/javascript" src="js/script.js"></script><!-- VisualBanner, CasinoBanner -->
+<script type="text/javascript" src="js/multislider.js"></script><!-- contents_slider -->
+<script type="text/javascript" src="js/tabulous.js"></script><!-- MainTab -->
+<script type="text/javascript" src="js/accordion.js"></script><!-- sub_아코디언 -->
+<script type="text/javascript" src="js/sub_tab.js"></script><!-- sub_tab -->
+<script type="text/javascript" src="js/jquery-popover.js"></script><!-- point_popup -->
+<script type="text/javascript" src="js/popup.js"></script><!-- popup -->
+<script type="text/javascript" src="js/left_menu.js"></script><!-- left_menu -->
+<script type="text/javascript" src="js/gallery.js"></script><!-- 갤러리게시판 view 팝업 -->
+<script type="text/javascript" src="js/showid.js"></script><!-- 달력 -->
+<script type="text/javascript" src="js/sports_acc.js"></script><!-- 스포츠아코디언, 베팅내역 아코디언 -->
+<script type="text/javascript" src="js/vertical_tab.js"></script><!-- 세로탭 -->
+<script type="text/javascript" src="js/over.js"></script><!-- 말풍선 -->
+<script type="text/javascript" src="js/over_script.js"></script><!-- 말풍선 -->
+<script type="text/javascript" src="js/table.js"></script><!-- main_table_slide -->
+<script type="text/javascript" src="js/gateway.js"></script><!-- gateway -->
+<script type="text/javascript" src="js/img_hover.js"></script><!-- casino_hover -->
+<script type="text/javascript" src="js/text_slide.js"></script><!-- text_slide -->
+<script type="text/javascript" src="js/switch.js"></script><!-- switch -->
+<link href="css/common.css" rel="stylesheet" type="text/css"><!--공통-->
+<link href="css/layout.css" rel="stylesheet" type="text/css"><!--공통-->
+<link href="css/main.css" rel="stylesheet" type="text/css"><!-- main -->
+<link href="css/sub.css" rel="stylesheet" type="text/css"><!-- sub -->
+<link href="css/game.css" rel="stylesheet" type="text/css"><!-- game -->
+<link href="css/gateway.css" rel="stylesheet" type="text/css"><!-- gateway -->
+</head>
+
+
+<body id="myAnchor">
+
+<!-- top버튼 -->
+<a href="#myAnchor" class="go-top">▲</a>
+<script>
+/*Add class when scroll down*/
+$(window).scroll(function(event){
+  	var scroll = $(window).scrollTop();
+    if (scroll >= 50) {
+        $(".go-top").addClass("show");
+    } else {
+        $(".go-top").removeClass("show");
+    }
+});
+/*Animation anchor*/
+$('a').click(function(){
+    $('html, body').animate({
+        scrollTop: $( $(this).attr('href') ).offset().top
+    }, 1000);
+});
+</script>
+
+<div id="wrap">
+<div id="header_wrap">
+	<div class="nav">
+		<div class="util_wrap"></div>
+        <ul class="util_left">
+            <li><span class="util_time">00:00:00</span></li>
+            <li>
+                <select id="language" name="language">
+                  <option value="0">한국어</option>
+                  <option value="1">영어</option>
+                  <option value="2">중국어</option>
+                  <option value="3">일본어</option>
+                </select> 
+                <script type="text/javascript">
+                    $(function(){
+                        $('#language').selectlist({
+                            zIndex: 10,
+                            width: 95,
+                            height: 34
+                        });		
+                    })
+                </script>
+            </li>
+            <li><a href="sub02.html"><span class="util_btn">공지/이벤트</span></a></li>
+            <li><a href="sub03.html"><span class="util_btn">도움말</span></a></li>
+            <li><a href="sub06.html"><span class="util_btn">경기결과</span></a></li>
+        </ul>
+		<div class="top_wrap">
+            <div class="top">
+                <span class="logo"><a href="index.html"><img src="images/logo.png"></a></span>
+                <ul class="top_right">
+                    <li><input type="text" class="input_style01 input_blue" placeholder="ID"><a href="sub01.html"><img src="images/input_mark.png"></a></li><!-- input_blue 인풋활성화 -->
+                    <li><input type="text" class="input_style01 input_red" placeholder="PW"><a href="sub01.html"><img src="images/input_mark.png"></a></li><!-- input_red 인풋조건미충족 -->
+                    <li><a href="#"><span class="top_btn1">로그인</span></a></li>
+                    <li><a href="#"><span class="top_btn2">회원가입</span></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="nav_wrap">
+			<div class="stroke">
+				<ul>
+					<li><a href="bet01.html">실시간</a></li>
+					<li><a href="bet02.html">스포츠</a></li>
+					<li><a href="bet03.html">가상게임</a></li>
+					<li><a href="bet04.html">카지노</a></li>
+					<li><a href="bet05.html">경마</a></li>
+				</ul>
+			</div>
+        </div>
+	</div>
+</div><!-- header_wrap -->
+
+
+
+<div id="contents_wrap">
+	<div class="game_contents">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td width="260"  valign="top">
+					<div class="game_left_wrap">
+						<div class="left_search_wrap">
+							<div class="left_search">
+								<input class="input_style05" placeholder="경기 또는 팀">
+									<span class="popover-wrapper">
+										<a href="#" data-role="popover" data-target="example-popover">
+											<img src="images/search_icon.jpg">
+										</a>
+										<div class="popover-modal example-popover">
+										<div class="popover-body">
+											<div class="example-body-in">
+												<table class="example_table_1" cellpadding="0" cellspacing="0">
+													<tr>
+														<td align="left" style="padding:15px 0 7px 10px">세리에A</td>
+														<td align="right" style="padding:15px 7px 0 10px">AC밀란     <span class="5c7785">vs</span>     유벤투스</td>
+													</tr>
+													<tr>
+														<td align="left" style="padding:7px 0 15px 10px">전반전  41</td>
+														<td align="right" style="padding:7px 10px 15px 0">+12 ></td>
+													</tr>
+												</table>
+												<table class="example_table_2" cellpadding="0" cellspacing="0">
+													<tr>
+														<td width="33.3%">
+															<div class="example_left">승</div><div class="example_right">1.26</div>
+														</td>
+														<td width="33.4%" align="center">
+															무
+														</td>
+														<td width="33.3%" style="border-right:none">
+															<div class="example_left">패</div><div class="example_right">1.26</div>
+														</td>
+													</tr>
+												</table>
+												<table class="example_table_1" cellpadding="0" cellspacing="0">
+													<tr>
+														<td align="left" style="padding:15px 0 7px 10px">세리에A</td>
+														<td align="right" style="padding:15px 7px 0 10px">AC밀란     <span class="5c7785">vs</span>     유벤투스</td>
+													</tr>
+													<tr>
+														<td align="left" style="padding:7px 0 15px 10px">전반전  41</td>
+														<td align="right" style="padding:7px 10px 15px 0">+12 ></td>
+													</tr>
+												</table>
+												<table class="example_table_2" cellpadding="0" cellspacing="0">
+													<tr>
+														<td width="33.3%">
+															<div class="example_left">승</div><div class="example_right">1.26</div>
+														</td>
+														<td width="33.4%" align="center">
+															무
+														</td>
+														<td width="33.3%" style="border-right:none">
+															<div class="example_left">패</div><div class="example_right">1.26</div>
+														</td>
+													</tr>
+												</table>
+											</div>
+										</div>
+									</div>
+								</span>
+								<script>
+									$('[data-role="popover"]').popover();
+								</script>
+							</div>
+						</div>
+						<div class="left_tab_wrap">
+							<a href="#"><div class="left_tab_on" style="margin:0 2px 0 0">
+								<div class="left_tab_l">실시간</div><div class="menu_count_on">132</div>
+							</div></a>
+							<a href="#"><div class="left_tab">
+								<div class="left_tab_l">스포츠</div><div class="menu_count">132</div>
+							</div></a>
+						</div>
+						<div class="bookmark_wrap">
+							<img src="images/icon_bookmark_on.png"> &nbsp;&nbsp;<span class="font_002">즐겨찾기</span>
+						</div>
+						<div class="left_menu_wrap">
+							  <script>
+								$(document).ready(function() {
+									$('[data-behavior=accordion]').simpleAccordion({cbOpen:accOpen, cbClose:accClose});
+								});
+
+
+								function accClose(e, $this) {
+									$this.find('span').fadeIn(200);
+								}
+
+								function accOpen(e, $this) {
+									$this.find('span').fadeOut(200)
+								}
+
+							</script>
+
+							<div class="accordion-group" data-behavior="accordion">
+								<div class="accordion-header"><!-- menu 시작 -->
+									<ul class="left_menu_list">
+										<li><img src="images/icon_game02.png"></li>
+										<li>축구</li>
+									</ul>
+									<div class="left_menu_count">132456</div>
+								</div>
+								<div class="accordion-body">
+									<div class="accordion-group" data-behavior="accordion" data-multiple="true">
+										<p class="accordion-header accordion-header2">세리에 A</p>
+										<div class="accordion-body">
+											<table class="left_menu_in" cellpadding="0" cellspacing="0">
+												<tr>
+													<td class="left_menu_in_l">유벤투스</td>
+													<td class="left_menu_in_r">2</td>
+												<tr>
+												<tr>
+													<td class="left_menu_in_l">토리노</td>
+													<td class="left_menu_in_r">0</td>
+												<tr>
+												<tr>
+													<td class="left_menu_in_l"><span class="font_001">전반전</span></td>
+													<td class="left_menu_in_r_img"><img src="images/icon_bookmark_on.png"></td>
+												<tr>
+											</table>
+										</div>
+										<p class="accordion-header accordion-header2">세리에 A</p>
+										<div class="accordion-body">
+											<table class="left_menu_in" cellpadding="0" cellspacing="0">
+												<tr>
+													<td class="left_menu_in_l">유벤투스</td>
+													<td class="left_menu_in_r">2</td>
+												<tr>
+												<tr>
+													<td class="left_menu_in_l">토리노</td>
+													<td class="left_menu_in_r">0</td>
+												<tr>
+												<tr>
+													<td class="left_menu_in_l"><span class="font_001">전반전</span></td>
+													<td class="left_menu_in_r_img"><img src="images/icon_bookmark_on.png"></td>
+												<tr>
+											</table>
+										</div>
+										<p class="accordion-header accordion-header2">세리에 A</p>
+										<div class="accordion-body">
+											<table class="left_menu_in" cellpadding="0" cellspacing="0">
+												<tr>
+													<td class="left_menu_in_l">유벤투스</td>
+													<td class="left_menu_in_r">2</td>
+												<tr>
+												<tr>
+													<td class="left_menu_in_l">토리노</td>
+													<td class="left_menu_in_r">0</td>
+												<tr>
+												<tr>
+													<td class="left_menu_in_l"><span class="font_001">전반전</span></td>
+													<td class="left_menu_in_r_img"><img src="images/icon_bookmark_on.png"></td>
+												<tr>
+											</table>
+										</div>
+									</div>
+								</div><!-- menu 끝 -->
+								<div class="accordion-header"><!-- menu 시작 -->
+									<ul class="left_menu_list">
+										<li><img src="images/icon_game03.png"></li>
+										<li>농구</li>
+									</ul>
+									<div class="left_menu_count">132456</div>
+								</div>
+								<div class="accordion-body">
+									<div class="accordion-group" data-behavior="accordion" data-multiple="true">
+										<p class="accordion-header accordion-header2">세리에 A</p>
+										<div class="accordion-body">
+											<table class="left_menu_in" cellpadding="0" cellspacing="0">
+												<tr>
+													<td class="left_menu_in_l">유벤투스</td>
+													<td class="left_menu_in_r">2</td>
+												<tr>
+												<tr>
+													<td class="left_menu_in_l">토리노</td>
+													<td class="left_menu_in_r">0</td>
+												<tr>
+												<tr>
+													<td class="left_menu_in_l"><span class="font_001">전반전</span></td>
+													<td class="left_menu_in_r_img"><img src="images/icon_bookmark_on.png"></td>
+												<tr>
+											</table>
+										</div>
+										<p class="accordion-header accordion-header2">세리에 A</p>
+										<div class="accordion-body">
+											<table class="left_menu_in" cellpadding="0" cellspacing="0">
+												<tr>
+													<td class="left_menu_in_l">유벤투스</td>
+													<td class="left_menu_in_r">2</td>
+												<tr>
+												<tr>
+													<td class="left_menu_in_l">토리노</td>
+													<td class="left_menu_in_r">0</td>
+												<tr>
+												<tr>
+													<td class="left_menu_in_l"><span class="font_001">전반전</span></td>
+													<td class="left_menu_in_r_img"><img src="images/icon_bookmark_on.png"></td>
+												<tr>
+											</table>
+										</div>
+										<p class="accordion-header accordion-header2">세리에 A</p>
+										<div class="accordion-body">
+											<table class="left_menu_in" cellpadding="0" cellspacing="0">
+												<tr>
+													<td class="left_menu_in_l">유벤투스</td>
+													<td class="left_menu_in_r">2</td>
+												<tr>
+												<tr>
+													<td class="left_menu_in_l">토리노</td>
+													<td class="left_menu_in_r">0</td>
+												<tr>
+												<tr>
+													<td class="left_menu_in_l"><span class="font_001">전반전</span></td>
+													<td class="left_menu_in_r_img"><img src="images/icon_bookmark_on.png"></td>
+												<tr>
+											</table>
+										</div>
+									</div>
+								</div><!-- menu 끝 -->
+								<div class="accordion-header"><!-- menu 시작 -->
+									<ul class="left_menu_list">
+										<li><img src="images/icon_game04.png"></li>
+										<li>배구</li>
+									</ul>
+									<div class="left_menu_count">132456</div>
+								</div>
+								<div class="accordion-body">
+									<div class="accordion-group" data-behavior="accordion" data-multiple="true">
+										<p class="accordion-header accordion-header2">세리에 A</p>
+										<div class="accordion-body">
+											<table class="left_menu_in" cellpadding="0" cellspacing="0">
+												<tr>
+													<td class="left_menu_in_l">유벤투스</td>
+													<td class="left_menu_in_r">2</td>
+												<tr>
+												<tr>
+													<td class="left_menu_in_l">토리노</td>
+													<td class="left_menu_in_r">0</td>
+												<tr>
+												<tr>
+													<td class="left_menu_in_l"><span class="font_001">전반전</span></td>
+													<td class="left_menu_in_r_img"><img src="images/icon_bookmark_on.png"></td>
+												<tr>
+											</table>
+										</div>
+									</div>
+								</div><!-- menu 끝 -->
+								<div class="accordion-header"><!-- menu 시작 -->
+									<ul class="left_menu_list">
+										<li><img src="images/icon_game05.png"></li>
+										<li>야구</li>
+									</ul>
+									<div class="left_menu_count">132456</div>
+								</div>
+								<div class="accordion-body">
+									<div class="accordion-group" data-behavior="accordion" data-multiple="true">
+										<p class="accordion-header accordion-header2">세리에 A</p>
+										<div class="accordion-body">
+											<table class="left_menu_in" cellpadding="0" cellspacing="0">
+												<tr>
+													<td class="left_menu_in_l">유벤투스</td>
+													<td class="left_menu_in_r">2</td>
+												<tr>
+												<tr>
+													<td class="left_menu_in_l">토리노</td>
+													<td class="left_menu_in_r">0</td>
+												<tr>
+												<tr>
+													<td class="left_menu_in_l"><span class="font_001">전반전</span></td>
+													<td class="left_menu_in_r_img"><img src="images/icon_bookmark_on.png"></td>
+												<tr>
+											</table>
+										</div>
+									</div>
+								</div><!-- menu 끝 -->
+								<div class="accordion-header"><!-- menu 시작 -->
+									<ul class="left_menu_list">
+										<li><img src="images/icon_game06.png"></li>
+										<li>축구</li>
+									</ul>
+									<div class="left_menu_count">132456</div>
+								</div>
+								<div class="accordion-body">
+									<div class="accordion-group" data-behavior="accordion" data-multiple="true">
+										<p class="accordion-header accordion-header2">세리에 A</p>
+										<div class="accordion-body">
+											<table class="left_menu_in" cellpadding="0" cellspacing="0">
+												<tr>
+													<td class="left_menu_in_l">유벤투스</td>
+													<td class="left_menu_in_r">2</td>
+												<tr>
+												<tr>
+													<td class="left_menu_in_l">토리노</td>
+													<td class="left_menu_in_r">0</td>
+												<tr>
+												<tr>
+													<td class="left_menu_in_l"><span class="font_001">전반전</span></td>
+													<td class="left_menu_in_r_img"><img src="images/icon_bookmark_on.png"></td>
+												<tr>
+											</table>
+										</div>
+									</div>
+								</div><!-- menu 끝 -->
+								<div class="accordion-header"><!-- menu 시작 -->
+									<ul class="left_menu_list">
+										<li><img src="images/icon_game07.png"></li>
+										<li>축구</li>
+									</ul>
+									<div class="left_menu_count">132456</div>
+								</div>
+								<div class="accordion-body">
+									<div class="accordion-group" data-behavior="accordion" data-multiple="true">
+										<p class="accordion-header accordion-header2">세리에 A</p>
+										<div class="accordion-body">
+											<table class="left_menu_in" cellpadding="0" cellspacing="0">
+												<tr>
+													<td class="left_menu_in_l">유벤투스</td>
+													<td class="left_menu_in_r">2</td>
+												<tr>
+												<tr>
+													<td class="left_menu_in_l">토리노</td>
+													<td class="left_menu_in_r">0</td>
+												<tr>
+												<tr>
+													<td class="left_menu_in_l"><span class="font_001">전반전</span></td>
+													<td class="left_menu_in_r_img"><img src="images/icon_bookmark_on.png"></td>
+												<tr>
+											</table>
+										</div>
+									</div>
+								</div><!-- menu 끝 -->
+								<div class="accordion-header"><!-- menu 시작 -->
+									<ul class="left_menu_list">
+										<li><img src="images/icon_game08.png"></li>
+										<li>축구</li>
+									</ul>
+									<div class="left_menu_count">132456</div>
+								</div>
+								<div class="accordion-body">
+									<div class="accordion-group" data-behavior="accordion" data-multiple="true">
+										<p class="accordion-header accordion-header2">세리에 A</p>
+										<div class="accordion-body">
+											<table class="left_menu_in" cellpadding="0" cellspacing="0">
+												<tr>
+													<td class="left_menu_in_l">유벤투스</td>
+													<td class="left_menu_in_r">2</td>
+												<tr>
+												<tr>
+													<td class="left_menu_in_l">토리노</td>
+													<td class="left_menu_in_r">0</td>
+												<tr>
+												<tr>
+													<td class="left_menu_in_l"><span class="font_001">전반전</span></td>
+													<td class="left_menu_in_r_img"><img src="images/icon_bookmark_on.png"></td>
+												<tr>
+											</table>
+										</div>
+									</div>
+								</div><!-- menu 끝 -->
+								<div class="accordion-header"><!-- menu 시작 -->
+									<ul class="left_menu_list">
+										<li><img src="images/icon_game09.png"></li>
+										<li>축구</li>
+									</ul>
+									<div class="left_menu_count">132456</div>
+								</div>
+								<div class="accordion-body">
+									<div class="accordion-group" data-behavior="accordion" data-multiple="true">
+										<p class="accordion-header accordion-header2">세리에 A</p>
+										<div class="accordion-body">
+											<table class="left_menu_in" cellpadding="0" cellspacing="0">
+												<tr>
+													<td class="left_menu_in_l">유벤투스</td>
+													<td class="left_menu_in_r">2</td>
+												<tr>
+												<tr>
+													<td class="left_menu_in_l">토리노</td>
+													<td class="left_menu_in_r">0</td>
+												<tr>
+												<tr>
+													<td class="left_menu_in_l"><span class="font_001">전반전</span></td>
+													<td class="left_menu_in_r_img"><img src="images/icon_bookmark_on.png"></td>
+												<tr>
+											</table>
+										</div>
+									</div>
+								</div><!-- menu 끝 -->
+								<div class="accordion-header"><!-- menu 시작 -->
+									<ul class="left_menu_list">
+										<li><img src="images/icon_game10.png"></li>
+										<li>축구</li>
+									</ul>
+									<div class="left_menu_count">132456</div>
+								</div>
+								<div class="accordion-body">
+									<div class="accordion-group" data-behavior="accordion" data-multiple="true">
+										<p class="accordion-header accordion-header2">세리에 A</p>
+										<div class="accordion-body">
+											<table class="left_menu_in" cellpadding="0" cellspacing="0">
+												<tr>
+													<td class="left_menu_in_l">유벤투스</td>
+													<td class="left_menu_in_r">2</td>
+												<tr>
+												<tr>
+													<td class="left_menu_in_l">토리노</td>
+													<td class="left_menu_in_r">0</td>
+												<tr>
+												<tr>
+													<td class="left_menu_in_l"><span class="font_001">전반전</span></td>
+													<td class="left_menu_in_r_img"><img src="images/icon_bookmark_on.png"></td>
+												<tr>
+											</table>
+										</div>
+									</div>
+								</div><!-- menu 끝 -->
+								<div class="accordion-header"><!-- menu 시작 -->
+									<ul class="left_menu_list">
+										<li><img src="images/icon_game11.png"></li>
+										<li>축구</li>
+									</ul>
+									<div class="left_menu_count">132456</div>
+								</div>
+								<div class="accordion-body">
+									<div class="accordion-group" data-behavior="accordion" data-multiple="true">
+										<p class="accordion-header accordion-header2">세리에 A</p>
+										<div class="accordion-body">
+											<table class="left_menu_in" cellpadding="0" cellspacing="0">
+												<tr>
+													<td class="left_menu_in_l">유벤투스</td>
+													<td class="left_menu_in_r">2</td>
+												<tr>
+												<tr>
+													<td class="left_menu_in_l">토리노</td>
+													<td class="left_menu_in_r">0</td>
+												<tr>
+												<tr>
+													<td class="left_menu_in_l"><span class="font_001">전반전</span></td>
+													<td class="left_menu_in_r_img"><img src="images/icon_bookmark_on.png"></td>
+												<tr>
+											</table>
+										</div>
+									</div>
+								</div><!-- menu 끝 -->
+								<div class="accordion-header"><!-- menu 시작 -->
+									<ul class="left_menu_list">
+										<li><img src="images/icon_game12.png"></li>
+										<li>축구</li>
+									</ul>
+									<div class="left_menu_count">132456</div>
+								</div>
+								<div class="accordion-body">
+									<div class="accordion-group" data-behavior="accordion" data-multiple="true">
+										<p class="accordion-header accordion-header2">세리에 A</p>
+										<div class="accordion-body">
+											<table class="left_menu_in" cellpadding="0" cellspacing="0">
+												<tr>
+													<td class="left_menu_in_l">유벤투스</td>
+													<td class="left_menu_in_r">2</td>
+												<tr>
+												<tr>
+													<td class="left_menu_in_l">토리노</td>
+													<td class="left_menu_in_r">0</td>
+												<tr>
+												<tr>
+													<td class="left_menu_in_l"><span class="font_001">전반전</span></td>
+													<td class="left_menu_in_r_img"><img src="images/icon_bookmark_on.png"></td>
+												<tr>
+											</table>
+										</div>
+									</div>
+								</div><!-- menu 끝 -->
+							</div>
+						</div>
+					</div>
+				</td><!-- left -->
+				<td width="80%" style="padding:0 10px 0 10px;"  valign="top">
+					<div class="soccer_wrap"><!-- soccer  -->
+						<div class="soccer_bg">
+							<div class="soccer_state">
+								<div class="soccer_row">
+									<div class="soccer_cell_left">
+										<div class="soccer_team_left">
+											<p>FC 바르셀로나</p>
+										</div>
+										<div class="soccer_goalin_left">
+											<ul>
+												<li style="color:#ffffff;">골인</li>
+												<li>11:23</li>
+												<li>11:23</li>
+											</ul>
+										</div>
+									</div>
+									<div class="soccer_cell_center">
+										<table  class="soccer_score_wrap" cellpadding="0" cellspacing="0" align="center"> 
+											<tr>
+												<td class="soccer_score_t">전반전 <span class="soccer_score_time">35:00</span></td>
+											</tr>
+											<tr>
+												<td>
+													<table class="soccer_score_in" cellpadding="0" cellspacing="0" align="center"> 
+														<tr>
+															<td class="soccer_score_in_bg">2</td>
+															<td class="soccer_score_in_c">:</td>
+															<td class="soccer_score_in_bg">0</td>
+														</tr>
+													</table>
+												</td>
+											</tr>
+										</table>
+									</div>
+									<div class="soccer_cell_right">
+										<div class="soccer_team_right">
+											<p>FC 바르셀로나</p>
+										</div>
+										<div class="soccer_goalin_right">
+											<ul>
+												<li style="color:#ffffff;">골인</li>
+												<li>11:23</li>
+												<li>11:23</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="soccer_table">
+							<table width="100%" cellpadding="0" cellspacing="0"> 
+								<tr>
+									<td class="soccer_table_tt">&nbsp;</td>
+									<td class="soccer_table_t">위험한공격</td>
+									<td class="soccer_table_t">유효슛팅</td>
+									<td class="soccer_table_t">슛팅</td>
+									<td class="soccer_table_t">코너킥</td>
+									<td class="soccer_table_t">옐로우카드</td>
+									<td class="soccer_table_t">레드카드</td>
+									<td class="soccer_table_t">오프사이트</td>
+									<td class="soccer_table_t">페넕티킥</td>
+								<tr>
+								<tr>
+									<td class="soccer_table_tdt">바르셀로나</td>
+									<td class="soccer_table_td">0</td>
+									<td class="soccer_table_td">1</td>
+									<td class="soccer_table_td">2</td>
+									<td class="soccer_table_td">3</td>
+									<td class="soccer_table_td">0</td>
+									<td class="soccer_table_td">1</td>
+									<td class="soccer_table_td">2</td>
+									<td class="soccer_table_td">2</td>
+								<tr>
+								<tr>
+									<td class="soccer_table_tdt">레알마드리드</td>
+									<td class="soccer_table_td">0</td>
+									<td class="soccer_table_td">1</td>
+									<td class="soccer_table_td">2</td>
+									<td class="soccer_table_td">3</td>
+									<td class="soccer_table_td">0</td>
+									<td class="soccer_table_td">1</td>
+									<td class="soccer_table_td">2</td>
+									<td class="soccer_table_td">2</td>
+								<tr>
+							</table>
+						</div>
+					</div><!-- soccer  -->
+
+
+					<div class="basketball_wrap"><!-- basketball  -->
+						<div class="etc_left">
+							1쿼터  <span class="etc_time">10:00</span>
+						</div>
+						<div class="etc_right">
+							<ul class="etc_score_list">
+								<li>
+									<div class="etc_score_team_t"></div>
+									<div class="etc_score_team_c">기아</div>
+									<div class="etc_score_team_b">우리은행</div>
+								</li>
+								<li>
+									<div class="etc_score_t">1쿼터</div>
+									<div class="etc_score_c">1</div>
+									<div class="etc_score_b">0</div>
+								</li>
+								<li>
+									<div class="etc_score_t">2쿼터</div>
+									<div class="etc_score_c">1</div>
+									<div class="etc_score_b">0</div>
+								</li>
+								<li>
+									<div class="etc_score_t">3쿼터</div>
+									<div class="etc_score_c">1</div>
+									<div class="etc_score_b">0</div>
+								</li>
+								<li>
+									<div class="etc_score_t">4쿼터</div>
+									<div class="etc_score_c">1</div>
+									<div class="etc_score_b">0</div>
+								</li>
+							</ul>
+						</div>
+					</div><!-- basketball  -->
+
+					<div class="baseball_wrap"><!-- baseball  -->
+						<div class="etc_left">
+							1회초  <span class="etc_time">35:00</span>
+						</div>
+						<div class="etc_right">
+							<ul class="baseball_score_list">
+								<li>
+									<div class="baseball_score_team_t"></div>
+									<div class="baseball_score_team_c">바르셀로나</div>
+									<div class="baseball_score_team_b">레알마드리드</div>
+								</li>
+								<li>
+									<div class="baseball_score_t">1회</div>
+									<div class="baseball_score_c">1</div>
+									<div class="baseball_score_b">0</div>
+								</li>
+								<li>
+									<div class="baseball_score_t">2회</div>
+									<div class="baseball_score_c">1</div>
+									<div class="baseball_score_b">0</div>
+								</li>
+								<li>
+									<div class="baseball_score_t">3회</div>
+									<div class="baseball_score_c">1</div>
+									<div class="baseball_score_b">0</div>
+								</li>
+								<li>
+									<div class="baseball_score_t">4회</div>
+									<div class="baseball_score_c">1</div>
+									<div class="baseball_score_b">0</div>
+								</li>
+								<li>
+									<div class="baseball_score_t">5회</div>
+									<div class="baseball_score_c">1</div>
+									<div class="baseball_score_b">0</div>
+								</li>
+								<li>
+									<div class="baseball_score_t">6회</div>
+									<div class="baseball_score_c">1</div>
+									<div class="baseball_score_b">0</div>
+								</li>
+								<li>
+									<div class="baseball_score_t">7회</div>
+									<div class="baseball_score_c">1</div>
+									<div class="baseball_score_b">0</div>
+								</li>
+								<li>
+									<div class="baseball_score_t">8회</div>
+									<div class="baseball_score_c">1</div>
+									<div class="baseball_score_b">0</div>
+								</li>
+								<li>
+									<div class="baseball_score_t">9회</div>
+									<div class="baseball_score_c">1</div>
+									<div class="baseball_score_b">0</div>
+								</li>
+							</ul>
+						</div>
+					</div><!-- baseball  -->
+
+					
+
+					<div class="volleyball_wrap"><!-- volleyball  -->
+						<div class="etc_left">
+							1세트  <span class="etc_time">10:00</span>
+						</div>
+						<div class="etc_right">
+							<ul class="etc_score_list">
+								<li>
+									<div class="etc_score_team_t"></div>
+									<div class="etc_score_team_c">기아</div>
+									<div class="etc_score_team_b">우리은행</div>
+								</li>
+								<li>
+									<div class="etc_score_t">1세트</div>
+									<div class="etc_score_c">1</div>
+									<div class="etc_score_b">0</div>
+								</li>
+								<li>
+									<div class="etc_score_t">2세트</div>
+									<div class="etc_score_c">1</div>
+									<div class="etc_score_b">0</div>
+								</li>
+								<li>
+									<div class="etc_score_t">3세트</div>
+									<div class="etc_score_c">1</div>
+									<div class="etc_score_b">0</div>
+								</li>
+								<li>
+									<div class="etc_score_t">4세트</div>
+									<div class="etc_score_c">1</div>
+									<div class="etc_score_b">0</div>
+								</li>
+								<li>
+									<div class="etc_score_t">5세트</div>
+									<div class="etc_score_c">1</div>
+									<div class="etc_score_b">0</div>
+								</li>
+							</ul>
+						</div>
+					</div><!-- volleyball  -->
+
+					<div class="hockey_wrap"><!-- hockey  -->
+						<div class="etc_left">
+							1피리어드  <span class="etc_time">10:00</span>
+						</div>
+						<div class="etc_right">
+							<ul class="etc_score_list">
+								<li>
+									<div class="etc_score_team_t"></div>
+									<div class="etc_score_team_c">기아</div>
+									<div class="etc_score_team_b">우리은행</div>
+								</li>
+								<li>
+									<div class="etc_score_t_hockey">1피리어드</div>
+									<div class="etc_score_c">1</div>
+									<div class="etc_score_b">0</div>
+								</li>
+								<li>
+									<div class="etc_score_t_hockey">2피리어드</div>
+									<div class="etc_score_c">1</div>
+									<div class="etc_score_b">0</div>
+								</li>
+								<li>
+									<div class="etc_score_t_hockey">3피리어드</div>
+									<div class="etc_score_c">1</div>
+									<div class="etc_score_b">0</div>
+								</li>
+								<li>
+									<div class="etc_score_t_hockey">4피리어드</div>
+									<div class="etc_score_c">1</div>
+									<div class="etc_score_b">0</div>
+								</li>
+								<li>
+									<div class="etc_score_t_hockey">5피리어드</div>
+									<div class="etc_score_c">1</div>
+									<div class="etc_score_b">0</div>
+								</li>
+							</ul>
+						</div>
+					</div><!-- hockey  -->
+
+					<div class="tennis_wrap"><!-- hockey  -->
+						<div class="etc_left">
+							1세트  <span class="etc_time">10:00</span>
+						</div>
+						<div class="etc_right">
+							<ul class="etc_score_list">
+								<li>
+									<div class="etc_score_team_t"></div>
+									<div class="etc_score_team_c">기아</div>
+									<div class="etc_score_team_b">우리은행</div>
+								</li>
+								<li>
+									<div class="etc_score_t">1세트</div>
+									<div class="etc_score_c">1</div>
+									<div class="etc_score_b">0</div>
+								</li>
+								<li>
+									<div class="etc_score_t">2세트</div>
+									<div class="etc_score_c">1</div>
+									<div class="etc_score_b">0</div>
+								</li>
+								<li>
+									<div class="etc_score_t">3세트</div>
+									<div class="etc_score_c">1</div>
+									<div class="etc_score_b">0</div>
+								</li>
+								<li>
+									<div class="etc_score_t">4세트</div>
+									<div class="etc_score_c">1</div>
+									<div class="etc_score_b">0</div>
+								</li>
+								<li>
+									<div class="etc_score_t">5세트</div>
+									<div class="etc_score_c">1</div>
+									<div class="etc_score_b">0</div>
+								</li>
+							</ul>
+						</div>
+					</div><!-- hockey  -->
+
+				</td>
+				<td width="260" class="game_right_wrap" valign="top">
+					<div class="game_right_wrap">
+						<div class="right_login_wrap">
+							<div class="right_login">
+								<p>베팅을 하시려면 로그인이 필요합니다.</p>
+								<a href="#"><span class="btn9">확인</span></a>
+							</div>
+						</div>
+						<div class="bet_banner_wrap">
+							배너
+						</div>
+						<div class="bet_banner_wrap">
+							배너
+						</div>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div><!-- contents -->
+
+<div id="footer_wrap">
+	<div class="f_site_map_wrap">
+    	<div class="f_site_map">
+			<div class="f_site_map_left_wrap">
+				<div class="f_site_map_left">
+					<div class="f_site_map_left_t">
+						ABOUT
+					</div>
+					<ul class="f_site_map_left_list">
+						<li><a href="#">베팅 규정</a></li>
+						<li><a href="#">공지/이벤트</a></li>
+						<li><a href="#">이용약관</a></li>
+					</ul>
+				</div>
+				<div class="f_site_map_left">
+					<div class="f_site_map_left_t">
+						HELP
+					</div>
+					<ul class="f_site_map_left_list">
+						<li><a href="#">베팅 가이드</a></li>
+						<li><a href="#">게임 가이드</a></li>
+						<li><a href="#">자주 묻는 질문</a></li>
+					</ul>
+				</div>
+				<div class="f_site_map_left">
+					<div class="f_site_map_left_t">
+						GAMES
+					</div>
+					<ul class="f_site_map_left_list">
+						<li><a href="#">스포츠북</a></li>
+						<li><a href="#">가상게임</a></li>
+						<li><a href="#">라이브 카지노</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="f_site_partner_wrap">
+			<div class="f_site_partner_t">
+				PARTNER
+			</div>
+			<div class="f_site_partner">
+				<ul>
+					<li><img src="images/partner_1.jpg"></li>
+					<li><img src="images/partner_2.jpg"></li>
+					<li><img src="images/partner_3.jpg"></li>
+					<li><img src="images/partner_4.jpg"></li>
+				</ul>
+				<ul>
+					<li><img src="images/partner_1.jpg"></li>
+					<li><img src="images/partner_2.jpg"></li>
+					<li><img src="images/partner_3.jpg"></li>
+					<li><img src="images/partner_4.jpg"></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+    <div class="f_copy_wrap">
+		Gambling can be addictive. Play responsibly.           www.gamblingtherapy.org & www.gamblersanonymous.org<br>
+		© 2017 IBET25.COM. ALL RIGHTS RESERVED. | +18  <br>
+		<img src="images/f_logo.jpg" style="margin:20px 0 0 0">
+	</div>
+</div>
+
+</div><!-- wrap -->
+</body>
+</html>

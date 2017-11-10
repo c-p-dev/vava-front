@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
-<%@ page import="net.vavasoft.bean.*" %>
-<%@ page import="net.vavasoft.dao.*" %>
+<%@ page import="bean.*" %>
+<%@ page import="dao.*" %>
 <%@ page import="java.text.DecimalFormat" %>
 
 <%
@@ -30,6 +30,6 @@
 	}
 	
 	DecimalFormat dfrmt	= new DecimalFormat("#,###,###,###,###");
-	DecimalFormat dfrmt2= new DecimalFormat("#,###,###,###,###");
+	
 %>
 

@@ -1,22 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="
-	net.vavasoft.bean.UserBean,
-	net.vavasoft.bean.UserBean,
-	net.vavasoft.bean.BetConUserBean,
-	net.vavasoft.dao.UserDao,
-	net.vavasoft.dao.BetConDao,
+	bean.UserBean,
+	bean.UserBean,
+	bean.BetConUserBean,
+	dao.UserDao,
+	dao.BetConDao,
 	java.sql.SQLException,
 	java.util.ArrayList,
 	java.util.List,
-	net.vavasoft.bean.MgBettingProfileBean,
-	net.vavasoft.bean.MgPlayerAccountBean,
-	net.vavasoft.controller.TotalEgameController,
-	net.vavasoft.controller.SpinCubeController,
+	bean.MgBettingProfileBean,
+	bean.MgPlayerAccountBean,
+	controller.TotalEgameController,
+	controller.SpinCubeController,
 	com.google.gson.reflect.TypeToken,
 	java.util.StringTokenizer,
-	net.vavasoft.bean.JoinCodeBean,
-	net.vavasoft.dao.JoinCodeDao,
-	net.vavasoft.bean.SmsAuthBean,
-	net.vavasoft.dao.SmsDao;" %>
+	bean.JoinCodeBean,
+	dao.JoinCodeDao,
+	bean.SmsAuthBean,
+	dao.SmsDao;" %>
 <%
 	UserBean post_ub 		= new UserBean();
 	JoinCodeBean jcBean 	= new JoinCodeBean();
