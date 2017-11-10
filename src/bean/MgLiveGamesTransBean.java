@@ -37,7 +37,7 @@ public class MgLiveGamesTransBean {
 		@SerializedName("AccountName")
 	    @Expose
 	    String accountName;
-		@SerializedName("tableCode")
+		@SerializedName("TableCode")
 	    @Expose
 		String tableCode;
 		@SerializedName("RoundId")
