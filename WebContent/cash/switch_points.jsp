@@ -39,31 +39,29 @@
 								<div class="blue_wrap">
 								<form id="pointform">
 									<div class="float_inline">
-											<div class="point_box">
-												<div class="cash_in">
-													<div class="cash_1"><p style="float:left">보유포인트</p><p style="float:right" class="font_002 pointavail" id="showpoint"><%=dfrmt.format(currentUser.getPoint())%></p></div>
-												</div>
-												<div class="cash_in">
-													<div class="cash_6">
-														<input class="input_style03" id="point" name="point" placeholder="입금자명">		
-													</div>
-													<div class="cash_3">
-														<span class="btn5" id="reset">정정</span>
-													</div>	
-													
-												</div>
-												<div class="cash_in">
-													<div class="cash_7">
-														<span id="err-msg1" style="color:orange;"></span>
-													</div>
-												</div>
-												<div class="cash_in">
-													<span><button type="submit" class="btn3c">전환신청</button></span>
-												</div>
-											</div>
-										<div class="point_banner">
-											배너배너배너
+										<div class="cash_in">
+											<div class="cash_1"><p style="float:left">보유포인트</p><p style="float:right" class="font_002 pointavail" id="showpoint"><%=dfrmt.format(currentUser.getPoint())%></p></div>
 										</div>
+										<div class="cash_in">
+											<div class="cash_6">
+												<input class="input_style03" id="point" name="point" placeholder="입금자명">		
+											</div>
+											<div class="cash_3">
+												<span class="btn5" id="reset">정정</span>
+											</div>
+										</div>
+										<div class="cash_in">
+											<div class="cash_7">
+												<span id="err-msg1" style="color:orange;"></span>
+											</div>
+										</div>
+										<div class="cash_in">
+											<span class="btn1" id="p1">1만원</span>
+		 									<span class="btn1" id="p2">5만원</span>
+		 									<span class="btn1" id="p3">10만원</span>
+		 									<span class="btn1" id="p4">100만원</span>
+											<span><button type="submit" class="btn3c">전환신청</button></span>
+										</div>	
 									</div>
 								</form>
 								</div>
@@ -90,67 +88,74 @@
 					</div>
 				</div>
 <script>
-$("#pointform").validate({
-	errorClass: 'form1-invalid',
-	validClass: 'form1-valid',
-	errorContainer: ".error_cash_in",
-		rules: {
+$(document).ready(function(){
+	var p = <%=currentUser.getPoint()%>;
+	$("#pointform").validate({
+		errorClass: 'form1-invalid',
+		validClass: 'form1-valid',
+		errorContainer: ".error_cash_in",
+			rules: {
+				point :{
+				required:true,
+				digits: true,
+				min: 10000,
+				max: p,
+			},
+		},
+			
+		messages: {
 			point :{
-			required:true,
-			digits: true,
-			min: 1000,
+				required:"입력이 필요합니다.",
+				digits: "입력은 숫자 여야합니다.",
+				min:"교환 가능한 최소 금액은 10000입니다.",
+				max:"불충분 한 포인트"
+			},
 		},
-	},
-	messages: {
-		point :{
-			required:"Input is required.",
-			digits: "Input must be numbers",
-			range:"The minimum exchangable amount is 1000.",
+		errorPlacement: function(error, element) {
+
+			var error_label = element.attr("name");
+			var id = element.attr("id");
+
+			
+		    if(error.text() != ""){
+		    	element.qtip({ 
+				    overwrite: true,
+				    content: {
+				        text: error,
+				        tooltipanchor: $(this),
+				        button: 'Close',
+				    },
+				    show: {
+			            when: false,
+			            ready: true, 
+			            event:false,
+			        },
+			        hide:{
+			        	fixed:true,
+			        	event:false,
+			        },
+			        position: {
+				        container: $("#acc_content_in_pointtb"),
+				        at: 'top center ',
+				        my: 'bottom center', 
+				        adjust : {
+				        	method : 'shift none',
+				        }
+				    }
+				});
+		    
+			}else{
+				element.qtip("hide");
+			}
+
 		},
-	},
-	errorPlacement: function(error, element) {
-
-		var error_label = element.attr("name");
-		var id = element.attr("id");
-
-		
-	    if(error.text() != ""){
-	    	element.qtip({ 
-			    overwrite: true,
-			    content: {
-			        text: error,
-			        tooltipanchor: $(this),
-			        button: 'Close',
-			    },
-			    show: {
-		            when: false,
-		            ready: true, 
-		            event:false,
-		        },
-		        hide:{
-		        	fixed:true,
-		        	event:false,
-		        },
-		        position: {
-			        container: $("#acc_content_in_pointtb"),
-			        at: 'top center ',
-			        my: 'bottom center', 
-			        adjust : {
-			        	method : 'shift none',
-			        }
-			    }
-			});
-	    
-		}else{
-			element.qtip("hide");
-		}
-
-	},
-	submitHandler: function(form) {
-		var data = $("#pointform").serializeJSON();
-	    submitPoint(data);
-  	}
+		submitHandler: function(form) {
+			var data = $("#pointform").serializeJSON();
+		    submitPoint(data);
+	  	}
+	});	 
 });
+
 function submitPoint(data){
 	$.ajax({
 		url : '/cash/jsp/switchPoints.jsp',
@@ -163,8 +168,8 @@ function submitPoint(data){
 		$('.money_dsp').text(number_format(data.money, 2));
 		$('.point_dsp').text(number_format(data.point, 2));
 		$('.pointavail').text(number_format(data.point, 2));
+		$("#pointform").validate().settings.rules.point.max = data.point;
 		$("#PointSuccesModal").popup("show");
-		
 	});
 }
 $('#PointSuccesModal').popup({
@@ -174,7 +179,6 @@ $('#PointSuccesModal').popup({
   		resetpointform();
 	}
 });
-
 $(".cs_close").on("click",function(e){
 	e.preventDefault();
 	$("#PointSuccesModal").popup("hide");
@@ -187,5 +191,21 @@ function resetpointform(){
 }
 $('#reset').click(function(){
 	$("#point").val("0");
+});
+$('#p1').click(function(){
+	 var num = +$("#point").val() + 10000;
+	 $("#point").val(num);
+});
+$('#p2').click(function(){
+	var num = +$("#point").val() + 50000;
+	 $("#point").val(num);
+});
+$('#p3').click(function(){
+	var num = +$("#point").val() + 100000;
+	 $("#point").val(num);
+});
+$('#p4').click(function(){
+	var num = +$("#point").val() + 1000000;
+	 $("#point").val(num);
 });
 </script>

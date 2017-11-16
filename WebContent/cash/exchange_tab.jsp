@@ -203,9 +203,9 @@
 		},
 		messages: {
 			withdraw :{
-				required:"Input is required.",
-				digits: "Input must be numbers",
-				min:"The minimum exchangable amount is 10,000.",
+				required:"입력이 필요합니다.",
+				digits: "입력은 숫자 여야합니다.",
+				min:"교환 가능한 최소 금액은 10,000입니다.",
 			},
 		},
 		errorPlacement: function(error, element) {
