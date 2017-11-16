@@ -68,16 +68,17 @@
 										    <option value="한국투자은행">한국투자은행</option>
 										    <option value="HMC투자증권">HMC투자증권</option>
 										    <option value="IBK투자증권">IBK투자증권</option>
+										    <option value="카카오뱅크">카카오뱅크</option>
 									</select>
 								</div>
 								<div class="cash_4">
-									<input class="input_style03"  name="bank_owner" placeholder="Name of depositor" placeholder="입금자명">		
+									<input class="input_style03"  name="bank_owner" placeholder="입금자명">		
 								</div>
 								<div class="cash_4">
-									<input class="input_style03"  name="bank_num" placeholder="Enter your account number" placeholder="입금자명">		
+									<input class="input_style03"  name="bank_num"  placeholder="계좌번호">		
 								</div>
 								<div class="cash_4">
-									<input class="input_style03" type="text" style="text-align: right;padding-right: 5%;" type="number" id="money" name="money" placeholder="Charge amount" placeholder="충전금액">		
+									<input class="input_style03" type="text" style="text-align: right;padding-right: 5%;" type="number" id="money" name="money"  placeholder="충전금액">		
 								</div>	
 								
 							</div>
@@ -179,7 +180,7 @@
 			Charge Application Submited<br>			
 		</div>
 		<div class="btn_wrap">
-			<span class="btn3c cs_close">충전하기</span></a>
+			<span class="btn3c cs_close">충전하기</span>
 		</div>
 	</div>
 </div>
@@ -319,20 +320,20 @@
 		},
 		messages: {
 		    bank_name :{
-				required:"Bank Name is required.",
+				required:"은행을 선택해 주세요.",
 			},
 			bank_num :{
-				required:"Bank Account Number is required",
-				digits: "Bank Number must be numbers",
+				required:"계좌번호를 입력해 주세요.",
+				digits: "계좌번호를 숫자로 입력해 주세요.",
 			},
 			bank_owner :{
-				required:"Depositor Name is required",
+				required:"예금주명을 입력해 주세요.",
 			},
 			money:{
-				required:"Money is required",
-				digits: "Money should be money",
-				min:"The minimum charge is $10.",
-				range:"The minimum charge is $10.",
+				required:"금액을 입력해 주세요.",
+				digits: "금액을 숫자로 입력해 주세요.",
+				min:"최소 만원 이상으로 입력해 주세요.",
+				range:"최소 만원 이상으로 입력해 주세요.",
 			}
 
 		},

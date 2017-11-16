@@ -23,8 +23,8 @@
 		/> -->
 	<Resource name="jdbc/ibet" auth="Container" type="javax.sql.DataSource"
                maxActive="100" maxIdle="30" maxWait="10000"
-               username="admin" password="admin" driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-               url="jdbc:sqlserver://10.30.42.125;DatabaseName=RT01"/>
+               username="rtuser1" password="vava!@#" driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+               url="jdbc:sqlserver://127.0.0.1:2433;databaseName=RT01"/>
 			  
 	<!-- name : dbcp name maxActive : 연결 최대 허용개수 maxIdle : 항상 연결 상태를 유지하는 개수 -->
 

@@ -41,14 +41,16 @@
 			</div>
 			<div class="f_site_partner">
 				<ul>
-					<li><img src="/images/partner/cod.png"></li>
-					<li><img src="/images/partner/bc.png"></li>
-					<li><img src="/images/partner/mg.png"></li>
+					<li><img src="/images/partner_1.jpg"></li>
+					<li><img src="/images/partner_2.jpg"></li>
+					<li><img src="/images/partner_3.jpg"></li>
+					<li><img src="/images/partner_4.jpg"></li>
 				</ul>
 				<ul>
-					<li><img src="/images/partner/ICE.png"></li>
-					<li><img src="/images/partner/leap.png"></li>
-					<li><img src="/images/partner/ag.png"></li>
+					<li><img src="/images/partner_1.jpg"></li>
+					<li><img src="/images/partner_2.jpg"></li>
+					<li><img src="/images/partner_3.jpg"></li>
+					<li><img src="/images/partner_4.jpg"></li>
 				</ul>
 			</div>
 		</div>
@@ -59,6 +61,3 @@
 		<img src="/images/f_logo.jpg" style="margin:20px 0 0 0">
 	</div>
 </div>
-
-</body>
-</html>
