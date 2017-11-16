@@ -45,7 +45,7 @@
 												</div>
 												<div class="cash_in">
 													<div class="cash_6">
-														<input class="input_style03" id="point" name="point" placeholder="입금자명">		
+														<input class="input_style03" id="point" name="point" placeholder="전환 포인트">		
 													</div>
 													<div class="cash_3">
 														<span class="btn5" id="reset">정정</span>
@@ -61,9 +61,11 @@
 													<span><button type="submit" class="btn3c">전환신청</button></span>
 												</div>
 											</div>
+										<!--
 										<div class="point_banner">
 											배너배너배너
 										</div>
+										-->
 									</div>
 								</form>
 								</div>
@@ -82,10 +84,10 @@
 							<img src="/images/check_icon.png">
 						</div>
 						<div class="pop_text">
-							Point Switch Success<br>			
+							전환 신청이 완료 되었습니다.<br>			
 						</div>
 						<div class="btn_wrap">
-							<span class="btn3c cs_close">충전하기</span></a>
+							<span class="btn3c cs_close">확인</span>
 						</div>
 					</div>
 				</div>
@@ -103,9 +105,9 @@ $("#pointform").validate({
 	},
 	messages: {
 		point :{
-			required:"Input is required.",
-			digits: "Input must be numbers",
-			range:"The minimum exchangable amount is 1000.",
+			required:"전환할 포인트를 입력해 주세요.",
+			digits: "전환할 포인트를 숫자로 입력해 주세요.",
+			range:"최소 전환 금액은 1000원 입니니다.",
 		},
 	},
 	errorPlacement: function(error, element) {

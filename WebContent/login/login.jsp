@@ -66,11 +66,11 @@
 			// console.log(!vUser);
 			// console.log(!vPass);
 			if(!vUser && !vPass){
-				toastr.success("Please complete the form");
+				toastr.success("아이디와 비밀번호를 입력해 주세요.");
 			}else if (vUser && !vPass){
-				toastr.success("Password is required");
+				toastr.success("비밀번호를 입력해 주세요.");
 			}else if (!vUser && vPass){
-				toastr.success("Userid is required");
+				toastr.success("아이디를 입력해 주세요.");
 			}else{
 
 				var data = $(this).serializeJSON();
@@ -110,13 +110,13 @@
 			},
 			messages: {
 			    userid :{
-					required:"User Id is required",
+					required:"아이디를 입력해 주세요.",
 					remote:"이미 사용중인 아이디 입니다.",
 				},
 				passwd :{
-					required:"Password is required",
-					minlength:"비밀번호를 6자리 이상 입력 해 주세요.",
-					maxlength:"비밀번호를 20자리 이하로 입력 해 주세요",
+					required:"비밀번호를 입력해 주세요.",
+					minlength:"비밀번호를 6자리 이상 입력해 주세요.",
+					maxlength:"비밀번호를 20자리 이하로 입력해 주세요",
 				},
 
 			},
@@ -157,7 +157,7 @@
 			}else if(obj.result == 1 ){
 				
 				setTimeout(function(){
-					toastr.success('Incorrect Password');
+					toastr.success('비밀번호가 일치하지 않습니다.');
 					$("#fd3_spn").hide();
 					$("#fd3_cont").show();
 					$("#passwd-input").focus();
@@ -168,7 +168,7 @@
 			}else if(obj.result == 2){
 
 				setTimeout(function(){
-					toastr.success('Unknown User Id');
+					toastr.success('존재하지 않는 아이디 입니다.');
 					$("#fd3_spn").hide();
 					$("#fd3_cont").show();
 					$("#userid-input").focus();
@@ -177,7 +177,7 @@
 
 			}else{
 
-				toastr.success('Something went wrong. Try again.');
+				toastr.success('죄송합니다. 다시 시도해 주세요.');
 				$("#fd3_spn").hide();
 				$("#fd3_cont").show();
 			}

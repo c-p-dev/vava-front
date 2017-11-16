@@ -181,10 +181,10 @@ public class GameDao {
 		
 		String  query 			= "SELECT game_provider, " + 
 				"CASE game_provider " + 
-				"  WHEN 1 THEN 'MG Casino' " + 
-				"  WHEN 2 THEN 'AG Casino'  " + 
-				"  WHEN 3 THEN 'Betconstruct Casino' " +  
-				"  WHEN 4 THEN '3D' " +  
+				"  WHEN 1 THEN '마이크로게임 카지노' " + 
+				"  WHEN 2 THEN '아시안게임 카지노'  " + 
+				"  WHEN 3 THEN '베컨 카지노' " +  
+				"  WHEN 4 THEN '가상게임' " +  
 				" END as game_provider_name " + 
 				"FROM game_lst WHERE game_provider != 4 " + 
 				"GROUP BY game_provider" ;
@@ -222,10 +222,10 @@ public class GameDao {
 		
 		String  query 			= "SELECT game_type, " + 
 				"CASE game_type " + 
-				"WHEN 1 THEN 'Live Roulette' " + 
-				"WHEN 2 THEN 'Live Sicbo' " + 
-				"WHEN 3 THEN 'LIVE Baccarat' " + 
-				"WHEN 4 THEN 'Live Dragon Tiger' " + 
+				"WHEN 1 THEN '라이브 룰렛' " + 
+				"WHEN 2 THEN '라이브 식보' " + 
+				"WHEN 3 THEN '라이브 바카라' " + 
+				"WHEN 4 THEN '라이브 드래곤 타이거' " + 
 				"END as game_type_name " + 
 				"FROM game_lst WHERE game_provider != 4 " +  
 				"GROUP BY game_type " ;
@@ -261,10 +261,10 @@ public class GameDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs 			= null;
 		String query = "SELECT game_type, CASE game_type " + 
-				"WHEN 1 THEN 'Live Roulette' " + 
-				"WHEN 2 THEN 'Live Sicbo' " + 
-				"WHEN 3 THEN 'Live Baccarat' " + 
-				"WHEN 4 THEN 'Live Dragon Tiger' " + 
+				"WHEN 1 THEN '라이브 룰렛' " + 
+				"WHEN 2 THEN '라이브 식보' " + 
+				"WHEN 3 THEN '라이브 바카라' " + 
+				"WHEN 4 THEN '라이브 드래곤 타이거' " + 
 				"WHEN 5 THEN '3D Horses' " + 
 				"WHEN 6 THEN '3D Animals' " + 
 				"END as game_type_name FROM game_lst WHERE game_provider = ? Group by game_type UNION " + 
@@ -279,10 +279,10 @@ public class GameDao {
 			
 			if(game_provider == 0){
 				query = "SELECT game_type, CASE game_type " + 
-						"WHEN 1 THEN 'Live Roulette' " + 
-						"WHEN 2 THEN 'Live Sicbo' " + 
-						"WHEN 3 THEN 'Live Baccarat' " + 
-						"WHEN 4 THEN 'Live Dragon Tiger' " + 
+						"WHEN 1 THEN '라이브 룰렛' " + 
+						"WHEN 2 THEN '라이브 식보' " + 
+						"WHEN 3 THEN '라이브 바카라' " + 
+						"WHEN 4 THEN '라이브 드래곤 타이거' " + 
 						"END as game_type_name FROM game_lst WHERE game_provider != 4 GROUP BY game_type UNION " + 
 						"SELECT 0 , 'ALL' AS game_type_name";
 				

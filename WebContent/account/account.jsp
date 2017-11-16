@@ -1,8 +1,96 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <%@ include file="/inc/session.jsp"%>
 <%@ include file="/inc/session_checker2.jsp"%>
-<%@ include file="/inc/main_header.jsp"%>
-<%@ include file="/inc/header.jsp"%>
 
+
+
+
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>iBET25(TEST WEB)</title>
+
+
+<meta name="viewport" content="width=1400,minimum-scale=0,maximum-scale=5,target-densitydpi=device-dpi">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">		
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.12.1.min.js"></script>
+<script type="text/javascript" src="/js/header.js" charset="utf-8"></script><!-- header -->
+<script type="text/javascript" src="/js/select.js" charset="utf-8"></script><!-- util_select -->
+<script type="text/javascript" src="/js/my_select.js"></script>
+<script type="text/javascript" src="/js/visual_slider.js"></script><!-- VisualBanner, CasinoBanner -->
+<script type="text/javascript" src="/js/script.js"></script><!-- VisualBanner, CasinoBanner -->
+<script type="text/javascript" src="/js/multislider.js"></script><!-- contents_slider -->
+<script type="text/javascript" src="/js/tabulous.js"></script><!-- MainTab -->
+<script type="text/javascript" src="/js/sub_tab.js"></script><!-- sub_tab -->
+<script type="text/javascript" src="/js/jquery-popover.js"></script><!-- point_popup -->
+<script type="text/javascript" src="/js/popup.js"></script><!-- popup -->
+<script type="text/javascript" src="/js/left_menu.js"></script><!-- left_menu -->
+<script type="text/javascript" src="/js/gallery.js"></script>
+<script type="text/javascript" src="/js/showid.js"></script>
+<script type="text/javascript" src="/js/vertical_tab.js"></script>
+<script type="text/javascript" src="/js/over.js"></script>
+<script type="text/javascript" src="/js/over_script.js"></script>
+<script type="text/javascript" src="/js/table.js"></script><!-- main_table_slide -->
+<script type="text/javascript" src="/js/gateway.js"></script><!-- gateway -->
+<script type="text/javascript" src="/js/img_hover.js"></script><!-- casino_hover -->
+<script type="text/javascript" src="/js/text_slide.js"></script><!-- text_slide -->
+<script type="text/javascript" src="/js/switch.js"></script><!-- switch -->
+<script type="text/javascript" src="/js/sports_acc.js"></script><!-- 스포츠아코디언, 베팅내역 아코디언-->
+<script type="text/javascript" src="/js/fade.js"></script><!-- switch -->
+<script type="text/javascript" src="/js/jquery.serializejson.js"></script><!-- json serializer -->
+<script type="text/javascript" src="/js/accordion.js"></script><!-- sub_아코디언 -->
+<script type="text/javascript" src="/js/common.js"></script>
+<script type="text/javascript" src="/js/jquery.validate.js"></script> 
+<script type="text/javascript" src="/js/jquery.nice-select.js"></script><!-- select -->
+<script type="text/javascript" src="/js/jqueryRemote.js"></script> 
+<script type="text/javascript" src="/js/additional-methods.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/list.pagination.js/0.1.1/list.pagination.min.js"></script>
+<script type="text/javascript" src="/js/datatables/jquery.dataTables.js"></script><!-- datatable -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.js"></script><!-- custom scrollbar -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/jquery.qtip.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script><!-- moment js -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.js"></script><!-- pickaday -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.js"></script>
+
+
+<link href="/css/common.css" rel="stylesheet" type="text/css">
+<link href="/css/layout.css" rel="stylesheet" type="text/css">
+<link href="/css/main.css" rel="stylesheet" type="text/css"><!-- main -->
+<link href="/css/sub.css" rel="stylesheet" type="text/css"><!-- sub -->
+<link href="/css/game.css" rel="stylesheet" type="text/css"><!-- game -->
+<link href="/css/gateway.css" rel="stylesheet" type="text/css"><!-- gateway -->
+<link href="/css/customize.css" rel="stylesheet" type="text/css">
+<link href="/css/font-awesome.css" rel="stylesheet" type="text/css">
+<link href="/css/spin.css" rel="stylesheet" type="text/css">
+<link href="/css/nice-select.css" rel="stylesheet" type="text/css"><!-- select -->
+<link href="/css/common2.css" rel="stylesheet" type="text/css">
+<link href="/css/manual.css" rel="stylesheet" type="text/css"><!--slide-->
+<link href="/css/custom.css" rel="stylesheet" type="text/css"><!--공통-->
+
+<link rel="stylesheet" href="/css/datatables.net-bs/css/bootstrap-simple.css" /> 
+<link rel="stylesheet" href="/css/datatables.net-bs/css/dataTables.bootstrap.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css" rel="stylesheet" type="text/css"><!-- toaster test  -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/jquery.qtip.css" /><!-- tooltip -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.css" rel="stylesheet" type="text/css">
+<!-- custom scrollbar test -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css" />
+
+<script type="text/javascript" src="/js/angular.js"></script> 
+<script type="text/javascript" src="/js/angular-animate.min.js"></script> 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.16/angular-filter.js"></script>    
+<script type="text/javascript" src="/js/v-accordion.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28//angular-route.min.js"></script>
+<link href="/css/v-accordion.css" rel="stylesheet" type="text/css">
 
 <style>
 	#pwmodal .pop_text{
@@ -14,11 +102,18 @@
     	display: none;
 	}
 </style>
+
+
+</head>
+<body>
+	
+	<%@ include file="/inc/header.jsp"%>
+	
 <div id="contents_wrap" class="accnt_pg">
 	<div class="contents">
 		<ul class="tabs">
-			<li><a href="#tab1">아이디찾기</a></li>
-			<li><a href="#tab2">비밀번호찾기</a></li>
+			<li><a href="#tab1">아이디 찾기</a></li>
+			<li><a href="#tab2">비밀번호 찾기</a></li>
 		</ul>
 		<div class="tab_container">
 			<div id="tab1" class="tab_content">
@@ -32,7 +127,7 @@
 										<input type="hidden" name="method" value="by_phone">
 										<table cellpadding="0" cellspacing="0" class="login_table">
 											<tr>
-												<td><input class="input_style02" id="fid1nk" name="nk" placeholder="Name" placeholder="이름"></td>
+												<td><input class="input_style02" id="fid1nk" name="nk" placeholder="예금주"></td>
 											</tr>
 											<tr>
 												<td>
@@ -40,12 +135,12 @@
 														<tr>
 															<td width="112" style="padding:0 10px 0 0">
 																<select class="input_style02" id="fid1cp" name="cp">
-																	<option value="+63" selected>+63</option>
-																	<option value="+82">+82</option>
+																	<option value="+82">+82(한국)</option>
+																	<option value="+63">+63(필리핀)</option>
 																</select>
 															</td>
 															<td width="158" style="padding:0 10px 0 0">
-																<input class="input_style02" id="fidcll" name="cll" placeholder="Mobile Phone Number" placeholder="휴대폰번호">
+																<input class="input_style02" id="fidcll" name="cll" placeholder="휴대폰 번호">
 															</td>
 															<td>
 																<button id="fSndBtn" class="btn5">인증</button>
@@ -64,7 +159,7 @@
 													<table  width="100%" cellpadding="0" cellspacing="0" class="login_table_in">
 														<tr>
 															<td width="280" style="padding:0 0px 0 0">
-																<input class="input_style02" id="findIdCert" name="ac" placeholder="Certification Number"  maxlength="6" placeholder="인증번호">
+																<input class="input_style02" id="findIdCert" name="ac" maxlength="6" placeholder="인증번호">
 															</td>
 														</tr>
 														<tr>
@@ -75,7 +170,7 @@
 											</tr>
 										</table>
 										<div class="acc_btn_wrap">
-											<input type="submit" class="btn3c" value="아이디확인">
+											<input type="submit" class="btn3c" value="아이디 확인">
 										</div>
 									</form>
 								</div>
@@ -91,14 +186,14 @@
 										<input type="hidden" name="method" value="by_bank">
 										<table cellpadding="0" cellspacing="0" class="login_table">
 											<tr>
-												<td><input class="input_style02" id="findIdBank_owner" name="bo"  placeholder="Name (Account Holder)" placeholder="이름(예금주)"></td>
+												<td><input class="input_style02" id="findIdBank_owner" name="bo" placeholder="예금주"></td>
 											</tr>
 											<tr>
 												<td>
 													<table  width="100%" cellpadding="0" cellspacing="0" class="login_table_in">
 														<tr>
 															<td width="112" style="padding:0 10px 0 0">
-																<select class="input_style02"  id="findIdBank_name" name="bn" placeholder="name of bank" placeholder="은행명">
+																<select class="input_style02"  id="findIdBank_name" name="bn" placeholder="은행명">
 																	<option value="국민은행" selected>국민은행</option>
 																    <option value="기업은행">기업은행</option>
 																    <option value="경남은행">경남은행</option>
@@ -130,9 +225,10 @@
 																    <option value="한국투자은행">한국투자은행</option>
 																    <option value="HMC투자증권">HMC투자증권</option>
 																    <option value="IBK투자증권">IBK투자증권</option>
+																    <option value="카카오뱅크">카카오뱅크</option>
 																</select>
 															</td>
-															<td width="158" style="padding:0 10px 0 0"><input class="input_style02" name="bnn"  placeholder="Account number entered at the time of registration" placeholder="가입시 입력한 계좌번호"></td>
+															<td width="158" style="padding:0 10px 0 0"><input class="input_style02" name="bnn"  placeholder="계좌번호"></td>
 															
 														</tr>	
 													</table>
@@ -144,12 +240,12 @@
 														<tr>
 															<td width="112" style="padding:0 10px 0 0">
 																<select class="input_style02" id="fid1cp2" name="cp">
-																	<option value="+63" selected>+63</option>
-																	<option value="+82">+82</option>
+																	<option value="+82">+82(한국)</option>
+																	<option value="+63">+63(필리핀)</option>
 																</select>
 															</td>
 															<td width="158" style="padding:0 10px 0 0">
-																<input class="input_style02" id="fidcll2" name="cll" placeholder="휴대폰번호">
+																<input class="input_style02" id="fidcll2" name="cll" placeholder="휴대폰 번호">
 															</td>
 														</tr>
 													</table>
@@ -157,7 +253,7 @@
 											</tr>
 										</table>
 										<div class="acc_btn_wrap">
-											<input type="submit" value="아이디문의" class="btn3c">
+											<input type="submit" value="아이디 문의" class="btn3c">
 										</div>
 
 									</form>
@@ -182,7 +278,7 @@
 												<td><input class="input_style02" id="fp1ud" name="ud"  placeholder="아이디"></td>
 											</tr>
 											<tr>
-												<td><input class="input_style02" id="fp1nk" name="nk"  placeholder="이름"></td>
+												<td><input class="input_style02" id="fp1nk" name="nk"  placeholder="예금주"></td>
 											</tr>
 											<tr>
 												<td>
@@ -190,11 +286,11 @@
 														<tr>
 															<td width="112" style="padding:0 10px 0 0">
 																<select class="input_style02"  id="fp1cp" name="cp">
-																	<option value="+63">+63</option>
-																	<option value="+82">+82</option>
+																	<option value="+82">+82(한국)</option>
+																	<option value="+63">+63(필리핀)</option>
 																</select>
 															</td>
-															<td width="158" style="padding:0 10px 0 0"><input class="input_style02" id="fp1cll" name="cll" maxlength="15" placeholder="휴대폰번호"></td>
+															<td width="158" style="padding:0 10px 0 0"><input class="input_style02" id="fp1cll" name="cll" maxlength="15" placeholder="휴대폰 번호"></td>
 															<td>
 																<button class="btn5" id="fSndBtn2">인증</button>
 															</td>
@@ -235,7 +331,7 @@
 										<input type="hidden" name="method" value="by_bank">
 										<table cellpadding="0" cellspacing="0" class="login_table">
 											<tr>
-												<td><input class="input_style02"  id="fp3bo" name="bo"  placeholder="이름(예금주)"></td>
+												<td><input class="input_style02"  id="fp3bo" name="bo"  placeholder="예금주"></td>
 											</tr>
 											<tr>
 												<td><div class="input_warning" id="bo-fp3-warn">- 를 제외하고 입력해주세요</div></td>
@@ -277,9 +373,10 @@
 																    <option value="한국투자은행">한국투자은행</option>
 																    <option value="HMC투자증권">HMC투자증권</option>
 																    <option value="IBK투자증권">IBK투자증권</option>
+																    <option value="카카오뱅크">카카오뱅크</option>
 																</select>
 															</td>
-															<td width="158" style="padding:0 0px 0 0"><input class="input_style02"  id="fp3bnn" name="bnn"  placeholder="가입시 입력한 계좌번호"></td>
+															<td width="158" style="padding:0 0px 0 0"><input class="input_style02"  id="fp3bnn" name="bnn"  placeholder="계좌번호"></td>
 														</tr>
 														<tr>
 															<td colspan="2" ><div class="input_warning" id="bnn-fp3-warn">- 를 제외하고 입력해주세요</div></td>
@@ -293,11 +390,11 @@
 														<tr>
 															<td width="112" style="padding:0 10px 0 0">
 																<select class="input_style02"  id="fp3cp" name="cp" >
-																	<option value="+63">+63</option>
-																	<option value="+82">+82</option>
+																	<option value="+82">+82(한국)</option>
+																	<option value="+63">+63(필리핀)</option>
 																</select>
 															</td>
-															<td width="158" style="padding:0 0px 0 0"><input class="input_style02"  id="fp3cll" name="cll"  placeholder="휴대폰번호"></td>
+															<td width="158" style="padding:0 0px 0 0"><input class="input_style02"  id="fp3cll" name="cll"  placeholder="휴대폰 번호"></td>
 														</tr>
 														<tr>
 															<td colspan="2"><div class="input_warning" id="cll-fp3-warn">- 를 제외하고 입력해주세요</div></td>
@@ -365,7 +462,7 @@
 							</tr>
 							<tr>
 								<td>
-									<input type="password" class="input_style02 pd" id="fp2pd2" name="newpd2"  placeholder="비밀번호확인">
+									<input type="password" class="input_style02 pd" id="fp2pd2" name="newpd2"  placeholder="비밀번호 확인">
 								</td>
 							</tr>
 							<tr>
@@ -431,7 +528,7 @@
 				}).done(function(data){
 					var obj = JSON.parse(data);
 					if(obj.userid == null || obj.userid == "null"){
-						toastr.success('Incorrect Authenication Code');
+						toastr.success('인증번호를 다시 확인해 주세요.');
 					}else{
 						toastr.clear();
 						$("#findIdUserid").html(obj.userid);
@@ -470,15 +567,15 @@
 			},
 			messages: {
 			    nk :{
-					required:"Nickname is required",
+					required:"별명을 입력해 주세요.",
 				},
 				cll :{
-					required:"Mobile Number is required",
-					minlength:"Minimum length is 10",
+					required:"휴대폰 번호를 입력해 주세요.",
+					minlength:"휴대폰 번호를 확인 후 다시 입력해 주세요.",
 				},
 				ac :{
-					required:"Certificate is required",
-					minlength:"Minimun Length is 6",
+					required:"인증번호를 입력해 주세요.",
+					minlength:"인증번호를 다시 확인해 주세요.",
 				},
 
 			},
@@ -636,18 +733,18 @@
 			},
 			messages: {
 				bn :{
-					required:"Bank name is required",
+					required:"은행을 선택해 주세요.",
 				},
 				bnn :{
-					required:"Bank number is required",
-					digits: "Please enter only digits on Bank Number",
+					required:"계좌번호를 입력해 주세요.",
+					digits: "계좌번호를 숫자로 입력해 주세요.",
 				},
 				bo :{
-					required:"Bank owner is required",
+					required:"예금주를 입력해 주세요.",
 				},
 				cll :{
-					required:"Mobile Number is required",
-					minlength:"Minimum length is 10",
+					required:"휴대폰 번호를 입력해 주세요.",
+					minlength:"휴대폰 번호를 확인 후 다시 입력해 주세요.",
 				}
 			},
 			errorPlacement: function(error, element) {
@@ -744,18 +841,18 @@
 			},
 			messages: {
 				ud :{
-					required:"User Id is required",
+					required:"아이디를 입력해 주세요.",
 				},
 				nk :{
-					required:"Nick name is required",
+					required:"별명울 입력해 주세요.",
 				},
 				ac :{
-					required:"Certificate is required",
-					minlength:"Minimun Length is 6",
+					required:"인증번호를 입력해 주세요.",
+					minlength:"인증번호를 다시 확인해 주세요.",
 				},
 				cll :{
-					required:"Mobile Number is required",
-					minlength:"Minimum length is 10",
+					required:"휴대폰 번호를 입력해 주세요.",
+					minlength:"휴대폰 번호를 확인 후 다시 입력해 주세요.",
 				}
 			},
 			errorPlacement: function(error, element) {
@@ -833,7 +930,7 @@
 							$("#modalPdSs").popup("show");
 						}else{
 							$("#pwmodal").popup("hide");
-							toastr.success("Something went wrong try again");
+							toastr.success("죄송합니다. 다시 시도해 주세요.");
 						}
 					});
 				}else if(data['form'] == 'f2'){
@@ -850,14 +947,14 @@
 							$("#modalPdSs").popup("show");
 						}else{
 							$("#pwmodal").popup("hide");
-							toastr.success("Something went wrong try again");
+							toastr.success("죄송합니다. 다시 시도해 주세요.");
 						}
 					});
 				}
 				else{
 
 					$("#pwmodal").popup("hide");
-					toastr.success("Something went wrong try again");
+					toastr.success("죄송합니다. 다시 시도해 주세요.");
 
 				}
 			}
@@ -886,15 +983,15 @@
 			},
 			messages: {
 				newpd :{
-					required:"Password is required",
-					minlength:"Minimum length is 6",
-					maxlength:"Maximum length is 20",
+					required:"비밀번호를 입력해 주세요.",
+					minlength:"비밀번호를 6자리 이상 입력해 주세요.",
+					maxlength:"비밀번호를 20자리 이하로 입력해 주세요.",
 				},
 				newpd2 :{
-					required:"Confirm Password is required",
-					minlength:"Minimum length is 6",
-					maxlength:"Maximum length is 20",
-					equalTo: "Confirm Password must be equal to New Password",
+					required:"비밀번호를 다시 한번 확인해 주세요.",
+					minlength:"비밀번호를 6자리 이상 입력해 주세요.",
+					maxlength:"비밀번호를 20자리 이하로 입력해 주세요.",
+					equalTo: "비밀번호가 일치하지 않습니다. 다시 입력해 주세요.",
 				},
 				
 			},
@@ -966,20 +1063,21 @@
 					required:true,
 				}
 			},
+				
 			messages: {
 				bn :{
-					required:"Bank name is required",
+					required:"은행을 선택해 주세요.",
 				},
 				bnn :{
-					required:"Bank number is required",
-					digits: "Please enter only digits on Bank Number",
+					required:"계좌번호를 입력해 주세요.",
+					digits: "계좌번호를 숫자로 입력해 주세요.",
 				},
 				bo :{
-					required:"Bank owner is required",
+					required:"예금주를 입력해 주세요.",
 				},
 				cll :{
-					required:"Mobile Number is required",
-					minlength:"Minimum length is 10",
+					required:"휴대폰 번호를 입력해 주세요.",
+					minlength:"휴대폰 번호를 확인 후 다시 입력해 주세요.",
 				}
 			},
 			errorPlacement: function(error, element) {
@@ -1146,8 +1244,8 @@
 				
 		    	$("#f1cdt").text(" ").hide();
 		    	clearInterval(f1cntr);
-		    	toastr.success("Verification Timed Out. Try Again");
-		    	$("#fSndBtn").html("Resend");
+		    	toastr.success("인증 시간이 초과했습니다. 다시 시도해 주세요.");
+		    	$("#fSndBtn").html("재전송");
 		    	f1rSnd = true;
 		    	$("#fSndBtn").prop("disabled",false);		
 		    	// $("#fade_1").popup("hide");
@@ -1170,13 +1268,13 @@
 		f2cntr = setInterval(function(){
 			td = moment.duration(td.asMilliseconds() - ti, 'milliseconds');
     		if(td >= 0){
-				$("#fcdt").text("Time Left to Verify : " + moment(td.asMilliseconds()).format('mm:ss '));
+				$("#fcdt").text("인증 남은 시간 : " + moment(td.asMilliseconds()).format('mm:ss '));
 			}else{
 				
 		    	$("#fcdt").text(" ").hide();
 		    	clearInterval(f2cntr);
 		    	toastr.success("Verification Timed Out. Try Again");
-		    	$("#fSndBtn2").html("Resend");
+		    	$("#fSndBtn2").html("재전송");
 		    	f2rSnd = true;
 		    	$("#fSndBtn2").prop("disabled",false);		
 		    	// $("#fade_1").popup("hide");
@@ -1187,5 +1285,7 @@
 
 </script>
 <%@ include file="/inc/footer.jsp"%>
+
+</div>
 </body>
 </html>
