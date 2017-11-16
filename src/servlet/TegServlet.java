@@ -92,6 +92,31 @@ public class TegServlet extends HttpServlet {
 			case 4:
 				teg_ctrl.extractLiveGameTransactions();
 				break;
+			
+			case 5:
+				UserBean sess_data5	= (UserBean)request.getSession().getAttribute("currentSessionUser");
+				UserBean udata5		= new UserBean();
+				UserDao user_db5	= new UserDao();
+				String srv_resp_5	= "";
+				System.out.println("show me the money");
+				if (null != sess_data5) {
+					udata5	= user_db5.getUserByUserId(sess_data5.getUserid());
+					
+					if (null != udata5) {
+						if (0 >= udata5.getMoney()) {
+							try {
+								System.out.println(udata5.getUserid());
+								srv_resp_5 = teg_ctrl.getAllMoney(udata5.getUserid());
+							} catch (ParseException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+					}
+				}
+				
+				output.print(srv_resp_5);
+				break;
 				
 			case 0:
 			default:
@@ -106,7 +131,6 @@ public class TegServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		
 		
 	}
 }

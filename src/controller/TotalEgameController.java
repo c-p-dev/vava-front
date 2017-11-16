@@ -314,11 +314,13 @@ public class TotalEgameController {
 		sc_resp			= sc_ctrl.makeTransaction(null, "withdraw");
 		sc_trans_data	= gson.fromJson(sc_resp, ScTransactionBean.class);
 		
-		if (0 < sc_trans_data.getAmount()) {
-			money 	= money + sc_trans_data.getAmount();
-			
-			user_profile.setMoney((int)money);
-			user_db.setUserMoney(username, money);
+		if (null != sc_trans_data) {
+			if (0 < sc_trans_data.getAmount()) {
+				money 	= money + sc_trans_data.getAmount();
+				
+				user_profile.setMoney((int)money);
+				user_db.setUserMoney(username, money);
+			}
 		}
 		
 		/*--------------------------------------------------------------------
@@ -376,6 +378,25 @@ public class TotalEgameController {
 		}
 		
 		return game_url_full;
+	}
+	
+	public String getAllMoney(String username) throws ParseException
+	{
+		Gson gson						= new Gson();
+		String json_data				= "";
+		SpinCubeController sc_ctrl		= null;
+		UserBean user_data				= new UserBean();
+		UserDao user_db					= new UserDao();
+		
+		user_data	= user_db.getUserByUserId(username);
+		sc_ctrl		= new SpinCubeController(Integer.toString(user_data.getSiteid()).concat("_").concat(user_data.getUserid()));
+		
+		user_data	= this.transferMoneyToVava(username);
+		user_data	= sc_ctrl.transferMoneyToVava(username);
+		
+		json_data	= gson.toJson(user_data, UserBean.class);
+		
+		return json_data;
 	}
 	
 	public UserBean transferMoneyToVava(String username)
