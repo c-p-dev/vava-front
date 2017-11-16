@@ -45,7 +45,7 @@
 					<td>
 						<table  cellpadding="0" width="100%" cellspacing="0" class="popup_table01_1">
 							<tr>
-								<td><input class="input_style02 input_required pd" type="password" maxlength="20" id="passwd" name="passwd" data-warn="pd-warn" placeholder="비밀번호" tabindex="3"></td>
+								<td><input class="input_style02 input_required" type="password" maxlength="20" id="passwd" name="passwd" data-warn="pd-warn" placeholder="비밀번호" tabindex="3"></td>
 							</tr>
 							<tr>
 								<td ><div class="input_warning" id="passwd-warn"> 만족 조건 충족 여부</div></td>
@@ -57,7 +57,7 @@
 					<td>
 						<table  cellpadding="0" width="100%" cellspacing="0" class="popup_table01_1">
 							<tr>
-								<td><input class="input_style02 input_required pd" type="password" maxlength="20" id="conf_passwd" name="conf_passwd" data-warn="pd-warn" placeholder="비밀번호" tabindex="4"></td>
+								<td><input class="input_style02 input_required" type="password" maxlength="20" id="conf_passwd" name="conf_passwd" data-warn="pd-warn" placeholder="비밀번호 확인" tabindex="4"></td>
 							</tr>
 							<tr>
 								<td ><div class="input_warning" id="conf_passwd-warn"> 만족 조건 충족 여부</div></td>
@@ -134,8 +134,8 @@
 							<tr>
 								<td width="150" align="left" style="padding:0 5px 0 0">
 									<select class="input_style02" name="cell_prefix" id="cell_prefix">
-										<option value="+63">+63(필리핀)</option>
 										<option value="+82">+82(한국)</option>
+										<option value="+63">+63(필리핀)</option>										
 									</select>
 								</td>
 								<td width="180" align="left" style="padding:0 5px 0 0"><input class="input_style02 input_required" id="cell" name="cell" maxlength="15" data-warn="cell-warn"  placeholder="휴대폰번호" tabindex="7" ></td>

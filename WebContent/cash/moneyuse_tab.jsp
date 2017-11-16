@@ -22,8 +22,8 @@
 							<tr>
 								<td>
 									<select class="input_style02" id="money-use-job-select">
-										<option value="ALL">전체</option>
-										<option value="POINT2MONEY" selected>POINT2MONEY</option>
+										<option value="ALL" selected>전체</option>
+										<option value="POINT2MONEY">POINT2MONEY</option>
 										<option value="ADMIN">ADMIN</option>
 										<option value="ADMIN_BET_CANCEL">ADMIN_BET_CANCEL</option>
 										<option value="AG_BET">AG_BET</option>

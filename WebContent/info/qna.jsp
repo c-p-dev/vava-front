@@ -89,7 +89,7 @@
                 
             },
             createdRow: function ( row, data, index ) {  
-            	console.log(row);
+            	//console.log(row);
             	$(row).addClass('s_close');
             	// if(index == 0){
             	// 	var thisRow = $qnaDt.row(row);

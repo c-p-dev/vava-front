@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <%@ page import = "dao.GameDao"%>
 <%@ page import = "java.text.DecimalFormat"%>
 <%@ page import = "java.util.*"%>
 <%@ page import = "dao.UserDao"%>
 <%@ page import = "bean.UserBean"%>
+
 <%
 	UserBean user_data	= (UserBean)session.getAttribute("currentSessionUser");
 	UserDao user_db	= new UserDao();
@@ -26,19 +28,19 @@
 								<td class="my_info">
 									<span class="my_left">예금주</span><span class="my_right"><%=currentUser.getBank_owner()%></span>
 								</td>
-							<tr>
+							</tr>
 							<tr>
 								<td colspan="3" style="height:10px;"></td>	
 							</tr>
 							<tr>
 								<td class="my_info">
-									<span class="my_left">닉네임 </span><span class="my_right"><%=currentUser.getNick()%></span>
+									<span class="my_left">별명 </span><span class="my_right"><%=currentUser.getNick()%></span>
 								</td>
 								<td class="my_center"></td>
 								<td class="my_info">
 									<span class="my_left">은행명 </span><span class="my_right"><%=currentUser.getBank_name()%> </span>
 								</td>
-							<tr>
+							</tr>
 							<tr>
 								<td colspan="3" style="height:10px;"></td>	
 							</tr>
@@ -50,7 +52,7 @@
 								<td class="my_info">
 									<span class="my_left">계좌번호</span><span class="my_right"><%=currentUser.getBank_num()%></span>
 								</td>
-							<tr>
+							</tr>
 						</table>
 					</div>
 				</div>
@@ -102,11 +104,12 @@
 													    <option value="한국투자은행">한국투자은행</option>
 													    <option value="HMC투자증권">HMC투자증권</option>
 													    <option value="IBK투자증권">IBK투자증권</option>
+													    <option value="카카오뱅크">카카오뱅크</option>
 												</select>
 											</td>
-											<td width="250" align="left" style="padding:0 5px 0 0"><input class="input_style02" name="bank_owner"  placeholder="New Account Holder" placeholder="예금주" ></td>
+											<td width="250" align="left" style="padding:0 5px 0 0"><input class="input_style02" name="bank_owner" placeholder="예금주" ></td>
 											
-											<td align="left" style="padding:0 5px 0 0"><input class="input_style02 input_required" name="bank_num" data-warn="bank-warn" placeholder=" New Account Number (without -)" placeholder="계좌번호입력(-없이 입력)"></td>
+											<td align="left" style="padding:0 5px 0 0"><input class="input_style02 input_required" name="bank_num" data-warn="bank-warn" placeholder="계좌번호입력(-없이 입력)"></td>
 										</tr>
 										<tr>
 											<td colspan="3">
@@ -127,7 +130,7 @@
 													<option value="+82">+82(한국)</option>
 												</select>
 											</td>
-											<td width="250" align="left" style="padding:0 5px 0 0"><input class="input_style02 input_required" name="cell" data-warn="cell-warn" placeholder="Mobile Phone Number" placeholder="휴대폰번호" ></td>
+											<td width="250" align="left" style="padding:0 5px 0 0"><input class="input_style02 input_required" name="cell" data-warn="cell-warn" placeholder="휴대폰 번호" ></td>
 											<td><a href="#"><span class="btn5" style="width: 40%;">인증</span></a></td>
 										</tr>
 										<tr>
@@ -159,28 +162,28 @@
 						<table cellspacing="0" cellpadding="0" class="my_table">
 							<tr>
 								<td class="my_pass">
-									<input class="input_style03" id="current_password" name="current_password" placeholder="Current Password" placeholder="현재 비밀번호" >
+									<input class="input_style03" id="current_password" name="current_password" placeholder="현재 비밀번호" >
 								</td>
 								<td class="my_text input_warning" id="current_password-update-warn" >비밀번호가 일치하지 않습니다. </td>
-							<tr>
+							</tr>
 							<tr>
 								<td colspan="3" style="height:10px;"></td>	
 							</tr>
 							<tr>
 								<td class="my_pass">
-									<input class="input_style03  cp" id="new_passowrd" name="new_passowrd" placeholder="New Password" placeholder="새 비밀번호">
+									<input class="input_style03  cp" id="new_passowrd" name="new_passowrd" placeholder="새 비밀번호">
 								</td>
 								<td class="my_text input_warning" id="new_passowrd-update-warn" >비밀번호는 최소 6자 이상으로 설정해주세요</td>
-							<tr>
+							</tr>
 							<tr>
 								<td colspan="3" style="height:10px;"></td>	
 							</tr>
 							<tr>
 								<td class="my_pass">
-									<input class="input_style03  cp" id="confirm_new_passowrd" name="confirm_new_passowrd" placeholder="Confirm New Password" placeholder="새 비밀번호 확인">
+									<input class="input_style03  cp" id="confirm_new_passowrd" name="confirm_new_passowrd" placeholder="새 비밀번호 확인">
 								</td>
 								<td class="my_text input_warning" id="confirm_new_passowrd-update-warn" >비밀번호가 일치하지 않습니다</td>
-							<tr>
+							</tr>
 						</table>
 						<div class="cash_in">
 							<!-- <a href="#"><span class="btn3c">전환신청</span></a>	 -->
@@ -199,7 +202,7 @@
 					<tr>
 						<td class="list_table_t" width="6%">No</td>
 						<td class="list_table_t" width="22%">아이디</td>
-						<td class="list_table_t" width="22%">닉네임</td>
+						<td class="list_table_t" width="22%">별명</td>
 						<td class="list_table_t" width="25%">코드발급일시</td>
 						<td class="list_table_t" width="25%">회원가입일시</td>
 					</tr>
@@ -295,6 +298,7 @@
 	    	}
 	    });
 
+
 	    $('#updatePasswordModal').popup({
 	    	transition: 'all 0.3s',
 	      	scrolllock: true,
@@ -306,15 +310,18 @@
 	    	}
 	    });
 
+
 	    $(".close-updateProfileModal").on("click",function(e){
 	    	e.preventDefault();
 	    	$('#updateProfileModal').popup("hide");
 	    });
 
+
 	    $(".close-updatePasswordModal").on("click",function(e){
 	    	e.preventDefault();
 	    	$('#updatePasswordModal').popup("hide");
 	    });
+
 
 		$.validator.addMethod(
 	        "sameCell",
@@ -330,9 +337,10 @@
 	        	}else{
 	        		return true;
 	        	}
-	        },
-	        "You must enter a new mobile phone number",
+	        }	        
+	        //"You must enter a new mobile phone number",
 		);
+
 
 		$("#updateProfileForm").validate({
 			debug: true,
@@ -364,32 +372,27 @@
 					sameCell:true,
 				}
 			},
+			
 			messages: {
 				bank_name :{
-					required:"Bank name is required",
+					required:"은행명을 입력해 주세요.",
 				},
 				bank_num :{
-					required:"Bank number is required",
-					digits: "Please enter only digits on Bank Number",
+					required:"계좌번호를 입력해 주세요.",
+					digits: "계좌번호를 숫자로 입력해 주세요.",
 				},
 				bank_owner :{
-					required:"Bank owner is required",
+					required:"예금주를 입력해 주세요.",
 				},
 				cell :{
-					required:"Mobile Number is required",
-					minlength:"Minimum length is 10",
-				},
+					required:"전화번호를 입력해 주세요.",
+					minlength:"전화번호를 확인 후 다시 입력해 주세요.",
+				}
+
 
 			},
 			errorPlacement: function(error, element) {
-				// // console.log(error);
-				// // console.log(element);
-				// $('#updateProfileForm input').css("border-color","#2e3032");
-				// var error_label = element.attr("name");
-			 //    if (element.attr("name") == error_label ){
-			 //    	$("#"+error_label+"-update-warn").html(error).show();
-			 //    	$('#'+error_label).css("border-color","#d50000");
-			 //    }
+
 				if(error.text() != ""){
 			    	element.qtip({ 
 					    overwrite: true,
@@ -471,25 +474,20 @@
 			},
 			messages: {
 				current_password :{
-					required:"Current Password is required",
-					remote : "Current Password does not match",
+					required:"현재 사용중인 비빌번호를 입력해 주세요.",
+					remote : "비밓번호를 확인 후 다시 입력해 주세요.",
 				},
 				new_passowrd :{
-					required:"New Password is required",
+					required:"새 비밀번호를 입력해 주세요.",
 				},
 				confirm_new_passowrd :{
-					required:"Confirm Password is required",
-					equalTo: "Confirm Password must be equal to New Password",
+					required:"비빌번호가 일치하지 않습니다.",
+					equalTo: "비빌번호가 일치하지 않습니다.",
 				}
 
 			},
 			errorPlacement: function(error, element) {
-				// $('#updatePasswordForm input').css("border-color","#2e3032");
-				// var error_label = element.attr("name");
-			 //    if (element.attr("name") == error_label ){
-			 //    	$("#"+error_label+"-update-warn").html(error).show();
-			 //    	$('#'+error_label).css("border-color","#d50000");
-			 //    }
+
 			 	if(error.text() != ""){
 			    	element.qtip({ 
 					    overwrite: true,
@@ -583,7 +581,7 @@
 				resetupdatePasswordForm();
 				$('#updatePasswordModal').popup('show');
 			}else{
-				alert("something went wrong");
+				alert("관리자에게 문의해 주세요.");
 			}
 		});
 	}

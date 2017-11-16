@@ -21,14 +21,16 @@ Gson gson = new Gson();
 Type type = new TypeToken<List<BettingListBean>>() {}.getType();
 Type type2 = new TypeToken<List<BettingSName>>() {}.getType();
 
-
-
 String blj = gson.toJson(bl, type);      
-
 String bsj = gson.toJson(bs, type);   
-
  
 %>
+
+<script type="text/javascript" src="/js/angular.js"></script> 
+<script type="text/javascript" src="/js/angular-animate.min.js"></script> 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.16/angular-filter.js"></script>    
+<script type="text/javascript" src="/js/v-accordion.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28//angular-route.min.js"></script>
 
 
 <script>
@@ -231,6 +233,11 @@ String bsj = gson.toJson(bs, type);
 
 </script>
 
+
+<link href="/css/v-accordion.css" rel="stylesheet" type="text/css">
+
+
+
 <style type="text/css">
 	.dataTables_filter {
 		display: none; 
@@ -245,7 +252,7 @@ String bsj = gson.toJson(bs, type);
 						<table cellspacing="0" cellpadding="0" class="my_search_select">
 							<tr>
 								<td>
-									<select ng-model="selectedItem" ng-change="updateSport(selectedItem)" clas">
+									<select ng-model="selectedItem" ng-change="updateSport(selectedItem)">
 										<option value=""> 종목</option>	
 										<option value=""> 전체</option>	
 										<option ng-repeat="(key,value) in BSJ |orderBy:'snames'|groupBy:'snames'" value="{{key}}"> {{key}} </option>
@@ -330,7 +337,7 @@ String bsj = gson.toJson(bs, type);
 													}
 											}
 									
-								%>
+							%>
 								<tr id='<%=blb.getBgid()%>' style="cursor: pointer">
 									<td class="acc_list_check" style="border-left:solid 1px #2e3032; border-right:solid 1px #2e3032;"><input type="checkbox" id="cb2" name="cb" value="<%=blb.getBgid()%>"></td>
 									<td class="acc_list_num"  style="border-right:solid 1px #2e3032;" onClick="selBat('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>"><%=blb.getBgid()%></td>
@@ -378,7 +385,6 @@ String bsj = gson.toJson(bs, type);
 								</form>
 							</div><!-- 1 -->
 						</div>
-
 						
 					</div>
 					<div class="left_btn_wrap"><span class="btn7" id="sa_sp2" style="cursor: pointer">전체 선택</span> &nbsp;<span class="btn8" id="del_all" style="cursor: pointer">선택 삭제</span></div>
@@ -515,10 +521,12 @@ String bsj = gson.toJson(bs, type);
 				</div>
 			</div>
 		</li>
+		
 		<li>
 			<div class="acc_head"><h3>아시안 게임 베팅내역  [<%=bl_ag.size()%>]</h3></div>
 			<div class="acc_content">
 				<div class="acc_content_in_2">
+					
 					<div class="bet_search_wrap">
 						<table cellspacing="0" cellpadding="0" class="my_search_select">
 							<tr>
@@ -550,6 +558,7 @@ String bsj = gson.toJson(bs, type);
 							</tr>
 						</table>
 					</div>
+					
 					<div class="bet_wrap">
 						
 						<div class="example4">
@@ -582,20 +591,20 @@ String bsj = gson.toJson(bs, type);
 							<%
 									if(blb_ag.getJob().equals("WIN")){
 							%>
-									<td class="acc_list_time" style="border-right:solid 1px #2e3032;"><span class="font_002">승<span></td>
+									<td class="acc_list_time" style="border-right:solid 1px #2e3032;"><span class="font_002">승</span></td>
 									<td style="text-align:right; border-right:solid 1px #2e3032;"><span class="font_002"><%=dfrmt.format(Integer.parseInt(blb_ag.getBmoney()))%></span> 원</td>
 									<td class="acc_list_price1" style="border-right:solid 1px #2e3032;"><span class="font_002"><%=dfrmt.format(Integer.parseInt(blb_ag.getRmoney()))%></span> 원</td>
 							<%		
 									} else if(blb_ag.getJob().equals("LOSE")){ 
 							%>
-									<td class="acc_list_time" style="border-right:solid 1px #2e3032;"><span class="font_004">패<span></td>
+									<td class="acc_list_time" style="border-right:solid 1px #2e3032;"><span class="font_004">패</span></td>
 									<td class="acc_list_price1_1" style="border-right:solid 1px #2e3032;"><span class="font_004"><%=dfrmt.format(Integer.parseInt(blb_ag.getBmoney()))%></span> 원</td>
 									<td class="acc_list_price1_1" style="border-right:solid 1px #2e3032;"><span class="font_004"><%=dfrmt.format(Integer.parseInt(blb_ag.getRmoney()))%></span> 원</td>
 							
 							<%		
 									} else if(blb_ag.getJob().equals("BET")){ 
 							%>
-									<td class="acc_list_time" style="border-right:solid 1px #2e3032;"><span class="font_004">배팅<span></td>
+									<td class="acc_list_time" style="border-right:solid 1px #2e3032;"><span class="font_004">배팅</span></td>
 									<td class="acc_list_price1" style="border-right:solid 1px #2e3032;"><span class="font_004"><%=dfrmt.format(Integer.parseInt(blb_ag.getBmoney()))%></span> 원</td>
 									<td class="acc_list_price1" style="border-right:solid 1px #2e3032;"><span class="font_004"><%=dfrmt.format(Integer.parseInt(blb_ag.getRmoney()))%></span> 원</td>
 							<%		
@@ -612,10 +621,11 @@ String bsj = gson.toJson(bs, type);
 									</tbody>
 								</table>	
 								</form>
-							</div><!-- 1 -->
+							</div>
 						</div>
 						
 					</div>
+					
 					<div class="left_btn_wrap"><span class="btn7" id="sa2_ag" style="cursor: pointer">전체 선택</span> &nbsp;<span class="btn8" id="del_all_ag" style="cursor: pointer">선택 삭제</span></div>
 											
 						<script type="text/javascript">
