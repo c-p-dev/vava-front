@@ -112,7 +112,8 @@
             });
 
             if (options.setzindex && !options.autozindex) {
-                $wrapper.css('z-index', '100001');
+                // $wrapper.css('z-index', '100001');
+                $wrapper.css('z-index', '999999999');
             }
 
             if (!options.outline) {

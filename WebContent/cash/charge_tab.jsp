@@ -36,7 +36,7 @@
 						<form name="chargeForm" id="chargeForm">
 							<div class="cash_in">
 								<div class="cash_4">
-									<select class="input_style02" name="bank_name">
+									<select class="input_style02" id="ct_bank_name" name="bank_name">
 										 	<option value="국민은행" selected>국민은행</option>
 										    <option value="기업은행">기업은행</option>
 										    <option value="경남은행">경남은행</option>
@@ -72,10 +72,10 @@
 									</select>
 								</div>
 								<div class="cash_4">
-									<input class="input_style03"  name="bank_owner" placeholder="입금자명">		
+									<input class="input_style03"  id="ct_bank_owner" name="bank_owner" placeholder="입금자명">		
 								</div>
 								<div class="cash_4">
-									<input class="input_style03"  name="bank_num"  placeholder="계좌번호">		
+									<input class="input_style03"  id="ct_bank_num" name="bank_num"  placeholder="계좌번호">		
 								</div>
 								<div class="cash_4">
 									<input class="input_style03" type="text" style="text-align: right;padding-right: 5%;" type="number" id="money" name="money"  placeholder="충전금액">		
@@ -103,7 +103,7 @@
 								<span class="btn1 add-money" data-am="100" >100만원</span> 
 								<span class="btn1 add-money" data-am="0" >정정</span>
 								<!-- <span class="btn3c">충전신청</span></a> -->
-								<input type="submit" value="충전신청" class="btn3c">
+								<input type="submit" id="ct_submit" value="충전신청" class="btn3c">
 							</div>
 							
 						</form>
@@ -293,6 +293,27 @@
 			}, 100);
         });
 
+
+        $("#ct_submit").on("click",function(e){
+			e.preventDefault();
+			if($("#chargeForm").valid()){
+				var data = $("#chargeForm").serializeJSON();
+			    submitCharge(data);
+			}
+		});
+
+		$("#chargeForm input").on("blur",function(e){
+			e.preventDefault();
+			var validator = $( "#chargeForm" ).validate(); 
+			var id = $(this).attr("id");
+			var valid = validator.element("#"+id);
+			$(this).qtip("hide");
+			// console.log(valid);
+			if(!valid && !valid){
+				$(this).focusin();
+			}			
+		});
+
 	});
 
 	$("#chargeForm").validate({
@@ -362,8 +383,8 @@
 			        },
 			        position: {
 				        container: $("#acc_content_in_chargetb"),
-				        at: 'top center ',
-				        my: 'bottom center', 
+				        at: 'bottom right ',
+				        my: 'top left', 
 				        adjust : {
 				        	method : 'shift none',
 				        }
@@ -374,11 +395,9 @@
 				element.qtip("hide");
 			}
 
-		},
-		submitHandler: function(form) {
-			var data = $("#chargeForm").serializeJSON();
-		    submitCharge(data);
-	  	}
+		}
+	
+
 	});
 
 	function addAmount(amount){

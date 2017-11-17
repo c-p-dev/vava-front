@@ -138,7 +138,7 @@
 		$.ajax({
 			url : '/info/jsp/getMessages.jsp',
 			data : {},
-			method: 'POST',
+			method: 'GET',
 		}).done(function(data){ 
 			drawMessages(data);
 			
