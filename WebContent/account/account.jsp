@@ -101,6 +101,14 @@
     	padding-bottom: 8px;
     	display: none;
 	}
+
+	form div.acc_btn_wrap{
+		width: 30%;
+	}
+
+	.popup_table01{
+		width: 30%;
+	}
 </style>
 
 
@@ -121,58 +129,60 @@
 					<li>
 						<div class="acc_head"><h3>회원가입시 등록한 휴대폰 번호로 찾기</h3></div>
 						<div class="acc_content">
-							<div class="acc_content_in_1  " id="acc_content_in_1_fid1">
-								<div class="login_center">
-									<form id="fid1">
-										<input type="hidden" name="method" value="by_phone">
-										<table cellpadding="0" cellspacing="0" class="login_table">
-											<tr>
-												<td><input class="input_style02" id="fid1nk" name="nk" placeholder="예금주"></td>
-											</tr>
-											<tr>
-												<td>
-													<table  width="100%" cellpadding="0" cellspacing="0" class="login_table_in">
-														<tr>
-															<td width="112" style="padding:0 10px 0 0">
-																<select class="input_style02" id="fid1cp" name="cp">
-																	<option value="+82">+82(한국)</option>
-																	<option value="+63">+63(필리핀)</option>
-																</select>
-															</td>
-															<td width="158" style="padding:0 10px 0 0">
-																<input class="input_style02" id="fidcll" name="cll" placeholder="휴대폰 번호">
-															</td>
-															<td>
-																<button id="fSndBtn" class="btn5">인증</button>
-															</td>
-														</tr>
-														<tr>
-															<td colspan="3">
-																<div id="f1cdt" class="hidden_cntdwn"></div>
-															</td>
-														</tr>
-													</table>
-												</td>
-											</tr>
-											<tr>
-												<td>
-													<table  width="100%" cellpadding="0" cellspacing="0" class="login_table_in">
-														<tr>
-															<td width="280" style="padding:0 0px 0 0">
-																<input class="input_style02" id="findIdCert" name="ac" maxlength="6" placeholder="인증번호">
-															</td>
-														</tr>
-														<tr>
-															<td ><div class="input_warning" id="ac-fid1-warn">인증이 완료되었습니다.</div></td>
-														</tr>
-													</table>
-												</td>
-											</tr>
-										</table>
-										<div class="acc_btn_wrap">
-											<input type="submit" class="btn3c" value="아이디 확인">
-										</div>
-									</form>
+							<div class="acc_content_in_2  " id="acc_content_in_1_fid1">
+								<div class="blue_wrap">
+									<div class="my_box">
+										<form id="fid1">
+											<input type="hidden" name="method" value="by_phone">
+											<table cellpadding="0" cellspacing="0" class="popup_table01">
+												<tr>
+													<td><input class="input_style02" id="fid1nk" name="nk" placeholder="예금주"></td>
+												</tr>
+												<tr>
+													<td>
+														<table  width="100%" cellpadding="0" cellspacing="0" class="login_table_in">
+															<tr>
+																<td width="112" style="padding:0 10px 0 0">
+																	<select class="input_style02" id="fid1cp" name="cp">
+																		<option value="+82">+82(한국)</option>
+																		<option value="+63">+63(필리핀)</option>
+																	</select>
+																</td>
+																<td width="158" style="padding:0 10px 0 0">
+																	<input class="input_style02" id="fidcll" name="cll" placeholder="휴대폰 번호">
+																</td>
+																<td>
+																	<button id="fSndBtn" class="btn5">인증</button>
+																</td>
+															</tr>
+															<tr>
+																<td colspan="3">
+																	<div id="f1cdt" class="hidden_cntdwn"></div>
+																</td>
+															</tr>
+														</table>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<table  width="100%" cellpadding="0" cellspacing="0" class="login_table_in">
+															<tr>
+																<td width="280" style="padding:0 0px 0 0">
+																	<input class="input_style02" id="findIdCert" name="ac" maxlength="6" placeholder="인증번호">
+																</td>
+															</tr>
+															<tr>
+																<td ><div class="input_warning" id="ac-fid1-warn">인증이 완료되었습니다.</div></td>
+															</tr>
+														</table>
+													</td>
+												</tr>
+											</table>
+											<div class="acc_btn_wrap">
+												<input type="submit" class="btn3c" value="아이디 확인">
+											</div>
+										</form>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -180,83 +190,84 @@
 					<li>
 						<div class="acc_head"><h3>회원가입시 등록한 계좌 정보로 찾기</h3></div>
 						<div class="acc_content">
-							<div class="acc_content_in_1" id="acc_content_in_1_fid2">
-								<div class="login_center">
-									<form id="fid2">
-										<input type="hidden" name="method" value="by_bank">
-										<table cellpadding="0" cellspacing="0" class="login_table">
-											<tr>
-												<td><input class="input_style02" id="findIdBank_owner" name="bo" placeholder="예금주"></td>
-											</tr>
-											<tr>
-												<td>
-													<table  width="100%" cellpadding="0" cellspacing="0" class="login_table_in">
-														<tr>
-															<td width="112" style="padding:0 10px 0 0">
-																<select class="input_style02"  id="findIdBank_name" name="bn" placeholder="은행명">
-																	<option value="국민은행" selected>국민은행</option>
-																    <option value="기업은행">기업은행</option>
-																    <option value="경남은행">경남은행</option>
-																    <option value="광주은행">광주은행</option>
-																    <option value="동부증권">동부증권</option>
-																    <option value="대구은행">대구은행</option>
-																    <option value="부산은행">부산은행</option>
-																    <option value="산업은행">산업은행</option>
-																    <option value="삼성증권">삼성증권</option>
-																    <option value="삼성증권">신영증권</option>
-																    <option value="신한은행">신한은행</option>
-																    <option value="우리은행">우리은행</option>
-																    <option value="외환은행">외환은행</option>
-																    <option value="저축은행">저축은행</option>
-																    <option value="전북은행">전북은행</option>
-																    <option value="제주은행">제주은행</option>
-																    <option value="하나은행">하나은행</option>
-																    <option value="CITI은행">CITI은행</option>
-																    <option value="HSBC은행">HSBC은행</option>
-																    <option value="SC제일">SC제일</option>
-																    <option value="새마을금고">새마을금고</option>
-																    <option value="우체국">우체국</option>
-																    <option value="농협중앙회">농협중앙회</option>
-																    <option value="단위농협">단위농협</option>
-																    <option value="신협">신협</option>
-																    <option value="수협">수협</option>
-																    <option value="동양증권">동양증권</option>
-																    <option value="유진투자증권">유진투자증권</option>
-																    <option value="한국투자은행">한국투자은행</option>
-																    <option value="HMC투자증권">HMC투자증권</option>
-																    <option value="IBK투자증권">IBK투자증권</option>
-																    <option value="카카오뱅크">카카오뱅크</option>
-																</select>
-															</td>
-															<td width="158" style="padding:0 10px 0 0"><input class="input_style02" name="bnn"  placeholder="계좌번호"></td>
-															
-														</tr>	
-													</table>
-												</td>
-											</tr>
-											<tr>
-												<td>
-													<table  width="100%" cellpadding="0" cellspacing="0" class="login_table_in">
-														<tr>
-															<td width="112" style="padding:0 10px 0 0">
-																<select class="input_style02" id="fid1cp2" name="cp">
-																	<option value="+82">+82(한국)</option>
-																	<option value="+63">+63(필리핀)</option>
-																</select>
-															</td>
-															<td width="158" style="padding:0 10px 0 0">
-																<input class="input_style02" id="fidcll2" name="cll" placeholder="휴대폰 번호">
-															</td>
-														</tr>
-													</table>
-												</td>
-											</tr>
-										</table>
-										<div class="acc_btn_wrap">
-											<input type="submit" value="아이디 문의" class="btn3c">
-										</div>
-
-									</form>
+							<div class="acc_content_in_2" id="acc_content_in_1_fid2">
+								<div class="blue_wrap">
+									<div class="my_box">
+										<form id="fid2">
+											<input type="hidden" name="method" value="by_bank">
+											<table cellpadding="0" cellspacing="0" class="popup_table01">
+												<tr>
+													<td><input class="input_style02" id="findIdBank_owner" name="bo" placeholder="예금주"></td>
+												</tr>
+												<tr>
+													<td>
+														<table  width="100%" cellpadding="0" cellspacing="0" class="login_table_in">
+															<tr>
+																<td width="112" style="padding:0 10px 0 0">
+																	<select class="input_style02"  id="findIdBank_name" name="bn" placeholder="은행명">
+																		<option value="국민은행" selected>국민은행</option>
+																	    <option value="기업은행">기업은행</option>
+																	    <option value="경남은행">경남은행</option>
+																	    <option value="광주은행">광주은행</option>
+																	    <option value="동부증권">동부증권</option>
+																	    <option value="대구은행">대구은행</option>
+																	    <option value="부산은행">부산은행</option>
+																	    <option value="산업은행">산업은행</option>
+																	    <option value="삼성증권">삼성증권</option>
+																	    <option value="삼성증권">신영증권</option>
+																	    <option value="신한은행">신한은행</option>
+																	    <option value="우리은행">우리은행</option>
+																	    <option value="외환은행">외환은행</option>
+																	    <option value="저축은행">저축은행</option>
+																	    <option value="전북은행">전북은행</option>
+																	    <option value="제주은행">제주은행</option>
+																	    <option value="하나은행">하나은행</option>
+																	    <option value="CITI은행">CITI은행</option>
+																	    <option value="HSBC은행">HSBC은행</option>
+																	    <option value="SC제일">SC제일</option>
+																	    <option value="새마을금고">새마을금고</option>
+																	    <option value="우체국">우체국</option>
+																	    <option value="농협중앙회">농협중앙회</option>
+																	    <option value="단위농협">단위농협</option>
+																	    <option value="신협">신협</option>
+																	    <option value="수협">수협</option>
+																	    <option value="동양증권">동양증권</option>
+																	    <option value="유진투자증권">유진투자증권</option>
+																	    <option value="한국투자은행">한국투자은행</option>
+																	    <option value="HMC투자증권">HMC투자증권</option>
+																	    <option value="IBK투자증권">IBK투자증권</option>
+																	    <option value="카카오뱅크">카카오뱅크</option>
+																	</select>
+																</td>
+																<td width="158" style="padding:0 0px 0 0"><input class="input_style02" name="bnn"  placeholder="계좌번호"></td>
+																
+															</tr>	
+														</table>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<table  width="100%" cellpadding="0" cellspacing="0" class="login_table_in">
+															<tr>
+																<td width="112" style="padding:0 10px 0 0">
+																	<select class="input_style02" id="fid1cp2" name="cp">
+																		<option value="+82">+82(한국)</option>
+																		<option value="+63">+63(필리핀)</option>
+																	</select>
+																</td>
+																<td width="158" style="padding:0 0px 0 0">
+																	<input class="input_style02" id="fidcll2" name="cll" placeholder="휴대폰 번호">
+																</td>
+															</tr>
+														</table>
+													</td>
+												</tr>
+											</table>
+											<div class="acc_btn_wrap">
+												<input type="submit" value="아이디 문의" class="btn3c">
+											</div>
+										</form>
+									</div>
 								</div>
 								
 							</div>
@@ -269,55 +280,57 @@
 					<li>
 						<div class="acc_head"><h3>회원가입시 등록한 휴대폰 번호로 찾기</h3></div>
 						<div class="acc_content">
-							<div class="acc_content_in_1" id="acc_content_in_fp1">
-								<div class="login_center">
-									<form id="fp1">
-										<input type="hidden" name="method" value="by_phone">
-										<table cellpadding="0" cellspacing="0" class="login_table">
-											<tr>
-												<td><input class="input_style02" id="fp1ud" name="ud"  placeholder="아이디"></td>
-											</tr>
-											<tr>
-												<td><input class="input_style02" id="fp1nk" name="nk"  placeholder="예금주"></td>
-											</tr>
-											<tr>
-												<td>
-													<table  width="100%" cellpadding="0" cellspacing="0" class="login_table_in">
-														<tr>
-															<td width="112" style="padding:0 10px 0 0">
-																<select class="input_style02"  id="fp1cp" name="cp">
-																	<option value="+82">+82(한국)</option>
-																	<option value="+63">+63(필리핀)</option>
-																</select>
-															</td>
-															<td width="158" style="padding:0 10px 0 0"><input class="input_style02" id="fp1cll" name="cll" maxlength="15" placeholder="휴대폰 번호"></td>
-															<td>
-																<button class="btn5" id="fSndBtn2">인증</button>
-															</td>
-														</tr>
-													</table>
-												</td>
-											</tr>
-											<tr>
-												<td>
-													<div id="fcdt" class="hidden_cntdwn"></div>
-												</td>
-											</tr>
-											<tr>
-												<td>
-													<table  width="100%" cellpadding="0" cellspacing="0" class="login_table_in">
-														<tr>
-															<td width="280" style="padding:0 0px 0 0"><input class="input_style02" id="fp1ac" name="ac" maxlength="6" placeholder="인증번호"></td>
-														</tr>
-													</table>
-												</td>
-											</tr>
+							<div class="acc_content_in_2" id="acc_content_in_fp1">
+								<div class="blue_wrap">
+									<div class="my_box">
+										<form id="fp1">
+											<input type="hidden" name="method" value="by_phone">
+											<table cellpadding="0" cellspacing="0" class="popup_table01">
+												<tr>
+													<td><input class="input_style02" id="fp1ud" name="ud"  placeholder="아이디"></td>
+												</tr>
+												<tr>
+													<td><input class="input_style02" id="fp1nk" name="nk"  placeholder="예금주"></td>
+												</tr>
+												<tr>
+													<td>
+														<table  width="100%" cellpadding="0" cellspacing="0" class="login_table_in">
+															<tr>
+																<td width="112" style="padding:0 10px 0 0">
+																	<select class="input_style02"  id="fp1cp" name="cp">
+																		<option value="+82">+82(한국)</option>
+																		<option value="+63">+63(필리핀)</option>
+																	</select>
+																</td>
+																<td width="158" style="padding:0 10px 0 0"><input class="input_style02" id="fp1cll" name="cll" maxlength="15" placeholder="휴대폰 번호"></td>
+																<td>
+																	<button class="btn5" id="fSndBtn2">인증</button>
+																</td>
+															</tr>
+														</table>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<div id="fcdt" class="hidden_cntdwn"></div>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<table  width="100%" cellpadding="0" cellspacing="0" class="login_table_in">
+															<tr>
+																<td width="280" style="padding:0 0px 0 0"><input class="input_style02" id="fp1ac" name="ac" maxlength="6" placeholder="인증번호"></td>
+															</tr>
+														</table>
+													</td>
+												</tr>
 
-										</table>
-										<div class="acc_btn_wrap">
-											<input type="submit" class="btn3c" value="비밀번호 설정">
-										</div>
-									</form>
+											</table>
+											<div class="acc_btn_wrap">
+												<input type="submit" class="btn3c" value="비밀번호 설정">
+											</div>
+										</form>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -325,90 +338,91 @@
 					<li>
 						<div class="acc_head"><h3>회원가입시 등록한 계좌 정보로 찾기</h3></div>
 						<div class="acc_content">
-							<div class="acc_content_in_1" id ="acc_content_in_fp3">
-								<div class="login_center">
-									<form id="fp3">
-										<input type="hidden" name="method" value="by_bank">
-										<table cellpadding="0" cellspacing="0" class="login_table">
-											<tr>
-												<td><input class="input_style02"  id="fp3bo" name="bo"  placeholder="예금주"></td>
-											</tr>
-											<tr>
-												<td><div class="input_warning" id="bo-fp3-warn">- 를 제외하고 입력해주세요</div></td>
-											</tr>
-											<tr>
-												<td>
-													<table  width="100%" cellpadding="0" cellspacing="0" class="login_table_in">
-														<tr>
-															<td width="112" style="padding:0 10px 0 0">
-																<select class="input_style02"  id="fp3bn" name="bn"  placeholder="은행명">
-																	<option value="국민은행" selected>국민은행</option>
-																    <option value="기업은행">기업은행</option>
-																    <option value="경남은행">경남은행</option>
-																    <option value="광주은행">광주은행</option>
-																    <option value="동부증권">동부증권</option>
-																    <option value="대구은행">대구은행</option>
-																    <option value="부산은행">부산은행</option>
-																    <option value="산업은행">산업은행</option>
-																    <option value="삼성증권">삼성증권</option>
-																    <option value="삼성증권">신영증권</option>
-																    <option value="신한은행">신한은행</option>
-																    <option value="우리은행">우리은행</option>
-																    <option value="외환은행">외환은행</option>
-																    <option value="저축은행">저축은행</option>
-																    <option value="전북은행">전북은행</option>
-																    <option value="제주은행">제주은행</option>
-																    <option value="하나은행">하나은행</option>
-																    <option value="CITI은행">CITI은행</option>
-																    <option value="HSBC은행">HSBC은행</option>
-																    <option value="SC제일">SC제일</option>
-																    <option value="새마을금고">새마을금고</option>
-																    <option value="우체국">우체국</option>
-																    <option value="농협중앙회">농협중앙회</option>
-																    <option value="단위농협">단위농협</option>
-																    <option value="신협">신협</option>
-																    <option value="수협">수협</option>
-																    <option value="동양증권">동양증권</option>
-																    <option value="유진투자증권">유진투자증권</option>
-																    <option value="한국투자은행">한국투자은행</option>
-																    <option value="HMC투자증권">HMC투자증권</option>
-																    <option value="IBK투자증권">IBK투자증권</option>
-																    <option value="카카오뱅크">카카오뱅크</option>
-																</select>
-															</td>
-															<td width="158" style="padding:0 0px 0 0"><input class="input_style02"  id="fp3bnn" name="bnn"  placeholder="계좌번호"></td>
-														</tr>
-														<tr>
-															<td colspan="2" ><div class="input_warning" id="bnn-fp3-warn">- 를 제외하고 입력해주세요</div></td>
-														</tr>
-													</table>
-												</td>
-											</tr>
-											<tr>
-												<td>
-													<table  width="100%" cellpadding="0" cellspacing="0" class="login_table_in">
-														<tr>
-															<td width="112" style="padding:0 10px 0 0">
-																<select class="input_style02"  id="fp3cp" name="cp" >
-																	<option value="+82">+82(한국)</option>
-																	<option value="+63">+63(필리핀)</option>
-																</select>
-															</td>
-															<td width="158" style="padding:0 0px 0 0"><input class="input_style02"  id="fp3cll" name="cll"  placeholder="휴대폰 번호"></td>
-														</tr>
-														<tr>
-															<td colspan="2"><div class="input_warning" id="cll-fp3-warn">- 를 제외하고 입력해주세요</div></td>
-														</tr>
-													</table>
-												</td>
-											</tr>
-										</table>
-										<div class="acc_btn_wrap">
-											<input type="submit" class="btn3c" value="비밀번호 문의">
-										</div>
-									</form>
+							<div class="acc_content_in_2" id ="acc_content_in_fp3">
+								<div class="blue_wrap">
+									<div class="my_box">
+										<form id="fp3">
+											<input type="hidden" name="method" value="by_bank">
+											<table cellpadding="0" cellspacing="0" class="popup_table01">
+												<tr>
+													<td><input class="input_style02"  id="fp3bo" name="bo"  placeholder="예금주"></td>
+												</tr>
+												<tr>
+													<td><div class="input_warning" id="bo-fp3-warn">- 를 제외하고 입력해주세요</div></td>
+												</tr>
+												<tr>
+													<td>
+														<table  width="100%" cellpadding="0" cellspacing="0" class="login_table_in">
+															<tr>
+																<td width="112" style="padding:0 10px 0 0">
+																	<select class="input_style02"  id="fp3bn" name="bn"  placeholder="은행명">
+																		<option value="국민은행" selected>국민은행</option>
+																	    <option value="기업은행">기업은행</option>
+																	    <option value="경남은행">경남은행</option>
+																	    <option value="광주은행">광주은행</option>
+																	    <option value="동부증권">동부증권</option>
+																	    <option value="대구은행">대구은행</option>
+																	    <option value="부산은행">부산은행</option>
+																	    <option value="산업은행">산업은행</option>
+																	    <option value="삼성증권">삼성증권</option>
+																	    <option value="삼성증권">신영증권</option>
+																	    <option value="신한은행">신한은행</option>
+																	    <option value="우리은행">우리은행</option>
+																	    <option value="외환은행">외환은행</option>
+																	    <option value="저축은행">저축은행</option>
+																	    <option value="전북은행">전북은행</option>
+																	    <option value="제주은행">제주은행</option>
+																	    <option value="하나은행">하나은행</option>
+																	    <option value="CITI은행">CITI은행</option>
+																	    <option value="HSBC은행">HSBC은행</option>
+																	    <option value="SC제일">SC제일</option>
+																	    <option value="새마을금고">새마을금고</option>
+																	    <option value="우체국">우체국</option>
+																	    <option value="농협중앙회">농협중앙회</option>
+																	    <option value="단위농협">단위농협</option>
+																	    <option value="신협">신협</option>
+																	    <option value="수협">수협</option>
+																	    <option value="동양증권">동양증권</option>
+																	    <option value="유진투자증권">유진투자증권</option>
+																	    <option value="한국투자은행">한국투자은행</option>
+																	    <option value="HMC투자증권">HMC투자증권</option>
+																	    <option value="IBK투자증권">IBK투자증권</option>
+																	    <option value="카카오뱅크">카카오뱅크</option>
+																	</select>
+																</td>
+																<td width="158" style="padding:0 0px 0 0"><input class="input_style02"  id="fp3bnn" name="bnn"  placeholder="계좌번호"></td>
+															</tr>
+															<tr>
+																<td colspan="2" ><div class="input_warning" id="bnn-fp3-warn">- 를 제외하고 입력해주세요</div></td>
+															</tr>
+														</table>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<table  width="100%" cellpadding="0" cellspacing="0" class="login_table_in">
+															<tr>
+																<td width="112" style="padding:0 10px 0 0">
+																	<select class="input_style02"  id="fp3cp" name="cp" >
+																		<option value="+82">+82(한국)</option>
+																		<option value="+63">+63(필리핀)</option>
+																	</select>
+																</td>
+																<td width="158" style="padding:0 0px 0 0"><input class="input_style02"  id="fp3cll" name="cll"  placeholder="휴대폰 번호"></td>
+															</tr>
+															<tr>
+																<td colspan="2"><div class="input_warning" id="cll-fp3-warn">- 를 제외하고 입력해주세요</div></td>
+															</tr>
+														</table>
+													</td>
+												</tr>
+											</table>
+											<div class="acc_btn_wrap">
+												<input type="submit" class="btn3c" value="비밀번호 문의">
+											</div>
+										</form>
+									</div>
 								</div>
-								
 							</div>
 						</div>
 					</li>
@@ -451,7 +465,7 @@
 				<form id="fp2">
 					<input type="hidden" name="form" value="f1">
 					<div class="login_center">
-						<table cellpadding="0" cellspacing="0" class="login_table">
+						<table cellpadding="0" cellspacing="0" class="popup_table01">
 							<tr>
 								<td><input type="password" class="input_style02 pd " id="fp2pd" name="newpd"  placeholder="비밀번호"></td>
 							</tr>
@@ -516,13 +530,23 @@
 			$("ul.tabs li a[href='#tab2']").click();
 		}
 
+		$("#fid1 input").on("blur",function(e){
+			var validator = $( "#fid1" ).validate();
+			var valid = validator.element($(this));
+			if(!valid && !valid){
+				$(this).focusin();
+			}else{
+				$(this).qtip("hide");
+			}
+		});
+
 		$("#fid1").on("submit",function(e){
 			e.preventDefault();
 			if($("#fid1").valid()){
 				var data = $(this).serializeJSON();
 				data['sd'] = "<%=SITEID%>";
 				$.ajax({
-					url : '/jsp/find_id.jsp',
+					url : '/account/jsp/find_id.jsp',
 					data : data,
 					method: 'POST',
 				}).done(function(data){
@@ -633,7 +657,7 @@
 				var frm = 'f1';
 
 				$.ajax({
-					url : '/jsp/send_code.jsp',
+					url : '/account/jsp/send_code.jsp',
 					data : {nk:nk,cp:cp,cll:cll,method:frm,rSend:f1rSnd},
 					method: 'POST',
 				}).done(function(data){
@@ -790,7 +814,7 @@
 	    		var data = $(this).serializeJSON();
 	    		data['sd'] = "<%=SITEID%>";
 	    		$.ajax({
-					url: '/jsp/find_id.jsp',
+					url: '/account/jsp/find_id.jsp',
 					data : data,
 					method: 'POST',
 				}).done(function(data){
@@ -898,7 +922,7 @@
 				var data = $(this).serializeJSON();
 				data['sd'] = "<%=SITEID%>";
 				$.ajax({
-					url : '/jsp/verify_pd.jsp',
+					url : '/account/jsp/verify_pd.jsp',
 					data : data,
 					method: 'POST',
 				}).done(function(data){
@@ -920,7 +944,7 @@
 					var fp1data = $("#fp1").serializeJSON();
 					$.extend(data,fp1data);
 					$.ajax({
-						url : '/jsp/update_pd.jsp',
+						url : '/account/jsp/update_pd.jsp',
 						data : data,
 						method: 'POST',
 					}).done(function(data){ 
@@ -937,7 +961,7 @@
 					var fp2data = $("#fp3").serializeJSON();
 					$.extend(data,fp2data);
 					$.ajax({
-						url : '/jsp/update_pd.jsp',
+						url : '/account/jsp/update_pd.jsp',
 						data : data,
 						method: 'POST',
 					}).done(function(data){ 
@@ -1123,7 +1147,7 @@
 				var data = $(this).serializeJSON();
 				data['sd'] = "<%=SITEID%>";
 				$.ajax({
-					url : '/jsp/verify_pd.jsp',
+					url : '/account/jsp/verify_pd.jsp',
 					data : data,
 					method: 'POST',
 				}).done(function(data){
@@ -1160,7 +1184,7 @@
 
 				
 				$.ajax({
-					url : '/jsp/send_code.jsp',
+					url : '/account/jsp/send_code.jsp',
 					data : {nk:nk,cp:cp,cll:cll,ud:ud,method:frm,rSend:f2rSnd},
 					method: 'POST',
 				}).done(function(data){

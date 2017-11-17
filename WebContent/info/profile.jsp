@@ -19,7 +19,7 @@
 			<div class="acc_content_in_2">
 				<div class="blue_wrap">
 					<div class="my_box">
-						<table cellspacing="0" cellpadding="0" class="my_table">
+						<table cellspacing="0" cellpadding="0" class="my_table" width="70%">
 							<tr>
 								<td class="my_info">
 									<span class="my_left">아이디</span><span class="my_right"><%=user_data.getUserid()%></span>
@@ -71,8 +71,8 @@
 								<td>
 									<table  width="100%" cellpadding="0" cellspacing="0" class="popup_table01_1">
 										<tr>
-											<td width="100" align="left" style="padding:0 5px 0 0">
-												<select class="input_style02" name="bank_name">
+											<td width="20%" align="left" style="padding:0 5px 0 0">
+												<select class="input_style02" id="up_bank_name" name="bank_name">
 													 	<option value="국민은행" selected>국민은행</option>
 													    <option value="기업은행">기업은행</option>
 													    <option value="경남은행">경남은행</option>
@@ -107,9 +107,9 @@
 													    <option value="카카오뱅크">카카오뱅크</option>
 												</select>
 											</td>
-											<td width="250" align="left" style="padding:0 5px 0 0"><input class="input_style02" name="bank_owner" placeholder="예금주" ></td>
+											<td width="40%" align="left" style="padding:0 5px 0 0"><input class="input_style02" id="up_bank_owner" name="bank_owner" placeholder="예금주" ></td>
 											
-											<td align="left" style="padding:0 5px 0 0"><input class="input_style02 input_required" name="bank_num" data-warn="bank-warn" placeholder="계좌번호입력(-없이 입력)"></td>
+											<td width="40%" align="left" style="padding:0 5px 0 0"><input class="input_style02 input_required" id="up_bank_num" name="bank_num" data-warn="bank-warn" placeholder="계좌번호입력(-없이 입력)"></td>
 										</tr>
 										<tr>
 											<td colspan="3">
@@ -124,17 +124,17 @@
 								<td>
 									<table  width="100%" cellpadding="0" cellspacing="0" class="popup_table01_1">
 										<tr>
-											<td width="100" align="left" style="padding:0 5px 0 0">
-												<select class="input_style02" name="cell_prefix" id="new_cell_prefix">
+											<td width="20%" align="left" style="padding:0 5px 0 0">
+												<select class="input_style02" id="up_cell_prefix" name="cell_prefix" id="new_cell_prefix">
 													<option value="+63">+63(필리핀 제도)</option>
 													<option value="+82">+82(한국)</option>
 												</select>
 											</td>
-											<td width="250" align="left" style="padding:0 5px 0 0"><input class="input_style02 input_required" name="cell" data-warn="cell-warn" placeholder="휴대폰 번호" ></td>
-											<td><a href="#"><span class="btn5" style="width: 40%;">인증</span></a></td>
+											<td width="40%" align="left" style="padding:0 5px 0 0"><input class="input_style02 input_required" id="up_cell" name="cell" data-warn="cell-warn" placeholder="휴대폰 번호" ></td>
+											<td width="40%"><span class="btn5" style="width: 40%;" id="up_cll_btn">인증</span></td>
 										</tr>
 										<tr>
-											<td colspan="4">
+											<td  colspan="4">
 												<div class="input_warning" id="cell-update-warn">입력하신 번호로 인증번호가 발송되었습니다.</div>	
 											</td>
 											
@@ -146,7 +146,7 @@
 						</table>
 						<div class="cash_in">
 							<!-- <a href="#"><span class="btn3c">전환신청</span></a>	 -->
-							<input type="submit" value="전환신청" class="btn3c">
+							<input type="submit" id="updateProfileBtn" value="전환신청" class="btn3c">
 						</div>
 					</form>
 				</div>
@@ -159,7 +159,7 @@
 			<div class="acc_content_in_2" id="acc_content_in_2_pass">
 				<div class="blue_wrap">
 					<form id="updatePasswordForm" name="updatePasswordForm">
-						<table cellspacing="0" cellpadding="0" class="my_table">
+						<table cellspacing="0" cellpadding="0" class="my_table" width="35%">
 							<tr>
 								<td class="my_pass">
 									<input class="input_style03" id="current_password" name="current_password" placeholder="현재 비밀번호" >
@@ -187,58 +187,11 @@
 						</table>
 						<div class="cash_in">
 							<!-- <a href="#"><span class="btn3c">전환신청</span></a>	 -->
-							<input type="submit" value ="전환신청" class="btn3c">
+							<input type="submit" id="updatePssBtn" value ="전환신청" class="btn3c">
 						</div>
 					</form>
 				</div>
 			</div>			
-		</div>
-	</li>
-	<li>
-		<div class="acc_head"><h3>추천회원 리스트</h3></div>
-		<div class="acc_content">
-			<div class="acc_content_in_2">
-				<table class="list_table" cellspacing="0" cellpadding="0" width="100%">
-					<tr>
-						<td class="list_table_t" width="6%">No</td>
-						<td class="list_table_t" width="22%">아이디</td>
-						<td class="list_table_t" width="22%">별명</td>
-						<td class="list_table_t" width="25%">코드발급일시</td>
-						<td class="list_table_t" width="25%">회원가입일시</td>
-					</tr>
-					<tr>
-						<td class="list_table_center">1</td>
-						<td class="list_table_center">12346578</td>
-						<td class="list_table_center"><span class="font_004">추천인</span></td>
-						<td class="list_table_center">2017-05-05 00 : 00 : 00</td>
-						<td class="list_table_center">2017-05-05 00 : 00 : 00</td>
-					</tr>
-					<tr>
-						<td class="list_table_center">1</td>
-						<td class="list_table_center">12346578</td>
-						<td class="list_table_center"><span class="font_004">추천인</span></td>
-						<td class="list_table_center">2017-05-05 00 : 00 : 00</td>
-						<td class="list_table_center">2017-05-05 00 : 00 : 00</td>
-					</tr>
-					<tr>
-						<td class="list_table_center">1</td>
-						<td class="list_table_center">12346578</td>
-						<td class="list_table_center"><span class="font_004">추천인</span></td>
-						<td class="list_table_center">2017-05-05 00 : 00 : 00</td>
-						<td class="list_table_center">2017-05-05 00 : 00 : 00</td>
-					</tr>
-					<tr>
-						<td class="list_table_center">1</td>
-						<td class="list_table_center">12346578</td>
-						<td class="list_table_center"><span class="font_004">추천인</span></td>
-						<td class="list_table_center">2017-05-05 00 : 00 : 00</td>
-						<td class="list_table_center">2017-05-05 00 : 00 : 00</td>
-					</tr>
-				</table>
-				<div class="acc_btn_wrap">
-					<a href="#"><div class="page"> >> </div></a> <a href="#"><span class="page"> > </span></a> <a href="#"><div class="page_on">1</div></a> <a href="#"><div class="page">2</div></a> <a href="#"><div class="page">3</div></a> <a href="#"><div class="page">4</div></a> <a href="#"><div class="page">5</div></a> <a href="#"><div class="page"> > </div></a> <a href="#"><div class="page"> >> </div></a>
-				</div>
-			</div>
 		</div>
 	</li>
 </ul>
@@ -337,10 +290,37 @@
 	        	}else{
 	        		return true;
 	        	}
-	        }	        
-	        //"You must enter a new mobile phone number",
+	        },	        
+	        "You must enter a new mobile phone number"
 		);
 
+
+		$("#updateProfileForm input").on("blur",function(e){
+			e.preventDefault();
+			var validator = $( "#updateProfileForm" ).validate(); 
+			var id = $(this).attr("id");
+			var valid = validator.element("#"+id);
+			$(this).qtip("hide");
+			// console.log(valid);
+			if(!valid && !valid){
+				$(this).focusin();
+			}			
+		});
+
+
+		$("#updateProfileBtn").on("click",function(e){
+			e.preventDefault();
+			if($("#updateProfileForm").valid()){
+				var data = $("#updateProfileForm").serializeJSON();
+			    submitProfileChanges(data);
+			}
+		});
+
+		$("#up_cll_btn").click(function(){
+			var validator = $( "#updateProfileForm" ).validate();
+			var validReferrer = validator.element( "#up_cell");
+			console.log(validReferrer);
+		});
 
 		$("#updateProfileForm").validate({
 			debug: true,
@@ -393,6 +373,8 @@
 			},
 			errorPlacement: function(error, element) {
 
+				var name = element.attr("name");
+
 				if(error.text() != ""){
 			    	element.qtip({ 
 					    overwrite: true,
@@ -412,8 +394,8 @@
 				        },
 				        position: {
 					        container: $("#acc_content_in_2_profile"),
-					        at: 'top center ',
-					        my: 'bottom center', 
+					        at: (name == "cell" ? "bottom right" : "top right"),
+					        my: (name == "cell" ? "top left" : "bottom left"), 
 					        adjust : {
 					        	method : 'shift none',
 					        }
@@ -424,13 +406,29 @@
 					element.qtip("hide");
 				}
 			  
-			},
-			submitHandler: function(form) {
-				var data = $("#updateProfileForm").serializeJSON();
-				// console.log(data);
-			    submitProfileChanges(data);
-			  
-		  	}
+			}
+		  	
+		});
+
+		$("#updatePasswordForm input").on("blur",function(e){
+			e.preventDefault();
+			var validator = $( "#updatePasswordForm" ).validate(); 
+			var id = $(this).attr("id");
+			var valid = validator.element("#"+id);
+			$(this).qtip("hide");
+			// console.log(valid);
+			if(!valid && !valid){
+				$(this).focusin();
+			}			
+		});
+
+
+		$("#updatePssBtn").on("click",function(e){
+			e.preventDefault();
+			if($("#updatePasswordForm").valid()){
+				var data = $("#updatePasswordForm").serializeJSON();
+			    submitPasswrdChanges(data);
+			}
 		});
 
 		$("#updatePasswordForm").validate({
@@ -507,8 +505,8 @@
 				        },
 				        position: {
 					        container: $("#acc_content_in_2_pass"),
-					        at: 'top center ',
-					        my: 'bottom center', 
+					        at: 'right center ',
+					        my: 'left center', 
 					        adjust : {
 					        	method : 'shift none',
 					        }
@@ -520,13 +518,15 @@
 				}
 			  
 			},
-			submitHandler: function(form) {
-				var data = $("#updatePasswordForm").serializeJSON();
-				// console.log(data);
-			    submitPasswrdChanges(data);
+			// submitHandler: function(form) {
+			// 	var data = $("#updatePasswordForm").serializeJSON();
+			// 	// console.log(data);
+			//     submitPasswrdChanges(data);
 			  
-		  	}
+		 //  	}
 		});
+
+
 
 		$(".cp").on("keypress",function(){
 			if($(this).val() == ""){
@@ -557,6 +557,7 @@
 			if(data){
 				resetupdateProfileForm();
 				$('#updateProfileModal').popup('show');
+				$("#updateProfileBtn input").qtip("hide");
 			}else{
 				alert("something went wrong");
 			}
@@ -580,6 +581,7 @@
 			if(data){
 				resetupdatePasswordForm();
 				$('#updatePasswordModal').popup('show');
+				$("#updatePasswordForm input").qtip("hide");
 			}else{
 				alert("관리자에게 문의해 주세요.");
 			}

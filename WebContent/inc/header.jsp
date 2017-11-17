@@ -91,6 +91,7 @@ $(window).scroll(function(event){
 	$(document).ready(function(){
 			
 		sTime();
+
 		$('#loginModal').popup({
 	      	transition: 'all 0.3s',
 	      	scrolllock: true,
@@ -139,7 +140,8 @@ $(window).scroll(function(event){
 			$("#logoutModal").popup("hide");
 		});
 
-		$("#showLogoutModal").on("click",function(e){
+		$(".showLogoutModal").on("click",function(e){
+			e.preventDefault();
 			$("#logoutModal").popup("show");
 		});
 
@@ -191,7 +193,7 @@ $(window).scroll(function(event){
 			$("#ftb").submit();
 		});
 
-		$("#user_menu_lst li a").on("click",function(e){
+		$("body").on("click","#user_menu_lst li a",function(e){
 			e.preventDefault();
 			var tab = $(this).attr('data-tab');
 			var pg = $(this).attr('data-pg');
@@ -201,7 +203,7 @@ $(window).scroll(function(event){
 
 		});
 
-		$("#user_popup_menu div a").on("click",function(e){
+		$("body").on("click","#user_popup_menu div a",function(e){
 			e.preventDefault();
 			var tab = $(this).attr('data-tab');
 			var pg = $(this).attr('data-pg');
@@ -329,108 +331,113 @@ $(window).scroll(function(event){
             <li><a href="/help/sub03.jsp"><span class="util_btn">도움말</span></a></li>
             <li><a href="/match/result.jsp"><span class="util_btn">경기결과</span></a></li>
         </ul>
-       	<% 
-        	if(checkSession){
-       	%>
-		<ul class="util_right">
-        <li class = 'hdr-money-row'>머니 <span class="util_money money_dsp"><%=dfrmt.format(UBAL)%></span></li>
-        <li>포인트 <span class="util_point point_dsp"><%=dfrmt.format(UPOINT)%></span></li>
-            <li>
-				<span class="popover-wrapper right">
-					<a href="#" data-role="popover" data-target="example-popover-2"><img src="/images/select_mark.png"></a>
-					<div class="popover-modal example-popover-2">
-						<div class="popover-body" >
-							<a href="#" data-toggle-role="close" style="position:absolute; right:20px; top:0px">×</a>
-							<div class="popover-body-in">
-								<span class="popover_t">보유머니</span> <span class="popover_money"><%=UBAL%></span>
-							</div>
-							<div class="popover-body-in">
-								<span class="popover_t">보유포인트</span> <span class="popover_money"><%=UPOINT%></span>
-							</div>
-							<div class="popover-body-btn" id="user_popup_menu">
-								<div class="popover-body-btn_in">
-									<a href="/cash/cash.jsp" data-pg="sb4" data-tab="tab1" ><span class="popover_btn">충전신청</span></a> 
-									<a href="/cash/cash.jsp"  data-pg="sb4" data-tab="tab2" ><span class="popover_btn">환전신청</span></a>
+        <div id="uhead">
+        	<% 
+	        	if(checkSession){
+	       	%>
+			<ul class="util_right">
+	        	<li class = 'hdr-money-row'>머니 <span class="util_money money_dsp"><%=dfrmt.format(UBAL)%></span></li>
+	        	<li>포인트 <span class="util_point point_dsp"><%=dfrmt.format(UPOINT)%></span></li>
+	            <li>
+					<span class="popover-wrapper right">
+						<a href="#" data-role="popover" data-target="example-popover-2"><img src="/images/select_mark.png"></a>
+						<div class="popover-modal example-popover-2">
+							<div class="popover-body" >
+								<a href="#" data-toggle-role="close" style="position:absolute; right:20px; top:0px">×</a>
+								<div class="popover-body-in">
+									<span class="popover_t">보유머니</span> <span class="popover_money"><%=UBAL%></span>
 								</div>
-								<div class="popover-body-btn_in">
-									<a href="/cash/cash.jsp" data-pg="sb4" data-tab="tab3" ><span class="popover_btn">포인트전환</span></a> 
-									<a href="/cash/cash.jsp" data-pg="sb4" data-tab="tab3"><span class="popover_btn">포인트사용내역</span></a>
+								<div class="popover-body-in">
+									<span class="popover_t">보유포인트</span> <span class="popover_money"><%=UPOINT%></span>
 								</div>
-								<div class="popover-body-btn_in">
-								<!--	<a href="/cash/cash.jsp" data-pg="sb4" data-tab="tab4" ><span class="popover_btn">머니전환</span></a> -->
-									<a href="/cash/cash.jsp" data-pg="sb4" data-tab="tab6"><span class="popover_btn">머니사용내역</span></a>
+								<div class="popover-body-btn" id="user_popup_menu">
+									<div class="popover-body-btn_in">
+										<a href="/cash/cash.jsp" data-pg="sb4" data-tab="tab1" ><span class="popover_btn">충전신청</span></a> 
+										<a href="/cash/cash.jsp"  data-pg="sb4" data-tab="tab2" ><span class="popover_btn">환전신청</span></a>
+									</div>
+									<div class="popover-body-btn_in">
+										<a href="/cash/cash.jsp" data-pg="sb4" data-tab="tab3" ><span class="popover_btn">포인트전환</span></a> 
+										<a href="/cash/cash.jsp" data-pg="sb4" data-tab="tab3"><span class="popover_btn">포인트사용내역</span></a>
+									</div>
+									<div class="popover-body-btn_in">
+									<!--	<a href="/cash/cash.jsp" data-pg="sb4" data-tab="tab4" ><span class="popover_btn">머니전환</span></a> -->
+										
+										<a href="/cash/cash.jsp" data-pg="sb4" data-tab="tab6"><span class="popover_btn">머니사용내역</span></a>
+										<span class="showLogoutModal popover_btn" style="color: #8a8c8d!important; cursor: pointer;">머니사용내역</span>
+									</div>
 								</div>
 							</div>
+							<script>
+								$('[data-role="popover"]').popover();
+								$('[data-role="popover2"]').popover({trigger: 'hover'});
+							</script>
 						</div>
-						<script>
-							$('[data-role="popover"]').popover();
-							$('[data-role="popover2"]').popover({trigger: 'hover'});
-						</script>
-					</div>
-				</span>
-			</li>
-		</ul>
-		<% } %>
-		<div class="top_wrap">
-            <div class="top">
-                <span class="logo"><a href="/"><img src="/images/logo.png"></a></span>
-             		<% 
-               			if(checkSession){
-      				%>
-	                <ul class="top_right" id="user_menu_lst">
-	                    <li>
-							<div class="select open">
-								<button type="button" class="myValue top_value">LV.<%=UCLEVEL%>   <%=NICK%></button>
-								<ul class="aList top_alist">
-									<li style="height:11px; width:152px; background:url(/images/select_top_bg.png) no-repeat"></li>
-									<li>
-										<a href="/info/info.jsp" data-pg="sb5" data-tab="tab1" >내 정보 </a>
-									</li>
-									<li>
-										<a href="/info/info.jsp" data-pg="sb5" data-tab="tab2" >베팅내역 </a>
-									</li>
-									<li>
-										<a href="/info/info.jsp" data-pg="sb5" data-tab="tab3" >1:1문의 </a>
-									</li>
-									<li>
-										<a href="/info/info.jsp" data-pg="sb5" data-tab="tab4" >쪽지함 </a>
-									</li>
-									
-									<li><span id="showLogoutModal" >로그아웃 </span> </li> 
-								</ul>
-							</div>				
-						</li>
-						<li><a href="/cash/cash.jsp" data-pg="sb4" data-tab="tab1" class="top_btn1" >  충전신청  </a></li>
-	                    <li><a href="/cash/cash.jsp" data-pg="sb4" data-tab="tab2" class="top_btn1" > 환전신청  </a></li>
-						<!--<li><a href="/cash/cash.jsp" data-pg="sb4" data-tab="tab4" class="top_btn3" > 머니전환  </a></li>-->
-						<li><a href="/info/info.jsp" data-pg="sb5" data-tab="tab1" ><span class="top_btn2">내정보</span></a></li>
-	                </ul>
-               	<% } else{  %>
-					<ul class="top_right">
-						<form id="login_header">
-							<li><input id="userid-header-input" type="text" class="input_style01" name="userid" placeholder="아이디"><img class="login-img-validator" data-tab="tab1" id="userid-img" src="/images/input_mark.png"></li>
-							<!-- input_blue 인풋활성화 -->
+					</span>
+				</li>
+			</ul>
+			<% } %>
+			<div class="top_wrap">
+	            <div class="top" id="user-header">
+	                <span class="logo"><a href="/"><img src="/images/logo.png"></a></span>
+	             		<% 
+	               			if(checkSession){
+	      				%>
+		                <ul class="top_right" id="user_menu_lst">
 		                    <li>
-		                    	<input id="passwd-header-input" type="password" class="input_style01" name="passwd" placeholder="비밀번호" style="width: 158px;"><img class="login-img-validator" data-tab="tab2" id="passwd-img" src="/images/input_mark.png">
-		                    </li>
-		                     <li><div class="input_warning login-warn" id="login-header-warn" >조건에 맞는 아이디를 입력해주세요.</div></li>
-		                    <!-- input_red 인풋조건미충족 -->
-		                    <li>
-		                    	<input type="submit" class="top_btn1" id="lginHderBtn" value="로그인" >
-		                    </li>
-		                    <li><span class="top_btn2 fade_1_open" >회원가입</span></li>
+								<div class="select open">
+									<button type="button" class="myValue top_value">LV.<%=UCLEVEL%>   <%=NICK%></button>
+									<ul class="aList top_alist">
+										<li style="height:11px; width:152px; background:url(/images/select_top_bg.png) no-repeat"></li>
+										<li>
+											<a href="/info/info.jsp" data-pg="sb5" data-tab="tab1" >내 정보 </a>
+										</li>
+										<li>
+											<a href="/info/info.jsp" data-pg="sb5" data-tab="tab2" >베팅내역 </a>
+										</li>
+										<li>
+											<a href="/info/info.jsp" data-pg="sb5" data-tab="tab3" >1:1문의 </a>
+										</li>
+										<li>
+											<a href="/info/info.jsp" data-pg="sb5" data-tab="tab4" >쪽지함 </a>
+										</li>
+										
+										<li><span class="showLogoutModal" >로그아웃 </span> </li> 
+									</ul>
+								</div>				
+							</li>
+							<li><a href="/cash/cash.jsp" data-pg="sb4" data-tab="tab1" class="top_btn1" >  충전신청  </a></li>
+		                    <li><a href="/cash/cash.jsp" data-pg="sb4" data-tab="tab2" class="top_btn1" > 환전신청  </a></li>
+							<!--<li><a href="/cash/cash.jsp" data-pg="sb4" data-tab="tab4" class="top_btn3" > 머니전환  </a></li>-->
+							<li><a href="/info/info.jsp" data-pg="sb5" data-tab="tab1" ><span class="top_btn2">내정보</span></a></li>
+		                </ul>
+	               	<% } else{  %>
+						<ul class="top_right">
+							<form id="login_header">
+								<li><input id="userid-header-input" type="text" class="input_style01" name="userid" placeholder="아이디"><img class="login-img-validator" data-tab="tab1" id="userid-img" src="/images/input_mark.png"></li>
+								<!-- input_blue 인풋활성화 -->
+			                    <li>
+			                    	<input id="passwd-header-input" type="password" class="input_style01" name="passwd" placeholder="비밀번호" style="width: 158px;"><img class="login-img-validator" data-tab="tab2" id="passwd-img" src="/images/input_mark.png">
+			                    </li>
+			                     <li><div class="input_warning login-warn" id="login-header-warn" >조건에 맞는 아이디를 입력해주세요.</div></li>
+			                    <!-- input_red 인풋조건미충족 -->
+			                    <li>
+			                    	<input type="submit" class="top_btn1" id="lginHderBtn" value="로그인" >
+			                    </li>
+			                    <li><span class="top_btn2 fade_1_open" >회원가입</span></li>
 
-	                    </form>
+		                    </form>
 
-	                    <div class="error" style="position: inherit;margin-top: 29px;">
-	                    	<!-- <div class="input_warning login-warn" id="login-header-warn" >조건에 맞는 아이디를 입력해주세요.</div> -->
-	                    </div>
-					</ul>
+		                    <div class="error" style="position: inherit;margin-top: 29px;">
+		                    	<!-- <div class="input_warning login-warn" id="login-header-warn" >조건에 맞는 아이디를 입력해주세요.</div> -->
+		                    </div>
+						</ul>
 
-               	<% }%>
+	               	<% }%>
 
-            </div>
+	            </div>
+	        </div>
         </div>
+       	
         <div class="nav_wrap">
 			<div class="stroke">
 				<ul>

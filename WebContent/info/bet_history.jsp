@@ -1173,7 +1173,7 @@ String bsj = gson.toJson(bs, type);
 			console.log("param : " + param);
 
 			$.ajax({
-				url:'/user/delBattingHistory.jsp',								
+				url:'/info/jsp/delBettingHistory.jsp',								
 				type:'POST',
 				cache: false,
 	   			data: param,
