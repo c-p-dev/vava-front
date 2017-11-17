@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <style>
 	#toast-container.toast-top-full-width > div, #toast-container.toast-bottom-full-width > div {
@@ -88,7 +89,8 @@ $(window).scroll(function(event){
 	});
 
 	$(document).ready(function(){
-		
+			
+		sTime();
 		$('#loginModal').popup({
 	      	transition: 'all 0.3s',
 	      	scrolllock: true,
@@ -116,11 +118,11 @@ $(window).scroll(function(event){
 			console.log(!vUser);
 			console.log(!vPass);
 			if(!vUser && !vPass){
-				toastr.success("Please complete the form");
+				toastr.success("아이디와 비밀번호를 입력해 주세요.");
 			}else if (vUser && !vPass){
-				toastr.success("Password is required");
+				toastr.success("비밀번호를 입력해 주세요.");
 			}else if (!vUser && vPass){
-				toastr.success("Userid is required");
+				toastr.success("아이디를 입력해 주세요.");
 			}else{
 
 				var data = $("#login_header").serializeJSON();
@@ -229,11 +231,11 @@ $(window).scroll(function(event){
 			},
 			messages: {
 			    userid :{
-					required:"User Id is required",
+					required:"아이디를 입력해 주세요.",
 					remote:"이미 사용중인 아이디 입니다.",
 				},
 				passwd :{
-					required:"Password is required",
+					required:"비밀번호를 입력해 주세요.",
 					minlength:"비밀번호를 6자리 이상 입력 해 주세요.",
 					maxlength:"비밀번호를 20자리 이하로 입력 해 주세요",
 				},
@@ -252,7 +254,7 @@ $(window).scroll(function(event){
 		$("#loginModal").popup("show");
 
 		$.ajax({
-			url : '../login/jsp/login_process.jsp',
+			url : '/login/jsp/login_process.jsp',
 			data : data,
 			method: 'POST',
 		}).done(function(data){
@@ -265,7 +267,7 @@ $(window).scroll(function(event){
 			}else if(obj.result == 1 ){
 				
 				setTimeout(function(){
-					toastr.success('Incorrect Password');
+					toastr.success('비밀번호가 일치하지 않습니다.');
 					$("#passwd-header-input").focus();
 
 					$("#loginModal").popup("hide");
@@ -274,7 +276,7 @@ $(window).scroll(function(event){
 			}else if(obj.result == 2){
 
 				setTimeout(function(){
-					toastr.success('Unknown User Id');
+					toastr.success('존재하지 않는 아이디 입니다.');
 					$("#userid-header-input").focus();
 
 					$("#loginModal").popup("hide");
@@ -282,11 +284,20 @@ $(window).scroll(function(event){
 
 			}else{
 
-				toastr.success('Something went wrong. Try again.');
+				toastr.success('죄송합니다. 다시 시도해 주세요.');
 				$("#loginModal").popup("hide");
 			}
 		});
 
+	}
+
+	function sTime(){
+
+		var counter = 0;
+		var i = setInterval(function(){
+		    $("#sTime").html(moment().format("HH:mm:ss"));
+		   
+		}, 200);
 	}
 
 </script>
@@ -296,7 +307,7 @@ $(window).scroll(function(event){
 	<div class="nav">
 		<div class="util_wrap"></div>
         <ul class="util_left">
-            <li><span class="util_time">00:00:00</span></li>
+            <li><span class="util_time" id="sTime">00:00:00</span></li>
             <li>
                 <select id="language" name="language">
                   <option value="0">한국어</option>
@@ -346,7 +357,7 @@ $(window).scroll(function(event){
 									<a href="/cash/cash.jsp" data-pg="sb4" data-tab="tab3"><span class="popover_btn">포인트사용내역</span></a>
 								</div>
 								<div class="popover-body-btn_in">
-									<a href="/cash/cash.jsp" data-pg="sb4" data-tab="tab4" ><span class="popover_btn">머니전환</span></a> 
+								<!--	<a href="/cash/cash.jsp" data-pg="sb4" data-tab="tab4" ><span class="popover_btn">머니전환</span></a> -->
 									<a href="/cash/cash.jsp" data-pg="sb4" data-tab="tab6"><span class="popover_btn">머니사용내역</span></a>
 								</div>
 							</div>
@@ -391,16 +402,16 @@ $(window).scroll(function(event){
 						</li>
 						<li><a href="/cash/cash.jsp" data-pg="sb4" data-tab="tab1" class="top_btn1" >  충전신청  </a></li>
 	                    <li><a href="/cash/cash.jsp" data-pg="sb4" data-tab="tab2" class="top_btn1" > 환전신청  </a></li>
-						<li><a href="/cash/cash.jsp" data-pg="sb4" data-tab="tab4" class="top_btn3" > 머니전환  </a></li>
+						<!--<li><a href="/cash/cash.jsp" data-pg="sb4" data-tab="tab4" class="top_btn3" > 머니전환  </a></li>-->
 						<li><a href="/info/info.jsp" data-pg="sb5" data-tab="tab1" ><span class="top_btn2">내정보</span></a></li>
 	                </ul>
                	<% } else{  %>
 					<ul class="top_right">
 						<form id="login_header">
-							<li><input id="userid-header-input" type="text" class="input_style01" name="userid" placeholder="ID"><img class="login-img-validator" data-tab="tab1" id="userid-img" src="../images/input_mark.png"></li>
+							<li><input id="userid-header-input" type="text" class="input_style01" name="userid" placeholder="아이디"><img class="login-img-validator" data-tab="tab1" id="userid-img" src="/images/input_mark.png"></li>
 							<!-- input_blue 인풋활성화 -->
 		                    <li>
-		                    	<input id="passwd-header-input" type="password" class="input_style01" name="passwd" placeholder="PW" style="width: 158px;"><img class="login-img-validator" data-tab="tab2" id="passwd-img" src="../images/input_mark.png">
+		                    	<input id="passwd-header-input" type="password" class="input_style01" name="passwd" placeholder="비밀번호" style="width: 158px;"><img class="login-img-validator" data-tab="tab2" id="passwd-img" src="/images/input_mark.png">
 		                    </li>
 		                     <li><div class="input_warning login-warn" id="login-header-warn" >조건에 맞는 아이디를 입력해주세요.</div></li>
 		                    <!-- input_red 인풋조건미충족 -->
@@ -479,7 +490,7 @@ $(window).scroll(function(event){
 		</div>
 		<div class="btn_wrap">
 			<a href="" class="closeLogoutBtn"><span class="btn3">취소</span></a>
-			<a href="../login/jsp/logout_process.jsp"><span class="btn3">확인</span></a>
+			<a href="/login/jsp/logout_process.jsp"><span class="btn3">확인</span></a>
 		</div>
 	</div>
 </div>

@@ -12,7 +12,7 @@
 --%>
 <ul class="smk_accordion">
 	<li>
-		<div clas "><h3>포인트사용내역</h3></div>
+		<div><h3>포인트사용내역</h3></div>
 		<div class="acc_content">
 			<div class="acc_content_in_2">
 				<div class="float_inline">
@@ -20,9 +20,10 @@
 						<table cellspacing="0" cellpadding="0" class="my_search_select">
 							<tr>
 								<td>
+									
 									<select class="input_style02" id="divisionSelect">
-										<option value="ALL">전체</option>
-										<option value="POINT2MONEY" selected>POINT2MONEY</option>
+										<option value="ALL" selected>전체</option>
+										<option value="POINT2MONEY">POINT2MONEY</option>
 										<option value="ADMIN">ADMIN</option>
 										<option value="ADMIN_BET_CANCEL">ADMIN_BET_CANCEL</option>
 										<option value="AG_BET">AG_BET</option>
@@ -37,6 +38,7 @@
 										<option value="MICRO_WITHDRAW">MICRO_WITHDRAW</option>
 										<option value="WITHDRAW">WITHDRAW</option>
 									</select>
+									
 								</td>
 								<td>
 									<input class="input_style04" id="dateSearch" placeholder="기간" value="2017-00-00 ~ 2017-00-00" readonly>

@@ -115,10 +115,10 @@
 			<img src="/images/check_icon.png">
 		</div>
 		<div class="pop_text">
-			Exchange Application Submited<br>			
+			환전 신청이 접수 되었습니다.<br>			
 		</div>
 		<div class="btn_wrap">
-			<span class="btn3c cs_close">충전하기</span></a>
+			<span class="btn3c cs_close">확인</span>
 		</div>
 	</div>
 </div>
