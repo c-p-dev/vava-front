@@ -128,7 +128,6 @@ public class BetConstructController {
 			params_str			= params_str.concat("gameId=").concat(game_id).concat("&");
 			params_str			= params_str.concat("token=").concat(token).concat("&");
 			params_str			= params_str.concat("partnerId=").concat(PARTNER_ID).concat("&");
-			params_str			= params_str.concat("tableId=").concat("1").concat("&");
 			params_str			= params_str.concat("language=").concat(GAME_LANG).concat("&");
 			params_str			= params_str.concat("openType=").concat(OPEN_TYPE);
 			

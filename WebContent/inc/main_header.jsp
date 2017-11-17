@@ -45,7 +45,6 @@
 <script type="text/javascript" src="/js/accordion.js"></script><!-- sub_아코디언 -->
 
 <script type="text/javascript" src="/js/common.js"></script>
-<script type="text/javascript" src="/js/refresh-money.js"></script>
 
 <script type="text/javascript" src="/js/jquery.validate.js"></script> 
 <script type="text/javascript" src="/js/jquery.nice-select.js"></script><!-- select -->

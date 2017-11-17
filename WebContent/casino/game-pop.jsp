@@ -22,6 +22,7 @@
 	      	escape: false,
 	      	blur: false,
 	      	onclose: function(){
+	      		
 	      		$('.hdr-money-row').show();
 	      		$('#game-pop-frame').attr('src', '');
 	      		$('#gm-pop-errmsg').html("");
@@ -33,5 +34,8 @@
 	    	}
 	    });
 	    
+	    $('#game-pop-frame').load(function(){
+	    	console.log($(this));
+	    });
 	});
 </script>

@@ -98,7 +98,7 @@ public class TegServlet extends HttpServlet {
 				UserBean udata5		= new UserBean();
 				UserDao user_db5	= new UserDao();
 				String srv_resp_5	= "";
-				System.out.println("show me the money");
+				
 				if (null != sess_data5) {
 					udata5	= user_db5.getUserByUserId(sess_data5.getUserid());
 					

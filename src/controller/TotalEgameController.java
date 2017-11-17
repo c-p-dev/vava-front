@@ -353,7 +353,7 @@ public class TotalEgameController {
 				game_url_full	= game_url_full.concat("&Password=").concat(mg_pincode);
 				game_url_full	= game_url_full.concat("&UL=ko-kr&CasinoID=2635&ClientID=7&BetProfileID=MobilePostLogin&StartingTab=");
 				game_url_full	= game_url_full.concat(lnk_dsp);
-				game_url_full	= game_url_full.concat("Baccarat&BrandID=igaming&altProxy=TNG&LogoutRedirect=http://desktop-v8eh8nb:8080");
+				game_url_full	= game_url_full.concat("Baccarat&BrandID=igaming&altProxy=TNG");
 			}
 		}
 		/*--------------------------------------------------------------------

@@ -59,3 +59,5 @@
 		<img src="/images/f_logo.jpg" style="margin:20px 0 0 0">
 	</div>
 </div>
+
+<script type="text/javascript" src="/js/refresh-money.js"></script>
