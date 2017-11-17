@@ -230,34 +230,45 @@
 <script>
 	$(document).ready(function () {
 		$(".racing_board_list li a").on("click",function(e) {
-			
-			var session 	= "<%=checkSession%>";
+				
 			var gm_provdr	= $(this).data('gm-provdr');
 			var lnk_dsp		= $(this).data('link-dsp');
+
+			$.ajax({
+				url : '/login/jsp/get_session.jsp',
+				data : {},
+				method: 'GET',
+				cache: false,
+			}).done(function(data){
+				var obj = JSON.parse(data);
+				var session = obj.result;
 			
-			if ((!session)
-			|| (false == session)
-			|| ("false" == session)) {
-				$('#fade_3').popup('show');
-			}
-			else {
-				$('.hdr-money-row').hide();
-				$('#fade_9').popup('show');
-				
-				$.get("/TegServlet?method=1&gm_provdr="+gm_provdr+"&lnk_dsp="+lnk_dsp, function(srv_resp) {
+
+				if ((!session)
+				|| (false == session)
+				|| ("false" == session)) {
+					$('#fade_3').popup('show');
+				}
+				else {
+					$('.hdr-money-row').hide();
+					$('#fade_9').popup('show');
 					
-					if ("" != srv_resp) {
-						$('#game-pop-frame').attr('src', srv_resp);
+					$.get("/TegServlet?method=1&gm_provdr="+gm_provdr+"&lnk_dsp="+lnk_dsp, function(srv_resp) {
 						
-						if (1 == gm_provdr) {
-							$('.money_dsp').text('0.00');
+						if ("" != srv_resp) {
+							$('#game-pop-frame').attr('src', srv_resp);
+							
+							if (1 == gm_provdr) {
+								$('.money_dsp').text('0.00');
+							}
 						}
-					}
-					else {
-						$('#gm-pop-errmsg').html("An error occured. Please reload the game.");
-					}
-				});
-			}
+						else {
+							$('#gm-pop-errmsg').html("An error occured. Please reload the game.");
+						}
+					});
+				}
+
+			});
 
 			return false;
 		})

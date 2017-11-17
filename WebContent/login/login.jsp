@@ -37,7 +37,28 @@
 			</form>
 		</div>	
 	</div>
-	
+</div>
+
+
+<!-- login success modal -->
+<div id="lgInMdl2" class="bg_mask_pop2">
+	<div class="bg_mask_pop_title">
+		<span class="popup_logo"><img src="/images/popup_logo.png"></span>
+		<span class="popup_close cMLgIn2"><img src="/images/popup_close.png"></span>
+	</div>
+	<div class="bg_mask_pop2_in">
+		<div class="pop_icon_center">
+			<img src="/images/check_icon.png">
+		</div>
+		<div class="pop_text">
+			로그인 성공!<br>
+			IBET25에 오신것을 환영합니다. <br>
+			IBET25에서 다양한 베팅의 세계를 마음껏 경험하세요!<br>
+		</div>
+		<div class="btn_wrap">
+			<span class="btn3 cMLgIn2">확인</span>
+		</div>
+	</div>
 </div>
 
 <script>
@@ -52,6 +73,25 @@
 			e.preventDefault();
 			$('#fade_3').popup("hide");
 			$('#fade_1').popup("show");
+		});
+
+
+		$('#lgInMdl2').popup({
+	      	transition: 'all 0.3s',
+	      	scrolllock: true,
+	      	onclose:function(){
+	    		$("#login_modal_form")[0].reset();
+	    		$('.input_warning').hide();
+	    		// location.reload();
+	    		$("#passwd-input").removeClass("password");
+	    		// alert("closing");
+	    	}
+	    });
+
+		$(".cMLgIn2").on("click",function(e){
+			e.preventDefault();
+			$("#lgInMdl2").popup("hide");
+		
 		});
 
 		$("#login_modal_form").on("submit",function(e){
@@ -87,6 +127,7 @@
 	      	onclose:function(){
 	    		$("#login_modal_form")[0].reset();
 	    		$('.input_warning').hide();
+	    		toastr.clear();
 	    	}
 	    });	
 
@@ -149,9 +190,20 @@
 			// console.log(obj);
 			if(obj.result == 0 ){
 
+				$.ajax({
+					url : '/login/jsp/get_header.jsp', //jsp				
+					data : data,
+					method: 'GET',
+				}).done(function(data){
+					console.log(data);
+					$("#uhead").html(data);
+					$("#fade_3").popup("hide");
+					$("#lgInMdl2").popup("show");	
+
+				});
 				// toastr.success('Login Successful');
-				$("#fade_3").popup("hide");
-				$("#loginModal").popup("show");
+				// $("#fade_3").popup("hide");
+				// $("#loginModal").popup("show");
 				
 
 			}else if(obj.result == 1 ){

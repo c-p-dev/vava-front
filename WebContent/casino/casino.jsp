@@ -234,7 +234,7 @@ ul.casino_board_list  + .btn_wrap{
 	spin += '</div>';
 	$(document).ready(function () {
 
-
+		
 		// $(".casino_board_list li a").on("click",function(e) {
 		$(".casino_right").html(spin);
 		setTimeout(function(){
@@ -242,35 +242,45 @@ ul.casino_board_list  + .btn_wrap{
 		}, 100);
 		
 		$("body").on("click",".casino_board_list li a",function(e) {
-			
-			var session 	= "<%=checkSession%>";
 			var gm_provdr	= $(this).data('gm-provdr');
 			var lnk_dsp		= $(this).data('link-dsp');
+			$.ajax({
+				url : '/login/jsp/get_session.jsp',
+				data : {},
+				method: 'GET',
+				cache: false,
+			}).done(function(data){
+				var obj = JSON.parse(data);
+				// console.log(obj);
+				var session = obj.result;
 			
-			if ((!session)
-			|| (false == session)
-			|| ("false" == session)) {
-				$('#fade_3').popup('show');
-			}
-			else {
-				$('.hdr-money-row').hide();
-				$('#fade_9').popup('show');
-				
-				$.get("../TegServlet?method=1&gm_provdr="+gm_provdr+"&lnk_dsp="+lnk_dsp, function(srv_resp) {
-					
-					if ("" != srv_resp) {
-						$('#game-pop-frame').attr('src', srv_resp);
-						
-						if (1 == gm_provdr) {
-							$('.money_dsp').text('0.00');
-						}
-					}
-					else {
-						$('#gm-pop-errmsg').html("An error occured. Please reload the game.");
-					}
-				});
-			}
 
+				if ((!session)
+				|| (false == session)
+				|| ("false" == session)) {
+					$('#fade_3').popup('show');
+				}
+				else {
+					$('.hdr-money-row').hide();
+					$('#fade_9').popup('show');
+					
+					$.get("../TegServlet?method=1&gm_provdr="+gm_provdr+"&lnk_dsp="+lnk_dsp, function(srv_resp) {
+						
+						if ("" != srv_resp) {
+							$('#game-pop-frame').attr('src', srv_resp);
+							
+							if (1 == gm_provdr) {
+								$('.money_dsp').text('0.00');
+							}
+						}
+						else {
+							$('#gm-pop-errmsg').html("An error occured. Please reload the game.");
+						}
+					});
+				}
+
+			});
+	
 			return false;
 		});
 
@@ -442,6 +452,22 @@ ul.casino_board_list  + .btn_wrap{
 		var next = '<li class=""><a class="page prev_pg">></a></li>';
 		$('ul.pagination').prepend(prev);
 		$('ul.pagination').append(next);
+	}
+
+	function getSess(){
+		var session = false;
+		$.ajax({
+			url : '/login/jsp/get_session.jsp',
+			data : {},
+			method: 'GET',
+		}).done(function(data){
+			var obj = JSON.parse(data);
+			// console.log(obj);
+			session = obj.result;
+
+		});
+
+		return session;
 	}
 
 
