@@ -8,9 +8,9 @@
 						ABOUT
 					</div>
 					<ul class="f_site_map_left_list">
-						<li><a href="#">베팅 규정</a></li>
-						<li><a href="#">공지/이벤트</a></li>
-						<li><a href="#">이용약관</a></li>
+						<li><a href="/help.jsp?page=br">베팅 규정</a></li>
+						<li><a href="">공지/이벤트</a></li>
+						<li><a href="/help.jsp?page=tou">이용약관</a></li>
 					</ul>
 				</div>
 				<div class="f_site_map_left">
@@ -18,9 +18,9 @@
 						HELP
 					</div>
 					<ul class="f_site_map_left_list">
-						<li><a href="#">베팅 가이드</a></li>
-						<li><a href="#">게임 가이드</a></li>
-						<li><a href="#">자주 묻는 질문</a></li>
+						<li><a href="/help.jsp?page=bg">베팅 가이드</a></li>
+						<li><a href="/help.jsp?page=gg">게임 가이드</a></li>
+						<li><a href="/help.jsp?page=faq">자주 묻는 질문</a></li>
 					</ul>
 				</div>
 				<div class="f_site_map_left">
@@ -28,9 +28,9 @@
 						GAMES
 					</div>
 					<ul class="f_site_map_left_list">
-						<li><a href="#">스포츠북</a></li>
-						<li><a href="#">가상게임</a></li>
-						<li><a href="#">라이브 카지노</a></li>
+						<li>스포츠북</li>
+						<li>가상게임</li>
+						<li>라이브 카지노</li>
 					</ul>
 				</div>
 			</div>
@@ -61,3 +61,6 @@
 </div>
 
 <script type="text/javascript" src="/js/refresh-money.js"></script>
+<!--
+
+//-->

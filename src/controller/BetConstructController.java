@@ -37,7 +37,7 @@ import util.StringManipulator;
 
 public class BetConstructController {
 	
-	public static final String API_BASE_URL		= "http://casinoapi.betconstruct.com/authorization.php?";
+	public static final String API_BASE_URL		= "http://games.vava26.com/authorization.php?";
 	public static final String PARTNER_ID		= "704";
 	public static final String SHARED_KEY		= "JKGS*&D^ST*&JBDSN";
 	public static final String HASH_TYPE		= "SHA-256";
@@ -176,7 +176,7 @@ public class BetConstructController {
 	        |-------------------------------------------------------------------*/
 			bc_user		= betcon_db.getUserBySessionToken(json_data.getToken());
 			user_data	= betcon_db.getUserByPlayerId(bc_user.getPlayerId());
-			
+			System.out.println(bc_user.getPlayerId());
 			/*--------------------------------------------------------------------
 	        |	Create Output Object for Response
 	        |-------------------------------------------------------------------*/
@@ -213,7 +213,7 @@ public class BetConstructController {
 		}
 		
 		json_output	= gson_null.toJson(auth_user, AuthenticationOutput.class);
-		
+		System.out.println(json_output);
 		return json_output;
 	}
 	
