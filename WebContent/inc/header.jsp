@@ -328,7 +328,7 @@ $(window).scroll(function(event){
                 </script>
             </li>
             <li><a href="/notice/sub02.jsp"><span class="util_btn">공지/이벤트</span></a></li>
-            <li><a href="/help/sub03.jsp"><span class="util_btn">도움말</span></a></li>
+            <li><a href="/help.jsp"><span class="util_btn">도움말</span></a></li>
             <li><a href="/match/result.jsp"><span class="util_btn">경기결과</span></a></li>
         </ul>
         <div id="uhead">
