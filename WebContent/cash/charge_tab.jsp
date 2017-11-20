@@ -191,6 +191,15 @@
 		$(".add-money").on("click",function(e){
 			var am = $(this).attr("data-am");
 			addAmount(am);
+
+			var validator = $( "#chargeForm" ).validate(); 
+			var valid = validator.element("#money");
+			console.log(valid);
+			if(valid){
+				$("#money").qtip("hide");
+			}
+			
+
 		});
 
 		$("#bankInfoBtn").on("click",function(){
@@ -314,7 +323,10 @@
 			}			
 		});
 
+
+
 	});
+
 
 	$("#chargeForm").validate({
   		errorClass: 'form1-invalid',
@@ -334,9 +346,9 @@
 			},
 			money:{
 				required:true,
-				digits: true,
-				min:10,
-				range: [10, 9999999999]
+				money_number:true,
+				money_min: true,
+
 			}
 		},
 		messages: {
@@ -352,9 +364,9 @@
 			},
 			money:{
 				required:"금액을 입력해 주세요.",
-				digits: "금액을 숫자로 입력해 주세요.",
-				min:"최소 만원 이상으로 입력해 주세요.",
-				range:"최소 만원 이상으로 입력해 주세요.",
+				money_number: "금액을 숫자로 입력해 주세요.",
+				money_min:"최소 만원 이상으로 입력해 주세요.",
+				
 			}
 
 		},
@@ -400,9 +412,19 @@
 
 	});
 
+	
 	function addAmount(amount){
 		
 		var current_am = parseInt($("#money").val()) || 0;
+		if(isNaN(parseInt($("#money").val()))){
+			current_am = 0;
+
+		}else{
+			current_am = parseInt(numberParser($("#money").val()));
+		}
+
+		console.log(current_am);
+
 		var am = 0;
 		var sum = 0;
 		if(amount == "1"){
@@ -420,13 +442,16 @@
 		else if(amount == "100"){
 			am = 1000000;
 			sum = am + current_am;
+		}else{
+
 		}
 
-		$("#money").val(sum);
+		$("#money").val(numberWithCommas(sum));
 	}
 
 	function submitCharge(data){
-		// console.log(data);
+		
+		
 		$.ajax({
 			url:'/cash/jsp/setChargeApplication.jsp',
 			data:data,
@@ -451,5 +476,7 @@
 		$("#chargeForm")[0].reset();
 		$("#chargeForm").validate().resetForm();
 	}
+
+
 
 </script>
