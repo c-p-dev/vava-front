@@ -226,6 +226,13 @@ public class GameDao {
 				"WHEN 2 THEN '라이브 식보' " + 
 				"WHEN 3 THEN '라이브 바카라' " + 
 				"WHEN 4 THEN '라이브 드래곤 타이거' " + 
+				"WHEN 5 THEN '3D Horses' " + 
+				"WHEN 6 THEN '3D Animals' " + 
+				"WHEN 7 THEN 'Poker' " + 
+				"WHEN 8 THEN 'Black Jack' " + 
+				"WHEN 9 THEN 'Roullete' " + 
+				"WHEN 10 THEN 'Chinga Choong' " + 
+				"WHEN 11 THEN 'Ogwill' " + 
 				"END as game_type_name " + 
 				"FROM game_lst WHERE game_provider != 4 " +  
 				"GROUP BY game_type " ;
@@ -267,6 +274,11 @@ public class GameDao {
 				"WHEN 4 THEN '라이브 드래곤 타이거' " + 
 				"WHEN 5 THEN '3D Horses' " + 
 				"WHEN 6 THEN '3D Animals' " + 
+				"WHEN 7 THEN 'Poker' " + 
+				"WHEN 8 THEN 'Black Jack' " + 
+				"WHEN 9 THEN 'Roullete' " + 
+				"WHEN 10 THEN 'Chinga Choong' " + 
+				"WHEN 11 THEN 'Ogwill' " + 
 				"END as game_type_name FROM game_lst WHERE game_provider = ? Group by game_type UNION " + 
 				"SELECT 0 , 'ALL' AS game_type_name";
 		
@@ -283,6 +295,13 @@ public class GameDao {
 						"WHEN 2 THEN '라이브 식보' " + 
 						"WHEN 3 THEN '라이브 바카라' " + 
 						"WHEN 4 THEN '라이브 드래곤 타이거' " + 
+						"WHEN 5 THEN '3D Horses' " + 
+						"WHEN 6 THEN '3D Animals' " + 
+						"WHEN 7 THEN 'Poker' " + 
+						"WHEN 8 THEN 'Black Jack' " + 
+						"WHEN 9 THEN 'Roullete' " + 
+						"WHEN 10 THEN 'Chinga Choong' " + 
+						"WHEN 11 THEN 'Ogwill' " + 
 						"END as game_type_name FROM game_lst WHERE game_provider != 4 GROUP BY game_type UNION " + 
 						"SELECT 0 , 'ALL' AS game_type_name";
 				

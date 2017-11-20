@@ -372,6 +372,7 @@ ul.casino_board_list  + .btn_wrap{
 		$.each(obj.games,function(index, el) {
 
 			tab_num =  tab_num + 1;
+			console.log(el);
 			var tab_name = el.game_type_name.toLowerCase();
 			tab_name = tab_name.split(' ').join('_'); 
 
