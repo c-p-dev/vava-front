@@ -28,17 +28,17 @@
 			<div class="contents">
 				<div class="sub_left">
 				<ul class="l_tabs">
-					<li><a href="#l-tab1">베팅 가이드</a></li>
-					<li><a href="#l-tab2">게임 가이드</a></li>
-					<li><a href="#l-tab3">자주 묻는 질문</a></li>
-					<li><a href="#l-tab4">이용약관</a></li>
+					<li id="ht1"><a href="#l-tab1">베팅 가이드</a></li>
+					<li id="ht2"><a href="#l-tab2">게임 가이드</a></li>
+					<li id="ht3"><a href="#l-tab3">자주 묻는 질문</a></li>
+					<li id="ht4"><a href="#l-tab4">이용약관</a></li>
 				</ul>
 			</div>	
 				<div class="sub_right">
 					<div id="l-tab1" class="left_tab_con">
 					<ul class="smk_accordion">
 						<li>
-							<div class="acc_head"><h3>스포츠 베팅 타입의 이해</h3></div>
+							<div class="acc_head br1"><h3>스포츠 베팅 타입의 이해</h3></div>
 							<div class="acc_content">
 								<div class="acc_content_in_2">
 									<p style="font-weight: bold;">■ 승무패 1×2</p>
@@ -236,7 +236,7 @@
 							</div>
 						</li>
 						<li>
-							<div class="acc_head"><h3>축구</h3></div>
+							<div class="acc_head br2"><h3>축구</h3></div>
 							<div class="acc_content">
 								<div class="acc_content_in_2">
 									<p>a.  축구 배팅은 IBET25 에서 별도로 규정한 내역을 제외하고 연장전과 승부차기는 포함되지 않고 정규 경기시간을 기준으로 승인된다. 정규경기 시간에는 심판에 의해 전반전과 후반전에 추가된 시간까지를 포함한다.</p>
@@ -2375,3 +2375,31 @@
 	</div><!-- main_contents -->
 <!-- wrap -->
 <%@ include file="/inc/footer.jsp"%>
+<script>
+$(document).ready(function() {
+	var urlParams = new URLSearchParams(window.location.search);
+	var page = urlParams.get('page');
+	if (page == "br"){
+		$("#ht1").click();
+		$(".br1").click();
+		$(".br2").click();
+	} else if (page == "tou"){
+		$("#ht4").click();
+	} else if (page == "bg"){
+		$("#ht1").click();
+	} else if (page == "gg"){
+		$("#ht2").click();
+	} else if (page == "faq") {
+		$("#ht3").click();
+	}
+});
+</script>
+<script>
+window.onload=function(){
+	window.history.pushState('/help.jsp', '?page=gg', '/help.jsp');
+	window.history.pushState('/help.jsp', '?page=bg', '/help.jsp');
+	window.history.pushState('/help.jsp', '?page=br', '/help.jsp');
+	window.history.pushState('/help.jsp', '?page=tou', '/help.jsp');
+	window.history.pushState('/help.jsp', '?page=faq', '/help.jsp');
+}
+</script>
