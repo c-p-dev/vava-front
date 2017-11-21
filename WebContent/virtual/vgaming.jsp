@@ -130,8 +130,8 @@
 
 			<ul class="l_tabs" id="game-cat">
 				<li><a href="#l-tab1" class="get-game">전체</a></li>
-				<li><a href="#l-tab2" class="get-game">Instant</a></li>
 				<li><a href="#l-tab3" class="get-game">Virtual</a></li>
+				<li><a href="#l-tab2" class="get-game">Instant</a></li>
 			</ul>
 			
 		</div>
@@ -141,33 +141,6 @@
 				
 				<div class="tab_container">
 					<div id="tab1" class="tab_content">
-						<div class="casino_board_wrap">
-							<span>  </span>
-							<ul class="racing_board_list">
-								
-								<%
-									for (int i = 0; i < igame_list.size(); i++) {
-										GameBean cur_igame = igame_list.get(i);
-								%>
-								<li>
-									<a href="#" data-gm-provdr = '<%=cur_igame.getGame_provider()%>' data-link-dsp = '<%=cur_igame.getLink_dsp()%>'>
-										<div class="img racing_board_img">
-											<img src="/images/<%=cur_igame.getGame_img()%>" style = 'width: 290px; height: 195px;'>
-											<div class="overlay">
-												 <span class="expand">Play now</span>
-											</div>
-										</div>
-									</a>
-									<div class="casino_board_text">
-										<p class="casino_name"><%=cur_igame.getGame_name()%></p>
-									</div>
-								</li>
-								<%
-									}
-								%>
-							
-							</ul>
-						</div>
 						
 						<div class="casino_board_wrap">
 							<span> </span>
@@ -197,6 +170,35 @@
 							</ul>
 							
 						</div>
+						
+						<div class="casino_board_wrap">
+							<span>  </span>
+							<ul class="racing_board_list">
+								
+								<%
+									for (int i = 0; i < igame_list.size(); i++) {
+										GameBean cur_igame = igame_list.get(i);
+								%>
+								<li>
+									<a href="#" data-gm-provdr = '<%=cur_igame.getGame_provider()%>' data-link-dsp = '<%=cur_igame.getLink_dsp()%>'>
+										<div class="img racing_board_img">
+											<img src="/images/<%=cur_igame.getGame_img()%>" style = 'width: 290px; height: 195px;'>
+											<div class="overlay">
+												 <span class="expand">Play now</span>
+											</div>
+										</div>
+									</a>
+									<div class="casino_board_text">
+										<p class="casino_name"><%=cur_igame.getGame_name()%></p>
+									</div>
+								</li>
+								<%
+									}
+								%>
+							
+							</ul>
+						</div>
+						
 					</div>
 					
 				</div>
