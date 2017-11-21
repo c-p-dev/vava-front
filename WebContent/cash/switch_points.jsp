@@ -44,7 +44,7 @@
 										</div>
 										<div class="cash_in">
 											<div class="cash_6">
-												<input class="input_style03" id="point" name="point" placeholder="입금자명">		
+												<input class="input_style03" id="point" name="point" style="text-align: right; padding-right:10px;" placeholder="입금자명">		
 											</div>
 											<div class="cash_3">
 												<span class="btn5" id="reset">정정</span>
@@ -60,7 +60,7 @@
 		 									<span class="btn1" id="p2">5만원</span>
 		 									<span class="btn1" id="p3">10만원</span>
 		 									<span class="btn1" id="p4">100만원</span>
-											<span><button type="submit" class="btn3c">전환신청</button></span>
+											<span><button type="submit" id="pointBtnSbmit" class="btn3c">전환신청</button></span>
 										</div>	
 									</div>
 								</form>
@@ -97,18 +97,21 @@ $(document).ready(function(){
 			rules: {
 				point :{
 				required:true,
-				digits: true,
-				min: 10000,
-				max: p,
+				money_number:true,
+				money_min: true,
+				max_point:p,
+				// digits: true,
+				// min: 10000,
+				// max: p,
 			},
 		},
 			
 		messages: {
 			point :{
 				required:"입력이 필요합니다.",
-				digits: "입력은 숫자 여야합니다.",
-				min:"교환 가능한 최소 금액은 10000입니다.",
-				max:"불충분 한 포인트"
+				money_number: "입력은 숫자 여야합니다.",
+				money_min:"교환 가능한 최소 금액은 10,000입니다.",
+				max_point:"불충분 한 포인트"
 			},
 		},
 		errorPlacement: function(error, element) {
@@ -136,8 +139,8 @@ $(document).ready(function(){
 			        },
 			        position: {
 				        container: $("#acc_content_in_pointtb"),
-				        at: 'top center ',
-				        my: 'bottom center', 
+				        at: 'left center ',
+				        my: 'right center', 
 				        adjust : {
 				        	method : 'shift none',
 				        }
@@ -149,14 +152,20 @@ $(document).ready(function(){
 			}
 
 		},
-		submitHandler: function(form) {
-			var data = $("#pointform").serializeJSON();
-		    submitPoint(data);
-	  	}
+		// submitHandler: function(form) {
+		// 	var data = $("#pointform").serializeJSON();
+		//     submitPoint(data);
+	 //  	}
 	});	 
 });
 
 function submitPoint(data){
+	console.log(data);
+	if(data != null){
+		var p = data.point;
+		data.point = numberParser(p);
+	} 
+	console.log(data);
 	$.ajax({
 		url : '/cash/jsp/switchPoints.jsp',
 		data : data,
@@ -172,6 +181,34 @@ function submitPoint(data){
 		$("#PointSuccesModal").popup("show");
 	});
 }
+
+$("#pointform input").on("blur",function(e){
+	e.preventDefault();
+	var validator = $( "#pointform" ).validate(); 
+	var id = $(this).attr("id");
+	var valid = validator.element("#"+id);
+	$(this).qtip("hide");
+
+	if(!valid && !valid){
+		$(this).focusin();
+	}			
+});
+
+$("#point").on("change",function(e){
+	e.preventDefault();
+	var data = $(this).val();
+	$(this).val(numberWithCommas(data));
+});
+
+$("#pointBtnSbmit").on("click",function(e){
+	e.preventDefault();
+	if($("#pointform").valid()){
+		$("#point").qtip("hide");
+		var data = $("#pointform").serializeJSON();
+	    submitPoint(data);
+	}
+});
+
 $('#PointSuccesModal').popup({
   	transition: 'all 0.3s',
   	scrolllock: true,
@@ -179,33 +216,69 @@ $('#PointSuccesModal').popup({
   		resetpointform();
 	}
 });
+
 $(".cs_close").on("click",function(e){
 	e.preventDefault();
 	$("#PointSuccesModal").popup("hide");
 
 });
+
+
+
 function resetpointform(){
 	$("#pointform")[0].reset();
 	$('#point').css('border-color', '#373332');
 	$( "#err-msg1" ).hide();
 }
+
+
+
 $('#reset').click(function(){
 	$("#point").val("0");
 });
+
 $('#p1').click(function(){
-	 var num = +$("#point").val() + 10000;
-	 $("#point").val(num);
+	// var num = + $("#point").val() + 10000;
+	// $("#point").val(numberWithCommas(num));
+	addVal(10000);
 });
+
 $('#p2').click(function(){
-	var num = +$("#point").val() + 50000;
-	 $("#point").val(num);
+	// var num = + $("#point").val() + 50000;
+	// $("#point").val(numberWithCommas(num));
+	addVal(50000);
 });
+
 $('#p3').click(function(){
-	var num = +$("#point").val() + 100000;
-	 $("#point").val(num);
+	// var num = + $("#point").val() + 100000;
+	// $("#point").val(numberWithCommas(num));
+	addVal(100000);
 });
+
 $('#p4').click(function(){
-	var num = +$("#point").val() + 1000000;
-	 $("#point").val(num);
+	// var num = + $("#point").val() + 1000000;
+	// $("#point").val(numberWithCommas(num));
+	addVal(1000000);
 });
+
+
+function addVal(point){
+	var amount = parseInt($("#point").val()) || 0;
+	if(isNaN(parseInt($("#point").val()))){
+		amount = 0;
+
+	}else{
+		amount = parseInt(numberParser($("#point").val()));
+	}
+
+	var sum = amount + point;
+	$("#point").val(numberWithCommas(sum));
+
+	var validator = $( "#pointform" ).validate(); 
+	var valid = validator.element("#point");
+	if(valid){
+		$("#point").qtip("hide");
+	}
+}
+
 </script>

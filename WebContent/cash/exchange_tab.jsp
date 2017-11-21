@@ -43,7 +43,7 @@
  	 									<span class="btn1" id="button3">10만원</span>
  	 									<span class="btn1" id="button4">100만원</span>
  	 									<span class="btn1" id="button5">정정</span>
-								<span><button type="submit" class="btn3c">환전신청</button></span>
+								<span><button type="submit" id="exchangeSbmtBtn" class="btn3c">환전신청</button></span>
 							</div>
 						</div>
 					</div>
@@ -197,15 +197,15 @@
   		rules: {
 			withdraw :{
 				required:true,
-				digits: true,
-				min: 10000
+				money_number:true,
+				money_min: true,
 			},
 		},
 		messages: {
 			withdraw :{
 				required:"입력이 필요합니다.",
-				digits: "입력은 숫자 여야합니다.",
-				min:"교환 가능한 최소 금액은 10,000입니다.",
+				money_number: "입력은 숫자 여야합니다.",
+				money_min:"교환 가능한 최소 금액은 10,000입니다.",
 			},
 		},
 		errorPlacement: function(error, element) {
@@ -233,8 +233,8 @@
 			        },
 			        position: {
 				        container: $("#acc_content_in_withdrawtb"),
-				        at: 'top center ',
-				        my: 'bottom center', 
+				        at: 'right center ',
+				        my: 'left center', 
 				        adjust : {
 				        	method : 'shift none',
 				        }
@@ -246,26 +246,50 @@
 			}
 
 		},
-		submitHandler: function(form) {
-			var data = $("#formwithdraw").serializeJSON();
-		    submitWithdraw(data);
-	  	}
+		
 	});
 
 	function submitWithdraw(data){
-		// console.log(data);
+		
+		if(data != null){
+			var num = data.withdraw;
+			data.withdraw = numberParser(num);
+		}
+
 		$.ajax({
 			url:'jsp/withdrawprocess.jsp',
 			data:data,
 			type:'POST'
 		}).done(function(data){
-			// console.log(data);
+			
 			if(data){
 				$("#ExchangeSuccesModal").popup("show");
 			}
 		});
 		
 	}
+
+	$("#formwithdraw input").on("blur",function(e){
+		e.preventDefault();
+		var validator = $( "#formwithdraw" ).validate(); 
+		var id = $(this).attr("id");
+		var valid = validator.element("#"+id);
+		$(this).qtip("hide");
+
+		if(!valid && !valid){
+			$(this).focusin();
+		}			
+	});
+
+	$("#exchangeSbmtBtn").on("click",function(e){
+		e.preventDefault();
+		if($("#formwithdraw").valid()){
+			$("#withdraw").qtip("hide");
+			var data = $("#formwithdraw").serializeJSON();
+		    submitWithdraw(data);
+		}
+	});
+
 	$('#ExchangeSuccesModal').popup({
 	  	transition: 'all 0.3s',
 	  	scrolllock: true,
@@ -281,28 +305,67 @@
 		$("#ExchangeSuccesModal").popup("hide");
 
 	});
+
+	function addWithDraw(point){
+		var amount = parseInt($("#withdraw").val()) || 0;
+		if(isNaN(parseInt($("#withdraw").val()))){
+			amount = 0;
+
+		}else{
+			amount = parseInt(numberParser($("#withdraw").val()));
+		}
+
+		var sum = amount + point;
+		$("#withdraw").val(numberWithCommas(sum));
+
+		var validator = $( "#formwithdraw" ).validate(); 
+		var valid = validator.element("#withdraw");
+		if(valid){
+			$("#withdraw").qtip("hide");
+		}
+
+
+	}
+
+
 	function resetformwithdraw(){
 		$("#formwithdraw")[0].reset();
 		$('#withdraw').css('border-color', '#373332');
 		$( "#err-msg" ).hide();
 	}
+
 	$('#button1').click(function(){
-		 var num = +$("#withdraw").val() + 10000;
-		 $("#withdraw").val(num);
+		// var num = +$("#withdraw").val() + 10000;
+		// $("#withdraw").val(num);
+		addWithDraw(10000);
+
 	});
+
 	$('#button2').click(function(){
-		var num = +$("#withdraw").val() + 50000;
-		 $("#withdraw").val(num);
+		// var num = +$("#withdraw").val() + 50000;
+		// $("#withdraw").val(num);
+		addWithDraw(50000);
+
 	});
+
 	$('#button3').click(function(){
-		var num = +$("#withdraw").val() + 100000;
-		 $("#withdraw").val(num);
+		// var num = +$("#withdraw").val() + 100000;
+		// $("#withdraw").val(num);
+		addWithDraw(100000);
+
 	});
+
 	$('#button4').click(function(){
-		var num = +$("#withdraw").val() + 1000000;
-		 $("#withdraw").val(num);
+		// var num = +$("#withdraw").val() + 1000000;
+		// $("#withdraw").val(num);
+		addWithDraw(1000000);
+
 	});
+
 	$('#button5').click(function(){
 		$("#withdraw").val("0");
 	});
+
+
+
 </script> 
