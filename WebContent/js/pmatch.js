@@ -21,7 +21,8 @@ var s=[
 		{"PID":16,"u":"left_pre.html"},
 		{"PID":17,"u":"jsp/loadPreMatch.jsp"},
 		{"PID":18,"u":"jsp/subLoadPreMatch.jsp"},
-		{"PID":19,"u":"jsp/setFavMatch.jsp"}
+		{"PID":19,"u":"jsp/setFavMatch.jsp"},
+		{"PID":20,"u":"jsp/getMarketCategory.jsp"}
 		]
   		
 mainAngular.factory('wss', function($window) {
@@ -162,6 +163,21 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 		$scope.tabMId = "0";    
     $scope.toggleMId = "0";  
     //liveMatchCnt();  
+    
+    $scope.mTyId = "ALL";
+		$scope.MKCAT = [];
+		//$scope.savedFavM = [];
+		$scope.Fav_mode = false;
+		
+		$scope.savedFavM = JSON.parse(localStorage.getItem('SFM'));
+		
+		if($scope.savedFavM  === null){
+			$scope.savedFavM = [];
+		}
+			
+		//console.log("$scope.savedFavM = " + $scope.savedFavM);
+		
+		//$scope.savedFavM = JSON.parse(chrome.storage.local.getItem('SFM'));
     mode = "PreMatch"; 
 	    
     			
@@ -176,11 +192,31 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 	    $scope.leftTab = left;
 	    mode = "LiveMatch";
 	  }
-
+		
+		$scope.loadPop = function (sid,mid) {
+			$scope.Fav_mode = false;
+	    //$scope.mTyId = "ALL";
+	    //$scope.Fav_mode = false;
+			$scope.getMatchInfobyMatchId(mid);
+			$scope.getMarketbyMatchId(mid);
+	 		//$scope.getStatusbyMatchId(mid,sid);
+	    $scope.centerTab = "center_popular.html";	    
+	    $scope.topLive = "/sport/html/top_pre"+sid+".html";
+	    //console.log($scope.topLive);
+	    $scope.tabMId = mid; 
+	    $scope.tabMkId = "0";  
+	    //$scope.Fav_mode = false;
+	    $scope.mTyId = "ALL";
+	    mode = "LiveMatch";
+		}	  	
+		
+		
 	 $scope.goPreMatch = function (left,center) {	 
 	 	
 
 	  	$scope.PMk =[];
+	  	$scope.innerTab = [];
+	  	//console.log("$scope.innerTab = []");	
 	  	$scope.tabCId = $scope.PMc[0].CId;
 	  	getMatchInfobyCompetition($scope.tabCId);  	
 	  	loadPreMatch();
@@ -196,6 +232,8 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 	  }
   
 	 $scope.goMatchMarket = function (tab,sid,mid) { 
+	 	  //console.log("goMatchMarket");
+	 	  
 	 		$scope.getMarketbyMatchId(mid);
 	 		$scope.getStatusbyMatchId(mid,sid);
 	    $scope.centerTab = tab;
@@ -225,6 +263,11 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
  
  
 	  $scope.goPreMatchMarket = function (tab,ht,at,sid,mid,idx) {	
+	  	$scope.mTyId ="ALL";
+	  	
+	  	//console.log("$scope.mTyId:"+$scope.mTyId);
+	  	
+	  	$scope.Fav_mode = false;
 	    $scope.centerTab = tab;
 	    $scope.innerTab = [];
 	    $scope.innerTab[idx] = "inner_pre.html";
@@ -241,7 +284,49 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 	    $scope.tabMkId = "0";  
 	    mode = "PreMatch";
 	  };
-     
+    
+    $scope.setMTyId = function(mTyId) {	  	 		
+			
+			$scope.mTyId = mTyId;
+			//$scope.pp = 0;
+			$scope.MKCAT =[];
+			$scope.Fav_mode = false;
+			
+	 		if(mTyId =='WL'){
+	 			$scope.MKCAT = $scope.cat_wl;
+	 		
+	 		} else if(mTyId =='OU'){
+	 			$scope.MKCAT = $scope.cat_ou;
+	 		
+	 		} else if(mTyId =='HD'){
+	 			$scope.MKCAT = $scope.cat_hd;
+	 			
+	 		} else if(mTyId =='CB'){
+	 			$scope.MKCAT = $scope.cat_cb ;
+	 		
+	 		} else if(mTyId =='ETC'){
+	 			$scope.MKCAT = $scope.cat_etc ;
+	 		
+	 		} 	 		
+	 		//console.log($scope.MKCAT);
+   
+	  };
+	  
+	$scope.findMakret =  function(arr,arr2){
+
+		var r = [];		
+
+		//angular.forEach(arr, function(i){
+			
+			angular.forEach(arr, function(k){
+				
+				if(arr2.indexOf(k.MTyId) !== -1){
+					r.push(k);
+				};				
+		});
+		return r;
+	};
+	 
 	  $scope.addBet  = function (sd,mkid,sn,st,ht,at,p,bp) { 	
 
 			$scope.betE = true;  	
@@ -324,12 +409,13 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 	 };
 
    $scope.getMaketbyCid  = function (left,center,cid) { 	  
+   	$scope.innerTab = []; 
   	$scope.centerTab = center;
     $scope.leftTab = left;
     $scope.tabDate = "0";
     $scope.CID = cid;
     //$scope.getMatchInfobyCompetition(cid);
-    $scope.PMk =[];
+    $scope.PMk =[];    
     getMatchInfobyCompetition(cid);
  }
 
@@ -353,6 +439,33 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 	});	
 				
 	var $filter = angular.injector(['ng', 'Vava']).get('$filter');
+	
+	console.log("$scope.mk_cat_before"); 
+	
+	$http({
+	    url: s[20].u, 
+	    method: "GET",
+	     headers: {
+        'Content-Type': 'utf-8'
+       }
+    }).success(function(data, status, headers, config) {  
+    	
+    	console.log("$scope.mk_cat"); 	
+    	console.log(data[0]);
+    	 	
+	    $scope.cat_wl = data[0].WL;
+	    $scope.cat_ou = data[0].OU;
+	    $scope.cat_hd = data[0].HD;
+	    
+	    console.log("$scope.cat_hd");
+	    console.log($scope.cat_hd);
+	    
+	    $scope.cat_cb = data[0].CB;
+	    $scope.cat_etc = data[0].ETC;
+
+		}).error(function(data, status, headers, config) {
+	    $scope.status = status;
+	});
 	
 	$http({
 	    url: s[5].u, 
@@ -512,13 +625,18 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 					for(var i = mSelect.length - 1; i >= 0; i--){
 						if(mSelect[i].Nm == 'W1') {
 							w1SelId = mSelect[i].Id ;
-							w1Price = mSelect[i].P ;					
+							//w1Price = mSelect[i].P ;			
+							w1Price = $filter('number')(mSelect[i].P, 2);
+									
 						} else if(mSelect[i].Nm == 'X') {
 							xSelId = mSelect[i].Id ;
-							xPrice = mSelect[i].P ;					
+							//xPrice = mSelect[i].P ;					
+							xPrice = $filter('number')(mSelect[i].P, 2);
+							
 						} else if(mSelect[i].Nm == 'W2') {
 							w2SelId = mSelect[i].Id ;
-							w2Price = mSelect[i].P ;
+							//w2Price = mSelect[i].P ;
+							w2Price = $filter('number')(mSelect[i].P, 2);
 						}
 					};
 
@@ -704,6 +822,27 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 		});
  };
  
+ 	$scope.getMatchInfobyMatchId = function(mid) {	
+	   $http({
+				method: 'GET', 
+				url: "jsp/getMatchInfobyMatchId.jsp", 
+				params: { 'mid' : mid },
+				headers: {'Content-Type': 'application/json; charset=utf-8'} 
+		 }).success(function(data, status, headers, config) {		
+		 			
+			if(data) {
+					$scope.MI = [];
+					console.log(data);
+					$scope.MI=data[0].Mt;
+					console.log($scope.MI);
+					
+			};
+			data = null;
+			
+		}).error(function(data, status, headers, config) {
+		});
+ };
+ 
 	$scope.getMarketbyMatchId = function(mid) {	
 	   $http({
 				method: 'GET', 
@@ -744,6 +883,7 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 				s = null;
 			};
 			data = null;
+			//$scope.mTyId ="ALL";
 			
 		}).error(function(data, status, headers, config) {
 		});
@@ -907,6 +1047,7 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 				      PeriodScore: data.PeriodScore,
 				      Score: data.Score,
 				      Server: data.Server,
+				      RemainingTime: data.RemainingTime,
 				      Set1Score: data.Set1Score,
 				      Set2Score: data.Set2Score,
 				      Set3Score: data.Set3Score,
@@ -940,6 +1081,27 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 				      Side: data.Side,	  	
 			  		});								  		
 		  			break;
+		  			
+		  		case "29": 	
+			   		$scope.liveTop.push({
+			   			SId : sid,
+			      	MId : data.EventId,			      	
+				      EventType: data.EventType,
+				      EventTypeId : data.EventTypeId,
+				      ExtraTimeScore: data.ExtraTimeScore,
+				      Info: data.Info,
+				      Period: data.Period,
+				      PeriodScore: data.PeriodScore,
+				      RemainingTime: data.RemainingTime,
+				      Score: data.Score,
+				      Server: data.Server,
+				      Set1Score: data.Set1Score,
+				      Set2Score: data.Set2Score,
+				      Set3Score: data.Set3Score,
+				      Side: data.Side,
+		  		});								  		
+	  			break;
+	  				
 		  		
 					}; //end switch     		
 			};
@@ -1003,12 +1165,15 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 				console.log("data[0].Market.length : " + data[0].Mk.length);
 				console.log("data[0].Result.length : " + data[0].Re.length);
 				console.log("data[0].Selections.length : " + data[0].Se.length);
+
 				
-				if(data[0].Mk !== undefined && data[0].Mk !== null && data[0].Mk.length > 0){
-					for (var j = 0; j < data[0].Mk.length ; j++) {						
-						$scope.LMKc.push(data[0].Mk[j]);							
+				if(mode != "PreMatch"){
+					
+					if(data[0].Mk !== undefined && data[0].Mk !== null && data[0].Mk.length > 0){
+						for (var j = 0; j < data[0].Mk.length ; j++) {						
+							$scope.LMKc.push(data[0].Mk[j]);							
+						}
 					}
-				}
 								
 				if(data[0].Re !== undefined && data[0].Re !== null && data[0].Re.length > 0){					
 					var w1Price, w2Price, xPrice="-";					
@@ -1017,18 +1182,23 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 			    for(var i = data[0].Se.length - 1; i >= 0; i--){						
 						if(data[0].Se[i].Nm=='W1') {
 							w1SelId = data[0].Se[i].Id ;
-							w1Price = data[0].Se[i].P ;
+							//w1Price = data[0].Se[i].P ;
+							w1Price = $filter('number')(data[0].Se[i].P, 2);
 						
 						} else if(data[0].Se[i].Nm=='X') {
 							xSelId = data[0].Se[i].Id ;
-							xPrice = data[0].Se[i].P ;
+							//xPrice = data[0].Se[i].P ;
+							xPrice = $filter('number')(data[0].Se[i].P, 2);
 						
 						} else if(data[0].Se[i].Nm=='W2') {
 							w2SelId = data[0].Se[i].Id ;
-							w2Price = data[0].Se[i].P ;
+							//w2Price = data[0].Se[i].P ;
+							w2Price = $filter('number')(data[0].Se[i].P, 2);
 						}
 					};
 					
+				}
+			}
 			   	$scope.LS.push({
 			  		SId:data[0].Mt[0].SId,
 			  		SN:data[0].Mt[0].SN,	    		
@@ -1048,7 +1218,9 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 			    	Rem:"",
 			    	Inf:"",			    	
 					});
-			  			  		
+			  
+			  if(mode != "PreMatch"){
+			  				  		
 					$scope.LMK.push({
 			  		SId:data[0].Mt[0].SId,
 			  		SN:data[0].Mt[0].SN,	    		
@@ -1115,15 +1287,18 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 						for (var i = 0; i < mResult.length; i++) {								
 							if(mResult[i].Nm == 'W1') {
 								w1SelId = mResult[i].Id ;
-								w1Price = mResult[i].P;
+								//w1Price = mResult[i].P;
+								w1Price = $filter('number')(mResult[i].P, 2);
 							
 							} else if(mResult[i].Nm == 'X'){
 								xSelId = mResult[i].Id ;
-								xPrice = mResult[i].P;
+								//xPrice = mResult[i].P;
+								xPrice = $filter('number')(mResult[i].P, 2);
 							
 							} else if(mResult[i].Nm == 'W2'){
 								w2SelId = mResult[i].Id ;
-								w2Price = mResult[i].P;
+								//w2Price = mResult[i].P;
+								w2Price = $filter('number')(mResult[i].P, 2);
 							}
 						};
 			  									  			  		
@@ -1249,15 +1424,18 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 							
 			    		if(obj.Selections[j].Name == 'W1') {
 			    			w1SelId = obj.Selections[j].Id ;
-			    			w1Price = obj.Selections[j].Price ;
+			    			//w1Price = obj.Selections[j].Price ;
+			    			w1Price = $filter('number')(obj.Selections[j].Price, 2);
 			    		
 			    		} else if(obj.Selections[j].Name == 'X') {
 								xSelId = obj.Selections[j].Id ;
-								xPrice = obj.Selections[j].Price ;
+								//xPrice = obj.Selections[j].Price ;
+								xPrice = $filter('number')(obj.Selections[j].Price, 2);
 							
 							} else if(obj.Selections[j].Name == 'W2') {
 								w2SelId = obj.Selections[j].Id ;
-								w2Price = obj.Selections[j].Price ;
+								//w2Price = obj.Selections[j].Price ;
+								w2Price = $filter('number')(obj.Selections[j].Price, 2);
 							}
 						};
 	      									
@@ -1311,15 +1489,18 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 							
 			    		if(obj.Selections[j].Name == 'W1') {
 			    			w1SelId = obj.Selections[j].Id ;
-			    			w1Price = obj.Selections[j].Price ;
+			    			//w1Price = obj.Selections[j].Price ;
+			    			w1Price = $filter('number')(obj.Selections[j].Price, 2);
 			    		
 			    		} else if(obj.Selections[j].Name == 'X') {
 								xSelId = obj.Selections[j].Id ;
-								xPrice = obj.Selections[j].Price ;
+								//xPrice = obj.Selections[j].Price ;
+								xPrice = $filter('number')(obj.Selections[j].Price, 2);
 							
 							} else if(obj.Selections[j].Name == 'W2') {
 								w2SelId = obj.Selections[j].Id ;
-								w2Price = obj.Selections[j].Price ;
+								//w2Price = obj.Selections[j].Price ;
+								w2Price = $filter('number')(obj.Selections[j].Price, 2);
 							}
 						};
 	      									
@@ -1655,6 +1836,7 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 					      PeriodScore: obj.PeriodScore,
 					      Score: obj.Score,
 					      Server: obj.Server,
+					      RemainingTime: obj.RemainingTime,
 					      Set1Score: obj.Set1Score,
 					      Set2Score: obj.Set2Score,
 					      Set3Score: obj.Set3Score,
@@ -1686,6 +1868,27 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 						      Side: obj.Side,	
 					  		});								  		
 				  			break;
+				  			
+				  			case 29: 					  								  		
+					   		$scope.liveTop.push({
+					      	MId : obj.EventId,			      	
+						      EventType: obj.EventType,
+						      EventTypeId : obj.EventTypeId,
+						      ExtraTimeScore: obj.ExtraTimeScore,
+						      Info: obj.Info,
+						      Period: obj.Period,
+						      //PeriodLength: 10,
+						      PeriodScore: obj.PeriodScore,
+						      RemainingTime: obj.RemainingTime,
+						      Score: obj.Score,
+						      Server: obj.Server,
+						      Set1Score: obj.Set1Score,
+						      Set2Score: obj.Set2Score,
+						      Set3Score: obj.Set3Score,
+						      Side: obj.Side,
+						      IsTimeout : obj.IsTimeout,
+				  			});								  		
+			  				break;
 				  			
 				  		};
 
@@ -1877,7 +2080,7 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 	};
 	
 	$scope.llive_load = function() {
-	    var myVar = setTimeout(showPage_llive, 1000);
+	    var myVar = setTimeout(showPage_llive, 2000);
 	};
 
 	$scope.clive_load = function() {
@@ -1912,6 +2115,38 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
     $scope.tabSId = sid;
   }
   
+  $scope.getFavMkId = function(mid,mkid) {		
+		$scope.mTyId = "FAV";
+		$scope.Fav_mode = true;
+	}
+	
+	$scope.us_mkt = function(mid,mkid) {		
+		
+		//$scope.savedFavM = [];		
+		$('#'+mkid).toggleClass("fa-star fa-star-o");		
+		
+		$scope.savedFavM = JSON.parse(localStorage.getItem('SFM'));
+		
+		if($scope.savedFavM  == null)
+			$scope.savedFavM = [];
+			
+		if( $('#'+mkid).hasClass("fa-star-o") ) {
+
+			$scope.savedFavM = $filter('omit')($scope.savedFavM,'mkid ==' + mkid);  // delete 
+			
+			localStorage.setItem('SFM',JSON.stringify($scope.savedFavM));			
+						
+		} else { 
+			
+			$scope.savedFavM.push({
+				mid:mid,
+				mkid: mkid,
+			});			
+			localStorage.setItem('SFM',JSON.stringify($scope.savedFavM));		
+			$scope.savedFavM = JSON.parse(localStorage.getItem('SFM'));
+		}
+	};
+	
 	$scope.sFaD = function(mid,f) {
 		$scope.favM = [];			 
 		$http({

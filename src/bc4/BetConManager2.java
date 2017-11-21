@@ -95,10 +95,10 @@ public class BetConManager2 {
 				        	
 	        	sb.append("[{\"WL\":\""+win_lose+"\",\"OU\":\""+over_under+"\",\"HD\":\""+handi+"\",\"CB\":\""+combi+"\",\"ETC\":\""+etc+"\"}]");
 		        
-	        	////Debug.out(sb.toString());
+	        	//Debug.out(sb.toString());
 		         
 		  }catch(Exception e){
-			  ////Debug.out("[getMarketCategory] : " + e.getMessage());
+			  //Debug.out("[getMarketCategory] : " + e.getMessage());
 		
 	      }finally{
 	    	  if(rs!=null) rs.close();
@@ -190,9 +190,9 @@ public class BetConManager2 {
 				  		" OR MARKET_TYPE_ID='10829' or MARKET_TYPE_ID='9321') ";
 
 		  
-		  ////Debug.out("query1 : " + query);	
-		  ////Debug.out("query2 : " + query2);	
-		  ////Debug.out("query3 : " + query3);	
+		  //Debug.out("query1 : " + query);	
+		  //Debug.out("query2 : " + query2);	
+		  //Debug.out("query3 : " + query3);	
 		  //Debug.out("query4 : " + query4);	
 		  //Debug.out("query5 : " + query4);
 
@@ -372,11 +372,11 @@ public class BetConManager2 {
 				  		" OR MARKET_TYPE_ID='10829' or MARKET_TYPE_ID='9321') ";
 
 		  
-		 // Debug.out("query1 : " + query);	
-		 // Debug.out("query2 : " + query2);	
-		 // Debug.out("query3 : " + query3);	
-		 // Debug.out("query4 : " + query4);	
-		 // Debug.out("query5 : " + query4);
+		 //// Debug.out("query1 : " + query);	
+		 //// Debug.out("query2 : " + query2);	
+		 //// Debug.out("query3 : " + query3);	
+		 //// Debug.out("query4 : " + query4);	
+		 //// Debug.out("query5 : " + query4);
 
 		  try{	      	
 			 	//Context initContext = new InitialContext();
@@ -460,7 +460,7 @@ public class BetConManager2 {
 	        	
 		        con.close();
 		        
-		        //Debug.out("getLiveMatches : " + sb.toString());
+		        ////Debug.out("getLiveMatches : " + sb.toString());
 		        
 		  }catch(Exception e){
 			  //Debug.out("[getLiveMatches] : " + e.getMessage());
@@ -491,7 +491,7 @@ public class BetConManager2 {
 					" and convert(char(8),match_date,112) <= convert(char(8),getdate()+7,112) "+
 					" and home_name is not null and away_name is not null";
 		 
-		  //Debug.out("[getPreMatches] :" + query);		
+		  ////Debug.out("[getPreMatches] :" + query);		
 		  
 		  try{	      	
 			 	Context initContext = new InitialContext();
@@ -515,7 +515,7 @@ public class BetConManager2 {
 		        	match = match.substring(0, match.length()-1); //(json_mk.length()-1);				        	
 	        	sb.append("["+match+"]");
 	        	
-	        	//Debug.out("[getPreMatches] : " + sb.toString());
+	        	////Debug.out("[getPreMatches] : " + sb.toString());
 			  		    
 		  }catch(Exception e){
 			  //Debug.out("[getPreMatches] : " + e.getMessage());
@@ -556,7 +556,7 @@ public class BetConManager2 {
 					" and convert(char(8),match_date,112) <= convert(char(8),getdate()+7,112) "+
 					" and home_name is not null and away_name is not null";
 		  
-		 // Debug.out("[getPreMatches] :" + query);		
+		 //// Debug.out("[getPreMatches] :" + query);		
 		  
 		  try{	      	
 			 	//Context initContext = new InitialContext();
@@ -580,7 +580,7 @@ public class BetConManager2 {
 		        	match = match.substring(0, match.length()-1); //(json_mk.length()-1);				        	
 	        	sb.append("["+match+"]");
 	        	
-	        	//Debug.out("[getPreMatches] : " + sb.toString());
+	        	////Debug.out("[getPreMatches] : " + sb.toString());
 			  		    
 		  }catch(Exception e){
 			  //Debug.out("[getPreMatches] : " + e.getMessage());
@@ -617,7 +617,7 @@ public class BetConManager2 {
 					" WHERE A.sport_id = B.SPORT_ID  AND A.region_id = C.REGION_ID AND A.compet_id = D.COMPET_ID "+
 					" AND a.match_id='"+mid+"'";
 		  
-		  //Debug.out("[getPreMatches] :" + query);		
+		  ////Debug.out("[getPreMatches] :" + query);		
 		  
 		  try{	      	
 			 	Context initContext = new InitialContext();
@@ -641,7 +641,7 @@ public class BetConManager2 {
 		        	match = match.substring(0, match.length()-1); //(json_mk.length()-1);				        	
 	        	sb.append("["+match+"]");
 	        	
-	        	//Debug.out("[getPreMatches] : " + sb.toString());
+	        	////Debug.out("[getPreMatches] : " + sb.toString());
 			  		    
 		  }catch(Exception e){
 			  //Debug.out("[getPreMatches] : " + e.getMessage());
@@ -739,10 +739,10 @@ public class BetConManager2 {
 				  		" OR MARKET_TYPE_ID='6564' OR MARKET_TYPE_ID='8750' OR MARKET_TYPE_ID='8763' OR MARKET_TYPE_ID='9775' "+
 				  		" OR MARKET_TYPE_ID='10829' or MARKET_TYPE_ID='9321') ";
 		  
-		 // Debug.out("[getMatchInfobyCompetition] query: " + query);		
-		 // Debug.out("[getMatchInfobyCompetition] query2: " + query2);	
-		 // Debug.out("[getMatchInfobyCompetition] query3: " + query3);	
-		 // Debug.out("[getMatchInfobyCompetition] query4: " + query4);
+		 //// Debug.out("[getMatchInfobyCompetition] query: " + query);		
+		 //// Debug.out("[getMatchInfobyCompetition] query2: " + query2);	
+		 //// Debug.out("[getMatchInfobyCompetition] query3: " + query3);	
+		 //// Debug.out("[getMatchInfobyCompetition] query4: " + query4);
 		  
 		  try{	      	
 			 	//Context initContext = new InitialContext();
@@ -812,7 +812,7 @@ public class BetConManager2 {
 
 	        	sb.append(",\"Se\": ["+sele+"]}]");	       	
 
-	        	//Debug.out("getMatchInfobyCompetition : " + sb.toString());	
+	        	////Debug.out("getMatchInfobyCompetition : " + sb.toString());	
 		        
 		  }catch(Exception e){
 			  //Debug.out("[getMatchInfobyCompetition] : " + e.getMessage());
@@ -863,7 +863,7 @@ public class BetConManager2 {
 					" AND a.match_id='"+mid+"'";		  
 		  		
 		  
-		  //Debug.out("[getMatchInfobyMatchId] query: " + query);		
+		  ////Debug.out("[getMatchInfobyMatchId] query: " + query);		
 
 		  
 		  try{	      	
@@ -880,7 +880,7 @@ public class BetConManager2 {
 		        pstmt.close();		        
 	        	con.close();
 	        
-	        	//Debug.out("getMatchInfobyMatchId : " + sb.toString());	
+	        	////Debug.out("getMatchInfobyMatchId : " + sb.toString());	
 		        
 		  }catch(Exception e){
 			  //Debug.out("[getMatchInfobyMatchId] : " + e.getMessage());
@@ -921,8 +921,8 @@ public class BetConManager2 {
 				  		" where a.MARKET_ID = B.MARKET_ID ";
 
 		  
-		  //Debug.out("[getMarketbyMatchId] : " + query1);
-		  //Debug.out("[getMarketbyMatchId] : " + query2);
+		  ////Debug.out("[getMarketbyMatchId] : " + query1);
+		  ////Debug.out("[getMarketbyMatchId] : " + query2);
 		  		  		  
 		  try{	      	
 			 	//Context initContext = new InitialContext();
@@ -998,7 +998,7 @@ public class BetConManager2 {
 		        pstmt.close();		        
 		        con.close();
 		        
-		        //Debug.out("[getValidMarketType] : " + sb.toString());
+		        ////Debug.out("[getValidMarketType] : " + sb.toString());
 		        
 		  }catch(Exception e){
 			  //Debug.out("[getValidMarketTtype] : " + e.getMessage());
@@ -1037,7 +1037,7 @@ public class BetConManager2 {
 					" WHERE A.sport_id = B.SPORT_ID  AND A.region_id = C.REGION_ID AND A.compet_id = D.COMPET_ID "+
 					" AND A.MATCH_ID = G.MATCH_ID AND G.USE_FLAG='T'AND (A.match_stat = '0' OR A.match_stat = '1') AND G.USER_ID ='"+uid+"'";
 
-		  	//Debug.out("[getFavMatch] query :" + query);
+		  	////Debug.out("[getFavMatch] query :" + query);
 		  	
 		  	try{	
 		  		
@@ -1063,10 +1063,10 @@ public class BetConManager2 {
 				        	
 	        	sb.append("["+fav+"]");
 	        	
-	        	//Debug.out("[getFavMatch] sb :" + sb.toString());
+	        	////Debug.out("[getFavMatch] sb :" + sb.toString());
 	        	
 		        con.close();
-		        //Debug.out("[getValidMarketType] : " + sb.toString());
+		        ////Debug.out("[getValidMarketType] : " + sb.toString());
 		        
 		  }catch(Exception e){
 			  //Debug.out("[getFavMatch] : " + e.getMessage());
@@ -1119,7 +1119,7 @@ public class BetConManager2 {
 					" WHERE A.sport_id = B.SPORT_ID  AND A.region_id = C.REGION_ID AND A.compet_id = D.COMPET_ID "+
 					" AND A.MATCH_ID = G.MATCH_ID AND G.USE_FLAG='T'AND (A.match_stat = '0' OR A.match_stat = '1') AND G.USER_ID ='"+uid+"'";
 
-	  	//Debug.out("[setFavMatch] query3 :" + query3);
+	  	////Debug.out("[setFavMatch] query3 :" + query3);
 	  	
 	  	try{	
 	  		
@@ -1137,7 +1137,7 @@ public class BetConManager2 {
 		 	r_up = pstmt.executeUpdate();		
 		 	pstmt.close(); 
 		 	
-		 	//Debug.out("[setFavMatch] r_up : "+r_up);
+		 	////Debug.out("[setFavMatch] r_up : "+r_up);
 		 	
 		 	if(r_up < 1){
 		 	
@@ -1149,7 +1149,7 @@ public class BetConManager2 {
 			 	pstmt.setString(4,flag);
 			 	
 			 	r_ins = pstmt.executeUpdate();	
-			 	//Debug.out("[setFavMatch] r_ins : "+r_ins);
+			 	////Debug.out("[setFavMatch] r_ins : "+r_ins);
 			 	pstmt.close(); 
 			 	
 		 	}
@@ -1170,10 +1170,10 @@ public class BetConManager2 {
 			        	
         	sb.append("["+fav+"]");
         	
-        	//Debug.out("[setFavMatch] sb :" + sb.toString());
+        	////Debug.out("[setFavMatch] sb :" + sb.toString());
         	
 	        con.close();
-	        //Debug.out("[getValidMarketType] : " + sb.toString());
+	        ////Debug.out("[getValidMarketType] : " + sb.toString());
 	        
 	  }catch(Exception e){
 		  //Debug.out("[setFavMatch] : " + e.getMessage());
@@ -1219,8 +1219,8 @@ public class BetConManager2 {
 
 		  
 		  
-		  //Debug.out("[getMarketbyMarketId] : " + query1);
-		  //Debug.out("[getMarketbyMarketId] : " + query2);
+		  ////Debug.out("[getMarketbyMarketId] : " + query1);
+		  ////Debug.out("[getMarketbyMarketId] : " + query2);
 		  		  		  
 		  try{	      	
 			 	//Context initContext = new InitialContext();
@@ -1259,7 +1259,7 @@ public class BetConManager2 {
 		        //sb2 = null;
 		        
 		  }catch(Exception e){
-			  ////Debug.out("[getMarketbyMatchId] : " + e.getMessage());
+			  //Debug.out("[getMarketbyMatchId] : " + e.getMessage());
 		
 	      }finally{
 	     	  if(rs!=null) rs.close();
@@ -1328,6 +1328,16 @@ public class BetConManager2 {
 			 query1 =  "SELECT '{\"EventId\":\"'+CAST(match_id as varchar(10))+'\",\"EventTypeId\":\"'+ISNULL(cast(EVENT_TYPEID as varchar(10)),'')+'\",\"EventType\":\"'+ISNULL(EVENT_TYPE,'')+'\",\"ExtraTimeScore\":\"'+ISNULL(EXT_TIME_SCORE,'')+'\",\"Info\":\"'+ISNULL(GAME_INFO,'')+'\",\"Period\":\"'+ISNULL(CAST(PERIOD  as varchar(2)),'')+'\",\"QuarterScore\":\"'+ISNULL(QUAT_SCORE,'')+'\", "+ 
 					 	" \"RemainingTime\":\"'+ISNULL(REMAIN_TIME,'')+'\",\"Score\":\"'+ISNULL(SCORE,'')+'\",\"Server\":\"'+ISNULL(CAST(server  as varchar(1)),'')+'\",\"Set1Score\":\"'+ISNULL(SET1_SCORE,'')+'\",\"Set2Score\":\"'+ISNULL(SET2_SCORE,'')+'\",\"Set3Score\":\"'+ISNULL(SET3_SCORE,'')+'\",\"Set4Score\":\"'+ISNULL(SET4_SCORE,'')+'\",\"Set5Score\":\"'+ISNULL(SET5_SCORE,'')+'\",\"Side\":\"'+ISNULL(cast(SIDE as varchar(1)),'')+'\"}' "+
 					 	" as stat from bc_STAT WHERE match_id = '"+mid+"'";	
+			 
+		  	} else if(sid.equals("29")) { //handball	
+				 query1 = 	"SELECT '{\"EventId\":\"'+CAST(match_id as varchar(10))+'\",\"EventTypeId\":\"'+ISNULL(cast(EVENT_TYPEID as varchar(10)),'')+'\",\"EventType\":\"'+ISNULL(EVENT_TYPE,'')+'\",\"ExtraTimeScore\":\"'+ISNULL(EXT_TIME_SCORE,'')+'\",\"Info\":\"'+ISNULL(GAME_INFO,'')+'\",\"Period\":\"'+ISNULL(CAST(PERIOD  as varchar(2)),'')+'\",\"PeriodScore\":\"'+ISNULL(PERIOD_SCORE,'')+'\", "+ 
+						 	" \"RemainingTime\":\"'+ISNULL(REMAIN_TIME,'')+'\",\"Score\":\"'+ISNULL(SCORE,'')+'\",\"Set1Score\":\"'+ISNULL(SET1_SCORE,'')+'\",\"Set2Score\":\"'+ISNULL(SET2_SCORE,'')+'\",\"Set3Score\":\"'+ISNULL(SET3_SCORE,'')+'\",\"Side\":\"'+ISNULL(cast(SIDE as varchar(1)),'')+'\"}' "+
+						 	" as stat from bc_STAT WHERE match_id = '"+mid+"'";
+				 
+		  	} else if(sid.equals("77")) { //handball	
+				 query1 = 	"SELECT '{\"EventId\":\"'+CAST(match_id as varchar(10))+'\",\"EventTypeId\":\"'+ISNULL(cast(EVENT_TYPEID as varchar(10)),'')+'\",\"EventType\":\"'+ISNULL(EVENT_TYPE,'')+'\",\"ExtraTimeScore\":\"'+ISNULL(EXT_TIME_SCORE,'')+'\",\"Info\":\"'+ISNULL(GAME_INFO,'')+'\",\"Period\":\"'+ISNULL(CAST(PERIOD  as varchar(2)),'')+'\",\"PeriodScore\":\"'+ISNULL(PERIOD_SCORE,'')+'\", "+ 
+						 	" \"RemainingTime\":\"'+ISNULL(REMAIN_TIME,'')+'\",\"Score\":\"'+ISNULL(SCORE,'')+'\",\"Set1Score\":\"'+ISNULL(SET1_SCORE,'')+'\",\"Set2Score\":\"'+ISNULL(SET2_SCORE,'')+'\",\"Set3Score\":\"'+ISNULL(SET3_SCORE,'')+'\",\"Side\":\"'+ISNULL(cast(SIDE as varchar(1)),'')+'\"}' "+
+						 	" as stat from bc_STAT WHERE match_id = '"+mid+"'";
 		  	}
 
 		  
@@ -1353,7 +1363,7 @@ public class BetConManager2 {
 		        
 		        
 		  }catch(Exception e){
-//			  Debug.out("[getStatusbyMatchId] : " + e.getMessage());
+			  //Debug.out("[getStatusbyMatchId] : " + e.getMessage());
 		
 	      }finally{
 	     	  //if(cs!=null) cs.close();
@@ -1380,7 +1390,7 @@ public class BetConManager2 {
 		  
 		  List<MatchResultBean> mr = new ArrayList<MatchResultBean>();
 		  
-		  query1 =" select convert(char(8),match_date,112) MT,match_date MDT,A.sport_id as SId,SNAME as SN,A.region_id as RId,RNAME as RN,A.compet_id as CId,CNAME as CN,home_name as HN,away_name as AN,a.market_id as MKID,a.match_id as MId,E.score as SC,F.cnt as CNT " +
+		  query1 =" select convert(char(8),match_date,112) MT,convert(char(16),match_date,120) MT3, match_date MDT,A.sport_id as SId,SNAME as SN,A.region_id as RId,RNAME as RN,A.compet_id as CId,CNAME as CN,home_name as HN,away_name as AN,a.market_id as MKID,a.match_id as MId,E.score as SC,F.cnt as CNT " +
 					" from bc_match a,bc_stat e, " +
 					" (SELECT SPORT_ID,CASE WHEN LEN(TXT) > 0 THEN TXT ELSE SPORT_NAME END  AS SNAME FROM bc_sport A LEFT OUTER JOIN BC_TRANS B ON A.SPORT_NAMEID = B.NAMEID) B, " +						
 					" (SELECT REGION_ID,CASE WHEN LEN(TXT) > 0 THEN TXT ELSE REGION_NAME END AS RNAME FROM  BC_REGION A LEFT OUTER JOIN BC_TRANS B ON A.REGION_NAMEID = B.NAMEID) C, " +	 					
@@ -1398,7 +1408,7 @@ public class BetConManager2 {
 					" and booked='t' and visible='t' and match_stat='2' " +
 					" order by match_date desc,A.sport_id,A.region_id,A.compet_id ";
 	 
-//		  	Debug.out("[getAllMatchResult] : " + query1);
+		  	//Debug.out("[getAllMatchResult] : " + query1);
 	  
 		
 		  try{	      	
@@ -1415,7 +1425,7 @@ public class BetConManager2 {
 		        	MatchResultBean mrb = new MatchResultBean();
 		        
 		        	mrb.setMdate(rs.getString("MT"));
-		        	//mrb.setMdate2(rs.getString("MDT"));
+		        	mrb.setMdate3(rs.getString("MT3"));
 		        	mrb.setMid(rs.getString("MId"));
 		        	mrb.setSid(rs.getString("SId"));
 		        	mrb.setSname(rs.getString("SN"));
@@ -1438,7 +1448,7 @@ public class BetConManager2 {
 		        
 	        
 		  	}catch(Exception e){
-//			  Debug.out("[getAllMatchResult] : " + e.getMessage());
+			  //Debug.out("[getAllMatchResult] : " + e.getMessage());
 		
 		    }finally{
 		   	  if(rs!=null) rs.close();
@@ -1497,7 +1507,7 @@ public class BetConManager2 {
 		        
 	        
 		  	}catch(Exception e){
-//			  Debug.out("[getAllMatchResult] : " + e.getMessage());
+			  //Debug.out("[getAllMatchResult] : " + e.getMessage());
 		
 		    }finally{
 		   	  if(rs!=null) rs.close();
@@ -1556,7 +1566,7 @@ public class BetConManager2 {
 		        
 	        
 		  	}catch(Exception e){
-//			  Debug.out("[getSelectionList] : " + e.getMessage());
+			  //Debug.out("[getSelectionList] : " + e.getMessage());
 		
 		    }finally{
 		   	  if(rs!=null) rs.close();
@@ -1628,7 +1638,7 @@ public class BetConManager2 {
 		        
 	        
 		  	}catch(Exception e){
-//			  Debug.out("[getFavoriteMatch] : " + e.getMessage());
+			  //Debug.out("[getFavoriteMatch] : " + e.getMessage());
 		
 		    }finally{
 		   	  if(rs!=null) rs.close();
@@ -1654,8 +1664,15 @@ public class BetConManager2 {
 		  
 		  List<DepositListBean> dl = new ArrayList<DepositListBean>();
 		  
-		  query1 ="select top 20 chid as CD,userid as UD,convert(char(16),regdate,120) as CT,money_req as MN from charge_lst order by chdate desc ";
+		  //query1 ="select top 20 chid as CD,userid as UD,convert(char(16),regdate,120) as CT,money_req as MN from charge_lst order by chdate desc ";
 		  
+		  query1 =" select * from (select top 20 chid as CD,SUBSTRING(userid,0,3)+replicate('*',len(userid)-3)+SUBSTRING(userid,LEN(userid),LEN(userid))  as UD, " +
+				 " convert(char(19),regdate,120) as CT,money_req as MN from charge_lst WHERE chdate > DATEADD(minute, -10, GETDATE()) order by chdate desc ) a " +
+				 " union  " +
+				 " select * from (select top 20 chid as CD,userid as UD,convert(char(19),regdate,120) as CT,money_req as MN from charge_lst2 order by REGdate desc) b " +
+				 " order by CT desc ";
+
+				 
 		  ////Debug.out("[getDepositList] : " + query1);
 	  
 		
@@ -1686,7 +1703,7 @@ public class BetConManager2 {
 		        
 	        
 		  	}catch(Exception e){
-//			  Debug.out("[getFavoriteMatch] : " + e.getMessage());
+			  //Debug.out("[getFavoriteMatch] : " + e.getMessage());
 		
 		    }finally{
 		   	  if(rs!=null) rs.close();
@@ -1831,18 +1848,19 @@ public class BetConManager2 {
 		        
 	        	rs.close();
 	        	pstmt.close();
+	        	con.close();
 	        	
 	        	if(sele.length() > 2)
 	        		sele = sele.substring(0, sele.length()-1); //(json_mk.length()-1);
 	
 	        	sb.append(",\"Se\":["+sele+"]}]");	        	
 	        	
-		        con.close();
 		        
-//		        Debug.out("getMainLiveMatch : " + sb.toString());
+		        
+		        //Debug.out("getMainLiveMatch : " + sb.toString());
 		        
 		  }catch(Exception e){
-//			  Debug.out("[getMainLiveMatch] : " + e.getMessage());
+			  //Debug.out("[getMainLiveMatch] : " + e.getMessage());
 		
 	      }finally{
 	     	 // if(cs!=null) cs.close();
@@ -2015,7 +2033,7 @@ public class BetConManager2 {
 		        ////Debug.out("getMainPreMatch : " + sb.toString());
 		        
 		  }catch(Exception e){
-//			  Debug.out("[getMainPreMatch] : " + e.getMessage());
+			  //Debug.out("[getMainPreMatch] : " + e.getMessage());
 		
 	      }finally{
 	     	 // if(cs!=null) cs.close();
@@ -2084,7 +2102,7 @@ public class BetConManager2 {
 		        ////Debug.out("getMainPreMatch : " + sb.toString());
 		        
 		  }catch(Exception e){
-//			  Debug.out("[getMainPreMatch] : " + e.getMessage());
+			  //Debug.out("[getMainPreMatch] : " + e.getMessage());
 		
 	      }finally{
 	     	 // if(cs!=null) cs.close();
@@ -2138,7 +2156,7 @@ public class BetConManager2 {
 		        ////Debug.out("getMainPreMatch : " + sb.toString());
 		        
 		  }catch(Exception e){
-//			  Debug.out("[getMainPreMatch] : " + e.getMessage());
+			  //Debug.out("[getMainPreMatch] : " + e.getMessage());
 		
 	      }finally{
 	     	 // if(cs!=null) cs.close();
@@ -2181,7 +2199,7 @@ public class BetConManager2 {
 			  query1 ="update asiagame_lst set viewtype='N' where userid='"+mid+"' and agid IN (" + sb.toString() + ")";
 		  }
 		  
-//		  Debug.out("query1 : " + query1);
+		  //Debug.out("query1 : " + query1);
 		  
 		  try{	      	
 			 				 	
@@ -2215,12 +2233,12 @@ public class BetConManager2 {
 	        	pstmt.close();
 		        con.close();
 		        
-//		        Debug.out("return :" + ret);
+		        //Debug.out("return :" + ret);
 		        
 		        ////Debug.out("getMainPreMatch : " + sb.toString());
 		        
 		  }catch(Exception e){
-//			  Debug.out("[detBetList] : " + e.getMessage());
+			  //Debug.out("[detBetList] : " + e.getMessage());
 		
 	      }finally{
 	     	 // if(cs!=null) cs.close();
@@ -2300,7 +2318,7 @@ public class BetConManager2 {
 		        
 	        
 		  	}catch(Exception e){
-//			  Debug.out("[getSelectionList] : " + e.getMessage());
+			  //Debug.out("[getSelectionList] : " + e.getMessage());
 		
 		    }finally{
 		   	  if(rs!=null) rs.close();
@@ -2351,7 +2369,7 @@ public class BetConManager2 {
 		    con.close();
 
 		  }catch(Exception e){
-//			  Debug.out("[getBetList_SC] : " + e.getMessage());
+			  //Debug.out("[getBetList_SC] : " + e.getMessage());
 		
 	    }finally{
 	   	  if(rs!=null) rs.close();	     	 
@@ -2399,7 +2417,7 @@ public class BetConManager2 {
 		    con.close();
 
 		  }catch(Exception e){
-//			  Debug.out("[getBetList_SC] : " + e.getMessage());
+			  //Debug.out("[getBetList_SC] : " + e.getMessage());
 		
 	    }finally{
 	   	  if(rs!=null) rs.close();	     	 
@@ -2449,7 +2467,7 @@ public class BetConManager2 {
 		    con.close();
 
 		  }catch(Exception e){
-//			  Debug.out("[getBetList_SC] : " + e.getMessage());
+			  //Debug.out("[getBetList_SC] : " + e.getMessage());
 		
 	    }finally{
 	   	  if(rs!=null) rs.close();	     	 
@@ -2460,6 +2478,77 @@ public class BetConManager2 {
 	return bl_sc;
 		
 	}
+	
+	public  List<MatchSearchResultBean> getSearchMatch(String key) throws SQLException{
+		
+		  Connection con = null;
+		  PreparedStatement pstmt = null;
+		  ResultSet rs = null;
+		 // StringBuffer sb = new StringBuffer(""); 
+		  String query1 ="";
+		  
+		  //HashMap<String, Object> mr = new HashMap<String, Object>();
+		  //Vector mr = new Vector();
+		  
+		  List<MatchSearchResultBean> msr = new ArrayList<MatchSearchResultBean>();
+		  
+		  
+		  query1 ="  SELECT match_id,convert(char(16),MATCH_DATE,120) match_date,A.sport_id,live,home_name, away_name, SNAME,RNAME,CNAME FROM bc_match A , " +
+				  " (SELECT SPORT_ID,CASE WHEN LEN(TXT) > 0 THEN TXT ELSE SPORT_NAME END  AS SNAME " +
+				  " FROM bc_sport A LEFT OUTER JOIN BC_TRANS B ON A.SPORT_NAMEID = B.NAMEID) B,	" +					
+				  " (SELECT REGION_ID,CASE WHEN LEN(TXT) > 0 THEN TXT ELSE REGION_NAME END AS RNAME " +
+				  " FROM  BC_REGION A LEFT OUTER JOIN BC_TRANS B ON A.REGION_NAMEID = B.NAMEID) C,	" +					
+				  " (SELECT COMPET_ID,CASE WHEN LEN(TXT) > 0 THEN TXT ELSE COMPET_NAME END AS CNAME " +
+				  " FROM BC_COMPETITION A LEFT OUTER JOIN BC_TRANS B ON A.NAMEID = B.NAMEID) D 	" +					
+				  " WHERE A.sport_id = B.SPORT_ID  AND A.region_id = C.REGION_ID AND A.compet_id = D.COMPET_ID " +
+				  " AND ((MATCH_STAT ='0' AND MATCH_DATE > GETDATE()) OR (LIVE_STAT ='1' AND MATCH_STAT ='1')) AND a.visible='T'  AND a.booked='T' and A.home_name is not null and A.away_name is not null " +
+				  " AND (A.home_name LIKE '%"+key+"%' OR A.away_name LIKE '%"+key+"%') " +
+				  //" --AND MATCH_DATE > GETDATE() " +
+				  "  ORDER BY MATCH_DATE ";
+	 
+		  	//Debug.out("[getSearchMatch] : " + query1);
+	  
+		
+		  try{	      	
+			 	con = ds.getConnection();			 
+			 	pstmt = con.prepareStatement(query1);	        
+		        rs = pstmt.executeQuery();
+		        
+		        while(rs.next()){
+		        			        
+		        	MatchSearchResultBean msrb = new MatchSearchResultBean();
+		        
+		        	msrb.setMdate(rs.getString("match_date"));
+		        	msrb.setMid(rs.getString("match_id"));
+		        	msrb.setSid(rs.getString("sport_id"));
+		        	msrb.setSname(rs.getString("SNAME"));
+		        	msrb.setRname(rs.getString("RNAME"));
+		        	msrb.setCname(rs.getString("CNAME"));
+		        	msrb.setHteam(rs.getString("home_name"));
+		        	msrb.setAteam(rs.getString("away_name"));
+		        	msrb.setLstat(rs.getString("live"));
+		       
+		        	msr.add(msrb); 
+		        }				  	
+	
+		        rs.close();
+		        pstmt.close();		        
+		        con.close();
+		        
+	        
+		  	}catch(Exception e){
+			  //Debug.out("[getSearchMatch] : " + e.getMessage());
+		
+		    }finally{
+		   	  if(rs!=null) rs.close();
+		   	  if(pstmt!=null)  pstmt.close();
+		   	  if(con!=null) con.close();
+		  	}
+	  
+		  return msr;
+	
+	}
+	
 
 }
 
