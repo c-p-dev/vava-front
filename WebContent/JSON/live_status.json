@@ -21,8 +21,8 @@
   					"KName": "세트 승"
   				},
   				{ "EventTypeId": 12,
-  					"EName": "3",
-  					"KName": "세트"
+  					"EName": "goal",
+  					"KName": "골"
   				},
   				{ "EventTypeId": 20,
   					"EName": "ballSafe",
@@ -50,7 +50,7 @@
   				},  				
   				{ "EventTypeId": 108,
   					"EName": "Finished",
-  					"KName": "경기 종료"
+  					"KName": "종료"
   				},
   				{ "EventTypeId": 205,
   					"EName": "point",
@@ -74,7 +74,7 @@
   				},
   				{ "EventTypeId": 320,
   					"EName": "foul",
-  					"KName": "파올"
+  					"KName": "파울"
   				},
   				{ "EventTypeId": 325,
   					"EName": "missedFreeThrow",
