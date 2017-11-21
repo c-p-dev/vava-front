@@ -155,7 +155,7 @@
 										<div class="img racing_board_img">
 											<img src="/images/<%=cur_vgame.getGame_img()%>" style = 'width: 290px; height: 195px;'>
 											<div class="overlay">
-												 <span class="expand">Play now</span>
+												 <span class="expand" style = "width: 125px; font-size: 20px;">Play now</span>
 											</div>
 										</div>
 									</a>
@@ -184,7 +184,7 @@
 										<div class="img racing_board_img">
 											<img src="/images/<%=cur_igame.getGame_img()%>" style = 'width: 290px; height: 195px;'>
 											<div class="overlay">
-												 <span class="expand">Play now</span>
+												 <span class="expand" style = "width: 125px; font-size: 20px;">Play now</span>
 											</div>
 										</div>
 									</a>
@@ -221,7 +221,7 @@
 										<div class="img racing_board_img">
 											<img src="/images/<%=cur_igame.getGame_img()%>" style = 'width: 290px; height: 195px;'>
 											<div class="overlay">
-												 <span class="expand">Play now</span>
+												 <span class="expand" style = "width: 125px; font-size: 20px;" style = "width: 125px; font-size: 20px;">Play now</span>
 											</div>
 										</div>
 									</a>
@@ -257,7 +257,7 @@
 										<div class="img racing_board_img">
 											<img src="/images/<%=cur_vgame.getGame_img()%>" style = 'width: 290px; height: 195px;'>
 											<div class="overlay">
-												 <span class="expand">Play now</span>
+												 <span class="expand" style = "width: 125px; font-size: 20px;">Play now</span>
 											</div>
 										</div>
 									</a>

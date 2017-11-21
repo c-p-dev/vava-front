@@ -385,7 +385,7 @@ ul.casino_board_list  + .btn_wrap{
 					li += '		<div class="img casino_board_img"> ';
 					li += '			<img src="/images/'+e.game_img+'" class="game-img" style = "width: 320px; height: 195px;"> ';
 					li += '			<div class="overlay"> ';
-					li += '				 <span class="expand">Play now</span> ';
+					li += '				 <span class="expand" style = "width: 125px; font-size: 20px;">Play now</span> ';
 					li += '			</div> ';
 					li += '		</div> ';
 					li += '	</a> ';
@@ -412,7 +412,7 @@ ul.casino_board_list  + .btn_wrap{
 
 
 		
-		var final_ul = '<ul class="tabs">';
+		var final_ul = '<ul class="tabs" style = "height:auto;">';
 			final_ul += ul_tabs;
 			final_ul += '</ul>';
 
