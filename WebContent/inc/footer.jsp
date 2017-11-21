@@ -29,8 +29,8 @@
 					</div>
 					<ul class="f_site_map_left_list">
 						<li>스포츠북</li>
-						<li>가상게임</li>
-						<li>라이브 카지노</li>
+						<li><a href="/virtual/vgaming.jsp">가상게임</a></li>
+						<li><a href="/casino/casino.jsp">라이브 카지노</a></li>
 					</ul>
 				</div>
 			</div>
