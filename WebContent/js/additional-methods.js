@@ -297,3 +297,27 @@ jQuery.validator.addMethod("ipv6", function(value, element, param) {
 jQuery.validator.addMethod("pattern", function(value, element, param) {
     return this.optional(element) || param.test(value);
 }, "Invalid format.");
+
+
+
+// custom validators 11/20/2017
+
+jQuery.validator.addMethod("money_number", function(value, element, param) {
+   return this.optional(element) || /^(\d{1,2})+(,\d{3})+$|^\d+$/.test(value);
+},"금액을 숫자로 입력해 주세요.");
+
+
+jQuery.validator.addMethod("money_min", function(value, element, param) {
+   	var min = 10000;
+    var new_num = value.replace(/,/g, "");
+	return (parseInt(new_num) >= min ? true : false);
+},"최소 만원 이상으로 입력해 주세요.");
+
+
+jQuery.validator.addMethod("max_point", function(value, element, param) {
+	
+    var new_num = value.replace(/,/g, "");
+	return (parseInt(new_num)  <= param ? true : false);
+},"불충분 한 포인트");
+
+

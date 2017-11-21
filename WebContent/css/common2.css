@@ -230,6 +230,10 @@ button.btn5 {
     border-width: 0px!important;
 }
 
+span.btn1{
+    cursor: pointer!important;
+}
+
 /*exchange_Tab*/
 .add-money{
 	cursor: pointer;
@@ -289,4 +293,108 @@ button.btn5:disabled {
 
 .input_warning{
     display: none;
+}
+
+/*price test*/
+.price-change-indicator {
+    display: block;
+    margin: 0 auto;
+    float: right;
+    margin-right: 6px
+}
+
+.thin .priceDown,
+.thin .priceUp {
+    left: -.9em;
+    top: .1em
+}
+
+.priceDown,
+.priceUp {
+    border: 6px solid transparent;
+    display: block;
+    height: 4px;
+    left: -1.2em;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    transform: rotate(45deg);
+    width: 4px
+}
+
+
+.priceDown:after,
+.priceDown:before,
+.priceUp:after,
+.priceUp:before {
+    content: "";
+    display: block;
+    height: inherit;
+    width: inherit;
+    position: absolute;
+    top: 0;
+    left: 0
+}
+
+.priceDown:before {
+    top: 0;
+    left: 0;
+    border-bottom: 2px solid #ff4f40;
+    border-right: 2px solid #ff4f40;
+    animation: top-arrow-down .7s infinite
+}
+
+.priceUp:after {
+    border-top: 2px solid #63ca00;
+    border-left: 2px solid #63ca00;
+    top: 0;
+    left: 0;
+    opacity: 1;
+    animation: bottom-arrow-up .7s infinite
+}
+
+.selection-view.selected .priceDown:before,
+.selection-view.selected .priceUp:after,
+.table-cell.selected .priceDown:before,
+.table-cell.selected .priceUp:after {
+    border-color: #fff
+}
+
+.selection-view.disabled .price,
+.table-cell.disabled .price {
+    color: #5d5d5d
+}
+
+.event-view .selection-view.table-cell,
+.flip-container .selection-view.table-cell,
+.league-selector-widget .selection-view.table-cell,
+.league-widget .table-cell.lozenges,
+.outrights-selections .selection-view.table-cell,
+.schedule-widget .selection-view.table-cell,
+.slider-slide .selection-view.table-cell,
+.table-cell-padding {
+    padding: 0 12px
+}
+
+
+@keyframes top-arrow-down {
+    0% {
+        opacity: 1;
+        transform: translate(-4px, -4px)
+    }
+    to {
+        opacity: 0;
+        transform: translate(2px, 2px)
+    }
+}
+
+@keyframes bottom-arrow-up {
+    0% {
+        opacity: 1;
+        transform: translate(1px, 1px)
+    }
+    to {
+        opacity: 0;
+        transform: translate(-3px, -3px)
+    }
 }

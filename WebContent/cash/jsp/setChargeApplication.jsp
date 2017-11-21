@@ -10,6 +10,8 @@
 <%@ page import = "java.util.StringTokenizer" %>
 
 <%
+	
+	
 	if(session.getAttribute("currentSessionUser") != null){
 		UserBean bean = (UserBean) session.getAttribute("currentSessionUser");
 		ChargeBean chargeBean = new ChargeBean();
