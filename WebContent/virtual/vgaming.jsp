@@ -126,7 +126,17 @@
 			</div>
 		</div>
 		
-		<div class="casino_right" style = 'width: 100%;'>
+        <div class="casino_left" style = 'padding-top: 20px;'>
+
+			<ul class="l_tabs" id="game-cat">
+				<li><a href="#l-tab1" class="get-game">전체</a></li>
+				<li><a href="#l-tab2" class="get-game">Instant</a></li>
+				<li><a href="#l-tab3" class="get-game">Virtual</a></li>
+			</ul>
+			
+		</div>
+        
+		<div class="casino_right">
 			<div id="l-tab1" class="left_tab_con">
 				
 				<div class="tab_container">
@@ -187,42 +197,82 @@
 							</ul>
 							
 						</div>
-						<script>
-							$(document).ready(function(){
-								if (Modernizr.touch) {
-									// show the close overlay button
-									$(".close-overlay").removeClass("hidden");
-									// handle the adding of hover class when clicked
-									$(".img").click(function(e){
-										if (!$(this).hasClass("hover")) {
-											$(this).addClass("hover");
-										}
-									});
-									// handle the closing of the overlay
-									$(".close-overlay").click(function(e){
-										e.preventDefault();
-										e.stopPropagation();
-										if ($(this).closest(".img").hasClass("hover")) {
-											$(this).closest(".img").removeClass("hover");
-										}
-									});
-								} else {
-									// handle the mouseenter functionality
-									$(".img").mouseenter(function(){
-										$(this).addClass("hover");
-									})
-									// handle the mouseleave functionality
-									.mouseleave(function(){
-										$(this).removeClass("hover");
-									});
-								}
-							});
-						</script>
 					</div>
 					
 				</div>
 			</div>
-
+            
+            <div id="l-tab2" class="left_tab_con">
+				
+				<div class="tab_container">
+					<div id="tab1" class="tab_content">
+						<div class="casino_board_wrap">
+							<span>  </span>
+							<ul class="racing_board_list">
+								
+								<%
+									for (int i = 0; i < igame_list.size(); i++) {
+										GameBean cur_igame = igame_list.get(i);
+								%>
+								<li>
+									<a href="#" data-gm-provdr = '<%=cur_igame.getGame_provider()%>' data-link-dsp = '<%=cur_igame.getLink_dsp()%>'>
+										<div class="img racing_board_img">
+											<img src="/images/<%=cur_igame.getGame_img()%>" style = 'width: 290px; height: 195px;'>
+											<div class="overlay">
+												 <span class="expand">Play now</span>
+											</div>
+										</div>
+									</a>
+									<div class="casino_board_text">
+										<p class="casino_name"><%=cur_igame.getGame_name()%></p>
+									</div>
+								</li>
+								<%
+									}
+								%>
+							
+							</ul>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+            
+            <div id="l-tab3" class="left_tab_con">
+				
+				<div class="tab_container">
+					<div id="tab1" class="tab_content">
+						<div class="casino_board_wrap">
+							<span> </span>
+							<ul class="racing_board_list">
+							
+								<%
+									for (int i = 0; i < vgame_list.size(); i++) {
+										GameBean cur_vgame = vgame_list.get(i);
+								%>
+								<li>
+									<a href="#" data-gm-provdr = '<%=cur_vgame.getGame_provider()%>' data-link-dsp = '<%=cur_vgame.getLink_dsp()%>'>
+										<div class="img racing_board_img">
+											<img src="/images/<%=cur_vgame.getGame_img()%>" style = 'width: 290px; height: 195px;'>
+											<div class="overlay">
+												 <span class="expand">Play now</span>
+											</div>
+										</div>
+									</a>
+									<div class="casino_board_text">
+										<p class="casino_name"><%=cur_vgame.getGame_name()%></p>
+									</div>
+								</li>
+								<%
+									}
+								%>
+								
+							</ul>
+						</div>
+					</div>
+					
+				</div>
+			</div>
 		</div>
 	</div>
 </div><!-- contents -->
@@ -271,7 +321,35 @@
 			});
 
 			return false;
-		})
+		});
+        
+        if (Modernizr.touch) {
+            // show the close overlay button
+            $(".close-overlay").removeClass("hidden");
+            // handle the adding of hover class when clicked
+            $(".img").click(function(e){
+                if (!$(this).hasClass("hover")) {
+                    $(this).addClass("hover");
+                }
+            });
+            // handle the closing of the overlay
+            $(".close-overlay").click(function(e){
+                e.preventDefault();
+                e.stopPropagation();
+                if ($(this).closest(".img").hasClass("hover")) {
+                    $(this).closest(".img").removeClass("hover");
+                }
+            });
+        } else {
+            // handle the mouseenter functionality
+            $(".img").mouseenter(function(){
+                $(this).addClass("hover");
+            })
+            // handle the mouseleave functionality
+            .mouseleave(function(){
+                $(this).removeClass("hover");
+            });
+        }
 	});
 </script>
 

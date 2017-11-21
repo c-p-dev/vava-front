@@ -103,14 +103,16 @@ public class BetConstructController {
     //-----------------------------------------------------
 	public String launchGame(String username, String game_id)
 	{
-		StringManipulator str_lib	= new StringManipulator();
+		SimpleDateFormat dfrmt 		= new SimpleDateFormat("yyyyMMddHHmmss");
+		Calendar cal_now			= Calendar.getInstance();
+		
 		BetConDao betcon_db			= new BetConDao();
 		UserDao user_db			 	= new UserDao();
 		
 		String game_url		= "";
 		String params_str	= "";
 		UserBean user_data	= user_db.getUserByUserId(username);
-		String token		= Integer.toString(user_data.getSiteid()).concat("_").concat(username).concat(str_lib.getSaltString(SESS_SALT_LEN));
+		String token		= Integer.toString(user_data.getSiteid()).concat("_").concat(username).concat("T").concat(dfrmt.format(cal_now.getTime()));
 		int create_token	= 0;
 		
 		/*--------------------------------------------------------------------
