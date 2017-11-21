@@ -197,10 +197,18 @@ $(window).scroll(function(event){
 			e.preventDefault();
 			var tab = $(this).attr('data-tab');
 			var pg = $(this).attr('data-pg');
-			$("#ftb input[name=pge]").val(pg);
-			$("#ftb input[name=tb]").val(tab);
-			$("#ftb").submit();
 
+			if(tab =="" && pg ==""){
+
+				$("#logoutModal").popup("show");
+
+			}else{
+				
+				$("#ftb input[name=pge]").val(pg);
+				$("#ftb input[name=tb]").val(tab);
+				$("#ftb").submit();
+			
+			}
 		});
 
 		$("body").on("click","#user_popup_menu div a",function(e){
@@ -400,8 +408,9 @@ $(window).scroll(function(event){
 										<li>
 											<a href="/info/info.jsp" data-pg="sb5" data-tab="tab4" >쪽지함 </a>
 										</li>
-										
-										<li><span class="showLogoutModal" >로그아웃 </span> </li> 
+										<li>
+											<a href="#" data-pg="" data-tab="" >로그아웃 </a>
+										</li> 
 									</ul>
 								</div>				
 							</li>

@@ -82,7 +82,7 @@ Type type2 = new TypeToken<List<DepositListBean>>() {}.getType();
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/jquery.qtip.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script><!-- moment js -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.js"></script><!-- pickaday -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.js"></script>
+
 
 
 <link href="/css/common.css" rel="stylesheet" type="text/css">
@@ -101,7 +101,6 @@ Type type2 = new TypeToken<List<DepositListBean>>() {}.getType();
 <link rel="stylesheet" href="/css/datatables.net-bs/css/bootstrap-simple.css" /> 
 <link rel="stylesheet" href="/css/datatables.net-bs/css/dataTables.bootstrap.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css" rel="stylesheet" type="text/css"><!-- toaster test  -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/jquery.qtip.css" /><!-- tooltip -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.css" rel="stylesheet" type="text/css">
 <!-- custom scrollbar test -->
@@ -1918,8 +1917,7 @@ Type type2 = new TypeToken<List<DepositListBean>>() {}.getType();
 										</table>
 									</div>
 
-									<div
-										ng-show="PMSD=='0' ? PS.length<5 : (PS|filter:{SId:PMSD}).length<5 ">
+									<div ng-show="PMSD=='0' ? PS.length<5 : (PS|filter:{SId:PMSD}).length<5 ">
 										<table id="table3" width="100%" cellpadding="0" cellspacing="0">
 											<!--<table id="table" width="100%" cellpadding="0" cellspacing="0">-->
 											<tbody>
@@ -2032,6 +2030,8 @@ Type type2 = new TypeToken<List<DepositListBean>>() {}.getType();
 				</div>
 			</div>
 			<!-- wrap -->
+
+			
 		</div>
 		<%@ include file="/inc/footer.jsp" %>
 

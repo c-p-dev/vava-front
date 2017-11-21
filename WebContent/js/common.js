@@ -24,3 +24,13 @@ function setTabActive(tab){
 		$(".tab_content:first").show(); //Show first tab content
 	}
 }
+
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+function numberParser(num){
+	var new_num = num.replace(/,/g, "");
+	return parseInt(new_num, 10);
+}
+
