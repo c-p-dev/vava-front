@@ -23,8 +23,10 @@
 .left_menu_in_1 {width:100%;background-color: #000000;padding:10px; margin:1px 0 1px 0; cursor:pointer}
 .left_menu_in_1 tr td {padding-top:3px; padding-bottom:3px}
 .left_menu_in_1_l {float:left; width:70%; padding-left:10px}
+.left_menu_in_1_l_1 {float:left; padding-left:0}
 .left_menu_in_1_r {float:right; padding-right:5px}
 .left_menu_in_1_r_1 {float:right; padding-right:20px}
+.left_menu_in_1_r_2 {float:right; padding-right:80px}
 .left_menu_in_1_r_img {float:right;}
 
 .bookmark_wrap_2 {width:100%; float:left; background:#2d3232; margin:0 0 1px 0; text-indent:15px; line-height:34px;}
@@ -59,6 +61,12 @@
 .live_4_1 {text-align:center; background:#222627;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;-webkit-transition: all .2s ease-in-out;-moz-transition: all .2s ease-in-out;-o-transition: all .2s ease-in-out;-ms-transition: all .2s ease-in-out;transition: all .2s ease-in-out;}
 .live_4_1:hover {background:#2e3334}
 .live_4_in_1 {float:center;}
+.live_victory_1 {border-right:solid 1px #1c2021;}
+
+.live_4_1_1 {text-align:right; background:#222627; width:13%;border-bottom:solid 1px #1c2021;  }
+.live_4_1_2 {text-align:center; background:#222627; width:2%;border-bottom:solid 1px #1c2021; color:#5c7785 }
+.live_4_1_3 {text-align:left; background:#222627; width:13%;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;  }
+
 
 .live_vs_1 {color:#5c7785}
 
@@ -160,37 +168,59 @@
 .slip_notice_wrap {width:100%; height:43px; line-height:43px;align:center; margin:5px 0 1px 0; background:#384447 }
 
 .accordion-header_1 {background: #2d3232 url("/images/accordion-closed.png") no-repeat 240px ;color: #0792c4; padding: 0 15px 0 15px;cursor: pointer;position: relative; height:34px; line-height:34px;margin:0 0 1px 0; cursor:pointer}
-.accordion-header_2 {background: #262a2b url("/images/accordion-closed.png") no-repeat ; background-position:95% 50%;  padding: 0 15px 0 15px;cursor: pointer;position: relative; height:34px; line-height:34px;margin:0 0 1px 0; cursor:pointer}
-.accordion-header_2.open {background: #2e3334 url("/images/accordion-opened.png") no-repeat ;background-position:95% 50%;}
+.accordion-header_2 {background: #2e3334 url("/images/accordion-closed.png") no-repeat ; background-position:95% 50%;  padding: 0 15px 0 15px;cursor: pointer;position: relative; height:34px; line-height:34px;margin:0 0 1px 0; cursor:pointer}
+/*.accordion-header_2.open {background: #2e3334 url("/images/accordion-opened.png") no-repeat ;background-position:95% 50%;}*/
+.accordion-header_3 {background: #3a3a3a url("/images/accordion-closed.png") no-repeat ; background-position:95% 50%;  padding: 0 15px 0 15px;cursor: pointer;position: relative; height:34px; line-height:34px;margin:0 0 1px 0; cursor:pointer}
+.accordion-header_4 {background: #677173 url("/images/accordion-closed.png") no-repeat ; background-position:95% 50%;  padding: 0 15px 0 15px;cursor: pointer;position: relative; height:34px; line-height:34px;margin:0 0 1px 0; cursor:pointer}
+
 
 .soprts_in_acc_1 {background: #2d3232;color: #0792c4; text-align:left;padding:0 15px 0 15px;cursor: pointer;margin-top: 7px;margin-bottom: 1px;transition: 0.25s all;position: relative;height:40px; line-height:40px;}
 
 
 
-.effect_tab_1_on {display:table-cell ; vertical-align:middle; text-align:center; border:solid 1px #0792c4;background:#293133;width:7%;  }
-.effect_tab_1 {text-align:center; background:#293133; display:table-cell ; vertical-align:middle; border-right:solid 1px #262a2b;width:7%; }
+.effect_tab_1_on {display:table-cell ; vertical-align:middle; text-align:center; border:solid 1px #0792c4;background:#293133;width:6%;  }
+.effect_tab_1 {text-align:center; background:#293133; display:table-cell ; vertical-align:middle; border-right:solid 1px #262a2b;width:6%; }
+.effect_tab_1:hover {background:#37393b;}
+
 
 .select button.effect_tab_select_t_1{ position:relative;z-index:2; cursor:pointer; padding:13px 10px 10px 10px; border:none; background:none; outline:none; color:#c1c3c4; width:180px;clear:both }
 .select button.effect_tab_select_t_1 span{ float:left;}
 .select button.effect_tab_select_t_1 img{ float:right;}
 
 
-.select ul.effect_tab_select_1{ display:none; position:absolute; top:41px; left:0; width:200px; z-index:10;}
+.select ul.effect_tab_select_1{ display:none; background:#293133; position:absolute; top:41px; left:0; width:200px; z-index:10;}
+.select ul.effect_tab_select_1:hover {background:#37393b;}
 
 .select ul.effect_tab_select_1 li{width:100%; position:relative; overflow:hidden; height:30px; line-height:30px; border-bottom:1px solid #292f30;  background:#1c2021; text-align:left; padding:0 10px 0 10px; cursor:pointer}
-
 .select.open ul.effect_tab_select_1{display:block;} 
 
 
 .effect_time_1 {width:13%;text-align:center; background:#262a2b; border-right:solid 1px #1c2021; border-bottom:solid 1px #1c2021}
+.effect_time_1:hover {background:#2e3334;}
+
 .effect_name_1 {width:7%;text-align:center; background:#262a2b; border-right:solid 1px #1c2021; border-bottom:solid 1px #1c2021}
+.effect_name_1:hover {background:#2e3334;}
+
 .effect_nation_1 {width:8%;text-align:center; background:#262a2b; border-right:solid 1px #1c2021; border-bottom:solid 1px #1c2021}
+.effect_nation_1:hover {background:#2e3334;}
+
 .effect_league_1 {width:15%;text-align:center; background:#262a2b; border-right:solid 1px #1c2021; border-bottom:solid 1px #1c2021}
+.effect_league_1:hover {background:#2e3334;}
+
 .effect_effect_1 {width:6%;color:#ffa800; text-align:center; background:#262a2b; border-right:solid 1px #1c2021; border-bottom:solid 1px #1c2021}
+.effect_effect_1:hover {background:#2e3334;}
+
 .effect_home_1 {width:20%;  background:#262a2b; border-right:solid 1px #1c2021; border-bottom:solid 1px #1c2021;}
+.effect_home_1:hover {background:#2e3334;}
+
 .effect_vs_1 {width:5%;text-align:center; background:#262a2b; border-right:solid 1px #1c2021; border-bottom:solid 1px #1c2021;}
+.effect_vs_1:hover {background:#2e3334;}
+
 .effect_loss_1 {width:20%;background:#262a2b; border-right:solid 1px #1c2021; border-bottom:solid 1px #1c2021;}
+.effect_loss_1:hover {background:#2e3334;}
+
 .effect_m_1 {text-align:center;background:#262a2b;border-bottom:solid 1px #1c2021;-webkit-transition: all .2s ease-in-out;-moz-transition: all .2s ease-in-out;-o-transition: all .2s ease-in-out;-ms-transition: all .2s ease-in-out;transition: all .2s ease-in-out;}
+.effect_m_1:hover {background:#2e3334;}
 
 .effect_left_1 {float:left; padding:0 0 0 10px}
 .effect_left_2 {float:left; padding:0 0 0 10px;color:#00afed}
@@ -410,3 +440,72 @@
 .font_002.sel {color:#ffa800}/* 인풋 충족사항 설명 노랑 */
 .sel_old {color:#CCCCCC;font-size:10px;}
 .sel_old.sel {color:#FFCC99;font-size:10px;}
+
+.sports_in_tab_on_1 {padding:9px 19px 7px 19px;border-radius: 7px 7px 0px 0px; border:solid 1px #0792c4 ; margin-right:0; color:#0792c4;background:#293133}
+.sports_in_tab_off_1 {padding:9px 19px 7px 19px;border-radius: 7px 7px 0px 0px; background:#293133; margin-right:1px ;display:inline-block}
+.sports_in_tab_off_1:hover {background:#2f383a}
+
+.sports_in_tab_on_2 {padding:9px 19px 7px 19px;border-radius: 7px 7px 0px 0px;border:solid 1px #0792c4 ; margin-right:0; color:#0792c4;background:#293133}
+.sports_in_tab_off_2 {padding:9px 20px 7px 20px;border-radius: 7px 7px 0px 0px;background:#293133; margin-right:1px ;display:inline-block}
+.sports_in_tab_off_2:hover {background:#2f383a}
+
+.accordion-header.ng-binding.ng-scope.open {color:#0792c4; font-weight:700}
+.accordion-header3 {background: #262a2b url("/images/accordion-closed.png") no-repeat 240px center;padding: 0 15px 0 15px;cursor: pointer;position: relative; height:34px; line-height:34px;margin:0 0 1px 0; cursor:pointer}
+
+/*.accordion-header_2.ng-binding.ng-scope.open {background: #677173 url("/images/accordion-opened.png") no-repeat 240px center;color:#ffffff; font-weight:700} */
+
+.board_bet_time_1{width:13%; border-right:}
+
+
+.board_bet_home_1{width:22%; color:#7da0b2; }
+.board_bet_expedition_1{width:22%; color:#7da0b2;}
+.board_bet_victory_1{width:12%; color:#00afed;}
+.board_bet_draw_1{width:12%; color:#00afed;}
+.board_bet_loss_1{width:12%; color:#00afed;}
+.board_bet_score_1{width:8%;  }
+
+.board_bet_home_2{width:28%; color:#7da0b2; text-align:center;}
+.board_bet_expedition_2{width:28%; color:#7da0b2;text-align:center;}
+
+
+.board_table_2.on{background:#293133}
+.board_table_1_1.on{background:#293133}
+.board_table_1_1.on:hover {color:#ffffff; font-weight:700}
+
+.search_table_1 {width:100%; border-bottom:solid 1px #313435; cursor:pointer;}
+.search_table_1:hover {color:#ffffff; font-weight:700; background:#0792c4; }
+.search_table_1 tr td {}
+
+
+
+ @keyframes top-arrow-down {
+     0% {
+         opacity: 1;
+         transform: translate(0px, -4px)
+     }
+     to {
+         opacity: 0;
+         transform: translate(0px, 2px)
+     }
+ }
+
+ @keyframes bottom-arrow-up {
+     0% {
+         opacity: 1;
+         transform: translate(0px, 1px)
+     }
+     to {
+         opacity: 0;
+         transform: translate(0px, -3px)
+     }
+ }
+ 
+ i.fa.fa-fw.fa-chevron-up{
+     animation: bottom-arrow-up 1s 10!important;
+
+ }
+
+ i.fa.fa-fw.fa-chevron-down{
+     animation: top-arrow-down 1s 10!important;
+ }
+ 

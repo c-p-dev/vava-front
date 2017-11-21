@@ -6,6 +6,7 @@ package bean;
 public class MatchResultBean {      			
 	
 	private String MT;
+	private String MT3;
 	private String MDT;
 	private String MD;
 	private String SD;
@@ -24,6 +25,10 @@ public class MatchResultBean {
   	public void setMdate(String MT){
     	this.MT = MT;
   	}	  	
+  	
+  	public void setMdate3(String MT3){
+    	this.MT3 = MT3;
+  	}	
   	
   	public void setMdate2(String MDT){
     	this.MDT = MDT;
@@ -81,6 +86,10 @@ public class MatchResultBean {
   	public String getMdate(){
     	return this.MT;
   	}	  	
+  	
+  	public String getMdate3(){
+  		return this.MT3;
+  	}
   	
   	public String getMdate2(){
     	return this.MDT;

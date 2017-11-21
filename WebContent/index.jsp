@@ -306,7 +306,7 @@ Type type2 = new TypeToken<List<DepositListBean>>() {}.getType();
 								});
 
 						function dl_load() {
-							var sp = setInterval(getDepositList, 1000 * 30);
+							var sp = setInterval(getDepositList, 1000 * 60 * 3);
 						}
 						;
 
@@ -464,19 +464,31 @@ Type type2 = new TypeToken<List<DepositListBean>>() {}.getType();
 																								for (var i = mSelect.length - 1; i >= 0; i--) {
 																									if (mSelect[i].Nm == 'W1') {
 																										//w1SelId = mSelect[i].Id ;
-																										w1Price = mSelect[i].P;
+																										//w1Price = mSelect[i].P;			
+																										w1Price = $filter('number')(mSelect[i].P, 2);																							
+																										//console.log("w1Price:"+ w1Price)
+																										//console.log("w1Price-1:"+$filter('number')(w1Price, 2))
+																										
 																									} else if (mSelect[i].Nm == 'X') {
 																										//xSelId = mSelect[i].Id ;
-																										xPrice = mSelect[i].P;
+																										//xPrice = mSelect[i].P;
+																										xPrice = $filter('number')(mSelect[i].P, 2);
+																										//console.log("xPrice:"+ xPrice)
+																										//console.log("xPrice-1:"+$filter('number')(xPrice, 2))
+																										
 																									} else if (mSelect[i].Nm == 'W2') {
 																										//w2SelId = mSelect[i].Id ;
-																										w2Price = mSelect[i].P;
+																										//w2Price = mSelect[i].P;
+																										w2Price = $filter('number')(mSelect[i].P, 2);
+																										//console.log("w2Price:"+ w2Price)
+																										//console.log("w2Price-1:"+$filter('number')(w2Price, 2))
 																									}
 																								}
 																								;
 																							}
 																							;
-
+																							
+																							
 																							$scope.LS
 																									.push({
 																										SId : obj2.SId,
@@ -608,13 +620,24 @@ Type type2 = new TypeToken<List<DepositListBean>>() {}.getType();
 																								for (var i = mSelect.length - 1; i >= 0; i--) {
 																									if (mSelect[i].Nm == 'W1') {
 																										//w1SelId = mSelect[i].Id ;
-																										w1Price = mSelect[i].P;
+																										//w1Price = mSelect[i].P;
+																										w1Price = $filter('number')(mSelect[i].P, 2);
+																										//console.log("w1Price:"+ w1Price)
+																										//console.log("w1Price-1:"+$filter('number')(w1Price, 2))
+																										
 																									} else if (mSelect[i].Nm == 'X') {
 																										//xSelId = mSelect[i].Id ;
-																										xPrice = mSelect[i].P;
+																										//xPrice = mSelect[i].P;
+																										xPrice = $filter('number')(mSelect[i].P, 2);
+																										//console.log("xPrice"+ xPrice)
+																										//console.log("xPrice-1:"+$filter('number')(xPrice, 2))
+																										
 																									} else if (mSelect[i].Nm == 'W2') {
 																										//w2SelId = mSelect[i].Id ;
-																										w2Price = mSelect[i].P;
+																										//w2Price = mSelect[i].P;
+																										w2Price = $filter('number')(mSelect[i].P, 2);
+																										//console.log("w2Price:"+ w2Price)
+																										//console.log("w2Price-1:"+$filter('number')(w2Price, 2))
 																									}
 																								}
 																								;
@@ -763,13 +786,23 @@ Type type2 = new TypeToken<List<DepositListBean>>() {}.getType();
 														for (var j = 0; j < obj.Selections.length; j++) {
 
 															if (obj.Selections[j].Name == 'W1') {
-																w1Price = obj.Selections[j].Price;
+																//w1Price = obj.Selections[j].Price;
+																w1Price = $filter('number')(obj.Selections[j].Price, 2);
+																//console.log("w1Price:"+ w1Price)
+																//console.log("w1Price-1:"+$filter('number')(w1Price, 2))
+																										
 
 															} else if (obj.Selections[j].Name == 'X') {
-																xPrice = obj.Selections[j].Price;
+																//xPrice = obj.Selections[j].Price;
+																xPrice = $filter('number')(obj.Selections[j].Price, 2);
+																//console.log("xPrice:"+ xPrice)
+																//console.log("xPrice-1:"+$filter('number')(xPrice, 2))
 
 															} else if (obj.Selections[j].Name == 'W2') {
-																w2Price = obj.Selections[j].Price;
+																//w2Price = obj.Selections[j].Price;
+																w2Price = $filter('number')(obj.Selections[j].Price, 2);
+																//console.log("w2Price:"+ w2Price)
+																//console.log("w2Price-1:"+$filter('number')(w2Price, 2))
 															}
 														}
 														;
@@ -799,13 +832,16 @@ Type type2 = new TypeToken<List<DepositListBean>>() {}.getType();
 														for (var j = 0; j < obj.Selections.length; j++) {
 
 															if (obj.Selections[j].Name == 'W1') {
-																w1Price = obj.Selections[j].Price;
+																//w1Price = obj.Selections[j].Price;
+																w1Price = $filter('number')(obj.Selections[j].Price, 2);
 
 															} else if (obj.Selections[j].Name == 'X') {
-																xPrice = obj.Selections[j].Price;
+																//xPrice = obj.Selections[j].Price;
+																xPrice = $filter('number')(obj.Selections[j].Price, 2);
 
 															} else if (obj.Selections[j].Name == 'W2') {
-																w2Price = obj.Selections[j].Price;
+																//w2Price = obj.Selections[j].Price;
+																w2Price = $filter('number')(obj.Selections[j].Price, 2);
 															}
 														}
 														;
@@ -971,7 +1007,7 @@ Type type2 = new TypeToken<List<DepositListBean>>() {}.getType();
 						};
 
 						$scope.main_load = function() {
-							var sp = setTimeout(sp_main, 3500);
+							var sp = setTimeout(sp_main, 2500);
 						};
 
 						$scope.lm_load = function() {
@@ -1065,13 +1101,18 @@ Type type2 = new TypeToken<List<DepositListBean>>() {}.getType();
 																								for (var i = mSelect.length - 1; i >= 0; i--) {
 																									if (mSelect[i].Nm == 'W1') {
 																										//w1SelId = mSelect[i].Id ;
-																										w1Price = mSelect[i].P;
+																										//w1Price = mSelect[i].P;
+																										w1Price = $filter('number')(mSelect[i].P, 2);
+																										
 																									} else if (mSelect[i].Nm == 'X') {
 																										//xSelId = mSelect[i].Id ;
-																										xPrice = mSelect[i].P;
+																										//xPrice = mSelect[i].P;
+																										xPrice = $filter('number')(mSelect[i].P, 2);
+																										
 																									} else if (mSelect[i].Nm == 'W2') {
 																										//w2SelId = mSelect[i].Id ;
-																										w2Price = mSelect[i].P;
+																										//w2Price = mSelect[i].P;
+																										w2Price = $filter('number')(mSelect[i].P, 2);
 																									}
 																								}
 																								;
@@ -1171,117 +1212,6 @@ Type type2 = new TypeToken<List<DepositListBean>>() {}.getType();
 	}
 </style>
 
-<style type="text/css">
-
-	.sk-fading-circle {
-	  margin: 15% auto 50px;
-	  width: 80px;
-	  height: 80px;
-	  position: relative; }
-	  .sk-fading-circle .sk-circle {
-	    width: 100%;
-	    height: 100%;
-	    position: absolute;
-	    left: 0;
-	    top: 0; }
-	  .sk-fading-circle .sk-circle:before {
-	    content: '';
-	    display: block;
-	    margin: 0 auto;
-	    width: 15%;
-	    height: 15%;
-	    background-color: #333;
-	    border-radius: 100%;
-	    -webkit-animation: sk-circleFadeDelay 1.2s infinite ease-in-out both;
-	            animation: sk-circleFadeDelay 1.2s infinite ease-in-out both; }
-	  .sk-fading-circle .sk-circle2 {
-	    -webkit-transform: rotate(30deg);
-	        -ms-transform: rotate(30deg);
-	            transform: rotate(30deg); }
-	  .sk-fading-circle .sk-circle3 {
-	    -webkit-transform: rotate(60deg);
-	        -ms-transform: rotate(60deg);
-	            transform: rotate(60deg); }
-	  .sk-fading-circle .sk-circle4 {
-	    -webkit-transform: rotate(90deg);
-	        -ms-transform: rotate(90deg);
-	            transform: rotate(90deg); }
-	  .sk-fading-circle .sk-circle5 {
-	    -webkit-transform: rotate(120deg);
-	        -ms-transform: rotate(120deg);
-	            transform: rotate(120deg); }
-	  .sk-fading-circle .sk-circle6 {
-	    -webkit-transform: rotate(150deg);
-	        -ms-transform: rotate(150deg);
-	            transform: rotate(150deg); }
-	  .sk-fading-circle .sk-circle7 {
-	    -webkit-transform: rotate(180deg);
-	        -ms-transform: rotate(180deg);
-	            transform: rotate(180deg); }
-	  .sk-fading-circle .sk-circle8 {
-	    -webkit-transform: rotate(210deg);
-	        -ms-transform: rotate(210deg);
-	            transform: rotate(210deg); }
-	  .sk-fading-circle .sk-circle9 {
-	    -webkit-transform: rotate(240deg);
-	        -ms-transform: rotate(240deg);
-	            transform: rotate(240deg); }
-	  .sk-fading-circle .sk-circle10 {
-	    -webkit-transform: rotate(270deg);
-	        -ms-transform: rotate(270deg);
-	            transform: rotate(270deg); }
-	  .sk-fading-circle .sk-circle11 {
-	    -webkit-transform: rotate(300deg);
-	        -ms-transform: rotate(300deg);
-	            transform: rotate(300deg); }
-	  .sk-fading-circle .sk-circle12 {
-	    -webkit-transform: rotate(330deg);
-	        -ms-transform: rotate(330deg);
-	            transform: rotate(330deg); }
-	  .sk-fading-circle .sk-circle2:before {
-	    -webkit-animation-delay: -1.1s;
-	            animation-delay: -1.1s; }
-	  .sk-fading-circle .sk-circle3:before {
-	    -webkit-animation-delay: -1s;
-	            animation-delay: -1s; }
-	  .sk-fading-circle .sk-circle4:before {
-	    -webkit-animation-delay: -0.9s;
-	            animation-delay: -0.9s; }
-	  .sk-fading-circle .sk-circle5:before {
-	    -webkit-animation-delay: -0.8s;
-	            animation-delay: -0.8s; }
-	  .sk-fading-circle .sk-circle6:before {
-	    -webkit-animation-delay: -0.7s;
-	            animation-delay: -0.7s; }
-	  .sk-fading-circle .sk-circle7:before {
-	    -webkit-animation-delay: -0.6s;
-	            animation-delay: -0.6s; }
-	  .sk-fading-circle .sk-circle8:before {
-	    -webkit-animation-delay: -0.5s;
-	            animation-delay: -0.5s; }
-	  .sk-fading-circle .sk-circle9:before {
-	    -webkit-animation-delay: -0.4s;
-	            animation-delay: -0.4s; }
-	  .sk-fading-circle .sk-circle10:before {
-	    -webkit-animation-delay: -0.3s;
-	            animation-delay: -0.3s; }
-	  .sk-fading-circle .sk-circle11:before {
-	    -webkit-animation-delay: -0.2s;
-	            animation-delay: -0.2s; }
-	  .sk-fading-circle .sk-circle12:before {
-	    -webkit-animation-delay: -0.1s;
-	            animation-delay: -0.1s; }
-	@-webkit-keyframes sk-circleFadeDelay {
-	  0%, 39%, 100% {
-	    opacity: 0; }
-	  40% {
-	    opacity: 1; } }
-	@keyframes sk-circleFadeDelay {
-	  0%, 39%, 100% {
-	    opacity: 0; }
-	  40% {
-	    opacity: 1; } }
-</style>
 
 </head>
 
@@ -1477,7 +1407,7 @@ Type type2 = new TypeToken<List<DepositListBean>>() {}.getType();
 											ng-repeat="(key,value) in LS | orderBy:'SId' |  groupBy:'SId'"><a
 											ng-class="{tabulous_active:tabSId==key}" style="cursor: pointer"
 											style="cursor:pointer" ng-click="selLS(key)"><img
-												src="/images/main_icon_game_{{key}}.png">&nbsp;{{value[0].SN}}</a></li>
+												src="/images/sport_m/{{key}}.png" width="15">&nbsp;{{value[0].SN}}</a></li>
 									</ul>
 								</div>
 
@@ -1493,115 +1423,83 @@ Type type2 = new TypeToken<List<DepositListBean>>() {}.getType();
 									</tr>
 								</table>
 
-								<div id="lm_spin" class="sk-circle">
-									<div class="sk-circle1 sk-child"></div>
-									<div class="sk-circle2 sk-child"></div>
-									<div class="sk-circle3 sk-child"></div>
-									<div class="sk-circle4 sk-child"></div>
-									<div class="sk-circle5 sk-child"></div>
-									<div class="sk-circle6 sk-child"></div>
-									<div class="sk-circle7 sk-child"></div>
-									<div class="sk-circle8 sk-child"></div>
-									<div class="sk-circle9 sk-child"></div>
-									<div class="sk-circle10 sk-child"></div>
-									<div class="sk-circle11 sk-child"></div>
-									<div class="sk-circle12 sk-child"></div>
+								<div id="lm_spin" class="sk-fading-circle_s">
+									<div class="sk-circle1 sk-circle"></div>
+									<div class="sk-circle2 sk-circle"></div>
+									<div class="sk-circle3 sk-circle"></div>
+									<div class="sk-circle4 sk-circle"></div>
+									<div class="sk-circle5 sk-circle"></div>
+									<div class="sk-circle6 sk-circle"></div>
+									<div class="sk-circle7 sk-circle"></div>
+									<div class="sk-circle8 sk-circle"></div>
+									<div class="sk-circle9 sk-circle"></div>
+									<div class="sk-circle10 sk-circle"></div>
+									<div class="sk-circle11 sk-circle"></div>
+									<div class="sk-circle12 sk-circle"></div>
 								</div>
 
-								<div ng-init="lm_load()" style="display: none;" id="spin2"
-									class="animate-top">
+								<div ng-init="lm_load()" style="display: none;" id="spin2" class="animate-top">
 
-									<div
-										ng-show="tabSId=='0' ? LS.length>4 : (LS|filter:{SId:tabSId}).length>4 ">
-										<table width="100%" cellpadding="0" cellspacing="0"
-											class="myTable2">
+									<div ng-show="tabSId=='0' ? LS.length>4 : (LS|filter:{SId:tabSId}).length>4 ">
+										<table width="100%" cellpadding="0" cellspacing="0"	class="myTable2">
 											<tbody>
-												<tr ng-if="tabSId==ls.SId||tabSId=='0'"
-													ng-repeat="ls in LS | orderBy:'HT' ">
+												<tr ng-if="tabSId==ls.SId||tabSId=='0'" ng-init="oIndex = $index"  ng-repeat="ls in LS">
 													<td>
-														<table width="100%" cellpadding="0" cellspacing="0"
-															class="board_table_1_1">
+														<table width="100%" cellpadding="0" cellspacing="0" class="board_table_1_1" ng-class="{'on':oIndex%2=='0'}">
 															<tr ng-if="ls.SusS">
-																<td width="28%" class="board_bet_home_1"
-																	ng-bind="ls.HT.substring(0,10)"></td>
-																<td width="28%" class="board_bet_expedition_1"
-																	ng-bind="ls.AT.substring(0,10)"></td>
-																<td width="12%" class="board_bet_victory_1"><i
-																	class='fa fa-fw fa-lock'></i></td>
-																<td width="12%" class="board_bet_draw_1"><i
-																	class='fa fa-fw fa-lock'></i></td>
-																<td width="12%" class="board_bet_loss_1"><i
-																	class='fa fa-fw fa-lock'></i></td>
-																<td width="8%" class="board_bet_score_1"><i
-																	class='fa fa-fw fa-lock'></i></td>
+																<td width="28%" class="board_bet_home_2">{{ls.HT.substring(0,10)}}</td>
+																<td width="28%" class="board_bet_expedition_2" ng-bind="ls.AT.substring(0,10)"></td>
+																<td width="12%" class="board_bet_victory_1"><i class='fa fa-fw fa-lock'></i></td>
+																<td width="12%" class="board_bet_draw_1"><i class='fa fa-fw fa-lock'></i></td>
+																<td width="12%" class="board_bet_loss_1"><i class='fa fa-fw fa-lock'></i></td>
+																<td width="8%" class="board_bet_score_1"><i class='fa fa-fw fa-lock'></i></td>
 															</tr>
 
 															<tr ng-if="!ls.SusS && ls.SusM" style="cursor: pointer"
 																ng-click="vM('2',ls.SId,ls.MId)">
-																<td width="28%" class="board_bet_home_1"
-																	ng-bind="ls.HT.substring(0,10)"></td>
-																<td width="28%" class="board_bet_expedition_1"
-																	ng-bind="ls.AT.substring(0,10)"></td>
-																<td width="12%" class="board_bet_victory_1"><i
-																	class='fa fa-fw fa-lock'></i></td>
-																<td width="12%" class="board_bet_draw_1"><i
-																	class='fa fa-fw fa-lock'></i></td>
-																<td width="12%" class="board_bet_victory_1"><i
-																	class='fa fa-fw fa-lock'></i></td>
-																<td width="8%" class="board_bet_score_1">+{{(LMKc|filter:{M:ls.MId,S:false,V:true}).length
-																	}}</td>
+																<td width="28%" class="board_bet_home_2" ng-bind="ls.HT.substring(0,10)"></td>
+																<td width="28%" class="board_bet_expedition_2" ng-bind="ls.AT.substring(0,10)"></td>
+																<td width="12%" class="board_bet_victory_1"><i class='fa fa-fw fa-lock'></i></td>
+																<td width="12%" class="board_bet_draw_1"><i class='fa fa-fw fa-lock'></i></td>
+																<td width="12%" class="board_bet_victory_1"><i class='fa fa-fw fa-lock'></i></td>
+																<td width="8%" class="board_bet_score_1">+{{(LMKc|filter:{M:ls.MId,S:false,V:true}).length}}</td>
 															</tr>
 
 															<tr ng-if="!ls.SusS && !ls.SusM" style="cursor: pointer"
 																ng-click="vM('2',ls.SId,ls.MId)">
-																<td width="28%" class="board_bet_home_1"
-																	ng-bind="ls.HT.substring(0,10)"></td>
-																<td width="28%" class="board_bet_expedition_1"
-																	ng-bind="ls.AT.substring(0,10)"></td>
+																<td width="28%" class="board_bet_home_2" ng-bind="ls.HT.substring(0,10)"></td>
+																<td width="28%" class="board_bet_expedition_2" ng-bind="ls.AT.substring(0,10)"></td>
 																<td width="12%" class="board_bet_victory_1">
 																	<div ng-show="ls.BW1P<ls.W1P">
-																		<i class="fa fa-fw fa-chevron-up" style="color: green"></i><b
-																			class="font_002">{{ls.W1P}}</b>
+																		<i class="fa fa-fw fa-chevron-up" style="color: green"></i><span class="font_002">{{ls.W1P}}</span>
 																	</div>
 																	<div ng-show="ls.BW1P>ls.W1P">
-																		<i class="fa fa-fw fa-chevron-down" style="color: red"></i><b
-																			class="font_002">{{ls.W1P}}</b>
+																		<i class="fa fa-fw fa-chevron-down" style="color: red"></i><span class="font_002">{{ls.W1P}}</span>
 																	</div>
-																	<div ng-show="ls.BW1P==ls.W1P">
-																		<b class="font_002">{{ls.W1P}}</b>
-																	</div>
+																	<div ng-show="ls.BW1P==ls.W1P"><span class="font_002">{{ls.W1P}}</span>	</div>
 																</td>
 
 																<td width="12%" class="board_bet_draw_1">
 																	<div ng-show="ls.BXP<ls.XP">
-																		<i class="fa fa-fw fa-chevron-up" style="color: green"></i><b
-																			class="font_002">{{ls.XP}}</b>
+																		<i class="fa fa-fw fa-chevron-up" style="color: green"></i><span class="font_002">{{ls.XP}}</span>
 																	</div>
 																	<div ng-show="ls.BXP>ls.XP">
-																		<i class="fa fa-fw fa-chevron-down" style="color: red"></i><b
-																			class="font_002">{{ls.XP}}</b>
+																		<i class="fa fa-fw fa-chevron-down" style="color: red"></i><span class="font_002">{{ls.XP}}</span>
 																	</div>
-																	<div ng-show="ls.BXP==ls.XP">
-																		<b class="font_002">{{ls.XP}}</b>
-																	</div>
+																	<div ng-show="ls.BXP==ls.XP"><span class="font_002">{{ls.XP}}</span></div>
 																</td>
 
 																<td width="12%" class="board_bet_loss_1">
 																	<div ng-show="ls.BW2P<ls.W2P">
-																		<i class="fa fa-fw fa-chevron-up" style="color: green"></i><b
-																			class="font_002">{{ls.W2P}}</b>
+																		<i class="fa fa-fw fa-chevron-up" style="color: green"></i><span class="font_002">{{ls.W2P}}</span>
 																	</div>
 																	<div ng-show="ls.BW2P>ls.W2P">
-																		<i class="fa fa-fw fa-chevron-down" style="color: red"></i><b
-																			class="font_002">{{ls.W2P}}</b>
+																		<i class="fa fa-fw fa-chevron-down" style="color: red"></i><span class="font_002">{{ls.W2P}}</span>
 																	</div>
-																	<div ng-show="ls.BW2P==ls.W2P">
-																		<b class="font_002">{{ls.W2P}}</b>
-																	</div>
+																	<div ng-show="ls.BW2P==ls.W2P"> <span class="font_002">{{ls.W2P}}</span></div>
 																</td>
 
-																<td width="8%" class="board_bet_score_1">+{{(LMKc|filter:{M:ls.MId,S:false,V:true}).length
-																	}}</td>
+																<td width="8%" class="board_bet_score_1">+{{(LMKc|filter:{M:ls.MId,S:false,V:true}).length}}</td>
 
 															</tr>
 
@@ -1613,98 +1511,66 @@ Type type2 = new TypeToken<List<DepositListBean>>() {}.getType();
 										</table>
 									</div>
 
-									<div
-										ng-show="tabSId=='0' ? LS.length<5 : (LS|filter:{SId:tabSId}).length<5 ">
+									<div ng-show="tabSId=='0' ? LS.length<5 : (LS|filter:{SId:tabSId}).length<5 ">
 										<table width="100%" cellpadding="0" cellspacing="0">
 
 											<tbody>
 
-												<tr ng-if="tabSId==ls.SId||tabSId=='0'"
-													ng-repeat="ls in LS | orderBy:'HT' ">
+												<tr ng-if="tabSId==ls.SId||tabSId=='0'" ng-init="oIndex = $index" ng-repeat="ls in LS">
 													<td>
-														<table width="100%" cellpadding="0" cellspacing="0"
-															class="board_table_1_1">
+														<table width="100%" cellpadding="0" cellspacing="0" class="board_table_1_1" ng-class="{'on':oIndex%2=='0'}">
 															<tr ng-if="ls.SusS">
-																<td width="28%" class="board_bet_home_1"
-																	ng-bind="ls.HT.substring(0,10)"></td>
-																<td width="28%" class="board_bet_expedition_1"
-																	ng-bind="ls.AT.substring(0,10)"></td>
-																<td width="12%" class="board_bet_victory_1"><i
-																	class='fa fa-fw fa-lock'></i></td>
-																<td width="12%" class="board_bet_draw_1"><i
-																	class='fa fa-fw fa-lock'></i></td>
-																<td width="12%" class="board_bet_loss_1"><i
-																	class='fa fa-fw fa-lock'></i></td>
-																<td width="8%" class="board_bet_score_1"><i
-																	class='fa fa-fw fa-lock'></i></td>
+																<td width="28%" class="board_bet_home_2" ng-bind="ls.HT.substring(0,10)"></td>
+																<td width="28%" class="board_bet_expedition_2" ng-bind="ls.AT.substring(0,10)"></td>
+																<td width="12%" class="board_bet_victory_1"><i class='fa fa-fw fa-lock'></i></td>
+																<td width="12%" class="board_bet_draw_1"><i class='fa fa-fw fa-lock'></i></td>
+																<td width="12%" class="board_bet_loss_1"><i class='fa fa-fw fa-lock'></i></td>
+																<td width="8%" class="board_bet_score_1"><i class='fa fa-fw fa-lock'></i></td>
 															</tr>
 
-															<tr ng-if="!ls.SusS && ls.SusM" style="cursor: pointer"
-																ng-click="vM('2',ls.SId,ls.MId)">
-																<td width="28%" class="board_bet_home_1"
-																	ng-bind="ls.HT.substring(0,10)"></td>
-																<td width="28%" class="board_bet_expedition_1"
-																	ng-bind="ls.AT.substring(0,10)"></td>
-																<td width="12%" class="board_bet_victory_1"><i
-																	class='fa fa-fw fa-lock'></i></td>
-																<td width="12%" class="board_bet_draw_1"><i
-																	class='fa fa-fw fa-lock'></i></td>
-																<td width="12%" class="board_bet_victory_1"><i
-																	class='fa fa-fw fa-lock'></i></td>
-																<td width="8%" class="board_bet_score_1">+{{(LMKc|filter:{M:ls.MId,S:false,V:true}).length
-																	}}</td>
+															<tr ng-if="!ls.SusS && ls.SusM" style="cursor: pointer" ng-click="vM('2',ls.SId,ls.MId)">
+																<td width="28%" class="board_bet_home_2" ng-bind="ls.HT.substring(0,10)"></td>
+																<td width="28%" class="board_bet_expedition_2" ng-bind="ls.AT.substring(0,10)"></td>
+																<td width="12%" class="board_bet_victory_1"><i class='fa fa-fw fa-lock'></i></td>
+																<td width="12%" class="board_bet_draw_1"><i class='fa fa-fw fa-lock'></i></td>
+																<td width="12%" class="board_bet_victory_1"><i class='fa fa-fw fa-lock'></i></td>
+																<td width="8%" class="board_bet_score_1">+{{(LMKc|filter:{M:ls.MId,S:false,V:true}).length}}</td>
 															</tr>
 
-															<tr ng-if="!ls.SusS && !ls.SusM" style="cursor: pointer"
-																ng-click="vM('2',ls.SId,ls.MId)">
-																<td width="28%" class="board_bet_home_1"
-																	ng-bind="ls.HT.substring(0,10)"></td>
-																<td width="28%" class="board_bet_expedition_1"
-																	ng-bind="ls.AT.substring(0,10)"></td>
+															<tr ng-if="!ls.SusS && !ls.SusM" style="cursor: pointer" ng-click="vM('2',ls.SId,ls.MId)">
+																<td width="28%" class="board_bet_home_2"ng-bind="ls.HT.substring(0,10)"></td>
+																<td width="28%" class="board_bet_expedition_2" ng-bind="ls.AT.substring(0,10)"></td>
 																<td width="12%" class="board_bet_victory_1">
 																	<div ng-show="ls.BW1P<ls.W1P">
-																		<i class="fa fa-fw fa-chevron-up" style="color: green"></i><b
-																			class="font_002">{{ls.W1P}}</b>
+																		<i class="fa fa-fw fa-chevron-up" style="color: green"></i><span class="font_002">{{ls.W1P}}</span>
 																	</div>
 																	<div ng-show="ls.BW1P>ls.W1P">
-																		<i class="fa fa-fw fa-chevron-down" style="color: red"></i><b
-																			class="font_002">{{ls.W1P}}</b>
+																		<i class="fa fa-fw fa-chevron-down" style="color: red"></i><span class="font_002">{{ls.W1P}}</span>
 																	</div>
-																	<div ng-show="ls.BW1P==ls.W1P">
-																		<b class="font_002">{{ls.W1P}}</b>
-																	</div>
+																	<div ng-show="ls.BW1P==ls.W1P"><span class="font_002">{{ls.W1P}}</span></div>
 																</td>
 
 																<td width="12%" class="board_bet_draw_1">
 																	<div ng-show="ls.BXP<ls.XP">
-																		<i class="fa fa-fw fa-chevron-up" style="color: green"></i><b
-																			class="font_002">{{ls.XP}}</b>
+																		<i class="fa fa-fw fa-chevron-up" style="color: green"></i><span class="font_002">{{ls.XP}}</span>
 																	</div>
 																	<div ng-show="ls.BXP>ls.XP">
-																		<i class="fa fa-fw fa-chevron-down" style="color: red"></i><b
-																			class="font_002">{{ls.XP}}</b>
+																		<i class="fa fa-fw fa-chevron-down" style="color: red"></i><span class="font_002">{{ls.XP}}</span>
 																	</div>
-																	<div ng-show="ls.BXP==ls.XP">
-																		<b class="font_002">{{ls.XP}}</b>
-																	</div>
+																	<div ng-show="ls.BXP==ls.XP"><span class="font_002">{{ls.XP}}</span></div>
 																</td>
 
 																<td width="12%" class="board_bet_loss_1">
 																	<div ng-show="ls.BW2P<ls.W2P">
-																		<i class="fa fa-fw fa-chevron-up" style="color: green"></i><b
-																			class="font_002">{{ls.W2P}}</b>
+																		<i class="fa fa-fw fa-chevron-up" style="color: green"></i><span class="font_002">{{ls.W2P}}</span>
 																	</div>
 																	<div ng-show="ls.BW2P>ls.W2P">
-																		<i class="fa fa-fw fa-chevron-down" style="color: red"></i><b
-																			class="font_002">{{ls.W2P}}</b>
+																		<i class="fa fa-fw fa-chevron-down" style="color: red"></i><span class="font_002">{{ls.W2P}}</span>
 																	</div>
-																	<div ng-show="ls.BW2P==ls.W2P">
-																		<b class="font_002">{{ls.W2P}}</b>
-																	</div>
+																	<div ng-show="ls.BW2P==ls.W2P"><span class="font_002">{{ls.W2P}}</span></div>
 																</td>
 
-																<td width="8%" class="board_bet_score_1">+{{(LMKc|filter:{M:ls.MId,S:false,V:true}).length
-																	}}</td>
+																<td width="8%" class="board_bet_score_1">+{{(LMKc|filter:{M:ls.MId,S:false,V:true}).length}}</td>
 
 															</tr>
 
@@ -1715,7 +1581,27 @@ Type type2 = new TypeToken<List<DepositListBean>>() {}.getType();
 											</tbody>
 										</table>
 									</div>
+									
+									
+									<div ng-show="tabSId=='0' ? LS.length<1 : (LS|filter:{SId:tabSId}).length<1 ">
+										<table width="100%" cellpadding="0" cellspacing="0">
 
+											<tbody>
+
+												<tr>
+													<td>
+														<table width="100%" cellpadding="0" cellspacing="0">
+															<tr>
+																<td style="padding:30px 0 10px 0; width:100%; heigth:100px; text-align:center;">현재 진행중인 경기가 없습니다. </td>															
+															</tr>
+														</table>
+													</td>
+												</tr>
+
+											</tbody>
+										</table>
+									</div>
+									
 
 								</div>
 
@@ -1767,20 +1653,15 @@ Type type2 = new TypeToken<List<DepositListBean>>() {}.getType();
 											style="cursor: pointer" ng-click="getPM('0',TM)">&nbsp;&nbsp;&nbsp;전체
 												&nbsp;&nbsp;&nbsp; </a></li>
 										<li><a ng-class="{tabulous_active:PMSD=='1'}"
-											style="cursor: pointer" ng-click="getPM('1',TM)"><img
-												src="/images/main_icon_game_1.png"> 축구</a></li>
+											style="cursor: pointer" ng-click="getPM('1',TM)"><img src="/images/sport_m/1.png" width="15"> 축구</a></li>
 										<li><a ng-class="{tabulous_active:PMSD=='3'}"
-											style="cursor: pointer" ng-click="getPM('3',TM)"><img
-												src="/images/main_icon_game_3.png"> 농구</a></li>
+											style="cursor: pointer" ng-click="getPM('3',TM)"><img src="/images/sport_m/3.png" width="15"> 농구</a></li>
 										<li><a ng-class="{tabulous_active:PMSD=='11'}"
-											style="cursor: pointer" ng-click="getPM('11',TM)"><img
-												src="/images/main_icon_game_11.png"> 야구</a></li>
+											style="cursor: pointer" ng-click="getPM('11',TM)"><img src="/images/sport_m/11.png" width="15"> 야구</a></li>
 										<li><a ng-class="{tabulous_active:PMSD=='5'}"
-											style="cursor: pointer" ng-click="getPM('5',TM)"><img
-												src="/images/main_icon_game_5.png"> 배구</a></li>
+											style="cursor: pointer" ng-click="getPM('5',TM)"><img src="/images/sport_m/5.png" width="15"> 배구</a></li>
 										<li><a ng-class="{tabulous_active:PMSD=='4'}"
-											style="cursor: pointer" ng-click="getPM('4',TM)"><img
-												src="/images/main_icon_game_4.png"> 테니스</a></li>
+											style="cursor: pointer" ng-click="getPM('4',TM)"><img src="/images/sport_m/4.png" width="15"> 테니스</a></li>
 									</ul>
 								</div>
 
@@ -1799,114 +1680,86 @@ Type type2 = new TypeToken<List<DepositListBean>>() {}.getType();
 								</table>
 
 
-								<div id="pm_spin" class="sk-circle">
-									<div class="sk-circle1 sk-child"></div>
-									<div class="sk-circle2 sk-child"></div>
-									<div class="sk-circle3 sk-child"></div>
-									<div class="sk-circle4 sk-child"></div>
-									<div class="sk-circle5 sk-child"></div>
-									<div class="sk-circle6 sk-child"></div>
-									<div class="sk-circle7 sk-child"></div>
-									<div class="sk-circle8 sk-child"></div>
-									<div class="sk-circle9 sk-child"></div>
-									<div class="sk-circle10 sk-child"></div>
-									<div class="sk-circle11 sk-child"></div>
-									<div class="sk-circle12 sk-child"></div>
+								<div id="pm_spin" class="sk-fading-circle_s">
+									<div class="sk-circle1 sk-circle"></div>
+									<div class="sk-circle2 sk-circle"></div>
+									<div class="sk-circle3 sk-circle"></div>
+									<div class="sk-circle4 sk-circle"></div>
+									<div class="sk-circle5 sk-circle"></div>
+									<div class="sk-circle6 sk-circle"></div>
+									<div class="sk-circle7 sk-circle"></div>
+									<div class="sk-circle8 sk-circle"></div>
+									<div class="sk-circle9 sk-circle"></div>
+									<div class="sk-circle10 sk-circle"></div>
+									<div class="sk-circle11 sk-circle"></div>
+									<div class="sk-circle12 sk-circle"></div>
 								</div>
 
 								<div ng-init="pm_load()" style="display: none;" id="spin1"
 									class="animate-top">
 
-									<div
-										ng-show="PMSD=='0' ? PS.length>4 : (PS|filter:{SId:PMSD}).length>4 ">
-										<table id="table3" width="100%" cellpadding="0" cellspacing="0"
-											class="myTable2">
+									<div ng-show="PMSD=='0' ? PS.length>4 : (PS|filter:{SId:PMSD}).length>4 ">
+										<table id="table3" width="100%" cellpadding="0" cellspacing="0" class="myTable2">
 											<!--<table id="table" width="100%" cellpadding="0" cellspacing="0">-->
 											<tbody>
 
-												<tr class="active" ng-repeat="ps in PS | orderBy:'Dt' ">
+												<tr class="active" ng-init="oIndex = $index" ng-repeat="ps in PS | orderBy:'Dt' ">
 													<td>
-														<table width="100%" cellpadding="0" cellspacing="0"
-															class="board_table_2">
+														<table width="100%" cellpadding="0" cellspacing="0" class="board_table_2" ng-class="{'on':oIndex%2=='0'}">
 
-															<tr ng-if="ps.SusS">
-																<td width="13%" class="board_bet_time" ng-bind="ps.Dt"></td>
-																<td width="22%" class="board_bet_home"
-																	ng-bind="ps.HT.substring(0,8)"></td>
-																<td width="22%" class="board_bet_expedition"
-																	ng-bind="ps.AT.substring(0,8)"></td>
-																<td width="12%" class="board_bet_victory"><i
-																	class='fa fa-fw fa-lock'></i></td>
-																<td width="12%" class="board_bet_draw"><i
-																	class='fa fa-fw fa-lock'></i></td>
-																<td width="12%" class="board_bet_loss"><i
-																	class='fa fa-fw fa-lock'></i></td>
-																<td width="7%" class="board_bet_score"><i
-																	class='fa fa-fw fa-lock'></i></td>
+															<tr  ng-if="ps.SusS">
+																<td width="13%" class="board_bet_time_1" ng-bind="ps.Dt"></td>
+																<td width="22%" class="board_bet_home_1" ng-bind="ps.HT.substring(0,8)"></td>
+																<td width="22%" class="board_bet_expedition_1" ng-bind="ps.AT.substring(0,8)"></td>
+																<td width="12%" class="board_bet_victory_1"><i class='fa fa-fw fa-lock'></i></td>
+																<td width="12%" class="board_bet_draw_1"><i class='fa fa-fw fa-lock'></i></td>
+																<td width="12%" class="board_bet_loss_1"><i class='fa fa-fw fa-lock'></i></td>
+																<td width="7%" class="board_bet_score_1"><i class='fa fa-fw fa-lock'></i></td>
 															</tr>
 
-															<tr ng-if="!ps.SusS && ps.SusM" style="cursor: pointer"
-																ng-click="vM('3',ps.SId,ps.MId)">
-																<td class="board_bet_time" ng-bind="ps.Dt"></td>
-																<td class="board_bet_home" ng-bind="ps.HT.substring(0,8)"></td>
-																<td class="board_bet_expedition"
-																	ng-bind="ps.AT.substring(0,8)"></td>
-																<td class="board_bet_victory"><i
-																	class='fa fa-fw fa-lock'></i></td>
-																<td class="board_bet_draw"><i class='fa fa-fw fa-lock'></i></td>
-																<td class="board_bet_victory"><i
-																	class='fa fa-fw fa-lock'></i></td>
-																<td class="board_bet_score">+{{(PMKc|filter:{M:ps.MId,S:false,V:true}).length
-																	}}</td>
+															<tr ng-if="!ps.SusS && ps.SusM" style="cursor: pointer" ng-click="vM('3',ps.SId,ps.MId)">
+																<td class="board_bet_time_1" ng-bind="ps.Dt"></td>
+																<td class="board_bet_home_1" ng-bind="ps.HT.substring(0,8)"></td>
+																<td class="board_bet_expedition_1" ng-bind="ps.AT.substring(0,8)"></td>
+																<td class="board_bet_victory_1"><i class='fa fa-fw fa-lock'></i></td>
+																<td class="board_bet_draw_1"><i class='fa fa-fw fa-lock'></i></td>
+																<td class="board_bet_loss_1" ><i class='fa fa-fw fa-lock'></i></td>
+																<td class="board_bet_score_1">+{{(PMKc|filter:{M:ps.MId,S:false,V:true}).length}}</td>
 															</tr>
 
-															<tr ng-if="!ps.SusS && !ps.SusM" style="cursor: pointer"
-																ng-click="vM('3',ps.SId,ps.MId)">
-																<td class="board_bet_time" ng-bind="ps.Dt"></td>
-																<td class="board_bet_home" ng-bind="ps.HT.substring(0,8)"></td>
-																<td class="board_bet_expedition"
-																	ng-bind="ps.AT.substring(0,8)"></td>
-																<td class="board_bet_victory">
+															<tr ng-if="!ps.SusS && !ps.SusM" style="cursor: pointer" ng-click="vM('3',ps.SId,ps.MId)">
+																<td class="board_bet_time_1" ng-bind="ps.Dt"></td>
+																<td class="board_bet_home_1" ng-bind="ps.HT.substring(0,8)"></td>
+																<td class="board_bet_expedition_1" ng-bind="ps.AT.substring(0,8)"></td>
+																<td class="board_bet_victory_1">
 																	<div ng-show="ps.BW1P<ps.W1P">
-																		<i class="fa fa-fw fa-chevron-up" style="color: green"></i><b
-																			class="font_002">{{ps.W1P}}</b>
+																		<i class="fa fa-fw fa-chevron-up" style="color: green"></i><span class="font_002">{{ps.W1P}}</span>
 																	</div>
 																	<div ng-show="ps.BW1P>ps.W1P">
-																		<i class="fa fa-fw fa-chevron-down" style="color: red"></i><b
-																			class="font_002">{{ps.W1P}}</b>
+																		<i class="fa fa-fw fa-chevron-down" style="color: red"></i><span class="font_002">{{ps.W1P}}</span>
 																	</div>
-																	<div ng-show="ps.BW1P==ps.W1P">
-																		<b class="font_002">{{ps.W1P}}</b>
-																	</div>
+																	<div ng-show="ps.BW1P==ps.W1P"><span class="font_002">{{ps.W1P}}</span></div>
 																</td>
-																<td class="board_bet_draw">
+																
+																<td class="board_bet_draw_1">
 																	<div ng-show="ps.BXP<ps.XP">
-																		<i class="fa fa-fw fa-chevron-up" style="color: green"></i><b
-																			class="font_002">{{ps.XP}}</b>
+																		<i class="fa fa-fw fa-chevron-up" style="color: green"></i><span class="font_002">{{ps.XP}}</span>
 																	</div>
 																	<div ng-show="ps.BXP>ps.XP">
-																		<i class="fa fa-fw fa-chevron-down" style="color: red"></i><b
-																			class="font_002">{{ps.XP}}</b>
+																		<i class="fa fa-fw fa-chevron-down" style="color: red"></i><span class="font_002">{{ps.XP}}</span>
 																	</div>
-																	<div ng-show="ps.BXP==ps.XP">
-																		<b class="font_002">{{ps.XP}}</b>
-																	</div>
+																	<div ng-show="ps.BXP==ps.XP"><span class="font_002">{{ps.XP}}</span></div>
 																</td>
-																<td class="board_bet_loss">
+																<td class="board_bet_loss_1">
 																	<div ng-show="ps.BW2P<ps.W2P">
-																		<i class="fa fa-fw fa-chevron-up" style="color: green"></i><b
-																			class="font_002">{{ps.W2P}}</b>
+																		<i class="fa fa-fw fa-chevron-up" style="color: green"></i><span class="font_002">{{ps.W2P}}</span>
 																	</div>
 																	<div ng-show="ps.BW2P>ps.W2P">
-																		<i class="fa fa-fw fa-chevron-down" style="color: red"></i><b
-																			class="font_002">{{ps.W2P}}</b>
+																		<i class="fa fa-fw fa-chevron-down" style="color: red"></i><span class="font_002">{{ps.W2P}}</span>
 																	</div>
-																	<div ng-show="ps.BW2P==ps.W2P">
-																		<b class="font_002">{{ps.W2P}}</b>
-																	</div>
+																	<div ng-show="ps.BW2P==ps.W2P"><span class="font_002">{{ps.W2P}}</span></div>
 																</td>
-																<td class="board_bet_score">+{{(PMKc|filter:{M:ps.MId,S:false,V:true}).length
-																	}}</td>
+																<td class="board_bet_score_1">+{{(PMKc|filter:{M:ps.MId,S:false,V:true}).length}}</td>
 															</tr>
 
 														</table>
@@ -1922,90 +1775,73 @@ Type type2 = new TypeToken<List<DepositListBean>>() {}.getType();
 											<!--<table id="table" width="100%" cellpadding="0" cellspacing="0">-->
 											<tbody>
 
-												<tr class="active" ng-if="PS.length!=0"
-													ng-repeat="ps in PS | orderBy:'Dt'">
+												<tr class="active" ng-if="PS.length!=0" ng-init="oIndex = $index"  ng-repeat="ps in PS | orderBy:'Dt'">
 													<td>
-														<table ng-show="PS.length!=0" width="100%" cellpadding="0"
-															cellspacing="0" class="board_table_2">
+														<table ng-show="PS.length!=0" width="100%" cellpadding="0" cellspacing="0" class="board_table_2" ng-class="{'on':oIndex%2=='0'}">
 
 															<tr ng-if="ps.SusS">
-																<td width="13%" class="board_bet_time" ng-bind="ps.Dt"></td>
-																<td width="22%" class="board_bet_home"
+																<td width="13%" class="board_bet_time_1" ng-bind="ps.Dt"></td>
+																<td width="22%" class="board_bet_home_1"
 																	ng-bind="ps.HT.substring(0,8)"></td>
-																<td width="22%" class="board_bet_expedition"
+																<td width="22%" class="board_bet_expedition_1"
 																	ng-bind="ps.AT.substring(0,8)"></td>
-																<td width="12%" class="board_bet_victory"><i
+																<td width="12%" class="board_bet_victory_1"><i
 																	class='fa fa-fw fa-lock'></i></td>
-																<td width="12%" class="board_bet_draw"><i
+																<td width="12%" class="board_bet_draw_1"><i
 																	class='fa fa-fw fa-lock'></i></td>
-																<td width="12%" class="board_bet_loss"><i
+																<td width="12%" class="board_bet_loss_1"><i
 																	class='fa fa-fw fa-lock'></i></td>
-																<td width="7%" class="board_bet_score"><i
-																	class='fa fa-fw fa-lock'></i></td>
+																<td width="7%" class="board_bet_score_1"><i class='fa fa-fw fa-lock'></i></td>
 															</tr>
 
 															<tr ng-if="!ps.SusS && ps.SusM" style="cursor: pointer"
 																ng-click="vM('3',ps.SId,ps.MId)">
-																<td class="board_bet_time" ng-bind="ps.Dt"></td>
-																<td class="board_bet_home" ng-bind="ps.HT.substring(0,8)"></td>
-																<td class="board_bet_expedition"
+																<td class="board_bet_time_1" ng-bind="ps.Dt"></td>
+																<td class="board_bet_home_1" ng-bind="ps.HT.substring(0,8)"></td>
+																<td class="board_bet_expedition_1"
 																	ng-bind="ps.AT.substring(0,8)"></td>
-																<td class="board_bet_victory"><i
+																<td class="board_bet_victory_1"><i
 																	class='fa fa-fw fa-lock'></i></td>
-																<td class="board_bet_draw"><i class='fa fa-fw fa-lock'></i></td>
-																<td class="board_bet_victory"><i
+																<td class="board_bet_draw_1"><i class='fa fa-fw fa-lock'></i></td>
+																<td class="board_bet_loss_1"><i
 																	class='fa fa-fw fa-lock'></i></td>
-																<td class="board_bet_score">+{{(PMKc|filter:{M:ps.MId,S:false,V:true}).length
-																	}}</td>
+																<td class="board_bet_score_1">+{{(PMKc|filter:{M:ps.MId,S:false,V:true}).length}}</td>
 															</tr>
 
 															<tr ng-if="!ps.SusS && !ps.SusM" style="cursor: pointer"
 																ng-click="vM('3',ps.SId,ps.MId)">
-																<td class="board_bet_time" ng-bind="ps.Dt"></td>
-																<td class="board_bet_home" ng-bind="ps.HT.substring(0,8)"></td>
-																<td class="board_bet_expedition"
+																<td class="board_bet_time_1" ng-bind="ps.Dt"></td>
+																<td class="board_bet_home_1" ng-bind="ps.HT.substring(0,8)"></td>
+																<td class="board_bet_expedition_1"
 																	ng-bind="ps.AT.substring(0,8)"></td>
-																<td class="board_bet_victory">
+																<td class="board_bet_victory_1">
 																	<div ng-show="ps.BW1P<ps.W1P">
-																		<i class="fa fa-fw fa-chevron-up" style="color: green"></i><b
-																			class="font_002">{{ps.W1P}}</b>
+																		<i class="fa fa-fw fa-chevron-up" style="color: green"></i><span class="font_002">{{ps.W1P}}</span>
 																	</div>
 																	<div ng-show="ps.BW1P>ps.W1P">
-																		<i class="fa fa-fw fa-chevron-down" style="color: red"></i><b
-																			class="font_002">{{ps.W1P}}</b>
+																		<i class="fa fa-fw fa-chevron-down" style="color: red"></i><span class="font_002">{{ps.W1P}}</span>
 																	</div>
-																	<div ng-show="ps.BW1P==ps.W1P">
-																		<b class="font_002">{{ps.W1P}}</b>
-																	</div>
+																	<div ng-show="ps.BW1P==ps.W1P"><span class="font_002">{{ps.W1P}}</span></div>
 																</td>
-																<td class="board_bet_draw">
+																<td class="board_bet_draw_1">
 																	<div ng-show="ps.BXP<ps.XP">
-																		<i class="fa fa-fw fa-chevron-up" style="color: green"></i><b
-																			class="font_002">{{ps.XP}}</b>
+																		<i class="fa fa-fw fa-chevron-up" style="color: green"></i><span class="font_002">{{ps.XP}}</span>
 																	</div>
 																	<div ng-show="ps.BXP>ps.XP">
-																		<i class="fa fa-fw fa-chevron-down" style="color: red"></i><b
-																			class="font_002">{{ps.XP}}</b>
+																		<i class="fa fa-fw fa-chevron-down" style="color: red"></i><span class="font_002">{{ps.XP}}</span>
 																	</div>
-																	<div ng-show="ps.BXP==ps.XP">
-																		<b class="font_002">{{ps.XP}}</b>
-																	</div>
+																	<div ng-show="ps.BXP==ps.XP"> <span class="font_002">{{ps.XP}}</span> </div>
 																</td>
-																<td class="board_bet_loss">
+																<td class="board_bet_loss_1">
 																	<div ng-show="ps.BW2P<ps.W2P">
-																		<i class="fa fa-fw fa-chevron-up" style="color: green"></i><b
-																			class="font_002">{{ps.W2P}}</b>
+																		<i class="fa fa-fw fa-chevron-up" style="color: green"></i><span class="font_002">{{ps.W2P}}</span>
 																	</div>
 																	<div ng-show="ps.BW2P>ps.W2P">
-																		<i class="fa fa-fw fa-chevron-down" style="color: red"></i><b
-																			class="font_002">{{ps.W2P}}</b>
+																		<i class="fa fa-fw fa-chevron-down" style="color: red"></i><span class="font_002">{{ps.W2P}}</span>
 																	</div>
-																	<div ng-show="ps.BW2P==ps.W2P">
-																		<b class="font_002">{{ps.W2P}}</b>
-																	</div>
+																	<div ng-show="ps.BW2P==ps.W2P"><span class="font_002">{{ps.W2P}}</span></div>
 																</td>
-																<td class="board_bet_score">+{{(PMKc|filter:{M:ps.MId,S:false,V:true}).length
-																	}}</td>
+																<td class="board_bet_score_1">+{{(PMKc|filter:{M:ps.MId,S:false,V:true}).length}}</td>
 															</tr>
 
 														</table>
@@ -2030,8 +1866,6 @@ Type type2 = new TypeToken<List<DepositListBean>>() {}.getType();
 				</div>
 			</div>
 			<!-- wrap -->
-
-			
 		</div>
 		<%@ include file="/inc/footer.jsp" %>
 

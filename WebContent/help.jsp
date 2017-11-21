@@ -22,6 +22,9 @@
     background-color:grey;
     color: white;
 }
+#tt1 td{
+text-align: center;
+}
 </style>
 <div id="wrap">
 	<div id="contents_wrap">
@@ -29,6 +32,7 @@
 				<div class="sub_left">
 				<ul class="l_tabs">
 					<li id="ht1"><a href="#l-tab1">베팅 가이드</a></li>
+					<li id="ht5"><a href="#l-tab5">베팅 규정</a></li>
 					<li id="ht2"><a href="#l-tab2">게임 가이드</a></li>
 					<li id="ht3"><a href="#l-tab3">자주 묻는 질문</a></li>
 					<li id="ht4"><a href="#l-tab4">이용약관</a></li>
@@ -93,42 +97,42 @@
 									    </tr>
 									    <tr>
 									        <td rowspan="3">0</td>
-									        <td style="text-align: center">승리</td>
-									        <td style="text-align: center">승리</td>
+									        <td>승리</td>
+									        <td>승리</td>
 									    </tr>
 									    <tr>
 									        <td>무승부</td>
-									        <td style="text-align: center">1배처리</td>
+									        <td>1배처리</td>
 									    </tr>
 									    <tr>
 									        <td>패</td>
-									        <td style="text-align: center">패</td>
+									        <td>패</td>
 									    </tr>
 									    <tr>
 									        <td rowspan="3">– 0.25(0--0.5)</td>
-									        <td style="text-align: center">승리</td>
-									        <td style="text-align: center">승리</td>
+									        <td>승리</td>
+									        <td>승리</td>
 									    </tr>
 									    <tr>
 									        <td>무승부</td>
-									        <td style="text-align: center">절반 패배 (배팅금의 50%)</td>
+									        <td>절반 패배 (배팅금의 50%)</td>
 									    </tr>
 									    <tr>
 									        <td>패</td>
-									        <td style="text-align: center">패</td>
+									        <td>패</td>
 									    </tr>
 									    <tr>
 									        <td rowspan="3">– 0.50(-0.25--0.75)</td>
-									        <td style="text-align: center" >승리</td>
-									        <td style="text-align: center">승리</td>
+									        <td >승리</td>
+									        <td>승리</td>
 									    </tr>
 									    <tr>
 									        <td>무승부</td>
-									        <td style="text-align: center">패</td>
+									        <td>패</td>
 									    </tr>
 									    <tr>
 									        <td>패</td>
-									        <td style="text-align: center">패</td>
+									        <td>패</td>
 									    </tr>
 									</table>
 									<br>
@@ -140,101 +144,732 @@
 									    </tr>
 									    <tr>
 									        <td rowspan="3">0</td>
-									        <td style="text-align: center">승리</td>
-									        <td style="text-align: center">승리</td>
+									        <td>승리</td>
+									        <td>승리</td>
 									    </tr>
 									    <tr>
 									        <td>무승부</td>
-									        <td style="text-align: center">1배처리</td>
+									        <td>1배처리</td>
 									    </tr>
 									    <tr>
 									        <td>패</td>
-									        <td style="text-align: center">패</td>
+									        <td>패</td>
 									    </tr>
 									    <tr>
 									        <td rowspan="3">– 0.25(0--0.5)</td>
-									        <td style="text-align: center">승리</td>
-									        <td style="text-align: center">승리</td>
+									        <td>승리</td>
+									        <td>승리</td>
 									    </tr>
 									    <tr>
 									        <td>무승부</td>
-									        <td style="text-align: center">절반의 승리 (배팅+당첨금의 50%)</td>
+									        <td>절반의 승리 (배팅+당첨금의 50%)</td>
 									    </tr>
 									    <tr>
 									        <td>패</td>
-									        <td style="text-align: center">패</td>
+									        <td>패</td>
 									    </tr>
 									    <tr>
 									        <td rowspan="3">– 0.50(-0.25--0.75)</td>
-									        <td style="text-align: center">승리</td>
-									        <td style="text-align: center">승리</td>
+									        <td>승리</td>
+									        <td>승리</td>
 									    </tr>
 									    <tr>
 									        <td>무승부</td>
-									        <td style="text-align: center">승리</td>
+									        <td>승리</td>
 									    </tr>
 									    <tr>
 									        <td>패</td>
-									        <td style="text-align: center">패</td>
+									        <td>패</td>
 									    </tr>
 									</table>
 									<br>
 									<table id="tt1">
 									    <tr>
-									        <th rowspan="4" style="background-color: grey;">-1.00</th>
+									        <th rowspan="4" style="background-color: grey; text-align: center">-1.00</th>
 									        <th style="text-align: center">2점차에 의해 승리</th>
 									        <th>승리</th>
 									    </tr>
 									    <tr>
 									        <td>1점차에 의해 승리</td>
-									        <td style="text-align: center">1배처리</td>
+									        <td>1배처리</td>
 									    </tr>
 									    <tr>
 									        <td>무승부</td>
-									        <td style="text-align: center">패</td>
+									        <td>패</td>
 									    </tr>
 									    <tr>
 									        <td>패</td>
-									        <td style="text-align: center">패</td>
+									        <td>패</td>
 									    </tr>
 									    <tr>
-									         <th rowspan="4" style="background-color: #191a1b;">-1.25</th>
-									        <td style="text-align: center">2점차에 의해 승리</td>
-									        <td style="text-align: center">승리</td>
+									         <th rowspan="4" style="background-color: #191a1b; text-align: center">-1.25</th>
+									        <td>2점차에 의해 승리</td>
+									        <td>승리</td>
 									    </tr>
 									    <tr>
 									        <td>1점차에 의해 승리</td>
-									        <td style="text-align: center">절반 패배 (배팅금의 50%)</td>
+									        <td>절반 패배 (배팅금의 50%)</td>
 									    </tr>
 									    <tr>
 									        <td>무승부</td>
-									        <td style="text-align: center">패</td>
+									        <td>패</td>
 									    </tr>
 									    <tr>
 									        <td>패</td>
-									        <td style="text-align: center">패</td>
+									        <td>패</td>
 									    </tr>
 									    <tr>
-									         <th rowspan="4" style="background-color: #191a1b;">– 1.50</th>
-									        <td style="text-align: center">2점차에 의해 승리</td>
-									        <td style="text-align: center">승리</td>
+									         <th rowspan="4" style="background-color: #191a1b; text-align: center">– 1.50</th>
+									        <td>2점차에 의해 승리</td>
+									        <td>승리</td>
 									    </tr>
 									    <tr>
 									        <td>1점차에 의해 승리</td>
-									        <td style="text-align: center">패</td>
+									        <td>패</td>
 									    </tr>
 									    <tr>
 									        <td>무승부</td>
-									        <td style="text-align: center">패</td>
+									        <td>패</td>
 									    </tr>
 									    <tr>
 									        <td>패</td>
-									        <td style="text-align: center">패</td>
+									        <td>패</td>
 									    </tr>
 									</table>
 								</div>
 							</div>
 						</li>
+
+					</ul>
+					</div>
+					<div id="l-tab2" class="left_tab_con">
+						<ul class="smk_accordion">
+							<li>
+								<div class="acc_head"><h3>Baccarat (바카라)</h3></div>
+								<div class="acc_content">
+									<div class="acc_content_in_2">
+										<p>가장 드라마틱한 테이블 게임</p>
+										<p style="font-weight: bold;">고객은 플레이어(Player)와 뱅커(Banker) 중 어느 핸드가 이길지 예상하여 베팅을 합니다. </p>
+										<p style="font-weight: bold;">비길 것을 예상하여 타이(Tie)에 함께 베팅하기도 합니다.</p>
+										<br><br>
+										<p>베팅은 카지노가 정한 리미트(Limit, 베팅 가능 최저 금액과 최고 금액, 게임 옵션 참고) 범위 내에서 하시면 됩니다.</p>
+										<p>딜러가 드로잉 룰에 따라 플레이어와 뱅커에 카드를 드로잉하여 플레이어, 뱅커 중 9에 가까운 쪽이 이깁니다.</p>
+										<p>플레이어, 뱅커의 각 2장 혹은 3장의 합으로 게임 승패가 결정됩니다.</p>
+										<p>TIP 많은 분들이 플레이어는 고객, 뱅커는 카지노의 영역으로 오해하는데, 고객이 플레이어와 뱅커 중 이기는 쪽을</p>
+										<p>예상하여 베팅을 하는 게임입니다. 고객은 플레이어와 뱅커 어느 쪽이든 베팅 할 수 있습니다.</p>
+										<br><br>
+										<p>이긴 쪽에 베팅된 금액은 고객에게 지급하고, 진 쪽에 베팅된 금액은 수거합니다.</p>
+										<p>플레이어가 이길 경우 베팅한 금액만큼(100%) 페이하고, 뱅커가 이길 경우 5%의 커미션을 공제(95%)하고 지급합니다.</p>
+										<br><br>
+										<p>비길 경우 Tie에 베팅한 고객에게 베팅액의 8배를 드리며, 이때 원금은 수거하지 않습니다.</p>
+										<br><br>
+										<p style="font-weight: bold;">카드의 가치</p>
+										<p>10과 그림카드(KING, QUEEN, JACK)는 모두 0으로 계산됩니다. 그 외의 카드는 표시된 숫자로 계산됩니다. A 는 1입니다.</p>
+										<br><br>
+										<p style="font-weight: bold;">카드의 순위</p>
+										<p style="font-weight: bold;">NATURAL</p>
+										<p>가장 높은 순위는 내추럴(Natural)입니다. 플레이어나 뱅커 사이드 중 어느 쪽이든 두 장의 합이 9, 8이면 게임은 종료됩니다.(4장으로 게임 종료)</p>
+										<p style="font-weight: bold;">STAND</p>
+										<p>플레이어 두 장의 합이 7, 6일 때, 뱅커 두 장의 합이 7일 때 스탠드(Stand)인데, 어느 쪽이든 스탠드일 경우 더 이상 카드를 받지 않고 스탠드합니다.</p>
+										<p>양쪽이 전부 스탠드일 때 추가 카드 드로잉이 없이 게임이 종료됩니다.(4장 혹은 5장으로 게임 종료)</p>
+										<p style="font-weight: bold;">NOTHING</p>
+										<p>플레이어, 뱅커 모두 스탠드보다 낮을 경우 플레이어가 먼저 한 장을 받는데, 이때 나온 플레이어 카드의 가치에 따라 게임이 종료되기도 하고, 뱅커 카드를 한 장 더 받고 종료되기도 합니다.</p>
+										<p>(5장 혹은 6장으로 종료)</p>
+										<br><br>
+										<p style="font-weight: bold;">페어 벳(Pair bet)</p>
+										<p>플레이어 혹은 뱅커 사이드에 처음 드로잉 된 2장의 카드(Initial two cards)가 같은 가치를 지닌 경우 (One Pair), 페어벳 베팅을 한 고객에게 11배를 지급합니다.</p>
+										<p>페어벳 베팅을 했는데 페어가 없는 경우에는 페어벳 베팅금을 수거하며, 페어벳은 플레이어 페어벳, 뱅커 페어벳으로 각각 나뉘어져 있어 원하시는 쪽에 베팅하실 수 있습니다.</p>
+										<p>게임에 참가 중인 다른 고객이 베팅하지 않은 금액만큼 추가 베팅이 가능합니다.</p>
+										<p>10 – J, J – K, Q – K 등과 같이 바카라에서의 가치는 0으로 같지만 Pair가 아니기 때문에 인정되지 않습니다.</p>
+										<p>오리지날 베팅 없이 타이나 페어벳 만으로 게임 참여가 가능합니다. 이 때, 카드는 오픈으로 뽑습니다.</p>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="acc_head"><h3>BlackJack (블랙잭)</h3></div>
+								<div class="acc_content">
+									<div class="acc_content_in_2">
+										<p>가장 인기가 많은 카지노 게임</p>
+										<p>게임 개요</p>
+										<p>블랙잭은 고객들이 가장 선호하는 카지노 게임의 하나로, </p>
+										<p>21 또는 21에 가까운 숫자를 만들어 딜러 보다 높으면 이기는 게임입니다.</p>
+										<p>고객에게 드로잉 된 최초 카드 2장(Initial two cards)의 높낮이에 따라 추가 카드를 받거나(Hit) </p>
+										<p>멈출 수 있으며 (Stay), 딜러보다 불리하다고 판단되면 베팅 금액의 절반을 포기하는 </p>
+										<p>조건으로 게임을 종료할 수 있습니다.</p>
+										<p>(이때 Hit, Stay, Surrender는 반드시 정해진 핸드 시그널로 표시해야 합니다.)</p>
+										<p>딜러는 이니셜 투 카드가 16 이하일 때, 17이상이 될 때까지 카드를 받아야 하며, 딜러와 </p>
+										<p>플레이어 모두 21을 초과하면 지게</p>
+										<p>됩니다. 이를 버스트(Bust)라고 합니다.</p>
+										<p>플레이어가 버스트하게 되면 해당 게임은 종료되며, 딜러가 버스트하게 되는 경우에는 </p>
+										<p>버스트하지 않은 플레이어가 이기게 됩니다. 플레이어들의 카드와 비교하여, 딜러보다 높은</p>
+										<p>카드의 베팅금액은 지급하고, 딜러보다 낮은 카드의 베팅 금액은 수거하며, 딜러와 </p>
+										<p>플레이어의 카드가 같을 경우 비기게 되어 지급, 수거 없이 게임을 종료시킵니다.</p>
+										<p>이니셜 투 카드 (처음 2장의 카드)의 조합이『A + any 10(10,J,Q,K)』으로, 합이 '21' 인 </p>
+										<p>경우가 가장 높은 카드이며, 이를 블랙잭이라 합니다. 플레이어가 블랙잭일 경우 1.5배를</p>
+										<p>지급하며, 딜러와 플레이어 모두 블랙잭일 경우 비기게 되며, 딜러가 블랙잭일 경우에는 </p>
+										<p>딜러가 이기게 됩니다.</p>
+										<br><br>
+										<p style="font-weight: bold;">카드의 가치</p>
+										<p>“ACE”는 1 또는 11로 계산됩니다. </p>
+										<p>그림카드 (KING, QUEEN, JACK)는 모두 10으로 계산되며, 그 외의 카드는 표시된 숫자로 계산됩니다</p>
+										<br>
+										<p>이니셜 투카드로 Ace와 10 카드를 받을 경우 이를 블랙잭이라 하며, 이니셜 투카드에 Ace가 있어 11로 카운팅이 가능한 경우 소프트 핸드라고 합니다.</p>
+										<br>
+										<p>카드를 더 받고자 할 때, Hit버튼을 클릭하시면 됩니다.</p>
+										<p>추가로 카드를 받지 않고자 할 때, Stay버튼을 클릭하시면 됩니다.</p>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="acc_head"><h3>Roulette (룰렛)목</h3></div>
+								<div class="acc_content">
+									<div class="acc_content_in_2">
+										<p>누구나 쉽게 할 수 있는 카지노 게임</p>
+										<p>게임 개요</p>
+										<p style="font-weight: bolder;">룰렛은 특별한 규칙이 없다고 할 수 있는 게임으로 초보자라도 쉽게 즐길 수 있기 때문에 가장 대중적인카지노 게임 중 하나입니다. </p>
+										<p style="font-weight: bolder;">딜러가 회전시킨 볼이 회전하고 있는 휠(회전판) 상의 어떤 번호(번호/색깔 등)에 낙착할 것인가를 알아맞추는 게임입니다.</p>
+										<p>휠 상의 번호들은 테이블 레이아웃에 표시가 되어 있으며, 이곳에 원하는 곳에 베팅하면 됩니다.</p>
+										<p>맞춘 칩스에 대해서는 각각의 배당률에 따라 배당을 받게 되며, 맞추지 못한 칩스는 수거되어 잃게 됩니다.</p>
+										<br>
+										<p style="font-weight: bold;">룰렛 베팅의 종류</p>
+										<p style="padding-left: 10px; font-weight: bold; text-decoration: underline"> 컬럼 벳/투엘브넘버 벳 (Column Bet / Twelve Number Bet)칩스를 레이아웃 하단에 위치한  </p>
+										<p style="padding-left: 10px; font-weight: bold; text-decoration: underline">세 개의 공간 중에 선택하여 놓습니다.</p>
+										<p style="padding-left: 10px; font-weight: bold; text-decoration: underline">이 베팅은 해당 공간의 상위 수직선상의 12개 번호를 가리킵니다. (1:2)</p>
+										<br><br>
+										<p style="padding-left: 10px; font-weight: bold; text-decoration: underline">다즌벳 (Dozen Bet)칩스를 레이아웃의 『1st 12』, 『2st 12』, 『3st 12』라고 표시된 지점에 놓습니다.</p>
+										<p style="padding-left: 10px; font-weight: bold; text-decoration: underline">『1st 12』는 1부터 12까지의 숫자를 가르키며, 『2st 12』는 13부터 24, 『3st 12』는 25부터 36까지의 숫자를 가르킵니다. (1:2)</p>
+										<br><br>
+										<p style="padding-left: 10px; font-weight: bold; text-decoration: underline">다즌벳 (Dozen Bet)칩스를 레이아웃의 『1st 12』, 『2st 12』, 『3st 12』라고 표시된 지점에 놓습니다.</p>
+										<p style="padding-left: 10px; font-weight: bold; text-decoration: underline">이븐/아드 넘버 벳 (Even/Odd Number Bet)0과 00를 제외한 레이아웃 상의 모든 번호는 짝수 (Even)와 홀수 (Odd)로 구분됩니다. (1:1)</p>
+										<br><br>
+										<p style="padding-left: 10px; font-weight: bold; text-decoration: underline">칼라 벳 (Color Bet)0과 00를 제외한 레이아웃 상의 모든 번호는 적색 (Red)와 흑색 (Black)으로 구분됩니다. (1:1)</p>
+										<br><br>
+										<p style="padding-left: 10px; font-weight: bold; text-decoration: underline">스트레이트 벳 (Straight Bet) 싱글 넘버 벳 (Single Number Bet)한 번호를 겨냥하여 베팅합니다. (1:35)</p>
+										<br><br>
+										<p style="padding-left: 10px; font-weight: bold; text-decoration: underline">스플릿 벳 (Split Bet) 투넘버 벳 (Two Number Bet)두 번호를 겨냥하여 칩스를 두 번호 사이의 선 위에 베팅합니다. (1:17)</p>
+										<br><br>
+										<p style="padding-left: 10px; font-weight: bold; text-decoration: underline">스트릿 벳 (Street Bet) 쓰리 넘버 벳 (Three Number Bet)세 번호를 겨냥하여 칩스를 레이아웃을 가로지르는 3가지 번호가 있는 선 위에 베팅합니다. (1:11)</p>
+										<br><br>
+										<p style="padding-left: 10px; font-weight: bold; text-decoration: underline">스퀘어 벳 (Square Bet) 코너벳 (Corner Bet) 포넘버 벳(Four Number Bet)네 번호를 겨냥하여 네 가지 번호가 교차하는 중간선 위에 베팅합니다. (1:8)</p>
+										<br><br>
+										<p style="padding-left: 10px; font-weight: bold; text-decoration: underline">파이브넘버 벳 (Five Number Bet)칩스를 1,2,3,0,00을 분리시키는 모서리 지점에 베팅합니다. (1:6)</p>
+										<br><br>
+										<p style="padding-left: 10px; font-weight: bold; text-decoration: underline">라인 벳 (Line Bet) 식스 넘버 벳 (Six Number Bet)칩스를 두 개의 Street 벳이 교차하는 선 위에 놓습니다. (1:5)</p>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div id="l-tab3" class="left_tab_con">
+						<ul class="smk_accordion">
+								<li>
+									<div class="acc_head"><h3>회원 가입 관련</h3></div>
+									<div class="acc_content">
+										<div class="acc_content_in_2">
+											<p style="font-weight:bold">Q 아이벳 회원 가입은 어떻게 하나요?</p>
+											<br>
+											<p>사이트 우측 상단에 “회원가입” 클릭후 필요한 정보를 작성 후 가입하시면 됩니다.
+											회원 가입은 해당 국가의 법적나이 19세 이상만 가능하며 유효한 휴대폰 번호를 입력하셔야 합니다.</p>
+											<br><br>
+											<p style="font-weight:bold">Q 사이트에 가입하면 어떤 의무사항이 있나요?</p>
+											<br>
+											<p>가입 후 30일 이내 사이트 이용내역이 없는경우, 자동으로 회원 탈퇴가 이루어지게 됩니다.</p>
+											<p style="color:#ffa800;"> 가입하는 것은 사이트의 이용에 대한 약관에 동의 하는 것입니다.</p>
+											<br><br>
+											<p style="font-weight:bold">Q 어떤 경우에 계정이 정지 되나요?</p>
+											<br>
+											<p> 약관에 어긋나는 베팅을 하였을 경우,불법적인 방법으로 입금한 경우
+												채팅, 전화 그리고 이메일로 서포트 연락 시 부적절 한 언어를 사용한 경우
+												통보없이 계정이 정지될 수 있습니다. </p>
+											<br><br>
+											<p style="font-weight:bold">Q 중복가입은 가능한가요?</p>
+											<br>
+											<p><font style="color:#ffa800;">가입은 1인1계정 입니다. 만약 중복 계정이 발견되면 통보 없이 계정삭제</font>가 됩니다</p>
+											<br><br>
+											<p style="font-weight:bold">Q 본인 개인정보 변경은 어떻게 하나요?</p>
+											<br>
+											<p>상단 ‘내 정보’ 클릭 후  변경 가능하며, 휴대폰번호 혹은 계좌번호 변경 시
+											고객센터로 통보해주셔야만 계좌변경 및 이벤트에 대한 소식을 받아보실 수 있습니다.</p>
+											<br><br>
+											<p style="font-weight:bold">Q 비밀번호를 잊어 버렸을 때 어떻게 해야 하나요?</p>
+											<br>
+											<p> 비밀번호를 잃어버렸을 경우 사이트내 휴대폰 번호 인증 후 변경가능합니다 . 이외에 방법은 없습니다.</p>
+											<br><br>
+											<p style="font-weight:bold">Q 로그인이 안되요?</p>
+											<br>
+											<p>로그인이 안될 때는 익스플로러 또는 크롬 쿠키 삭제 및 방문내역을 삭제 후 로그인하시면 됩니다.</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="acc_head"><h3>베팅 관련</h3></div>
+									<div class="acc_content">
+										<div class="acc_content_in_2">
+											<p style="font-weight:bold">Q 스포츠 베팅 시 최대 베팅 한도 및 최대 베팅 가능한 폴더 수는 어떻게 되나요?</p>
+											<br>
+											<p><font style="color:#ffa800;">해외 배팅업체의 경우 각 리그 , 해당팀, 배당률에 따라 최대 베팅한도는 상이</font>합니다.</p>
+											<p>이는 최대 베팅 가능한 폴더 수 및 베팅 상한가 도 똑같이 적용됩니다.</p>
+											<p>그로 인해 베팅 한도 및 베팅 상한가는 게임마다 다르게 적용되고 있습니다. </p>
+											<p><font style="color:#ffa800;">베팅하시려는 경기의 본인 최대 베팅 한도를 알고 싶으시면</font></p>
+											<p><font style="color:#ffa800;">로그인 후 베팅하실 경기 배당에 마우스를 올리거나 각 경기 선택 후 배팅슬립 하단 ‘맥스’ </font></p>
+											<p><font style="color:#ffa800;">버튼을 누르시면 확인 가능</font>합니다.</p>
+											<p>로그인 전 에는 ‘맥스’ 버튼이 활성화 되지 않습니다.</p>
+											<br><br>
+											<p style="font-weight:bold">Q 베팅 슬립에 나오는 베팅종류는 무엇인가요?</p>
+											<br>
+											<p>아이벳 에서는 단폴 베팅, 조합 베팅 이렇게 2종류의 베팅 종류를 제공합니다. </p>
+											<br><br>
+											<p style="font-weight:bold; color:#00afed;">1-단폴 베팅</p>
+											<br>
+											<p>베팅 슬립에 담긴 경기들을 개별적으로 베팅 금액을 설정할 수 있으며,</p>
+											<p>베팅 금액이 설정된 경기들은 한 번의 클릭으로 모두 단 폴더 베팅할 수 있습니다.</p>
+											<br><br>
+											<p style="font-weight:bold; color:#00afed;">2-조합베팅</p>
+											<br>
+											<p>베팅 슬립에 담긴 여러 개의 경기들을 조합 하여 베팅할 수 있습니다</p>
+											<p>다만 베팅 카트에 담긴 내역 중 조합 베팅이 가능하지 않는 내역은</p>
+											<p>카트에 경고 표시되며 대상 경기 중 하나를 삭제 하시면 정상적으로</p>
+											<p>베팅 처리가 완료 됩니다.</p>
+											<br><br>
+											<p style="font-weight:bold">Q 라이브 베팅 시 베팅 완료가 되지 않거나 간섭이 일어나는 이유는 무엇인가요?</p>
+											<br>
+											<p>아래의 이유들로 인해서 이와 같은 상황이 발생될 수 있습니다.</p>
+												<p>- 인터넷 서비스 회사의 문제</p>
+												<p>- 갑자기 너무 많은 베팅이 몰렸을 때</p>
+												<p>- 해당 경기가 너무 빠르게 진행되고 있고 배당 조정이 급격히 일어날때</p>
+												<p>- 기술적인 문제(소프트웨어 문제, 정전 등)</p>
+												<p>- 자연재해</p>
+											<br><br>
+											<p style="font-weight:bold">Q 베팅한 경기의 배당률이 시간이 지나도 멈춰 있는 경우</p>
+											<br>
+											<p>배당률이 시간이 지나도 멈추어 있는 경우는 해당 경기의 생방송이 멈추거나, 소프트웨어 문제</p>
+											<p>그리고 정전 등의 이유로 일어날 수 있습니다.</p>
+											<br><br>
+											<p style="font-weight:bold">Q 베팅한 경기의 배당률이 시간이 지나도 멈춰 있는 경우</p>
+											<br>
+											<p>배당률이 시간이 지나도 멈추어 있는 경우는 해당 경기의 생방송이 멈추거나, 소프트웨어 문제</p>
+											<p>그리고 정전 등의 이유로 일어날 수 있습니다.</p>
+											<br><br>
+											<p style="font-weight:bold">Q 라이브 베팅에 있는 경기 시간과 스코어 등이 정확하지 않은 경우</p>
+											<br>
+											<p>의도되지 않은 기술적 이유로 드물게 일어나는 경우가 있습니다. 라이브 베팅에서 제공하는
+											경기시간은 지표일 뿐입니다. 실제 확인 가능한 경기만 베팅에 이용하시기 바랍니다.
+											당사는 위에 보여지는 정보 즉,<font style="color:#ffa800;"> 스코어 혹은 경기시간의 정확성 및  현재성에 대하여 책임이
+											없음을 알려 드립니다.
+											만약 베팅시점에 보여지는 정보가 부정확 했더라도 실제 경기의 결과와
+											배당이 적용됨을  알려드립니다.</font></p>
+											<br><br>
+											<p style="font-weight:bold">Q 나의 베팅한도가 줄어 들었을때</p>
+											<br>
+											<p>어느 북메이커든지 플레이어의 베팅한도를 줄일 수 있는 권리를 가지고 있으며 이 사항에
+											대하여 설명할 의무가 없습니다.</p>
+											<p>그리고 북메이커는 합당한 이유가 있을 시 플레이어의 계정을 정지 시킬 수 있습니다.</p>
+											<br><br>
+											<p style="font-weight:bold">Q 라이브 페이지에서 경기도중 베팅한 경기가 사라졌습니다. 베팅은 어떻게 처리되나요?</p>
+											<br>
+											<p>해당 경기의 공식정보가 업데이트 되지 않아 중단된 경우입니다. 라이브 도중 경기가
+											사라져도 완료된 베팅은 공식결과가 나오는대로 정상 처리됩니다. 해당 경기의 공식정보가 없을</p>
+											<p>사라져도 완료된 베팅은 공식결과가 나오는대로 정상 처리됩니다. 해당 경기의 공식정보가 없을</p>
+											<br><br>
+											<p style="font-weight:bold">Q 축구 경기 중 만약 한 선수가 2장의 옐로우 카드를 받을 시 베팅 결과 처리</p>
+											<br>
+											<p>두 번째 옐로우 카드를 받으면 레드카드를 받는 것과 같이 선수는 퇴장을 당하므로 두 번째
+											옐로우 카드는 레드카드로 간주합니다. 그러므로 옐로우 카드 1장과 레드카드 1장을 받은
+											것으로 베팅결과에 적용됩니다</p>
+											<br><br>
+											<p style="font-weight:bold">Q 테니스 경기 중 만약 한 선수가 기권할 시 베팅 결과 처리</p>
+											<br>
+											<p>만약 한 선수가 부상 등의 이유로 기권할 시 베팅은 적특 처리됩니다.</p>
+											<br><br>	
+											<p style="font-weight:bold">Q 테니스 경기 중 만약 한 선수가 기권할 시 베팅 결과 처리</p>
+											<br>
+											<p>경기 시작 시간이 표기와 다르게 몇 시간 빠르거나 늦게 시작되어도 실제 경기 시작전에 베팅이 </p>
+											<p>완료되면 정상 처리됨을 알려 드립니다.</p>
+											<p><font style="color: #ffa800;">그리고 베팅 이후의 취소는 불가합니다.</font></p>									
+											<br><br>
+											<p style="font-weight:bold">Q 베팅 취소는 가능한가요?</p>
+											<br>
+											<p><font style="color: #ffa800;">베팅 취소는 ‘하루3회’ 가능 </font>합니다. 진행중인 경기가 포함되어 있는 다폴더 베팅은 취소가 불가능하며, 베팅후 10분 이내에만 취소가 가능합니다.</p>									
+											<br><br>									
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="acc_head"><h3>입금,출금 관련</h3></div>
+									<div class="acc_content">
+										<div class="acc_content_in_2">
+											<p style="color:maroon;">※ 아이벳 "원화 계좌이체 " 방식의 입출금은 "아이벳" 의 엄격한 자금 보호 아래 진행하며  마스터, 에이젼시의 원화 입출금은 불허합니다.</p>
+											<br><br>
+											<p style="font-weight:bold">Q 입금계좌 확인은 어떻게 하나요?</p>
+											<br>
+											<p>계좌확인은 입금 신청시 비밀번호를 입력하면 자동 안내됩니다.</p>
+											<p style="color:#ffa800;">계좌는 수시로 변경되기 때문에 입금 전에는 반드시 안내되는 계좌로 입금하셔야 합니다.</p>
+											<br><br>
+											<p style="font-weight:bold">Q 수표로 입금 가능한가요?</p>
+											<br>
+											<p style="color:#ffa800;">수표입금은 절대 불가합니다. 만약 수표입금 시 통보 없이 계정삭제가 될 수 있습니다.</p>
+											<br><br>
+											<p style="font-weight:bold">Q 실수로 구계좌로 입금했어요?</p>
+											<br>
+											<p>구 계좌로 입금 시에는 저희 쪽에서 확인이 불가능 합니다. 그로 인해 충전도 불가능합니다.</p>
+											<br><br>
+											<p style="font-weight:bold">Q 입금 출금은 어떻게 하나요?</p>
+											<br>
+											<p style="color:#ffa800;">입금 시에는 개인정보란에 등록된 본인 이름과 입금자명이 동일해야 합니다. 타인명의로 입금 시 충전이 불가하며 강퇴처리될 수도 있습니다.</p>
+											<p style="color:#ffa800;">출금은 슈퍼마스터에 등록된 본인 명의의 계좌로만 출금이 됩니다. 하루 최대 3회 출금이 가능합니다.</p>
+											<br><br>
+											<p style="font-weight:bold">Q 입금 시 입금하지 않고 “충전확인”을 클릭하면 어떻게 되나요?</p>
+											<br>
+											<p style="color:#ffa800;">아이벳 사용약관에 의하여, 허위로 “충전확인”를 클릭하시면 계정이 즉시 정지 되오니,반드시 입금을 완료하시고 “충전확인”를 클릭해주세요.</p>
+											<br><br>
+											<p style="font-weight:bold">Q 입금 후 베팅을 하지 않고 바로 출금이 가능한가요?</p>
+											<br>
+											<p>불가능 합니다. 불법자금 세탁방지 및 입금 시 수수료등이 발생하기 때문에 입금 후 전액 베팅을 하지 않으시면 출금이 되지 않습니다.</p>
+											<br><br>
+											<p style="font-weight:bold">Q 입금 출금은 얼마까지 가능한가요?</p>
+											<br>
+											<p>입금 출금액에 대한 한도는 없습니다.<font style="color:#ffa800;">다만 계좌 이체 방식의 일일 출금의 경우 평소 회원과 당사와의 입출금 거래 금액을 기준으로</font></p>
+											<p><font style="color:#ffa800;">이에 크게 벗어나는 출금 금액일 경우 그 금액을 나누어 송금 시킬 수 있습니다. </font>이는 한국 자본거래법 (은행 모니터링 후 금감원 자동통보)</p>
+											<p>기준에 따른 사항이며 <font style="text-decoration: underline;">이런 사항이 발생할경우 당사 자금팀은 지체없이 회원에게 보고해야할 의무가 있습니다.</font></p>
+											<p><font style="text-decoration: underline;">※다른 기타 결제수단을 원할 경우 ( 비트코인 및 유로 , 달러화 결제 ) 고객센터를 통해 문의바랍니다.</font></p>
+											<br><br>
+											<p style="font-weight:bold">Q 출금이 왜 안되나요?</p>
+											<br>
+											<p>충전 후 돈이 들어오지 않은 경우는 새로 고침 하시면 회원님의 보유머니가 정상적으로 보입니다.</p>
+											<br><br>
+											<p style="font-weight:bold">Q 계좌 번호를 변경 하고 싶은데 가능 한가요?</p>
+											<br>
+											<p>귀하의 잔액이 0 일 때 메시지로 문의 하시면 변경 가능 합니다.</p>
+											<p>잔액이 남아있는 경우 기존 등록된 계좌로 잔액을 모두 송금합니다.</p>
+											<p>단, 거래 내역이 없는 계좌는 변경이 불가능 합니다.</p>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					<div id="l-tab4" class="left_tab_con">
+						<ul class="smk_accordion">
+						<li>
+							<div class="acc_head"><h3>【 이용약관 】</h3></div>
+							<div class="acc_content">
+								<div class="acc_content_in_2">
+									<p>1. 본 약관을 읽고 회원가입을 완료하실 경우 </p>
+									<p>회원님은 본 약관에 이미 동의 하신 것으로 간주되며, 본 약관을 읽지 않고 회원 가입 후 생기는 어떤 문제도 본사는 책임을 질 수 없습니다.</p>
+									<br>
+									<p>2. 회사는 이용약관을 언제든지 변경하거나 추가 할 수 있습니다.</p>
+									<p>이용약관의 변경에 대한 내용은 사이트 내에 공지와 동시에 적용되며, 본 문서에 추가 됩니다. </p>
+									<br>
+									<p>3.각 회원님들이 위치하고 계신 국가별 법적인 제한으로 어떤 국가들에서는 사이트들에 대한 접속이 </p>
+									<p>차단될 수도 있습니다.</p>
+									<p>그러나 본사는 원칙적으로 접속을 제한하지 않으며 이에 대한 책임을 지거나 해결 할 수 없습니다. </p>
+									<p>단 악의적인 사용자로 판단되었거나, 사이트의 원활한 서비스 제공을 위해 일시적으로 특정 지역에 </p>
+									<p>위치한 회원이나 특정회원의 접속을 제한할 수 있는 권리가 있습니다.</p>
+									<br>
+									<p>4. 회원님들이 회원가입을 하시면 가입시의 절차에 따라 자동으로 회원 가입이 승인 됩니다.</p>
+									<p>특별히 회원 가입 승인에 제한을 두지 않으나, 악의적인 사용자와 사이트의 원활한 서비스 제공을 위해 승인을 거부하거나 취소할 수 있습니다.</p>
+									<p>회사는 회원님들이 가입시 기재한 어떠한 정보도 제 3자에게 제공하거나 노출하지 않으며, 가능한 모든 방법을 동원하여 회원님들의 정보 보호에 만전을 다하고 있습니다.</p>
+									<p>그럼에도 불구하고 불가항력적인 이유로 정보가 노출될 가능성도 있음을 참고하십시요.</p>
+									<br>
+									<p>5. 회원가입에 연령은 성인 즉 만 20세를 기준으로 합니다. </p>
+									<p>회사는 20세 미만의 고객이라고 판단되면 언제든지 해당회원의 접근을 제한 하거나 가입 승인을 </p>
+									<p>취소하거나, 심지어 배팅을 하였다 하더라도 이에 대한 금액 지불을 거부할 수 있습니다.</p>
+									<br>
+									<p>6. 회원은 자신의 회원아이디와 비밀번호의 비밀엄수에 대한 책임을 가지고 있습니다. 아이디와 비밀번호 노출로 인하여 제 3자가 배팅하여 생기는 피해에 대해서 이에 따른 어떠한 책임도 회사는 지지 않습니다. </p>
+									<br>
+									<p>7. 회원은 언제든지 자신의 배팅머니를 사용하거나 환전신청하여 인출 할 수 있습니다.</p>
+									<br>
+									<p>8. 만약 회원의 배팅머니와 관련된 배당금의 합계나 충전, 또는 환전에 따른 여러 계산에서 잘못된 점이 있다면 이에 대한 신고와 재확인 요구는 회원에게 있습니다. </p>
+									<p>회원이 신고하거나 재확인 요구를 하지 않아서 발생한 직접 또는 간접적인 모든 배팅이나 충전, 환전 등 배팅 머니와 관련된 일련의 모든 행위들은 모두 취소 처리 될 것입니다.</p>
+									<br>
+									<p>9. 회사는 모든 회원님들께 친절하고 편리한 서비스를 제공하는것을 목표로 삼고 있지만, 부정 중복가입, 해킹시도, 근거 없는 비방글 유포 등 특정한 계정에 대해서 </p>
+									<p>회원자격을 박탈 할 수 있으며 이러한 경우에 해당 아이디의 모든 배팅머니는 몰수 되고 사이트 내에서의 모든 자격을 잃게 될 것입니다.</p>
+									<p>그러나 회원 스스로 회원 자격을 버릴 경우에는 자신의 보유 머니를 언제든지 신청하여 인출 할 수 있습니다.</p>
+									<br>
+									<p>10. 회사는 모든 서비스를 모든 회원님들께 친절하고 편리하며, 공정하고 투명하게 운영하도록 최선을 </p>
+									<p>다합니다.</p>
+									<p>회원은 회사의 모든 서비스를 이용함에 있어 규칙에 따라 정해진 범위 안에서 이용해야만 합니다.</p>
+									<p>회사와 회원은 서로 신뢰하고 동반자로서의 관계를 유지하기 위해 노력해야 합니다.</p>
+									<br>
+									<p>11. 회사는 언제나 정확한 정보를 제공하기 위해 최선의 노력을 다하고 있으나 예기치 않은 오류나 대응할 수 없는 불가 항력적인 사항의 경우 이에 따른 결과에 대해 수정할 권리를 가지고 있습니다.</p>
+									<br>
+									<p>12. 회사는 배당의 잘못된 기재 및 공식적인 경기 변동사항 (경기전 감독사임, 예기치 못한 선수의 </p>
+									<p>갑작스런 사고 등)으로 인한 경기 배당 수정 및 취소할 권리를 갖으며, 회원 또한 잘못된 정보를 확인하였을 경우 회원의 의무로서 즉시 회사에 알려야합니다.</p>
+									<p>배당 경기 시간등 잘못된 정보를 알고 있음에도 이를 회사에 알리지 않고 배팅할 경우, 또한 오히려 이를 악용하여 큰 차익을 내려는 의도가 보일 경우 회사는 그 회원에 대한 징계를 내릴 수 있습니다.</p>
+									<br>
+									<p>13. 회사는 어떤한 경우에도 불법적인 시도와 타협하거나 거래하지 않으며, 이를 막기 위해 가능한 모든 방법을 동원하고 있습니다.</p>
+									<p>회사는 불법적인 시도에 대한 모든 일련의 행위는 모두 취소 처리 하고 지불하지 않을 권리가 있습니다.</p>
+									<br>
+									<p>14. 모든 회원은 한 아이피에서 한 계정만을 사용하여야 하며 부득이하게 같은 아이피에서 다른 회원과 함께 가입 및 이용을 해야할 경우 먼저 고객센터를 통하여 승인을 얻어야합니다.</p>
+									<p>승인을 얻지 않고 중복가입할 경우 회사는 중복아이디 정지 탈퇴 삭제할 권리가 있으며 모든 금액을 </p>
+									<p>환수할 권리도 있습니다.</p>
+									<br>
+									<p>15. 게시판은 본사 운영과 아무런 연관이 없으며 다만, 근거없이 게시판을 악용하여 상대방을 비방하거나 회사를 비방할 경우 예고 없이 회원의 아이디를 정지 탈퇴 삭제할 권리가 있습니다.</p>
+									<br>
+									<p>16. 머니 충전시 회원은 언제든지 발급된 계좌를 정확히 확인해야합니다.</p>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="acc_head"><h3>【 일반규정 】</h3></div>
+							<div class="acc_content">
+								<div class="acc_content_in_2">
+									<p>아이벳 스포츠북이 회원의 베팅을 승인할 때의 조건들을 세분화하여 요약한 것입니다.</p>
+									<p>승인된 모든 베팅은 이 규정의 적용을 받습니다.</p>
+									<p>당신이 베팅을 할 때 오류를 범할 경우 또는 우리 사이트와 시스템에서 오류가 발생될 경우 어떻게 베팅이 정산되는지에 대한 세부내역들도 이 규정에 명시되어 있습니다.</p>
+									<p>이 규정과 특별한 베팅룰을 숙지하는 것은 여러분의 책무입니다.</p>
+									<p>아이벳은 사전 통보 없이 항상 베팅 규정을 추가,삭제,변경할 권한을 갖습니다.</p>
+									<br><br>
+									<p>1.1 일반 사항</p>
+									<br><br>
+									<p>1.1.1<font style="color:#ffa800;">실수로 베팅완료를 클릭 하였다 하여도 약관의 따라 완료된 베팅은 취소처리가 불가능 하다.</font></p>
+									<br><br>
+									<p style="font-weight:bold">1.1.2 회사에 의해 제공된 모든 베팅 정보는 진실되고 명확해야 한다.</p>
+									<p style="font-weight:bold">하지만 회사가 데이터, 시간, 장소, 경쟁상대, 배당, 결과, 통계 및 기타 베팅 정보들에</p>
+									<p style="font-weight:bold">대해서 최선을 다해 종합적으로 정확성을 보장하는 노력을 기울였음에도 불구하고</p>
+									<p style="font-weight:bold">오류 또는 누락 등이 발생할 경우 이에 대한 책임이 없다.</p>
+									<p style="font-weight:bold">회사는 명확한 오류에 대해서는 수정을 해야 하며 또한 특정 스포츠 이벤트에 제공된</p>
+									<p style="font-weight:bold">다른 베팅 유형으로 정의된 마켓들이 성실히 관리되도록 모든 타당한 조치를 취해야 한다.</p>
+									<br><br>
+									<p style="font-weight:bold">1.1.3 두 팀간 또는 개인간 조직화된 스포츠 경기로 정의된 이벤트가 만약 예정 시간 전에</p>
+									<p style="font-weight:bold">시작되었고 이 경우 베팅을 했을 경우 (특정 라이브 베팅은 제외됨) 베팅은 유효하다고</p>
+									<p style="font-weight:bold">간주된다. 만약 마켓이 정확한 시간에 종료 또는 중단 되지 않았을 경우,</p>
+									<p style="font-weight:bold">회사는 실제 시작시간(특정 라이브 베팅은 제외)이후에 이루어진 모든 베팅을</p>
+									<p style="font-weight:bold">무효화할 권리를 갖는다.</p>
+									<p style="font-weight:bold">따라서 우리 웹사이트상에서 경기의 일자와 시작 시간은 단순한 참조용일 뿐이다.</p>
+									<br><br>
+									<p style="font-weight:bold">1.1.4 영어버전의 우선순위를 갖는다. 만약 어느 팀이 정해진(지정된) 상대 팀이 아닌</p>
+									<p style="font-weight:bold">다른 팀과 경기를 할 경우, 회사의 재량으로 이 경기는 무효로 간주된다.</p>
+									<br><br>
+									<p style="font-weight:bold">1.1.5 고객은 항상 경기 스코어와 경기관련 모든 정보에 대하여 베팅 전 반드시</p>
+									<p style="font-weight:bold">이해하고 있어야 한다.</p>
+									<p style="font-weight:bold">이해가 안되는 부분은 언제든 고객센터에 문의 하여 충분히 숙지하여야 한다</p>
+									<br><br>
+									<p style="font-weight:bold">1.1.6 회사는 규정을 변경할 사유가 발생될 경우 이에 대한 권리를 가진다.</p>
+									<p style="font-weight:bold">이러한 규정 변경은 웹사이트에 등재됨과 동시에 구속력과 유효성을 갖는다.</p>
+									<br><br>
+									<p style="font-weight:bold">1.1.7 고객은 현재 스코어, 시간경과 및 실시간 중계에 대하여 제 3자가 제공하는</p>
+									<p style="font-weight:bold">기타 다른 데이터들이 시간지연 또는 오류를 발생시킬 수 있다는 점과 이 데이터를</p>
+									<p style="font-weight:bold">기준으로 베팅이 된 것은 전적으로 고객들 자신의 ‘위험성’이라는 것을 인정해야 한다.</p>
+									<p style="font-weight:bold">회사는 이러한 데이터의 정확성, 완성도 또는 타임라인(시각표)을 보장해 줄 수</p>
+									<p style="font-weight:bold">없고 이와 관련된 고객들의 직간접 피해에 대해 책임이 없다.</p>
+									<br><br>
+									<p style="font-weight:bold">1.1.8 라이브 거래에서 보여지는 마켓은 전체 경기를 말한다.</p>
+									<p style="font-weight:bold">(예외: 축구경기에서 아시안 헨디켑은 현재 스코어에서 지정된 다음 마켓 이름까지 항상 거래된다)</p>
+									<br><br>
+									<p style="font-weight:bold">1.1.9 복수 베팅에서 하나의 이벤트 결과가 또 다른 이벤트 결과에 영향을 줄 경우</p>
+									<p style="font-weight:bold">이를 인정하지 않으며 이러한 상황하에서 회사는 복수베팅을 싱글(Single)로서</p>
+									<p style="font-weight:bold">결정할 권한이 있다. 복수 베팅에 승리할 경우 투자한 총 금액은 각각의</p>
+									<p style="font-weight:bold">선택 분에 대하여 균일하게 나누어서 정산된다.</p>
+									<br><br>
+									<p style="font-weight:bold">1.1.10 가격, 레이스, 경기 또는 이벤트의 조작의 증거가 있는 곳에서,</p>
+									<p style="font-weight:bold">차후 조사결과가 나올 때까지 회사는 베팅을 무효화 하거나</p>
+									<p style="font-weight:bold">이익금의 결제를 보류 할 권한이 있다.</p>
+									<p style="font-weight:bold">만약 베팅을 하는 과정에서 금전상의 이익을 얻기 위해 고의적인 시도가 있다고</p>
+									<p style="font-weight:bold">판단될 경우, 차후 조사 결과가 나올 때까지 회사는 이 베팅을 무효 처리하고</p>
+									<p style="font-weight:bold">이익금 결제를 보류할 권한을 갖는다.</p>
+									<br><br>
+									<p style="font-weight:bold">1.1.11 베팅이 마무리된 후 1주 또는 이벤트가 종료된 후 2주가 지나가면 클레임 또는</p>
+									<p style="font-weight:bold">논쟁이 없는 것으로 간주된다. 우선적으로, 모든 클레임과 불만은 고객센터를</p>
+									<p style="font-weight:bold">통해서 접수되어야 하고 접수된 클레임은 거래 팀으로 전달된다.</p>
+									<p style="font-weight:bold">만약 거래 팀이 접수된 클레임을 해결할 수 없을 경우,</p>
+									<p style="font-weight:bold">스포츠북 본사가 최종 결정을 하여 그 결과를 이메일로 고객에게 통지한다.</p>
+									<br><br>
+									<p style="font-weight:bold">1.1.12 회사는 어떤 팀 또는 포지션에 가격을 제공하지 않을 권리가 있다.</p>
+									<p style="font-weight:bold">이럴 경우N/O(오퍼 없음)로서 웹에 등재된다.</p>
+									<p style="font-weight:bold">가격이 제시되지 않은 곳에 베팅[배당(1.00)]을 할 경우 무효가 된다.</p>
+									<br><br>
+									<p style="font-weight:bold">1.1.13 회사 웹사이트를 사용할 때, 고객은 이 사이트에서 제공하는(라이브 TV 영상 포함)</p>
+									<p style="font-weight:bold">현재 스코어, 시간경과 그리고 다른 데이터들을 인정해야 한다.</p>
+									<p style="font-weight:bold">제 3자에 의해 공급된 실기간 정보는 시간 지연 및 오류를 초래할 수 있다.</p>
+									<p style="font-weight:bold">따라서 이 데이터를 기준으로 베팅한 것은 전적으로 고객 자신들의 위험성 이라는 것을</p>
+									<p style="font-weight:bold">인정해야 해야 하며 회사는 고객의 직간접적인 손실에 대해 보상해 줄 책임이 없다.</p>
+									<br><br>
+									<p style="font-weight:bold">1.1.14 약관의 어긋나는 베팅을 하였을 경우, 도나 신용카드 및 수표 사용 등의 불법적인</p>
+									<p style="font-weight:bold">방법으로 입금한 경우, 채팅 그리고 이메일로 서포트 연락 시 부적절 한</p>
+									<p style="font-weight:bold">언어를 사용한 경우, 이미 완료된 답변에 반복되는</p>
+									<p style="font-weight:bold">문의로 업무에 지장을 초래한 경우 회사는 해당고객의 계정을 통보 없이 정지 할 권한이 있다.</p>
+									<br><br>
+									<p style="font-weight:bold">1.1.15 어느 북메이커든지 플레이어의 베팅한도를 줄일 수 있는 권리를 가지고 있으며</p>
+									<p style="font-weight:bold">이 사항에 대하여 설명할 의무가 없다. 그리고 북메이커는 합당한 이유가</p>
+									<p style="font-weight:bold">있을 시 회사는 해당고객의 계정을 통보 없이 정지 할 권한이 있다.</p>
+									<br><br>
+									<br><br>
+									<p style="font-weight:bold">1.2 포기와 연기,지연</p>
+									<br><br>
+									<p style="font-weight:bold">1.2.1 만약 이벤트가 예정시작일자(예정 시작시간 12시간 이내)에</p>
+									<p style="font-weight:bold">시작되지 않거나 예정일 이내에 종료되지 않을 경우 모든 베팅은 무효이다.</p>
+									<br><br>
+									<p style="font-weight:bold">1.2.2 종료 전 경기가 중단되어 되어 30시간 이내에 다시 시작하지 않을 경우</p>
+									<p style="font-weight:bold">중단될 당시에 이미 결정된 베팅 결과를 제외하고 모두 무효가 된다.</p>
+									<p style="font-weight:bold">마켓은 베팅이 발생된 것에 대해 전적으로 결정된다. 예를 들어,</p>
+									<p style="font-weight:bold">이미 결정이 된 ‘하프타임’ ‘쿼터’ ‘이닝’ 또는 다른 기간의 쿼터에 대한 베팅과</p>
+									<p style="font-weight:bold">같이 만약 골이 경기 중단 시점에서 나올 경우 ‘첫 번째 팀 스코어’ 또는</p>
+									<p style="font-weight:bold">첫 골 시간’의 베팅은 유지 된다.</p>
+									<p style="font-weight:bold">*예외 스포츠 : 테니스, 탁구의 경우 30시간이 지나도 공식결과가 나와야 처린된다.</p>
+									<br><br>
+									<p style="font-weight:bold">1.2.3 만약 이벤트가 예정 시간 이내에 종료되지 않은 상태에서 공식 결과가</p>
+									<p style="font-weight:bold">선언되거나 결과가 특정 이벤트 주체 측에 의해 결정될 경우,</p>
+									<p style="font-weight:bold">회사는 이 경기를 공식적으로 유효하다고 간주할 권한이 있다.</p>
+									<br><br>
+									<p style="font-weight:bold">1.3 장소 변경과 플레이 전 기재된 이벤트</p>
+									<br>
+	 								<table id="tt1">
+										    <tr>
+										        <th style="text-align: center">W1 = 팀1 승</th>
+										        <th style="text-align: center">draw = 무</th>
+										        <th style="text-align: center">W2 = 팀2 승</th>
+										        <th style="text-align: center">1x = 팀1 승 또는 무</th>
+										        <th style="text-align: center">12 = 팀1 승 또는 팀2 승</th>
+										    </tr>
+										    <tr>
+										        <td>or = 또는</td>
+										        <td>X = 무</td>
+										        <td>& = 그리고</td>
+										        <td>x2 = 팀2 승 또는 무</td>
+										        <td></td>
+										    </tr>
+										</table>
+									<p style="font-weight:bold">1.3.2 별도의 언급이 없을 경우, 경기가 중립 그라운드(그 반대의 경우 포함)에서</p>
+									<p style="font-weight:bold">일정대로 개최되면 모든 베팅은 유효하다. 하지만 경기 장소가 변경되어</p>
+									<p style="font-weight:bold">홈팀이 원정경기(또는 그 반대일 경우 포함)를 하게 되면 모든 베팅은 무효로 간주된다.</p>
+									<p style="font-weight:bold">또한 홈팀과 원정팀 이름이 반대로 잘못 기재될 경우에도 회사는</p>
+									<p style="font-weight:bold">베팅을 무효로 간주할 권한이 있다.</p>
+									<br><br>
+									<p style="font-weight:bold">1.3.3 한 팀/국가/연맹(또는 그 이상)에 의해 개최된 경기는 중립구장에서</p>
+									<p style="font-weight:bold">경기한 것으로 간주된다. 만약 개최 팀이 원정 팀으로 등재될 경우 베팅은 유효하다.</p>
+									<p style="font-weight:bold">예를 들어 독일에서 개최된 월드컵 경기에서 “아르헨티나-독일” 이벤트로 기재될</p>
+									<p style="font-weight:bold">경우 이 이벤트에 대한 모든 베팅은 승인된다.</p>
+									<br><br>
+									<p style="font-weight:bold">1.3.4 모든 팀간의 경기가 아닌 이벤트에 대해서 마켓이 개장한 후 경기 장소가</p>
+									<p style="font-weight:bold">변경될 경우 개인 스포츠 룰 이내에서 규정된 장소를 제외하고 모든 베팅은</p>
+									<p style="font-weight:bold">여전히 유효한 것으로 간주된다.</p>
+									<br><br>
+									<p style="font-weight:bold">1.3.5 만약 플레이어나 팀이 틀리게 등재될 경우 베팅은 무효가 된다.</p>
+									<p style="font-weight:bold">이미 홍보했던 상대 팀이 변경될 경우 모든 베팅은 취소된다.</p>
+									<p style="font-weight:bold">다만 한글로 표기된 팀 이름의 경우 한국 플레이어들이 많이</p>
+									<p style="font-weight:bold">이용하는 라이브 스코어 사이트를 참고하여 업데이트 되기에 번역 오류로</p>
+									<p style="font-weight:bold">인한 팀 이름에 관한 분쟁 시에는 영어로 표기된 공식 팀 이름을 기준으로 처리한다.</p>
+									<br><br>
+									<p style="font-weight:bold">1.4 기간</p>
+									<br><br>
+									<p style="font-weight:bold">1.4.1 공지된 이베트 기간은 단순 참조용일 뿐이다. 개인 스포츠 룰을 제외하고</p>
+									<p style="font-weight:bold">예정된 기간이 변경되었을 지라도 베팅은 유효하다.</p>
+									<br><br>
+									<p style="font-weight:bold">1.4.2 로스타임 또는 연장전에 발생된 득점은 정규시간 마지막 종료시간에</p>
+									<p style="font-weight:bold">발생된 것으로 간주된다. 예를 들어 축구경기 전반전 로스타임에서</p>
+									<p style="font-weight:bold">득점이 나오면 45분에 득점을 한 것으로 간주된다.</p>
+									<br><br>
+									<p style="font-weight:bold">1.4.3 정상적이지 않은 경기 시간, 계산절차 또는 경기구성방식에 대하여</p>
+									<p style="font-weight:bold">스포츠 규칙을 위반할 경우, 회사는 베팅을 무효화할 권한을 갖는다.</p>
+									<br><br>
+									<p style="font-weight:bold">1.4.4 광고했던 출전 팀이 바뀌는 등 경기 구성 방식이 변경될 경우 베팅은 무효가 된다.</p>
+									<br><br>
+									<p style="font-weight:bold">1.5 결과</p>
+									<br><br>
+									<p style="font-weight:bold">1.5.1 결과는 스포츠베팅(경기 종료 후 30분내) 라이브베팅(경기 종료 후 20분내)</p>
+									<p style="font-weight:bold">에 처리된며 ,해당시간 이전에 결과처리에 대한 문의시 받아들여지지 않는다.</p>
+									<p style="font-weight:bold">모든 결과 처리는 일괄 처리되며, 특정 플레이어나 특정 베팅을 공식결과와</p>
+									<p style="font-weight:bold">다르게 적용하지 않는다.</p>
+									<br><br>
+									<p style="font-weight:bold">1.5.2 결과에 대한 실격 또는 변경이 차후에 발생되는 것과 관계없이 관련된</p>
+									<p style="font-weight:bold">시상결과는 공식결과로 집계된다. 만약 시상식이 없을 경우, 결과는</p>
+									<p style="font-weight:bold">차후의 실격 또는 변경과 관계없이 마켓이 결정될 때 관련 주체 측의 공식</p>
+									<p style="font-weight:bold">결과에 따라서 결정된다. 공식적인 결과가 불가할 경우, 마켓이 결정되고</p>
+									<p style="font-weight:bold">회사가 최종 결정을 한 가능한 증거를 참고해서 결정된다.</p>
+									<br><br>
+									<p style="font-weight:bold">1.5.3 마켓은 일반적으로 이벤트가 결정된 후 즉시 결정된다.</p>
+									<p style="font-weight:bold">공식 결과가 나오기 전에 단순히 고객 서비스로서 일부 마켓이 결정될 수도 있다.</p>
+									<p style="font-weight:bold">회사는 마켓 이벤트의 오류가 발생될 때 이를 해결할 권리를 가지고 있으며</p>
+									<p style="font-weight:bold">이것은 당신의 보유머니에 그대로 반영된다.</p>
+									<br><br>
+									<p style="font-weight:bold">1.5.4 결과에 대한 불확실성이 있는 이벤트일 경우, 회사는 마켓 결정을 보류할 권리를 갖는다.</p>
+									<p style="font-weight:bold">마켓 결과가 공식적으로 확인되지 않을 경우, 회사는 무효 처리할 수 있다.</p>
+									<br><br>
+									<p style="font-weight:bold">1.5.5 회사는 결정된 베팅에 대한 이벤트 결론 후 72시간 만에 이루어진</p>
+									<p style="font-weight:bold">변경 또는 수정을 인정치 않는다.</p>
+									<br><br>
+									<p style="font-weight:bold">1.5.6 회사 웹사이트에 공지된 결과와 공식 결과가 충돌할 경우 정확한 결과를</p>
+									<p style="font-weight:bold">결정하기 위하여 특정 이벤트에 대한 회사의 비디오 판독을 참조해서 결정한다.</p>
+									<p style="font-weight:bold">만약 비디오 판독이 불가할 경우, 경기 주체 측이 공식적으로 공지된</p>
+									<p style="font-weight:bold">것을 최종 결과로 간주된다.웹사이트를 통해 공식적인 결과를 제공할 수 없을</p>
+									<p style="font-weight:bold">경우 또는 결과가 인위적으로 조작되었을 경우 회사는</p>
+									<p style="font-weight:bold">최종 결과를 결정하고 변경할 권한을 갖는다. 이 건과 관련해서 회사의 결정은</p>
+									<p style="font-weight:bold">최종적인 것이 되며 구속력을 지닌다. 5.7가격이 틀리게 게시되고 계산될 경우,</p>
+									<p style="font-weight:bold">회사는 베팅을 무효화할 수 있다. 이럴 경우 마켓 평균치와 비교하여 지불금의</p>
+									<p style="font-weight:bold">100% 이상의 편차를 포함시킨다.</p>
+									<br><br>
+									<p style="font-weight:bold">1.5.7 개인 스포츠 경기에 대해 특별한 참조사항이 없을 경우,</p>
+									<p style="font-weight:bold">모든 마켓의 정산은 공식경기규칙을 기준으로 결정된다.</p>
+									<br><br>
+									<p style="font-weight:bold">1.5.8 개인 스포츠 경기에 대해 특별한 참조사항이 없을 경우,</p>
+									<p style="font-weight:bold">상대 팀은 팽팽한 접전의 경기를 해야 베팅이 유효하다.</p>
+									<br><br>
+									<p style="font-weight:bold">1.5.9 무승부에 대한 가격이 제시되지 않을 경우, 공식경기규칙이 승자를 결정할 수 없을 경우,</p>
+									<p style="font-weight:bold">또는 공식 결과가 무승부일 경우, Dead Heat(접전/막상막하)이 적용된다.</p>
+									<p style="font-weight:bold">Dead Heat(접전/막상막하)이 발생할 경우 내기에 건 돈은 스포츠 게임</p>
+									<p style="font-weight:bold">참여자 수로 나누어진 후 잃은 나머지 배팅금과 전체 배당으로 결제된다.</p>
+									<br><br>
+									<p style="font-weight:bold">1.6 베팅</p>
+									<br><br>
+									<p style="font-weight:bold">1.6.1 약관에 따라 완료된 베팅은 취소가 불가능하며, 고객은 베팅전 반드시</p>
+									<p style="font-weight:bold">베팅금액과 베팅종류를 확인해야한다. 회사는 실수로 베팅한 내역에 관해 일체의 책임 권한이 없다.</p>
+									<br><br>
+									<p style="font-weight:bold">1.6.2 한 경기 내 크로스베팅은 불가능 하다. 단, 승무패X코너킥X</p>
+									<p style="font-weight:bold">옐로우 카드의 조합은 가능하다.승무패와 언더/오버 크로스 베팅은 조합할 수 없으며,</p>
+									<p style="font-weight:bold">이미 조합 되어있는 “승무패 & 토탈 오버/언더”를 통해 베팅이 가능하다.</p>
+									<br><br>
+									<p style="font-weight:bold">1.6.3 고객은 로그인 후 1경기 혹은 이상의 경기를 선택하면 오른쪽 상단 베팅</p>
+									<p style="font-weight:bold">슬립에 선택내역 확인이 가능하다. 2경기 이상을 선택하면 자동으로</p>
+									<p style="font-weight:bold">멀티베팅으로 전환되며, 완료된 베팅은 베팅슬립내 베팅내역에서 확인할 수 있다.</p>
+									<br><br>
+									<p style="font-weight:bold">1.6.4 최대, 최소 베팅 한계는 스포츠와 게임에 따라서 변동하며,</p>
+									<p style="font-weight:bold">맥스벳을 눌러 최대 베팅 가능금액을 확인할 수 있다.단,</p>
+									<p style="font-weight:bold">싱글베팅시 맥스벳 이상 중복베팅은 불가능하다.</p>
+									<br><br>
+									<p style="font-weight:bold">1.6.5 축 베팅의 경우 하나라도 픽이 다르면 다른 베팅으로 정상 처리된다.</p>
+									<p style="font-weight:bold">단, 동일 픽을 중복 베팅 할때는 합한 베팅 금액이 베팅한도를 넘으면 안된다.</p>
+									<br><br>
+									<br><br>
+									<p style="font-weight:bold">1.7 시간의 수락</p>
+									<br><br>
+									<p style="font-weight:bold">1.7.1 이벤트 또는 경기가 시작이 된 후 실수로 인해 베팅이 승인되었을 경우,</p>
+									<p style="font-weight:bold">해당 선택에 대한 베팅은 무효가 된다. 단, 문제가 있는 이벤트가 회사의</p>
+									<p style="font-weight:bold">작동 시스템 또는 라이브 서비스에 의해 승인이 될 경우는 예외로 할 수 있다.</p>
+									<p style="font-weight:bold">(예 : 경기 시작 시간이 표기와 다르게 몇 시간 빠르거나 늦게 시작되어도</p>
+									<p style="font-weight:bold">실제 경기 시작전에 베팅이 완료되면 이는 정상 처리된다.)</p>
+									<br><br>
+									<p style="font-weight:bold">1.7.2 회사는 명백한 오류를 수정할 권한을 갖는다. 상호 동의를 할 경우,</p>
+									<p style="font-weight:bold">이벤트가 시작된 후 베팅을 한 것에 대하여 회사는 승인할 권한이 있고</p>
+									<p style="font-weight:bold">그 당시의 레이스 또는 이벤트에 대한 베팅은 유효하다. 하지만 고객이</p>
+									<p style="font-weight:bold">경기 결과를 미리 알고 있었다는 징후가 있을 경우 회사는 그 베팅을 무효화할 권한을 갖는다.</p>
+									<br><br>
+									<p style="font-weight:bold">1.7.3 베팅 시간에 대한 분쟁이 있을 경우, 회사의 서버에 기록된 시간이 그 기준이 된다.</p>
+									<br><br>
+									<p style="font-weight:bold">1.8 라이브 / 인-러닝(진행중인) 베팅</p>
+									<br><br>
+									<p style="font-weight:bold">1.8.1 라이브 또는 인-러닝 베팅은 이벤트가 진행될 때의 갑작스런 큰</p>
+									<p style="font-weight:bold">배당변경의 적용을 받는다. 이런 이유 때문에 회사는 표시된 배당이 항상 베팅</p>
+									<p style="font-weight:bold">가능하다고 보장해 줄 수 없다. 또한 회사의 전적인 재량권에 의해 전체</p>
+									<p style="font-weight:bold">경기에 대한 배당을 제공해 줄 권한이 없다.</p>
+									<br><br>
+									<p style="font-weight:bold">1.8.2 추가적으로, 가격이 회사 웹사이트에 등재되었을 지라도 만약 베팅이</p>
+									<p style="font-weight:bold">이루어질 때 그 당시의 가격이 산업시장가격과 차이가 있어 회사의 통제 밖의</p>
+									<p style="font-weight:bold">상황을 초래할 경우 회사는 베팅을 거절하고 무효화할 권한을 갖는다.</p>
+									<br><br>
+									<p style="font-weight:bold">우리는 효율성과 즐거움을 위해 최신기술을 사용합니다. 우리 아이벳 사이트를 통해서 </p>
+									<p style="font-weight:bold">고객들에게 공평한 거래 서비스를 제공할 것을 약속 드립니다.</p>
+									<br><br>
+									<p style="font-weight:bold">문의 사항이나 자세한 정보가 필요하실 경우 저희 고객서비스 상담원에게 연락을 주시기 바랍니다.</p>
+									<p style="font-weight:bold">여기게 스포츠 베팅의 다양한 규정들이 명시 되었지만, 가끔씩 이벤트 자체 규정이 있는 불가피한 상황도 있습니다.</p>
+									<br><br>
+									<p style="font-weight:bold">우리는 규정을 추가할 권리가 있습니다. 고객은 베팅 전 각 이벤트의 규정들을 숙지하실 책임이 있습니다.</p>					
+								</div>
+							</div>
+						</li>
+					</ul>
+					</div>
+					<div id="l-tab5" class="left_tab_con">
+					<ul class="smk_accordion">
 						<li>
 							<div class="acc_head br2"><h3>축구</h3></div>
 							<div class="acc_content">
@@ -1276,7 +1911,7 @@
 							</div>
 						</li>
 						<li>
-							<div class="acc_head"><h3>아이스 하키</h3></div>
+						<div class="acc_head"><h3>아이스 하키</h3></div>
 							<div class="acc_content">
 								<div class="acc_content_in_2">
 									<p>a.   국내외 아이스 하키 챔피언십에 대한 배팅은 별도의 언급이 없을 경우 정규경기시간을 기준으로 계산된다.</p>
@@ -1743,632 +2378,6 @@
 						</li>
 					</ul>
 					</div>
-					<div id="l-tab2" class="left_tab_con">
-						<ul class="smk_accordion">
-							<li>
-								<div class="acc_head"><h3>Baccarat (바카라)</h3></div>
-								<div class="acc_content">
-									<div class="acc_content_in_2">
-										<p>가장 드라마틱한 테이블 게임</p>
-										<p style="font-weight: bold;">고객은 플레이어(Player)와 뱅커(Banker) 중 어느 핸드가 이길지 예상하여 베팅을 합니다. </p>
-										<p style="font-weight: bold;">비길 것을 예상하여 타이(Tie)에 함께 베팅하기도 합니다.</p>
-										<br><br>
-										<p>베팅은 카지노가 정한 리미트(Limit, 베팅 가능 최저 금액과 최고 금액, 게임 옵션 참고) 범위 내에서 하시면 됩니다.</p>
-										<p>딜러가 드로잉 룰에 따라 플레이어와 뱅커에 카드를 드로잉하여 플레이어, 뱅커 중 9에 가까운 쪽이 이깁니다.</p>
-										<p>플레이어, 뱅커의 각 2장 혹은 3장의 합으로 게임 승패가 결정됩니다.</p>
-										<p>TIP 많은 분들이 플레이어는 고객, 뱅커는 카지노의 영역으로 오해하는데, 고객이 플레이어와 뱅커 중 이기는 쪽을</p>
-										<p>예상하여 베팅을 하는 게임입니다. 고객은 플레이어와 뱅커 어느 쪽이든 베팅 할 수 있습니다.</p>
-										<br><br>
-										<p>이긴 쪽에 베팅된 금액은 고객에게 지급하고, 진 쪽에 베팅된 금액은 수거합니다.</p>
-										<p>플레이어가 이길 경우 베팅한 금액만큼(100%) 페이하고, 뱅커가 이길 경우 5%의 커미션을 공제(95%)하고 지급합니다.</p>
-										<br><br>
-										<p>비길 경우 Tie에 베팅한 고객에게 베팅액의 8배를 드리며, 이때 원금은 수거하지 않습니다.</p>
-										<br><br>
-										<p style="font-weight: bold;">카드의 가치</p>
-										<p>10과 그림카드(KING, QUEEN, JACK)는 모두 0으로 계산됩니다. 그 외의 카드는 표시된 숫자로 계산됩니다. A 는 1입니다.</p>
-										<br><br>
-										<p style="font-weight: bold;">카드의 순위</p>
-										<p style="font-weight: bold;">NATURAL</p>
-										<p>가장 높은 순위는 내추럴(Natural)입니다. 플레이어나 뱅커 사이드 중 어느 쪽이든 두 장의 합이 9, 8이면 게임은 종료됩니다.(4장으로 게임 종료)</p>
-										<p style="font-weight: bold;">STAND</p>
-										<p>플레이어 두 장의 합이 7, 6일 때, 뱅커 두 장의 합이 7일 때 스탠드(Stand)인데, 어느 쪽이든 스탠드일 경우 더 이상 카드를 받지 않고 스탠드합니다.</p>
-										<p>양쪽이 전부 스탠드일 때 추가 카드 드로잉이 없이 게임이 종료됩니다.(4장 혹은 5장으로 게임 종료)</p>
-										<p style="font-weight: bold;">NOTHING</p>
-										<p>플레이어, 뱅커 모두 스탠드보다 낮을 경우 플레이어가 먼저 한 장을 받는데, 이때 나온 플레이어 카드의 가치에 따라 게임이 종료되기도 하고, 뱅커 카드를 한 장 더 받고 종료되기도 합니다.</p>
-										<p>(5장 혹은 6장으로 종료)</p>
-										<br><br>
-										<p style="font-weight: bold;">페어 벳(Pair bet)</p>
-										<p>플레이어 혹은 뱅커 사이드에 처음 드로잉 된 2장의 카드(Initial two cards)가 같은 가치를 지닌 경우 (One Pair), 페어벳 베팅을 한 고객에게 11배를 지급합니다.</p>
-										<p>페어벳 베팅을 했는데 페어가 없는 경우에는 페어벳 베팅금을 수거하며, 페어벳은 플레이어 페어벳, 뱅커 페어벳으로 각각 나뉘어져 있어 원하시는 쪽에 베팅하실 수 있습니다.</p>
-										<p>게임에 참가 중인 다른 고객이 베팅하지 않은 금액만큼 추가 베팅이 가능합니다.</p>
-										<p>10 – J, J – K, Q – K 등과 같이 바카라에서의 가치는 0으로 같지만 Pair가 아니기 때문에 인정되지 않습니다.</p>
-										<p>오리지날 베팅 없이 타이나 페어벳 만으로 게임 참여가 가능합니다. 이 때, 카드는 오픈으로 뽑습니다.</p>
-									</div>
-								</div>
-							</li>
-							<li>
-								<div class="acc_head"><h3>BlackJack (블랙잭)</h3></div>
-								<div class="acc_content">
-									<div class="acc_content_in_2">
-										<p>가장 인기가 많은 카지노 게임</p>
-										<p>게임 개요</p>
-										<p>블랙잭은 고객들이 가장 선호하는 카지노 게임의 하나로, </p>
-										<p>21 또는 21에 가까운 숫자를 만들어 딜러 보다 높으면 이기는 게임입니다.</p>
-										<p>고객에게 드로잉 된 최초 카드 2장(Initial two cards)의 높낮이에 따라 추가 카드를 받거나(Hit) </p>
-										<p>멈출 수 있으며 (Stay), 딜러보다 불리하다고 판단되면 베팅 금액의 절반을 포기하는 </p>
-										<p>조건으로 게임을 종료할 수 있습니다.</p>
-										<p>(이때 Hit, Stay, Surrender는 반드시 정해진 핸드 시그널로 표시해야 합니다.)</p>
-										<p>딜러는 이니셜 투 카드가 16 이하일 때, 17이상이 될 때까지 카드를 받아야 하며, 딜러와 </p>
-										<p>플레이어 모두 21을 초과하면 지게</p>
-										<p>됩니다. 이를 버스트(Bust)라고 합니다.</p>
-										<p>플레이어가 버스트하게 되면 해당 게임은 종료되며, 딜러가 버스트하게 되는 경우에는 </p>
-										<p>버스트하지 않은 플레이어가 이기게 됩니다. 플레이어들의 카드와 비교하여, 딜러보다 높은</p>
-										<p>카드의 베팅금액은 지급하고, 딜러보다 낮은 카드의 베팅 금액은 수거하며, 딜러와 </p>
-										<p>플레이어의 카드가 같을 경우 비기게 되어 지급, 수거 없이 게임을 종료시킵니다.</p>
-										<p>이니셜 투 카드 (처음 2장의 카드)의 조합이『A + any 10(10,J,Q,K)』으로, 합이 '21' 인 </p>
-										<p>경우가 가장 높은 카드이며, 이를 블랙잭이라 합니다. 플레이어가 블랙잭일 경우 1.5배를</p>
-										<p>지급하며, 딜러와 플레이어 모두 블랙잭일 경우 비기게 되며, 딜러가 블랙잭일 경우에는 </p>
-										<p>딜러가 이기게 됩니다.</p>
-										<br><br>
-										<p style="font-weight: bold;">카드의 가치</p>
-										<p>“ACE”는 1 또는 11로 계산됩니다. </p>
-										<p>그림카드 (KING, QUEEN, JACK)는 모두 10으로 계산되며, 그 외의 카드는 표시된 숫자로 계산됩니다</p>
-										<br>
-										<p>이니셜 투카드로 Ace와 10 카드를 받을 경우 이를 블랙잭이라 하며, 이니셜 투카드에 Ace가 있어 11로 카운팅이 가능한 경우 소프트 핸드라고 합니다.</p>
-										<br>
-										<p>카드를 더 받고자 할 때, Hit버튼을 클릭하시면 됩니다.</p>
-										<p>추가로 카드를 받지 않고자 할 때, Stay버튼을 클릭하시면 됩니다.</p>
-									</div>
-								</div>
-							</li>
-							<li>
-								<div class="acc_head"><h3>Roulette (룰렛)목</h3></div>
-								<div class="acc_content">
-									<div class="acc_content_in_2">
-										<p>누구나 쉽게 할 수 있는 카지노 게임</p>
-										<p>게임 개요</p>
-										<p style="font-weight: bolder;">룰렛은 특별한 규칙이 없다고 할 수 있는 게임으로 초보자라도 쉽게 즐길 수 있기 때문에 가장 대중적인카지노 게임 중 하나입니다. </p>
-										<p style="font-weight: bolder;">딜러가 회전시킨 볼이 회전하고 있는 휠(회전판) 상의 어떤 번호(번호/색깔 등)에 낙착할 것인가를 알아맞추는 게임입니다.</p>
-										<p>휠 상의 번호들은 테이블 레이아웃에 표시가 되어 있으며, 이곳에 원하는 곳에 베팅하면 됩니다.</p>
-										<p>맞춘 칩스에 대해서는 각각의 배당률에 따라 배당을 받게 되며, 맞추지 못한 칩스는 수거되어 잃게 됩니다.</p>
-										<br>
-										<p style="font-weight: bold;">룰렛 베팅의 종류</p>
-										<p style="padding-left: 10px; font-weight: bold; text-decoration: underline"> 컬럼 벳/투엘브넘버 벳 (Column Bet / Twelve Number Bet)칩스를 레이아웃 하단에 위치한  </p>
-										<p style="padding-left: 10px; font-weight: bold; text-decoration: underline">세 개의 공간 중에 선택하여 놓습니다.</p>
-										<p style="padding-left: 10px; font-weight: bold; text-decoration: underline">이 베팅은 해당 공간의 상위 수직선상의 12개 번호를 가리킵니다. (1:2)</p>
-										<br><br>
-										<p style="padding-left: 10px; font-weight: bold; text-decoration: underline">다즌벳 (Dozen Bet)칩스를 레이아웃의 『1st 12』, 『2st 12』, 『3st 12』라고 표시된 지점에 놓습니다.</p>
-										<p style="padding-left: 10px; font-weight: bold; text-decoration: underline">『1st 12』는 1부터 12까지의 숫자를 가르키며, 『2st 12』는 13부터 24, 『3st 12』는 25부터 36까지의 숫자를 가르킵니다. (1:2)</p>
-										<br><br>
-										<p style="padding-left: 10px; font-weight: bold; text-decoration: underline">다즌벳 (Dozen Bet)칩스를 레이아웃의 『1st 12』, 『2st 12』, 『3st 12』라고 표시된 지점에 놓습니다.</p>
-										<p style="padding-left: 10px; font-weight: bold; text-decoration: underline">이븐/아드 넘버 벳 (Even/Odd Number Bet)0과 00를 제외한 레이아웃 상의 모든 번호는 짝수 (Even)와 홀수 (Odd)로 구분됩니다. (1:1)</p>
-										<br><br>
-										<p style="padding-left: 10px; font-weight: bold; text-decoration: underline">칼라 벳 (Color Bet)0과 00를 제외한 레이아웃 상의 모든 번호는 적색 (Red)와 흑색 (Black)으로 구분됩니다. (1:1)</p>
-										<br><br>
-										<p style="padding-left: 10px; font-weight: bold; text-decoration: underline">스트레이트 벳 (Straight Bet) 싱글 넘버 벳 (Single Number Bet)한 번호를 겨냥하여 베팅합니다. (1:35)</p>
-										<br><br>
-										<p style="padding-left: 10px; font-weight: bold; text-decoration: underline">스플릿 벳 (Split Bet) 투넘버 벳 (Two Number Bet)두 번호를 겨냥하여 칩스를 두 번호 사이의 선 위에 베팅합니다. (1:17)</p>
-										<br><br>
-										<p style="padding-left: 10px; font-weight: bold; text-decoration: underline">스트릿 벳 (Street Bet) 쓰리 넘버 벳 (Three Number Bet)세 번호를 겨냥하여 칩스를 레이아웃을 가로지르는 3가지 번호가 있는 선 위에 베팅합니다. (1:11)</p>
-										<br><br>
-										<p style="padding-left: 10px; font-weight: bold; text-decoration: underline">스퀘어 벳 (Square Bet) 코너벳 (Corner Bet) 포넘버 벳(Four Number Bet)네 번호를 겨냥하여 네 가지 번호가 교차하는 중간선 위에 베팅합니다. (1:8)</p>
-										<br><br>
-										<p style="padding-left: 10px; font-weight: bold; text-decoration: underline">파이브넘버 벳 (Five Number Bet)칩스를 1,2,3,0,00을 분리시키는 모서리 지점에 베팅합니다. (1:6)</p>
-										<br><br>
-										<p style="padding-left: 10px; font-weight: bold; text-decoration: underline">라인 벳 (Line Bet) 식스 넘버 벳 (Six Number Bet)칩스를 두 개의 Street 벳이 교차하는 선 위에 놓습니다. (1:5)</p>
-									</div>
-								</div>
-							</li>
-						</ul>
-					</div>
-					<div id="l-tab3" class="left_tab_con">
-						<ul class="smk_accordion">
-								<li>
-									<div class="acc_head"><h3>회원 가입 관련</h3></div>
-									<div class="acc_content">
-										<div class="acc_content_in_2">
-											<p style="font-weight:bold">Q 아이벳 회원 가입은 어떻게 하나요?</p>
-											<br>
-											<p>사이트 우측 상단에 “회원가입” 클릭후 필요한 정보를 작성 후 가입하시면 됩니다.
-											회원 가입은 해당 국가의 법적나이 19세 이상만 가능하며 유효한 휴대폰 번호를 입력하셔야 합니다.</p>
-											<br><br>
-											<p style="font-weight:bold">Q 사이트에 가입하면 어떤 의무사항이 있나요?</p>
-											<br>
-											<p>가입 후 30일 이내 사이트 이용내역이 없는경우, 자동으로 회원 탈퇴가 이루어지게 됩니다.</p>
-											<p style="color:#ffa800;"> 가입하는 것은 사이트의 이용에 대한 약관에 동의 하는 것입니다.</p>
-											<br><br>
-											<p style="font-weight:bold">Q 어떤 경우에 계정이 정지 되나요?</p>
-											<br>
-											<p> 약관에 어긋나는 베팅을 하였을 경우,불법적인 방법으로 입금한 경우
-												채팅, 전화 그리고 이메일로 서포트 연락 시 부적절 한 언어를 사용한 경우
-												통보없이 계정이 정지될 수 있습니다. </p>
-											<br><br>
-											<p style="font-weight:bold">Q 중복가입은 가능한가요?</p>
-											<br>
-											<p><font style="color:#ffa800;">가입은 1인1계정 입니다. 만약 중복 계정이 발견되면 통보 없이 계정삭제</font>가 됩니다</p>
-											<br><br>
-											<p style="font-weight:bold">Q 본인 개인정보 변경은 어떻게 하나요?</p>
-											<br>
-											<p>상단 ‘내 정보’ 클릭 후  변경 가능하며, 휴대폰번호 혹은 계좌번호 변경 시
-											고객센터로 통보해주셔야만 계좌변경 및 이벤트에 대한 소식을 받아보실 수 있습니다.</p>
-											<br><br>
-											<p style="font-weight:bold">Q 비밀번호를 잊어 버렸을 때 어떻게 해야 하나요?</p>
-											<br>
-											<p> 비밀번호를 잃어버렸을 경우 사이트내 휴대폰 번호 인증 후 변경가능합니다 . 이외에 방법은 없습니다.</p>
-											<br><br>
-											<p style="font-weight:bold">Q 로그인이 안되요?</p>
-											<br>
-											<p>로그인이 안될 때는 익스플로러 또는 크롬 쿠키 삭제 및 방문내역을 삭제 후 로그인하시면 됩니다.</p>
-										</div>
-									</div>
-								</li>
-								<li>
-									<div class="acc_head"><h3>베팅 관련</h3></div>
-									<div class="acc_content">
-										<div class="acc_content_in_2">
-											<p style="font-weight:bold">Q 스포츠 베팅 시 최대 베팅 한도 및 최대 베팅 가능한 폴더 수는 어떻게 되나요?</p>
-											<br>
-											<p><font style="color:#ffa800;">해외 배팅업체의 경우 각 리그 , 해당팀, 배당률에 따라 최대 베팅한도는 상이</font>합니다.</p>
-											<p>이는 최대 베팅 가능한 폴더 수 및 베팅 상한가 도 똑같이 적용됩니다.</p>
-											<p>그로 인해 베팅 한도 및 베팅 상한가는 게임마다 다르게 적용되고 있습니다. </p>
-											<p><font style="color:#ffa800;">베팅하시려는 경기의 본인 최대 베팅 한도를 알고 싶으시면</font></p>
-											<p><font style="color:#ffa800;">로그인 후 베팅하실 경기 배당에 마우스를 올리거나 각 경기 선택 후 배팅슬립 하단 ‘맥스’ </font></p>
-											<p><font style="color:#ffa800;">버튼을 누르시면 확인 가능</font>합니다.</p>
-											<p>로그인 전 에는 ‘맥스’ 버튼이 활성화 되지 않습니다.</p>
-											<br><br>
-											<p style="font-weight:bold">Q 베팅 슬립에 나오는 베팅종류는 무엇인가요?</p>
-											<br>
-											<p>아이벳 에서는 단폴 베팅, 조합 베팅 이렇게 2종류의 베팅 종류를 제공합니다. </p>
-											<br><br>
-											<p style="font-weight:bold; color:#00afed;">1-단폴 베팅</p>
-											<br>
-											<p>베팅 슬립에 담긴 경기들을 개별적으로 베팅 금액을 설정할 수 있으며,</p>
-											<p>베팅 금액이 설정된 경기들은 한 번의 클릭으로 모두 단 폴더 베팅할 수 있습니다.</p>
-											<br><br>
-											<p style="font-weight:bold; color:#00afed;">2-조합베팅</p>
-											<br>
-											<p>베팅 슬립에 담긴 여러 개의 경기들을 조합 하여 베팅할 수 있습니다</p>
-											<p>다만 베팅 카트에 담긴 내역 중 조합 베팅이 가능하지 않는 내역은</p>
-											<p>카트에 경고 표시되며 대상 경기 중 하나를 삭제 하시면 정상적으로</p>
-											<p>베팅 처리가 완료 됩니다.</p>
-											<br><br>
-											<p style="font-weight:bold">Q 라이브 베팅 시 베팅 완료가 되지 않거나 간섭이 일어나는 이유는 무엇인가요?</p>
-											<br>
-											<p>아래의 이유들로 인해서 이와 같은 상황이 발생될 수 있습니다.</p>
-												<p>- 인터넷 서비스 회사의 문제</p>
-												<p>- 갑자기 너무 많은 베팅이 몰렸을 때</p>
-												<p>- 해당 경기가 너무 빠르게 진행되고 있고 배당 조정이 급격히 일어날때</p>
-												<p>- 기술적인 문제(소프트웨어 문제, 정전 등)</p>
-												<p>- 자연재해</p>
-											<br><br>
-											<p style="font-weight:bold">Q 베팅한 경기의 배당률이 시간이 지나도 멈춰 있는 경우</p>
-											<br>
-											<p>배당률이 시간이 지나도 멈추어 있는 경우는 해당 경기의 생방송이 멈추거나, 소프트웨어 문제</p>
-											<p>그리고 정전 등의 이유로 일어날 수 있습니다.</p>
-											<br><br>
-											<p style="font-weight:bold">Q 베팅한 경기의 배당률이 시간이 지나도 멈춰 있는 경우</p>
-											<br>
-											<p>배당률이 시간이 지나도 멈추어 있는 경우는 해당 경기의 생방송이 멈추거나, 소프트웨어 문제</p>
-											<p>그리고 정전 등의 이유로 일어날 수 있습니다.</p>
-											<br><br>
-											<p style="font-weight:bold">Q 라이브 베팅에 있는 경기 시간과 스코어 등이 정확하지 않은 경우</p>
-											<br>
-											<p>의도되지 않은 기술적 이유로 드물게 일어나는 경우가 있습니다. 라이브 베팅에서 제공하는
-											경기시간은 지표일 뿐입니다. 실제 확인 가능한 경기만 베팅에 이용하시기 바랍니다.
-											당사는 위에 보여지는 정보 즉,<font style="color:#ffa800;"> 스코어 혹은 경기시간의 정확성 및  현재성에 대하여 책임이
-											없음을 알려 드립니다.
-											만약 베팅시점에 보여지는 정보가 부정확 했더라도 실제 경기의 결과와
-											배당이 적용됨을  알려드립니다.</font></p>
-											<br><br>
-											<p style="font-weight:bold">Q 나의 베팅한도가 줄어 들었을때</p>
-											<br>
-											<p>어느 북메이커든지 플레이어의 베팅한도를 줄일 수 있는 권리를 가지고 있으며 이 사항에
-											대하여 설명할 의무가 없습니다.</p>
-											<p>그리고 북메이커는 합당한 이유가 있을 시 플레이어의 계정을 정지 시킬 수 있습니다.</p>
-											<br><br>
-											<p style="font-weight:bold">Q 라이브 페이지에서 경기도중 베팅한 경기가 사라졌습니다. 베팅은 어떻게 처리되나요?</p>
-											<br>
-											<p>해당 경기의 공식정보가 업데이트 되지 않아 중단된 경우입니다. 라이브 도중 경기가
-											사라져도 완료된 베팅은 공식결과가 나오는대로 정상 처리됩니다. 해당 경기의 공식정보가 없을</p>
-											<p>사라져도 완료된 베팅은 공식결과가 나오는대로 정상 처리됩니다. 해당 경기의 공식정보가 없을</p>
-											<br><br>
-											<p style="font-weight:bold">Q 축구 경기 중 만약 한 선수가 2장의 옐로우 카드를 받을 시 베팅 결과 처리</p>
-											<br>
-											<p>두 번째 옐로우 카드를 받으면 레드카드를 받는 것과 같이 선수는 퇴장을 당하므로 두 번째
-											옐로우 카드는 레드카드로 간주합니다. 그러므로 옐로우 카드 1장과 레드카드 1장을 받은
-											것으로 베팅결과에 적용됩니다</p>
-											<br><br>
-											<p style="font-weight:bold">Q 테니스 경기 중 만약 한 선수가 기권할 시 베팅 결과 처리</p>
-											<br>
-											<p>만약 한 선수가 부상 등의 이유로 기권할 시 베팅은 적특 처리됩니다.</p>
-											<br><br>	
-											<p style="font-weight:bold">Q 테니스 경기 중 만약 한 선수가 기권할 시 베팅 결과 처리</p>
-											<br>
-											<p>경기 시작 시간이 표기와 다르게 몇 시간 빠르거나 늦게 시작되어도 실제 경기 시작전에 베팅이 </p>
-											<p>완료되면 정상 처리됨을 알려 드립니다.</p>
-											<p><font style="color: #ffa800;">그리고 베팅 이후의 취소는 불가합니다.</font></p>									
-											<br><br>
-											<p style="font-weight:bold">Q 베팅 취소는 가능한가요?</p>
-											<br>
-											<p><font style="color: #ffa800;">베팅 취소는 ‘하루3회’ 가능 </font>합니다. 진행중인 경기가 포함되어 있는 다폴더 베팅은 취소가 불가능하며, 베팅후 10분 이내에만 취소가 가능합니다.</p>									
-											<br><br>									
-										</div>
-									</div>
-								</li>
-								<li>
-									<div class="acc_head"><h3>입금,출금 관련</h3></div>
-									<div class="acc_content">
-										<div class="acc_content_in_2">
-											<p style="color:maroon;">※ 아이벳 "원화 계좌이체 " 방식의 입출금은 "아이벳" 의 엄격한 자금 보호 아래 진행하며  마스터, 에이젼시의 원화 입출금은 불허합니다.</p>
-											<br><br>
-											<p style="font-weight:bold">Q 입금계좌 확인은 어떻게 하나요?</p>
-											<br>
-											<p>계좌확인은 입금 신청시 비밀번호를 입력하면 자동 안내됩니다.</p>
-											<p style="color:#ffa800;">계좌는 수시로 변경되기 때문에 입금 전에는 반드시 안내되는 계좌로 입금하셔야 합니다.</p>
-											<br><br>
-											<p style="font-weight:bold">Q 수표로 입금 가능한가요?</p>
-											<br>
-											<p style="color:#ffa800;">수표입금은 절대 불가합니다. 만약 수표입금 시 통보 없이 계정삭제가 될 수 있습니다.</p>
-											<br><br>
-											<p style="font-weight:bold">Q 실수로 구계좌로 입금했어요?</p>
-											<br>
-											<p>구 계좌로 입금 시에는 저희 쪽에서 확인이 불가능 합니다. 그로 인해 충전도 불가능합니다.</p>
-											<br><br>
-											<p style="font-weight:bold">Q 입금 출금은 어떻게 하나요?</p>
-											<br>
-											<p style="color:#ffa800;">입금 시에는 개인정보란에 등록된 본인 이름과 입금자명이 동일해야 합니다. 타인명의로 입금 시 충전이 불가하며 강퇴처리될 수도 있습니다.</p>
-											<p style="color:#ffa800;">출금은 슈퍼마스터에 등록된 본인 명의의 계좌로만 출금이 됩니다. 하루 최대 3회 출금이 가능합니다.</p>
-											<br><br>
-											<p style="font-weight:bold">Q 입금 시 입금하지 않고 “충전확인”을 클릭하면 어떻게 되나요?</p>
-											<br>
-											<p style="color:#ffa800;">아이벳 사용약관에 의하여, 허위로 “충전확인”를 클릭하시면 계정이 즉시 정지 되오니,반드시 입금을 완료하시고 “충전확인”를 클릭해주세요.</p>
-											<br><br>
-											<p style="font-weight:bold">Q 입금 후 베팅을 하지 않고 바로 출금이 가능한가요?</p>
-											<br>
-											<p>불가능 합니다. 불법자금 세탁방지 및 입금 시 수수료등이 발생하기 때문에 입금 후 전액 베팅을 하지 않으시면 출금이 되지 않습니다.</p>
-											<br><br>
-											<p style="font-weight:bold">Q 입금 출금은 얼마까지 가능한가요?</p>
-											<br>
-											<p>입금 출금액에 대한 한도는 없습니다.<font style="color:#ffa800;">다만 계좌 이체 방식의 일일 출금의 경우 평소 회원과 당사와의 입출금 거래 금액을 기준으로</font></p>
-											<p><font style="color:#ffa800;">이에 크게 벗어나는 출금 금액일 경우 그 금액을 나누어 송금 시킬 수 있습니다. </font>이는 한국 자본거래법 (은행 모니터링 후 금감원 자동통보)</p>
-											<p>기준에 따른 사항이며 <font style="text-decoration: underline;">이런 사항이 발생할경우 당사 자금팀은 지체없이 회원에게 보고해야할 의무가 있습니다.</font></p>
-											<p><font style="text-decoration: underline;">※다른 기타 결제수단을 원할 경우 ( 비트코인 및 유로 , 달러화 결제 ) 고객센터를 통해 문의바랍니다.</font></p>
-											<br><br>
-											<p style="font-weight:bold">Q 출금이 왜 안되나요?</p>
-											<br>
-											<p>충전 후 돈이 들어오지 않은 경우는 새로 고침 하시면 회원님의 보유머니가 정상적으로 보입니다.</p>
-											<br><br>
-											<p style="font-weight:bold">Q 계좌 번호를 변경 하고 싶은데 가능 한가요?</p>
-											<br>
-											<p>귀하의 잔액이 0 일 때 메시지로 문의 하시면 변경 가능 합니다.</p>
-											<p>잔액이 남아있는 경우 기존 등록된 계좌로 잔액을 모두 송금합니다.</p>
-											<p>단, 거래 내역이 없는 계좌는 변경이 불가능 합니다.</p>
-										</div>
-									</div>
-								</li>
-							</ul>
-						</div>
-						<div id="l-tab4" class="left_tab_con">
-						<ul class="smk_accordion">
-						<li>
-							<div class="acc_head"><h3>【 이용약관 】</h3></div>
-							<div class="acc_content">
-								<div class="acc_content_in_2">
-									<p>1. 본 약관을 읽고 회원가입을 완료하실 경우 </p>
-									<p>회원님은 본 약관에 이미 동의 하신 것으로 간주되며, 본 약관을 읽지 않고 회원 가입 후 생기는 어떤 문제도 본사는 책임을 질 수 없습니다.</p>
-									<br>
-									<p>2. 회사는 이용약관을 언제든지 변경하거나 추가 할 수 있습니다.</p>
-									<p>이용약관의 변경에 대한 내용은 사이트 내에 공지와 동시에 적용되며, 본 문서에 추가 됩니다. </p>
-									<br>
-									<p>3.각 회원님들이 위치하고 계신 국가별 법적인 제한으로 어떤 국가들에서는 사이트들에 대한 접속이 </p>
-									<p>차단될 수도 있습니다.</p>
-									<p>그러나 본사는 원칙적으로 접속을 제한하지 않으며 이에 대한 책임을 지거나 해결 할 수 없습니다. </p>
-									<p>단 악의적인 사용자로 판단되었거나, 사이트의 원활한 서비스 제공을 위해 일시적으로 특정 지역에 </p>
-									<p>위치한 회원이나 특정회원의 접속을 제한할 수 있는 권리가 있습니다.</p>
-									<br>
-									<p>4. 회원님들이 회원가입을 하시면 가입시의 절차에 따라 자동으로 회원 가입이 승인 됩니다.</p>
-									<p>특별히 회원 가입 승인에 제한을 두지 않으나, 악의적인 사용자와 사이트의 원활한 서비스 제공을 위해 승인을 거부하거나 취소할 수 있습니다.</p>
-									<p>회사는 회원님들이 가입시 기재한 어떠한 정보도 제 3자에게 제공하거나 노출하지 않으며, 가능한 모든 방법을 동원하여 회원님들의 정보 보호에 만전을 다하고 있습니다.</p>
-									<p>그럼에도 불구하고 불가항력적인 이유로 정보가 노출될 가능성도 있음을 참고하십시요.</p>
-									<br>
-									<p>5. 회원가입에 연령은 성인 즉 만 20세를 기준으로 합니다. </p>
-									<p>회사는 20세 미만의 고객이라고 판단되면 언제든지 해당회원의 접근을 제한 하거나 가입 승인을 </p>
-									<p>취소하거나, 심지어 배팅을 하였다 하더라도 이에 대한 금액 지불을 거부할 수 있습니다.</p>
-									<br>
-									<p>6. 회원은 자신의 회원아이디와 비밀번호의 비밀엄수에 대한 책임을 가지고 있습니다. 아이디와 비밀번호 노출로 인하여 제 3자가 배팅하여 생기는 피해에 대해서 이에 따른 어떠한 책임도 회사는 지지 않습니다. </p>
-									<br>
-									<p>7. 회원은 언제든지 자신의 배팅머니를 사용하거나 환전신청하여 인출 할 수 있습니다.</p>
-									<br>
-									<p>8. 만약 회원의 배팅머니와 관련된 배당금의 합계나 충전, 또는 환전에 따른 여러 계산에서 잘못된 점이 있다면 이에 대한 신고와 재확인 요구는 회원에게 있습니다. </p>
-									<p>회원이 신고하거나 재확인 요구를 하지 않아서 발생한 직접 또는 간접적인 모든 배팅이나 충전, 환전 등 배팅 머니와 관련된 일련의 모든 행위들은 모두 취소 처리 될 것입니다.</p>
-									<br>
-									<p>9. 회사는 모든 회원님들께 친절하고 편리한 서비스를 제공하는것을 목표로 삼고 있지만, 부정 중복가입, 해킹시도, 근거 없는 비방글 유포 등 특정한 계정에 대해서 </p>
-									<p>회원자격을 박탈 할 수 있으며 이러한 경우에 해당 아이디의 모든 배팅머니는 몰수 되고 사이트 내에서의 모든 자격을 잃게 될 것입니다.</p>
-									<p>그러나 회원 스스로 회원 자격을 버릴 경우에는 자신의 보유 머니를 언제든지 신청하여 인출 할 수 있습니다.</p>
-									<br>
-									<p>10. 회사는 모든 서비스를 모든 회원님들께 친절하고 편리하며, 공정하고 투명하게 운영하도록 최선을 </p>
-									<p>다합니다.</p>
-									<p>회원은 회사의 모든 서비스를 이용함에 있어 규칙에 따라 정해진 범위 안에서 이용해야만 합니다.</p>
-									<p>회사와 회원은 서로 신뢰하고 동반자로서의 관계를 유지하기 위해 노력해야 합니다.</p>
-									<br>
-									<p>11. 회사는 언제나 정확한 정보를 제공하기 위해 최선의 노력을 다하고 있으나 예기치 않은 오류나 대응할 수 없는 불가 항력적인 사항의 경우 이에 따른 결과에 대해 수정할 권리를 가지고 있습니다.</p>
-									<br>
-									<p>12. 회사는 배당의 잘못된 기재 및 공식적인 경기 변동사항 (경기전 감독사임, 예기치 못한 선수의 </p>
-									<p>갑작스런 사고 등)으로 인한 경기 배당 수정 및 취소할 권리를 갖으며, 회원 또한 잘못된 정보를 확인하였을 경우 회원의 의무로서 즉시 회사에 알려야합니다.</p>
-									<p>배당 경기 시간등 잘못된 정보를 알고 있음에도 이를 회사에 알리지 않고 배팅할 경우, 또한 오히려 이를 악용하여 큰 차익을 내려는 의도가 보일 경우 회사는 그 회원에 대한 징계를 내릴 수 있습니다.</p>
-									<br>
-									<p>13. 회사는 어떤한 경우에도 불법적인 시도와 타협하거나 거래하지 않으며, 이를 막기 위해 가능한 모든 방법을 동원하고 있습니다.</p>
-									<p>회사는 불법적인 시도에 대한 모든 일련의 행위는 모두 취소 처리 하고 지불하지 않을 권리가 있습니다.</p>
-									<br>
-									<p>14. 모든 회원은 한 아이피에서 한 계정만을 사용하여야 하며 부득이하게 같은 아이피에서 다른 회원과 함께 가입 및 이용을 해야할 경우 먼저 고객센터를 통하여 승인을 얻어야합니다.</p>
-									<p>승인을 얻지 않고 중복가입할 경우 회사는 중복아이디 정지 탈퇴 삭제할 권리가 있으며 모든 금액을 </p>
-									<p>환수할 권리도 있습니다.</p>
-									<br>
-									<p>15. 게시판은 본사 운영과 아무런 연관이 없으며 다만, 근거없이 게시판을 악용하여 상대방을 비방하거나 회사를 비방할 경우 예고 없이 회원의 아이디를 정지 탈퇴 삭제할 권리가 있습니다.</p>
-									<br>
-									<p>16. 머니 충전시 회원은 언제든지 발급된 계좌를 정확히 확인해야합니다.</p>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="acc_head"><h3>【 일반규정 】</h3></div>
-							<div class="acc_content">
-								<div class="acc_content_in_2">
-									<p>아이벳 스포츠북이 회원의 베팅을 승인할 때의 조건들을 세분화하여 요약한 것입니다.</p>
-									<p>승인된 모든 베팅은 이 규정의 적용을 받습니다.</p>
-									<p>당신이 베팅을 할 때 오류를 범할 경우 또는 우리 사이트와 시스템에서 오류가 발생될 경우 어떻게 베팅이 정산되는지에 대한 세부내역들도 이 규정에 명시되어 있습니다.</p>
-									<p>이 규정과 특별한 베팅룰을 숙지하는 것은 여러분의 책무입니다.</p>
-									<p>아이벳은 사전 통보 없이 항상 베팅 규정을 추가,삭제,변경할 권한을 갖습니다.</p>
-									<br><br>
-									<p>1.1 일반 사항</p>
-									<br><br>
-									<p>1.1.1<font style="color:#ffa800;">실수로 베팅완료를 클릭 하였다 하여도 약관의 따라 완료된 베팅은 취소처리가 불가능 하다.</font></p>
-									<br><br>
-									<p style="font-weight:bold">1.1.2 회사에 의해 제공된 모든 베팅 정보는 진실되고 명확해야 한다.</p>
-									<p style="font-weight:bold">하지만 회사가 데이터, 시간, 장소, 경쟁상대, 배당, 결과, 통계 및 기타 베팅 정보들에</p>
-									<p style="font-weight:bold">대해서 최선을 다해 종합적으로 정확성을 보장하는 노력을 기울였음에도 불구하고</p>
-									<p style="font-weight:bold">오류 또는 누락 등이 발생할 경우 이에 대한 책임이 없다.</p>
-									<p style="font-weight:bold">회사는 명확한 오류에 대해서는 수정을 해야 하며 또한 특정 스포츠 이벤트에 제공된</p>
-									<p style="font-weight:bold">다른 베팅 유형으로 정의된 마켓들이 성실히 관리되도록 모든 타당한 조치를 취해야 한다.</p>
-									<br><br>
-									<p style="font-weight:bold">1.1.3 두 팀간 또는 개인간 조직화된 스포츠 경기로 정의된 이벤트가 만약 예정 시간 전에</p>
-									<p style="font-weight:bold">시작되었고 이 경우 베팅을 했을 경우 (특정 라이브 베팅은 제외됨) 베팅은 유효하다고</p>
-									<p style="font-weight:bold">간주된다. 만약 마켓이 정확한 시간에 종료 또는 중단 되지 않았을 경우,</p>
-									<p style="font-weight:bold">회사는 실제 시작시간(특정 라이브 베팅은 제외)이후에 이루어진 모든 베팅을</p>
-									<p style="font-weight:bold">무효화할 권리를 갖는다.</p>
-									<p style="font-weight:bold">따라서 우리 웹사이트상에서 경기의 일자와 시작 시간은 단순한 참조용일 뿐이다.</p>
-									<br><br>
-									<p style="font-weight:bold">1.1.4 영어버전의 우선순위를 갖는다. 만약 어느 팀이 정해진(지정된) 상대 팀이 아닌</p>
-									<p style="font-weight:bold">다른 팀과 경기를 할 경우, 회사의 재량으로 이 경기는 무효로 간주된다.</p>
-									<br><br>
-									<p style="font-weight:bold">1.1.5 고객은 항상 경기 스코어와 경기관련 모든 정보에 대하여 베팅 전 반드시</p>
-									<p style="font-weight:bold">이해하고 있어야 한다.</p>
-									<p style="font-weight:bold">이해가 안되는 부분은 언제든 고객센터에 문의 하여 충분히 숙지하여야 한다</p>
-									<br><br>
-									<p style="font-weight:bold">1.1.6 회사는 규정을 변경할 사유가 발생될 경우 이에 대한 권리를 가진다.</p>
-									<p style="font-weight:bold">이러한 규정 변경은 웹사이트에 등재됨과 동시에 구속력과 유효성을 갖는다.</p>
-									<br><br>
-									<p style="font-weight:bold">1.1.7 고객은 현재 스코어, 시간경과 및 실시간 중계에 대하여 제 3자가 제공하는</p>
-									<p style="font-weight:bold">기타 다른 데이터들이 시간지연 또는 오류를 발생시킬 수 있다는 점과 이 데이터를</p>
-									<p style="font-weight:bold">기준으로 베팅이 된 것은 전적으로 고객들 자신의 ‘위험성’이라는 것을 인정해야 한다.</p>
-									<p style="font-weight:bold">회사는 이러한 데이터의 정확성, 완성도 또는 타임라인(시각표)을 보장해 줄 수</p>
-									<p style="font-weight:bold">없고 이와 관련된 고객들의 직간접 피해에 대해 책임이 없다.</p>
-									<br><br>
-									<p style="font-weight:bold">1.1.8 라이브 거래에서 보여지는 마켓은 전체 경기를 말한다.</p>
-									<p style="font-weight:bold">(예외: 축구경기에서 아시안 헨디켑은 현재 스코어에서 지정된 다음 마켓 이름까지 항상 거래된다)</p>
-									<br><br>
-									<p style="font-weight:bold">1.1.9 복수 베팅에서 하나의 이벤트 결과가 또 다른 이벤트 결과에 영향을 줄 경우</p>
-									<p style="font-weight:bold">이를 인정하지 않으며 이러한 상황하에서 회사는 복수베팅을 싱글(Single)로서</p>
-									<p style="font-weight:bold">결정할 권한이 있다. 복수 베팅에 승리할 경우 투자한 총 금액은 각각의</p>
-									<p style="font-weight:bold">선택 분에 대하여 균일하게 나누어서 정산된다.</p>
-									<br><br>
-									<p style="font-weight:bold">1.1.10 가격, 레이스, 경기 또는 이벤트의 조작의 증거가 있는 곳에서,</p>
-									<p style="font-weight:bold">차후 조사결과가 나올 때까지 회사는 베팅을 무효화 하거나</p>
-									<p style="font-weight:bold">이익금의 결제를 보류 할 권한이 있다.</p>
-									<p style="font-weight:bold">만약 베팅을 하는 과정에서 금전상의 이익을 얻기 위해 고의적인 시도가 있다고</p>
-									<p style="font-weight:bold">판단될 경우, 차후 조사 결과가 나올 때까지 회사는 이 베팅을 무효 처리하고</p>
-									<p style="font-weight:bold">이익금 결제를 보류할 권한을 갖는다.</p>
-									<br><br>
-									<p style="font-weight:bold">1.1.11 베팅이 마무리된 후 1주 또는 이벤트가 종료된 후 2주가 지나가면 클레임 또는</p>
-									<p style="font-weight:bold">논쟁이 없는 것으로 간주된다. 우선적으로, 모든 클레임과 불만은 고객센터를</p>
-									<p style="font-weight:bold">통해서 접수되어야 하고 접수된 클레임은 거래 팀으로 전달된다.</p>
-									<p style="font-weight:bold">만약 거래 팀이 접수된 클레임을 해결할 수 없을 경우,</p>
-									<p style="font-weight:bold">스포츠북 본사가 최종 결정을 하여 그 결과를 이메일로 고객에게 통지한다.</p>
-									<br><br>
-									<p style="font-weight:bold">1.1.12 회사는 어떤 팀 또는 포지션에 가격을 제공하지 않을 권리가 있다.</p>
-									<p style="font-weight:bold">이럴 경우N/O(오퍼 없음)로서 웹에 등재된다.</p>
-									<p style="font-weight:bold">가격이 제시되지 않은 곳에 베팅[배당(1.00)]을 할 경우 무효가 된다.</p>
-									<br><br>
-									<p style="font-weight:bold">1.1.13 회사 웹사이트를 사용할 때, 고객은 이 사이트에서 제공하는(라이브 TV 영상 포함)</p>
-									<p style="font-weight:bold">현재 스코어, 시간경과 그리고 다른 데이터들을 인정해야 한다.</p>
-									<p style="font-weight:bold">제 3자에 의해 공급된 실기간 정보는 시간 지연 및 오류를 초래할 수 있다.</p>
-									<p style="font-weight:bold">따라서 이 데이터를 기준으로 베팅한 것은 전적으로 고객 자신들의 위험성 이라는 것을</p>
-									<p style="font-weight:bold">인정해야 해야 하며 회사는 고객의 직간접적인 손실에 대해 보상해 줄 책임이 없다.</p>
-									<br><br>
-									<p style="font-weight:bold">1.1.14 약관의 어긋나는 베팅을 하였을 경우, 도나 신용카드 및 수표 사용 등의 불법적인</p>
-									<p style="font-weight:bold">방법으로 입금한 경우, 채팅 그리고 이메일로 서포트 연락 시 부적절 한</p>
-									<p style="font-weight:bold">언어를 사용한 경우, 이미 완료된 답변에 반복되는</p>
-									<p style="font-weight:bold">문의로 업무에 지장을 초래한 경우 회사는 해당고객의 계정을 통보 없이 정지 할 권한이 있다.</p>
-									<br><br>
-									<p style="font-weight:bold">1.1.15 어느 북메이커든지 플레이어의 베팅한도를 줄일 수 있는 권리를 가지고 있으며</p>
-									<p style="font-weight:bold">이 사항에 대하여 설명할 의무가 없다. 그리고 북메이커는 합당한 이유가</p>
-									<p style="font-weight:bold">있을 시 회사는 해당고객의 계정을 통보 없이 정지 할 권한이 있다.</p>
-									<br><br>
-									<br><br>
-									<p style="font-weight:bold">1.2 포기와 연기,지연</p>
-									<br><br>
-									<p style="font-weight:bold">1.2.1 만약 이벤트가 예정시작일자(예정 시작시간 12시간 이내)에</p>
-									<p style="font-weight:bold">시작되지 않거나 예정일 이내에 종료되지 않을 경우 모든 베팅은 무효이다.</p>
-									<br><br>
-									<p style="font-weight:bold">1.2.2 종료 전 경기가 중단되어 되어 30시간 이내에 다시 시작하지 않을 경우</p>
-									<p style="font-weight:bold">중단될 당시에 이미 결정된 베팅 결과를 제외하고 모두 무효가 된다.</p>
-									<p style="font-weight:bold">마켓은 베팅이 발생된 것에 대해 전적으로 결정된다. 예를 들어,</p>
-									<p style="font-weight:bold">이미 결정이 된 ‘하프타임’ ‘쿼터’ ‘이닝’ 또는 다른 기간의 쿼터에 대한 베팅과</p>
-									<p style="font-weight:bold">같이 만약 골이 경기 중단 시점에서 나올 경우 ‘첫 번째 팀 스코어’ 또는</p>
-									<p style="font-weight:bold">첫 골 시간’의 베팅은 유지 된다.</p>
-									<p style="font-weight:bold">*예외 스포츠 : 테니스, 탁구의 경우 30시간이 지나도 공식결과가 나와야 처린된다.</p>
-									<br><br>
-									<p style="font-weight:bold">1.2.3 만약 이벤트가 예정 시간 이내에 종료되지 않은 상태에서 공식 결과가</p>
-									<p style="font-weight:bold">선언되거나 결과가 특정 이벤트 주체 측에 의해 결정될 경우,</p>
-									<p style="font-weight:bold">회사는 이 경기를 공식적으로 유효하다고 간주할 권한이 있다.</p>
-									<br><br>
-									<p style="font-weight:bold">1.3 장소 변경과 플레이 전 기재된 이벤트</p>
-									<br>
-	 								<table id="tt1">
-										    <tr>
-										        <th style="text-align: center">W1 = 팀1 승</th>
-										        <th style="text-align: center">draw = 무</th>
-										        <th style="text-align: center">W2 = 팀2 승</th>
-										        <th style="text-align: center">1x = 팀1 승 또는 무</th>
-										        <th style="text-align: center">12 = 팀1 승 또는 팀2 승</th>
-										    </tr>
-										    <tr>
-										        <td style="text-align: center">or = 또는</td>
-										        <td style="text-align: center">X = 무</td>
-										        <td style="text-align: center">& = 그리고</td>
-										        <td style="text-align: center">x2 = 팀2 승 또는 무</td>
-										        <td style="text-align: center"></td>
-										    </tr>
-										</table>
-									<p style="font-weight:bold">1.3.2 별도의 언급이 없을 경우, 경기가 중립 그라운드(그 반대의 경우 포함)에서</p>
-									<p style="font-weight:bold">일정대로 개최되면 모든 베팅은 유효하다. 하지만 경기 장소가 변경되어</p>
-									<p style="font-weight:bold">홈팀이 원정경기(또는 그 반대일 경우 포함)를 하게 되면 모든 베팅은 무효로 간주된다.</p>
-									<p style="font-weight:bold">또한 홈팀과 원정팀 이름이 반대로 잘못 기재될 경우에도 회사는</p>
-									<p style="font-weight:bold">베팅을 무효로 간주할 권한이 있다.</p>
-									<br><br>
-									<p style="font-weight:bold">1.3.3 한 팀/국가/연맹(또는 그 이상)에 의해 개최된 경기는 중립구장에서</p>
-									<p style="font-weight:bold">경기한 것으로 간주된다. 만약 개최 팀이 원정 팀으로 등재될 경우 베팅은 유효하다.</p>
-									<p style="font-weight:bold">예를 들어 독일에서 개최된 월드컵 경기에서 “아르헨티나-독일” 이벤트로 기재될</p>
-									<p style="font-weight:bold">경우 이 이벤트에 대한 모든 베팅은 승인된다.</p>
-									<br><br>
-									<p style="font-weight:bold">1.3.4 모든 팀간의 경기가 아닌 이벤트에 대해서 마켓이 개장한 후 경기 장소가</p>
-									<p style="font-weight:bold">변경될 경우 개인 스포츠 룰 이내에서 규정된 장소를 제외하고 모든 베팅은</p>
-									<p style="font-weight:bold">여전히 유효한 것으로 간주된다.</p>
-									<br><br>
-									<p style="font-weight:bold">1.3.5 만약 플레이어나 팀이 틀리게 등재될 경우 베팅은 무효가 된다.</p>
-									<p style="font-weight:bold">이미 홍보했던 상대 팀이 변경될 경우 모든 베팅은 취소된다.</p>
-									<p style="font-weight:bold">다만 한글로 표기된 팀 이름의 경우 한국 플레이어들이 많이</p>
-									<p style="font-weight:bold">이용하는 라이브 스코어 사이트를 참고하여 업데이트 되기에 번역 오류로</p>
-									<p style="font-weight:bold">인한 팀 이름에 관한 분쟁 시에는 영어로 표기된 공식 팀 이름을 기준으로 처리한다.</p>
-									<br><br>
-									<p style="font-weight:bold">1.4 기간</p>
-									<br><br>
-									<p style="font-weight:bold">1.4.1 공지된 이베트 기간은 단순 참조용일 뿐이다. 개인 스포츠 룰을 제외하고</p>
-									<p style="font-weight:bold">예정된 기간이 변경되었을 지라도 베팅은 유효하다.</p>
-									<br><br>
-									<p style="font-weight:bold">1.4.2 로스타임 또는 연장전에 발생된 득점은 정규시간 마지막 종료시간에</p>
-									<p style="font-weight:bold">발생된 것으로 간주된다. 예를 들어 축구경기 전반전 로스타임에서</p>
-									<p style="font-weight:bold">득점이 나오면 45분에 득점을 한 것으로 간주된다.</p>
-									<br><br>
-									<p style="font-weight:bold">1.4.3 정상적이지 않은 경기 시간, 계산절차 또는 경기구성방식에 대하여</p>
-									<p style="font-weight:bold">스포츠 규칙을 위반할 경우, 회사는 베팅을 무효화할 권한을 갖는다.</p>
-									<br><br>
-									<p style="font-weight:bold">1.4.4 광고했던 출전 팀이 바뀌는 등 경기 구성 방식이 변경될 경우 베팅은 무효가 된다.</p>
-									<br><br>
-									<p style="font-weight:bold">1.5 결과</p>
-									<br><br>
-									<p style="font-weight:bold">1.5.1 결과는 스포츠베팅(경기 종료 후 30분내) 라이브베팅(경기 종료 후 20분내)</p>
-									<p style="font-weight:bold">에 처리된며 ,해당시간 이전에 결과처리에 대한 문의시 받아들여지지 않는다.</p>
-									<p style="font-weight:bold">모든 결과 처리는 일괄 처리되며, 특정 플레이어나 특정 베팅을 공식결과와</p>
-									<p style="font-weight:bold">다르게 적용하지 않는다.</p>
-									<br><br>
-									<p style="font-weight:bold">1.5.2 결과에 대한 실격 또는 변경이 차후에 발생되는 것과 관계없이 관련된</p>
-									<p style="font-weight:bold">시상결과는 공식결과로 집계된다. 만약 시상식이 없을 경우, 결과는</p>
-									<p style="font-weight:bold">차후의 실격 또는 변경과 관계없이 마켓이 결정될 때 관련 주체 측의 공식</p>
-									<p style="font-weight:bold">결과에 따라서 결정된다. 공식적인 결과가 불가할 경우, 마켓이 결정되고</p>
-									<p style="font-weight:bold">회사가 최종 결정을 한 가능한 증거를 참고해서 결정된다.</p>
-									<br><br>
-									<p style="font-weight:bold">1.5.3 마켓은 일반적으로 이벤트가 결정된 후 즉시 결정된다.</p>
-									<p style="font-weight:bold">공식 결과가 나오기 전에 단순히 고객 서비스로서 일부 마켓이 결정될 수도 있다.</p>
-									<p style="font-weight:bold">회사는 마켓 이벤트의 오류가 발생될 때 이를 해결할 권리를 가지고 있으며</p>
-									<p style="font-weight:bold">이것은 당신의 보유머니에 그대로 반영된다.</p>
-									<br><br>
-									<p style="font-weight:bold">1.5.4 결과에 대한 불확실성이 있는 이벤트일 경우, 회사는 마켓 결정을 보류할 권리를 갖는다.</p>
-									<p style="font-weight:bold">마켓 결과가 공식적으로 확인되지 않을 경우, 회사는 무효 처리할 수 있다.</p>
-									<br><br>
-									<p style="font-weight:bold">1.5.5 회사는 결정된 베팅에 대한 이벤트 결론 후 72시간 만에 이루어진</p>
-									<p style="font-weight:bold">변경 또는 수정을 인정치 않는다.</p>
-									<br><br>
-									<p style="font-weight:bold">1.5.6 회사 웹사이트에 공지된 결과와 공식 결과가 충돌할 경우 정확한 결과를</p>
-									<p style="font-weight:bold">결정하기 위하여 특정 이벤트에 대한 회사의 비디오 판독을 참조해서 결정한다.</p>
-									<p style="font-weight:bold">만약 비디오 판독이 불가할 경우, 경기 주체 측이 공식적으로 공지된</p>
-									<p style="font-weight:bold">것을 최종 결과로 간주된다.웹사이트를 통해 공식적인 결과를 제공할 수 없을</p>
-									<p style="font-weight:bold">경우 또는 결과가 인위적으로 조작되었을 경우 회사는</p>
-									<p style="font-weight:bold">최종 결과를 결정하고 변경할 권한을 갖는다. 이 건과 관련해서 회사의 결정은</p>
-									<p style="font-weight:bold">최종적인 것이 되며 구속력을 지닌다. 5.7가격이 틀리게 게시되고 계산될 경우,</p>
-									<p style="font-weight:bold">회사는 베팅을 무효화할 수 있다. 이럴 경우 마켓 평균치와 비교하여 지불금의</p>
-									<p style="font-weight:bold">100% 이상의 편차를 포함시킨다.</p>
-									<br><br>
-									<p style="font-weight:bold">1.5.7 개인 스포츠 경기에 대해 특별한 참조사항이 없을 경우,</p>
-									<p style="font-weight:bold">모든 마켓의 정산은 공식경기규칙을 기준으로 결정된다.</p>
-									<br><br>
-									<p style="font-weight:bold">1.5.8 개인 스포츠 경기에 대해 특별한 참조사항이 없을 경우,</p>
-									<p style="font-weight:bold">상대 팀은 팽팽한 접전의 경기를 해야 베팅이 유효하다.</p>
-									<br><br>
-									<p style="font-weight:bold">1.5.9 무승부에 대한 가격이 제시되지 않을 경우, 공식경기규칙이 승자를 결정할 수 없을 경우,</p>
-									<p style="font-weight:bold">또는 공식 결과가 무승부일 경우, Dead Heat(접전/막상막하)이 적용된다.</p>
-									<p style="font-weight:bold">Dead Heat(접전/막상막하)이 발생할 경우 내기에 건 돈은 스포츠 게임</p>
-									<p style="font-weight:bold">참여자 수로 나누어진 후 잃은 나머지 배팅금과 전체 배당으로 결제된다.</p>
-									<br><br>
-									<p style="font-weight:bold">1.6 베팅</p>
-									<br><br>
-									<p style="font-weight:bold">1.6.1 약관에 따라 완료된 베팅은 취소가 불가능하며, 고객은 베팅전 반드시</p>
-									<p style="font-weight:bold">베팅금액과 베팅종류를 확인해야한다. 회사는 실수로 베팅한 내역에 관해 일체의 책임 권한이 없다.</p>
-									<br><br>
-									<p style="font-weight:bold">1.6.2 한 경기 내 크로스베팅은 불가능 하다. 단, 승무패X코너킥X</p>
-									<p style="font-weight:bold">옐로우 카드의 조합은 가능하다.승무패와 언더/오버 크로스 베팅은 조합할 수 없으며,</p>
-									<p style="font-weight:bold">이미 조합 되어있는 “승무패 & 토탈 오버/언더”를 통해 베팅이 가능하다.</p>
-									<br><br>
-									<p style="font-weight:bold">1.6.3 고객은 로그인 후 1경기 혹은 이상의 경기를 선택하면 오른쪽 상단 베팅</p>
-									<p style="font-weight:bold">슬립에 선택내역 확인이 가능하다. 2경기 이상을 선택하면 자동으로</p>
-									<p style="font-weight:bold">멀티베팅으로 전환되며, 완료된 베팅은 베팅슬립내 베팅내역에서 확인할 수 있다.</p>
-									<br><br>
-									<p style="font-weight:bold">1.6.4 최대, 최소 베팅 한계는 스포츠와 게임에 따라서 변동하며,</p>
-									<p style="font-weight:bold">맥스벳을 눌러 최대 베팅 가능금액을 확인할 수 있다.단,</p>
-									<p style="font-weight:bold">싱글베팅시 맥스벳 이상 중복베팅은 불가능하다.</p>
-									<br><br>
-									<p style="font-weight:bold">1.6.5 축 베팅의 경우 하나라도 픽이 다르면 다른 베팅으로 정상 처리된다.</p>
-									<p style="font-weight:bold">단, 동일 픽을 중복 베팅 할때는 합한 베팅 금액이 베팅한도를 넘으면 안된다.</p>
-									<br><br>
-									<br><br>
-									<p style="font-weight:bold">1.7 시간의 수락</p>
-									<br><br>
-									<p style="font-weight:bold">1.7.1 이벤트 또는 경기가 시작이 된 후 실수로 인해 베팅이 승인되었을 경우,</p>
-									<p style="font-weight:bold">해당 선택에 대한 베팅은 무효가 된다. 단, 문제가 있는 이벤트가 회사의</p>
-									<p style="font-weight:bold">작동 시스템 또는 라이브 서비스에 의해 승인이 될 경우는 예외로 할 수 있다.</p>
-									<p style="font-weight:bold">(예 : 경기 시작 시간이 표기와 다르게 몇 시간 빠르거나 늦게 시작되어도</p>
-									<p style="font-weight:bold">실제 경기 시작전에 베팅이 완료되면 이는 정상 처리된다.)</p>
-									<br><br>
-									<p style="font-weight:bold">1.7.2 회사는 명백한 오류를 수정할 권한을 갖는다. 상호 동의를 할 경우,</p>
-									<p style="font-weight:bold">이벤트가 시작된 후 베팅을 한 것에 대하여 회사는 승인할 권한이 있고</p>
-									<p style="font-weight:bold">그 당시의 레이스 또는 이벤트에 대한 베팅은 유효하다. 하지만 고객이</p>
-									<p style="font-weight:bold">경기 결과를 미리 알고 있었다는 징후가 있을 경우 회사는 그 베팅을 무효화할 권한을 갖는다.</p>
-									<br><br>
-									<p style="font-weight:bold">1.7.3 베팅 시간에 대한 분쟁이 있을 경우, 회사의 서버에 기록된 시간이 그 기준이 된다.</p>
-									<br><br>
-									<p style="font-weight:bold">1.8 라이브 / 인-러닝(진행중인) 베팅</p>
-									<br><br>
-									<p style="font-weight:bold">1.8.1 라이브 또는 인-러닝 베팅은 이벤트가 진행될 때의 갑작스런 큰</p>
-									<p style="font-weight:bold">배당변경의 적용을 받는다. 이런 이유 때문에 회사는 표시된 배당이 항상 베팅</p>
-									<p style="font-weight:bold">가능하다고 보장해 줄 수 없다. 또한 회사의 전적인 재량권에 의해 전체</p>
-									<p style="font-weight:bold">경기에 대한 배당을 제공해 줄 권한이 없다.</p>
-									<br><br>
-									<p style="font-weight:bold">1.8.2 추가적으로, 가격이 회사 웹사이트에 등재되었을 지라도 만약 베팅이</p>
-									<p style="font-weight:bold">이루어질 때 그 당시의 가격이 산업시장가격과 차이가 있어 회사의 통제 밖의</p>
-									<p style="font-weight:bold">상황을 초래할 경우 회사는 베팅을 거절하고 무효화할 권한을 갖는다.</p>
-									<br><br>
-									<p style="font-weight:bold">우리는 효율성과 즐거움을 위해 최신기술을 사용합니다. 우리 아이벳 사이트를 통해서 </p>
-									<p style="font-weight:bold">고객들에게 공평한 거래 서비스를 제공할 것을 약속 드립니다.</p>
-									<br><br>
-									<p style="font-weight:bold">문의 사항이나 자세한 정보가 필요하실 경우 저희 고객서비스 상담원에게 연락을 주시기 바랍니다.</p>
-									<p style="font-weight:bold">여기게 스포츠 베팅의 다양한 규정들이 명시 되었지만, 가끔씩 이벤트 자체 규정이 있는 불가피한 상황도 있습니다.</p>
-									<br><br>
-									<p style="font-weight:bold">우리는 규정을 추가할 권리가 있습니다. 고객은 베팅 전 각 이벤트의 규정들을 숙지하실 책임이 있습니다.</p>					
-								</div>
-							</div>
-						</li>
-					</ul>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -2380,9 +2389,7 @@ $(document).ready(function() {
 	var urlParams = new URLSearchParams(window.location.search);
 	var page = urlParams.get('page');
 	if (page == "br"){
-		$("#ht1").click();
-		$(".br1").click();
-		$(".br2").click();
+		$("#ht5").click();
 	} else if (page == "tou"){
 		$("#ht4").click();
 	} else if (page == "bg"){
