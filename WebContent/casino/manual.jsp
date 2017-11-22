@@ -60,7 +60,8 @@
 			</div>
 		</div>
 		<div id="dragon_tiger" class="tab_content tabpadding">
-			<div class="tab" style="padding-left: 12%;">
+			<!-- <div class="tab" style="padding-left: 12%;"> -->
+			<div class="tab" style="padding-left: 14%;">
 			  <button class="tablinks" style="position: relative;" data-rules = 'dtrules' id="defaultOpen">게임규칙</button>
 			  <button class="tablinks" style="position: relative;" data-rules = 'dtplay'>게임방법</button>
 			</div>
@@ -107,7 +108,9 @@
 			</div>
 		</div>
 		<div id="gen_bac" class="tab_content tabpadding">
-			<div class="tab" style="padding-left: 24.5%;">
+			<!-- <div class="tab" style="padding-left: 24.5%;"> -->
+			<div class="tab" style="padding-left: 28.5%;">
+
 			  <button class="tablinks" data-rules = 'gbrules' id="defaultOpen">게임규칙</button>
 			  <button class="tablinks" data-rules = 'gbplay' >게임방법</button>
 			</div>
@@ -188,7 +191,8 @@
 			</div>
 		</div>
 		<div id="vip_bac" class="tab_content tabpadding">
-			<div class="tab" style="padding-left: 36.6%;">
+			<!-- <div class="tab" style="padding-left: 36.6%;"> -->
+			<div class="tab" style="padding-left: 42.6%;">
 			  <button class="tablinks" data-rules = 'vbrules' id="defaultOpen">게임규칙</button>
 			  <button class="tablinks" data-rules = 'vbplay'>게임방법</button>
 			</div>
@@ -269,7 +273,8 @@
 			</div>
 		</div>
 		<div id="bid_bac" class="tab_content tabpadding">
-			<div class="tab" style="padding-left:48.8%;">
+			<!-- <div class="tab" style="padding-left:48.8%;"> -->
+			<div class="tab" style="padding-left:57.1%;">
 			  <button class="tablinks" data-rules = 'bbrules' id="defaultOpen">게임규칙</button>
 			  <button class="tablinks" data-rules = 'bbplay'>게임방법</button>
 			</div>
@@ -354,7 +359,9 @@
 			</div>
 		</div>
 		<div id="roulette" class="tab_content tabpadding">
-			<div class="tab" style="padding-left:61%;">
+			<!-- <div class="tab" style="padding-left:61%;"> -->
+			<div class="tab" style="padding-left:71%;">
+
 			  <button class="tablinks" data-rules = 'rrules' id="defaultOpen">게임규칙</button>
 			  <button class="tablinks" data-rules = 'rplay' >게임방법</button>
 			</div>
@@ -431,7 +438,9 @@
 			</div>
 		</div>
 		<div id="seo_bo" class="tab_content tabpadding">
-			<div class="tab" style="padding-left:73%;">
+			<!-- <div class="tab" style="padding-left:73%;"> -->
+			<div class="tab" style="padding-left:84.4%;">
+
 			  <button class="tablinks" data-rules = 'srules' id="defaultOpen">게임규칙</button>
 			  <button class="tablinks" data-rules = 'splay' >게임방법</button>
 			</div>

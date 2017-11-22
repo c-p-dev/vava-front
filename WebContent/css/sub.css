@@ -100,12 +100,16 @@ ul.l_tabs li.active, ul.l_tabs li.active a:hover {background: #00afed; }
 .cash_box {width:960px; display:block}
 .my_box {width:100%; display:block; }
 .cash_in {width:100%; display:inline-block; margin:0 0 10px 0}
+/*.cash_1 {width:388px; height:38px; margin:0 10px 0 0; line-height:38px; background:#191a1b; padding:0 10px 0 10px;float:left; border:solid 1px #2e3032}*/
 .cash_1 {width:388px; height:38px; margin:0 10px 0 0; line-height:38px; background:#191a1b; padding:0 10px 0 10px;float:left; border:solid 1px #2e3032}
-.cash_2 {float:left;width:410px; height:40px;margin:0 10px 0 0; }
+.cash_1 {width: 383px; height: 38px; margin: 0 5px 0 0; line-height: 38px; background: #191a1b; padding: 0 10px 0 10px; float: left; border: solid 1px #2e3032; } 
+/*.cash_2 {float:left;width:410px; height:40px;margin:0 10px 0 0; }*/
+.cash_2 {float: left; width: 404px; height: 40px; margin: 0 5px 0 0; }
 .cash_3 {float:left; width:120px; }
-.cash_4 {width:200px; height:40px; margin:0 10px 0 0; float:left; }
+/*.cash_4 {width:200px; height:40px; margin:0 10px 0 0; float:left; }*/
+.cash_4 {width: 200px; height: 40px; margin: 0 5px 0 0; float: left; } 
 .cash_5 { float:left; color:#6b7f7f; line-height:40px;}
-.cash_6 {width:280px; height:40px; margin:0 10px 0 0; float:left; }
+.cash_6 {width:280px; height:40px; margin:0 5px 0 0; float:left; }
 .cash_7 {float:left; color:#ffa800}
 .cash_8 {width:410px; float:left; height:40px;  color:#ffa800; margin:0 10px 0 0}
 .cash_warning {line-height:25px; width:100%; margin:0 0 30px 0}
@@ -120,7 +124,8 @@ ul.l_tabs li.active, ul.l_tabs li.active a:hover {background: #00afed; }
 .my_table {margin:0 0 20px 0}
 .my_search_wrap {width:100%; float:left;}
 .my_search_select {}
-.my_search_select tr td {width: 235px; padding:0 10px 0 0}
+/*.my_search_select tr td {width: 235px; padding:0 10px 0 0}*/
+.my_search_select tr td {width: 235px; padding:0 5px 0 0}
 .my_search_list {width:100%; float:left; margin:40px 0 0 0}
 .my_info {padding:0 10px 0 10px; border:solid 1px #2e3032 ; background:#191a1b; width:580px; height:40px;}
 .my_pass {padding:0 10px 0 0;width:580px; height:40px;}

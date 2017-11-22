@@ -42,8 +42,8 @@ public class ChargeDao {
 		boolean result = false;
 		Date date = new Date();
 	
-		String  query = "INSERT INTO RT01.dbo.charge_lst (userid,siteid,charge_level,bank_name,bank_owner,bank_num,money_req,user_grade,regdate,chstate,ip,viewtype) "+
-				" VALUES (?,?,?,?,?,?,?,1,?,'PEND',?,'Y')";
+		String  query = "INSERT INTO RT01.dbo.charge_lst (userid,siteid,charge_level,bank_name,bank_owner,money_req,user_grade,regdate,chstate,ip,viewtype) "+
+				" VALUES (?,?,?,?,?,?,1,?,'PEND',?,'Y')";
 		try{
 		
 			DBConnector.getInstance();
@@ -54,10 +54,10 @@ public class ChargeDao {
 		    pstmt.setString(3,cBean.getCharge_level());
 		    pstmt.setString(4,cBean.getBank_name());
 		    pstmt.setString(5,cBean.getBank_owner());
-		    pstmt.setString(6,cBean.getBank_num());
-		    pstmt.setInt(7,cBean.getMoney_req());
-		    pstmt.setString(8,sdf.format(date));
-		    pstmt.setString(9,cBean.getIp());
+//		    pstmt.setString(6,cBean.getBank_num());
+		    pstmt.setInt(6,cBean.getMoney_req());
+		    pstmt.setString(7,sdf.format(date));
+		    pstmt.setString(8,cBean.getIp());
 		    
 			row = pstmt.executeUpdate(); 
 			logger.debug(query);
@@ -106,7 +106,7 @@ public class ChargeDao {
 			while(rs.next()){
 				HashMap<String, Object> hsm = new HashMap<String, Object>();
 				hsm.put("chid", (rs.getString("chid") != null ? rs.getString("chid") : null));
-				hsm.put("regdate", (rs.getString("regdate") != null ? dateFormater.format(dateFormater.parse(rs.getString("regdate"))) : null));
+				hsm.put("regdate", (rs.getString("regdate") != null ? sdf.format(dateFormater.parse(rs.getString("regdate"))) : null));
 				double amount = (rs.getString("money_req") != null ? Double.parseDouble(rs.getString("money_req")) : 0);
 				hsm.put("money", formatter.format(amount));
 				hsm.put("chdate", (rs.getString("chdate") != null ? rs.getString("chdate") : null));

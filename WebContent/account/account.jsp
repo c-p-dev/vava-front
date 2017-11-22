@@ -11,14 +11,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>iBET25(TEST WEB)</title>
 
-
 <meta name="viewport" content="width=1400,minimum-scale=0,maximum-scale=5,target-densitydpi=device-dpi">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="pragma" content="no-cache" />
 <meta http-equiv="cache-control" content="no-cache" />
 <meta http-equiv="expires" content="0" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">		
-
+<link href="/images/favicon.ico" rel="icon">
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.1.min.js"></script>
 <script type="text/javascript" src="/js/header.js" charset="utf-8"></script><!-- header -->
 <script type="text/javascript" src="/js/select.js" charset="utf-8"></script><!-- util_select -->
@@ -106,7 +105,7 @@
 		width: 30%;
 	}
 
-	.popup_table01{
+	.accnt_pg .popup_table01{
 		width: 30%;
 	}
 </style>

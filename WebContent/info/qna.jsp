@@ -18,10 +18,14 @@
 	}
 	#qnaDt tbody tr{
 		cursor: pointer;
+		transition: all .2s ease-in-out;
 	}
 	#qnaDt tbody tr td.dt-txt {
 	    text-align: left!important;
     	padding-left: 10px!important;
+	}
+	table#qnaDt tbody tr:hover {
+		background: #2e3334!important;
 	}
 </style>
 <ul class="smk_accordion">

@@ -27,7 +27,7 @@
 <meta http-equiv="cache-control" content="no-cache" />
 <meta http-equiv="expires" content="0" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">		
-
+<link href="/images/favicon.ico" rel="icon">
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.1.min.js"></script>
 <script type="text/javascript" src="/js/header.js" charset="utf-8"></script><!-- header -->
 <script type="text/javascript" src="/js/select.js" charset="utf-8"></script><!-- util_select -->
@@ -127,9 +127,38 @@ ul.casino_board_list  + .btn_wrap{
 	margin-top:30px;
 }
 
-/*#l-tab1 ul.tabs li {
-	width: 14%!important;
-}*/
+
+.left_tab_con ul.tabs  {
+	display: flex;
+}
+.left_tab_con ul.tabs li{
+	width: 100%;
+	white-space: nowrap;
+	border: 1px solid #2d3232!important;
+    border-bottom: none!important;
+}
+
+.left_tab_con ul.tabs li:active{
+	/*border: 1px solid #2d3232;
+    border-bottom: none;*/
+}
+
+.left_tab_con ul.tabs li a {
+	width: 100%;
+	text-overflow: ellipsis;  
+	overflow: hidden!important;
+
+}
+
+.left_tab_con ul.tabs li.active a {
+	width: 100%;
+	border: none;
+    border-bottom: none;
+}
+
+.left_tab_con ul.tabs li.active a:hover {
+    width: 100%!important;
+}
 
 </style>
 
@@ -238,7 +267,19 @@ ul.casino_board_list  + .btn_wrap{
 		// $(".casino_board_list li a").on("click",function(e) {
 		$(".casino_right").html(spin);
 		setTimeout(function(){
-			$(".l_tabs li:first a ").click();
+			// $(".l_tabs li:first a ").click();
+			$.ajax({
+				url : 'jsp/get_game.jsp',
+				data : {gp:"0"},
+				method: 'GET',
+				error: function(){
+					toaster.success("Failed to load games. Please try again.");
+					$(".l_tabs li:first a ").click();
+				}
+			}).done(function(data){
+				var obj = JSON.parse(data);
+				doList(obj,data);
+			});
 		}, 100);
 		
 		$("body").on("click",".casino_board_list li a",function(e) {
@@ -284,19 +325,38 @@ ul.casino_board_list  + .btn_wrap{
 			return false;
 		});
 
-		$("#game-cat li a.get-game").on("click",function(e){
+		$("#game-cat li a").on("click",function(e){
 			e.preventDefault();
-			var gp = $(this).attr("data-val");
-			$.ajax({
-				url : 'jsp/get_game.jsp',
-				data : {gp:gp},
-				method: 'GET',
-			}).done(function(data){
-				var obj = JSON.parse(data);
-				// console.log(obj);
-				doList(obj,gp);
-			});
-
+			if($(this).parent().hasClass('active') == false){
+				$(".casino_right").html(spin);
+				var data = $(this).attr("data-val");
+				if($(this).hasClass('get-game')){
+					//get Game
+					$.ajax({
+							url : 'jsp/get_game.jsp',
+							data : {gp:data},
+							method: 'GET',
+							error: function(){
+								toaster.success("Failed to load games. Please try again.");
+								$(".l_tabs li:first a ").click();
+							}
+						}).done(function(data){
+							var obj = JSON.parse(data);
+							doList(obj,data);
+					});
+				}else{
+					// get Manual
+					$.ajax({
+						url : 'jsp/get_manual.jsp',
+						data : {man:data},
+						method: 'GET',
+					}).done(function(data){
+						loadManual(data);
+					});
+				}
+			}else{
+				return false;
+			}
 			
 		});
 
@@ -421,7 +481,7 @@ ul.casino_board_list  + .btn_wrap{
 		var tab_container = '<div class="tab_container"> '+div_tab+'</div>';
 
 		var final_div = '<div id="l-tab1" class="left_tab_con">'+ final_ul + tab_container+ '</div>';
-		$(".casino_right").html(spin);
+		
 
 		setTimeout(function(){
 			$(".casino_right").hide().html(final_div).fadeIn();

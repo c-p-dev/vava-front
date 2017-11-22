@@ -51,15 +51,12 @@
 											</div>
 										</div>
 										<div class="cash_in">
-											<div class="cash_7">
-												<span id="err-msg1" style="color:orange;"></span>
-											</div>
-										</div>
-										<div class="cash_in">
 											<span class="btn1" id="p1">1만원</span>
 		 									<span class="btn1" id="p2">5만원</span>
 		 									<span class="btn1" id="p3">10만원</span>
 		 									<span class="btn1" id="p4">100만원</span>
+										</div>
+										<div class="cash_in">
 											<span><button type="submit" id="pointBtnSbmit" class="btn3c">전환신청</button></span>
 										</div>	
 									</div>
@@ -228,7 +225,7 @@ $(".cs_close").on("click",function(e){
 function resetpointform(){
 	$("#pointform")[0].reset();
 	$('#point').css('border-color', '#373332');
-	$( "#err-msg1" ).hide();
+	// $( "#err-msg1" ).hide();
 }
 
 

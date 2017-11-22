@@ -405,7 +405,7 @@ public class UserDao {
 			while(rs.next()){
 				HashMap<String, Object> hsm = new HashMap<String, Object>();
 				hsm.put("wdid", (rs.getString("wdid") != null ? rs.getString("wdid") : null));
-				hsm.put("regdate", (rs.getString("regdate") != null ? dateFormater.format(dateFormater.parse(rs.getString("regdate"))) : null));
+				hsm.put("regdate", (rs.getString("regdate") != null ? sdf.format(dateFormater.parse(rs.getString("regdate"))) : null));
 				double amount = (rs.getString("money_req") != null ? Double.parseDouble(rs.getString("money_req")) : 0);
 				hsm.put("money", formatter.format(amount));
 				hsm.put("chdate", (rs.getString("wddate") != null ? rs.getString("wddate") : null));

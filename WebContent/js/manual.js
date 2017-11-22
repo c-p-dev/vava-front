@@ -4,18 +4,18 @@ $(document).ready(function(){
 		$(".allgames").click();
     });
 	
-	$("#game-cat li a.get-manual").on("click",function(e){
-		e.preventDefault();
-		var man = $(this).attr('data-val');
-		$.ajax({
-			url : 'jsp/get_manual.jsp',
-			data : {man:man},
-			method: 'GET',
-		}).done(function(data){
-			//console.log(data);
-			loadManual(data);
-		});
-	});
+	// $("#game-cat li a.get-manual").on("click",function(e){
+	// 	e.preventDefault();
+	// 	var man = $(this).attr('data-val');
+	// 	$.ajax({
+	// 		url : 'jsp/get_manual.jsp',
+	// 		data : {man:man},
+	// 		method: 'GET',
+	// 	}).done(function(data){
+	// 		//console.log(data);
+	// 		loadManual(data);
+	// 	});
+	// });
 	
 });
 

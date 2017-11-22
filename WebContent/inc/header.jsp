@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
 <style>
 	#toast-container.toast-top-full-width > div, #toast-container.toast-bottom-full-width > div {
 		width: 30%!important;
@@ -54,7 +53,7 @@ var lgMsg = '<div class="bg_mask_pop_title">'
 	lgMsg += '		IBET25에서 다양한 베팅의 세계를 마음껏 경험하세요!<br>';
 	lgMsg += '	</div>';
 	lgMsg += '	<div class="btn_wrap">';
-	lgMsg += '		<a href="/"><span class="btn3">확인</span></a>';
+	lgMsg += '		<span class="btn3 closeloginModalBtn">확인</span>';
 	lgMsg += '	</div>';
 	lgMsg += '</div>';
 
@@ -88,27 +87,34 @@ $(window).scroll(function(event){
 	    }, 1000);
 	});
 
+
+
 	$(document).ready(function(){
-			
+
 		sTime();
+
 
 		$('#loginModal').popup({
 	      	transition: 'all 0.3s',
 	      	scrolllock: true,
+      		escape: false,
+      		blur:false,
 	      	onclose:function(){
-	    		$("#login_header")[0].reset();
+	    		// $("#login_header")[0].reset();
 	    		$('.input_warning').hide();
 	    		// location.reload();
-	    		$("#passwd-header-input").removeClass("password");
+	    		// $("#passwd-header-input").removeClass("password");
 	    	}
 	    });
 
 	    $('#logoutModal').popup({
 	      	transition: 'all 0.3s',
 	      	scrolllock: true,
+	      	escape: false,
+	      	blur:false,
 	    });	
 
-		$("#login_header").on("submit", function(e){
+		$("body").on("submit","#login_header",function(e){
 			e.preventDefault();
 
 			toastr.clear();
@@ -148,14 +154,14 @@ $(window).scroll(function(event){
 		$("body").on("click",".closeloginModalBtn",function(e){
 			e.preventDefault();
 			$("#loginModal").popup("hide");
-			location.reload();
+			// location.reload();
 		});
 
-		$("#passwd-header-input").on("focus",function(){
+		$("body").on("focus","#passwd-header-input",function(){
 			$(this).addClass("password");
 		});
 
-		$("#passwd-header-input").on("blur",function(){
+		$("body").on("blur","#passwd-header-input",function(){
 			if($(this).val() == ""){
 				$(this).removeClass("password");	
 			}
@@ -186,7 +192,7 @@ $(window).scroll(function(event){
 			}
 		}
 
-		$(".login-img-validator").on("click",function(){
+		$("body").on("click",".login-img-validator",function(){
 			var tab = $(this).attr('data-tab');
 			$("#ftb input[name=pge]").val("acc");
 			$("#ftb input[name=tb]").val(tab);
@@ -195,6 +201,7 @@ $(window).scroll(function(event){
 
 		$("body").on("click","#user_menu_lst li a",function(e){
 			e.preventDefault();
+			
 			var tab = $(this).attr('data-tab');
 			var pg = $(this).attr('data-pg');
 
@@ -219,6 +226,12 @@ $(window).scroll(function(event){
 			$("#ftb input[name=tb]").val(tab);
 			$("#ftb").submit();
 
+		});
+
+		$("body").on("click",".logOutBn",function(e){
+			e.preventDefault();
+			$("#logoutModal").html(lgSpin);
+			window.location.replace("/login/jsp/logout_process.jsp");
 		});
 
 		$("#login_header").validate({
@@ -272,7 +285,19 @@ $(window).scroll(function(event){
 			if(obj.result == 0 ){
 
 				// toastr.success('Login Successful');
-				$("#loginModal").html(lgMsg);
+				// $("#loginModal").html(lgMsg);
+				$.ajax({
+					url : '/login/jsp/get_header.jsp', //jsp				
+					data : {},
+					method: 'GET',
+				}).done(function(data){
+					// console.log(data);
+					$("#uhead").html(data);
+					$("#fade_3").popup("hide");
+					// $("#lgInMdl2").popup("show");
+					 $("#loginModal").html(lgMsg);	
+
+				});
 
 			}else if(obj.result == 1 ){
 				
@@ -303,11 +328,26 @@ $(window).scroll(function(event){
 
 	function sTime(){
 
-		var counter = 0;
-		var i = setInterval(function(){
-		    $("#sTime").html(moment().format("HH:mm:ss"));
-		   
-		}, 200);
+		$.ajax({
+			url : '../SystemDate',
+			data : {},
+			method: 'GET',
+		}).done(function(data){
+			// console.log(data);
+			var obj = JSON.parse(data);
+			var t = moment(obj.t,"MMM DD, YYYY hh:mm:ss A");
+			// console.log(t);
+		
+			var i = setInterval(function(){
+		
+				t.add(1, 's');
+		
+			    $("#sTime").html(t.format("HH:mm:ss"));
+			}, 1000);
+
+		});
+	
+		
 	}
 
 </script>
@@ -319,21 +359,9 @@ $(window).scroll(function(event){
         <ul class="util_left">
             <li><span class="util_time" id="sTime">00:00:00</span></li>
             <li>
-                <select id="language" name="language">
-                  <option value="0">한국어</option>
-                  <option value="1">영어</option>
-                  <option value="2">중국어</option>
-                  <option value="3">일본어</option>
+                <select id="language" name="language" class="diff-select select-button">
+                  <option value="0" selected>한국어</option>
                 </select> 
-                <script type="text/javascript">
-                    $(function(){
-                        $('#language').selectlist({
-                            zIndex: 10,
-                            width: 95,
-                            height: 34
-                        });		
-                    })
-                </script>
             </li>
             <li><a href="/notice/sub02.jsp"><span class="util_btn">공지/이벤트</span></a></li>
             <li><a href="/help.jsp"><span class="util_btn">도움말</span></a></li>
@@ -371,7 +399,7 @@ $(window).scroll(function(event){
 									<!--	<a href="/cash/cash.jsp" data-pg="sb4" data-tab="tab4" ><span class="popover_btn">머니전환</span></a> -->
 										
 										<a href="/cash/cash.jsp" data-pg="sb4" data-tab="tab6"><span class="popover_btn">머니사용내역</span></a>
-										<span class="showLogoutModal popover_btn" style="color: #8a8c8d!important; cursor: pointer;">머니사용내역</span>
+										<span class="showLogoutModal popover_btn" style="color: #8a8c8d!important; cursor: pointer;">로그아웃 </span>
 									</div>
 								</div>
 							</div>
@@ -433,12 +461,7 @@ $(window).scroll(function(event){
 			                    	<input type="submit" class="top_btn1" id="lginHderBtn" value="로그인" >
 			                    </li>
 			                    <li><span class="top_btn2 fade_1_open" >회원가입</span></li>
-
 		                    </form>
-
-		                    <div class="error" style="position: inherit;margin-top: 29px;">
-		                    	<!-- <div class="input_warning login-warn" id="login-header-warn" >조건에 맞는 아이디를 입력해주세요.</div> -->
-		                    </div>
 						</ul>
 
 	               	<% }%>
@@ -506,7 +529,7 @@ $(window).scroll(function(event){
 		</div>
 		<div class="btn_wrap">
 			<a href="" class="closeLogoutBtn"><span class="btn3">취소</span></a>
-			<a href="/login/jsp/logout_process.jsp"><span class="btn3">확인</span></a>
+			<a href="/login/jsp/logout_process.jsp"><span class="btn3 logOutBn ">확인</span></a>
 		</div>
 	</div>
 </div>

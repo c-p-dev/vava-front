@@ -52,8 +52,8 @@ public class QnaDao {
 				HashMap<String, Object> hsm = new HashMap<String, Object>();
 				
 				hsm.put("title", (rs.getString("title") == null ? "" : rs.getString("title")));
-				hsm.put("regdate", (rs.getString("regdate") == null ?  "" : dateFormater.format(dateFormater.parse(rs.getString("regdate"))) ));
-				hsm.put("ansdate", (rs.getString("ansdate") == null ? "" : dateFormater.format(dateFormater.parse(rs.getString("ansdate"))) ));
+				hsm.put("regdate", (rs.getString("regdate") == null ?  "" : sdf.format(dateFormater.parse(rs.getString("regdate"))) ));
+				hsm.put("ansdate", (rs.getString("ansdate") == null ? "" : sdf.format(dateFormater.parse(rs.getString("ansdate"))) ));
 				hsm.put("txt", (rs.getString("txt") == null ? "" : rs.getString("txt")));
 				hsm.put("viewtype", (rs.getString("viewtype") == null ?  "" :  rs.getString("viewtype") ));
 				hsm.put("writer", (rs.getString("writer") == null ?  "" :  rs.getString("writer") ));

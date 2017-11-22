@@ -4,7 +4,8 @@ var s=[
 		{"PID":0,"u":"center_live.html"},
 		{"PID":1,"u":"left_live.html"},
 		{"PID":2,"u":"right_bet.html"},
-		{"PID":3,"u":"ws://10.30.42.116:7071"},
+		//{"PID":3,"u":"ws://10.30.42.116:7071"},
+		{"PID":3,"u":"ws://103.1.249.79:7071"},
 		{"PID":4,"u":"center_pre.html"},
 		{"PID":5,"u":"/JSON/period_name.json"},
 		{"PID":6,"u":"/JSON/live_status.json"},
@@ -86,7 +87,11 @@ mainAngular.filter('sf',function(){
 	};
 });
       
-mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, wss) {		
+mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, wss) {	
+	
+	loadLiveMatchInit();
+	loadPreMatchInit();  
+	  	
 	wss.subscribe(function( message) {		
 		try {
 						
@@ -117,8 +122,28 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 	});
 		
 	wss.con();
-	//console.log("connected")
-	
+
+		$scope.fmid =document.getElementById("mid").value; 
+		$scope.fsid =document.getElementById("sid").value; 
+		$scope.ftab =document.getElementById("tab").value; 
+		
+		$scope.fmain = function () {
+			
+			if($scope.fmid.length > 1){
+				
+				if($scope.ftab == '1' || $scope.ftab == '3' ){
+					$scope.loadPop($scope.fsid,$scope.fmid);				
+				} else if($scope.ftab == '2'){				
+					$scope.goMatchMarket('center_market.html',$scope.fsid,$scope.fmid);
+				} 
+			
+			$scope.fmid = "";
+			$scope.fsid = "";
+			$scope.ftab = "";
+
+		}
+	}
+		
 	  $scope.centerTab = s[0].u; 
 	  $scope.leftTab = s[1].u; 
 	  $scope.rightTab = s[2].u;     
@@ -145,8 +170,8 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 		$scope.liveTop = [];					
 		$scope.validMKTypeId =[];	
 		$scope.lm =[];
-	  loadLiveMatchInit();
-	  loadPreMatchInit();  
+		
+
 	  var mode = "LiveMatch";   
 
 		$scope.loadPop = function (sid,mid) {
@@ -156,27 +181,30 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 			$scope.getMarketbyMatchId(mid);
 	 		//$scope.getStatusbyMatchId(mid,sid);
 	    $scope.centerTab = "center_popular.html";	    
-	    $scope.topLive = "/html/top_pre"+sid+".html";
-	    console.log($scope.topLive);
-	    
+	    $scope.topLive = "/sport/html/top_pre"+sid+".html";
+	    //console.log($scope.topLive);
 	    $scope.tabMId = mid; 
 	    $scope.tabMkId = "0";  
 	    mode = "LiveMatch";
 		}	  	
 
-	 $scope.goLiveMatch = function (left,center) {	  	
+	 $scope.goLiveMatch = function (left,center) {	  
+	 	console.log("goLiveMatch : " + center);	
 	  	loadLiveMatchInit();
 	  	preMatchCnt();  	
 	  	islive = true;
 			$scope.PMk = [];	
 			$scope.tabMId = "0";
 			$scope.tabSId ="0";  	 	
-	    $scope.centerTab = center;
+	    $scope.centerTab = "center_live.html";
 	    $scope.leftTab = left;
 	    mode = "LiveMatch";
 	  }
 
 	 $scope.goPreMatch = function (left,center) {	    	
+	 	console.log("goPreMatch");	 	
+	 	$scope.centerTab = "center_pre.html";
+	 	
 	  	$scope.PMk =[];
 	  	$scope.tabCId = $scope.PMc[0].CId;
 	  	getMatchInfobyCompetition($scope.tabCId);  	
@@ -186,7 +214,7 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 	  	$scope.LMK = [];	
 	  	$scope.LS = [];	
 			$scope.tabMId = "0";
-	    $scope.centerTab = center;
+	    $scope.centerTab = "center_pre.html";
 	    $scope.leftTab = left;    
 	    $scope.toggleMId = "0";  
 	    mode = "PreMatch";  
@@ -224,13 +252,24 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
     
 	  
 	  $scope.addBet  = function (sd,mkid,sn,st,ht,at,p,bp) { 	
+
 	  	$scope.betE = true;  	
 	  	for(var i = $scope.bet.length - 1; i >= 0; i--){  									
+					
+					
+					if($scope.bet[i].Sd == sd){
+						//$scope.betA = true;
+						$scope.bet = $filter('omit')($scope.bet,'Sd ==' + sd);  // delete ID		
+						return;
+					};
+					
 					if($scope.bet[i].Mkid == mkid){
 						$scope.betA = true;
 						return;
 					};
+
 			};		
+		
 	  	$scope.bet.push({
 				Sd:sd,
 				Mkid:mkid,
@@ -380,7 +419,7 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 					SId:obj.SId,
 					SN:obj.SN,
 					CN:obj.CN,
-					HT:obj.AT,
+					HT:obj.HT,
 					AT:obj.AT,				
 					Dt:obj.Dt,
 				});				
@@ -823,6 +862,28 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 			  		});								  		
 		  			break;
 					
+					case "6": 	
+			   		$scope.liveTop.push({
+			   			SId : sid,
+			      	MId : data.EventId,			      	
+			      	EventType: data.EventType,
+			      	EventTypeId : data.EventTypeId,
+				      Info: data.Info,
+				      //IsTimeout: true,
+				      Period: data.Period,
+				      PeriodScore: data.PeriodScore,
+				      Score: data.Score,
+				      Server: data.Server,
+				      Set1Score: data.Set1Score,
+				      Set2Score: data.Set2Score,
+				      Set3Score: data.Set3Score,
+				      Set4Score: data.Set4Score,
+				      Set5Score: data.Set5Score,
+				      Side: data.Side,
+				      SportKind: data.SportKind,   	
+			  		});								  		
+		  			break;
+		  			
 					case "11": 	
 			   		$scope.liveTop.push({
 			   			SId : sid,
@@ -1431,7 +1492,10 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 		   				var ATS = LS_obj.ATS;
 	   				}
 		   			
-		   			if(HTS != LS_obj.HTS || ATS != LS_obj.ATS || obj.Period != LS_obj.Pe || obj.CurrentMinute != LS_obj.Cur || obj.RemainingTime != LS_obj.Rem){  //updated score or period
+				  	
+
+
+		   			if(HTS != LS_obj.HTS || ATS != LS_obj.ATS || obj.Period != LS_obj.Pe || obj.CurrentMinute != LS_obj.Cur || obj.RemainingTime != LS_obj.Rem){  
 	   				
 		   				$scope.LS.splice(i2,1);			
 			   						
@@ -1457,8 +1521,14 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 				  		});
 			  		};
 			  						   				
-   					if ($scope.tabMId == obj.EventId){   						
-	   					$scope.liveTop.splice(0,1);		   				
+   					if ($scope.tabMId == obj.EventId){   	
+   						
+   						console.log("$scope.liveTop");
+	   					console.log(obj);	
+	   										
+	   					$scope.liveTop.splice(0,1);		   		
+	   					
+	   						
 		   				switch(obj.SportKind) {     	 		   
 							case 1: 
 					   		$scope.liveTop.push({							   			
@@ -1512,6 +1582,7 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 						      Set2Score: obj.Set2Score,
 						      Set3Score: obj.Set3Score,
 						      Side: obj.Side,
+						      IsTimeout : obj.IsTimeout,
 				  		});								  		
 			  			break;
 			  			
@@ -1581,6 +1652,26 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 				  		});								  		
 			  			break;
 				  		
+				  		case 6: 	
+				   		$scope.liveTop.push({
+				      	MId : obj.EventId,			      	
+				      	EventType: obj.EventType,
+				      	EventTypeId : obj.EventTypeId,
+					      Info: obj.Info,
+					      //IsTimeout: true,
+					      Period: obj.Period,
+					      PeriodScore: obj.PeriodScore,
+					      Score: obj.Score,
+					      Server: obj.Server,
+					      Set1Score: obj.Set1Score,
+					      Set2Score: obj.Set2Score,
+					      Set3Score: obj.Set3Score,
+					      Set4Score: obj.Set4Score,
+					      Set5Score: obj.Set5Score,
+					      Side: obj.Side,  	
+				  		});								  		
+			  			break;
+			  			
 				  		case 11: 	
 					   		$scope.liveTop.push({
 					      	MId : obj.EventId,			      	
@@ -1605,6 +1696,9 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 				  			break;
 				  			
 				  		};
+				  		
+				  		console.log("$scope.liveTop");
+	   					console.log($scope.liveTop);	
 
 		  			}; 		
 				  };
