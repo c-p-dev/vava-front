@@ -27,24 +27,23 @@
 					<div class="blue_wrap">
 						<div class="cash_box">
 							<div class="cash_in">
-								<div class="cash_1"><p style="float:left">보유금액</p><p style="float:right"><span class="font_002 money_dsp" id="money"><%=dfrmt.format(currentUser.getMoney())%></span>원 </p></div>
-							</div>
-							<div class="cash_in">
-								<div class="cash_4">
-									<input class="input_style03" type="text" style="text-align: right;padding-right: 5%;" placeholder="환전금액" id="withdraw" name="withdraw">		
+								<div class="cash_10"><p style="float:left">보유금액</p><p style="float:right"><span class="font_002 money_dsp" id="money"><%=dfrmt.format(currentUser.getMoney())%></span>원 </p></div>
+								<div class="cash_9">
+									<input class="input_style03" type="text" style="text-align: right;padding-right: 5%;" placeholder="환전금액" id="withdraw" name="withdraw">
 								</div>	
 								<div class="cash_5">
 									<span id="err-msg" style="color:orange;"></span>
 								</div>
 							</div>
 							<div class="cash_in">
-								<span class="btn1" id="button1">1만원</span>
-								<span class="btn1" id="button2">5만원</span>
-								<span class="btn1" id="button3">10만원</span>
-								<span class="btn1" id="button4">100만원</span>
-								<span class="btn1" id="button5">정정</span>
+								<span class="ebtn btn1" id="button1">1만원</span>
+								<span class="ebtn btn1" id="button2">5만원</span>
+								<span class="ebtn btn1" id="button3">10만원</span>
+								<span class="ebtn btn1" id="button6">50만원</span>
+								<span class="ebtn btn1" id="button4">100만원</span>
+								<span class="ebtn btn1" id="button5">정정</span>
 							</div>
-							<div class="cash_in">
+							<div class="cash_in exbtn">
 								<span><button type="submit" id="exchangeSbmtBtn" class="btn3c">환전신청</button></span>
 							</div>
 						</div>
@@ -221,8 +220,7 @@
 				    overwrite: true,
 				    content: {
 				        text: error,
-				        tooltipanchor: $(this),
-				        button: 'Close',
+				        tooltipanchor: $(this)
 				    },
 				    show: {
 			            when: false,
@@ -363,7 +361,9 @@
 		addWithDraw(1000000);
 
 	});
-
+	$('#button6').click(function(){
+		addWithDraw(500000);
+	}); 
 	$('#button5').click(function(){
 		$("#withdraw").val("0");
 	});
