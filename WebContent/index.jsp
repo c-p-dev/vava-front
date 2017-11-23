@@ -42,7 +42,7 @@ Type type2 = new TypeToken<List<DepositListBean>>() {}.getType();
 <meta http-equiv="cache-control" content="no-cache" />
 <meta http-equiv="expires" content="0" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">		
-
+<link href="/images/favicon.ico" rel="icon">
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.1.min.js"></script>
 <script type="text/javascript" src="/js/header.js" charset="utf-8"></script><!-- header -->
 <script type="text/javascript" src="/js/select.js" charset="utf-8"></script><!-- util_select -->
@@ -1280,7 +1280,7 @@ Type type2 = new TypeToken<List<DepositListBean>>() {}.getType();
 						</div>
 
 						<div class="video_wrap">
-							<video  id="videoId" width="100%" height="100%" controls loop>
+							<video  id="videoId" width="100%" height="100%" controls loop muted>
 								<source src="/inc/video/vid_1.mp4" type="video/mp4">
 							</video>
 						</div>

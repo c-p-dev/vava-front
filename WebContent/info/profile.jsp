@@ -19,7 +19,7 @@
 			<div class="acc_content_in_2">
 				<div class="blue_wrap">
 					<div class="my_box">
-						<table cellspacing="0" cellpadding="0" class="my_table" width="70%">
+						<table cellspacing="0" cellpadding="0" class="my_table" width="50%">
 							<tr>
 								<td class="my_info">
 									<span class="my_left">아이디</span><span class="my_right"><%=user_data.getUserid()%></span>
@@ -66,7 +66,7 @@
 			<div class="acc_content_in_2" id="acc_content_in_2_profile">
 				<div class="blue_wrap">
 					<form name="updateProfileForm" id="updateProfileForm">
-						<table width="60%" cellpadding="0" cellspacing="0" class="popup_table01">
+						<table width="50%" cellpadding="0" cellspacing="0" class="popup_table01">
 							<tr>
 								<td>
 									<table  width="100%" cellpadding="0" cellspacing="0" class="popup_table01_1">
@@ -107,9 +107,9 @@
 													    <option value="카카오뱅크">카카오뱅크</option>
 												</select>
 											</td>
-											<td width="40%" align="left" style="padding:0 5px 0 0"><input class="input_style02" id="up_bank_owner" name="bank_owner" placeholder="예금주" ></td>
+											<td width="30%" align="left" style="padding:0 5px 0 0"><input class="input_style02" id="up_bank_owner" name="bank_owner" placeholder="예금주" ></td>
 											
-											<td width="40%" align="left" style="padding:0 5px 0 0"><input class="input_style02 input_required" id="up_bank_num" name="bank_num" data-warn="bank-warn" placeholder="계좌번호입력(-없이 입력)"></td>
+											<td width="50%" align="left" style="padding:0 5px 0 0"><input class="input_style02 input_required" id="up_bank_num" name="bank_num" data-warn="bank-warn" placeholder="계좌번호입력(-없이 입력)"></td>
 										</tr>
 										<tr>
 											<td colspan="3">
@@ -130,8 +130,8 @@
 													<option value="+82">+82(한국)</option>
 												</select>
 											</td>
-											<td width="40%" align="left" style="padding:0 5px 0 0"><input class="input_style02 input_required" id="up_cell" name="cell" data-warn="cell-warn" placeholder="휴대폰 번호" ></td>
-											<td width="40%"><span class="btn5" style="width: 40%;" id="up_cll_btn">인증</span></td>
+											<td width="30%" align="left" style="padding:0 5px 0 0"><input class="input_style02 input_required" id="up_cell" name="cell" data-warn="cell-warn" placeholder="휴대폰 번호" ></td>
+											<td width="50%"><span class="btn5" style="width: 40%;" id="up_cll_btn">인증</span></td>
 										</tr>
 										<tr>
 											<td  colspan="4">
@@ -144,7 +144,7 @@
 								</td>
 							</tr>
 						</table>
-						<div class="cash_in">
+						<div class="cash_in" style="padding-top: 5px;">
 							<!-- <a href="#"><span class="btn3c">전환신청</span></a>	 -->
 							<input type="submit" id="updateProfileBtn" value="전환신청" class="btn3c">
 						</div>
@@ -159,7 +159,7 @@
 			<div class="acc_content_in_2" id="acc_content_in_2_pass">
 				<div class="blue_wrap">
 					<form id="updatePasswordForm" name="updatePasswordForm">
-						<table cellspacing="0" cellpadding="0" class="my_table" width="35%">
+						<table cellspacing="0" cellpadding="0" class="my_table" width="25%" style="margin-bottom: 10px;">
 							<tr>
 								<td class="my_pass">
 									<input class="input_style03" id="current_password" name="current_password" placeholder="현재 비밀번호" >

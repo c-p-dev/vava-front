@@ -2,7 +2,7 @@
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 
 /* sub_tab,카지노공통 */
-ul.tabs {float: left; height: 40px; border-bottom: 1px solid #2d3232; width: 100%;}
+ul.tabs {float: left; border-bottom: 1px solid #2d3232; width: 100%;}
 ul.tabs li {float: left;height: 40px;line-height: 40px;margin-bottom: -1px;margin-right: 2px;background: #252929;overflow: hidden;position: relative;width:160px; height:40px;text-align:center;font-size:14px; font-weight:bold;display:inline-block;}
 ul.tabs li a {background: #252929;color:#6b7a7a; width:100%; height:40px;display:inline-block;}	
 ul.tabs li a:hover {background: #2d3232;color:#6b7a7a; width:100%; height:40px;display:inline-block;}	
@@ -116,7 +116,7 @@ ul.l_tabs li.active, ul.l_tabs li.active a:hover {background: #00afed; }
 .b_left {border-left:solid 1px #2e3032}
 .point_box {width:410px; float:left; margin:0 40px 0 0}
 .point_banner {width:740px; height:200px; float:left; background:#000000}
-.float_inline {display:inline-block;}
+.float_inline {display:inline-block; width: 100%;}
 .my_table {margin:0 0 20px 0}
 .my_search_wrap {width:100%; float:left;}
 .my_search_select {}
@@ -256,7 +256,9 @@ table.acc_list_table_in {width:100%;background:#202122}
 .effect_wrap {width:100%; float:left;}
 .effect_table {width:100%; }
 .effect_table tr td {cursor:pointer; height:34px;}
-.effect_table_t{background:#222627; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021; height:34px;text-align:center}
+
+.effect_table_t{font-family:Nanum Gothic;background:#222627; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021; height:34px;text-align:center}
+
 .effect_time {width:12%;text-align:center; background:#262a2b; border-right:solid 1px #1c2021; border-bottom:solid 1px #1c2021}
 .effect_name {width:7%;text-align:center; background:#262a2b; border-right:solid 1px #1c2021; border-bottom:solid 1px #1c2021}
 .effect_nation {width:8%;text-align:center; background:#262a2b; border-right:solid 1px #1c2021; border-bottom:solid 1px #1c2021}

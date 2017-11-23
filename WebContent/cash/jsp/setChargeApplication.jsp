@@ -27,9 +27,8 @@
 	    }
 
 		chargeBean.setBank_name(request.getParameter("bank_name").trim());
-		chargeBean.setBank_num(request.getParameter("bank_num").trim());
 		chargeBean.setBank_owner(request.getParameter("bank_owner").trim());
-		chargeBean.setMoney_req(Integer.parseInt(request.getParameter("money")));
+		chargeBean.setMoney_req(Integer.parseInt(request.getParameter("money").replace(",", "")));
 		chargeBean.setIp(ip);
 	
 		result = chargeDao.saveChargeApplication(bean, chargeBean);

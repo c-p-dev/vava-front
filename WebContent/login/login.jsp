@@ -79,6 +79,8 @@
 		$('#lgInMdl2').popup({
 	      	transition: 'all 0.3s',
 	      	scrolllock: true,
+	      	escape: false,
+	      	blur:false,
 	      	onclose:function(){
 	    		$("#login_modal_form")[0].reset();
 	    		$('.input_warning').hide();
@@ -124,6 +126,8 @@
 		$('#fade_3').popup({
 	      	transition: 'all 0.3s',
 	      	scrolllock: true,
+	      	escape: false,
+	      	blur:false,
 	      	onclose:function(){
 	    		$("#login_modal_form")[0].reset();
 	    		$('.input_warning').hide();
@@ -185,6 +189,9 @@
 			url : '/login/jsp/login_process.jsp', //jsp				
 			data : data,
 			method: 'POST',
+			error: function(){
+				toastr.success("Something Went Wrong. Please Try Again.");
+			}
 		}).done(function(data){
 			var obj = JSON.parse(data);
 			// console.log(obj);
@@ -192,8 +199,11 @@
 
 				$.ajax({
 					url : '/login/jsp/get_header.jsp', //jsp				
-					data : data,
+					data : {},
 					method: 'GET',
+					error: function(){
+						toastr.success("Something Went Wrong. Please Try Again.");
+					}
 				}).done(function(data){
 					console.log(data);
 					$("#uhead").html(data);

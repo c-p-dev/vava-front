@@ -74,9 +74,9 @@
 								<div class="cash_4">
 									<input class="input_style03"  id="ct_bank_owner" name="bank_owner" placeholder="입금자명">		
 								</div>
-								<div class="cash_4">
+<!-- 								<div class="cash_4">
 									<input class="input_style03"  id="ct_bank_num" name="bank_num"  placeholder="계좌번호">		
-								</div>
+								</div> -->
 								<div class="cash_4">
 									<input class="input_style03" type="text" style="text-align: right;padding-right: 5%;" type="number" id="money" name="money"  placeholder="충전금액">		
 								</div>	
@@ -103,6 +103,9 @@
 								<span class="btn1 add-money" data-am="100" >100만원</span> 
 								<span class="btn1 add-money" data-am="0" >정정</span>
 								<!-- <span class="btn3c">충전신청</span></a> -->
+								
+							</div>
+							<div class="cash_in">
 								<input type="submit" id="ct_submit" value="충전신청" class="btn3c">
 							</div>
 							

@@ -326,7 +326,7 @@
 .casino_left {width:260px; margin:0 30px 0 0; float:left;}
 .casino_right {width:1040px;float:left;}
 .casino_visual_wrap {width:100%; float:left; margin:0 0 15px 0}
-.casino_board_wrap {width:100%; float:left; margin:0 0 20px 0}
+.casino_board_wrap {width:100%; float:left; margin:10px 0 20px 0}
 .casino_board_list {}
 .casino_board_list li {float:left; margin:0 40px 40px 0; width:320px;}
 .casino_board_list li:nth-child(3),

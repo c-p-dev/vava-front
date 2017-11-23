@@ -72,7 +72,9 @@
 			</div>
 		</div>
 		<div id="mgTab2" class="tab_content tabpadding">
-			<div class="tab" style="padding-left: 12%;">
+			<!-- <div class="tab" style="padding-left: 12%;"> -->
+			<div class="tab" style="padding-left: 14%;">
+
 			  <button class="tablinks" style="position: relative;" data-rules = 'bacca1' >게임규칙</button>
 			  <button class="tablinks" style="position: relative;" data-rules = 'bacca2' >게임방법</button>
 			</div>
@@ -110,7 +112,9 @@
 			</div>
 		</div>
 		<div id="mgTab3" class="tab_content tabpadding">
-			<div class="tab" style="padding-left: 24.5%;">
+			<!-- <div class="tab" style="padding-left: 24.5%;"> -->
+			<div class="tab" style="padding-left: 28.5%;">
+
 			  <button class="tablinks" style="position: relative;" data-rules = 'bbacca1' >게임규칙</button>
 			  <button class="tablinks" style="position: relative;" data-rules = 'bbacca2' >게임방법</button>
 			</div>
@@ -148,7 +152,9 @@
 			</div>
 		</div>	
 		<div id="mgTab4" class="tab_content tabpadding">
-			<div class="tab" style="padding-left: 36.4%;">
+			<!-- <div class="tab" style="padding-left: 36.4%;"> -->
+			<div class="tab" style="padding-left: 42.7%;">
+
 			  <button class="tablinks" style="position: relative;" data-rules = 'mbacca1' >게임규칙</button>
 			  <button class="tablinks" style="position: relative;" data-rules = 'mbacca2' >게임방법</button>
 			</div>
@@ -200,7 +206,9 @@
 			</div>
 		</div>
 		<div id="mgTab5" class="tab_content tabpadding">
-			<div class="tab" style="padding-left: 48.8%;">
+			<!-- <div class="tab" style="padding-left: 48.8%;"> -->
+			<div class="tab" style="padding-left: 57.2%;">
+
 			  <button class="tablinks" style="position: relative;" data-rules = 'mgroulette1' >게임규칙</button>
 			  <button class="tablinks" style="position: relative;" data-rules = 'mgroulette2' >게임방법</button>
 			</div>
@@ -235,7 +243,9 @@
 			</div>
 		</div>
 		<div id="mgTab6" class="tab_content tabpadding">
-			<div class="tab" style="padding-left: 61%;">
+			<!-- <div class="tab" style="padding-left: 61%;"> -->
+			<div class="tab" style="padding-left: 71.4%;">
+
 			  <button class="tablinks" style="position: relative;" data-rules = 'mgsbo1' >게임규칙</button>
 			  <button class="tablinks" style="position: relative;" data-rules = 'mgsbo2' >게임방법</button>
 			</div>
@@ -269,7 +279,7 @@
 				<img src="/images/mg/s1.png" style="width:100%; ">
 			</div>
 		</div>
-		<div id="mgTab7" class="tab_content tabpadding">
+		<div id="mgTab7" class="tab_content tabpadding" style="margin-top: 20px;">
 			<div class="slideshow-container">
 				    <div class="mySlides fade">
 				      <img src="/images/mobile_mg/1.png" style="width:100%; ">

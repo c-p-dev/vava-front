@@ -38,11 +38,13 @@
 								</div>
 							</div>
 							<div class="cash_in">
-										<span class="btn1" id="button1">1만원</span>
- 	 									<span class="btn1" id="button2">5만원</span>
- 	 									<span class="btn1" id="button3">10만원</span>
- 	 									<span class="btn1" id="button4">100만원</span>
- 	 									<span class="btn1" id="button5">정정</span>
+								<span class="btn1" id="button1">1만원</span>
+								<span class="btn1" id="button2">5만원</span>
+								<span class="btn1" id="button3">10만원</span>
+								<span class="btn1" id="button4">100만원</span>
+								<span class="btn1" id="button5">정정</span>
+							</div>
+							<div class="cash_in">
 								<span><button type="submit" id="exchangeSbmtBtn" class="btn3c">환전신청</button></span>
 							</div>
 						</div>
