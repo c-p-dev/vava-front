@@ -48,24 +48,75 @@
 .accordion dt.accordion-active:before {content: url("/images/arrow_top.png") ;padding-right: 5px;float:right;}
 .accordion dt.accordion-active:hover {cursor: pointer; background:#2d3232}
 
+.live_table {background:#222627;width:100%; }
 
-.live_0_0 {text-align:center; background:#222627; width:3% ;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;}
-.live_0_1 {text-align:center; background:#222627; width:7% ;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;}
+.live_0_0 {text-align:center; width:3% ;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;}
+.live_0_1 {text-align:center; width:7% ;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;}
 .live_0_1:hover {background:#2e3334}
-.live_1_1 {text-align:center; background:#222627; width:10% ;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;}
-.live_1_1:hover {background:#2e3334}
-.live_2_1 {text-align:center; text-align:center; color:#ffa800; background:#222627;width:5%;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021; }
-.live_2_1:hover {background:#2e3334}
-.live_3_1 {text-align:center; background:#222627; width:13%;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;  }
-.live_3_1:hover {background:#2e3334}
-.live_4_1 {text-align:center; background:#222627;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;-webkit-transition: all .2s ease-in-out;-moz-transition: all .2s ease-in-out;-o-transition: all .2s ease-in-out;-ms-transition: all .2s ease-in-out;transition: all .2s ease-in-out;}
-.live_4_1:hover {background:#2e3334}
+.live_1_1 {text-align:center; width:10% ;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;}
+
+/*.live_1_1:hover {background:#2e3334}*/
+
+.live_2_1 {text-align:center; text-align:center; color:#ffa800; width:5%;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021; }
+/*.live_2_1:hover {background:#2e3334}*/
+.live_3_1 {text-align:center; width:13%;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;  }
+/*.live_3_1:hover {background:#2e3334}*/
+.live_4_1 {text-align:center; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;-webkit-transition: all .2s ease-in-out;-moz-transition: all .2s ease-in-out;-o-transition: all .2s ease-in-out;-ms-transition: all .2s ease-in-out;transition: all .2s ease-in-out;}
+/*.live_4_1:hover {background:#2e3334}*/
+
+.live_4_1_1 {text-align:right; width:13%;border-bottom:solid 1px #1c2021;  }
+.live_4_1_2 {text-align:center; width:2%;border-bottom:solid 1px #1c2021; color:#5c7785 }
+.live_4_1_3 {text-align:left; width:13%;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;  }
+
+.live_8_1 {text-align:center;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;}
+.live_8_2 {text-align:center;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;}
+/*.live_8_1:hover {background:#2e3334}*/
+
+.pre_0_0 {text-align:center; width:3% ;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;}
+
+.sports_2_2 {width:9% ;text-align:center; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;}
+.sports_3_2 {width:9% ;text-align:center; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;}
+.sports_4_2 {width:7% ;text-align:center; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;}
+.sports_5_2 {width:11% ;text-align:center; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;}
+.sports_6_2 {width:* ;text-align:center; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;}
+.sports_10_2 {width:6% ;text-align:center;border-bottom:solid 1px #1c2021;}
+
+.sports_table_1 {background:#222627; width:100%; }
+.sports_table_1 tr td {cursor:pointer;height:34px; }
+
+ /*
+.sports_table_1 tr:hover td:not(:nth-child(7)):not(:nth-child(8)):not(:nth-child(9)){ background:#2e3334; }
+
+
+.sports_table_1 td:nth-child(7):hover {background:#2e3334;}
+*/
+
+ /*
+.sports_table_1 .sports_3_2 tr:hover {background:#2e3334;}
+
+
+.sports_table_1 td:nth-child(1):hover .sports_3_2 {background:#2e3334;}
+*/
+
+/*
+.sports_table_1  td:hover {background: red; }
+
+
+.sports_table_1  tr:hover, td:nth-child(7):hover {
+	background:#2e3334;
+	} td:nth-child(6) {	background: none; }
+*/
+
+.pre_4_1_1 {text-align:right; width:45%;}
+.pre_4_1_2 {text-align:center;width:10%;color:#5c7785;}
+.pre_4_1_3 {text-align:left; width:45%;}
+
+
+
+
 .live_4_in_1 {float:center;}
 .live_victory_1 {border-right:solid 1px #1c2021;}
 
-.live_4_1_1 {text-align:right; background:#222627; width:13%;border-bottom:solid 1px #1c2021;  }
-.live_4_1_2 {text-align:center; background:#222627; width:2%;border-bottom:solid 1px #1c2021; color:#5c7785 }
-.live_4_1_3 {text-align:left; background:#222627; width:13%;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;  }
 
 
 .live_vs_1 {color:#5c7785}
@@ -75,17 +126,21 @@
 .live_5_1 {color:#0792c4;text-align:center;background:#222627;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;-webkit-transition: all .2s ease-in-out;-moz-transition: all .2s ease-in-out;-o-transition: all .2s ease-in-out;-ms-transition: all .2s ease-in-out;transition: all .2s ease-in-out;}
 .live_5_1:hover {background:#2e3334;}
 .live_5_1.sel {background: #0792c4;}
+.live_5_2 {color:#0792c4;text-align:center;background:#222627;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;-webkit-transition: all .2s ease-in-out;-moz-transition: all .2s ease-in-out;-o-transition: all .2s ease-in-out;-ms-transition: all .2s ease-in-out;transition: all .2s ease-in-out;}
+
 
 .live_6_1 {color:#0792c4;text-align:center;background:#222627;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;-webkit-transition: all .2s ease-in-out;-moz-transition: all .2s ease-in-out;-o-transition: all .2s ease-in-out;-ms-transition: all .2s ease-in-out;transition: all .2s ease-in-out;}
 .live_6_1:hover {background:#2e3334}
 .live_6_1.sel {background: #0792c4;}
+.live_6_2 {color:#0792c4;text-align:center;background:#222627;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;-webkit-transition: all .2s ease-in-out;-moz-transition: all .2s ease-in-out;-o-transition: all .2s ease-in-out;-ms-transition: all .2s ease-in-out;transition: all .2s ease-in-out;}
+
 
 .live_7_1 {color:#0792c4;text-align:center;background:#222627;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;-webkit-transition: all .2s ease-in-out;-moz-transition: all .2s ease-in-out;-o-transition: all .2s ease-in-out;-ms-transition: all .2s ease-in-out;transition: all .2s ease-in-out;}
 .live_7_1:hover {background:#2e3334}
 .live_7_1.sel {background: #0792c4;}
+.live_7_2 {color:#0792c4;text-align:center;background:#222627;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;-webkit-transition: all .2s ease-in-out;-moz-transition: all .2s ease-in-out;-o-transition: all .2s ease-in-out;-ms-transition: all .2s ease-in-out;transition: all .2s ease-in-out;}
 
-.live_8_1 {text-align:center;background:#222627;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;}
-.live_8_1:hover {background:#2e3334}
+
 
 .left_menu_count_1 {float:right; border-radius:10px;background:#1b1d1e;margin:7px 5px 0 0; line-height:10px; padding:0 2px 0 7px;}
 
@@ -358,22 +413,25 @@
 
 .sports_2_1 {width:7% ;text-align:center; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;background:#222627;}
 .sports_2_1:hover { background:#2e3334; }
-.sports_3_1 {width:13% ;text-align:center; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;background:#222627;}
+.sports_3_1 {width:11% ;text-align:center; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;background:#222627;}
 .sports_3_1:hover { background:#2e3334; }
 .sports_4_1 {width:7% ;text-align:center; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;background:#222627;}
 .sports_4_1:hover { background:#2e3334; }
-.sports_5_1 {width:13% ;text-align:center; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;background:#222627;}
+.sports_5_1 {width:11% ;text-align:center; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;background:#222627;}
 .sports_5_1:hover { background:#2e3334; }
-.sports_6_1 {text-align:center; text-indent:15px; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;background:#222627;}
+.sports_6_1 {width:28% ;text-align:center; text-indent:15px; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;background:#222627;}
 .sports_6_1:hover { background:#2e3334; }
 .sports_7_1 {width:9% ;text-align:center; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;color:#0792c4;background:#222627;}
-.sports_7_1:hover { background:#2e3334; }
+.sports_7_1:hover { background:#2e3334; } 
+
+
 .sports_7_1.sel {background: #0792c4;}
 .sports_8_1 {width:9% ;text-align:center; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;color:#0792c4;background:#222627;}
-.sports_8_1:hover { background:#2e3334; }
+.sports_8_1:hover { background:#2e3334; } 
 .sports_8_1.sel {background: #0792c4;}
 .sports_9_1 {width:9% ;text-align:center; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;color:#0792c4;background:#222627;}
-.sports_9_1:hover { background:#2e3334; }
+.sports_9_1:hover { background:#2e3334; } 
+
 .sports_9_1.sel {background: #0792c4;}
 
 .sports_10_1 {width:6% ;text-align:center;border-bottom:solid 1px #1c2021;background:#222627;}

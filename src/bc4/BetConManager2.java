@@ -372,11 +372,11 @@ public class BetConManager2 {
 				  		" OR MARKET_TYPE_ID='10829' or MARKET_TYPE_ID='9321') ";
 
 		  
-		 //// Debug.out("query1 : " + query);	
-		 //// Debug.out("query2 : " + query2);	
-		 //// Debug.out("query3 : " + query3);	
-		 //// Debug.out("query4 : " + query4);	
-		 //// Debug.out("query5 : " + query4);
+		 // //Debug.out("query1 : " + query);	
+		 // //Debug.out("query2 : " + query2);	
+		 // //Debug.out("query3 : " + query3);	
+		 // //Debug.out("query4 : " + query4);	
+		 // //Debug.out("query5 : " + query4);
 
 		  try{	      	
 			 	//Context initContext = new InitialContext();
@@ -556,7 +556,7 @@ public class BetConManager2 {
 					" and convert(char(8),match_date,112) <= convert(char(8),getdate()+7,112) "+
 					" and home_name is not null and away_name is not null";
 		  
-		 //// Debug.out("[getPreMatches] :" + query);		
+		 // //Debug.out("[getPreMatches] :" + query);		
 		  
 		  try{	      	
 			 	//Context initContext = new InitialContext();
@@ -671,7 +671,7 @@ public class BetConManager2 {
 		  StringBuffer sb = new StringBuffer(""); 
 
 		  String query = " SELECT '{\"Id\":\"'+CAST(A.match_id as varchar(10))+'\",\"CId\":\"'+CAST(A.compet_id as varchar(10))+'\",\"CN\":\"'+CNAME+'\","+
-					"\"Dt\":\"'+convert(varchar,MATCH_DATE,120)+'\",\"SId\":\"'+CAST(A.sport_id as varchar(10))+'\",\"SN\":\"'+SNAME+'\",\"RId\":\"'+CAST(A.region_id as varchar(10))+'\",\"RN\":\"'+RNAME+'\","+
+					"\"Dt\":\"'+convert(char(16),MATCH_DATE,120)+'\",\"SId\":\"'+CAST(A.sport_id as varchar(10))+'\",\"SN\":\"'+SNAME+'\",\"RId\":\"'+CAST(A.region_id as varchar(10))+'\",\"RN\":\"'+RNAME+'\","+
 					//" \"LiveStatus\":\"'+CAST(A.live_stat as varchar(1))+'\",\"MatchStatus\":\"'+CAST(A.match_stat as varchar(1))+'\","+
 					//" \"IsLiveAvailable\":\"'+CASE WHEN live_stat = 0 THEN 'true' ELSE 'false' END+'\","+
 					//" \"IsVisible\":'+CASE WHEN visible ='T' THEN 'true' ELSE 'false' END+', "+
@@ -739,10 +739,10 @@ public class BetConManager2 {
 				  		" OR MARKET_TYPE_ID='6564' OR MARKET_TYPE_ID='8750' OR MARKET_TYPE_ID='8763' OR MARKET_TYPE_ID='9775' "+
 				  		" OR MARKET_TYPE_ID='10829' or MARKET_TYPE_ID='9321') ";
 		  
-		 //// Debug.out("[getMatchInfobyCompetition] query: " + query);		
-		 //// Debug.out("[getMatchInfobyCompetition] query2: " + query2);	
-		 //// Debug.out("[getMatchInfobyCompetition] query3: " + query3);	
-		 //// Debug.out("[getMatchInfobyCompetition] query4: " + query4);
+		 // //Debug.out("[getMatchInfobyCompetition] query: " + query);		
+		 // //Debug.out("[getMatchInfobyCompetition] query2: " + query2);	
+		 // //Debug.out("[getMatchInfobyCompetition] query3: " + query3);	
+		 // //Debug.out("[getMatchInfobyCompetition] query4: " + query4);
 		  
 		  try{	      	
 			 	//Context initContext = new InitialContext();
@@ -905,13 +905,13 @@ public class BetConManager2 {
 
 		  String query1 = "DECLARE @list varchar(MAX)  "+
 				  	" SELECT @list = JSON FROM BC_JSON WHERE KEYNAME='MARKET_TYPE'  "+
-				  	"SELECT '{\"Id\":\"'+Cast(Market_Id As Varchar(10))+'\",\"Sq\":'+CAST(SEQUENCE as varchar(10))+',\"MId\":'+CAST(match_id as varchar(10))+',\"MTyId\":\"'+CAST(MARKET_TYPE_ID as varchar(10)) +'\","+
-				  	" \"Vis\":'+CASE WHEN visible ='T' THEN 'true' ELSE 'false' END+',"+
-				  	" \"Sus\":'+CASE WHEN Suspend ='T' THEN 'true' ELSE 'false' END+',"+
-				  	" \"Nm\":\"'+replace(replace(replace(market_name,'{sw}',SEQUENCE),'{pw}',POINT_SEQ),'{s}',SEQUENCE)+'\"},' "+
-		  			" as market FROM bc_Market "+
-		  			" where MATCH_ID = '"+mid+"' and MARKET_TYPE_ID in (SELECT splitdata FROM SplitString(@list,',')) and  VISIBLE='T' And Suspend = 'F' ";
-
+				  	"SELECT '{\"Id\":\"'+Cast(a.Market_Id As Varchar(10))+'\",\"Sq\":'+CAST(SEQUENCE as varchar(10))+',\"MId\":'+CAST(a.match_id as varchar(10))+',\"MTyId\":\"'+CAST(MARKET_TYPE_ID as varchar(10)) +'\","+
+				  	" \"Vis\":'+CASE WHEN a.visible ='T' THEN 'true' ELSE 'false' END+',"+
+				  	" \"Sus\":'+CASE WHEN a.Suspend ='T' THEN 'true' ELSE 'false' END+',"+
+				  	" \"Nm\":\"'+replace(replace(replace(replace(replace(market_name,'{sw}',SEQUENCE),'{pw}',POINT_SEQ),'{s}',SEQUENCE),'W1',home_name),'W2',away_name)+'\"},' "+
+		  			" as market FROM bc_Market a, bc_match b "+
+		  			" where a.MATCH_ID = '"+mid+"' and MARKET_TYPE_ID in (SELECT splitdata FROM SplitString(@list,',')) and a.match_id = b.match_id and  a.VISIBLE='T' And a.Suspend = 'F' ";
+		  /*
 		  String query2 =  " DECLARE @list varchar(MAX) "+
 				  		" SELECT @list = JSON FROM BC_JSON WHERE KEYNAME='MARKET_TYPE' "+
 				  		" SELECT  '{\"Id\":'+CAST(sel_id AS VARCHAR(10))+',\"MkId\":'+CAST(A.Market_Id AS VARCHAR(10))+',\"BP\":\"'+CAST(SEL_PRICE as varchar(10))+'\",\"P\":\"'+CAST(SEL_PRICE as varchar(10))+'\","+
@@ -919,10 +919,20 @@ public class BetConManager2 {
 				  		" as sel from bc_selection a, (SELECT MARKET_ID,HANDICAP FROM bc_market WHERE MARKET_TYPE_ID in (SELECT splitdata FROM SplitString(@list,',')) "+
 				  		" and MATCH_ID = '"+mid+"'  AND suspend = 'F' AND visible='T'  ) B "+
 				  		" where a.MARKET_ID = B.MARKET_ID ";
+		 */
+		  String query2 =  " DECLARE @list varchar(MAX) "+
+			  		" SELECT @list = JSON FROM BC_JSON WHERE KEYNAME='MARKET_TYPE' "+
+			  		" SELECT  '{\"Id\":'+CAST(sel_id AS VARCHAR(10))+',\"MkId\":'+CAST(A.Market_Id AS VARCHAR(10))+',\"BP\":\"'+CAST(SEL_PRICE as varchar(10))+'\",\"P\":\"'+CAST(SEL_PRICE as varchar(10))+'\","+
+			  		" \"Nm\":\"'+ replace(replace(replace(replace(replace(replace(sel_name,'{h}',B.HANDICAP),'{-h}',B.HANDICAP*-1),'{hv}',isnull(home_value,'')),'{av}',isnull(away_value,'')),'W1',home_name),'W2',away_name)+'\",\"Or\":'+CAST(SEL_ORDER AS VARCHAR(10)) +'},' "+
+			  		" as sel from bc_selection a, (SELECT MATCH_ID,MARKET_ID,HANDICAP FROM bc_market WHERE MARKET_TYPE_ID in (SELECT splitdata FROM SplitString(@list,',')) "+
+			  		" and MATCH_ID = '"+mid+"'  AND suspend = 'F' AND visible='T'  ) B, "+
+			  		" (SELECT MATCH_ID,home_name,away_name from bc_match  where MATCH_ID = '"+mid+"') C " +
+			  		" where a.MARKET_ID = B.MARKET_ID and B.MATCH_ID = C.MATCH_ID";
+		  
 
 		  
-		  ////Debug.out("[getMarketbyMatchId] : " + query1);
-		  ////Debug.out("[getMarketbyMatchId] : " + query2);
+		  //Debug.out("[getMarketbyMatchId] : " + query1);
+		  //Debug.out("[getMarketbyMatchId] : " + query2);
 		  		  		  
 		  try{	      	
 			 	//Context initContext = new InitialContext();
@@ -1201,26 +1211,27 @@ public class BetConManager2 {
 
 		  String query1 = "DECLARE @list varchar(MAX)  "+
 				  	" SELECT @list = JSON FROM BC_JSON WHERE KEYNAME='MARKET_TYPE'  "+
-				  	"SELECT '{\"Id\":\"'+Cast(Market_Id As Varchar(10))+'\",\"Sq\":'+CAST(SEQUENCE as varchar(10))+',\"MId\":'+CAST(match_id as varchar(10))+',\"MTyId\":\"'+CAST(MARKET_TYPE_ID as varchar(10)) +'\","+
-				  	" \"Vis\":'+CASE WHEN visible ='T' THEN 'true' ELSE 'false' END+',"+
-				  	" \"Sus\":'+CASE WHEN Suspend ='T' THEN 'true' ELSE 'false' END+',"+
-				  	" \"Nm\":\"'+replace(replace(replace(market_name,'{sw}',SEQUENCE),'{pw}',POINT_SEQ),'{s}',SEQUENCE) +'\"' "+
-		  			" as market FROM bc_Market "+
-		  			" where Market_Id = '"+mkid+"' and MARKET_TYPE_ID in (SELECT splitdata FROM SplitString(@list,',')) "; //and  VISIBLE='T' And Suspend = 'F' ";
+				  	"SELECT '{\"Id\":\"'+Cast(a.Market_Id As Varchar(10))+'\",\"Sq\":'+CAST(SEQUENCE as varchar(10))+',\"MId\":'+CAST(a.match_id as varchar(10))+',\"MTyId\":\"'+CAST(MARKET_TYPE_ID as varchar(10)) +'\","+
+				  	" \"Vis\":'+CASE WHEN a.visible ='T' THEN 'true' ELSE 'false' END+',"+
+				  	" \"Sus\":'+CASE WHEN a.Suspend ='T' THEN 'true' ELSE 'false' END+',"+
+				  	" \"Nm\":\"'+replace(replace(replace(replace(replace(market_name,'{sw}',SEQUENCE),'{pw}',POINT_SEQ),'{s}',SEQUENCE),'W1',home_name),'W2',away_name) +'\"' "+
+		  			" as market FROM bc_Market a, bc_match b "+
+		  			" where a.Market_Id = '"+mkid+"' and MARKET_TYPE_ID in (SELECT splitdata FROM SplitString(@list,',')) and a.match_id = b.match_id "; //and  VISIBLE='T' And Suspend = 'F' ";
 		  
 		  String query2 =  " DECLARE @list varchar(MAX) "+
 				  		" SELECT @list = JSON FROM BC_JSON WHERE KEYNAME='MARKET_TYPE' "+
 				  		" SELECT  '{\"Id\":'+CAST(sel_id AS VARCHAR(10))+',\"MkId\":'+CAST(A.Market_Id AS VARCHAR(10))+',\"BP\":\"'+CAST(SEL_PRICE as varchar(10))+'\",\"P\":\"'+CAST(SEL_PRICE as varchar(10))+'\","+
-				  		" \"Nm\":\"'+ replace(replace(sel_name,'{h}',B.HANDICAP),'{-h}',B.HANDICAP*-1)+'\",\"Or\":'+CAST(SEL_ORDER AS VARCHAR(10)) +'},' "+
-				  		" as sel from bc_selection a, (SELECT MARKET_ID,HANDICAP FROM bc_market WHERE MARKET_TYPE_ID in (SELECT splitdata FROM SplitString(@list,',')) "+
-				  		//" and Market_Id = '"+mkid+"' AND suspend = 'F' AND visible='T'  ) B "+
-				  		" and Market_Id = '"+mkid+"' ) B "+
+				  		" \"Nm\":\"'+ replace(replace(replace(replace(replace(replace(sel_name,'{h}',B.HANDICAP),'{-h}',B.HANDICAP*-1),'{hv}',isnull(home_value,'')),'{av}',isnull(away_value,'')),'W1',home_name),'W2',away_name)+'\",\"Or\":'+CAST(SEL_ORDER AS VARCHAR(10)) +'},' "+
+				  		" as sel from bc_selection a, "+
+				  	//	" (SELECT MATCH_ID,MARKET_ID,HANDICAP FROM bc_market WHERE MARKET_TYPE_ID in (SELECT splitdata FROM SplitString(@list,',')) and Market_Id = '"+mkid+"' ) B, "+
+				  		" (SELECT bb.home_name,bb.away_name, aa.MATCH_ID,aa.MARKET_ID,HANDICAP FROM bc_market aa, bc_match bb WHERE MARKET_TYPE_ID in (SELECT splitdata FROM SplitString(@list,',')) "+
+				  		" and aa.Market_Id = '"+mkid+"' and aa.match_id = bb.match_id ) B " +
 				  		" where a.MARKET_ID = B.MARKET_ID ";
 
 		  
 		  
-		  ////Debug.out("[getMarketbyMarketId] : " + query1);
-		  ////Debug.out("[getMarketbyMarketId] : " + query2);
+		  //Debug.out("[getMarketbyMarketId] : " + query1);
+		  //Debug.out("[getMarketbyMarketId] : " + query2);
 		  		  		  
 		  try{	      	
 			 	//Context initContext = new InitialContext();
@@ -1259,7 +1270,7 @@ public class BetConManager2 {
 		        //sb2 = null;
 		        
 		  }catch(Exception e){
-			  //Debug.out("[getMarketbyMatchId] : " + e.getMessage());
+			  //Debug.out("[getMarketbyMarketId] : " + e.getMessage());
 		
 	      }finally{
 	     	  if(rs!=null) rs.close();
