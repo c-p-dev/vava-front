@@ -476,7 +476,7 @@ $(window).scroll(function(event){
 					<li><a href="/sport/prematch.jsp">스포츠</a></li>
 					<li><a href="/virtual/vgaming.jsp">가상게임</a></li>
 					<li><a href="/casino/casino.jsp">카지노</a></li>
-					<li><a href="#">경마</a></li>
+					<li><a href="/minigame/list.jsp">미니게임</a></li>
 				</ul>
 			</div>
         </div>

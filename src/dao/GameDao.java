@@ -61,7 +61,7 @@ public class GameDao {
 		Connection con 			= null;
 		PreparedStatement pstmt = null;
 		ResultSet rs 			= null;
-		String  query 			= "SELECT TOP 1000 * FROM game_lst WHERE game_type != 5 AND game_type != 6" ;
+		String  query 			= "SELECT TOP 1000 * FROM game_lst WHERE game_type != 5 AND game_type != 6 AND game_type != 10 AND game_type != 11" ;
 		
 		List<GameBean>	game_list = new ArrayList<>();
 		
@@ -173,6 +173,123 @@ public class GameDao {
 		
 		return game_list;
 	}
+	
+	public List<GameBean> getAllMinigames() {
+		Connection con 			= null;
+		PreparedStatement pstmt = null;
+		ResultSet rs 			= null;
+		String  query 			= "SELECT TOP 1000 * FROM game_lst WHERE game_type = 10 OR game_type = 11" ;
+		
+		List<GameBean>	game_list = new ArrayList<>();
+		
+		try {
+			DBConnector.getInstance();
+			con 				= DBConnector.getConnection();
+		    pstmt   			= con.prepareStatement(query);
+			rs 					= pstmt.executeQuery();
+            
+            while (rs.next()) {
+            	GameBean game_data = new GameBean();
+            	
+            	game_data.setGame_id(rs.getInt("game_id"));
+            	game_data.setGame_name(rs.getString("game_name"));
+            	game_data.setGame_provider(rs.getInt("game_provider"));
+            	game_data.setGame_type(rs.getInt("game_type"));
+            	game_data.setLink_dsp(rs.getString("link_dsp"));
+            	game_data.setGame_img(rs.getString("game_img"));
+            	game_data.setDate_added(rs.getString("date_added"));
+            	
+            	game_list.add(game_data);
+            }
+            
+            rs.close();
+	        pstmt.close();
+	        con.close();
+		}
+		catch(Exception e) {
+			
+		}
+		
+		return game_list;
+	}
+	
+	public List<GameBean> getLadderGames() {
+		Connection con 			= null;
+		PreparedStatement pstmt = null;
+		ResultSet rs 			= null;
+		String  query 			= "SELECT TOP 1000 * FROM game_lst WHERE game_type = 11" ;
+		
+		List<GameBean>	game_list = new ArrayList<>();
+		
+		try {
+			DBConnector.getInstance();
+			con 				= DBConnector.getConnection();
+		    pstmt   			= con.prepareStatement(query);
+			rs 					= pstmt.executeQuery();
+            
+            while (rs.next()) {
+            	GameBean game_data = new GameBean();
+            	
+            	game_data.setGame_id(rs.getInt("game_id"));
+            	game_data.setGame_name(rs.getString("game_name"));
+            	game_data.setGame_provider(rs.getInt("game_provider"));
+            	game_data.setGame_type(rs.getInt("game_type"));
+            	game_data.setLink_dsp(rs.getString("link_dsp"));
+            	game_data.setGame_img(rs.getString("game_img"));
+            	game_data.setDate_added(rs.getString("date_added"));
+            	
+            	game_list.add(game_data);
+            }
+            
+            rs.close();
+	        pstmt.close();
+	        con.close();
+		}
+		catch(Exception e) {
+			
+		}
+		
+		return game_list;
+	}
+	
+	public List<GameBean> getChingaGames() {
+		Connection con 			= null;
+		PreparedStatement pstmt = null;
+		ResultSet rs 			= null;
+		String  query 			= "SELECT TOP 1000 * FROM game_lst WHERE game_type = 10 " ;
+		
+		List<GameBean>	game_list = new ArrayList<>();
+		
+		try {
+			DBConnector.getInstance();
+			con 				= DBConnector.getConnection();
+		    pstmt   			= con.prepareStatement(query);
+			rs 					= pstmt.executeQuery();
+            
+            while (rs.next()) {
+            	GameBean game_data = new GameBean();
+            	
+            	game_data.setGame_id(rs.getInt("game_id"));
+            	game_data.setGame_name(rs.getString("game_name"));
+            	game_data.setGame_provider(rs.getInt("game_provider"));
+            	game_data.setGame_type(rs.getInt("game_type"));
+            	game_data.setLink_dsp(rs.getString("link_dsp"));
+            	game_data.setGame_img(rs.getString("game_img"));
+            	game_data.setDate_added(rs.getString("date_added"));
+            	
+            	game_list.add(game_data);
+            }
+            
+            rs.close();
+	        pstmt.close();
+	        con.close();
+		}
+		catch(Exception e) {
+			
+		}
+		
+		return game_list;
+	}
 
 	public List<GameBean> getGameProviders() {
 		Connection con 			= null;
@@ -231,8 +348,8 @@ public class GameDao {
 				"WHEN 7 THEN 'Poker' " + 
 				"WHEN 8 THEN 'Black Jack' " + 
 				"WHEN 9 THEN 'Roullete' " + 
-				"WHEN 10 THEN 'Chinga Choong' " + 
-				"WHEN 11 THEN 'Ogwill' " + 
+				"WHEN 10 THEN '가위바위보 게임' " + 
+				"WHEN 11 THEN '텍사스 사다리 게임' " + 
 				"END as game_type_name " + 
 				"FROM game_lst WHERE game_provider != 4 " +  
 				"GROUP BY game_type " ;
@@ -277,9 +394,11 @@ public class GameDao {
 				"WHEN 7 THEN 'Poker' " + 
 				"WHEN 8 THEN 'Black Jack' " + 
 				"WHEN 9 THEN 'Roullete' " + 
-				"WHEN 10 THEN 'Chinga Choong' " + 
-				"WHEN 11 THEN 'Ogwill' " + 
-				"END as game_type_name FROM game_lst WHERE game_provider = ? Group by game_type UNION " + 
+				"WHEN 10 THEN '가위바위보 게임' " + 
+				"WHEN 11 THEN '텍사스 사다리 게임' " + 
+				"END as game_type_name FROM game_lst " +
+				"WHERE game_provider = ? AND game_type != 5 AND game_type != 6 AND game_type != 10 AND game_type != 11 " +
+				"GROUP BY game_type UNION " + 
 				"SELECT 0 , 'ALL' AS game_type_name";
 		
 		
@@ -300,9 +419,11 @@ public class GameDao {
 						"WHEN 7 THEN 'Poker' " + 
 						"WHEN 8 THEN 'Black Jack' " + 
 						"WHEN 9 THEN 'Roullete' " + 
-						"WHEN 10 THEN 'Chinga Choong' " + 
-						"WHEN 11 THEN 'Ogwill' " + 
-						"END as game_type_name FROM game_lst WHERE game_provider != 4 GROUP BY game_type UNION " + 
+						"WHEN 10 THEN '가위바위보 게임' " + 
+						"WHEN 11 THEN '텍사스 사다리 게임' " + 
+						"END as game_type_name FROM game_lst " +
+						"WHERE game_provider != 4 AND game_type != 5 AND game_type != 6 AND game_type != 10 AND game_type != 11 " +
+						"GROUP BY game_type UNION " + 
 						"SELECT 0 , 'ALL' AS game_type_name";
 				
 				pstmt   			= con.prepareStatement(query);
@@ -365,7 +486,7 @@ public class GameDao {
 			con 				= DBConnector.getConnection();
 			
 			if(game_type == 0 && game_provider == 0){
-				query = "SELECT * FROM game_lst WHERE game_provider != 4";
+				query = "SELECT * FROM game_lst WHERE game_provider != 4 AND game_type != 5 AND game_type != 6 AND game_type != 10 AND game_type != 11";
 				pstmt  = con.prepareStatement(query);
 			}
 			else if (game_type != 0 && game_provider == 0){
@@ -374,7 +495,7 @@ public class GameDao {
 				pstmt.setInt(1, game_type);
 			}
 			else if (game_type == 0 && game_provider != 0){
-				query = "SELECT * FROM game_lst WHERE game_provider = ? ";
+				query = "SELECT * FROM game_lst WHERE game_provider = ? AND game_type != 5 AND game_type != 6 AND game_type != 10 AND game_type != 11";
 				pstmt  = con.prepareStatement(query);
 				pstmt.setInt(1, game_provider);
 			}
