@@ -25,13 +25,18 @@
 				<div class="blue_wrap">
 					<div class="cash_box">
 						<div class="cash_in">
-							<div class="cash_1"><p style="float:left">보유금액</p><p style="float:right"><span class="font_002 money_dsp"><%=dfrmt.format(currentUser.getMoney())%></span> 원</p></div>
-							<div class="cash_2">
+							<div class="cash_13">
 								<input class="input_style03" id="bankInfoTxt" placeholder="비밀번호 입력 후 “전용계좌확인” 버튼을 클릭해주세요">
 							</div>
 							<div class="cash_3">
 								<span class="btn5" id="bankInfoBtn">전용계좌확인</span>
 							</div>
+						</div>
+						<div class="cash_in">
+							<div class="cash_10"><p style="float:left">보유금액</p><p style="float:right"><span class="font_002 money_dsp"><%=dfrmt.format(currentUser.getMoney())%></span> 원</p></div>
+							<div class="cash_9">
+									<input class="input_style03" type="text" style="text-align: right;padding-right: 5%;" type="number" id="money" name="money"  placeholder="충전금액">		
+							</div>	
 						</div>
 						<form name="chargeForm" id="chargeForm">
 							<div class="cash_in">
@@ -71,16 +76,12 @@
 										    <option value="카카오뱅크">카카오뱅크</option>
 									</select>
 								</div>
-								<div class="cash_4">
+								<div class="cash_11">
 									<input class="input_style03"  id="ct_bank_owner" name="bank_owner" placeholder="입금자명">		
 								</div>
 <!-- 								<div class="cash_4">
 									<input class="input_style03"  id="ct_bank_num" name="bank_num"  placeholder="계좌번호">		
-								</div> -->
-								<div class="cash_4">
-									<input class="input_style03" type="text" style="text-align: right;padding-right: 5%;" type="number" id="money" name="money"  placeholder="충전금액">		
-								</div>	
-								
+								</div> -->								
 							</div>
 							<div class="cash_in error_cash_in">
 								<div class="cash_4">
@@ -97,15 +98,16 @@
 								</div>	
 							</div>
 							<div class="cash_in">
-								<span class="btn1 add-money" data-am="1" >1만원</span> 
-								<span class="btn1 add-money" data-am="5" >5만원</span> 
-								<span class="btn1 add-money" data-am="10" >10만원</span> 
-								<span class="btn1 add-money" data-am="100" >100만원</span> 
-								<span class="btn1 add-money" data-am="0" >정정</span>
+								<span class="ebtn btn1 add-money" data-am="1" >1만원</span> 
+								<span class="ebtn btn1 add-money" data-am="5" >5만원</span> 
+								<span class="ebtn btn1 add-money" data-am="10" >10만원</span>
+								<span class="ebtn btn1 add-money" data-am="50" >50만원</span> 
+								<span class="ebtn btn1 add-money" data-am="100" >100만원</span> 
+								<span class="ebtn btn1 add-money" data-am="0" >정정</span>
 								<!-- <span class="btn3c">충전신청</span></a> -->
 								
 							</div>
-							<div class="cash_in">
+							<div class="cash_in exbtn">
 								<input type="submit" id="ct_submit" value="충전신청" class="btn3c">
 							</div>
 							
@@ -385,7 +387,6 @@
 				    content: {
 				        text: error,
 				        tooltipanchor: $(this),
-				        button: 'Close',
 				    },
 				    show: {
 			            when: false,
@@ -398,8 +399,8 @@
 			        },
 			        position: {
 				        container: $("#acc_content_in_chargetb"),
-				        at: 'bottom right ',
-				        my: 'top left', 
+				        at: 'right center ',
+				        my: 'left center',  
 				        adjust : {
 				        	method : 'shift none',
 				        }
@@ -440,6 +441,10 @@
 		}
 		else if(amount == "10"){
 			am = 100000;
+			sum = am + current_am;
+		}
+		else if(amount == "50"){
+			am = 500000;
 			sum = am + current_am;
 		}
 		else if(amount == "100"){
