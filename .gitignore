@@ -1,4 +1,7 @@
 *.classpath
+*.class
 *.project
+*.bak
 /*.settings/
+/bin
 /build
