@@ -532,7 +532,7 @@
 					    content: {
 					        text: error,
 					        tooltipanchor: $(this),
-					        button: 'Close',
+					        //button: 'Close',
 					    },
 					    show: {
 				            when: false,

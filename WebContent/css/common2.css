@@ -396,3 +396,23 @@ button.btn5:disabled {
     background: #252b2b!important;
 }
 
+
+
+/*fade*/
+.tab_content.fading{
+    opacity: 1;
+    animation: fading 0.4s linear;
+}
+
+.fading {
+        -webkit-animation-timing-function: ease-in-out;
+        -webkit-animation-duration: 705ms;
+        -moz-animation-timing-function: ease-in-out;
+        -moz-animation-duration: 705ms;        
+}
+
+@keyframes fading {
+    from { opacity: 0 }
+    to { opacity: 1 }
+
+}
