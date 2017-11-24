@@ -24,16 +24,22 @@
 			<div class="acc_content_in_2" id="acc_content_in_chargetb">
 				<div class="blue_wrap">
 					<div class="cash_box">
+						<form name="chargeForm" id="chargeForm">
 						<div class="cash_in">
-							<div class="cash_1"><p style="float:left">보유금액</p><p style="float:right"><span class="font_002 money_dsp"><%=dfrmt.format(currentUser.getMoney())%></span> 원</p></div>
-							<div class="cash_2">
+							<div class="cash_13">
 								<input class="input_style03" id="bankInfoTxt" placeholder="비밀번호 입력 후 “전용계좌확인” 버튼을 클릭해주세요">
 							</div>
 							<div class="cash_3">
 								<span class="btn5" id="bankInfoBtn">전용계좌확인</span>
 							</div>
 						</div>
-						<form name="chargeForm" id="chargeForm">
+						<div class="cash_in">
+							<div class="cash_10"><p style="float:left">보유금액</p><p style="float:right"><span class="font_002 money_dsp"><%=dfrmt.format(currentUser.getMoney())%></span> 원</p></div>
+							<div class="cash_9">
+									<input class="input_style03" type="text" style="text-align: right;padding-right: 5%;" type="number" id="money" name="money"  placeholder="충전금액">		
+							</div>	
+						</div>
+						
 							<div class="cash_in">
 								<div class="cash_4">
 									<select class="input_style02" id="ct_bank_name" name="bank_name">
@@ -71,41 +77,24 @@
 										    <option value="카카오뱅크">카카오뱅크</option>
 									</select>
 								</div>
-								<div class="cash_4">
+								<div class="cash_11">
 									<input class="input_style03"  id="ct_bank_owner" name="bank_owner" placeholder="입금자명">		
 								</div>
 <!-- 								<div class="cash_4">
 									<input class="input_style03"  id="ct_bank_num" name="bank_num"  placeholder="계좌번호">		
-								</div> -->
-								<div class="cash_4">
-									<input class="input_style03" type="text" style="text-align: right;padding-right: 5%;" type="number" id="money" name="money"  placeholder="충전금액">		
-								</div>	
-								
-							</div>
-							<div class="cash_in error_cash_in">
-								<div class="cash_4">
-									<div class="input_warning" id="bank_name-charge-warn">입력하신 번호로 인증번호가 발송되었습니다.</div>
-								</div>
-								<div class="cash_4">
-									<div class="input_warning" id="bank_owner-charge-warn">입력하신 번호로 인증번호가 발송되었습니다.</div>
-								</div>
-								<div class="cash_4">
-									<div class="input_warning" id="bank_num-charge-warn">입력하신 번호로 인증번호가 발송되었습니다.</div>
-								</div>
-								<div class="cash_4">
-									<div class="input_warning" id="money-charge-warn">입력하신 번호로 인증번호가 발송되었습니다.</div>
-								</div>	
+								</div> -->								
 							</div>
 							<div class="cash_in">
-								<span class="btn1 add-money" data-am="1" >1만원</span> 
-								<span class="btn1 add-money" data-am="5" >5만원</span> 
-								<span class="btn1 add-money" data-am="10" >10만원</span> 
-								<span class="btn1 add-money" data-am="100" >100만원</span> 
-								<span class="btn1 add-money" data-am="0" >정정</span>
+								<span class="ebtn btn1 add-money" data-am="1" >1만원</span> 
+								<span class="ebtn btn1 add-money" data-am="5" >5만원</span> 
+								<span class="ebtn btn1 add-money" data-am="10" >10만원</span>
+								<span class="ebtn btn1 add-money" data-am="50" >50만원</span> 
+								<span class="ebtn btn1 add-money" data-am="100" >100만원</span> 
+								<span class="ebtn btn1 add-money" data-am="0" >정정</span>
 								<!-- <span class="btn3c">충전신청</span></a> -->
 								
 							</div>
-							<div class="cash_in">
+							<div class="cash_in exbtn">
 								<input type="submit" id="ct_submit" value="충전신청" class="btn3c">
 							</div>
 							
@@ -116,7 +105,7 @@
 		</div>
 	</li>
 	<li>
-		<div class="acc_head dt_div"><h3>충전신청 리스트</h3></div>
+		<div class="acc_head dt_div_cash"><h3>충전신청 리스트</h3></div>
 		<div class="acc_content">
 			<div class="acc_content_in_2">
 				<table id="dataTable1" cellspacing="0" cellpadding="0" data-scroll-x="true" style="width: 100%!important;">
@@ -194,14 +183,6 @@
 		$(".add-money").on("click",function(e){
 			var am = $(this).attr("data-am");
 			addAmount(am);
-
-			var validator = $( "#chargeForm" ).validate(); 
-			var valid = validator.element("#money");
-			console.log(valid);
-			if(valid){
-				$("#money").qtip("hide");
-			}
-			
 
 		});
 
@@ -298,7 +279,7 @@
         });
 
 
-        $(".dt_div").on("click",function(){
+        $(".dt_div_cash").on("click",function(){
         	
         	setTimeout(function() {
 			  	$dataTable1.columns.adjust().draw();
@@ -385,7 +366,6 @@
 				    content: {
 				        text: error,
 				        tooltipanchor: $(this),
-				        button: 'Close',
 				    },
 				    show: {
 			            when: false,
@@ -398,8 +378,8 @@
 			        },
 			        position: {
 				        container: $("#acc_content_in_chargetb"),
-				        at: 'bottom right ',
-				        my: 'top left', 
+				        at: 'right center ',
+				        my: 'left center',  
 				        adjust : {
 				        	method : 'shift none',
 				        }
@@ -440,6 +420,10 @@
 		}
 		else if(amount == "10"){
 			am = 100000;
+			sum = am + current_am;
+		}
+		else if(amount == "50"){
+			am = 500000;
 			sum = am + current_am;
 		}
 		else if(amount == "100"){

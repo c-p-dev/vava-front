@@ -612,7 +612,7 @@
 					    content: {
 					        text: error,
 					        tooltipanchor: $(this),
-					        button: 'Close',
+					        // button: 'Close',
 					    },
 					    show: {
 				            when: false,
@@ -780,7 +780,7 @@
 					    content: {
 					        text: error,
 					        tooltipanchor: $(this),
-					        button: 'Close',
+					        // button: 'Close',
 					    },
 					    show: {
 				            when: false,
@@ -888,7 +888,7 @@
 					    content: {
 					        text: error,
 					        tooltipanchor: $(this),
-					        button: 'Close',
+					        // button: 'Close',
 					    },
 					    show: {
 				            when: false,
@@ -1028,7 +1028,7 @@
 					    content: {
 					        text: error,
 					        tooltipanchor: $(this),
-					        button: 'Close',
+					        // button: 'Close',
 					    },
 					    show: {
 				            when: false,
@@ -1113,7 +1113,7 @@
 					    content: {
 					        text: error,
 					        tooltipanchor: $(this),
-					        button: 'Close',
+					        // button: 'Close',
 					    },
 					    show: {
 				            when: false,

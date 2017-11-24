@@ -40,23 +40,20 @@
 								<form id="pointform">
 									<div class="float_inline">
 										<div class="cash_in">
-											<div class="cash_1"><p style="float:left">보유포인트</p><p style="float:right" class="font_002 pointavail" id="showpoint"><%=dfrmt.format(currentUser.getPoint())%></p></div>
-										</div>
-										<div class="cash_in">
-											<div class="cash_6">
+											<div class="cash_10"><p style="float:left">보유포인트</p><p style="float:right" class="font_002 pointavail" id="showpoint"><%=dfrmt.format(currentUser.getPoint())%></p></div>
+											<div class="cash_9">
 												<input class="input_style03" id="point" name="point" style="text-align: right; padding-right:10px;" placeholder="입금자명">		
 											</div>
-											<div class="cash_3">
-												<span class="btn5" id="reset">정정</span>
-											</div>
 										</div>
 										<div class="cash_in">
-											<span class="btn1" id="p1">1만원</span>
-		 									<span class="btn1" id="p2">5만원</span>
-		 									<span class="btn1" id="p3">10만원</span>
-		 									<span class="btn1" id="p4">100만원</span>
+											<span class="ebtn btn1" id="p1">1만원</span>
+		 									<span class="ebtn btn1" id="p2">5만원</span>
+		 									<span class="ebtn btn1" id="p3">10만원</span>
+		 									<span class="ebtn btn1" id="p5">50만원</span>
+		 									<span class="ebtn btn1" id="p4">100만원</span>
+		 									<span class="ebtn btn1" id="reset">정정</span>
 										</div>
-										<div class="cash_in">
+										<div class="cash_in exbtn">
 											<span><button type="submit" id="pointBtnSbmit" class="btn3c">전환신청</button></span>
 										</div>	
 									</div>
@@ -122,8 +119,7 @@ $(document).ready(function(){
 				    overwrite: true,
 				    content: {
 				        text: error,
-				        tooltipanchor: $(this),
-				        button: 'Close',
+				        tooltipanchor: $(this)
 				    },
 				    show: {
 			            when: false,
@@ -136,8 +132,8 @@ $(document).ready(function(){
 			        },
 			        position: {
 				        container: $("#acc_content_in_pointtb"),
-				        at: 'left center ',
-				        my: 'right center', 
+				        at: 'right center ',
+				        my: 'left center', 
 				        adjust : {
 				        	method : 'shift none',
 				        }
@@ -256,6 +252,11 @@ $('#p4').click(function(){
 	// var num = + $("#point").val() + 1000000;
 	// $("#point").val(numberWithCommas(num));
 	addVal(1000000);
+});
+$('#p5').click(function(){
+	// var num = + $("#point").val() + 1000000;
+	// $("#point").val(numberWithCommas(num));
+	addVal(500000);
 });
 
 

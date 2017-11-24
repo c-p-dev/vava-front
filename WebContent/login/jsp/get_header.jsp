@@ -40,10 +40,10 @@
 			"				<div class=\"popover-body\" >\n" + 
 			"					<a href=\"#\" data-toggle-role=\"close\" style=\"position:absolute; right:20px; top:0px\">×</a>\n" + 
 			"					<div class=\"popover-body-in\">\n" + 
-			"						<span class=\"popover_t\">보유머니</span> <span class=\"popover_money\"> " + UBAL + " </span>\n" + 
+			"						<span class=\"popover_t\">보유머니</span> <span class=\"popover_money\"> " + dfrmt.format(UBAL) + " </span>\n" + 
 			"					</div>\n" + 
 			"					<div class=\"popover-body-in\">\n" + 
-			"						<span class=\"popover_t\">보유포인트</span> <span class=\"popover_money\">" + UPOINT+ " </span>\n" + 
+			"						<span class=\"popover_t\">보유포인트</span> <span class=\"popover_money\">" + dfrmt.format(UPOINT) + " </span>\n" + 
 			"					</div>\n" + 
 			"					<div class=\"popover-body-btn\" id=\"user_popup_menu\">\n" + 
 			"						<div class=\"popover-body-btn_in\">\n" + 
@@ -58,7 +58,7 @@
 			"						<!--	<a href=\"/cash/cash.jsp\" data-pg=\"sb4\" data-tab=\"tab4\" ><span class=\"popover_btn\">머니전환</span></a> -->\n" + 
 			"							\n" + 
 			"							<a href=\"/cash/cash.jsp\" data-pg=\"sb4\" data-tab=\"tab6\"><span class=\"popover_btn\">머니사용내역</span></a>\n" + 
-			"							<span class=\"showLogoutModal popover_btn\" style=\"color: #8a8c8d!important; cursor: pointer;\">머니사용내역</span>\n" + 
+			"							<span class=\"showLogoutModal popover_btn\" style=\"color: #8a8c8d!important; cursor: pointer;\">로그아웃 </span>\n" + 
 			"						</div>\n" + 
 			"					</div>\n" + 
 			"				</div>\n" + 
