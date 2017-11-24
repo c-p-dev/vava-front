@@ -113,7 +113,7 @@ public class BcTransactionLogDao {
 		int result 				= 0;
 		String query 			= "INSERT INTO bc_transaction_log "
 				+ "(player_id, rgs_id, rgs_related_id, token, currency, withdraw_amount, deposit_amount, transaction_type, type_description, date_added, status) "
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		try {
 			DBConnector.getInstance();
@@ -192,7 +192,7 @@ public class BcTransactionLogDao {
 		Connection con 			= null;
 		PreparedStatement pstmt = null;
 		ResultSet rs 			= null;
-		String  query 			= "SELECT TOP 1 * FROM bc_transaction_log WHERE player_id = ? AND token = ?" ;
+		String  query 			= "SELECT TOP 1 * FROM bc_transaction_log WHERE player_id = ? AND token = ?";
 		
 		BcTransactionLogBean trans_data	= new BcTransactionLogBean();
 		

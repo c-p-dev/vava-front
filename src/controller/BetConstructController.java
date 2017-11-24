@@ -178,7 +178,7 @@ public class BetConstructController {
 	        |-------------------------------------------------------------------*/
 			bc_user		= betcon_db.getUserBySessionToken(json_data.getToken());
 			user_data	= betcon_db.getUserByPlayerId(bc_user.getPlayerId());
-			System.out.println(bc_user.getPlayerId());
+			
 			/*--------------------------------------------------------------------
 	        |	Create Output Object for Response
 	        |-------------------------------------------------------------------*/
@@ -215,7 +215,7 @@ public class BetConstructController {
 		}
 		
 		json_output	= gson_null.toJson(auth_user, AuthenticationOutput.class);
-		System.out.println(json_output);
+		
 		return json_output;
 	}
 	
@@ -328,7 +328,7 @@ public class BetConstructController {
 		int db_add_upd_ok		= 0;
 		String json_body		= "";
 		String pubkey			= "";
-		
+		System.out.println(json_input);
 		/*--------------------------------------------------------------------
         |	Remove Public Key for verification
         |-------------------------------------------------------------------*/
@@ -489,17 +489,9 @@ public class BetConstructController {
 							trans_data.setWithdraw_amount(new BigDecimal(json_data.getWithdrawAmount()).setScale(0, BigDecimal.ROUND_HALF_UP).doubleValue());
 							trans_data.setDeposit_amount(new BigDecimal(json_data.getDepositAmount()).setScale(0, BigDecimal.ROUND_HALF_UP).doubleValue());
 							trans_data.setTransaction_type(3);
-							System.out.println("Perform calculation");
-							System.out.println(user_data.getMoney());
-							System.out.println(json_data.getDepositAmount());
-							System.out.println(json_data.getWithdrawAmount());
 							
 							bal_remain	= new BigDecimal(user_data.getMoney()).add(new BigDecimal(json_data.getDepositAmount()));
-							System.out.println("ADD Money and Deposit");
-							System.out.println(bal_remain);
 							bal_remain	= bal_remain.subtract(new BigDecimal(json_data.getWithdrawAmount()));
-							System.out.println("Subtract the Withdraw");
-							System.out.println(bal_remain);
 						}
 						break;
 						
@@ -519,7 +511,7 @@ public class BetConstructController {
 						resp_data.setErrorDescription("Not Enough Balance");
 					}
 				}
-				
+				System.out.println(trans_valid);
 				if (true == trans_valid) {
 					/*--------------------------------------------------------------------
 			        |	Sets status of transaction to processed
