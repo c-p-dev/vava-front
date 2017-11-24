@@ -524,6 +524,7 @@ public class BetConstructController {
 					/*--------------------------------------------------------------------
 			        |	Sets status of transaction to processed
 			        |-------------------------------------------------------------------*/
+					trans_data.setType_description(json_data.getTypeId());
 					trans_data.setStatus(BC_TRANS_COMPLETE);
 					
 					if (0 == trans_data.getTransaction_id()) {

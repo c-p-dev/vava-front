@@ -13,7 +13,8 @@ public class BcTransactionLogBean {
 	private String currency;
 	private String date_added;
 	private int status;
-	
+	private int type_description;
+
 	public int getTransaction_id() {
 		return transaction_id;
 	}
@@ -102,4 +103,11 @@ public class BcTransactionLogBean {
 		this.status = status;
 	}
 	
+	public int getType_description() {
+		return type_description;
+	}
+
+	public void setType_description(int type_description) {
+		this.type_description = type_description;
+	}
 }

@@ -112,7 +112,7 @@ public class BcTransactionLogDao {
 		PreparedStatement pstmt = null;
 		int result 				= 0;
 		String query 			= "INSERT INTO bc_transaction_log "
-				+ "(player_id, rgs_id, rgs_related_id, token, currency, withdraw_amount, deposit_amount, transaction_type, date_added, status) "
+				+ "(player_id, rgs_id, rgs_related_id, token, currency, withdraw_amount, deposit_amount, transaction_type, type_description, date_added, status) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		try {
@@ -128,8 +128,9 @@ public class BcTransactionLogDao {
             pstmt.setDouble(6, trans_data.getWithdraw_amount());
             pstmt.setDouble(7, trans_data.getDeposit_amount());
             pstmt.setInt(8, trans_data.getTransaction_type());
-            pstmt.setString(9, sdf.format(date));
-            pstmt.setInt(10, trans_data.getStatus());
+            pstmt.setInt(9, trans_data.getType_description());
+            pstmt.setString(10, sdf.format(date));
+            pstmt.setInt(11, trans_data.getStatus());
 			
             result	= pstmt.executeUpdate();
             
@@ -152,7 +153,7 @@ public class BcTransactionLogDao {
 		int result 				= 0;
 		String query 			= "UPDATE bc_transaction_log SET "
 				+ "player_id = ?, rgs_id = ?, rgs_related_id = ?, token = ?, currency = ?, "
-				+ "withdraw_amount = ?, deposit_amount = ?, transaction_type = ?, date_added = ?, status = ? "
+				+ "withdraw_amount = ?, deposit_amount = ?, transaction_type = ?, type_description = ?, date_added = ?, status = ? "
 				+ "WHERE transaction_id = ?";
 		
 		try {
@@ -168,9 +169,10 @@ public class BcTransactionLogDao {
             pstmt.setDouble(6, trans_data.getWithdraw_amount());
             pstmt.setDouble(7, trans_data.getDeposit_amount());
             pstmt.setInt(8, trans_data.getTransaction_type());
-            pstmt.setString(9, sdf.format(date));
-            pstmt.setInt(10, trans_data.getStatus());
-            pstmt.setInt(11, trans_data.getTransaction_id());
+            pstmt.setInt(9, trans_data.getType_description());
+            pstmt.setString(10, sdf.format(date));
+            pstmt.setInt(11, trans_data.getStatus());
+            pstmt.setInt(12, trans_data.getTransaction_id());
 			
             result	= pstmt.executeUpdate();
             
