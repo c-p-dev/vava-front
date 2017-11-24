@@ -93,7 +93,7 @@ public class ChargeDao {
 		ResultSet rs = null;
 		String query = "SELECT * FROM RT01.dbo.charge_lst WHERE userid = ?";
 		DecimalFormat formatter = new DecimalFormat("#,###");
-		DateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd");
+		DateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		
 		try{	      
 			

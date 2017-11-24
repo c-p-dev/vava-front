@@ -145,7 +145,7 @@ $(window).scroll(function(event){
 			$("#logoutModal").popup("hide");
 		});
 
-		$(".showLogoutModal").on("click",function(e){
+		$("body").on("click",".showLogoutModal",function(e){
 			e.preventDefault();
 			$("#logoutModal").popup("show");
 		});
@@ -380,10 +380,10 @@ $(window).scroll(function(event){
 							<div class="popover-body" >
 								<a href="#" data-toggle-role="close" style="position:absolute; right:20px; top:0px">×</a>
 								<div class="popover-body-in">
-									<span class="popover_t">보유머니</span> <span class="popover_money"><%=UBAL%></span>
+									<span class="popover_t">보유머니</span> <span class="popover_money"><%=dfrmt.format(UBAL)%></span>
 								</div>
 								<div class="popover-body-in">
-									<span class="popover_t">보유포인트</span> <span class="popover_money"><%=UPOINT%></span>
+									<span class="popover_t">보유포인트</span> <span class="popover_money"><%=dfrmt.format(UPOINT)%></span>
 								</div>
 								<div class="popover-body-btn" id="user_popup_menu">
 									<div class="popover-body-btn_in">
