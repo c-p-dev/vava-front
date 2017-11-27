@@ -91,7 +91,7 @@ public class ChargeDao {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String query = "SELECT * FROM RT01.dbo.charge_lst WHERE userid = ?";
+		String query = "SELECT * FROM RT01.dbo.charge_lst WHERE userid = ? ";
 		DecimalFormat formatter = new DecimalFormat("#,###");
 		DateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		

@@ -372,11 +372,11 @@ public class BetConManager2 {
 				  		" OR MARKET_TYPE_ID='10829' or MARKET_TYPE_ID='9321') ";
 
 		  
-		 // //Debug.out("query1 : " + query);	
-		 // //Debug.out("query2 : " + query2);	
-		 // //Debug.out("query3 : " + query3);	
-		 // //Debug.out("query4 : " + query4);	
-		 // //Debug.out("query5 : " + query4);
+		 //// Debug.out("query1 : " + query);	
+		 //// Debug.out("query2 : " + query2);	
+		 //// Debug.out("query3 : " + query3);	
+		 //// Debug.out("query4 : " + query4);	
+		 //// Debug.out("query5 : " + query4);
 
 		  try{	      	
 			 	//Context initContext = new InitialContext();
@@ -488,7 +488,7 @@ public class BetConManager2 {
 		  String query = " SELECT '{\"Id\":\"'+CAST(match_id as varchar(10))+'\",\"CId\":\"'+CAST(compet_id as varchar(10))+'\"},' AS match  "+
 					" FROM bc_match WHERE match_stat='0' AND visible='T' AND booked='T' "+
 					" and convert(char(8),match_date,112) >= convert(char(8),getdate(),112) "+
-					" and convert(char(8),match_date,112) <= convert(char(8),getdate()+7,112) "+
+					" and convert(char(8),match_date,112) <= convert(char(8),getdate()+6,112) "+
 					" and home_name is not null and away_name is not null";
 		 
 		  ////Debug.out("[getPreMatches] :" + query);		
@@ -541,7 +541,7 @@ public class BetConManager2 {
 		  StringBuffer sb = new StringBuffer(""); 
 
 		  String query = " SELECT '{\"Id\":\"'+CAST(A.match_id as varchar(10))+'\",\"CId\":\"'+CAST(A.compet_id as varchar(10))+'\",\"CN\":\"'+CNAME+'\", "+
-					" \"SId\":\"'+CAST(A.sport_id as varchar(10))+'\",\"SN\":\"'+SNAME+'\",\"RId\":\"'+CAST(A.region_id as varchar(10))+'\",\"RN\":\"'+RNAME+'\"},' AS match  "+
+					" \"SId\":\"'+CAST(A.sport_id as varchar(10))+'\",\"Dt\":\"'+convert(char(10),match_date,120)+'\",\"SN\":\"'+SNAME+'\",\"RId\":\"'+CAST(A.region_id as varchar(10))+'\",\"RN\":\"'+RNAME+'\"},' AS match  "+
 					" FROM bc_match A ,"+
 					" (SELECT SPORT_ID,CASE WHEN LEN(TXT) > 0 THEN TXT ELSE SPORT_NAME END  AS SNAME "+
 					" FROM bc_sport A LEFT OUTER JOIN BC_TRANS B ON A.SPORT_NAMEID = B.NAMEID) B,"+						
@@ -553,10 +553,10 @@ public class BetConManager2 {
 					//" AND live='T' and a.live_stat='1' AND a.visible='T'  AND a.booked='T' ";
 					" AND a.match_stat='0' AND a.visible='T'  AND a.booked='T' "+
 					" and convert(char(8),match_date,112) >= convert(char(8),getdate(),112) "+
-					" and convert(char(8),match_date,112) <= convert(char(8),getdate()+7,112) "+
+					" and convert(char(8),match_date,112) <= convert(char(8),getdate()+6,112) "+
 					" and home_name is not null and away_name is not null";
 		  
-		 // //Debug.out("[getPreMatches] :" + query);		
+		 //// Debug.out("[getPreMatches] :" + query);		
 		  
 		  try{	      	
 			 	//Context initContext = new InitialContext();
@@ -606,7 +606,7 @@ public class BetConManager2 {
 		  StringBuffer sb = new StringBuffer(""); 
 
 		  String query = " SELECT '{\"Id\":\"'+CAST(A.match_id as varchar(10))+'\",\"CId\":\"'+CAST(A.compet_id as varchar(10))+'\",\"CN\":\"'+CNAME+'\", "+
-					" \"SId\":\"'+CAST(A.sport_id as varchar(10))+'\",\"SN\":\"'+SNAME+'\",\"RId\":\"'+CAST(A.region_id as varchar(10))+'\",\"RN\":\"'+RNAME+'\"},' AS match  "+
+					" \"SId\":\"'+CAST(A.sport_id as varchar(10))+'\",\"Dt\":\"'+convert(char(10),match_date,120)+'\",\"SN\":\"'+SNAME+'\",\"RId\":\"'+CAST(A.region_id as varchar(10))+'\",\"RN\":\"'+RNAME+'\"},' AS match  "+
 					" FROM bc_match A ,"+
 					" (SELECT SPORT_ID,CASE WHEN LEN(TXT) > 0 THEN TXT ELSE SPORT_NAME END  AS SNAME "+
 					" FROM bc_sport A LEFT OUTER JOIN BC_TRANS B ON A.SPORT_NAMEID = B.NAMEID) B,"+						
@@ -657,6 +657,354 @@ public class BetConManager2 {
 		
 	}
 	
+	public StringBuffer getTodayMatchInfo(String dt) throws SQLException{
+		 
+		  Connection con = null;
+		  PreparedStatement pstmt = null;		  
+		  ResultSet rs = null;		  
+		  String match = "";
+		  String result = "";
+		  String sele = "";
+		  String market = "";
+		  //String stat = "";
+		  
+		  StringBuffer sb = new StringBuffer(""); 
+
+		  String query = " SELECT '{\"Id\":\"'+CAST(A.match_id as varchar(10))+'\",\"CId\":\"'+CAST(A.compet_id as varchar(10))+'\",\"CN\":\"'+CNAME+'\","+
+					"\"Dt\":\"'+convert(char(16),MATCH_DATE,120)+'\",\"SId\":\"'+CAST(A.sport_id as varchar(10))+'\",\"SN\":\"'+SNAME+'\",\"RId\":\"'+CAST(A.region_id as varchar(10))+'\",\"RN\":\"'+RNAME+'\","+
+					"\"Sus\":'+CASE WHEN suspend ='T' THEN 'true' ELSE 'false' END+',"+
+					"\"HT\":\"'+home_name+'\","+
+					"\"AT\":\"'+away_name+'\"},' AS match  "+
+					" FROM bc_match A ,"+
+					" (SELECT SPORT_ID,CASE WHEN LEN(TXT) > 0 THEN TXT ELSE SPORT_NAME END  AS SNAME "+
+					" FROM bc_sport A LEFT OUTER JOIN BC_TRANS B ON A.SPORT_NAMEID = B.NAMEID) B,"+						
+					" (SELECT REGION_ID,CASE WHEN LEN(TXT) > 0 THEN TXT ELSE REGION_NAME END AS RNAME "+
+					" FROM  BC_REGION A LEFT OUTER JOIN BC_TRANS B ON A.REGION_NAMEID = B.NAMEID) C,"+						
+					" (SELECT COMPET_ID,CASE WHEN LEN(TXT) > 0 THEN TXT ELSE COMPET_NAME END AS CNAME "+
+					" FROM BC_COMPETITION A LEFT OUTER JOIN BC_TRANS B ON A.NAMEID = B.NAMEID) D "+						
+					" WHERE A.sport_id = B.SPORT_ID  AND A.region_id = C.REGION_ID AND A.compet_id = D.COMPET_ID "+
+					//" AND a.compet_id='"+cid+"' 
+					" AND a.match_stat='0' AND a.visible='T'  AND a.booked='T' "+
+					//" and convert(char(8),match_date,112) >= convert(char(8),getdate(),112) "+
+					//" and convert(char(8),match_date,112) <= convert(char(8),getdate()+6,112) "+
+					" and convert(char(10),match_date,120) = '"+dt+"' "+
+					" and home_name is not null and away_name is not null";		  
+		  
+		  String query2 =" DECLARE @list varchar(MAX) "+
+				  		" SELECT @list = JSON FROM BC_JSON WHERE KEYNAME='MARKET_TYPE' "+		  
+				  		" SELECT '{\"Id\":'+CAST(A.MARKET_ID as varchar(10))+',\"M\":\"'+CAST(B.MATCH_ID as varchar(10))+'\","+
+				  		" \"V\":'+CASE WHEN A.visible ='T' THEN 'true' ELSE 'false' END +',"+
+				  		" \"S\":'+CASE WHEN A.suspend ='T' THEN 'true' ELSE 'false' END +'},' as market "+
+		  				" FROM BC_MARKET A,  BC_MATCH B "+
+		  				" WHERE A.MATCH_ID = B.MATCH_ID AND MARKET_TYPE_ID in "+
+		  				" (SELECT splitdata FROM SplitString(@list,',')) "+ 
+		  				//" AND B.compet_id='"+cid+"' AND B.match_stat='0' AND B.visible='T'  AND B.booked='T' "+ 
+		  				" AND B.match_stat='0' AND B.visible='T'  AND B.booked='T' "+ 
+		  				" AND A.visible='T' AND A.suspend = 'F' "+
+		  				//" and convert(char(8),match_date,112) >= convert(char(8),getdate(),112) "+
+						//" and convert(char(8),match_date,112) <= convert(char(8),getdate()+6,112) "+
+						//" and convert(char(8),match_date,112) = convert(char(8),getdate(),112) "+
+						" and convert(char(10),match_date,120) = '"+dt+"' "+
+		  				"and home_name is not null and away_name is not null";
+		  
+		  String query3 = " SELECT  '{\"Id\":'+CAST(A.MARKET_ID as varchar(10))+',\"MId\":'+CAST(B.MATCH_ID as varchar(10))+', "+
+				  		"	\"Sus\":'+CASE WHEN A.suspend ='T' THEN 'true' ELSE 'false' END+'},' "+
+				  		//" \"IsVisible\":'+CASE WHEN A.visible ='T' THEN 'true' ELSE 'false' END+'},' as result "+ 
+				  		" as result "+ 
+				  		" FROM BC_MARKET A ,BC_match b "+
+				  		//" WHERE  B.compet_id='"+cid+"' AND B.match_stat='0' AND B.visible='T'  AND B.booked='T'  "+
+				  		" WHERE B.match_stat='0' AND B.visible='T'  AND B.booked='T'  "+
+				  		" AND A.visible='T' "+
+				  		//" and convert(char(8),match_date,112) >= convert(char(8),getdate(),112) "+
+						//" and convert(char(8),match_date,112) <= convert(char(8),getdate()+6,112) "+
+						//" and convert(char(8),match_date,112) = convert(char(8),getdate(),112) "+
+						" and convert(char(10),match_date,120) = '"+dt+"' "+
+				  		" and home_name is not null and away_name is not null"+
+				  		" and a.MATCH_ID = b.MATCH_ID AND (MARKET_TYPE_ID ='377' or MARKET_TYPE_ID='399' or MARKET_TYPE_ID='2434' or MARKET_TYPE_ID='4475' "+
+				  		" OR MARKET_TYPE_ID='5488' OR MARKET_TYPE_ID='5498'   OR MARKET_TYPE_ID='8774' OR MARKET_TYPE_ID='6544' "+
+				  		" OR MARKET_TYPE_ID='6564' OR MARKET_TYPE_ID='8750' OR MARKET_TYPE_ID='8763' OR MARKET_TYPE_ID='9775' "+
+				  		" OR MARKET_TYPE_ID='10829' or MARKET_TYPE_ID='9321')  ";
+		 
+		  String query4 = " SELECT  '{\"Id\":\"'+CAST(C.SEL_ID as varchar(10))+'\",\"MId\":'+CAST(B.MATCH_ID as varchar(10))+',\"MkId\":\"'+CAST(C.Market_Id as varchar(10))+'\", "+
+				  		" \"Nm\":\"'+CAST(C.sel_name as varchar(10))+'\",\"P\":\"'+CAST(C.sel_price as varchar(10))+'\", "+
+				  		"  \"Sus\":'+CASE WHEN A.suspend ='T' THEN 'true' ELSE 'false' END+'},' "+
+				  		//" \"IsVisible\":'+CASE WHEN A.visible ='T' THEN 'true' ELSE 'false' END+'},' as selection "+ 
+				  		" as selection "+ 
+				  		" FROM BC_MARKET A ,BC_match b, bc_selection c "+
+				  		//" WHERE  B.compet_id='"+cid+"' AND B.match_stat='0' AND B.visible='T'  AND B.booked='T' "+ 
+				  		" WHERE B.match_stat='0' AND B.visible='T'  AND B.booked='T' "+ 
+				  		" AND A.visible='T' and a.market_id = c.market_id "+
+				  		//" and convert(char(8),match_date,112) >= convert(char(8),getdate(),112) "+
+						//" and convert(char(8),match_date,112) <= convert(char(8),getdate()+6,112) "+
+						//" and convert(char(8),match_date,112) = convert(char(8),getdate(),112) "+
+						" and convert(char(10),match_date,120) = '"+dt+"' "+
+				  		" and home_name is not null and away_name is not null"+
+				  		" and a.MATCH_ID = b.MATCH_ID AND (MARKET_TYPE_ID ='377' or MARKET_TYPE_ID='399' or MARKET_TYPE_ID='2434' or MARKET_TYPE_ID='4475' "+
+				  		" OR MARKET_TYPE_ID='5488' OR MARKET_TYPE_ID='5498'   OR MARKET_TYPE_ID='8774' OR MARKET_TYPE_ID='6544' "+
+				  		" OR MARKET_TYPE_ID='6564' OR MARKET_TYPE_ID='8750' OR MARKET_TYPE_ID='8763' OR MARKET_TYPE_ID='9775' "+
+				  		" OR MARKET_TYPE_ID='10829' or MARKET_TYPE_ID='9321') ";
+		  
+		  //Debug.out("[getTodayMatchInfo] query: " + query);		
+		  //Debug.out("[getTodayMatchInfo] query2: " + query2);	
+		  //Debug.out("[getTodayMatchInfo] query3: " + query3);	
+		  //Debug.out("[getTodayMatchInfo] query4: " + query4);
+		  
+		  try{	      	
+			 	//Context initContext = new InitialContext();
+			 	//Context envContext = (Context)initContext.lookup("java:/comp/env");
+			 	//DataSource ds = (DataSource)envContext.lookup("jdbc/ibet");
+			 				 	
+			 	con = ds.getConnection();			 	
+			 	
+			 	pstmt = con.prepareStatement(query);	
+		        rs = pstmt.executeQuery();
+		        		        
+		        while(rs.next()){
+		        	match += rs.getString("match");
+		        }
+		        rs.close();
+		        pstmt.close();
+		        
+		        if(match.length() > 2)
+		        	match = match.substring(0, match.length()-1); //(json_mk.length()-1);
+				        	
+	        	sb.append("[{\"Mt\": ["+match+"]");
+		        
+		        //pstmt2.setString(1, rs.getString("MATCH_ID"));
+		        pstmt = con.prepareStatement(query2);
+		        rs = pstmt.executeQuery();
+			        
+	        	 while(rs.next()){
+	        		 market += rs.getString("market");
+	        	 }
+	        	 
+	        	 rs.close();
+	        	 pstmt.close();
+
+	        	if(market.length() > 2)
+	        		market = market.substring(0, market.length()-1); //(json_mk.length()-1);
+				        	
+	        	sb.append(",\"Mk\": ["+market+"]");
+
+	        	pstmt = con.prepareStatement(query3);
+	        	rs = pstmt.executeQuery();
+		        
+	        	while(rs.next()){
+	        		result += rs.getString("result");
+		        }
+		        
+	        	rs.close();
+	        	pstmt.close();
+	        	
+	        	if(result.length() > 2)
+	        		result = result.substring(0, result.length()-1); //(json_mk.length()-1);
+
+	        	sb.append(",\"Re\": ["+result+"]");
+	        	
+	        	pstmt = con.prepareStatement(query4);
+	        	rs = pstmt.executeQuery();
+		        
+	        	while(rs.next()){
+	        		sele += rs.getString("selection");
+		        }
+		        
+	        	rs.close();
+	        	pstmt.close();
+	        	con.close();
+	        	
+	        	if(sele.length() > 2)
+	        		sele = sele.substring(0, sele.length()-1); //(json_mk.length()-1);
+
+	        	sb.append(",\"Se\": ["+sele+"]}]");	       	
+
+	        	////Debug.out("getMatchInfobyCompetition : " + sb.toString());	
+		        
+		  }catch(Exception e){
+			  //Debug.out("[getTodayMatchInfo] : " + e.getMessage());
+		
+	      }finally{
+	    	  if(rs!=null) rs.close();
+	     	  if(pstmt!=null)  pstmt.close();
+	     	  if(con!=null) con.close();
+	    	}
+		  
+	  return sb;
+		
+	}
+	
+	public StringBuffer getMatchInfobySport(String sid,String dt) throws SQLException{
+		 
+		  Connection con = null;
+		  PreparedStatement pstmt = null;		  
+		  ResultSet rs = null;		  
+		  String match = "";
+		  String result = "";
+		  String sele = "";
+		  String market = "";
+		  //String stat = "";
+		  
+		  StringBuffer sb = new StringBuffer(""); 
+
+		  String query = " SELECT '{\"Id\":\"'+CAST(A.match_id as varchar(10))+'\",\"CId\":\"'+CAST(A.compet_id as varchar(10))+'\",\"CN\":\"'+CNAME+'\","+
+					"\"Dt\":\"'+convert(char(16),MATCH_DATE,120)+'\",\"SId\":\"'+CAST(A.sport_id as varchar(10))+'\",\"SN\":\"'+SNAME+'\",\"RId\":\"'+CAST(A.region_id as varchar(10))+'\",\"RN\":\"'+RNAME+'\","+
+					//" \"LiveStatus\":\"'+CAST(A.live_stat as varchar(1))+'\",\"MatchStatus\":\"'+CAST(A.match_stat as varchar(1))+'\","+
+					//" \"IsLiveAvailable\":\"'+CASE WHEN live_stat = 0 THEN 'true' ELSE 'false' END+'\","+
+					//" \"IsVisible\":'+CASE WHEN visible ='T' THEN 'true' ELSE 'false' END+', "+
+					"\"Sus\":'+CASE WHEN suspend ='T' THEN 'true' ELSE 'false' END+',"+
+					//" \"IsLive\":\"'+CASE WHEN live ='T' THEN 'true' ELSE 'false' END+'\","+
+					//" \"IsStarted\":\"'+CASE WHEN match_start ='T' THEN 'true' ELSE 'false' END+'\", "+
+					"\"HT\":\"'+home_name+'\","+
+					"\"AT\":\"'+away_name+'\"},' AS match  "+
+					" FROM bc_match A ,"+
+					" (SELECT SPORT_ID,CASE WHEN LEN(TXT) > 0 THEN TXT ELSE SPORT_NAME END  AS SNAME "+
+					" FROM bc_sport A LEFT OUTER JOIN BC_TRANS B ON A.SPORT_NAMEID = B.NAMEID) B,"+						
+					" (SELECT REGION_ID,CASE WHEN LEN(TXT) > 0 THEN TXT ELSE REGION_NAME END AS RNAME "+
+					" FROM  BC_REGION A LEFT OUTER JOIN BC_TRANS B ON A.REGION_NAMEID = B.NAMEID) C,"+						
+					" (SELECT COMPET_ID,CASE WHEN LEN(TXT) > 0 THEN TXT ELSE COMPET_NAME END AS CNAME "+
+					" FROM BC_COMPETITION A LEFT OUTER JOIN BC_TRANS B ON A.NAMEID = B.NAMEID) D "+						
+					" WHERE A.sport_id = B.SPORT_ID  AND A.region_id = C.REGION_ID AND A.compet_id = D.COMPET_ID "+
+					//" AND live='T' and a.live_stat='1' AND a.visible='T'  AND a.booked='T' ";
+					" AND a.sport_id='"+sid+"' AND a.match_stat='0' AND a.visible='T'  AND a.booked='T' "+
+					//" and convert(char(8),match_date,112) >= convert(char(8),getdate(),112) "+
+					" and convert(char(10),match_date,120) = '"+dt+"'"+
+					" and home_name is not null and away_name is not null";		  
+		  
+		  String query2 =" DECLARE @list varchar(MAX) "+
+				  		" SELECT @list = JSON FROM BC_JSON WHERE KEYNAME='MARKET_TYPE' "+		  
+				  		" SELECT '{\"Id\":'+CAST(A.MARKET_ID as varchar(10))+',\"M\":\"'+CAST(B.MATCH_ID as varchar(10))+'\","+
+				  		" \"V\":'+CASE WHEN A.visible ='T' THEN 'true' ELSE 'false' END +',"+
+				  		" \"S\":'+CASE WHEN A.suspend ='T' THEN 'true' ELSE 'false' END +'},' as market "+
+		  				" FROM BC_MARKET A,  BC_MATCH B "+
+		  				" WHERE A.MATCH_ID = B.MATCH_ID AND MARKET_TYPE_ID in "+
+		  				" (SELECT splitdata FROM SplitString(@list,',')) "+ 
+		  				" AND B.sport_id='"+sid+"' AND B.match_stat='0' AND B.visible='T'  AND B.booked='T' "+  
+		  				" AND A.visible='T' AND A.suspend = 'F' "+
+		  				//" and convert(char(8),match_date,112) >= convert(char(8),getdate(),112) "+
+						//" and convert(char(8),match_date,112) <= convert(char(8),getdate()+6,112) "+
+						" and convert(char(10),match_date,120) = '"+dt+"'"+
+		  				"and home_name is not null and away_name is not null";
+		  
+		  String query3 = " SELECT  '{\"Id\":'+CAST(A.MARKET_ID as varchar(10))+',\"MId\":'+CAST(B.MATCH_ID as varchar(10))+', "+
+				  		"	\"Sus\":'+CASE WHEN A.suspend ='T' THEN 'true' ELSE 'false' END+'},' "+
+				  		//" \"IsVisible\":'+CASE WHEN A.visible ='T' THEN 'true' ELSE 'false' END+'},' as result "+ 
+				  		" as result "+ 
+				  		" FROM BC_MARKET A ,BC_match b "+
+				  		" WHERE  B.sport_id='"+sid+"' AND B.match_stat='0' AND B.visible='T'  AND B.booked='T'  "+
+				  		" AND A.visible='T' "+
+				  		//" and convert(char(8),match_date,112) >= convert(char(8),getdate(),112) "+
+						//" and convert(char(8),match_date,112) <= convert(char(8),getdate()+6,112) "+
+						" and convert(char(10),match_date,120) = '"+dt+"'"+
+				  		" and home_name is not null and away_name is not null"+
+				  		" and a.MATCH_ID = b.MATCH_ID AND (MARKET_TYPE_ID ='377' or MARKET_TYPE_ID='399' or MARKET_TYPE_ID='2434' or MARKET_TYPE_ID='4475' "+
+				  		" OR MARKET_TYPE_ID='5488' OR MARKET_TYPE_ID='5498'   OR MARKET_TYPE_ID='8774' OR MARKET_TYPE_ID='6544' "+
+				  		" OR MARKET_TYPE_ID='6564' OR MARKET_TYPE_ID='8750' OR MARKET_TYPE_ID='8763' OR MARKET_TYPE_ID='9775' "+
+				  		" OR MARKET_TYPE_ID='10829' or MARKET_TYPE_ID='9321')  ";
+		 
+		  String query4 = " SELECT  '{\"Id\":\"'+CAST(C.SEL_ID as varchar(10))+'\",\"MId\":'+CAST(B.MATCH_ID as varchar(10))+',\"MkId\":\"'+CAST(C.Market_Id as varchar(10))+'\", "+
+				  		" \"Nm\":\"'+CAST(C.sel_name as varchar(10))+'\",\"P\":\"'+CAST(C.sel_price as varchar(10))+'\", "+
+				  		"  \"Sus\":'+CASE WHEN A.suspend ='T' THEN 'true' ELSE 'false' END+'},' "+
+				  		//" \"IsVisible\":'+CASE WHEN A.visible ='T' THEN 'true' ELSE 'false' END+'},' as selection "+ 
+				  		" as selection "+ 
+				  		" FROM BC_MARKET A ,BC_match b, bc_selection c "+
+				  		" WHERE  B.sport_id='"+sid+"' AND B.match_stat='0' AND B.visible='T'  AND B.booked='T' "+ 
+				  		" AND A.visible='T' and a.market_id = c.market_id "+
+				  		//" and convert(char(8),match_date,112) >= convert(char(8),getdate(),112) "+
+						//" and convert(char(8),match_date,112) <= convert(char(8),getdate()+6,112) "+
+						" and convert(char(10),match_date,120) = '"+dt+"'"+
+				  		" and home_name is not null and away_name is not null"+
+				  		" and a.MATCH_ID = b.MATCH_ID AND (MARKET_TYPE_ID ='377' or MARKET_TYPE_ID='399' or MARKET_TYPE_ID='2434' or MARKET_TYPE_ID='4475' "+
+				  		" OR MARKET_TYPE_ID='5488' OR MARKET_TYPE_ID='5498'   OR MARKET_TYPE_ID='8774' OR MARKET_TYPE_ID='6544' "+
+				  		" OR MARKET_TYPE_ID='6564' OR MARKET_TYPE_ID='8750' OR MARKET_TYPE_ID='8763' OR MARKET_TYPE_ID='9775' "+
+				  		" OR MARKET_TYPE_ID='10829' or MARKET_TYPE_ID='9321') ";
+		  
+		  //Debug.out("[getMatchInfobySport] query: " + query);		
+		  //Debug.out("[getMatchInfobySport] query2: " + query2);	
+		  //Debug.out("[getMatchInfobySport] query3: " + query3);	
+		  //Debug.out("[getMatchInfobySport] query4: " + query4);
+		  
+		  try{	      	
+			 	//Context initContext = new InitialContext();
+			 	//Context envContext = (Context)initContext.lookup("java:/comp/env");
+			 	//DataSource ds = (DataSource)envContext.lookup("jdbc/ibet");
+			 				 	
+			 	con = ds.getConnection();			 	
+			 	
+			 	pstmt = con.prepareStatement(query);	
+		        rs = pstmt.executeQuery();
+		        		        
+		        while(rs.next()){
+		        	match += rs.getString("match");
+		        }
+		        rs.close();
+		        pstmt.close();
+		        
+		        if(match.length() > 2)
+		        	match = match.substring(0, match.length()-1); //(json_mk.length()-1);
+				        	
+	        	sb.append("[{\"Mt\": ["+match+"]");
+		        
+		        //pstmt2.setString(1, rs.getString("MATCH_ID"));
+		        pstmt = con.prepareStatement(query2);
+		        rs = pstmt.executeQuery();
+			        
+	        	 while(rs.next()){
+	        		 market += rs.getString("market");
+	        	 }
+	        	 
+	        	 rs.close();
+	        	 pstmt.close();
+
+	        	if(market.length() > 2)
+	        		market = market.substring(0, market.length()-1); //(json_mk.length()-1);
+				        	
+	        	sb.append(",\"Mk\": ["+market+"]");
+
+	        	pstmt = con.prepareStatement(query3);
+	        	rs = pstmt.executeQuery();
+		        
+	        	while(rs.next()){
+	        		result += rs.getString("result");
+		        }
+		        
+	        	rs.close();
+	        	pstmt.close();
+	        	
+	        	if(result.length() > 2)
+	        		result = result.substring(0, result.length()-1); //(json_mk.length()-1);
+
+	        	sb.append(",\"Re\": ["+result+"]");
+	        	
+	        	pstmt = con.prepareStatement(query4);
+	        	rs = pstmt.executeQuery();
+		        
+	        	while(rs.next()){
+	        		sele += rs.getString("selection");
+		        }
+		        
+	        	rs.close();
+	        	pstmt.close();
+	        	con.close();
+	        	
+	        	if(sele.length() > 2)
+	        		sele = sele.substring(0, sele.length()-1); //(json_mk.length()-1);
+
+	        	sb.append(",\"Se\": ["+sele+"]}]");	       	
+
+	        	////Debug.out("getMatchInfobyCompetition : " + sb.toString());	
+		        
+		  }catch(Exception e){
+			  //Debug.out("[getMatchInfobySport] : " + e.getMessage());
+		
+	      }finally{
+	    	  if(rs!=null) rs.close();
+	     	  if(pstmt!=null)  pstmt.close();
+	     	  if(con!=null) con.close();
+	    	}
+		  
+	  return sb;
+		
+	}
+	
 	public StringBuffer getMatchInfobyCompetition(String cid) throws SQLException{
 				 
 		  Connection con = null;
@@ -691,7 +1039,7 @@ public class BetConManager2 {
 					//" AND live='T' and a.live_stat='1' AND a.visible='T'  AND a.booked='T' ";
 					" AND a.compet_id='"+cid+"' AND a.match_stat='0' AND a.visible='T'  AND a.booked='T' "+
 					" and convert(char(8),match_date,112) >= convert(char(8),getdate(),112) "+
-					" and convert(char(8),match_date,112) <= convert(char(8),getdate()+7,112) "+
+					" and convert(char(8),match_date,112) <= convert(char(8),getdate()+6,112) "+
 					" and home_name is not null and away_name is not null";		  
 		  
 		  String query2 =" DECLARE @list varchar(MAX) "+
@@ -705,7 +1053,7 @@ public class BetConManager2 {
 		  				" AND B.compet_id='"+cid+"' AND B.match_stat='0' AND B.visible='T'  AND B.booked='T' "+  
 		  				" AND A.visible='T' AND A.suspend = 'F' "+
 		  				" and convert(char(8),match_date,112) >= convert(char(8),getdate(),112) "+
-						" and convert(char(8),match_date,112) <= convert(char(8),getdate()+7,112) "+
+						" and convert(char(8),match_date,112) <= convert(char(8),getdate()+6,112) "+
 		  				"and home_name is not null and away_name is not null";
 		  
 		  String query3 = " SELECT  '{\"Id\":'+CAST(A.MARKET_ID as varchar(10))+',\"MId\":'+CAST(B.MATCH_ID as varchar(10))+', "+
@@ -716,7 +1064,7 @@ public class BetConManager2 {
 				  		" WHERE  B.compet_id='"+cid+"' AND B.match_stat='0' AND B.visible='T'  AND B.booked='T'  "+
 				  		" AND A.visible='T' "+
 				  		" and convert(char(8),match_date,112) >= convert(char(8),getdate(),112) "+
-						" and convert(char(8),match_date,112) <= convert(char(8),getdate()+7,112) "+
+						" and convert(char(8),match_date,112) <= convert(char(8),getdate()+6,112) "+
 				  		" and home_name is not null and away_name is not null"+
 				  		" and a.MATCH_ID = b.MATCH_ID AND (MARKET_TYPE_ID ='377' or MARKET_TYPE_ID='399' or MARKET_TYPE_ID='2434' or MARKET_TYPE_ID='4475' "+
 				  		" OR MARKET_TYPE_ID='5488' OR MARKET_TYPE_ID='5498'   OR MARKET_TYPE_ID='8774' OR MARKET_TYPE_ID='6544' "+
@@ -732,17 +1080,17 @@ public class BetConManager2 {
 				  		" WHERE  B.compet_id='"+cid+"' AND B.match_stat='0' AND B.visible='T'  AND B.booked='T' "+ 
 				  		" AND A.visible='T' and a.market_id = c.market_id "+
 				  		" and convert(char(8),match_date,112) >= convert(char(8),getdate(),112) "+
-						" and convert(char(8),match_date,112) <= convert(char(8),getdate()+7,112) "+
+						" and convert(char(8),match_date,112) <= convert(char(8),getdate()+6,112) "+
 				  		" and home_name is not null and away_name is not null"+
 				  		" and a.MATCH_ID = b.MATCH_ID AND (MARKET_TYPE_ID ='377' or MARKET_TYPE_ID='399' or MARKET_TYPE_ID='2434' or MARKET_TYPE_ID='4475' "+
 				  		" OR MARKET_TYPE_ID='5488' OR MARKET_TYPE_ID='5498'   OR MARKET_TYPE_ID='8774' OR MARKET_TYPE_ID='6544' "+
 				  		" OR MARKET_TYPE_ID='6564' OR MARKET_TYPE_ID='8750' OR MARKET_TYPE_ID='8763' OR MARKET_TYPE_ID='9775' "+
 				  		" OR MARKET_TYPE_ID='10829' or MARKET_TYPE_ID='9321') ";
 		  
-		 // //Debug.out("[getMatchInfobyCompetition] query: " + query);		
-		 // //Debug.out("[getMatchInfobyCompetition] query2: " + query2);	
-		 // //Debug.out("[getMatchInfobyCompetition] query3: " + query3);	
-		 // //Debug.out("[getMatchInfobyCompetition] query4: " + query4);
+		 //// Debug.out("[getMatchInfobyCompetition] query: " + query);		
+		 //// Debug.out("[getMatchInfobyCompetition] query2: " + query2);	
+		 //// Debug.out("[getMatchInfobyCompetition] query3: " + query3);	
+		 //// Debug.out("[getMatchInfobyCompetition] query4: " + query4);
 		  
 		  try{	      	
 			 	//Context initContext = new InitialContext();
