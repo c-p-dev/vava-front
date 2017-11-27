@@ -1101,6 +1101,26 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 				      Side: data.Side,
 		  		});								  		
 	  			break;
+	  			
+	  			case "77": 	
+			   		$scope.liveTop.push({
+			   			SId : sid,
+			      	MId : data.EventId,			      	
+				      EventType: data.EventType,
+				      EventTypeId : data.EventTypeId,
+				      ExtraTimeScore: data.ExtraTimeScore,
+				      Info: data.Info,
+				      Period: data.Period,
+				      PeriodScore: data.PeriodScore,
+				      RemainingTime: data.RemainingTime,
+				      Score: data.Score,
+				      Server: data.Server,
+				      Set1Score: data.Set1Score,
+				      Set2Score: data.Set2Score,
+				      Set3Score: data.Set3Score,
+				      Side: data.Side,
+		  		});								  		
+	  			break;
 	  				
 		  		
 					}; //end switch     		
@@ -1889,6 +1909,29 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 						      IsTimeout : obj.IsTimeout,
 				  			});								  		
 			  				break;
+			  				
+			  				case 77: 					  								  		
+					   		$scope.liveTop.push({
+					   			SId:obj.SportKind,
+					      	MId : obj.EventId,			      	
+						      EventType: obj.EventType,
+						      EventTypeId : obj.EventTypeId,
+						      ExtraTimeScore: obj.ExtraTimeScore,
+						      Info: obj.Info,
+						      Period: obj.Period,
+						      //PeriodLength: 10,
+						      PeriodScore: obj.PeriodScore,
+						      RemainingTime: obj.RemainingTime,
+						      Score: obj.Score,
+						      Server: obj.Server,
+						      Set1Score: obj.Set1Score,
+						      Set2Score: obj.Set2Score,
+						      Set3Score: obj.Set3Score,
+						      Side: obj.Side,
+						      IsTimeout : obj.IsTimeout,
+				  			});								  		
+			  				break;
+			  				
 				  			
 				  		};
 
@@ -2178,6 +2221,63 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 		});
 		
 	};
+	
+	$scope.sInfo = function() {
+			
+		var s = document.sm.k.value;
+		//var ss = encodeURIComponent(s);		
+		//console.log("s:"+s);
+				
+		 $http({
+				method: 'GET', 
+				url: "jsp/getSearchMatch.jsp", 
+				params: {'key':s},
+				headers: {'Content-Type': 'application/json; charset=utf-8'} 
+				
+		}).success(function(data, status, headers, config) {				
+		
+		if(data) {		
+			
+			//console.log(document.sm.k.value);
+			//console.log(data);
+		
+			$scope.SM = [];
+
+	    angular.forEach(data, function(obj,idx) {      
+				$scope.SM.push({
+					SId:obj.SID,
+					Dt:obj.MDT,
+					SN:obj.SN,
+					LS:obj.LSTAT,
+					HT:obj.HT,
+					AT:obj.AT,
+					//RId:obj.RId,
+					RN:obj.RN,
+					//CId:obj.CId,
+					CN:obj.CN,
+				 	MId:obj.MID,
+				});
+		  }); 
+			
+			//console.log($scope.SM);
+			
+		};
+		
+		data = null;
+		
+		}).error(function(data, status, headers, config) {
+			console.log(status);
+			data = null;
+		});
+ };
+
+ $scope.getDayLabel = function(lday) { 
+	var week = new Array('(일)', '(월)', '(화)', '(수)', '(목)', '(금)', '(토)');  
+	var today = new Date(lday).getDay(); 
+	var todayLabel = week[today]; 
+	return todayLabel; 
+}
+
 
 }); // end
 

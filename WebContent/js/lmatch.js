@@ -23,7 +23,8 @@ var s=[
 		{"PID":18,"u":"jsp/subLoadPreMatch.jsp"},
 		{"PID":19,"u":"jsp/setFavMatch.jsp"},
 		{"PID":20,"u":"jsp/getMarketCategory.jsp"},
-		{"PID":21,"u":"jsp/getSearchMatch.jsp"}
+		{"PID":21,"u":"jsp/getSearchMatch.jsp"},
+		{"PID":22,"u":"jsp/getTodayMatchInfo.jsp"}	
 		]
   		
 mainAngular.factory('wss', function($window) {
@@ -88,7 +89,28 @@ mainAngular.filter('sf',function(){
 		return r;
 	};
 });
-    
+ 
+
+ mainAngular.directive("outsideClick", ['$document','$parse', function( $document, $parse ){
+    return {
+        link: function( $scope, $element, $attributes ){
+            var scopeExpression = $attributes.outsideClick,
+                onDocumentClick = function(event){
+                    var isChild = $element.find(event.target).length > 0;
+
+                    if(!isChild) {
+                        $scope.$apply(scopeExpression);
+                    }
+                };
+
+            $document.on("click", onDocumentClick);
+
+            $element.on('$destroy', function() {
+                $document.off("click", onDocumentClick);
+            });
+        }
+    }
+}]);    
            
 mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, wss) {	
 	
@@ -149,7 +171,7 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 	  $scope.leftTab = s[1].u; 
 	  $scope.rightTab = s[2].u;     
 	  $scope.tabSId = "0";	
-	  $scope.tabCId = "0";							
+	  $scope.tabCId = "-1";							
 	  $scope.tabMId = "0";							
 	  $scope.tabMkId = "0" ;						
 	  $scope.tabDate = "0" ;						
@@ -182,11 +204,21 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 		$scope.savedFavM = JSON.parse(localStorage.getItem('SFM'));
 		
 		if($scope.savedFavM  == null)
-			$scope.savedFavM = [];
-			
-		console.log("$scope.savedFavM = " + $scope.savedFavM);
+			$scope.savedFavM = [];			
+		//console.log("$scope.savedFavM = " + $scope.savedFavM);
 		
-	  var mode = "LiveMatch";   
+		$scope.date0 = moment().utcOffset('+0800').format('YYYY-MM-DD');
+		$scope.date1 = moment().add(1, 'days').utcOffset('+0800').format('YYYY-MM-DD');
+		$scope.date2 = moment().add(2, 'days').utcOffset('+0800').format('YYYY-MM-DD');
+		$scope.date3 = moment().add(3, 'days').utcOffset('+0800').format('YYYY-MM-DD');
+		$scope.date4 = moment().add(4, 'days').utcOffset('+0800').format('YYYY-MM-DD');
+		$scope.date5 = moment().add(5, 'days').utcOffset('+0800').format('YYYY-MM-DD');
+		$scope.date6 = moment().add(6, 'days').utcOffset('+0800').format('YYYY-MM-DD');
+		
+		$scope.tabDt = $scope.date0;
+		
+	  var mode = "LiveMatch"; 
+	  $scope.pm_mode = "t";  
 
 
  	$scope.loadLiveMatchInit = function() {		
@@ -373,8 +405,14 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 	  	$scope.PMk =[];
 	  	$scope.innerTab = [];
 	  	//console.log("goPreMatch");	 	
-	  	$scope.tabCId = $scope.PMc[0].CId;
-	  	getMatchInfobyCompetition($scope.tabCId);  	
+	  	//$scope.tabCId = $scope.PMc[0].CId;
+	  	$scope.tabCId = "-1";
+	  	
+	  	//getMatchInfobyCompetition($scope.tabCId);  	
+	  	getTodayMatchInfo("1");
+	  	$scope.tabDt = $scope.date0;
+	  	$scope.pm_mode = "t";
+	  	
 	  	loadPreMatch();
 	  	liveMatchCnt();  	
 	  	islive = false;
@@ -548,25 +586,34 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 		if(element) element.focus();
 	 };
 
-   $scope.getMaketbyCid  = function (left,center,cid) { 	  
+   $scope.getMaketbyCid  = function (left,center,cid,sid) { 	  
    	$scope.innerTab = [];
   	$scope.centerTab = center;
     $scope.leftTab = left;
     $scope.tabDate = "0";
+    $scope.pm_mode = "p";  
     $scope.CID = cid;
-   	
-    //$scope.getMatchInfobyCompetition(cid);
+   	$scope.selectedSId = sid;
     $scope.PMk =[];
     getMatchInfobyCompetition(cid);
  }
 
    $scope.preMatchDate = function (left, center,cid,date) {
+   	$scope.pm_mode = "p";
   	$scope.innerTab = [];  
   	$scope.leftTab = left;
   	$scope.centerTab = center;
   	$scope.tabDate = date;
  }    
 
+   $scope.todayMatch = function (dt) {
+   		$scope.innerTab = []; 
+			$scope.pm_mode = "t";  
+			$scope.tabDt = dt;
+			
+			getTodayMatchInfo(dt);
+ }   
+ 
 	$scope.lm.push({
 		t:"실시간",
    	l:s[1].u, //"left_live.html",
@@ -590,7 +637,7 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
        }
     }).success(function(data, status, headers, config) {  
     	
-    	console.log("$scope.mk_cat"); 	
+    	//console.log("$scope.mk_cat"); 	
     	 	
 	    $scope.cat_wl = data[0].WL;
 	    $scope.cat_ou = data[0].OU;
@@ -697,151 +744,6 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
   
 
  
-  /*
- 	function loadLiveMatchInit() {		//market tab
-		 $http({
-				method: 'GET', 
-				url: s[9].u, //'jsp/loadLiveMatchInit.jsp', 
-				headers: {'Content-Type': 'application/json; charset=utf-8'} 
-		 }).success(function(data, status, headers, config) {
-			
-			$scope.LS = [];
-			$scope.LMK = [];		
-			$scope.LMKc = [];
-			
-			angular.forEach(data, function(obj,idx) {				
-				if(obj.Mk !== null &&  obj.Mk !== undefined && obj.Mk.length > 0){					
-					for (var j = 0; j < obj.Mk.length ; j++) {						
-						$scope.LMKc.push(obj.Mk[j]);							
-					}
-				}
-				
-		    angular.forEach(obj.Mt, function(obj2,idx2) {       
-				
-				var mStat = obj.St.filter(function (el) { return el.MId == obj2.Id; })	
-				var mResult = obj.Re.filter(function (el) { return el.MId == obj2.Id; })	
-				var mSelect = obj.Se.filter(function (el) { return el.MId == obj2.Id; })	
-				
-				var HTeamScore = "-";
-			  var ATeamScore = "-";	
-			   			
-				if(mStat !== undefined && mStat !== null && mStat.length > 0){			
-					HTeamScore = mStat[0].Sc.split(':')[0];
-		 			ATeamScore = mStat[0].Sc.split(':')[1]; 
-				
-				} else {
-				 	//return;			 
-				};		
-											
-				if(mResult !== undefined && mResult !== null && mResult.length > 0){				
-					var w1Price, w2Price, xPrice  ="-";			
-					var w1SelId, xSelId, w2SelId ="";	
-					
-					for(var i = mSelect.length - 1; i >= 0; i--){
-						if(mSelect[i].Nm == 'W1') {
-							w1SelId = mSelect[i].Id ;
-							//w1Price = mSelect[i].P ;			
-							w1Price = $filter('number')(mSelect[i].P, 2);		
-							
-						} else if(mSelect[i].Nm == 'X') {
-							xSelId = mSelect[i].Id ;
-							//xPrice = mSelect[i].P ;				
-							xPrice = $filter('number')(mSelect[i].P, 2);	
-								
-						} else if(mSelect[i].Nm == 'W2') {
-							w2SelId = mSelect[i].Id ;
-							//w2Price = mSelect[i].P ;
-							w2Price = $filter('number')(mSelect[i].P, 2);	
-						}
-					};
-
-			   	$scope.LS.push({
-			  		SId:obj2.SId,
-			  		SN:obj2.SN,	    		
-			  		RId:obj2.RId,
-			  		RN:obj2.RN,
-			  		CId:obj2.CId,
-			  		CN:obj2.CN,
-			    	MId:obj2.Id,
-			    	HT:obj2.HT,
-			    	AT:obj2.AT,
-			    	Pe:mStat[0].Pe,
-			    	//EType : mMatchStat[0].EventType,
-			    	HTS:HTeamScore,
-			    	ATS:ATeamScore,
-			    	Sus:obj2.Sus,
-			    	Cur:(mStat[0].Cur == undefined) ? "" : mStat[0].Cur, //mStat[0].CurrentMinute,
-			    	Rem:(mStat[0].Rem == undefined) ? "" : mStat[0].Rem, //mStat[0].RemainingTime,
-			    	Inf:mStat.Inf,		    	
-					});
-			  			  		
-					$scope.LMK.push({
-			  		SId:obj2.SId,
-			  		SN:obj2.SN,	    		
-			  		RId:obj2.RId,
-			  		RN:obj2.RN,
-			  		CId:obj2.CId,
-			  		CN:obj2.CN,
-			    	MId:obj2.Id,
-			    	HT:obj2.HT,
-			    	AT:obj2.AT,
-			    	Pe:mStat[0].Pe,
-			    	HTS:HTeamScore,
-			    	ATS:ATeamScore,
-			    	//Market : obj.Market,
-			    	MkId:mResult[0].Id, 
-			    	Sus:mResult[0].Sus, 
-			    	Vis:mResult[0].Vis,
-			    	Cur:(mStat[0].Cur == undefined) ? "" : mStat[0].Cur, //mStat[0].CurrentMinute,
-			    	Rem:(mStat[0].Rem == undefined) ? "" : mStat[0].Rem, //mStat[0].RemainingTime,  
-			    	W1SD:w1SelId,
-			    	XSD:xSelId,
-			    	W2SD:w2SelId,
-			    	BW1P:w1Price, 
-				    BXP:xPrice,
-				    BW2P:w2Price,			      	
-			    	W1P:w1Price,
-			    	XP:xPrice,
-			    	W2P:w2Price,
-					});				
-				};
-			  });
-		 		
-		 	}); 
-
-			data=null;
-				
-			}).error(function(data, status, headers, config) {
-					console.log(status);
-					data=null;
-			});
-  };
-
-  
- function loadPreMatchInit() {			
-		 $http({
-				method: 'GET', 
-				url: s[10].u,  
-				headers: {'Content-Type': 'application/json; charset=utf-8'} 
-			}).success(function(data, status, headers, config) {				
-			$scope.PMc = [];			
-			
-			angular.forEach(data, function(obj,idx) {
-				if(obj.Id !== undefined && obj.Id !== null && obj.Id.length > 0){
-					$scope.PMc.push({
-						CId : obj.CId,
-					 	MId : obj.Id,			 	
-					});	  		
-				};
-			});
-			data=null;
-			}).error(function(data, status, headers, config) {
-				console.log(status);
-				data=null;
-			});
- };
- */
- 
  function loadPreMatch() {			
 		 $http({
 				method: 'GET', 
@@ -856,6 +758,7 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 				$scope.PM.push({
 					SId:obj.SId,
 					SN:obj.SN,
+					Dt:obj.Dt,
 					RId:obj.RId,
 					RN:obj.RN,
 					CId:obj.CId,
@@ -885,6 +788,7 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 				$scope.PM.push({
 					SId:data.SId,
 					SN:data.SN,
+					Dt:data.Dt,
 					RId:data.RId,
 					RN:data.RN,
 					CId:data.CId,
@@ -944,6 +848,9 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 				s = null;
 			};
 			data = null;
+			
+			console.log("$scope.MK");
+			console.log($scope.MK);
 			
 			//$scope.mTyId ="ALL";
 			
@@ -1394,7 +1301,144 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 		});
  };
  
- 	function getMatchInfobyCompetition(cid) {	      	      
+   function getTodayMatchInfo(dt) {	 
+  	
+  	 
+  	if(dt != "1"){
+	
+	  		document.getElementById("spin_clive2").style.display  = "block";
+	  		document.getElementById("clive2").style.display = "none";
+	  		//console.log("dt==" + dt);
+	  		
+	  } else {
+	  	dt = $scope.date0;
+	  }
+	  
+	   $http({
+				method: 'GET', 
+				url: s[22].u, 
+				params: { 'dt' : dt },
+				headers: {'Content-Type': 'application/json; charset=utf-8'} 
+		}).success(function(data, status, headers, config) {	
+							
+			$scope.toPMkC = [];
+			$scope.toPMk = [];
+			//$scope.tabCId = cid;
+			
+			console.log(data);
+			
+
+			if(data[0].Mk !== null &&  data[0].Mk !== undefined && data[0].Mk.length > 0){					
+				for (var j = 0; j < data[0].Mk.length ; j++) {						
+					$scope.toPMkC.push(data[0].Mk[j]);							
+				}
+			};		
+			if(data[0].Mt !== null &&  data[0].Mt !== undefined && data[0].Mt.length > 0){
+				
+				for (var j = 0; j < data[0].Mt.length ; j++) {										
+					var w1Price, w2Price, xPrice ="-";
+					var w1SelId, xSelId, w2SelId ="";										
+					var mMatchResult = data[0].Re.filter(function (el) { return el.MId == data[0].Mt[j].Id; });	
+															
+					if(mMatchResult !== null && mMatchResult !== undefined && mMatchResult.length > 0 ){
+						var mResult = data[0].Se.filter(function (el) { return el.MkId == mMatchResult[0].Id });
+						
+						for (var i = 0; i < mResult.length; i++) {								
+							if(mResult[i].Nm == 'W1') {
+								w1SelId = mResult[i].Id ;
+								//w1Price = mResult[i].P;
+								w1Price = $filter('number')(mResult[i].P, 2);
+							
+							} else if(mResult[i].Nm == 'X'){
+								xSelId = mResult[i].Id ;
+								//xPrice = mResult[i].P;
+								xPrice = $filter('number')(mResult[i].P, 2);
+							
+							} else if(mResult[i].Nm == 'W2'){
+								w2SelId = mResult[i].Id ;
+								//w2Price = mResult[i].P;
+								w2Price = $filter('number')(mResult[i].P, 2);
+							}
+						};
+			  									  			  		
+			  		$scope.toPMk.push({
+			    		SId:data[0].Mt[j].SId,
+			    		SN:data[0].Mt[j].SN,	    		
+			    		RId:data[0].Mt[j].RId,
+			    		RN:data[0].Mt[j].RN,
+			    		CId:data[0].Mt[j].CId,
+			    		CN:data[0].Mt[j].CN,
+			      	MId:data[0].Mt[j].Id,
+			      	Dt:data[0].Mt[j].Dt,
+			      	HT:data[0].Mt[j].HT,
+			      	AT:data[0].Mt[j].AT,				      	
+			      	//Market : mMatchMarket, //obj.Market.filter(function (el) { return el.MatchId == obj.Match[j].Id; }), //; obj.Match.Market, //marketId,
+			      	MkId:mMatchResult[0].Id, //marketId,
+			      	Sus:mMatchResult[0].Sus, // IsSuspended,	
+			      	//IsSuspendedR: obj.Result[0].IsSuspended, // IsSuspended,	    	
+			      	W1SD:w1SelId,
+	    				XSD:xSelId,
+	    				W2SD:w2SelId,	
+			      	BW1P:w1Price, 
+					    BXP:xPrice,
+					    BW2P:w2Price,			      	
+			      	W1P:w1Price,
+			      	XP:xPrice,
+			      	W2P:w2Price,
+			  		});			  		
+
+			  	}else{
+			  		
+			  		$scope.toPMk.push({
+			    		SId:data[0].Mt[j].SId,
+			    		SN:data[0].Mt[j].SN,	    		
+			    		RId:data[0].Mt[j].RId,
+			    		RN:data[0].Mt[j].RN,
+			    		CId:data[0].Mt[j].CId,
+			    		CN:data[0].Mt[j].CN,
+			      	MId:data[0].Mt[j].Id,
+			      	Dt:data[0].Mt[j].Dt,
+			      	HT:data[0].Mt[j].HT,
+			      	AT:data[0].Mt[j].AT,				      	
+			      	//Market : mMatchMarket, //obj.Market, //marketId,
+			      	MkId:null, //marketId,
+			      	Sus:true, // IsSuspended,	
+			      	//IsSuspendedR: obj.Result[0].IsSuspended, // IsSuspended,	   
+			      	W1SD:"0",
+	    				XSD:"0",
+	    				W2SD:"0",	 	
+			      	BW1P:"0", 
+					    BXP:"0",
+					    BW2P:"0",			      	
+			      	W1P:"0",
+			      	XP:"0",
+			      	W2P:"0",
+				  		});	
+			  		}
+		  				  	
+		    };
+		     
+	  	};
+			data = null;				
+		
+	  		
+	  	document.getElementById("clive2").style.display  = "block";
+	  	document.getElementById("spin_clive2").style.display = "none";
+
+	  	
+	  
+			}).error(function(data, status, headers, config) {
+				console.log(status);
+				data = null;	
+			});
+ }
+ 
+ 	function getMatchInfobyCompetition(cid) {	 
+ 		
+ 		document.getElementById("spin_clive2").style.display  = "block";
+	  document.getElementById("clive2").style.display = "none";
+	    
+	         	      
 	   $http({
 				method: 'GET', 
 				url: s[15].u, 
@@ -1406,8 +1450,8 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 			$scope.PMk = [];
 			$scope.tabCId = cid;
 			
-			console.log("cid : " + cid);
-			console.log(data);
+			//console.log("cid : " + cid);
+			//console.log(data);
 			
 
 			if(data[0].Mk !== null &&  data[0].Mk !== undefined && data[0].Mk.length > 0){					
@@ -1502,6 +1546,16 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 		     
 	  	};
 			data = null;				
+			
+		//	console.log($scope.PMk);
+   		var ss = $scope.PMk.filter(function (el) { return el.CId == cid; })[0]
+   	//	console.log(ss);
+   		
+   	document.getElementById("selsport1").innerHTML = ss.SN;
+	  document.getElementById("selcomp1").innerHTML = ss.CN;			
+		document.getElementById("spin_clive2").style.display  = "none";
+	  document.getElementById("clive2").style.display = "block";
+	  
 			}).error(function(data, status, headers, config) {
 				console.log(status);
 				data = null;	
@@ -1516,6 +1570,15 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 		//check favorite match and bet match
 	}
 
+	function finishPreMatch(mid) {		
+		$scope.PM = $filter('omit')($scope.PM,'MId ==' + mid);  // delete ID					
+		$scope.PMk = $filter('omit')($scope.PMk,'MId ==' + mid);  // delete ID			
+		$scope.toPMk = $filter('omit')($scope.toPMk,'MId ==' + mid);  // delete ID			
+		$scope.PMkC = $filter('omit')($scope.PMkC,'MId ==' + mid);  // delete ID			
+		$scope.toPMkC = $filter('omit')($scope.toPMkC,'MId ==' + mid);  // delete ID	
+		//check favorite match and bet match
+	}
+	
 	function sub_loadGetMatchMarket(response) {		
 
 		angular.forEach(response.Objects, function(obj,idx) {					
@@ -1619,70 +1682,137 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 			if(mode == "PreMatch"){	
 				
 				
-				for (var c = 0; c < $scope.PMK.length; c++) {		
-							
-			 		var pm = $scope.PMK[c];	
-			 				 		
-				 	if(pm.MkId == obj.Id){	
-				 		
-				 		console.log("PreMatch market:"+obj.MatchId);
-				 						 		
-				 		var w1Price, w2Price, xPrice =0;
-						var w1SelId, xSelId, w2SelId  ="";
-										
-		    		for (var j = 0; j < obj.Selections.length; j++) {
-							
-			    		if(obj.Selections[j].Name == 'W1') {
-			    			w1SelId = obj.Selections[j].Id ;
-			    			//w1Price = obj.Selections[j].Price ;
-			    			w1Price = $filter('number')(obj.Selections[j].Price, 2);
-			    		
-			    		} else if(obj.Selections[j].Name == 'X') {
-								xSelId = obj.Selections[j].Id ;
-								//xPrice = obj.Selections[j].Price ;
-								xPrice = $filter('number')(obj.Selections[j].Price, 2);
-							
-							} else if(obj.Selections[j].Name == 'W2') {
-								w2SelId = obj.Selections[j].Id ;
-								//w2Price = obj.Selections[j].Price ;
-								w2Price = $filter('number')(obj.Selections[j].Price, 2);
-							}
-						};
-	      									
-						if(w1Price != pm.W1P || xPrice != pm.XP || w2Price != pm.W2P ||  pm.Sus != obj.IsSuspended){							
-							$scope.PMK = $filter('omit')($scope.PMK,'MkId ==' + obj.Id);  								
-			        $scope.PMK.push({
-				    		SId:pm.SId,
-				    		SN:pm.SN,	    		
-				    		RId:pm.RId,
-				    		RN:pm.RN,
-				    		CId:pm.CId,
-				    		CN:pm.CN,
-				      	MId:pm.MId,
-				      	HT:pm.HT,
-				      	AT:pm.AT,
-				      	//Pe:pm.Pe,
-				      	//HTS:pm.HTS,
-				      	//ATS:pm.ATS,
-				      	//Market : market_tmp,
-				      	MkId:obj.Id,
-		      			Sus:obj.IsSuspended,
-		      			//Vis:obj.IsVisible,
-		      			//Cur:lm.Cur,
-								//Rem:lm.Rem,	
-								W1SD:w1SelId,
-								XSD:xSelId,
-								W2SD:w2SelId,		    	
-		      			BW1P:lm.W1P,
-				      	BXP:lm.XP,
-				      	BW2P:lm.W2P,			      	
-				      	W1P:w1Price,
-				      	XP:xPrice,
-				      	W2P:w2Price,
-			  			});
-				  	};				  						 
-					};						
-				};
+				if($scope.pm_mode == "p" ){	
+
+					for (var c = 0; c < $scope.PMk.length; c++) {		
+								
+				 		var pm = $scope.PMk[c];	
+				 				 		
+					 	if(pm.MkId == obj.Id){					 		
+					 		var w1Price, w2Price, xPrice ="-";
+							var w1SelId, xSelId, w2SelId  ="";
+											
+			    		for (var j = 0; j < obj.Selections.length; j++) {
+								
+				    		if(obj.Selections[j].Name == 'W1') {
+				    			w1SelId = obj.Selections[j].Id ;
+				    			//w1Price = obj.Selections[j].Price ;
+				    			w1Price = $filter('number')(obj.Selections[j].Price, 2);
+				    		
+				    		} else if(obj.Selections[j].Name == 'X') {
+									xSelId = obj.Selections[j].Id ;
+									//xPrice = obj.Selections[j].Price ;
+									xPrice = $filter('number')(obj.Selections[j].Price, 2);
+								
+								} else if(obj.Selections[j].Name == 'W2') {
+									w2SelId = obj.Selections[j].Id ;
+									//w2Price = obj.Selections[j].Price ;
+									w2Price = $filter('number')(obj.Selections[j].Price, 2);
+								}
+							};
+		      									
+							if(w1Price != pm.W1P || xPrice != pm.XP || w2Price != pm.W2P ||  pm.Sus != obj.IsSuspended){							
+								$scope.PMk = $filter('omit')($scope.PMk,'MkId ==' + obj.Id);  								
+				        $scope.PMk.push({
+				        	Dt:pm.Dt,
+					    		SId:pm.SId,
+					    		SN:pm.SN,	    		
+					    		RId:pm.RId,
+					    		RN:pm.RN,
+					    		CId:pm.CId,
+					    		CN:pm.CN,
+					      	MId:pm.MId,
+					      	HT:pm.HT,
+					      	AT:pm.AT,
+					      	//Pe:pm.Pe,
+					      	//HTS:pm.HTS,
+					      	//ATS:pm.ATS,
+					      	//Market : market_tmp,
+					      	MkId:obj.Id,
+			      			Sus:obj.IsSuspended,
+			      			//Vis:obj.IsVisible,
+			      			//Cur:lm.Cur,
+									//Rem:lm.Rem,	
+									W1SD:w1SelId,
+									XSD:xSelId,
+									W2SD:w2SelId,		    	
+			      			BW1P:pm.W1P,
+					      	BXP:pm.XP,
+					      	BW2P:pm.W2P,			      	
+					      	W1P:w1Price,
+					      	XP:xPrice,
+					      	W2P:w2Price,
+				  			});
+					  	};				  						 
+						};						
+					};
+					
+				}else if ($scope.pm_mode == "t" ){	
+					
+					for (var c1 = 0; c1 < $scope.toPMk.length; c1++) {		
+								
+				 		var topm = $scope.toPMk[c1];	
+				 				 		
+					 	if(topm.MkId == obj.Id){					 		
+					 		var w1Price, w2Price, xPrice ="-";
+							var w1SelId, xSelId, w2SelId  ="";
+											
+			    		for (var j = 0; j < obj.Selections.length; j++) {
+								
+				    		if(obj.Selections[j].Name == 'W1') {
+				    			w1SelId = obj.Selections[j].Id ;
+				    			//w1Price = obj.Selections[j].Price ;
+				    			w1Price = $filter('number')(obj.Selections[j].Price, 2);
+				    		
+				    		} else if(obj.Selections[j].Name == 'X') {
+									xSelId = obj.Selections[j].Id ;
+									//xPrice = obj.Selections[j].Price ;
+									xPrice = $filter('number')(obj.Selections[j].Price, 2);
+								
+								} else if(obj.Selections[j].Name == 'W2') {
+									w2SelId = obj.Selections[j].Id ;
+									//w2Price = obj.Selections[j].Price ;
+									w2Price = $filter('number')(obj.Selections[j].Price, 2);
+								}
+							};
+		      									
+							if(w1Price != topm.W1P || xPrice != topm.XP || w2Price != topm.W2P ||  topm.Sus != obj.IsSuspended){							
+								$scope.toPMk = $filter('omit')($scope.toPMk,'MkId ==' + obj.Id);  								
+				        $scope.toPMk.push({
+				        	Dt:topm.Dt,
+					    		SId:topm.SId,
+					    		SN:topm.SN,	    		
+					    		RId:topm.RId,
+					    		RN:topm.RN,
+					    		CId:topm.CId,
+					    		CN:topm.CN,
+					      	MId:topm.MId,
+					      	HT:topm.HT,
+					      	AT:topm.AT,
+					      	//Pe:pm.Pe,
+					      	//HTS:pm.HTS,
+					      	//ATS:pm.ATS,
+					      	//Market : market_tmp,
+					      	MkId:obj.Id,
+			      			Sus:obj.IsSuspended,
+			      			//Vis:obj.IsVisible,
+			      			//Cur:lm.Cur,
+									//Rem:lm.Rem,	
+									W1SD:w1SelId,
+									XSD:xSelId,
+									W2SD:w2SelId,		    	
+			      			BW1P:topm.W1P,
+					      	BXP:topm.XP,
+					      	BW2P:topm.W2P,			      	
+					      	W1P:w1Price,
+					      	XP:xPrice,
+					      	W2P:w2Price,
+				  			});
+					  	};				  						 
+						};						
+					};
+				}
+				
 			};
 				
 			if($scope.tabMId !="0" && $scope.tabMId == obj.MatchId){			
@@ -1741,7 +1871,8 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 								};
 						};	
 					};
-			};				
+			};	
+						
 		});			
 	};
 
@@ -2087,107 +2218,156 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 	};
 		
   function sub_loadGetMatch(res) {		  	  	
-  	var nlm = true;
+  	
   	  	
   	angular.forEach(res.Objects, function(obj,idx) {						
 			
 			if(!obj.IsBooked){
 					return;
 			};
-
-	  	angular.forEach($scope.LS, function(Ls_obj,i2) {
-	  			  		
-	  		if (Ls_obj.MId == obj.Id){			  					  			
-	  			nlm = false;			
-	  			
-	  			if(Ls_obj.IsVisible && !obj.IsVisible){	
-	  				finishLiveMatch(obj.Id);
-	  				
-	  			} else if(!obj.IsLive){	  				
-	  				finishLiveMatch(obj.Id);
-	  			
-	  			} else if(obj.LiveStatus == '2'){	  				
-	  				finishLiveMatch(obj.Id);
-		
-	  			} else if(obj.IsLive) {
-	  						  				
-	  				if(obj.Stat !== undefined && obj.Stat !== null && obj.Stat.length > 0){							
-							var HTS = obj.Stat.Score.split(':')[0];
-					 		var ATS = obj.Stat.Score.split(':')[1];						 			
-						} else{
-		   				var HTS = Ls_obj.HTS;
-		   				var ATS = Ls_obj.ATS;
-	   				}	   				
-	   				
-	   				if(HTS != LS_obj.HTS || ATS != LS_obj.ATS || obj.Period != LS_obj.Pe || obj.CurrentMinute != LS_obj.Cur || obj.RemainingTime != LS_obj.Rem){  //updated score or period
-	   					
-		   				$scope.LS.splice(i2,1);			
-			   						
-				   		$scope.LS.push({
-				    		SId:Ls_obj.SId,
-				    		SN:Ls_obj.SN,	    		
-				    		RId:Ls_obj.RId,
-				    		RN:Ls_obj.RN,
-				    		CId:Ls_obj.CId,
-				    		CN:Ls_obj.CN,
-				      	MId:Ls_obj.MId,
-				      	HT:Ls_obj.HT,
-				      	AT:Ls_obj.AT,
-				      	Pe:obj.Period,				      	
-				      	//GScore : GameScore,
-				      	//EType : '',	
-				      	HTS:HTS,
-				      	ATS:ATS,
-				      	Sus:obj.IsSuspended,	
-				      	Cur:(obj.CurrentMinute == undefined) ? "" : obj.CurrentMinute, //obj.CurrentMinute, obj.CurrentMinute,
-		    				Rem:(obj.RemainingTime == undefined) ? "" : obj.RemainingTime, //obj.RemainingTime, obj.,	
-				      	Inf:obj.Info,	      	
-				  		});
-				  		
-				  		angular.forEach($scope.LMK, function(LMK_obj,i3) {
-				  						  									 
-								if (LMK_obj.MId == obj.EventId){					  			
-					  			$scope.LMK[i3].HTS = HTS;
-					  			$scope.LMK[i3].ATS = ATS;
-					  			$scope.LMK[i3].Pe = obj.Period;
-					  			$scope.LMK[i3].Cur = (obj.CurrentMinute == undefined) ? "" : obj.CurrentMinute; //obj.CurrentMinute;
-					  			$scope.LMK[i3].Rem = (obj.RemainingTime == undefined) ? "" : obj.RemainingTime; //obj.RemainingTime;					  										  							  		
-				  			};
-				  		});			  		
-			  	};			  
-			  	};
-				};
-			});
+			
+			if(mode == "LiveMatch"){ 				
+				var nlm = true;
 				
-			if(nlm && obj.IsVisible ){
-				
-				if(obj.IsLive && obj.MatchStatus !='2'){		
-					//getNewMatchbyMatchId(obj.Id);	
-					subLoadLiveMatch(obj.Id);	
-				
-				} else if(!obj.IsLive && obj.MatchStatus =='0'){	
-					
-						$scope.PMc = $filter('omit')($scope.PMc,'MId ==' + obj.Id);  // delete ID			
-						console.log("[!obj.IsLive && obj.MatchStatus =='0'] $scope.PMc.length:" + $scope.PMc.length);
-						
-						$scope.PMc.push({
-									CId : obj.CompetitionId,
-	    						MId : obj.Id,
-						});	
-						console.log("[!obj.IsLive && obj.MatchStatus =='0'] $scope.PMc.length:" + $scope.PMc.length);
-						
-					} else if(!obj.IsLive && obj.MatchStatus =='1'){
-							console.log("[!obj.IsLive && obj.MatchStatus =='1'] $scope.PMc.length:" + $scope.PMc.length);	
-							$scope.PMc = $filter('omit')($scope.PMc,'MId ==' + obj.Id);  // delete ID		
-							console.log("[!obj.IsLive && obj.MatchStatus =='1'] $scope.PMc.length:" + $scope.PMc.length);	
-							
-					} else if(!obj.IsLive && obj.MatchStatus =='2'){	
-							console.log("[!obj.IsLive && obj.MatchStatus =='2'] $scope.PMc.length:" + $scope.PMc.length);	
-							$scope.PMc = $filter('omit')($scope.PMc,'MId ==' + obj.Id);  // delete ID		
-							console.log("[!obj.IsLive && obj.MatchStatus =='2'] $scope.PMc.length:" + $scope.PMc.length);	
-					
+		  	angular.forEach($scope.LS, function(Ls_obj,i2) {
+		  			  		
+		  		if (Ls_obj.MId == obj.Id){			  					  			
+		  			nlm = false;			
+		  			
+		  			if(Ls_obj.IsVisible && !obj.IsVisible){	
+		  				finishLiveMatch(obj.Id);
+		  				
+		  			} else if(!obj.IsLive){	  				
+		  				finishLiveMatch(obj.Id);
+		  			
+		  			} else if(obj.LiveStatus == '2'){	  				
+		  				finishLiveMatch(obj.Id);
+			
+		  			} else if(obj.IsLive) {
+		  						  				
+		  				if(obj.Stat !== undefined && obj.Stat !== null && obj.Stat.length > 0){							
+								var HTS = obj.Stat.Score.split(':')[0];
+						 		var ATS = obj.Stat.Score.split(':')[1];						 			
+							} else{
+			   				var HTS = Ls_obj.HTS;
+			   				var ATS = Ls_obj.ATS;
+		   				}	   				
+		   				
+		   				if(HTS != LS_obj.HTS || ATS != LS_obj.ATS || obj.Period != LS_obj.Pe || obj.CurrentMinute != LS_obj.Cur || obj.RemainingTime != LS_obj.Rem){  //updated score or period
+		   					
+			   				$scope.LS.splice(i2,1);			
+				   						
+					   		$scope.LS.push({
+					    		SId:Ls_obj.SId,
+					    		SN:Ls_obj.SN,	    		
+					    		RId:Ls_obj.RId,
+					    		RN:Ls_obj.RN,
+					    		CId:Ls_obj.CId,
+					    		CN:Ls_obj.CN,
+					      	MId:Ls_obj.MId,
+					      	HT:Ls_obj.HT,
+					      	AT:Ls_obj.AT,
+					      	Pe:obj.Period,				      	
+					      	//GScore : GameScore,
+					      	//EType : '',	
+					      	HTS:HTS,
+					      	ATS:ATS,
+					      	Sus:obj.IsSuspended,	
+					      	Cur:(obj.CurrentMinute == undefined) ? "" : obj.CurrentMinute, //obj.CurrentMinute, obj.CurrentMinute,
+			    				Rem:(obj.RemainingTime == undefined) ? "" : obj.RemainingTime, //obj.RemainingTime, obj.,	
+					      	Inf:obj.Info,	      	
+					  		});
+					  		
+					  		angular.forEach($scope.LMK, function(LMK_obj,i3) {
+					  						  									 
+									if (LMK_obj.MId == obj.EventId){					  			
+						  			$scope.LMK[i3].HTS = HTS;
+						  			$scope.LMK[i3].ATS = ATS;
+						  			$scope.LMK[i3].Pe = obj.Period;
+						  			$scope.LMK[i3].Cur = (obj.CurrentMinute == undefined) ? "" : obj.CurrentMinute; //obj.CurrentMinute;
+						  			$scope.LMK[i3].Rem = (obj.RemainingTime == undefined) ? "" : obj.RemainingTime; //obj.RemainingTime;					  										  							  		
+					  			};
+					  		});			  		
+				  	};			  
+				  	};
 					};
+				});
+				
+				if(nlm && obj.IsVisible ){
+					
+					if(obj.IsLive && obj.MatchStatus !='2'){		
+						//getNewMatchbyMatchId(obj.Id);	
+						subLoadLiveMatch(obj.Id);	
+					
+					} else if(!obj.IsLive && obj.MatchStatus =='0'){	
+						
+							$scope.PMc = $filter('omit')($scope.PMc,'MId ==' + obj.Id);  // delete ID			
+							console.log("[!obj.IsLive && obj.MatchStatus =='0'] $scope.PMc.length:" + $scope.PMc.length);
+							
+							$scope.PMc.push({
+										CId : obj.CompetitionId,
+		    						MId : obj.Id,
+							});	
+							console.log("[!obj.IsLive && obj.MatchStatus =='0'] $scope.PMc.length:" + $scope.PMc.length);
+							
+						} else if(!obj.IsLive && obj.MatchStatus =='1'){
+								console.log("[!obj.IsLive && obj.MatchStatus =='1'] $scope.PMc.length:" + $scope.PMc.length);	
+								$scope.PMc = $filter('omit')($scope.PMc,'MId ==' + obj.Id);  // delete ID		
+								console.log("[!obj.IsLive && obj.MatchStatus =='1'] $scope.PMc.length:" + $scope.PMc.length);	
+								
+						} else if(!obj.IsLive && obj.MatchStatus =='2'){	
+								console.log("[!obj.IsLive && obj.MatchStatus =='2'] $scope.PMc.length:" + $scope.PMc.length);	
+								$scope.PMc = $filter('omit')($scope.PMc,'MId ==' + obj.Id);  // delete ID		
+								console.log("[!obj.IsLive && obj.MatchStatus =='2'] $scope.PMc.length:" + $scope.PMc.length);	
+						
+						};
+				};
+			
+			
+			}  else if(mode == "PreMatch" ){	
+					var npm = true;
+					
+					console.log("sub_loadGetMatch:[tabCid] = "+$scope.tabCId);					
+					console.log("sub_loadGetMatch:[obj.CompetitionId] = "+obj.CompetitionId);
+						
+					console.log("sub_loadGetMatch:[tabDt] = "+$scope.tabDt);	
+					console.log("sub_loadGetMatch:[obj.Date] = "+obj.Date);
+										
+					angular.forEach($scope.PM, function(pm_obj,i3) {
+		  			  		
+			  		if (pm_obj.MId == obj.Id){			  					  			
+			  			
+			  			npm = false;			
+			  			
+			  			if(!obj.IsVisible){	
+			  				finishPreMatch(obj.Id);
+			  				
+			  			} else if(!obj.IsBooked){	  				
+			  				finishPreMatch(obj.Id);
+			  			
+			  			} else if(obj.MatchStatus != '0'){	  				
+			  				finishPreMatch(obj.Id);
+				
+			  			} else if(obj.IsLive) {
+			  				finishPreMatch(obj.Id);
+			  			}		 
+					  };
+					});
+					
+				if(npm && obj.IsVisible && obj.MatchStatus == '0' && obj.IsBooked ){
+					
+						console.log("sub_loadGetMatch:[tabCid] = "+$scope.tabCId);					
+						console.log("sub_loadGetMatch:[obj.CompetitionId] = "+obj.CompetitionId);
+						
+						console.log("sub_loadGetMatch:[tabDt] = "+$scope.tabDt);	
+						console.log("sub_loadGetMatch:[obj.Date] = "+obj.Date);
+						
+						subLoadPreMatch(obj.Id);	
+
+				};
+				
 			};
+			
 		});
 
 	};
@@ -2261,35 +2441,55 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 	  $scope.tabMId = "0";
 	});
 	
-	/*
-	$scope.have_mk = function(idx) {
-		$scope.pp = idx;
-		//console.log("$scope.have_mk");
-	  //$scope.tabMId = "0";
-	}
-*/
-
 	$scope.openSel = function() {
 	  var cname = document.getElementById("selsport").className;	  
-	  if(cname == "sports_more select open"){
-	  	document.getElementById("selsport").className ="sports_more select";
+	  if(cname == "effect_more select open"){
+	  	document.getElementById("selsport").className ="effect_more select";
 	  }else {
-	  	document.getElementById("selsport").className ="sports_more select open";
-	  }	  
+	  	document.getElementById("selsport").className ="effect_more select open";
+	  }	    
 	};
 
-	$scope.openComp = function() {
-	  var cname = document.getElementById("selcomp").className;	  
-	  if(cname == "sports_more select open"){
-	  	document.getElementById("selcomp").className ="sports_more select";
-	  }else {
-	  	document.getElementById("selcomp").className ="sports_more select open";
+	$scope.closeSel = function() {
+	  var cname = document.getElementById("selsport").className;	  
+	  //console.log("closeSel");
+	  
+	  if(cname == "effect_more select open"){
+	  	document.getElementById("selsport").className ="effect_more select";
 	  }
 	};
+	
+	$scope.openComp = function() {
+	  var cname = document.getElementById("selcomp").className;	  
+	  if(cname == "effect_more select open"){
+	  	document.getElementById("selcomp").className ="effect_more select";
+	  }else {
+	  	document.getElementById("selcomp").className ="effect_more select open";
+	  }
+	  
+	};
 
-	$scope.selSport = function(sid,sname) {
-	  $scope.selectedSId = sid;
+	$scope.closeComp = function() {
+	  var cname = document.getElementById("selcomp").className;	  
+	  //console.log("closeSel");
+	  
+	  if(cname == "effect_more select open"){
+	  	document.getElementById("selcomp").className ="effect_more select";
+	  }
+	};
+	
+	$scope.selSport = function(sid,sname) {		
+		$scope.selectedSId = sid;
+	  $scope.tabCId ="-1"; 
 	  document.getElementById("selsport1").innerHTML = sname;
+	  
+	  if(sname == "종목 전체"){
+	  	document.getElementById("selcomp1").innerHTML ="리그 전체 ";
+	  	$scope.pm_mode = "t";
+	  } else { 
+	  	document.getElementById("selcomp1").innerHTML ="리그를 선택해 주세요";
+	  }
+	
 	};
 
 	$scope.selComp = function(cid,cname) {		
@@ -2297,8 +2497,28 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 		$scope.toggleMId = "";
 		$scope.tabMId = "0"; 
 	  document.getElementById("selcomp1").innerHTML = cname;
+	  $scope.pm_mode = "p";	
 	  $scope.tabDate = "0";
-	  getMatchInfobyCompetition(cid);
+	  
+	  if(cid =="-1"){
+	  	
+	  	if($scope.selectedSId == "0"){
+	  		$scope.pm_mode = "t";
+	  		getTodayMatchInfo($scope.date0);
+	  			  		
+	  	} else {
+	  		//console.log("$scope.selectedSId:"+$scope.selectedSId);
+		  	$scope.pm_mode = "m";
+			  var fdt = $filter('orderBy')($scope.PM.filter(function (el) { return el.SId == $scope.selectedSId; }), "Dt")[0].Dt ;
+				$scope.tabDate = fdt; 		  
+		  	$scope.getMatchInfobySport($scope.selectedSId,$scope.tabDate);
+	  	}
+
+	  } else { 
+	  	$scope.pm_mode = "p";
+	  	getMatchInfobyCompetition(cid);
+	  }
+	  
 	};
 	
 	$scope.llive_load = function() {

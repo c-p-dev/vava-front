@@ -130,8 +130,8 @@
 
 			<ul class="l_tabs" id="game-cat">
 				<li><a href="#l-tab1" class="get-game">전체</a></li>
-				<li><a href="#l-tab3" class="get-game">Virtual</a></li>
-				<li><a href="#l-tab2" class="get-game">Instant</a></li>
+				<li><a href="#l-tab3" class="get-game">가상 게임</a></li>
+				<li><a href="#l-tab2" class="get-game">인스턴트 게임</a></li>
 				<li><a href="#l-tab4" class="get-vbet-hist" target = '_blank'>베팅내역 확인하기</a></li>
 			</ul>
 			

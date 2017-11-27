@@ -177,6 +177,7 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 		//$scope.pp = 0;
 		//$scope.savedFavM = [];
 		$scope.Fav_mode = false;
+		$scope.LMKc = [];
 		
 		$scope.savedFavM = JSON.parse(localStorage.getItem('SFM'));
 		
@@ -225,7 +226,7 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 				};		
 											
 				if(mResult !== undefined && mResult !== null && mResult.length > 0){				
-					var w1Price, w2Price, xPrice  ="-";			
+					var w1Price, w2Price, xPrice  = 0;			
 					var w1SelId, xSelId, w2SelId ="";	
 					
 					for(var i = mSelect.length - 1; i >= 0; i--){
@@ -1284,7 +1285,7 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 				//	console.log("$scope.LMKc.length : " + $scope.LMKc.length);
 								
 				if(data[0].Re !== undefined && data[0].Re !== null && data[0].Re.length > 0){					
-					var w1Price, w2Price, xPrice="-";					
+					var w1Price, w2Price, xPrice=0;					
 					var w1SelId, xSelId, w2SelId ="";			
 			    
 			    for(var i = data[0].Se.length - 1; i >= 0; i--){						
@@ -1328,6 +1329,10 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 					console.log("data[0].Mt[0].Sus: " + data[0].Mt[0].Sus);
 				}
 			}
+			
+			console.log("data[0].Mt[0]:" +data[0].Mt[0]);
+			console.log(data[0].Mt[0]);
+			
 			   	$scope.LS.push({
 			  		SId:data[0].Mt[0].SId,
 			  		SN:data[0].Mt[0].SN,	    		
@@ -1413,7 +1418,7 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 			if(data[0].Mt !== null &&  data[0].Mt !== undefined && data[0].Mt.length > 0){
 				
 				for (var j = 0; j < data[0].Mt.length ; j++) {										
-					var w1Price, w2Price, xPrice ="-";
+					var w1Price, w2Price, xPrice = 0;
 					var w1SelId, xSelId, w2SelId ="";										
 					var mMatchResult = data[0].Re.filter(function (el) { return el.MId == data[0].Mt[j].Id; });	
 															
@@ -1553,7 +1558,7 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 			 		var lm = $scope.LMK[c];	
 			 				 		
 				 	if(lm.MkId == obj.Id){					 		
-				 		var w1Price, w2Price, xPrice ="-";
+				 		var w1Price, w2Price, xPrice =0;
 						var w1SelId, xSelId, w2SelId  ="";
 										
 		    		for (var j = 0; j < obj.Selections.length; j++) {
@@ -1622,7 +1627,7 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 				 		
 				 		console.log("PreMatch market:"+obj.MatchId);
 				 						 		
-				 		var w1Price, w2Price, xPrice ="-";
+				 		var w1Price, w2Price, xPrice =0;
 						var w1SelId, xSelId, w2SelId  ="";
 										
 		    		for (var j = 0; j < obj.Selections.length; j++) {
@@ -2415,7 +2420,10 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 		var s = document.sm.k.value;
 		//var ss = encodeURIComponent(s);
 		
-		console.log("s:"+s);
+		//console.log("s:"+s.length);
+			//if(s.length<1){
+			//	return 
+			//}
 				
 		 $http({
 				method: 'GET', 
@@ -2460,6 +2468,12 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 		});
  };
  
+  $scope.getDayLabel = function(lday) { 
+	var week = new Array('(일)', '(월)', '(화)', '(수)', '(목)', '(금)', '(토)');  
+	var today = new Date(lday).getDay(); 
+	var todayLabel = week[today]; 
+	return todayLabel; 
+}
 
 }); // end
 
@@ -2505,5 +2519,3 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 	}
 
 
-
- 
