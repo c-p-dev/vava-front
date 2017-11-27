@@ -391,7 +391,7 @@ public class UserDao {
 
 		String query = "SELECT * FROM RT01.dbo.withdraw_lst WHERE userid = ?";
 		DecimalFormat formatter = new DecimalFormat("#,###");
-		DateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd");
+		DateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		
 		try{	      
 			

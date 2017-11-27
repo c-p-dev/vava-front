@@ -7,7 +7,7 @@
 <%@page import="bean.UserBean"%>
 
 <%
-	DecimalFormat dfrmt				= new DecimalFormat("#,###,###,###,###.00");
+	DecimalFormat dfrmt				= new DecimalFormat("#,###,###,###,###");
 	boolean checkSession = false;
 	UserDao user_db			= new UserDao();
 	UserBean user_data		= (UserBean)session.getAttribute("currentSessionUser");
@@ -24,7 +24,7 @@
 			<div class="acc_content_in_2" id="acc_content_in_chargetb">
 				<div class="blue_wrap">
 					<div class="cash_box">
-						<form name="chargeForm" id="chargeForm">
+						
 						<div class="cash_in">
 							<div class="cash_13">
 								<input class="input_style03" id="bankInfoTxt" placeholder="비밀번호 입력 후 “전용계좌확인” 버튼을 클릭해주세요">
@@ -33,6 +33,7 @@
 								<span class="btn5" id="bankInfoBtn">전용계좌확인</span>
 							</div>
 						</div>
+						<form name="chargeForm" id="chargeForm">
 						<div class="cash_in">
 							<div class="cash_10"><p style="float:left">보유금액</p><p style="float:right"><span class="font_002 money_dsp"><%=dfrmt.format(currentUser.getMoney())%></span> 원</p></div>
 							<div class="cash_9">
@@ -108,7 +109,7 @@
 		<div class="acc_head dt_div_cash"><h3>충전신청 리스트</h3></div>
 		<div class="acc_content">
 			<div class="acc_content_in_2">
-				<table id="dataTable1" cellspacing="0" cellpadding="0" data-scroll-x="true" style="width: 100%!important;">
+				<table id="dataTable1_charge" cellspacing="0" cellpadding="0" data-scroll-x="true" style="width: 100%!important;">
             	</table>
 			</div>
 		</div>
@@ -162,7 +163,7 @@
 <div id="chargeSuccesModal" class="bg_mask_pop2">
 	<div class="bg_mask_pop_title">
 		<span class="popup_logo"><img src="/images/popup_logo.png"></span>
-		<span class="popup_close fade_2_close cs_close"><img src="/images/popup_close.png"></span>
+		<span class="popup_close fade_2_close cs_close_charge"><img src="/images/popup_close.png"></span>
 	</div>
 	<div class="bg_mask_pop2_in">
 		<div class="pop_icon_center">
@@ -172,14 +173,35 @@
 			Charge Application Submited<br>			
 		</div>
 		<div class="btn_wrap">
-			<span class="btn3c cs_close">충전하기</span>
+			<span class="btn3c cs_close_charge">충전하기</span>
 		</div>
 	</div>
 </div>
+
+<!-- confirm1 -->
+<div id="conf_modal1" class="bg_mask_pop2 conf_modal">
+	<div class="bg_mask_pop_title">
+		<span class="popup_logo"><img src="/images/popup_logo.png"></span>
+		<span class="popup_close conf_modal_close"><img src="/images/popup_close.png"></span>
+	</div>
+	<div class="bg_mask_pop2_in">
+		<div class="pop_icon_center">
+			<img src="/images/exclamation_icon.png">
+		</div>
+		<div class="pop_text">
+			Are you sure?
+		</div>
+		<div class="btn_wrap">
+			<span class="btn3 conf_modal_close">No</span>
+			<span class="btn3 conf_modal_yes ">Yes</span>
+		</div>
+	</div>
+</div>
+
 <script>
 	$(document).ready(function(){
 		
-		var $dataTable1;
+		var $dataTable1_charge;
 		$(".add-money").on("click",function(e){
 			var am = $(this).attr("data-am");
 			addAmount(am);
@@ -210,15 +232,15 @@
 	    	}
 	    });
 
-		$(".cs_close").on("click",function(e){
+		$(".cs_close_charge").on("click",function(e){
 			e.preventDefault();
-			$dataTable1.ajax.reload();
-	    	$dataTable1.columns.adjust().draw();
+			$dataTable1_charge.ajax.reload();
+	    	$dataTable1_charge.columns.adjust().draw();
 			$("#chargeSuccesModal").popup("hide");
 
 		});
 
-		$dataTable1 = $('#dataTable1').DataTable({
+		$dataTable1_charge = $('#dataTable1_charge').DataTable({
 			ajax : '/cash/jsp/getChargeList.jsp',
 			bProcessing: true,
 			sAjaxDataProp:"",
@@ -227,15 +249,18 @@
 			lengthChange: false,
 			autowWidth:true,
 			pageLength: 10,
+			aaSorting: [[1,'desc']],
             columns : [
                 	{ 
                         data   : 'chid',
                         title  : '번호',
+                        
 
                     },
                     { 
                         data   : 'regdate',
                         title  : '신청일시',
+
                     },
                     { 
                         data   : 'money',
@@ -282,7 +307,7 @@
         $(".dt_div_cash").on("click",function(){
         	
         	setTimeout(function() {
-			  	$dataTable1.columns.adjust().draw();
+			  	$dataTable1_charge.columns.adjust().draw();
 			}, 100);
         });
 
@@ -290,8 +315,11 @@
         $("#ct_submit").on("click",function(e){
 			e.preventDefault();
 			if($("#chargeForm").valid()){
-				var data = $("#chargeForm").serializeJSON();
-			    submitCharge(data);
+				$("#money").qtip("hide");
+				$("#ct_bank_owner").qtip("hide");
+				$("#conf_modal1").popup("show");
+				// var data = $("#chargeForm").serializeJSON();
+				//submitCharge(data);
 			}
 		});
 
@@ -307,7 +335,9 @@
 			}			
 		});
 
+		submitCharge();
 
+		
 
 	});
 
@@ -391,7 +421,8 @@
 			}
 
 		}
-	
+		
+
 
 	});
 
@@ -436,24 +467,28 @@
 		$("#money").val(numberWithCommas(sum));
 	}
 
-	function submitCharge(data){
-		
-		
-		$.ajax({
-			url:'/cash/jsp/setChargeApplication.jsp',
-			data:data,
-			type:'POST'
-		}).done(function(data){
-			// console.log(data);
-			if(data){
-				$("#chargeSuccesModal").popup("show");
-				
-				$.get("TegServlet?method=3", function(srv_resp) {
-					if ('null' != srv_resp.money) {
-						$('.money_dsp').text(number_format(srv_resp.money, 2));
-					}
-				});
-			}
+	function submitCharge(){
+
+		$("#conf_modal1 .conf_modal_yes").on("click",function(){
+			var data = $("#chargeForm").serializeJSON();
+			$.ajax({
+				url:'/cash/jsp/setChargeApplication.jsp',
+				data:data,
+				type:'POST'
+			}).done(function(data){
+				// console.log(data);
+				if(data){
+					$("#chargeSuccesModal").popup("show");
+					
+					$.get("TegServlet?method=3", function(srv_resp) {
+						if ('null' != srv_resp.money) {
+							$('.money_dsp').text(number_format(srv_resp.money, 2));
+						}
+					});
+				}
+			});
+			// alert("charge_true");
+			$("#conf_modal1").popup("hide");
 		});
 		
 	}
@@ -464,6 +499,9 @@
 		$("#chargeForm").validate().resetForm();
 	}
 
+	function chargeConfirm(){
+
+	}
 
 
 </script>

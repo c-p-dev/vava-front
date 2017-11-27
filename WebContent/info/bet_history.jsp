@@ -31,7 +31,14 @@ String bsj = gson.toJson(bs, type);
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.16/angular-filter.js"></script>    
 <script type="text/javascript" src="/js/v-accordion.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28//angular-route.min.js"></script>
-
+<style>
+	.cal{
+		position: relative;
+	}
+	.showdp{
+		cursor:pointer;
+	}
+</style>
 
 <script>
 
@@ -270,31 +277,33 @@ String bsj = gson.toJson(bs, type);
 								</td> -->
 								<td>
 									<input class="input_style04" id="bd1" placeholder="기간" value="2017-00-00 ~ 2017-00-00" readonly>
-									<span class="showdp1"><img src="/images/car_icon.jpg"></span>
-									<div id="bet-depth1" style="display:none; width:; position:absolute; z-index:100000000; left: 230px; top:130px;">
-										<table border="0" cellspacing="0" cellpadding="0" class="car_table">
-											<tr>
-												<td id="bdfdiv1" bgcolor="#303030" style="border-radius:3px; padding:5px; box-shadow: 10px 10px 20px -5px rgba(10, 10, 5, 5);">
-													<input type="text" id="bfd1" class="hidden bhdp1" style="display: none;" >
-												</td>
-												<td id="bdtdiv1" bgcolor="#303030" style="border-radius:3px; padding:5px; box-shadow: 10px 10px 20px -5px rgba(10, 10, 5, 5);">
-													<input type="text" id="bdt1" class="hidden bhdp1"  style="display: none;">
-												</td>
-											</tr>
-											
-										</table>
-										<div style="float:right; padding:7px 2px 7px 10px;">
-											<span id="closeMoneyPikaday" class="bclose1" >
-												<img src="/images/car_close.png" class="bclose1">
-											</span>
-										</div>
-									</div>
+									<span class="showdp1 showdp"><img src="/images/car_icon.jpg"></span>
 								</td>
 								<td>
 									<span class="btn1" id="dpbtn1">검색</span>
 								</td>
 							</tr>
 						</table>
+					</div>
+					<div class="cal">
+						<div id="bet-depth1" style="display:none; width:; position:absolute; z-index:100000000; top: -15px; left: 430px;">
+							<table border="0" cellspacing="0" cellpadding="0" class="car_table">
+								<tr>
+									<td id="bdfdiv1" bgcolor="#303030" style="border-radius:3px; padding:5px; box-shadow: 10px 10px 20px -5px rgba(10, 10, 5, 5);">
+										<input type="text" id="bfd1" class="hidden bhdp1" style="display: none;" >
+									</td>
+									<td id="bdtdiv1" bgcolor="#303030" style="border-radius:3px; padding:5px; box-shadow: 10px 10px 20px -5px rgba(10, 10, 5, 5);">
+										<input type="text" id="bdt1" class="hidden bhdp1"  style="display: none;">
+									</td>
+								</tr>
+								
+							</table>
+							<div style="float:right; padding:7px 2px 7px 10px;">
+								<span id="closeMoneyPikaday" class="bclose1" >
+									<img src="/images/car_close.png" class="bclose1">
+								</span>
+							</div>
+						</div>
 					</div>
 					<div class="bet_wrap">
 						
@@ -532,31 +541,33 @@ String bsj = gson.toJson(bs, type);
 							<tr>
 								<td>
 									<input class="input_style04" id="bd2" placeholder="기간" value="2017-00-00 ~ 2017-00-00" readonly>
-									<span class="showdp2"><img src="/images/car_icon.jpg"></span>
-									<div id="bet-depth2" style="display:none; width:; position:absolute; z-index:100000000; left: 230px; top:889px;">
-										<table border="0" cellspacing="0" cellpadding="0" class="car_table">
-											<tr>
-												<td id="bdfdiv2" bgcolor="#303030" style="border-radius:3px; padding:5px; box-shadow: 10px 10px 20px -5px rgba(10, 10, 5, 5);">
-													<input type="text" id="bfd2" class="hidden bhdp2" style="display: none;" >
-												</td>
-												<td id="bdtdiv2" bgcolor="#303030" style="border-radius:3px; padding:5px; box-shadow: 10px 10px 20px -5px rgba(10, 10, 5, 5);">
-													<input type="text" id="bdt2" class="hidden bhdp2"  style="display: none;">
-												</td>
-											</tr>
-											
-										</table>
-										<div style="float:right; padding:7px 2px 7px 10px;">
-											<span id="closeMoneyPikaday" class="bclose2" >
-												<img src="/images/car_close.png" class="bclose2">
-											</span>
-										</div>
-									</div>
+									<span class="showdp2 showdp"><img src="/images/car_icon.jpg"></span>
 								</td>
 								<td>
 									<span class="btn1" id="dpbtn2">검색</span>
 								</td>
 							</tr>
 						</table>
+					</div>
+					<div class="cal">
+						<div id="bet-depth2" style="display:none; width:; position:absolute; z-index:100000000;     top: -15px; left: 190px;"> 
+						<table border="0" cellspacing="0" cellpadding="0" class="car_table">
+								<tr>
+									<td id="bdfdiv2" bgcolor="#303030" style="border-radius:3px; padding:5px; box-shadow: 10px 10px 20px -5px rgba(10, 10, 5, 5);">
+										<input type="text" id="bfd2" class="hidden bhdp2" style="display: none;" >
+									</td>
+									<td id="bdtdiv2" bgcolor="#303030" style="border-radius:3px; padding:5px; box-shadow: 10px 10px 20px -5px rgba(10, 10, 5, 5);">
+										<input type="text" id="bdt2" class="hidden bhdp2"  style="display: none;">
+									</td>
+								</tr>
+								
+							</table>
+							<div style="float:right; padding:7px 2px 7px 10px;">
+								<span id="closeMoneyPikaday" class="bclose2" >
+									<img src="/images/car_close.png" class="bclose2">
+								</span>
+							</div>
+						</div>
 					</div>
 					
 					<div class="bet_wrap">
@@ -746,31 +757,33 @@ String bsj = gson.toJson(bs, type);
 							<tr>
 								<td>
 									<input class="input_style04" id="bd3" placeholder="기간" value="2017-00-00 ~ 2017-00-00" readonly>
-									<span class="showdp3"><img src="/images/car_icon.jpg"></span>
-									<div id="bet-depth3" style="display:none; width:; position:absolute; z-index:100000000; left: 230px; top:1646px;">
-										<table border="0" cellspacing="0" cellpadding="0" class="car_table">
-											<tr>
-												<td id="bdfdiv3" bgcolor="#303030" style="border-radius:3px; padding:5px; box-shadow: 10px 10px 20px -5px rgba(10, 10, 5, 5);">
-													<input type="text" id="bfd3" class="hidden bhdp3" style="display: none;" >
-												</td>
-												<td id="bdtdiv3" bgcolor="#303030" style="border-radius:3px; padding:5px; box-shadow: 10px 10px 20px -5px rgba(10, 10, 5, 5);">
-													<input type="text" id="bdt3" class="hidden bhdp3"  style="display: none;">
-												</td>
-											</tr>
-											
-										</table>
-										<div style="float:right; padding:7px 2px 7px 10px;">
-											<span id="closeMoneyPikaday" class="bclose3" >
-												<img src="/images/car_close.png" class="bclose3">
-											</span>
-										</div>
-									</div>
+									<span class="showdp3 showdp"><img src="/images/car_icon.jpg"></span>
 								</td>
 								<td>
 									<span class="btn1" id="dpbtn3">검색</span>
 								</td>
 							</tr>
 						</table>
+					</div>
+					<div class="cal">
+						<div id="bet-depth3" style="display:none; width:; position:absolute; z-index:100000000; top: -15px; left: 190px;">
+							<table border="0" cellspacing="0" cellpadding="0" class="car_table">
+								<tr>
+									<td id="bdfdiv3" bgcolor="#303030" style="border-radius:3px; padding:5px; box-shadow: 10px 10px 20px -5px rgba(10, 10, 5, 5);">
+										<input type="text" id="bfd3" class="hidden bhdp3" style="display: none;" >
+									</td>
+									<td id="bdtdiv3" bgcolor="#303030" style="border-radius:3px; padding:5px; box-shadow: 10px 10px 20px -5px rgba(10, 10, 5, 5);">
+										<input type="text" id="bdt3" class="hidden bhdp3"  style="display: none;">
+									</td>
+								</tr>
+								
+							</table>
+							<div style="float:right; padding:7px 2px 7px 10px;">
+								<span id="closeMoneyPikaday" class="bclose3" >
+									<img src="/images/car_close.png" class="bclose3">
+								</span>
+							</div>
+						</div>
 					</div>
 					<div class="bet_wrap">
 						
@@ -935,31 +948,33 @@ String bsj = gson.toJson(bs, type);
 							<tr>
 								<td>
 									<input class="input_style04" id="bd4" placeholder="기간" value="2017-00-00 ~ 2017-00-00" readonly>
-									<span class="showdp4"><img src="/images/car_icon.jpg"></span>
-									<div id="bet-depth4" style="display:none; width:; position:absolute; z-index:100000000; left: 230px; top:2405px;">
-										<table border="0" cellspacing="0" cellpadding="0" class="car_table">
-											<tr>
-												<td id="bdfdiv4" bgcolor="#303030" style="border-radius:3px; padding:5px; box-shadow: 10px 10px 20px -5px rgba(10, 10, 5, 5);">
-													<input type="text" id="bfd4" class="hidden bhdp4" style="display: none;" >
-												</td>
-												<td id="bdtdiv4" bgcolor="#303030" style="border-radius:3px; padding:5px; box-shadow: 10px 10px 20px -5px rgba(10, 10, 5, 5);">
-													<input type="text" id="bdt4" class="hidden bhdp4"  style="display: none;">
-												</td>
-											</tr>
-											
-										</table>
-										<div style="float:right; padding:7px 2px 7px 10px;">
-											<span id="closeMoneyPikaday" class="bclose4" >
-												<img src="/images/car_close.png" class="bclose4">
-											</span>
-										</div>
-									</div>
+									<span class="showdp4 showdp"><img src="/images/car_icon.jpg"></span>
 								</td>
 								<td>
 									<span class="btn1" id="dpbtn4">검색</span>
 								</td>
 							</tr>
 						</table>
+					</div>
+					<div class="cal">
+						<div id="bet-depth4" style="display:none; width:; position:absolute; z-index:100000000; top: -15px; left: 190px;">
+							<table border="0" cellspacing="0" cellpadding="0" class="car_table">
+								<tr>
+									<td id="bdfdiv4" bgcolor="#303030" style="border-radius:3px; padding:5px; box-shadow: 10px 10px 20px -5px rgba(10, 10, 5, 5);">
+										<input type="text" id="bfd4" class="hidden bhdp4" style="display: none;" >
+									</td>
+									<td id="bdtdiv4" bgcolor="#303030" style="border-radius:3px; padding:5px; box-shadow: 10px 10px 20px -5px rgba(10, 10, 5, 5);">
+										<input type="text" id="bdt4" class="hidden bhdp4"  style="display: none;">
+									</td>
+								</tr>
+								
+							</table>
+							<div style="float:right; padding:7px 2px 7px 10px;">
+								<span id="closeMoneyPikaday" class="bclose4" >
+									<img src="/images/car_close.png" class="bclose4">
+								</span>
+							</div>
+						</div>
 					</div>
 					<div class="bet_wrap">
 						

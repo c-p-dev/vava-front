@@ -152,8 +152,12 @@ $(window).scroll(function(event){
 
 		$("body").on("click",".closeloginModalBtn",function(e){
 			e.preventDefault();
-			$("#loginModal").popup("hide");
-			// location.reload();
+			var u = window.location.href;
+			if(u.indexOf("/account/account.jsp") == -1 ){
+				$("#loginModal").popup("hide");
+			}else{
+				location.reload();
+			} 
 		});
 
 		$("body").on("focus","#passwd-header-input",function(){
