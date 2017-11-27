@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import bean.UserBean;
 import controller.SpinCubeController;
 
 @WebServlet("/spincube-api/*")
@@ -27,6 +28,7 @@ public class SpinCubeServlet extends HttpServlet {
 	public static final String SC_METHOD_WITHDRAW		= "/Withdraw";
 	public static final String SC_METHOD_LOCK_STS		= "/UpdUserLock";
 	public static final String SC_METHOD_GET_BETS		= "/GetBetDetails";
+	public static final String SC_METHOD_GET_PCHECK		= "/GetBetPlaycheck";
 
 	
 	/**
@@ -111,6 +113,21 @@ public class SpinCubeServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			output.print(srv_resp_6);
+		}
+		else if (method.equals(SC_METHOD_GET_PCHECK)) {
+			String srv_resp_7 	= "";
+			
+			try {
+				UserBean udata	=	(UserBean)request.getSession().getAttribute("currentSessionUser");
+				String uname	= Integer.toString(udata.getSiteid()).concat("_").concat(udata.getUserid());
+				
+				SpinCubeController sc_ctrl2		= new SpinCubeController(uname);
+				srv_resp_7 			= sc_ctrl2.getBetPlaycheckUrl();
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			output.print(srv_resp_7);
 		}
 		else {
 			String srv_resp_0	= "Invalid Method";

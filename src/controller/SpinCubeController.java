@@ -296,6 +296,27 @@ public class SpinCubeController {
 		return srv_resp;
 	}
 	
+	public String getBetPlaycheckUrl() throws ParseException
+	{
+		/*	Variable Declaration	*/
+		Gson gson				= new Gson();
+		
+		String url				= SC_BASE_URL.concat("agents/").concat(SC_AGENT_UNAME).concat("/Players/").concat(this.player_id).concat("/products/SVS/betVisualizers");
+		String post_param		= "";
+		String srv_resp			= "";
+		
+		/*	Convert parameters to JSON	*/
+		post_param	= "utcOffset=8&";
+		post_param	= post_param.concat("langCode=ko-KR");
+		
+		/*--------------------------------------------------------------------
+        |	Execute HTTP POST Request to TEG
+        |-------------------------------------------------------------------*/
+		srv_resp 	= this.postToSc(url, post_param, "application/x-www-form-urlencoded");
+		
+		return srv_resp;
+	}
+	
 	public UserBean transferMoneyToVava(String username) throws ParseException
 	{
 		Gson gson				= new Gson();
