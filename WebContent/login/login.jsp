@@ -205,11 +205,11 @@
 						toastr.success("Something Went Wrong. Please Try Again.");
 					}
 				}).done(function(data){
-					console.log(data);
+					
 					$("#uhead").html(data);
 					$("#fade_3").popup("hide");
-					$("#lgInMdl2").popup("show");	
-
+					$("#lgInMdl2").popup("show");
+					$('a.get-vbet-hist').parent().show();
 				});
 				// toastr.success('Login Successful');
 				// $("#fade_3").popup("hide");

@@ -24,93 +24,251 @@
 			<div ng-switch-when="true">			
 				<table class="bet_table_2" style="height:400px; width:100%; font-weight: 700; font-size:15px;" cellpadding="0" cellspacing="0">
 					<tr>
-						<td>시간은 단순 참고용입니다.현재 스코어, 시간경과 및 기타 다른 데이터들이 지연또는 오류를 회사는 보장해 줄 수 없고 <br><br><br> 이와 관련된 고객들의 직간접 피해에 대해 책임이 없습니다.</td>
+						<td> 경기가 종료 되었거나 현재 베팅을 할수 없는 상태입니다.<br><br><br> 베팅 가능한 항목이 있는경우 화면에 자동으로 나타납니다. </td>
 					</tr>
 				</table>
 			</div>
 																				
 			<div ng-switch-default>				
-				<div class="sports_dd_p">				
-					<v-accordion class="vAccordion--default" multiple>
+				<div>	
+					
+					<table class="sports_in_tab" cellpadding="0" cellspacing="0" >
+						<tr>
 						
-	    			<v-pane expanded="true" ng-repeat="(key,value) in MK|filter:{Sus:false,Vis:true} | orderBy:['MTyId','Id','Sq'] | groupBy:'MTyId' ">
-						<v-pane-header><div class="accordion-header_2" ng-class="{'open' : $pane.isExpanded() }" style="display:table; width:100%;"><b>{{value[0].Nm}}</b></div></v-pane-header>
-							<v-pane-content expanded="true" ng-show="true">								
-							<v-pane expanded="true" ng-show="true" ng-repeat="sel2 in value | orderBy:'Id' ">								
-									<v-pane-header>
-										
-										
-									<div ng-switch="sel2.Se.length>3"> 					
-											<div ng-switch-when="true">		
-																		
-												<ul class="nav-tabs" style="display:table; width:100%;">              					 
-											  <li class="soprts_in_acc_2"  ng-class="{'sel' : (bet|filter:{Sd:sel.Id}).length>0}" ng-click="addBet(sel.Id,sel.MkId,value[0].Nm,sel.Nm,(LS|filter:{MId:tabMId})[0].HT,(LS|filter:{MId:tabMId})[0].AT,sel.P,sel.P)" 
-											  	 style="display:table-cell;float:left; width:24.9%; border-right:solid 0.1em #17191a; padding: 0;"  ng-repeat="sel in sel2.Se  | orderBy:'MkId' "> 			
-											  	 				  	
-													<div class="sports_v_l_1">{{sel.Nm}}</div>	
-									  				
-									  				<div ng-show="sel.BP<sel.P" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <b class="font_002">{{sel.P}}</b> <i style="color:grey;font-size:10px;"> (<del>{{sel.BP}}</del>)</i> </div>
-														<div ng-show="sel.BP>sel.P" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <b class="font_002">{{sel.P}}</b> <i style="color:grey;font-size:10px;"> (<del>{{sel.BP}}</del>)</i> </div>
-														<div ng-show="sel.BP==sel.P" class="sports_v_r_1"><b class="font_002">{{sel.P}}<i style="color:grey;font-size:10px;"> (<del>{{sel.BP}}</del>)</i></b></div>
-																
-												</li>																																								
-											</ul>								
+							<td ng-if="(savedFavM|filter:{mid:MI.Id}).length>0" ng-click="getFavMkId()">
+							 <a href="#"><span class="sports_in_tab_off_1" ng-class="{'sports_in_tab_on_1':mTyId=='FAV'}">
+							 		<img src="/images/icon_bookmark_on.png" height="15">
+							 		<span class="live_tab_count">{{(savedFavM|filter:{mid:MI.Id}).length}}</span></span></a>
+							</td>
+							
+							<td ng-if="(savedFavM|filter:{mid:MI.Id}).length<1">
+							 <span class="sports_in_tab_off_1" ng-class="{'sports_in_tab_on_1':mTyId=='FAV'}">
+							 		<img ng-if="(savedFavM|filter:{mid:MI.Id}).length<1" src="/images/icon_bookmark.png" height="15">
+							 </span>
+							</td>
+									        
+							<td  ng-click="setMTyId('ALL')">
+								<a href="#"><span class="sports_in_tab_off_2" ng-class="{'sports_in_tab_on_2':mTyId=='ALL'}">전체 <span class="live_tab_count">{{(MK|filter:{Sus:false,Vis:true}).length }} </span></span></a>
+							</td>
+							
+							<td ng-show="wl_len>0" ng-click="setMTyId('WL')"><div style="display:none">{{wl_len= findMakret( (MK|filter:{Sus:false,Vis:true}), cat_wl).length }}</div>
+								<a href="#"><span class="sports_in_tab_off_2" ng-class="{'sports_in_tab_on_2':mTyId=='WL'}">승무패 <span class="live_tab_count">{{wl_len}}</span> </a>
+							</td>
+							
+							<td ng-show="ou_len>0" ng-click="setMTyId('OU')"><div style="display:none">{{ou_len= findMakret( (MK|filter:{Sus:false,Vis:true}), cat_ou).length }}</div>
+								<a href="#"><span class="sports_in_tab_off_2" ng-class="{'sports_in_tab_on_2':mTyId=='OU'}">언/오버 <span class="live_tab_count">{{ou_len}}</span></a>
+							</td>
+							
+							<td ng-show="hd_len>0" ng-click="setMTyId('HD')"><div style="display:none">{{hd_len= findMakret( (MK|filter:{Sus:false,Vis:true}), cat_hd).length }}</div>
+								<a href="#"><span class="sports_in_tab_off_2" ng-class="{'sports_in_tab_on_2':mTyId=='HD'}">핸디캡 <span class="live_tab_count">{{hd_len}}</span></a>
+							</td>
+							
+							<td ng-show="cb_len>0" ng-click="setMTyId('CB')"><div style="display:none">{{cb_len= findMakret( (MK|filter:{Sus:false,Vis:true}), cat_cb).length }}</div>
+								<a href="#"><span class="sports_in_tab_off_2" ng-class="{'sports_in_tab_on_2':mTyId=='CB'}">조합 <span class="live_tab_count">{{cb_len}}</span></a>
+							</td>
+							
+							<td ng-show="etc_len>0" ng-click="setMTyId('ETC')"><div style="display:none">{{etc_len= findMakret( (MK|filter:{Sus:false,Vis:true}), cat_etc).length }}</div>
+								<a href="#"><span class="sports_in_tab_off_2" ng-class="{'sports_in_tab_on_2':mTyId=='ETC'}">기타 <span class="live_tab_count">{{etc_len}}</span></a>
+							</td>
+							
+						</tr>
+					</table>
+	 				
+	 				<div ng-switch="Fav_mode">
+	 				
+	 					<div ng-switch-when="true">			 						
+							<v-accordion class="vAccordion--default" multiple>	
+								<v-pane expanded="true" ng-if="(savedFavM|filter:{mkid:value[0].Id})[0].mid !== undefined" ng-repeat="(key,value) in MK|filter:{Sus:false,Vis:true} | orderBy:['MTyId','Id','Sq'] | groupBy:'MTyId' ">	   
+										<v-pane-header inactive>
 											
-											</div>
-											
-											<div ng-switch-default>
+											<div class="accordion-header_2" ng-class="{'open' : $pane.isExpanded() }">
 												
-												<div ng-switch="sel2.Se.length==3"> 					
-													<div ng-switch-when="true">	
-															
-															<ul class="nav-tabs" style="display:table; width:100%;">              					 
-															  <li class="soprts_in_acc_2"  ng-class="{'sel' : (bet|filter:{Sd:sel.Id}).length>0}" ng-click="addBet(sel.Id,sel.MkId,value[0].Nm,sel.Nm,(LS|filter:{MId:tabMId})[0].HT,(LS|filter:{MId:tabMId})[0].AT,sel.P,sel.P)" 
-															  	 style="display:table-cell;float:center; width:33.23%; border-right:solid 0.1em #17191a; padding: 0;"  ng-repeat="sel in sel2.Se  | orderBy:'MkId' "> 							  	
-																	<div class="sports_v_l_1">{{sel.Nm}} </div>	
-													  				<div ng-show="sel.BP<sel.P" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <b class="font_002">{{sel.P}}</b> <i style="color:grey;font-size:10px;"> (<del>{{sel.BP}}</del>)</i> </div>
-																		<div ng-show="sel.BP>sel.P" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <b class="font_002">{{sel.P}}</b> <i style="color:grey;font-size:10px;"> (<del>{{sel.BP}}</del>)</i> </div>
-																		<div ng-show="sel.BP==sel.P" class="sports_v_r_1"><b class="font_002">{{sel.P}}<i style="color:grey;font-size:10px;"> (<del>{{sel.BP}}</del>)</i></b></div>
-																</li>																																								
-															</ul>		
-											
-													</div>
-													<div ng-switch-default>
-															
-															<ul class="nav-tabs" style="display:table; width:100%;">              					 
-															  <li class="soprts_in_acc_2"  ng-class="{'sel' : (bet|filter:{Sd:sel.Id}).length>0}" ng-click="addBet(sel.Id,sel.MkId,value[0].Nm,sel.Nm,(LS|filter:{MId:tabMId})[0].HT,(LS|filter:{MId:tabMId})[0].AT,sel.P,sel.P)" 
-															  	 style="display:table-cell;float:center; width:49.9%; border-right:solid 0.1em #17191a; padding: 0;"  ng-repeat="sel in sel2.Se  | orderBy:'MkId' "> 							  	
-																	<div class="sports_v_l_1">{{sel.Nm}}</div>	
-													  				<div ng-show="sel.BP<sel.P" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <b class="font_002">{{sel.P}}</b> <i style="color:grey;font-size:10px;"> (<del>{{sel.BP}}</del>)</i> </div>
-																		<div ng-show="sel.BP>sel.P" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <b class="font_002">{{sel.P}}</b> <i style="color:grey;font-size:10px;"> (<del>{{sel.BP}}</del>)</i> </div>
-																		<div ng-show="sel.BP==sel.P" class="sports_v_r_1"><b class="font_002">{{sel.P}}<i style="color:grey;font-size:10px;"> (<del>{{sel.BP}}</del>)</i></b></div>
-																</li>																																								
-															</ul>		
-															
-													</div>	
-												</div>	
-												
-										</div>
-									</div>
-					
+											<span>
+												<a href="#"  class="left_menu_in_1_l_1" ng-click="us_mkt(value[0].MId,value[0].Id)">		
 													
-									</v-pane-header>	
-							<v-pane-content>								 	
-							</v-pane-content>
-							</v-pane>											
-							</v-pane-content>								
-						</v-pane>							
-					</v-accordion>
-					
+													<i ng-if="(savedFavM|filter:{mkid:value[0].Id})[0].mid == undefined" id="{{value[0].Id}}" class="fa fa-star-o"></i>
+													<i ng-if="(savedFavM|filter:{mkid:value[0].Id})[0].mid !== undefined" id="{{value[0].Id}}" class="fa fa-star"></i>
+																								
+												</a>
+											</span>
+											
+												<span ng-click="$pane.toggle()" style="padding-left:10px; display:table; width:90%;"><b>{{value[0].Nm}}</b> </span>
+											</div> 
+											
+											</v-pane-header>
+											<v-pane-content expanded="true" ng-show="true" >		
+																
+												<v-pane expanded="true" ng-repeat="sel2 in value | orderBy:'Id' ">								
+													<v-pane-header>					
+																									
+														<div ng-switch="sel2.Se.length>3"> 					
+																<div ng-switch-when="true">		
+																							
+																	<ul class="nav-tabs" style="display:table; width:100%;">              					 
+																  <li class="soprts_in_acc_2"  ng-class="{'sel' : (bet|filter:{Sd:sel.Id}).length>0}" ng-click="addBet(sel.Id,sel.MkId,value[0].Nm,sel.Nm,(LS|filter:{MId:tabMId})[0].HT,(LS|filter:{MId:tabMId})[0].AT,sel.P,sel.P)" 
+																  	 style="display:table-cell;float:left; width:24.9%; border-right:solid 0.1em #17191a; padding: 0;"  ng-repeat="sel in sel2.Se  | orderBy:'MkId' "> 			
+																  	 				  	
+																		<div class="sports_v_l_1">{{sel.Nm}}</div>	
+														  				
+														  				<div ng-show="sel.BP<sel.P" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <b class="font_002">{{sel.P}}</b> <i class="sel_old"> (<del>{{sel.BP}}</del>)</i> </div>
+																			<div ng-show="sel.BP>sel.P" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <b class="font_002">{{sel.P}}</b> <i class="sel_old"> (<del>{{sel.BP}}</del>)</i> </div>
+																			<div ng-show="sel.BP==sel.P" class="sports_v_r_1"><b class="font_002">{{sel.P}}<i class="sel_old"> (<del>{{sel.BP}}</del>)</i></b></div>
+																					
+																	</li>																																								
+																</ul>																						
+																</div>
+																
+																<div ng-switch-default>															
+																	<div ng-switch="sel2.Se.length==3"> 					
+																		<div ng-switch-when="true">	
+																				
+																				<ul class="nav-tabs" style="display:table; width:100%;">              					 
+																				  <li class="soprts_in_acc_2"  ng-class="{'sel' : (bet|filter:{Sd:sel.Id}).length>0}" ng-click="addBet(sel.Id,sel.MkId,value[0].Nm,sel.Nm,(LS|filter:{MId:tabMId})[0].HT,(LS|filter:{MId:tabMId})[0].AT,sel.P,sel.P)" 
+																				  	 style="display:table-cell;float:center; width:33.23%; border-right:solid 0.1em #17191a; padding: 0;"  ng-repeat="sel in sel2.Se  | orderBy:'MkId' "> 							  	
+																						<div class="sports_v_l_1">{{sel.Nm}}</div>	
+																		  				<div ng-show="sel.BP<sel.P" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <b class="font_002">{{sel.P}}</b> <i class="sel_old"> (<del>{{sel.BP}}</del>)</i> </div>
+																							<div ng-show="sel.BP>sel.P" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <b class="font_002">{{sel.P}}</b> <i class="sel_old"> (<del>{{sel.BP}}</del>)</i> </div>
+																							<div ng-show="sel.BP==sel.P" class="sports_v_r_1"><b class="font_002">{{sel.P}}<i class="sel_old"> (<del>{{sel.BP}}</del>)</i></b></div>
+																					</li>																																								
+																				</ul>		
+																
+																		</div>
+																		<div ng-switch-default>
+																				
+																				<ul class="nav-tabs" style="display:table; width:100%;">              					 
+																				  <li class="soprts_in_acc_2"  ng-class="{'sel' : (bet|filter:{Sd:sel.Id}).length>0}" ng-click="addBet(sel.Id,sel.MkId,value[0].Nm,sel.Nm,(LS|filter:{MId:tabMId})[0].HT,(LS|filter:{MId:tabMId})[0].AT,sel.P,sel.P)" 
+																				  	 style="display:table-cell;float:center; width:49.9%; border-right:solid 0.1em #17191a; padding: 0;"  ng-repeat="sel in sel2.Se  | orderBy:'MkId' "> 							  	
+																						<div class="sports_v_l_1">{{sel.Nm}}</div>	
+																		  				<div ng-show="sel.BP<sel.P" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <b class="font_002">{{sel.P}}</b> <i class="sel_old"> (<del>{{sel.BP}}</del>)</i> </div>
+																							<div ng-show="sel.BP>sel.P" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <b class="font_002">{{sel.P}}</b> <i class="sel_old"> (<del>{{sel.BP}}</del>)</i> </div>
+																							<div ng-show="sel.BP==sel.P" class="sports_v_r_1"><b class="font_002">{{sel.P}}<i class="sel_old"> (<del>{{sel.BP}}</del>)</i></b></div>
+																					</li>																																								
+																				</ul>		
+																				
+																		</div>	
+																	</div>	
+																	
+															</div>
+														</div>  
 
+											</v-pane-header>	
+									<v-pane-content>								 	
+									</v-pane-content>
+									</v-pane>									
+									</v-pane-content>	
+
+								</v-pane>	
+								
+
+							</v-accordion>
+						</div>
+						
+						<div ng-switch-default>
+							<v-accordion class="vAccordion--default" multiple>	
+								<v-pane expanded="true" ng-if="(MKCAT.indexOf(value[0].MTyId)>-1)||mTyId =='ALL'" ng-repeat="(key,value) in MK|filter:{Sus:false,Vis:true} | orderBy:['MTyId','Id','Sq'] | groupBy:'MTyId' ">	   
+										<v-pane-header inactive>
+											
+											<div class="accordion-header_2" ng-class="{'open' : $pane.isExpanded() }">
+												
+											<span>
+												<a href="#"  class="left_menu_in_1_l_1" ng-click="us_mkt(value[0].MId,value[0].Id)">		
+													
+													<i ng-if="(savedFavM|filter:{mkid:value[0].Id})[0].mid == undefined" id="{{value[0].Id}}" class="fa fa-star-o"></i>
+													<i ng-if="(savedFavM|filter:{mkid:value[0].Id})[0].mid !== undefined" id="{{value[0].Id}}" class="fa fa-star"></i>
+																								
+												</a>
+											</span>
+											
+												<span ng-click="$pane.toggle()" style="padding-left:10px; display:table; width:90%;"><b>{{value[0].Nm}}</b> </span>
+											</div> 
+											
+											</v-pane-header>
+											<v-pane-content expanded="true" ng-show="true" >		
+																
+												<v-pane expanded="true" ng-repeat="sel2 in value | orderBy:'Id' ">								
+													<v-pane-header>					
+																									
+														<div ng-switch="sel2.Se.length>3"> 					
+																<div ng-switch-when="true">		
+																							
+																	<ul class="nav-tabs" style="display:table; width:100%;">              					 
+																  <li class="soprts_in_acc_2"  ng-class="{'sel' : (bet|filter:{Sd:sel.Id}).length>0}" ng-click="addBet(sel.Id,sel.MkId,value[0].Nm,sel.Nm,(LS|filter:{MId:tabMId})[0].HT,(LS|filter:{MId:tabMId})[0].AT,sel.P,sel.P)" 
+																  	 style="display:table-cell;float:left; width:24.9%; border-right:solid 0.1em #17191a; padding: 0;"  ng-repeat="sel in sel2.Se  | orderBy:'MkId' "> 			
+																  	 				  	
+																		<div class="sports_v_l_1">{{sel.Nm}}</div>	
+														  				
+														  				<div ng-show="sel.BP<sel.P" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <b class="font_002">{{sel.P}}</b> <i class="sel_old"> (<del>{{sel.BP}}</del>)</i> </div>
+																			<div ng-show="sel.BP>sel.P" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <b class="font_002">{{sel.P}}</b> <i class="sel_old"> (<del>{{sel.BP}}</del>)</i> </div>
+																			<div ng-show="sel.BP==sel.P" class="sports_v_r_1"><b class="font_002">{{sel.P}}<i class="sel_old"> (<del>{{sel.BP}}</del>)</i></b></div>
+																					
+																	</li>																																								
+																</ul>																						
+																</div>
+																
+																<div ng-switch-default>															
+																	<div ng-switch="sel2.Se.length==3"> 					
+																		<div ng-switch-when="true">	
+																				
+																				<ul class="nav-tabs" style="display:table; width:100%;">              					 
+																				  <li class="soprts_in_acc_2"  ng-class="{'sel' : (bet|filter:{Sd:sel.Id}).length>0}" ng-click="addBet(sel.Id,sel.MkId,value[0].Nm,sel.Nm,(LS|filter:{MId:tabMId})[0].HT,(LS|filter:{MId:tabMId})[0].AT,sel.P,sel.P)" 
+																				  	 style="display:table-cell;float:center; width:33.23%; border-right:solid 0.1em #17191a; padding: 0;"  ng-repeat="sel in sel2.Se  | orderBy:'MkId' "> 							  	
+																						<div class="sports_v_l_1">{{sel.Nm}}</div>	
+																		  				<div ng-show="sel.BP<sel.P" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <b class="font_002">{{sel.P}}</b> <i class="sel_old"> (<del>{{sel.BP}}</del>)</i> </div>
+																							<div ng-show="sel.BP>sel.P" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <b class="font_002">{{sel.P}}</b> <i class="sel_old"> (<del>{{sel.BP}}</del>)</i> </div>
+																							<div ng-show="sel.BP==sel.P" class="sports_v_r_1"><b class="font_002">{{sel.P}}<i class="sel_old"> (<del>{{sel.BP}}</del>)</i></b></div>
+																					</li>																																								
+																				</ul>		
+																
+																		</div>
+																		<div ng-switch-default>
+																				
+																				<ul class="nav-tabs" style="display:table; width:100%;">              					 
+																				  <li class="soprts_in_acc_2"  ng-class="{'sel' : (bet|filter:{Sd:sel.Id}).length>0}" ng-click="addBet(sel.Id,sel.MkId,value[0].Nm,sel.Nm,(LS|filter:{MId:tabMId})[0].HT,(LS|filter:{MId:tabMId})[0].AT,sel.P,sel.P)" 
+																				  	 style="display:table-cell;float:center; width:49.9%; border-right:solid 0.1em #17191a; padding: 0;"  ng-repeat="sel in sel2.Se  | orderBy:'MkId' "> 							  	
+																						<div class="sports_v_l_1">{{sel.Nm}}</div>	
+																		  				<div ng-show="sel.BP<sel.P" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <b class="font_002">{{sel.P}}</b> <i class="sel_old"> (<del>{{sel.BP}}</del>)</i> </div>
+																							<div ng-show="sel.BP>sel.P" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <b class="font_002">{{sel.P}}</b> <i class="sel_old"> (<del>{{sel.BP}}</del>)</i> </div>
+																							<div ng-show="sel.BP==sel.P" class="sports_v_r_1"><b class="font_002">{{sel.P}}<i class="sel_old"> (<del>{{sel.BP}}</del>)</i></b></div>
+																					</li>																																								
+																				</ul>		
+																				
+																		</div>	
+																	</div>	
+																	
+															</div>
+														</div>  
+
+											</v-pane-header>	
+									<v-pane-content>								 	
+									</v-pane-content>
+									</v-pane>									
+									</v-pane-content>	
+
+								</v-pane>	
+								
+
+							</v-accordion>
+						</div>
+					
+					</div>
+						
+						<div ng-show="(MK|filter:{Sus:false,Vis:true}).length<1">			
+							<table class="bet_table_2" style="height:400px; width:100%; font-weight: 700; font-size:15px;" cellpadding="0" cellspacing="0">
+								<tr>
+									<td> 경기가 종료 되었거나 현재 베팅을 할수 없는 상태입니다.<br><br><br> 베팅 가능한 항목이 있는경우 화면에 자동으로 나타납니다. </td>
+								</tr>
+							</table>
+						</div>
+						
 				</div>					
 			</div>			              											
 		</div>	
 	</div>
 
-
-
 </div>
 	
+
+						
 <!--
 			
 -->					

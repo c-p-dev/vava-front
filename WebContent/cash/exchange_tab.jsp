@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="bean.UserBean, dao.UserDao, java.text.DecimalFormat"%>
 <jsp:useBean id="bean" class="bean.UserBean" />
 <%
-	DecimalFormat dfrmt				= new DecimalFormat("#,###,###,###,###.00");
+	DecimalFormat dfrmt				= new DecimalFormat("#,###,###,###,###");
 
 	if(session.getAttribute("currentSessionUser") != null){
 		bean = (bean.UserBean) session.getAttribute("currentSessionUser");	
@@ -109,7 +109,7 @@
 <div id="ExchangeSuccesModal" class="bg_mask_pop2">
 	<div class="bg_mask_pop_title">
 		<span class="popup_logo"><img src="/images/popup_logo.png"></span>
-		<span class="popup_close fade_2_close cs_close"><img src="/images/popup_close.png"></span>
+		<span class="popup_close fade_2_close cs_close_exchange"><img src="/images/popup_close.png"></span>
 	</div>
 	<div class="bg_mask_pop2_in">
 		<div class="pop_icon_center">
@@ -119,12 +119,32 @@
 			환전 신청이 접수 되었습니다.<br>			
 		</div>
 		<div class="btn_wrap">
-			<span class="btn3c cs_close">확인</span>
+			<span class="btn3c cs_close_exchange">확인</span>
+		</div>
+	</div>
+</div>
+
+<!-- confirm3 -->
+<div id="conf_modal3" class="bg_mask_pop2 conf_modal">
+	<div class="bg_mask_pop_title">
+		<span class="popup_logo"><img src="/images/popup_logo.png"></span>
+		<span class="popup_close conf_modal_close"><img src="/images/popup_close.png"></span>
+	</div>
+	<div class="bg_mask_pop2_in">
+		<div class="pop_icon_center">
+			<img src="/images/exclamation_icon.png">
+		</div>
+		<div class="pop_text">
+			Are you sure?
+		</div>
+		<div class="btn_wrap">
+			<span class="btn3 conf_modal_close">No</span>
+			<span class="btn3 conf_modal_yes ">Yes</span>
 		</div>
 	</div>
 </div>
 <script>
-	$dataTable1 = $('#dataTable2').DataTable({
+	$dataTable_exchange = $('#dataTable2').DataTable({
 		ajax : '/cash/jsp/getWithdrawList.jsp',
 		bProcessing: true,
 		sAjaxDataProp:"",
@@ -132,6 +152,7 @@
 		bInfo : false,
 		lengthChange: false,
 		autowWidth:true,
+		aaSorting: [[1,'desc']],
 	    columns : [
 	        	{ 
 	                data   : 'wdid',
@@ -187,7 +208,7 @@
 	$(".dt_div").on("click",function(){
 		
 		setTimeout(function() {
-		  	$dataTable1.columns.adjust().draw();
+		  	$dataTable_exchange.columns.adjust().draw();
 		}, 100);
 	});
 	
@@ -249,24 +270,32 @@
 		
 	});
 
-	function submitWithdraw(data){
-		
-		if(data != null){
-			var num = data.withdraw;
-			data.withdraw = numberParser(num);
-		}
+	submitWithdraw();
 
-		$.ajax({
-			url:'jsp/withdrawprocess.jsp',
-			data:data,
-			type:'POST'
-		}).done(function(data){
-			
-			if(data){
-				$("#ExchangeSuccesModal").popup("show");
-			}
-		});
+	function submitWithdraw(){
 		
+		$("#conf_modal3 .conf_modal_yes").on("click",function(){
+			
+			var data = $("#formwithdraw").serializeJSON();
+			console.log(data);
+			if(data != null){
+				var num = data.withdraw;
+				data.withdraw = numberParser(num);
+			}
+
+			$.ajax({
+				url:'jsp/withdrawprocess.jsp',
+				data:data,
+				type:'POST'
+			}).done(function(data){
+				if(data){
+					$("#ExchangeSuccesModal").popup("show");
+				}
+			});
+			
+			$("#conf_modal3").popup("hide");
+
+		});
 	}
 
 	$("#formwithdraw input").on("blur",function(e){
@@ -285,10 +314,10 @@
 		e.preventDefault();
 		if($("#formwithdraw").valid()){
 			$("#withdraw").qtip("hide");
-			var data = $("#formwithdraw").serializeJSON();
-		    submitWithdraw(data);
+		    $("#conf_modal3").popup("show");
 		}
 	});
+
 
 	$('#ExchangeSuccesModal').popup({
 	  	transition: 'all 0.3s',
@@ -298,10 +327,10 @@
 		}
 	});
 
-	$(".cs_close").on("click",function(e){
+	$(".cs_close_exchange").on("click",function(e){
 		e.preventDefault();
-		$dataTable1.ajax.reload();
-		$dataTable1.columns.adjust().draw();
+		$dataTable_exchange.ajax.reload();
+		$dataTable_exchange.columns.adjust().draw();
 		$("#ExchangeSuccesModal").popup("hide");
 
 	});

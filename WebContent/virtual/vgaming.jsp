@@ -130,8 +130,9 @@
 
 			<ul class="l_tabs" id="game-cat">
 				<li><a href="#l-tab1" class="get-game">전체</a></li>
-				<li><a href="#l-tab3" class="get-game">Virtual</a></li>
-				<li><a href="#l-tab2" class="get-game">Instant</a></li>
+				<li><a href="#l-tab3" class="get-game">가상 게임</a></li>
+				<li><a href="#l-tab2" class="get-game">인스턴트 게임</a></li>
+				<li><a href="#l-tab4" class="get-vbet-hist" target = '_blank'>베팅내역 확인하기</a></li>
 			</ul>
 			
 		</div>
@@ -324,7 +325,38 @@
 
 			return false;
 		});
+		
+		function bindPlaycheckClick() {
+			$('#game-cat li').on('click', 'a.get-vbet-hist', function() {
+				
+				//$('#game-cat li').off('click', 'a.get-vbet-hist');
+				
+				var newWindow = window.open("","_blank");
+				
+				$.get('/spincube-api/GetBetPlaycheck', function(srv_resp) {
+					
+					newWindow.location.href = srv_resp.url;
+					newWindow.blur;
+					newWindow.focus;
+					
+				}, 'json');
+				
+				return false;
+			});
+		}
+		
+		bindPlaycheckClick();
         
+		$.get('/login/jsp/get_session.jsp', function(srv_resp) {
+			
+			if (!srv_resp.result) {
+				$('a.get-vbet-hist').parent().hide();
+			}
+			else {
+				$('a.get-vbet-hist').parent().show();
+			}
+		}, 'json');
+		
         if (Modernizr.touch) {
             // show the close overlay button
             $(".close-overlay").removeClass("hidden");

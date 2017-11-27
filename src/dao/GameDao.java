@@ -296,15 +296,11 @@ public class GameDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs 			= null;
 		
-		String  query 			= "SELECT game_provider, " + 
-				"CASE game_provider " + 
-				"  WHEN 1 THEN '마이크로게임 카지노' " + 
-				"  WHEN 2 THEN '아시안게임 카지노'  " + 
-				"  WHEN 3 THEN '베컨 카지노' " +  
-				"  WHEN 4 THEN '가상게임' " +  
-				" END as game_provider_name " + 
-				"FROM game_lst WHERE game_provider != 4 " + 
-				"GROUP BY game_provider" ;
+		String  query 			= "SELECT game_provider, lk_game_providers.description AS game_provider_name " + 
+				"FROM game_lst " +
+				"JOIN lk_game_providers on game_lst.game_provider = lk_game_providers.game_provider_id " +
+				"WHERE game_provider != 4 "+
+				"GROUP BY game_provider, lk_game_providers.description" ;
 		
 		List<GameBean>	provider_list = new ArrayList<>();
 		
@@ -337,22 +333,11 @@ public class GameDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs 			= null;
 		
-		String  query 			= "SELECT game_type, " + 
-				"CASE game_type " + 
-				"WHEN 1 THEN '라이브 룰렛' " + 
-				"WHEN 2 THEN '라이브 식보' " + 
-				"WHEN 3 THEN '라이브 바카라' " + 
-				"WHEN 4 THEN '라이브 드래곤 타이거' " + 
-				"WHEN 5 THEN '3D Horses' " + 
-				"WHEN 6 THEN '3D Animals' " + 
-				"WHEN 7 THEN 'Poker' " + 
-				"WHEN 8 THEN 'Black Jack' " + 
-				"WHEN 9 THEN 'Roullete' " + 
-				"WHEN 10 THEN '가위바위보 게임' " + 
-				"WHEN 11 THEN '텍사스 사다리 게임' " + 
-				"END as game_type_name " + 
-				"FROM game_lst WHERE game_provider != 4 " +  
-				"GROUP BY game_type " ;
+		String  query 			= "SELECT game_type, lk_game_types.description AS game_type_name " + 
+				"FROM game_lst " +
+				"JOIN lk_game_types ON game_lst.game_type = lk_game_types.game_type_id " +
+				"WHERE game_provider != 4 " +
+				"GROUP BY game_lst.game_type, lk_game_types.description " ;
 		
 		List<GameBean>	type_list = new ArrayList<>();
 		
@@ -384,22 +369,12 @@ public class GameDao {
 		Connection con 			= null;
 		PreparedStatement pstmt = null;
 		ResultSet rs 			= null;
-		String query = "SELECT game_type, CASE game_type " + 
-				"WHEN 1 THEN '라이브 룰렛' " + 
-				"WHEN 2 THEN '라이브 식보' " + 
-				"WHEN 3 THEN '라이브 바카라' " + 
-				"WHEN 4 THEN '라이브 드래곤 타이거' " + 
-				"WHEN 5 THEN '3D Horses' " + 
-				"WHEN 6 THEN '3D Animals' " + 
-				"WHEN 7 THEN 'Poker' " + 
-				"WHEN 8 THEN 'Black Jack' " + 
-				"WHEN 9 THEN 'Roullete' " + 
-				"WHEN 10 THEN '가위바위보 게임' " + 
-				"WHEN 11 THEN '텍사스 사다리 게임' " + 
-				"END as game_type_name FROM game_lst " +
+		String query = "SELECT game_type, lk_game_types.description AS game_type_name " +
+				"FROM game_lst " +
+				"JOIN lk_game_types ON game_lst.game_type = lk_game_types.game_type_id " +
 				"WHERE game_provider = ? AND game_type != 5 AND game_type != 6 AND game_type != 10 AND game_type != 11 " +
-				"GROUP BY game_type UNION " + 
-				"SELECT 0 , 'ALL' AS game_type_name";
+				"GROUP BY game_type, lk_game_types.description UNION " + 
+				"SELECT 0 , '전체' AS game_type_name";
 		
 		
 		GameMenuBean gd = new GameMenuBean();
@@ -409,22 +384,12 @@ public class GameDao {
 			con 				= DBConnector.getConnection();
 			
 			if(game_provider == 0){
-				query = "SELECT game_type, CASE game_type " + 
-						"WHEN 1 THEN '라이브 룰렛' " + 
-						"WHEN 2 THEN '라이브 식보' " + 
-						"WHEN 3 THEN '라이브 바카라' " + 
-						"WHEN 4 THEN '라이브 드래곤 타이거' " + 
-						"WHEN 5 THEN '3D Horses' " + 
-						"WHEN 6 THEN '3D Animals' " + 
-						"WHEN 7 THEN 'Poker' " + 
-						"WHEN 8 THEN 'Black Jack' " + 
-						"WHEN 9 THEN 'Roullete' " + 
-						"WHEN 10 THEN '가위바위보 게임' " + 
-						"WHEN 11 THEN '텍사스 사다리 게임' " + 
-						"END as game_type_name FROM game_lst " +
-						"WHERE game_provider != 4 AND game_type != 5 AND game_type != 6 AND game_type != 10 AND game_type != 11 " +
-						"GROUP BY game_type UNION " + 
-						"SELECT 0 , 'ALL' AS game_type_name";
+				query = "SELECT game_type, lk_game_types.description AS game_type_name " +
+						"FROM game_lst " +
+						"JOIN lk_game_types ON game_lst.game_type = lk_game_types.game_type_id " +
+						"WHERE game_type != 5 AND game_type != 6 AND game_type != 10 AND game_type != 11 " +
+						"GROUP BY game_type, lk_game_types.description UNION " + 
+						"SELECT 0 , '전체' AS game_type_name";
 				
 				pstmt   			= con.prepareStatement(query);
 			}else{

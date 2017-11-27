@@ -74,10 +74,10 @@
 
 .pre_0_0 {text-align:center; width:3% ;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;}
 
-.sports_2_2 {width:9% ;text-align:center; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;}
+.sports_2_2 {width:9% ;text-align:left; padding-left:10px; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;}
 .sports_3_2 {width:9% ;text-align:center; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;}
-.sports_4_2 {width:7% ;text-align:center; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;}
-.sports_5_2 {width:11% ;text-align:center; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;}
+.sports_4_2 {width:9% ;text-align:left; padding-left:10px; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;}
+.sports_5_2 {width:13% ;text-align:center; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;}
 .sports_6_2 {width:* ;text-align:center; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;}
 .sports_10_2 {width:6% ;text-align:center;border-bottom:solid 1px #1c2021;}
 

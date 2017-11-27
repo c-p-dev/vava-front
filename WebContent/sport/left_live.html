@@ -1,17 +1,17 @@
 ﻿
-<div id="spin_llive" class="sk-circle">
-  <div class="sk-circle1 sk-child"></div>
-  <div class="sk-circle2 sk-child"></div>
-  <div class="sk-circle3 sk-child"></div>
-  <div class="sk-circle4 sk-child"></div>
-  <div class="sk-circle5 sk-child"></div>
-  <div class="sk-circle6 sk-child"></div>
-  <div class="sk-circle7 sk-child"></div>
-  <div class="sk-circle8 sk-child"></div>
-  <div class="sk-circle9 sk-child"></div>
-  <div class="sk-circle10 sk-child"></div>
-  <div class="sk-circle11 sk-child"></div>
-  <div class="sk-circle12 sk-child"></div>
+<div id="spin_llive" class="sk-fading-circle_s">
+  <div class="sk-circle1 sk-circle"></div>
+  <div class="sk-circle2 sk-circle"></div>
+  <div class="sk-circle3 sk-circle"></div>
+  <div class="sk-circle4 sk-circle"></div>
+  <div class="sk-circle5 sk-circle"></div>
+  <div class="sk-circle6 sk-circle"></div>
+  <div class="sk-circle7 sk-circle"></div>
+  <div class="sk-circle8 sk-circle"></div>
+  <div class="sk-circle9 sk-circle"></div>
+  <div class="sk-circle10 sk-circle"></div>
+  <div class="sk-circle11 sk-circle"></div>
+  <div class="sk-circle12 sk-circle"></div>
 </div>
 
 <div ng-init="llive_load()" style="display:none;" id="myDiv" class="animate-bottom">
@@ -19,10 +19,14 @@
 <div class="left_search_wrap">	
 	
 	<div class="left_search">
-		<input   id="pop" class="input_style05" ng-model="s" placeholder="팀 이름">
+		
+		<form name="sm" ng-submit="sInfo()">
+			<input  id="pop" class="input_style05" name="k" placeholder="팀 이름">
+		
+		
 			<span  id="popo" class="popover-wrapper">
 				<a href="#" data-role="popover" data-target="example-popover">
-					<img src="/images/search_icon.jpg">
+					<img id="spop" src="/images/search_icon.jpg" ng-click="sInfo()">
 				</a>
 								
 				<div class="popover-modal example-popover">
@@ -30,30 +34,58 @@
 					<div class="popover-body">
 						<div class="example-body-in">
 					
-							<table ng-show= "(LS|sf:s).length==0" class="example_table_1" cellpadding="0" cellspacing="0">
+					
+							<table ng-show= "SM.length==0" class="example_table_1" cellpadding="0" cellspacing="0">
 										<tr>
 											<td width="100%" align="center" style="padding:15px 0 15px 0"> 검색 결과가 없습니다.
 											</td>
 										</tr>
 							</table>
 									
-							<div ng-repeat="ss in LS|sf:s" >
+							<div ng-repeat="ss in SM" >
 											
-								<table class="example_table_1" cellpadding="0" cellspacing="0" ng-click="goMatchMarket('center_market.html',ss.SId,ss.MId)">
+								<table ng-if="ss.LS=='T'" class="search_table_1" cellpadding="0" cellspacing="0" ng-click="goMatchMarket('center_market.html',ss.SId,ss.MId)">
+																	
 									<tr>
-										<td colspan="2" align="left"  style="padding:8px 7px 0 10px"> <img width="15" src="/images/sport_s/{{ss.SId}}.png"/> &nbsp; {{ss.SN}} 
+										<td align="left"  style="padding:8px 7px 5px 10px"> <img width="15" src="/images/sport_s/{{ss.SId}}.png"/> &nbsp; {{ss.SN}} 
+										<td align="right" style="padding:8px 7px 7px 10px"> {{ss.Dt}} </td>	
 										</td>
 									</tr>
-									<tr>								
-										<td colspan="2" align="left" style="padding:15px 7px 0 10px"><span class="font_002">{{ss.HT}}</span>&nbsp;<span class="5c7785">vs</span>&nbsp;<span class="font_002">{{ss.AT}}</span>  </td>
-									</tr>
+									
 									<tr>
-										<td align="left" style="padding:15px 0 7px 10px">{{ss.CN.substring(0,25)}}</td>
-										<td align="right" style="padding:15px 7px 7px 10px"> {{(periodName|where:{Id:ss.SId,P:ss.Pe})[0].KN}}</td>
+										<td align="left"  style="padding:8px 0 5px 8px">{{ss.CN.substring(0,25)}}</td>
+										<td align="right" style="padding:8px 0 5px 8px"> <span style="color:#63d823; font-style:italic; font-size:12px; font-weight:bold; padding-right:20px">LIVE</span></td> 
 									</tr>
+									
+									<tr>								
+										<td colspan="2" align="left" style="padding:8px 0 15px 8px"><span class="font_002">{{ss.HT}}</span>&nbsp;<span class="5c7785">vs</span>&nbsp;<span class="font_002">{{ss.AT}}</span>  </td>
+									</tr>
+									
 								</table>	
+								
+								<table ng-if="ss.LS!='T'" class="search_table_1" cellpadding="0" cellspacing="0" ng-click="loadPop(ss.SId,ss.MId)">
+									
+									<tr>
+										<td align="left"  style="padding:8px 7px 5px 10px"> <img width="15" src="/images/sport_s/{{ss.SId}}.png"/> &nbsp; {{ss.SN}} 
+										<td align="right" style="padding:8px 7px 7px 10px"> {{ss.Dt}} </td>	
+										</td>
+									</tr>
+									
+									<tr>
+										<td colspan="2"  align="left" style="padding:8px 0 5px 8px">{{ss.CN.substring(0,25)}}</td>
+										<!-- <td align="right" style="padding:15px 7px 7px 10px"> {{(periodName|where:{Id:ss.SId,P:ss.Pe})[0].KN}}</td> -->
+									</tr>
+									
+									<tr>								
+										<td colspan="2" align="left" style="padding:8px 0 15px 8px"><span class="font_002">{{ss.HT}}</span>&nbsp;<span class="5c7785">vs</span>&nbsp;<span class="font_002">{{ss.AT}}</span>  </td>
+									</tr>
+									
+								</table>	
+								
 						
 							</div>
+						
+						
 						</div>
 					</div>
 				
@@ -69,7 +101,28 @@
 	   	  	document.getElementById("popo").setAttribute('class', 'popover-wrapper'); //.popover(show);popover-wrapper open
 	    	}
 			});
+			
+		  //$('form').submit(function(e){
+         //console.log("form.submit");
+         
+        // e.preventDefault();
+         //sInfo();
+         //makeAjaxRequest();
+      //   return true
+    	//});
+    	
+    	//$('#spop').on('click',function(e){
+         //console.log("form.submit2");
+         
+         //e.preventDefault();
+      //   sInfo();
+         //makeAjaxRequest();
+    	//});
+    	
+    
 		</script>
+		
+		</form>
 	</div>
 	
 </div>
@@ -82,7 +135,7 @@
 		<a href="#" ng-click="goPreMatch(lm[1].l,lm[1].c)"><div class="left_tab_1">
 			<div class="left_tab_l_1" ng-bind="lm[1].t"></div><div class="menu_count_on"  ng-bind="PMc.length"></div>
 		</div></a>
-
+</div>
 	
 		<div class="left_menu_wrap">
 	<v-accordion class="vAccordion--default" multiple>	
@@ -148,7 +201,7 @@
 						</v-pane>         							
 			</v-accordion>		
 		</div>
-		</div>
+		
 		<table ng-show= "LS.length==0" class="example_table_1" cellpadding="0" cellspacing="0">
 			<tr>
 				<td width="100%" align="center" style="padding:15px 0 15px 0"> 		현재 진행중인 경기가 없습니다.
@@ -160,38 +213,31 @@
 		
 		<v-accordion class="vAccordion--default" multiple>		
 								
-	 		<v-pane  ng-repeat="(key_sp,value_sp) in LS | orderBy:['SId','RId','CId'] | groupBy:'SId'" expanded="true">            	              
+	 		<v-pane  ng-repeat="(key_sp,value_sp) in LS | orderBy:['SId','RId','CId'] | groupBy:'SId'" expanded="false">            	              
 	    	<v-pane-header>
-					<div class="accordion-header" ng-class="{'open' : $pane.isExpanded() }"><img width="15" src="/images/sport_s/{{value_sp[0].SId}}.png">&nbsp;{{value_sp[0].SN}} 
+					<div class="accordion-header" ng-class="{'open' : $pane.isExpanded() }"><img width="15" src="/images/sport_s/{{value_sp[0].SId}}.png">&nbsp;{{value_sp[0].SN}} <div ng-if="!$pane.isExpanded()" class="left_menu_count">{{value_sp.length}}  </div>
 						<!--<div class="left_menu_count">{{value_sp.length}}  </div>  -->
 					</div>
 				</v-pane-header>
-	    		<v-pane-content expanded="true" ng-show="true">	  	              												
-	          		<v-pane ng-repeat="(key_rg,value_rg ) in value_sp | orderBy:['SId','RId','CId'] | groupBy:'RN'" expanded="true">          		
+	    		<v-pane-content expanded="false" ng-show="true">	  	              												
+	          		<v-pane ng-repeat="(key_rg,value_rg ) in value_sp | orderBy:['SId','RId','CId'] | groupBy:'RN'" expanded="false">          		
 	          			<v-pane-header>				              			
-	          				<div class="accordion-header" ng-class="{'open' : $pane.isExpanded() }"><img style="vertical-align:middle;width:14px;height:10px;margin-bottom:3px;" src="/images/region_s/{{value_rg[0].RId}}.png">&nbsp;{{key_rg}}
-											<!--<div class="left_menu_count">{{value_rg.length}}</div>-->
+	          				<div class="accordion-header_3" ng-class="{'open' : $pane.isExpanded() }"><img style="vertical-align:middle;width:14px;height:10px;margin-bottom:3px;" src="/images/region_s/{{value_rg[0].RId}}.png">&nbsp;{{key_rg}}
+											<div class="left_menu_count">{{value_rg.length}}</div>
 										</div>												
 	          			</v-pane-header>	              	
-	        					<v-pane-content expanded="true" ng-show="true">	
-	        								              						
-	        						<!-- <v-pane expanded="false"  ng-init="showCnt=$index" ng-repeat="(key_cp, value_cp ) in value_rg  | orderBy:['SId','RId','CId'] | groupBy:'CName'">		-->  
-	        						
+	        					<v-pane-content expanded="true" ng-show="true">		        								              						
+	        						<!-- <v-pane expanded="false"  ng-init="showCnt=$index" ng-repeat="(key_cp, value_cp ) in value_rg  | orderBy:['SId','RId','CId'] | groupBy:'CName'">		-->  	        						
 	        						<v-pane ng-show="true" ng-repeat="(key_cp, value_cp ) in value_rg  | orderBy:['SId','RId','CId'] | groupBy:'CN'" expanded="false">           		
 		              			<v-pane-header>							              			
-		              				<div class="accordion-header_2" ng-class="{'open' : $pane.isExpanded() }">&nbsp;{{key_cp.substring(0,25)}} 
-														<div class="left_menu_count">{{value_cp.length}}</div>
+		              				<div class="accordion-header_4" ng-class="{'open' : $pane.isExpanded() }">&nbsp;{{key_cp.substring(0,25)}}  <div class="left_menu_count">{{value_cp.length}}</div>
+														
 													</div>															
-		              			</v-pane-header>	            
-		              			  	
-	              					<v-pane-content expanded="true" ng-show="true">
-	              									              						
-	              						<v-pane id="value_cp[0].MId"  expanded="true" ng-show="true"  ng-repeat="mem in value_cp | orderBy:'MId'">				
-	              									              									              		
-					              			<v-pane-header expanded="true"  ng-show="true"></v-pane-header>	              	
-				              				
-				              					<v-pane-content expanded="false" ng-show="true">			
-				              						
+		              			</v-pane-header>	            		              			  	
+	              					<v-pane-content expanded="true" ng-show="true">	              									              						
+	              						<v-pane id="value_cp[0].MId"  expanded="true" ng-show="true"  ng-repeat="mem in value_cp | orderBy:'MId'">					              									              									              		
+					              			<v-pane-header expanded="true"  ng-show="true"></v-pane-header>	              					              				
+				              					<v-pane-content expanded="false" ng-show="true">							              						
 																		<table class="left_menu_in_1" cellpadding="0" cellspacing="0" ng-click="goMatchMarket('center_market.html',mem.SId,mem.MId)">
 																			<tr>
 																				<td class="left_menu_in_1_l" ng-bind="mem.HT"></td>  

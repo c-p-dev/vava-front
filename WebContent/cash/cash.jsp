@@ -83,7 +83,6 @@
 </head>
 <body> 
 	
-
 <%@ include file="/inc/header.jsp"%>
 
 <div id="contents_wrap" class="cash_tab">
@@ -124,7 +123,13 @@
 		if(tab != ""){
 			$("ul.tabs li a[href='#"+tab+"']").click();
 		}
+
+		$(".conf_modal_close").on("click",function(){
+			$(".conf_modal").popup("hide");
+		});
 	});
+
+
 </script>
 <%@ include file="/inc/footer.jsp"%>
 </div>

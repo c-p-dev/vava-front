@@ -20,7 +20,7 @@
 
 </style>
 <%
-	DecimalFormat dfrmt				= new DecimalFormat("#,###,###,###,###.00");
+	DecimalFormat dfrmt				= new DecimalFormat("#,###,###,###,###");
 	boolean checkSession = false;
 	UserDao user_db			= new UserDao();
 	UserBean user_data		= (UserBean)session.getAttribute("currentSessionUser");
@@ -78,6 +78,26 @@
 						</div>
 						<div class="btn_wrap">
 							<span class="btn3c cs_close">충전하기</span></a>
+						</div>
+					</div>
+				</div>
+
+				<!-- confirm2 -->
+				<div id="conf_modal2" class="bg_mask_pop2 conf_modal">
+					<div class="bg_mask_pop_title">
+						<span class="popup_logo"><img src="/images/popup_logo.png"></span>
+						<span class="popup_close conf_modal_close"><img src="/images/popup_close.png"></span>
+					</div>
+					<div class="bg_mask_pop2_in">
+						<div class="pop_icon_center">
+							<img src="/images/exclamation_icon.png">
+						</div>
+						<div class="pop_text">
+							Are you sure?
+						</div>
+						<div class="btn_wrap">
+							<span class="btn3 conf_modal_close">No</span>
+							<span class="btn3 conf_modal_yes ">Yes</span>
 						</div>
 					</div>
 				</div>
@@ -149,29 +169,38 @@ $(document).ready(function(){
 		// 	var data = $("#pointform").serializeJSON();
 		//     submitPoint(data);
 	 //  	}
-	});	 
+	});
+
+	submitPoint();	 
 });
 
-function submitPoint(data){
-	console.log(data);
-	if(data != null){
-		var p = data.point;
-		data.point = numberParser(p);
-	} 
-	console.log(data);
-	$.ajax({
-		url : '/cash/jsp/switchPoints.jsp',
-		data : data,
-		dataType: 'JSON',
-		method: 'POST',
-	}).done(function(data){ 
+function submitPoint(){
+
+	$("#conf_modal2 .conf_modal_yes").on("click",function(){
+		
+		var data = $("#pointform").serializeJSON();
 		// console.log(data);
-		// console.log(data.money);
-		$('.money_dsp').text(number_format(data.money, 2));
-		$('.point_dsp').text(number_format(data.point, 2));
-		$('.pointavail').text(number_format(data.point, 2));
-		$("#pointform").validate().settings.rules.point.max = data.point;
-		$("#PointSuccesModal").popup("show");
+		if(data != null){
+			var p = data.point;
+			data.point = numberParser(p);
+		} 
+		// console.log(data);
+		$.ajax({
+			url : '/cash/jsp/switchPoints.jsp',
+			data : data,
+			dataType: 'JSON',
+			method: 'POST',
+		}).done(function(data){ 
+			// console.log(data);
+			// console.log(data.money);
+			$('.money_dsp').text(number_format(data.money, 2));
+			$('.point_dsp').text(number_format(data.point, 2));
+			$('.pointavail').text(number_format(data.point, 2));
+			$("#pointform").validate().settings.rules.point.max = data.point;
+			$("#PointSuccesModal").popup("show");
+		});
+		// alert("switch true");
+		$("#conf_modal1").popup("hide")
 	});
 }
 
@@ -197,10 +226,12 @@ $("#pointBtnSbmit").on("click",function(e){
 	e.preventDefault();
 	if($("#pointform").valid()){
 		$("#point").qtip("hide");
-		var data = $("#pointform").serializeJSON();
-	    submitPoint(data);
+		$("#conf_modal2").popup("show");
+	    
 	}
 });
+
+
 
 $('#PointSuccesModal').popup({
   	transition: 'all 0.3s',
