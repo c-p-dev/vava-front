@@ -494,13 +494,8 @@ ul.casino_board_list  + .btn_wrap{
 		var options = {
 		  	valueNames: ['casino_name'],
 		  	listClass: 'casino_board_list',
-		  	page: 6,
-  			pagination: [{
-		      outerWindow: 100,
-		      innerWindow: 100,
-		      left:100,
-		      right:100,
-		    }],
+		  	page: 1000,
+  			
 		};
 
 		var hackerList = new List('contents_wrap', options);

@@ -84,6 +84,13 @@
 <body> 
 	
 <%@ include file="/inc/header.jsp"%>
+<style>
+	.cash_tab .btn3c {
+		cursor: pointer;
+		margin-top: 5px;
+	}
+	
+</style>
 
 <div id="contents_wrap" class="cash_tab">
 	<div class="contents">
