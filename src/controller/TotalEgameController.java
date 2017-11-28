@@ -368,10 +368,12 @@ public class TotalEgameController {
 		else if (4 == game_provider) {
 			sc_ctrl.makeTransaction(money, "deposit");
 			
-			/*	Update database to empty VAVA money of user	*/
-			user_db.setUserMoney(username, 0);
-			
 			game_url_full		= sc_ctrl.getGameUrl(lnk_dsp);
+			
+			/*	Update database to empty VAVA money of user	*/
+			if (!game_url_full.equals("")) {
+				user_db.setUserMoney(username, 0);
+			}
 		}
 		else {
 			game_url_full		= bc_ctrl.launchGame(username, lnk_dsp);

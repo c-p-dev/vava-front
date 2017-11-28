@@ -435,6 +435,7 @@ public class SpinCubeController {
 	public String postToSc(String url, String post_param, String content_type) throws ParseException
 	{
 		/*	Variable Declaration	*/
+		int resp_code		= 0;
 		String responseBody = "";
 		String bearer_auth	= "";
 		
@@ -474,10 +475,18 @@ public class SpinCubeController {
 			output.close();
 			
 			/*	Get SpinCube response		*/
-			InputStream response = connection.getInputStream();
+			resp_code				= connection.getResponseCode();
 			
-			try (Scanner scanner = new Scanner(response)) {
-				responseBody = scanner.useDelimiter("\\A").next();
+			if ((200 == resp_code) || (201 == resp_code)) {
+				InputStream response 	= connection.getInputStream();
+				
+				try (Scanner scanner = new Scanner(response)) {
+					responseBody = scanner.useDelimiter("\\A").next();
+				}
+			}
+			else if (401 == resp_code) {
+				this.getToken();
+				responseBody = this.postToSc(url, post_param, content_type);
 			}
 			
 		}
@@ -487,6 +496,7 @@ public class SpinCubeController {
 		}
 		catch (IOException e) {
 			/*	Auto-generated catch block	*/
+			responseBody = "";
 			e.printStackTrace();
 		}
 		
