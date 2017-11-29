@@ -296,11 +296,12 @@ public class GameDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs 			= null;
 		
-		String  query 			= "SELECT game_provider, lk_game_providers.description AS game_provider_name " + 
+		String  query 			= "SELECT game_provider, lk_game_providers.description AS game_provider_name,lk_game_providers.description_en, lk_game_providers.show_order " + 
 				"FROM game_lst " +
 				"JOIN lk_game_providers on game_lst.game_provider = lk_game_providers.game_provider_id " +
 				"WHERE game_provider != 4 "+
-				"GROUP BY game_provider, lk_game_providers.description" ;
+				"GROUP BY game_provider, lk_game_providers.description, lk_game_providers.show_order ,lk_game_providers.description_en "
+				+ " ORDER BY  lk_game_providers.show_order ASC" ;
 		
 		List<GameBean>	provider_list = new ArrayList<>();
 		

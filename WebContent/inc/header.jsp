@@ -38,6 +38,7 @@
 <!-- top버튼 -->
 <a href="#myAnchor" class="go-top">▲</a>
 <script>
+	console.log("<%=IP%>");
 /*Add class when scroll down*/
 var lgMsg = '<div class="bg_mask_pop_title">'
 	lgMsg += '	<span class="popup_logo"><img src="/images/popup_logo.png"></span>';
@@ -90,7 +91,9 @@ $(window).scroll(function(event){
 
 
 	$(document).ready(function(){
-
+		if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+			window.location = "http://www.vava21.com";
+		}
 		sTime();
 
 
