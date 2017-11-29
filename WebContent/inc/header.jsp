@@ -299,7 +299,7 @@ $(window).scroll(function(event){
 					$("#fade_3").popup("hide");
 					// $("#lgInMdl2").popup("show");
 					 $("#loginModal").html(lgMsg);	
-
+					 $('a.get-vbet-hist').parent().show();
 				});
 
 			}else if(obj.result == 1 ){

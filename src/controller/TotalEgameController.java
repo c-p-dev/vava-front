@@ -3,6 +3,7 @@ package controller;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -30,6 +31,7 @@ import bean.MgResponseStatusBean;
 import bean.MgWithdrawAllBean;
 import bean.ScTransactionBean;
 import bean.UserBean;
+import dao.FinancialMovementDao;
 import dao.MgLiveTransLogDao;
 import dao.UserDao;
 import util.NukeSSLCerts;
@@ -89,6 +91,8 @@ public class TotalEgameController {
 		String url							= api_base+"WithdrawalAll";
 		String json_param					= "";
 		String srv_resp						= "";
+		FinancialMovementDao fin_db			= new FinancialMovementDao();
+		MgWithdrawAllBean trans_data		= new MgWithdrawAllBean();
 		HashMap<String, Object>	teg_param	= new HashMap<String, Object>();
 		
 		/*	Parameters to be passed to TEG	*/
@@ -101,6 +105,10 @@ public class TotalEgameController {
         |	Execute HTTP POST Request to TEG
         |-------------------------------------------------------------------*/
 		srv_resp 	= this.postToTeg(url, json_param);
+		trans_data	= gson.fromJson(srv_resp, MgWithdrawAllBean.class);
+		
+		/*	Add transaction record to database	*/
+		fin_db.addMgTransactionLog(username, trans_data.getResult().getTransactionAmount(), "withdraw");
 		
 		return srv_resp;
 	}
@@ -112,6 +120,7 @@ public class TotalEgameController {
 		String url							= api_base+"deposit";
 		String json_param					= "";
 		String srv_resp						= "";
+		FinancialMovementDao fin_db			= new FinancialMovementDao();
 		HashMap<String, Object>	teg_param	= new HashMap<String, Object>();
 		
 		/*	Parameters to be passed to TEG	*/
@@ -126,6 +135,9 @@ public class TotalEgameController {
         |-------------------------------------------------------------------*/
 		if (0 < money) {
 			srv_resp 	= this.postToTeg(url, json_param);
+			
+			/*	Add transaction record to database	*/
+			fin_db.addMgTransactionLog(username, money, "deposit");
 		}
 		else {
 			srv_resp	= "{Status:{ErrorCode:0}}";
@@ -278,7 +290,7 @@ public class TotalEgameController {
 			money 	= money + withdraw_data.getResult().getTransactionAmount();
 			
 			user_profile.setMoney((int)money);
-			user_db.setUserMoney(username, money);
+			user_db.setUserMoney(username, new BigDecimal(money).setScale(0, BigDecimal.ROUND_HALF_UP).doubleValue());
 		}
 		else {
 			
@@ -432,7 +444,7 @@ public class TotalEgameController {
 			money 			= user_profile.getMoney() + withdraw_data.getResult().getTransactionAmount();
 			
 			user_profile.setMoney((int)money);
-			user_db.setUserMoney(username, money);
+			user_db.setUserMoney(username, new BigDecimal(money).setScale(0, BigDecimal.ROUND_HALF_UP).doubleValue());
 		}
 		
 		return user_profile;
