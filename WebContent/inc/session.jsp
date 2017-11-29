@@ -12,6 +12,7 @@
 	String NICK = "";
 	int UBAL = 0;
 	int UPOINT = 0;
+	String IP = request.getRemoteAddr();
 	
 	if(session.getAttribute("currentSessionUser") != null){
 		UserDao user_db 	=  new UserDao();
@@ -25,6 +26,7 @@
 		NICK = bean.getNick();
 		UBAL = bean.getMoney();
 		UPOINT = bean.getPoint();
+		IP = bean.getIp();
 		
 		//out.print(bean.getNick());  
 	}
