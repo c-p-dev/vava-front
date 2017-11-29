@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <div id="footer_wrap">
 	<div class="f_site_map_wrap">
     	<div class="f_site_map">
@@ -35,23 +36,16 @@
 				</div>
 			</div>
 		</div>
+		
 		<div class="f_site_partner_wrap">
 			<div class="f_site_partner_t">
 				PARTNER
 			</div>
 			<div class="f_site_partner">
-				<ul>
-					<li><img src="/images/partner/cod.png"></li>
-					<li><img src="/images/partner/bc.png"></li>
-					<li><img src="/images/partner/mg.png"></li>
-				</ul>
-				<ul>
-					<li><img src="/images/partner/ICE.png"></li>
-					<li><img src="/images/partner/leap.png"></li>
-					<li><img src="/images/partner/ag.png"></li>
-				</ul>
+				<img src="/images/partner_1.jpg">
 			</div>
 		</div>
+		
 	</div>
     <div class="f_copy_wrap">
 		Gambling can be addictive. Play responsibly.           www.gamblingtherapy.org & www.gamblersanonymous.org<br>

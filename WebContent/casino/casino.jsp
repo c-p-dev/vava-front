@@ -206,36 +206,16 @@ ul.casino_board_list  + .btn_wrap{
 			</div>
 			<ul class="l_tabs" id="game-cat">
 				<li><a href="#l-tab1" class="get-game"  data-val="0">전체</a></li>
-				<%
-					for (int i = 0; i < game_providers.size(); i++) {
-						GameBean providers = game_providers.get(i);
-						int tab = i + 2;
-						
-						String html = "<li><a href=#l-tab"+tab+" class=get-game data-val="+providers.getGame_provider()+">"+providers.getProvider_name()+"</a></li>";
-
-						if(providers.getGame_provider() ==1){
-							
-							html +=("<li><a href='#l-tab3' class='get-manual agtab' data-val='manual'>아시안게임 메뉴얼</a></li>");
-						
-						}else if(providers.getGame_provider() ==2){
-							
-							html +=("<li><a href='#l-tab5' class='get-manual mgtab' data-val='manual2'>마이크로게임 메뉴얼</a></li>");
-						
-						}else if(providers.getGame_provider() ==3){
-							
-							html +=("<li><a href='#l-tab=7' class='get-manual' data-val=''>벳컨 메뉴얼</a></li>");
-						
-						}
-
-						out.print(html);
-
-				%>
-					
-					<!-- <li><a href="#l-tab<%=tab%>" data-val='<%=providers.getGame_provider()%>'><%=providers.getProvider_name()%></a></li> -->
-					
-				<%
-					}
-				%>
+				<!-- asia -->
+				<li><a href="#l-tab3" class="get-game" data-val="2">아시안게임 카지노</a></li>
+				<li><a href='#l-tab3' class='get-manual agtab' data-val='manual'>아시안게임 메뉴얼</a></li>
+				<!-- micro -->
+				<li><a href="#l-tab2" class="get-game" data-val="1">마이크로게임 카지노</a></li>
+				<li><a href='#l-tab5' class='get-manual mgtab' data-val='manual2'>마이크로게임 메뉴얼</a></li>
+				<!-- betcon -->
+				<li><a href="#l-tab4" class="get-game" data-val="3">베컨 카지노</a></li>
+				<li><a href='#l-tab=7' class='get-manual' data-val=''>벳컨 메뉴얼</a></li>
+				
 			</ul>
 			
 
@@ -280,6 +260,7 @@ ul.casino_board_list  + .btn_wrap{
 				var obj = JSON.parse(data);
 				doList(obj,data);
 			});
+			
 		}, 100);
 		
 		$("body").on("click",".casino_board_list li a",function(e) {
