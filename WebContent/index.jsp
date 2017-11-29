@@ -1304,7 +1304,7 @@ Type type2 = new TypeToken<List<DepositListBean>>() {}.getType();
 											<a style="cursor: pointer" ng-click="vM('1',ml.SD,ml.MD)">
 												<div class="main_bet_time">
 													<p class="main_bet_time_icon">
-														<img src="/images/comp_m/112.png">
+														<img src="/images/comp_m/1631.png">
 													</p>
 													<p class="main_bet_time_text">
 														{{ml.MT.substring(0,10)}}<br>{{ml.MT.substring(10,16)}}
@@ -1332,38 +1332,6 @@ Type type2 = new TypeToken<List<DepositListBean>>() {}.getType();
 												type="hidden" name="mid" ng-model="mid"> <input
 												type="hidden" name="tab" ng-model="tab">
 										</form>
-
-										<script type="text/javascript">
-											$(function() {
-												$('#third').carouseller({
-													scrollSpeed : 500,
-													autoScrollDelay : 6000,
-													easing : 'linear'
-												});
-											});
-
-											var videos = [
-													"https://www.youtube.com/embed/SCyNP-eqS0Y?modestbranding=1&autoplay=1&controls=0&vq=hd720",
-													"https://www.youtube.com/embed/TD15l1RWqcI?modestbranding=1&autoplay=1&controls=0&vq=hd720",
-													"https://www.youtube.com/embed/HfEEZDtktUk?modestbranding=1&autoplay=1&controls=0&vq=hd720",
-													"https://www.youtube.com/embed/lCE_7j5quOY?modestbranding=1&autoplay=1&controls=0&vq=hd720",
-													"https://www.youtube.com/embed/Tx15fbNMCns?modestbranding=1&autoplay=1&controls=0&vq=hd720",
-													"https://www.youtube.com/embed/mFIOGpIQtVU?modestbranding=1&autoplay=1&controls=0&vq=hd720", ];
-
-											//console.log("window.onload Video");
-
-											var playerDiv = document
-													.getElementById("random_player");
-											var player = document.createElement("IFRAME");
-											var randomVideoUrl = videos[Math.floor(Math
-													.random()
-													* videos.length)];
-											player.setAttribute('width', '100%');
-											player.setAttribute('height', '100%');
-											player.setAttribute('src', randomVideoUrl);
-											// playerDiv.appendChild(player);
-										</script>
-
 									</div>
 								</div>
 							</div>
