@@ -300,8 +300,8 @@ public class GameDao {
 				"FROM game_lst " +
 				"JOIN lk_game_providers on game_lst.game_provider = lk_game_providers.game_provider_id " +
 				"WHERE game_provider != 4 "+
-				"GROUP BY game_provider, lk_game_providers.description, lk_game_providers.show_order ,lk_game_providers.description_en "
-				+ " ORDER BY  lk_game_providers.show_order ASC" ;
+				"GROUP BY game_provider, lk_game_providers.description, lk_game_providers.show_order ,lk_game_providers.description_en " +
+				"ORDER BY  lk_game_providers.show_order ASC";
 		
 		List<GameBean>	provider_list = new ArrayList<>();
 		
@@ -338,7 +338,7 @@ public class GameDao {
 				"FROM game_lst " +
 				"JOIN lk_game_types ON game_lst.game_type = lk_game_types.game_type_id " +
 				"WHERE game_provider != 4 " +
-				"GROUP BY game_lst.game_type, lk_game_types.description " ;
+				"GROUP BY game_lst.game_type, lk_game_types.description";
 		
 		List<GameBean>	type_list = new ArrayList<>();
 		
@@ -445,14 +445,22 @@ public class GameDao {
 		
 		String  query 			= "SELECT * FROM game_lst WHERE game_type = ? AND game_provider = ? " ;
 		List<GameBean>	game_list = new ArrayList<>();
-		System.out.println("game_type : "+ game_type);
-		System.out.println("game_provider: " + game_provider);
+		
 		try {
 			DBConnector.getInstance();
 			con 				= DBConnector.getConnection();
 			
 			if(game_type == 0 && game_provider == 0){
-				query = "SELECT * FROM game_lst WHERE game_provider != 4 AND game_type != 5 AND game_type != 6 AND game_type != 10 AND game_type != 11";
+				query = "SELECT *"
+						+ " FROM game_lst"
+						+ " JOIN lk_game_providers ON game_provider = game_provider_id" 
+						+ " WHERE game_provider != 4"
+						+ " AND game_type != 5"
+						+ " AND game_type != 6"
+						+ " AND game_type != 10"
+						+ " AND game_type != 11"
+						+ " ORDER BY show_order ASC";
+				
 				pstmt  = con.prepareStatement(query);
 			}
 			else if (game_type != 0 && game_provider == 0){
