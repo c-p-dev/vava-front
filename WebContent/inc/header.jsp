@@ -31,6 +31,26 @@
 		color:#fff;
 	}
 
+	.popup_modal.bg_mask_pop2{
+		
+	    width: min-content!important;
+	    height: 500px!important;
+	}
+
+
+	.popup_modal .bg_mask_pop2_in{
+
+	    width: 100%!important;
+	    padding:0px!important;
+
+	}
+
+	.popup_modal .bg_mask_pop2_in img{
+	    width: 500px!important;
+    	height: 500px!important;
+		
+	}
+
 </style>
 
 
@@ -123,6 +143,7 @@ $(window).scroll(function(event){
 	      	scrolllock: true,
 	      	escape: false,
 	      	blur:false,
+
 	    });	
 
 		$("body").on("submit","#login_header",function(e){
@@ -250,6 +271,7 @@ $(window).scroll(function(event){
 			window.location.replace("/login/jsp/logout_process.jsp");
 		});
 
+	
 		$("#login_header").validate({
 	  		errorClass: 'form1-invalid',
 	    	validClass: 'header-login-valid',
