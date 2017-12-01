@@ -112,7 +112,12 @@ if(request.getParameter("tab") != null && request.getParameter("tab").trim().len
 	
 
 <%@ include file="/inc/header.jsp" %>
-
+<script>
+	$("div.stroke ul li:nth-child(1) a").on("click",function(e){
+		e.preventDefault();
+		window.location.reload();
+	});
+</script>
 <div id="contents_wrap">
 	<div class="game_contents">
 		<table width="100%" valign="top" border="0" cellspacing="0" cellpadding="0">

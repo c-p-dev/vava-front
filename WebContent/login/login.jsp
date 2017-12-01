@@ -86,6 +86,7 @@
 	    		$('.input_warning').hide();
 	    		// location.reload();
 	    		$("#passwd-input").removeClass("password");
+	    		$(".popup_modal").popup("show");
 	    		// alert("closing");
 	    	}
 	    });
@@ -205,10 +206,12 @@
 						toastr.success("Something Went Wrong. Please Try Again.");
 					}
 				}).done(function(data){
-					
-					$("#uhead").html(data);
+					var obj = JSON.parse(data);
+
+					$("#uhead").html(obj.header);
 					$("#fade_3").popup("hide");
 					$("#lgInMdl2").popup("show");
+					createPopup(obj.popup);
 					$('a.get-vbet-hist').parent().show();
 				});
 				// toastr.success('Login Successful');

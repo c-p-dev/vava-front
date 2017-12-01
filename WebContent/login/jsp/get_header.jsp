@@ -20,6 +20,8 @@
 	UserBean sess_data 	=  (UserBean) session.getAttribute("currentSessionUser");
 	UserBean bean 		=  user_db.getUserByUserId(sess_data.getUserid());
 
+	NoticeEventDao ne_dao = new NoticeEventDao();
+	List<NoticeEventBean> ne_bean = ne_dao.getAllPopup();
 	
 	SITEID = String.valueOf(bean.getSiteid());
 	UID = bean.getUserid();		
@@ -179,8 +181,37 @@
 			"	\n" + 
 			"});</script>";
 	
+	
+	String popup = "";
+
+	if(ne_bean.size() > 0){
 		
-	out.println(html);
+		for (int k=0; k < ne_bean.size() ; k++){
+			System.out.println("popup count: " +  k);
+			NoticeEventBean b = (NoticeEventBean) ne_bean.get(k);
+
+			popup += "<div id=\"popup_"+k+" \" class=\"bg_mask_pop2 popup_modal\">\r\n" + 
+					"	<div class=\"bg_mask_pop_title\">\r\n" + 
+					"		<span class=\"popup_logo\"><img src=\"/images/popup_logo.png\"></span>\r\n" + 
+					"		<span class=\"popup_close123 \"><img src=\"/images/popup_close.png\"></span>\r\n" + 
+					"	</div>\r\n" + 
+					"	<div class=\"bg_mask_pop2_in\">\r\n" + 
+					"		<img src=\"http://admin.vava21.com:88/contents/event/10.jpg\">\r\n" + 
+					"	</div>\r\n" + 
+					"</div>";
+			
+		}
+	
+	}
+
+	
+	Gson gson = new Gson();
+	HashMap<String, Object> hsm = new HashMap<String, Object>();
+	
+	
+	hsm.put("header", html);
+	hsm.put("popup", ne_bean);
+	out.println(gson.toJson(hsm).toString());
 
 
 %>

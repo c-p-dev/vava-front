@@ -105,12 +105,20 @@ $(window).scroll(function(event){
 	      	onclose:function(){
 	    		// $("#login_header")[0].reset();
 	    		$('.input_warning').hide();
+	    		$(".popup_modal").popup("show");
 	    		// location.reload();
 	    		// $("#passwd-header-input").removeClass("password");
 	    	}
 	    });
 
 	    $('#logoutModal').popup({
+	      	transition: 'all 0.3s',
+	      	scrolllock: true,
+	      	escape: false,
+	      	blur:false,
+	    });	
+
+	    $('.popup_modal').popup({
 	      	transition: 'all 0.3s',
 	      	scrolllock: true,
 	      	escape: false,
@@ -172,6 +180,8 @@ $(window).scroll(function(event){
 				$(this).removeClass("password");	
 			}
 		});
+
+
 
 
 		toastr.options = {
@@ -276,6 +286,10 @@ $(window).scroll(function(event){
 		  	
 		});
 
+		$("body").on("click",".popup_modal .popup_close",function(e){
+			$(this).parent().parent().popup("hide");
+		});
+
 	});
 
 	function submitLoginHeader(data){
@@ -297,12 +311,13 @@ $(window).scroll(function(event){
 					data : {},
 					method: 'GET',
 				}).done(function(data){
-					// console.log(data);
-					$("#uhead").html(data);
+
+					var obj = JSON.parse(data);
+					$("#uhead").html(obj.header);
+					createPopup(obj.popup);
+					$("#loginModal").html(lgMsg);	
 					$("#fade_3").popup("hide");
-					// $("#lgInMdl2").popup("show");
-					 $("#loginModal").html(lgMsg);	
-					 $('a.get-vbet-hist').parent().show();
+					$('a.get-vbet-hist').parent().show();
 				});
 
 			}else if(obj.result == 1 ){
@@ -354,6 +369,29 @@ $(window).scroll(function(event){
 		});
 	
 		
+	}
+
+	function createPopup(data){
+		console.log(data);
+		var html = "";
+		
+		$.each(data,function(x,y){
+
+			html += '<div id="popup_'+x+'" class="bg_mask_pop2 popup_modal">'
+			html += '	<div class="bg_mask_pop_title">';
+			html += '		<span class="popup_logo"><img src="/images/popup_logo.png"></span>';
+			html += '		<span class="popup_close cMLgIn2"><img src="/images/popup_close.png"></span>';
+			html += '	</div>';
+			html += '	<div class="bg_mask_pop2_in" style="text-align:center;">';
+			html += '		<img src="http://admin.vava21.com:88/contents/popup/'+y.img+'">';
+			html += '	</div>';
+			html += '</div>';
+
+		});
+
+		$(html).insertAfter('#logoutModal');
+
+
 	}
 
 </script>
