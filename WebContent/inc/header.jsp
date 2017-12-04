@@ -33,8 +33,8 @@
 
 	.popup_modal.bg_mask_pop2{
 		
-	    width: min-content!important;
-	    height: 500px!important;
+	    width: 500px!important;
+	    height: 600px!important;
 	}
 
 
@@ -47,7 +47,7 @@
 
 	.popup_modal .bg_mask_pop2_in img{
 	    width: 500px!important;
-    	height: 500px!important;
+    	height: 600px!important;
 		
 	}
 
@@ -119,7 +119,7 @@ $(window).scroll(function(event){
 
 		$('#loginModal').popup({
 	      	transition: 'all 0.3s',
-	      	scrolllock: true,
+	      	// scrolllock: true,
       		escape: false,
       		blur:false,
 	      	onclose:function(){
@@ -133,14 +133,14 @@ $(window).scroll(function(event){
 
 	    $('#logoutModal').popup({
 	      	transition: 'all 0.3s',
-	      	scrolllock: true,
+	      	// scrolllock: true,
 	      	escape: false,
 	      	blur:false,
 	    });	
 
 	    $('.popup_modal').popup({
 	      	transition: 'all 0.3s',
-	      	scrolllock: true,
+	      	// scrolllock: true,
 	      	escape: false,
 	      	blur:false,
 
