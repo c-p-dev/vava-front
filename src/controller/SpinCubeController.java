@@ -229,8 +229,6 @@ public class SpinCubeController {
 		String url				= SC_BASE_URL.concat("agents/").concat(SC_AGENT_UNAME).concat("/Transactions");
 		String post_param		= "";
 		String srv_resp			= "";
-		Double amt_partial		= amount;
-		Double amt_save			= 0.0;
 		String idem_key			= this.player_id.concat(str_lib.getSaltString(9));
 		boolean allow_trans		= false;
 		
@@ -265,61 +263,18 @@ public class SpinCubeController {
         |-------------------------------------------------------------------*/
 		if (true == allow_trans) {
 			
-			/*--------------------------------------------------------------------
-	        |	Perform multiple deposits when amount is greater than 20m
-	        |-------------------------------------------------------------------*/
-			if ((type.equals("deposit")) && (20000000 <= amount)) {
-				
-				/*	Loop until amount is 0	*/
-				int max_itr	= (int)Math.ceil(amount / 20000000.0);
-				
-				if (0 == max_itr) {
-					max_itr	= 1;
-				}
-				
-				for (int cur_itr = 0; max_itr > cur_itr; cur_itr++) {
-					
-					post_param		= "";
-					
-					if (20000000 <= amt_partial) {
-						amt_save	= 20000000.0;
-						post_param	= "amount=".concat(Integer.toString(20000000)).concat("&");
-					}
-					else {
-						amt_save	= amt_partial;
-						post_param	= "amount=".concat(Double.toString(amt_partial)).concat("&");
-					}
-					
-					idem_key			= this.player_id.concat(str_lib.getSaltString(9));
-					
-					//post_param	= post_param.concat("externalTransactionId=4").concat("&");
-					post_param	= post_param.concat("idempotencyKey=").concat(idem_key).concat("&");
-					post_param	= post_param.concat("playerId=").concat(this.player_id).concat("&");
-					post_param	= post_param.concat("type=").concat(type).concat("&");
-					post_param	= post_param.concat("productId=SVS");
-					
-					srv_resp 	= this.postToSc(url, post_param, "application/x-www-form-urlencoded");
-					amt_partial = amt_partial - 20000000.0;
-					
-					if (!srv_resp.equals("")) {
-						fin_db.addScTransactionLog(this.player_id, amt_save.longValue(), type);
-					}
-				}
+			srv_resp 	= this.postToSc(url, post_param, "application/x-www-form-urlencoded");
+			
+			if ((type.equals("withdraw")) && (null == amount)) {
+				amount 		= 0.00;
 			}
-			else {
-				srv_resp 	= this.postToSc(url, post_param, "application/x-www-form-urlencoded");
-				
-				if ((type.equals("withdraw")) && (null == amount)) {
-					amount 		= 0.00;
-				}
-				else if ((type.equals("withdraw")) && (null != amount)) {
-					fin_data	= gson.fromJson(srv_resp, ScTransactionBean.class);
-					amount		= fin_data.getAmount();
-				}
-				
-				if (!srv_resp.equals("")) {
-					fin_db.addScTransactionLog(this.player_id, (new Double(amount)).longValue(), type);
-				}
+			else if ((type.equals("withdraw")) && (null != amount)) {
+				fin_data	= gson.fromJson(srv_resp, ScTransactionBean.class);
+				amount		= fin_data.getAmount();
+			}
+			
+			if (!srv_resp.equals("")) {
+				fin_db.addScTransactionLog(this.player_id, (new Double(amount)).longValue(), type);
 			}
 		}
 		
