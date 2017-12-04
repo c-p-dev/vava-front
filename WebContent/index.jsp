@@ -1304,7 +1304,7 @@ Type type2 = new TypeToken<List<DepositListBean>>() {}.getType();
 											<a style="cursor: pointer" ng-click="vM('1',ml.SD,ml.MD)">
 												<div class="main_bet_time">
 													<p class="main_bet_time_icon">
-														<img src="/images/comp_m/1631.png">
+														<img src="/images/comp_m/538.png">
 													</p>
 													<p class="main_bet_time_text">
 														{{ml.MT.substring(0,10)}}<br>{{ml.MT.substring(10,16)}}
