@@ -62,6 +62,17 @@
 </div>
 
 <script>
+	$('#fade_3').popup({
+      	transition: 'all 0.3s',
+      	// scrolllock: true,
+      	escape: false,
+      	blur:false,
+      	onclose:function(){
+    		$("#login_modal_form")[0].reset();
+    		$('.input_warning').hide();
+    		toastr.clear();
+    	}
+    });	
 	$(document).ready(function () {
 		
 		$("#signinBtn").on("click",function(e){
@@ -78,7 +89,7 @@
 
 		$('#lgInMdl2').popup({
 	      	transition: 'all 0.3s',
-	      	scrolllock: true,
+	      	// scrolllock: true,
 	      	escape: false,
 	      	blur:false,
 	      	onclose:function(){
@@ -124,17 +135,7 @@
 			
 		});
 
-		$('#fade_3').popup({
-	      	transition: 'all 0.3s',
-	      	scrolllock: true,
-	      	escape: false,
-	      	blur:false,
-	      	onclose:function(){
-	    		$("#login_modal_form")[0].reset();
-	    		$('.input_warning').hide();
-	    		toastr.clear();
-	    	}
-	    });	
+		
 
 	    $("#login_modal_form").validate({
 	  		errorClass: 'form1-invalid',

@@ -244,6 +244,14 @@
 
 <script>
 	$(document).ready(function () {
+
+		$('#fade_3').popup({
+	      	transition: 'all 0.3s',
+	      	// scrolllock: true,
+	      	escape: false,
+	      	blur:false,
+	    });
+	    
 		$(".racing_board_list li a").on("click",function(e) {
 				
 			var gm_provdr	= $(this).data('gm-provdr');

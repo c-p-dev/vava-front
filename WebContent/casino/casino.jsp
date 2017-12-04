@@ -263,6 +263,12 @@ ul.casino_board_list  + .btn_wrap{
 	spin += '</div>';
 	$(document).ready(function () {
 
+		$('#fade_3').popup({
+	      	transition: 'all 0.3s',
+	      	// scrolllock: true,
+	      	escape: false,
+	      	blur:false,
+	    });	
 		
 		// $(".casino_board_list li a").on("click",function(e) {
 		$(".casino_right").html(spin);
