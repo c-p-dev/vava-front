@@ -5,7 +5,7 @@
 			<ul>
 				<li>배당변경자동적용</li>
 				<li>
-					<input type="checkbox" id="cb" name="checkboxName" class="checkbox" />
+					<input type="checkbox" id="cb" name="checkboxName" class="checkbox"/>
 					<script>
 						$(document).ready(function(){
 							$(".checkbox").Sswitch({
@@ -20,37 +20,20 @@
 			</ul>
 		</div>
 		
-		<div  ng-show="!betE" style="width:100%; height:40px; line-height:40px; margin:5px 0 1px 0;text-align:center;">
+		<div ng-show="bet.length<1" style="width:100%; height:40px; line-height:40px; margin:0 0 1px 0;text-align:center;">
 			베팅을 원하시면<br>	원하시는 경기의 배당을 선택해 주세요.
 		</div>
-		
-		
-		<div class="slip_tab_wrap" ng-show="betE">
+			
+		<div class="slip_tab_wrap" ng-show="bet.length>0">
 			<ul>
-				
-				<div ng-switch="bet.length">
-					<div ng-switch-when="0">	
-						<li><a href="#"><span class="slip_tab_on">싱글</span></a></li>
-						<li><a href="#"><span class="slip_tab">다폴더</span></a></li>
-					</div>
-					
-					<div ng-switch-when="1">	
-						<li><a href="#"><span class="slip_tab_on">싱글</span></a></li>
-						<li><a href="#"><span class="slip_tab">다폴더</span></a></li>
-					</div>
-					
-					<div ng-switch-default>	 
-						<li><a href="#"><span class="slip_tab">싱글</span></a></li>
-						<li><a href="#"><span class="slip_tab_on">다폴더</span></a></li>
-					</div>
-					
-				</div>
-				
+					<li ng-click="betMode(1)"><a href="#"><span ng-class="{slip_tab_on:betM == 1,slip_tab:betM !=1}">싱글</span></a></li>
+					<li ng-click="betMode(2)"><a href="#"><span ng-class="{slip_tab_on:betM == 2,slip_tab:betM !=2}">다폴더</span></a></li>					
 				<li class="slip_tab_icon"><a href="#" ng-click="delAllBet()"><img src="/images/waste.jpg"></a></li>
 			</ul>
 		</div>
-	
-		<div ng-switch="betA"> <!-- market suspended -->			
+		
+
+		<div ng-switch="betA||betB||betF"> <!-- market suspended -->			
 																																		
 			<div ng-switch-when="true">	
 				
@@ -75,8 +58,8 @@
 							</div>
 							<div class="end_bet_cell_r_1 font_002">{{bet.P}}</div>
 						</div>
-					</div>
-						
+					</div>			
+					
 				</div>
 		
 			</div>
@@ -102,76 +85,55 @@
 							<div class="slip_bet_cell_l">
 								<span class="font_002" ng-bind="bet.ST"></span>
 							</div>
-							<div class="slip_bet_cell_r font_002" ng-bind="bet.P"></div>
+							<div class="slip_bet_cell_r font_002">{{bet.P}}</div>
+						</div>			
+					</div>
+				
+					
+				<div ng-if="betM==1"  class="slip_bet_in">
+					<div class="slip_bet_row">
+						<div class="slip_bet_cell_ll">베팅금액 {{betM}}</div>
+						<div class="slip_bet_cell_cc">
+							<input type="text" class="input_style06" style="text-align:right;" ng-model="bet.Amt" format="number" restrict-to="[0-9]"><!--  restrict-to="[0-9]"-->
+						</div>
+						<div class="slip_bet_cell_rr" ng-click="getMaxBetS(bet.Sd)">
+							<a href="#"><span class="btn10">맥스</span></a>
 						</div>
 					</div>
+				</div>
+			
+				<div ng-if="betM == 1"  class="slip_bet_in">
+				 <div class="slip_bet_row">
+					<div class="slip_bet_cell_ll">예상당첨</div>
+					<div class="slip_bet_cell_cc" style="text-align: right;">
+						<span id="exptAmt" class="font_002">{{(bet.P*bet.Amt)|number:0}}</span>
+					</div>
+					<div class="slip_bet_cell_rr" style="text-align:left">&nbsp;&nbsp;&nbsp;원</div>
+				</div>
+				</div>				
+						
 				</div>
 			</div>
 			
 		</div>
-	
 
-	<!--	
-		<div class="slip_bet_end">
-			<div class="slip_bet_in">
-				<div class="slip_bet_row">
-					<div class="end_bet_cell_l">
-						AC밀란    <span style="color:#43525a"> vs </span>     유벤투스
-					</div>
-					<div class="end_bet_cell_r">
-						<a href="#" class="notify-close-btn"><img src="images/end_close.jpg"></a>
-					</div>
-				</div>
-				<div class="slip_bet_row">
-					<div class="end_bet_cell_l">
-						승무패
-					</div>
-					<div class="end_bet_cell_r">
-						1.23
-					</div>
-				</div>
-				<div class="slip_bet_row">
-					<div class="end_bet_cell_l">
-						<span style="color:#4f3400">유벤투스</span>
-					</div>
-					<div class="end_bet_cell_r">
-						1.23
-					</div>
-				</div>
-			</div>
-			<div class="slip_bet_in">
-				<div class="slip_bet_row">
-					<div class="end_bet_cell_ll">
-						베팅금액 
-					</div>
-					<div class="end_bet_cell_cc">
-						<input class="input_style06">
-					</div>
-					<div class="end_bet_cell_rr">
-						<a href="#"><span class="btn11">맥스</span></a>
-					</div>
-				</div>
-			</div>
-		</div>
-		-->
-		
-		<div class="slip_bet_table_wrap"  ng-show="betE">
 	
-			<div class="bet_table_wrap">
+		<div class="slip_bet_table_wrap" ng-if="bet.length>0">
+	
+			<div ng-if="betM==2" class="bet_table_wrap" ng-show="betE">
 				<div class="bet_table">
 					<div class="bet_table_row">
 						<div class="bet_table_cell_l">배당률</div>
-					<div id="betPrice" class="bet_table_cell_r" ng-bind="gBP()"></div> 
+					<div id="betPrice" class="bet_table_cell_r"><b><font class="font_002">{{gBP()}}</font></b></div> 
 					</div>
 				</div>
 				<div class="bet_table">
 					<div class="bet_table_row">
 						<div class="bet_table_cell_ll">베팅금액</div>
-						<div class="bet_table_cell_cc_1">
-							<!--<input onkeydown="onlyNumber(this)" ng-model="betAmt" class="input_style06" style="text-align: right;">-->
-							 <input onkeyup="inputNumberFormat(this)" ng-model="betAmt" class="input_style06" style="text-align: right;">
+						<div class="bet_table_cell_cc">
+							 <input type="text" class="input_style06" style="text-align: right;" ng-model="betAmt[0]"  format="number" restrict-to="[0-9]">
 						</div>
-						<div class="bet_table_cell_rr">
+						<div class="bet_table_cell_rr" ng-click="getMaxBet()">
 							<a href="#"><span class="btn10">맥스</span></a>
 						</div>
 					</div>
@@ -179,23 +141,13 @@
 				<div class="bet_table">
 					<div class="bet_table_row">
 						<div class="bet_table_cell_l">예상당첨</div>
-						<div class="bet_table_cell_r"><span id="exptAmt" class="font_002">{{ betPrice*rCom(betAmt)|number:2 }}</span> 원</div>
+						<div class="bet_table_cell_r"><span id="exptAmt" class="font_002">{{ (betPrice*betAmt)|number:0 }}</span> 원</div>
 					</div>
 				</div>
 			</div>
-
-	<!--	
-			<table class="bet_table_2" cellpadding="0" cellspacing="0">
-				<tr>
-					<td><img src="images/icon_ck.png"></td>
-				</tr>
-				<tr>
-					<td>베팅금액은 보유머니를 초과할 수 없습니다.</td>
-				</tr>
-			</table>
-  -->
-	 
-			<table class="bet_table_2" cellpadding="0" cellspacing="0"  ng-show="betA">
+	</div>
+		
+			<table id="betA" class="animate-bottom bet_table_2" cellpadding="0" cellspacing="0"  ng-if="betA">
 				<tr>
 					<td><img src="/images/icon_ck.png"></td>
 				</tr>
@@ -206,11 +158,89 @@
 					<td><a href="#"><span class="btn9"  ng-click="conAlert(1)">확인</span></a></td>
 				</tr>
 			</table>
-		
-			<div class="bet_btn_wrap" ng-show="!betA"><a href="#"><span class="bet_btn">베팅하기</span></a></div>
 			
+			<table id="betB" class="animate-bottom bet_table_2" cellpadding="0" cellspacing="0"  ng-if="betB">
+				<tr>
+					<td><img src="/images/icon_ck.png"></td>
+				</tr>
+				<tr>
+					<td>로그인 후에 베팅해 주세요. </td>
+				</tr>
+				<tr>
+					<td><a href="#"><span class="btn9"  ng-click="conAlert(2)">확인</span></a></td>
+				</tr>
+			</table>
 			
-		 </div>
+			<table id="betC" class="animate-bottom bet_table_2" cellpadding="0" cellspacing="0"  ng-if="betC">
+				<tr>
+					<td><img src="/images/icon_ck.png"></td>
+				</tr>
+				<tr>
+					<td>베팅이 완료되었습니다. </td>
+				</tr>
+				<tr>
+					<td><a href="#"><span class="btn9"  ng-click="conAlert(3)">확인</span></a></td>
+				</tr>
+			</table>
+			
+			<table id="betD" class="animate-bottom bet_table_2" cellpadding="0" cellspacing="0"  ng-if="betD">
+				<tr>
+					<td><img src="/images/icon_ck.png"></td>
+				</tr>
+				<tr>
+					<td>베팅 처리중 오류가 발생했습니다.<br> 다시 베팅해 주세요. </td>
+				</tr>
+				<tr>
+					<td><a href="#"><span class="btn9"  ng-click="conAlert(4)">확인</span></a></td>
+				</tr>
+			</table>
+			
+			<table id="betF" class="animate-bottom bet_table_2" cellpadding="0" cellspacing="0"  ng-if="betF">
+				<tr>
+					<td><img src="/images/icon_ck.png"></td>
+				</tr>
+				<tr>
+					<td>잔액이 부족합니다.<br> 다시 베팅해 주세요. </td>
+				</tr>
+				<tr>
+					<td><a href="#"><span class="btn9"  ng-click="conAlert(5)">확인</span></a></td>
+				</tr>
+			</table>
+			
+			<table id="betG" class="animate-bottom bet_table_2" cellpadding="0" cellspacing="0"  ng-if="betG">
+				<tr>
+					<td><img src="/images/icon_ck.png"></td>
+				</tr>
+				<tr>
+					<td>베당률이 변경 되었습니다.<br> 변경된 베당률로  베팅 하시겠습니까? </td>
+				</tr>
+				<tr>
+					<td><a href="#"><span class="btn9"  ng-click="conAlert(6)">예</span></a>
+							<a href="#"><span class="btn9"  ng-click="conAlert(7)">아니요</span></a>
+					</td>
+				</tr>
+			</table>
+			
+			<table id="betH" class="animate-bottom bet_table_2" cellpadding="0" cellspacing="0"  ng-if="betH">
+				<tr>
+					<td><img src="/images/icon_ck.png"></td>
+				</tr>
+				<tr>
+					<td>베팅 최대 금액은<br> 로그인 후에 확인 하실 수 있습니다. </td>
+				</tr>
+				<tr>
+					<td><a href="#"><span class="btn9"  ng-click="conAlert(8)">확인</span></a></td>
+				</tr>
+			</table>
+			<!--
+			<div class="bet_btn_wrap" ng-if="betM==1&&bet.length>0" ng-show="!betA&&!betB&&!betC&&betE&&!betF" ng-click="betProcS()"><a href="#"><span class="bet_btn">베팅하기</span></a></div>
+			<div class="bet_btn_wrap" ng-if="betM!=1&&bet.length>0" ng-show="!betA&&!betB&&!betC&&betE&&!betF" ng-click="betProcM()"><a href="#"><span class="bet_btn">베팅하기</span></a></div>
+			-->
+			<div class="bet_btn_wrap" ng-if="betM==1&&bet.length>0" ng-show="betClick" ng-click="betProcS()"><a href="#"><span class="bet_btn">베팅하기</span></a></div>
+			<div class="bet_btn_wrap" ng-if="betM!=1&&bet.length>0" ng-show="betClick" ng-click="betProcM()"><a href="#"><span class="bet_btn">베팅하기</span></a></div>
+			
+			</div>
+
 		<!--
 		<div class="bet_banner_wrap">
 			배너

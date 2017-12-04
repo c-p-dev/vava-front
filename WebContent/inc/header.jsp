@@ -539,8 +539,8 @@ $(window).scroll(function(event){
         <div class="nav_wrap">
 			<div class="stroke">
 				<ul>
-					<li><a href="/sport/livematch.jsp">실시간</a></li>
-					<li><a href="/sport/prematch.jsp">스포츠</a></li>
+					<li><a href="/sport/livematch.jsp?m=<%=System.currentTimeMillis()%>">실시간</a></li>
+					<li><a href="/sport/prematch.jsp?p=<%=System.currentTimeMillis()%>">스포츠</a></li>
 					<li><a href="/virtual/vgaming.jsp">가상게임</a></li>
 					<li><a href="/casino/casino.jsp">카지노</a></li>
 					<li><a href="/minigame/list.jsp">미니게임</a></li>
@@ -586,16 +586,15 @@ $(window).scroll(function(event){
 	</div>
 	<div class="bg_mask_pop2_in">
 		<div class="pop_icon_center">
-			<img src="/images/exclamation_icon.png">
+			<img src="/images/check_icon.png">
 		</div>
 		<div class="pop_text">
-			로그인 성공!<br>
-			IBET25에 오신것을 환영합니다. <br>
-			IBET25에서 다양한 베팅의 세계를 마음껏 경험하세요!<br>
+			IBET25를 찾아 주셔서 감사합니다.<br>
+			로그아웃 하시겠습니까?<br>			
 		</div>
 		<div class="btn_wrap">
-			<a href="" class="closeLogoutBtn"><span class="btn3">취소</span></a>
 			<a href="/login/jsp/logout_process.jsp"><span class="btn3 logOutBn ">확인</span></a>
+			<a href="" class="closeLogoutBtn"><span class="btn3">취소</span></a>			
 		</div>
 	</div>
 </div>

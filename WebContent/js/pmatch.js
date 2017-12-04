@@ -25,7 +25,10 @@ var s=[
 		{"PID":20,"u":"jsp/getMarketCategory.jsp"},
 		{"PID":21,"u":"jsp/getSearchMatch.jsp"},
 		{"PID":22,"u":"jsp/getTodayMatchInfo.jsp"},
-		{"PID":23,"u":"jsp/getMatchInfobySport.jsp"}
+		{"PID":23,"u":"jsp/getMatchInfobySport.jsp"},
+		{"PID":24,"u":"jsp/getMaxBetAmt.jsp"},
+		{"PID":25,"u":"jsp/setMultiBet.jsp"},
+		{"PID":26,"u":"jsp/setSingleBet.jsp"}
 		]
   		
 mainAngular.factory('wss', function($window) {
@@ -111,6 +114,45 @@ mainAngular.filter('sf',function(){
         }
     }
 }]);
+
+
+mainAngular.directive('restrictTo', function() {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attrs) {
+            var re = RegExp(attrs.restrictTo);
+            var exclude = /Backspace|Enter|Tab|Delete|Del|ArrowUp|Up|ArrowDown|Down|ArrowLeft|Left|ArrowRight|Right/;
+
+            element[0].addEventListener('keydown', function(event) {
+                if (!exclude.test(event.key) && !re.test(event.key)) {
+                    event.preventDefault();
+                }
+            });
+        }
+    }
+});
+
+mainAngular.directive('format', ['$filter', function ($filter) {
+    return {
+        require: '?ngModel',
+        link: function (scope, elem, attrs, ctrl) {
+            if (!ctrl) return;
+
+
+            ctrl.$formatters.unshift(function (a) {
+                return $filter(attrs.format)(ctrl.$modelValue)
+            });
+
+
+            ctrl.$parsers.unshift(function (viewValue) {
+                var plainNumber = viewValue.replace(/[^\d|\-+|\.+]/g, '');
+                elem.val($filter(attrs.format)(plainNumber));
+                return plainNumber;
+            });
+        }
+    };
+}]);
+
      
 mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, wss) {		
 	wss.subscribe(function( message) {		
@@ -159,11 +201,12 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 	  $scope.betA = false;
 	  $scope.betE = false;
 	  $scope.betPrice = 1;
-		$scope.betAmt = 100;	
+	  $scope.betAmt = [];	
+		$scope.betAmt[0] = "1000";
 	  $scope.liveTop = [];		
 		$scope.PM = [];		
 		$scope.PMk = [];
-		$scope.PMkC = []; 
+		//$scope.PMkC = []; 
 		$scope.CID = [];
 		$scope.LS = [];
 		$scope.LMK = [];	
@@ -202,6 +245,19 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 		$scope.date6 = moment().add(6, 'days').utcOffset('+0800').format('YYYY-MM-DD');
 		
 		$scope.tabDt = $scope.date0;
+		$scope.betM = "1"; //bet-mode
+		
+		$scope.betClick = false;
+		$scope.betConf = false;
+		
+		$scope.betB = false;
+		$scope.betC = false;
+		$scope.betD = false;
+		$scope.betF = false;
+		$scope.betG = false;
+		$scope.betH = false;
+		$scope.paneIdx = -1;
+		
 
 		$scope.savedFavM = JSON.parse(localStorage.getItem('SFM'));
 		
@@ -214,8 +270,12 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 		//$scope.savedFavM = JSON.parse(chrome.storage.local.getItem('SFM'));
     var mode = "PreMatch"; 
     $scope.pm_mode = "t";
+    $scope.parseFloat = parseFloat;
+    
+    $scope.ISLG = checkSession;
+	  $scope.ubal = UBAL;
+	  
 	    
-    			
 	 $scope.goLiveMatch = function (left,center) {	  	
 	  	loadLiveMatchInit();
 	  	preMatchCnt();  	
@@ -307,6 +367,7 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 	  	
 	  	//console.log("$scope.mTyId:"+$scope.mTyId);
 	  	
+	  	
 	  	$scope.Fav_mode = false;
 	    $scope.centerTab = tab;
 	    $scope.innerTab = [];
@@ -316,9 +377,11 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 	    $scope.preAT = at;  	    
 	    if($scope.tabMId !== mid){
 	    	$scope.getMarketbyMatchId($scope.toggleMId);
-	    	$scope.tabMId = mid;     	
+	    	$scope.tabMId = mid; 
+	    	$scope.paneIdx = idx;    	
 	    } else{
 	    	$scope.tabMId = "0"; 
+	    	$scope.paneIdx = -1;
 	    }
 	    $scope.MK = [];    
 	    $scope.tabMkId = "0";  
@@ -367,9 +430,15 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 		return r;
 	};
 	 
-	  $scope.addBet  = function (sd,mkid,sn,st,ht,at,p,bp) { 	
-
+	  $scope.addBet  = function (sd,mkid,sn,st,ht,at,p,bp,mid) { 	
+			
+			if($scope.betA||$scope.betB||$scope.betC||$scope.betD||$scope.betF||$scope.betG||$scope.betH){
+				return
+			}
+			
 			$scope.betE = true;  	
+			$scope.betClick = true;
+			
 	  	for(var i = $scope.bet.length - 1; i >= 0; i--){  								
 										
 					if($scope.bet[i].Sd == sd){
@@ -377,28 +446,38 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 						return;
 					};
 					
-					if($scope.bet[i].Mkid == mkid){
+					if($scope.bet[i].MId == mid){
 						$scope.betA = true;
+						$scope.betClick = false;
 						return;
 					};
 
 			};		
 			
 	  	$scope.bet.push({
+	  		MId:mid,
 				Sd:sd,
 				Mkid:mkid,
 	   		Sn:sn,
 	   		ST:st,
 	   		HT:ht,
 	   		AT:at,
-	   		P:p,
-	   		BP:bp,
+	   		P:$filter('number')(p, 2),
+	   		BP:$filter('number')(bp, 2),
+	   		Amt:1000
 			});		
+			
+			if($scope.bet.length<2)
+				$scope.betM ="1";
+				
+			if($scope.bet.length>1)
+				$scope.betM ="2";
+				
 		var element =  document.getElementById("betPrice");
 		if(element) element.focus();          
 	 };
  
-	 $scope.setBet  = function (sd,mkid,sn,st,ht,at,p,bp) { 	
+	 $scope.setBet  = function (sd,mkid,sn,st,ht,at,p,bp,mid) { 	
 	  	$scope.betE = true;  	
 	  	for(var i = $scope.bet.length - 1; i >= 0; i--){  									
 				if($scope.bet[i].Mkid == mkid){
@@ -407,14 +486,16 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 				};
 			};		
 	  	$scope.bet.push({
+	  		MId:mid,
 	  		Sd:sd,
 				Mkid:mkid,
 	   		Sn:sn,
 	   		ST:st,
 	   		HT:ht,
 	   		AT:at,
-	   		P:p,
-	   		BP:bp
+	   		P:$filter('number')(p, 2),
+	   		BP:$filter('number')(bp, 2),
+	   		Amt:1000
 			});		
 		var element =  document.getElementById("betPrice");
 		if(element) element.focus();          
@@ -442,10 +523,67 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 			$scope.betA = false;
 	 };
  	 		
-	 $scope.conAlert  = function (alert) { 	  	
-	  if(alert == "1") $scope.betA = false; 
-	 	var element =  document.getElementById("betPrice");
-		if(element) element.focus();
+	 $scope.conAlert  = function (alert) { 	  
+	 	
+	 	//document.getElementById("betA").style="display:none;"
+	 		
+	  if(alert == "1"){
+	  	document.getElementById("betA").style="display:none;"
+	  	 $scope.betA = false; 	 
+	  	 $scope.betClick = true; 	 
+	  	}
+	  if(alert == "2") {
+	  	document.getElementById("betB").style="display:none;"
+	  	$scope.betB = false; 
+	  	$scope.betClick = true; 
+	  }
+	  
+	  if(alert == "3") {
+	  	document.getElementById("betC").style="display:none;"
+	  	$scope.betC = false; 	 
+	  	//$scope.getHeader(); 	
+	  }
+	  
+	  if(alert == "4") {
+	  	document.getElementById("betD").style="display:none;"
+	  	$scope.betD = false; 
+	  	$scope.betE = true; 
+	  	 $scope.betClick = true; 
+	  }
+	  
+	  if(alert == "5") {
+	  	document.getElementById("betF").style="display:none;"
+	  	$scope.betF = false; 
+	  	 $scope.betClick = true; 
+	  }
+	  
+	  if(alert == "6") {
+	  	document.getElementById("betG").style="display:none;"
+	  	$scope.betG = false; 
+	  	
+	  	$scope.betConf = true;
+	  	console.log("$scope.betM:" + $scope.betM);
+	  	
+	  	if($scope.betM =="2")
+	  		$scope.betProcM();
+	  	
+	  	else if ($scope.betM =="1")
+	  		$scope.betProcS();	  		
+	  }
+	  
+	  if(alert == "7") {
+	  	document.getElementById("betG").style="display:none;"
+	  	$scope.betG = false; 
+	  	$scope.betClick = true; 	 
+	  }
+	  
+	  if(alert == "8") {
+	  	document.getElementById("betH").style="display:none;"
+	  	$scope.betH = false; 
+	  }
+	  
+	 	//var element =  document.getElementById("betPrice");
+		//if(element) element.focus();
 	 };
 
    $scope.getMaketbyCid  = function (left,center,cid,sid) { 	  
@@ -670,19 +808,27 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 				};		
 											
 				if(mResult !== undefined && mResult !== null && mResult.length > 0){				
-					var w1Price, w2Price, xPrice  ="-";			
-					var w1SelId, xSelId, w2SelId ="";	
+					//var w1Price, w2Price, xPrice  ="-";			
+					//var w1SelId, xSelId, w2SelId ="";	
 					
+					var w1Price="0"; 
+					var w2Price="0";
+					var xPrice="0";
+					var w1SelId="-1";
+					var xSelId="-1";
+					var w2SelId="-1";	
+							
 					for(var i = mSelect.length - 1; i >= 0; i--){
 						if(mSelect[i].Nm == 'W1') {
 							w1SelId = mSelect[i].Id ;
 							//w1Price = mSelect[i].P ;			
 							w1Price = $filter('number')(mSelect[i].P, 2);
-									
+							
 						} else if(mSelect[i].Nm == 'X') {
 							xSelId = mSelect[i].Id ;
 							//xPrice = mSelect[i].P ;					
 							xPrice = $filter('number')(mSelect[i].P, 2);
+							
 							
 						} else if(mSelect[i].Nm == 'W2') {
 							w2SelId = mSelect[i].Id ;
@@ -1251,9 +1397,16 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 					}
 								
 				if(data[0].Re !== undefined && data[0].Re !== null && data[0].Re.length > 0){					
-					var w1Price, w2Price, xPrice="-";					
-					var w1SelId, xSelId, w2SelId ="";			
+					//var w1Price, w2Price, xPrice="-";					
+					//var w1SelId, xSelId, w2SelId ="";			
 			    
+			    var w1Price="0"; 
+					var w2Price="0";
+					var xPrice="0";
+					var w1SelId="-1";
+					var xSelId="-1";
+					var w2SelId="-1";	
+							
 			    for(var i = data[0].Se.length - 1; i >= 0; i--){						
 						if(data[0].Se[i].Nm=='W1') {
 							w1SelId = data[0].Se[i].Id ;
@@ -1310,9 +1463,12 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 			    	HTS:"0",
 			    	ATS:"0",
 			    	//Market : obj.Market,
-			    	MkId:data[0].Re[0].Id, 
-			    	Sus:data[0].Re[0].Sus, 
-			    	Vis:data[0].Re[0].Vis,
+			    	//MkId:data[0].Re[0].Id, 
+			    	//Sus:data[0].Re[0].Sus, 
+			    	//Vis:data[0].Re[0].Vis,
+			    	MkId:(data[0].Re[0].Id == undefined) ? "" : data[0].Re[0].Id,
+			    	Sus:(data[0].Re[0].Sus == undefined) ? "" : data[0].Re[0].Sus,
+			    	Vis:(data[0].Re[0].Vis == undefined) ? "" : data[0].Re[0].Vis,	
 			    	Cur:"", //(data[0].Stat[0].CurrentMinute == undefined) ? "" : data[0].Stat[0].CurrentMinute, //mStat[0].CurrentMinute,
 			    	Rem:"", //(data[0].Stat[0].RemainingTime == undefined) ? "" : data[0].Stat[0].RemainingTime, //mStat[0].RemainingTime,  
 			    	W1SD:w1SelId,
@@ -1354,23 +1510,32 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 				headers: {'Content-Type': 'application/json; charset=utf-8'} 
 		}).success(function(data, status, headers, config) {	
 							
-			$scope.toPMkC = [];
+			//$scope.toPMkC = [];
 			$scope.toPMk = [];
 			//$scope.tabCId = cid;
 			
 			console.log(data);
 			
 
-			if(data[0].Mk !== null &&  data[0].Mk !== undefined && data[0].Mk.length > 0){					
-				for (var j = 0; j < data[0].Mk.length ; j++) {						
-					$scope.toPMkC.push(data[0].Mk[j]);							
-				}
-			};		
+			//if(data[0].Mk !== null &&  data[0].Mk !== undefined && data[0].Mk.length > 0){					
+			//	for (var j = 0; j < data[0].Mk.length ; j++) {						
+			//		$scope.toPMkC.push(data[0].Mk[j]);							
+			//	}
+			//};		
+			
 			if(data[0].Mt !== null &&  data[0].Mt !== undefined && data[0].Mt.length > 0){
 				
 				for (var j = 0; j < data[0].Mt.length ; j++) {										
-					var w1Price, w2Price, xPrice ="-";
-					var w1SelId, xSelId, w2SelId ="";										
+					//var w1Price, w2Price, xPrice ="-";
+					//var w1SelId, xSelId, w2SelId ="";										
+					
+					var w1Price="0"; 
+					var w2Price="0";
+					var xPrice="0";
+					var w1SelId="-1";
+					var xSelId="-1";
+					var w2SelId="-1";	
+							
 					var mMatchResult = data[0].Re.filter(function (el) { return el.MId == data[0].Mt[j].Id; });	
 															
 					if(mMatchResult !== null && mMatchResult !== undefined && mMatchResult.length > 0 ){
@@ -1458,6 +1623,7 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 	  	document.getElementById("clive2").style.display  = "block";
 	  	document.getElementById("spin_clive2").style.display = "none";
 
+	  	console.log($scope.toPMk);
 	  	
 	  
 			}).error(function(data, status, headers, config) {
@@ -1484,24 +1650,32 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 				headers: {'Content-Type': 'application/json; charset=utf-8'} 
 		}).success(function(data, status, headers, config) {	
 							
-			$scope.PMkC = [];
+			//$scope.PMkC = [];
 			$scope.PMk = [];
 			$scope.tabCId = "-2";
 			
 			console.log(data);
 			
 
-			if(data[0].Mk !== null &&  data[0].Mk !== undefined && data[0].Mk.length > 0){					
-				for (var j = 0; j < data[0].Mk.length ; j++) {						
-					$scope.PMkC.push(data[0].Mk[j]);							
-				}
-			};
+		//	if(data[0].Mk !== null &&  data[0].Mk !== undefined && data[0].Mk.length > 0){					
+		//		for (var j = 0; j < data[0].Mk.length ; j++) {						
+		//			$scope.PMkC.push(data[0].Mk[j]);							
+		//		}
+		//	};
 					
 			if(data[0].Mt !== null &&  data[0].Mt !== undefined && data[0].Mt.length > 0){
 				
 				for (var j = 0; j < data[0].Mt.length ; j++) {										
-					var w1Price, w2Price, xPrice ="-";
-					var w1SelId, xSelId, w2SelId ="";										
+					//var w1Price, w2Price, xPrice ="-";
+					//var w1SelId, xSelId, w2SelId ="";										
+					
+					var w1Price="0"; 
+					var w2Price="0";
+					var xPrice="0";
+					var w1SelId="-1";
+					var xSelId="-1";
+					var w2SelId="-1";	
+							
 					var mMatchResult = data[0].Re.filter(function (el) { return el.MId == data[0].Mt[j].Id; });	
 															
 					if(mMatchResult !== null && mMatchResult !== undefined && mMatchResult.length > 0 ){
@@ -1617,20 +1791,28 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 				headers: {'Content-Type': 'application/json; charset=utf-8'} 
 		}).success(function(data, status, headers, config) {					
 			
-			$scope.PMkC = [];
+			//$scope.PMkC = [];
 			$scope.PMk = [];
 			$scope.tabCId = cid;
 
-			if(data[0].Mk !== null &&  data[0].Mk !== undefined && data[0].Mk.length > 0){					
-				for (var j = 0; j < data[0].Mk.length ; j++) {						
-					$scope.PMkC.push(data[0].Mk[j]);							
-				}
-			};		
+			//if(data[0].Mk !== null &&  data[0].Mk !== undefined && data[0].Mk.length > 0){					
+			//	for (var j = 0; j < data[0].Mk.length ; j++) {						
+			//		$scope.PMkC.push(data[0].Mk[j]);							
+			//	}
+			//};		
 			if(data[0].Mt !== null &&  data[0].Mt !== undefined && data[0].Mt.length > 0){
 				
 				for (var j = 0; j < data[0].Mt.length ; j++) {										
-					var w1Price, w2Price, xPrice ="-";
-					var w1SelId, xSelId, w2SelId ="";										
+					//var W1Price, w2Price, xPrice ="-";
+					//var w1SelId, xSelId, w2SelId ="";		
+													
+					var w1Price="0"; 
+					var w2Price="0";
+					var xPrice="0";
+					var w1SelId="-1";
+					var xSelId="-1";
+					var w2SelId="-1";	
+					
 					var mMatchResult = data[0].Re.filter(function (el) { return el.MId == data[0].Mt[j].Id; });	
 															
 					if(mMatchResult !== null && mMatchResult !== undefined && mMatchResult.length > 0 ){
@@ -1743,8 +1925,8 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 		$scope.PM = $filter('omit')($scope.PM,'MId ==' + mid);  // delete ID					
 		$scope.PMk = $filter('omit')($scope.PMk,'MId ==' + mid);  // delete ID			
 		$scope.toPMk = $filter('omit')($scope.toPMk,'MId ==' + mid);  // delete ID			
-		$scope.PMkC = $filter('omit')($scope.PMkC,'MId ==' + mid);  // delete ID			
-		$scope.toPMkC = $filter('omit')($scope.toPMkC,'MId ==' + mid);  // delete ID	
+		//$scope.PMkC = $filter('omit')($scope.PMkC,'MId ==' + mid);  // delete ID			
+		//$scope.toPMkC = $filter('omit')($scope.toPMkC,'MId ==' + mid);  // delete ID	
 		//check favorite match and bet match
 	}
 	
@@ -1791,8 +1973,15 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 			 		var lm = $scope.LMK[c];	
 			 				 		
 				 	if(lm.MkId == obj.Id){					 		
-				 		var w1Price, w2Price, xPrice ="-";
-						var w1SelId, xSelId, w2SelId  ="";
+				 		//var w1Price, w2Price, xPrice ="-";
+						//var w1SelId, xSelId, w2SelId  ="";
+							
+							var w1Price="0"; 
+							var w2Price="0";
+							var xPrice="0";
+							var w1SelId="-1";
+							var xSelId="-1";
+							var w2SelId="-1";	
 										
 		    		for (var j = 0; j < obj.Selections.length; j++) {
 							
@@ -1812,6 +2001,12 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 								w2Price = $filter('number')(obj.Selections[j].Price, 2);
 							}
 						};
+						
+						console.log("w1Price : " + w1Price);
+						console.log("xPrice : " + xPrice);
+						console.log("w2Price : " + w2Price);
+						
+						
 	      									
 						if(w1Price != lm.W1P || xPrice != lm.XP || w2Price != lm.W2P ||  lm.Sus != obj.IsSuspended){							
 							$scope.LMK = $filter('omit')($scope.LMK,'MkId ==' + obj.Id);  								
@@ -1851,6 +2046,7 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 			
 			if(mode == "PreMatch" ){	
 				
+				
 				if($scope.pm_mode == "p" ){	
 
 					for (var c = 0; c < $scope.PMk.length; c++) {		
@@ -1859,12 +2055,19 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 				 				 		
 					 	if(pm.MkId == obj.Id){	
 					 		
-					 		console.log("pre-match market:" + obj.Id);
-					 		console.log("$scope.pm_mode:" + $scope.pm_mode);
+					 		//console.log("pre-match market:" + obj.Id);
+					 		//console.log("$scope.pm_mode:" + $scope.pm_mode);
 					 						 		
-					 		var w1Price, w2Price, xPrice ="-";
-							var w1SelId, xSelId, w2SelId  ="";
-											
+					 		//var w1Price, w2Price, xPrice ="-";
+							//var w1SelId, xSelId, w2SelId  ="";
+							
+							var w1Price="0"; 
+							var w2Price="0";
+							var xPrice="0";
+							var w1SelId="-1";
+							var xSelId="-1";
+							var w2SelId="-1";	
+									
 			    		for (var j = 0; j < obj.Selections.length; j++) {
 								
 				    		if(obj.Selections[j].Name == 'W1') {
@@ -1935,11 +2138,18 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 				 				 		
 					 	if(topm.MkId == obj.Id){					 	
 					 			
-					 		console.log("pre-match market:" + obj.Id);
-					 		console.log("$scope.pm_mode:" + $scope.pm_mode);
+					 		//console.log("pre-match market:" + obj.Id);
+					 		//console.log("$scope.pm_mode:" + $scope.pm_mode);
 					 		
-					 		var w1Price, w2Price, xPrice ="-";
-							var w1SelId, xSelId, w2SelId  ="";
+					 		//var w1Price, w2Price, xPrice ="-";
+							//var w1SelId, xSelId, w2SelId  ="";
+							
+							var w1Price="0"; 
+							var w2Price="0";
+							var xPrice="0";
+							var w1SelId="-1";
+							var xSelId="-1";
+							var w2SelId="-1";	
 											
 			    		for (var j = 0; j < obj.Selections.length; j++) {
 								
@@ -1996,7 +2206,7 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 					      	W2P:w2Price,
 				  			});
 				  			
-				  			console.log("push: 'MkId =='" + obj.Id);
+				  			//console.log("push: 'MkId =='" + obj.Id);
 				  			
 					  	};				  						 
 						};						
@@ -2019,13 +2229,18 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 			    			for (var n = 0; n < mk.Se.length; n++) {						    				    				
 			    				if(obj.Selections[j].Id == mk.Se[n].Id) {			    					
 					    			sel_tmp.push({
-												BP:mk.Se[n].BP,
+												//BP:mk.Se[n].BP,
+											 	BP:$filter('number')(mk.Se[n].BP, 2),
 												Id:obj.Selections[j].Id,
 												MkId:mk.Se[n].MkId,
 												Nm:mk.Se[n].Nm,
 												Or:obj.Selections[j].Order,
-												P:obj.Selections[j].Price,													
-										});										
+												//P:obj.Selections[j].Price,	
+												P:$filter('number')(obj.Selections[j].Price, 2)												
+										});		
+										//console.log("mk.Se[n].BP:"+mk.Se[n].BP);
+										//console.log("$filter('number')(mk.Se[n].BP, 2):"+$filter('number')(mk.Se[n].BP, 2));
+																		
 									};
 								};
 							};
@@ -2556,7 +2771,7 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 		for(var h = $scope.bet.length - 1;h >= 0; h--){	
 			tBetP = tBetP * $scope.bet[h].P;
 		}
-			$scope.betPrice = tBetP;	
+			$scope.betPrice = $filter('number')(tBetP, 2);
 			return $scope.betPrice;
 	};
 
@@ -2833,6 +3048,258 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 	//return today;
 }
 
+
+
+ $scope.getMaxBet = function() {			
+ 	
+ 	//var selids = $scope.bet.filter(function (el) { return el.Sd});	
+ 	var selids = $scope.bet.map(function(elem) { return elem.Sd ;})
+ 	console.log(selids);
+ 	
+ 	if(!$scope.ISLG){
+		$scope.betH = true;
+		$scope.betClick = false;
+		return
+	}
+		
+		 $http({
+				method: 'POST', 
+				url: s[24].u,  
+				params: {'sel':selids},
+				headers: {'Content-Type': 'application/json; charset=utf-8'} 
+			}).success(function(data, status, headers, config) {	
+			
+			if(data) {		
+			
+				$scope.betAmt[0] = data.trim();
+				console.log($scope.betAmt[0]);
+			}
+			
+				data=null;
+			}).error(function(data, status, headers, config) {
+				console.log(status);
+				data=null;
+			});
+	
+ };
+ 
+ $scope.getMaxBetS = function(sel) {			
+ 	
+ 	//var selids = $scope.bet.filter(function (el) { return el.Sd});	
+ 	//var selids = $scope.bet.map(function(elem) { return elem.Sd ;})
+ 	console.log(sel);
+ 	
+ 	if(!$scope.ISLG){
+		$scope.betH = true;
+		$scope.betClick = false;
+		return
+	}
+	
+ 	
+		 $http({
+				method: 'POST', 
+				url: s[24].u,  
+				params: {'sel':sel},
+				headers: {'Content-Type': 'application/json; charset=utf-8'} 
+			}).success(function(data, status, headers, config) {	
+			
+			if(data) {		
+			console.log("data:"+data);
+			 angular.forEach($scope.bet, function(b,i) {
+  									 
+					if (b.Sd == sel){					  			
+		  			$scope.bet[i].Amt = data.trim();					  							  		
+	  			};
+	  		});
+			
+			console.log(data);
+			}
+			
+			data=null;
+			}).error(function(data, status, headers, config) {
+				console.log(status);
+				data=null;
+			});
+	
+ };
+ 
+$scope.betMode = function(m) {		
+	$scope.betM = m
+};
+
+
+$scope.betProcM = function() {		
+	
+	//console.log("$scope.ISLG:"+$scope.ISLG);
+	
+	if(!$scope.ISLG){
+		$scope.betB = true;
+		$scope.betClick = false;
+		return
+	}
+	
+	var chbet = 0;
+	for(var i = $scope.bet.length - 1; i >= 0; i--){  
+		//tamt += parseInt($scope.bet[i].Amt);		 
+		 if($scope.bet[i].P != $scope.bet[i].BP)
+		 	chbet = 1;
+	};		
+	
+	if(parseInt($scope.betAmt[0]) > $scope.ubal){
+		$scope.betF = true;
+		$scope.betClick = false;
+		return;
+	}
+	
+	if(!document.getElementById("cb").checked && chbet>0 && !$scope.betConf){
+		$scope.betG = true;
+		$scope.betClick = false;
+		return;
+	}
+	
+	$scope.betConf = false;
+	
+	var selids = $scope.bet.map(function(elem) { return elem.Sd ;})
+	
+	 $http({
+		method: 'POST', 
+		url: s[25].u,  
+		params: {'sel':selids,'amt':$scope.betAmt[0]},
+		headers: {'Content-Type': 'application/json; charset=utf-8'} 
+	}).success(function(data, status, headers, config) {	
+	
+	if(data) {			
+			console.log(data.trim());
+			
+		if(data.trim() =="1"){			
+			//console.log("OK:"+data);
+			$scope.getHeader(); 	
+			$scope.bet = [];
+	  	$scope.betC = true; 
+	  	$scope.betE = false;
+	  	
+	  	
+	  } else {
+	  	$scope.betD = true; 
+	  	$scope.betE = false;
+	  }
+	}	
+		
+	data=null;
+	}).error(function(data, status, headers, config) {
+		console.log(status);
+		data=null;
+	});
+			
+ 	//console.log(selids);
+ 	
+};
+
+
+$scope.betProcS = function() {		
+	//$scope.betM = m
+	
+	console.log("$scope.ISLG:"+$scope.ISLG);
+	
+	if(!$scope.ISLG){
+		$scope.betB = true;
+		$scope.betClick = false;
+		return
+	}
+	
+	var tamt = 0;	
+	var chbet = 0;
+	
+	for(var i = $scope.bet.length - 1; i >= 0; i--){  
+		tamt += parseInt($scope.bet[i].Amt);
+		 
+		 if($scope.bet[i].P != $scope.bet[i].BP)
+		 	chbet = 1;
+	};	
+	
+	console.log("tamt:"+tamt);
+	console.log("chbet:"+chbet);
+		
+	if(tamt > $scope.ubal){
+		$scope.betF = true;
+		$scope.betClick = false;
+		return
+	}
+	
+	console.log("$scope.betConf:"+$scope.betConf);
+	console.log("$scope.betG:"+$scope.betG);
+	
+	if(!document.getElementById("cb").checked && chbet>0 && !$scope.betConf){
+		$scope.betG = true;
+		$scope.betClick = false;
+		return
+	}
+	
+	$scope.betConf = false;
+	
+	//var tAmt = $scope.bet.map(function(elem) { return elem.Amt ;})	
+	//console.log("tAmt:"+tAmt);
+	
+	var selids = $scope.bet.map(function(elem) { return elem.Sd ;})
+	var selamts = $scope.bet.map(function(elem) { return elem.Sd+'P'+elem.Amt;})
+	
+	//selids = selids.trim();
+	//selamts = selamts.trim();
+	
+ 	console.log(selids);
+ 	console.log(selamts);
+ 	
+ 	$http({
+		method: 'POST', 
+		url: s[26].u,  
+		params: {'sel':selids,'amt':selamts},
+		headers: {'Content-Type': 'application/json; charset=utf-8'} 
+	}).success(function(data, status, headers, config) {	
+	
+	if(data) {			
+		
+		console.log(data.trim());
+			
+		if(data.trim() =="1"){			
+			//console.log("OK:"+data);
+			$scope.getHeader(); 
+			$scope.bet = [];
+	  	$scope.betC = true; 
+	  	$scope.betE = false;
+	  	
+	  } else {
+	  	$scope.betD = true; 
+	  	$scope.betE = false;
+	  }
+	}
+	
+	data=null;
+	}).error(function(data, status, headers, config) {
+		console.log(status);
+		data=null;
+	});
+
+};
+
+$scope.getHeader = function() {	
+	
+	 	$http({
+		method: 'POST', 
+		url: '/login/jsp/get_header.jsp',  
+		headers: {'Content-Type': 'application/json; charset=utf-8'} 
+	}).success(function(data, status, headers, config) {	
+	
+		console.log(data)
+		
+		$("#uhead").html(data);
+		
+		data=null;
+		
+	}).error(function(data, status, headers, config) {
+		console.log(status);
+		data=null;
+	});
+}
 
 }); // end
 

@@ -372,11 +372,11 @@ public class BetConManager2 {
 				  		" OR MARKET_TYPE_ID='10829' or MARKET_TYPE_ID='9321') ";
 
 		  
-		 // //Debug.out("query1 : " + query);	
-		 // //Debug.out("query2 : " + query2);	
-		 // //Debug.out("query3 : " + query3);	
-		 // //Debug.out("query4 : " + query4);	
-		 // //Debug.out("query5 : " + query4);
+		 //// Debug.out("query1 : " + query);	
+		 //// Debug.out("query2 : " + query2);	
+		 //// Debug.out("query3 : " + query3);	
+		 //// Debug.out("query4 : " + query4);	
+		 //// Debug.out("query5 : " + query4);
 
 		  try{	      	
 			 	//Context initContext = new InitialContext();
@@ -556,7 +556,7 @@ public class BetConManager2 {
 					" and convert(char(8),match_date,112) <= convert(char(8),getdate()+6,112) "+
 					" and home_name is not null and away_name is not null";
 		  
-		 // //Debug.out("[getPreMatches] :" + query);		
+		 //// Debug.out("[getPreMatches] :" + query);		
 		  
 		  try{	      	
 			 	//Context initContext = new InitialContext();
@@ -690,6 +690,7 @@ public class BetConManager2 {
 					" and convert(char(10),match_date,120) = '"+dt+"' "+
 					" and home_name is not null and away_name is not null";		  
 		  
+		  /*
 		  String query2 =" DECLARE @list varchar(MAX) "+
 				  		" SELECT @list = JSON FROM BC_JSON WHERE KEYNAME='MARKET_TYPE' "+		  
 				  		" SELECT '{\"Id\":'+CAST(A.MARKET_ID as varchar(10))+',\"M\":\"'+CAST(B.MATCH_ID as varchar(10))+'\","+
@@ -706,6 +707,7 @@ public class BetConManager2 {
 						//" and convert(char(8),match_date,112) = convert(char(8),getdate(),112) "+
 						" and convert(char(10),match_date,120) = '"+dt+"' "+
 		  				"and home_name is not null and away_name is not null";
+		  */
 		  
 		  String query3 = " SELECT  '{\"Id\":'+CAST(A.MARKET_ID as varchar(10))+',\"MId\":'+CAST(B.MATCH_ID as varchar(10))+', "+
 				  		"	\"Sus\":'+CASE WHEN A.suspend ='T' THEN 'true' ELSE 'false' END+'},' "+
@@ -745,7 +747,7 @@ public class BetConManager2 {
 				  		" OR MARKET_TYPE_ID='10829' or MARKET_TYPE_ID='9321') ";
 		  
 		  //Debug.out("[getTodayMatchInfo] query: " + query);		
-		  //Debug.out("[getTodayMatchInfo] query2: " + query2);	
+		  ////Debug.out("[getTodayMatchInfo] query2: " + query2);	
 		  //Debug.out("[getTodayMatchInfo] query3: " + query3);	
 		  //Debug.out("[getTodayMatchInfo] query4: " + query4);
 		  
@@ -770,6 +772,7 @@ public class BetConManager2 {
 				        	
 	        	sb.append("[{\"Mt\": ["+match+"]");
 		        
+	        	/*
 		        //pstmt2.setString(1, rs.getString("MATCH_ID"));
 		        pstmt = con.prepareStatement(query2);
 		        rs = pstmt.executeQuery();
@@ -785,6 +788,7 @@ public class BetConManager2 {
 	        		market = market.substring(0, market.length()-1); //(json_mk.length()-1);
 				        	
 	        	sb.append(",\"Mk\": ["+market+"]");
+	        	*/
 
 	        	pstmt = con.prepareStatement(query3);
 	        	rs = pstmt.executeQuery();
@@ -869,6 +873,7 @@ public class BetConManager2 {
 					" and convert(char(10),match_date,120) = '"+dt+"'"+
 					" and home_name is not null and away_name is not null";		  
 		  
+		  /*
 		  String query2 =" DECLARE @list varchar(MAX) "+
 				  		" SELECT @list = JSON FROM BC_JSON WHERE KEYNAME='MARKET_TYPE' "+		  
 				  		" SELECT '{\"Id\":'+CAST(A.MARKET_ID as varchar(10))+',\"M\":\"'+CAST(B.MATCH_ID as varchar(10))+'\","+
@@ -883,6 +888,7 @@ public class BetConManager2 {
 						//" and convert(char(8),match_date,112) <= convert(char(8),getdate()+6,112) "+
 						" and convert(char(10),match_date,120) = '"+dt+"'"+
 		  				"and home_name is not null and away_name is not null";
+		  */
 		  
 		  String query3 = " SELECT  '{\"Id\":'+CAST(A.MARKET_ID as varchar(10))+',\"MId\":'+CAST(B.MATCH_ID as varchar(10))+', "+
 				  		"	\"Sus\":'+CASE WHEN A.suspend ='T' THEN 'true' ELSE 'false' END+'},' "+
@@ -918,7 +924,7 @@ public class BetConManager2 {
 				  		" OR MARKET_TYPE_ID='10829' or MARKET_TYPE_ID='9321') ";
 		  
 		  //Debug.out("[getMatchInfobySport] query: " + query);		
-		  //Debug.out("[getMatchInfobySport] query2: " + query2);	
+		////  Debug.out("[getMatchInfobySport] query2: " + query2);	
 		  //Debug.out("[getMatchInfobySport] query3: " + query3);	
 		  //Debug.out("[getMatchInfobySport] query4: " + query4);
 		  
@@ -943,6 +949,7 @@ public class BetConManager2 {
 				        	
 	        	sb.append("[{\"Mt\": ["+match+"]");
 		        
+	        	/*
 		        //pstmt2.setString(1, rs.getString("MATCH_ID"));
 		        pstmt = con.prepareStatement(query2);
 		        rs = pstmt.executeQuery();
@@ -958,6 +965,7 @@ public class BetConManager2 {
 	        		market = market.substring(0, market.length()-1); //(json_mk.length()-1);
 				        	
 	        	sb.append(",\"Mk\": ["+market+"]");
+	        	*/
 
 	        	pstmt = con.prepareStatement(query3);
 	        	rs = pstmt.executeQuery();
@@ -1042,6 +1050,7 @@ public class BetConManager2 {
 					" and convert(char(8),match_date,112) <= convert(char(8),getdate()+6,112) "+
 					" and home_name is not null and away_name is not null";		  
 		  
+		  /*
 		  String query2 =" DECLARE @list varchar(MAX) "+
 				  		" SELECT @list = JSON FROM BC_JSON WHERE KEYNAME='MARKET_TYPE' "+		  
 				  		" SELECT '{\"Id\":'+CAST(A.MARKET_ID as varchar(10))+',\"M\":\"'+CAST(B.MATCH_ID as varchar(10))+'\","+
@@ -1055,6 +1064,7 @@ public class BetConManager2 {
 		  				" and convert(char(8),match_date,112) >= convert(char(8),getdate(),112) "+
 						" and convert(char(8),match_date,112) <= convert(char(8),getdate()+6,112) "+
 		  				"and home_name is not null and away_name is not null";
+		  */
 		  
 		  String query3 = " SELECT  '{\"Id\":'+CAST(A.MARKET_ID as varchar(10))+',\"MId\":'+CAST(B.MATCH_ID as varchar(10))+', "+
 				  		"	\"Sus\":'+CASE WHEN A.suspend ='T' THEN 'true' ELSE 'false' END+'},' "+
@@ -1087,10 +1097,10 @@ public class BetConManager2 {
 				  		" OR MARKET_TYPE_ID='6564' OR MARKET_TYPE_ID='8750' OR MARKET_TYPE_ID='8763' OR MARKET_TYPE_ID='9775' "+
 				  		" OR MARKET_TYPE_ID='10829' or MARKET_TYPE_ID='9321') ";
 		  
-		 // //Debug.out("[getMatchInfobyCompetition] query: " + query);		
-		 // //Debug.out("[getMatchInfobyCompetition] query2: " + query2);	
-		 // //Debug.out("[getMatchInfobyCompetition] query3: " + query3);	
-		 // //Debug.out("[getMatchInfobyCompetition] query4: " + query4);
+		 //// Debug.out("[getMatchInfobyCompetition] query: " + query);		
+		 //// Debug.out("[getMatchInfobyCompetition] query2: " + query2);	
+		 //// Debug.out("[getMatchInfobyCompetition] query3: " + query3);	
+		 //// Debug.out("[getMatchInfobyCompetition] query4: " + query4);
 		  
 		  try{	      	
 			 	//Context initContext = new InitialContext();
@@ -1113,6 +1123,7 @@ public class BetConManager2 {
 				        	
 	        	sb.append("[{\"Mt\": ["+match+"]");
 		        
+	        	/*
 		        //pstmt2.setString(1, rs.getString("MATCH_ID"));
 		        pstmt = con.prepareStatement(query2);
 		        rs = pstmt.executeQuery();
@@ -1128,6 +1139,7 @@ public class BetConManager2 {
 	        		market = market.substring(0, market.length()-1); //(json_mk.length()-1);
 				        	
 	        	sb.append(",\"Mk\": ["+market+"]");
+	        	*/
 
 	        	pstmt = con.prepareStatement(query3);
 	        	rs = pstmt.executeQuery();
