@@ -372,11 +372,11 @@ public class BetConManager2 {
 				  		" OR MARKET_TYPE_ID='10829' or MARKET_TYPE_ID='9321') ";
 
 		  
-		 //// Debug.out("query1 : " + query);	
-		 //// Debug.out("query2 : " + query2);	
-		 //// Debug.out("query3 : " + query3);	
-		 //// Debug.out("query4 : " + query4);	
-		 //// Debug.out("query5 : " + query4);
+		 // //Debug.out("query1 : " + query);	
+		 // //Debug.out("query2 : " + query2);	
+		 // //Debug.out("query3 : " + query3);	
+		 // //Debug.out("query4 : " + query4);	
+		 // //Debug.out("query5 : " + query4);
 
 		  try{	      	
 			 	//Context initContext = new InitialContext();
@@ -556,7 +556,7 @@ public class BetConManager2 {
 					" and convert(char(8),match_date,112) <= convert(char(8),getdate()+6,112) "+
 					" and home_name is not null and away_name is not null";
 		  
-		 //// Debug.out("[getPreMatches] :" + query);		
+		 // //Debug.out("[getPreMatches] :" + query);		
 		  
 		  try{	      	
 			 	//Context initContext = new InitialContext();
@@ -1087,10 +1087,10 @@ public class BetConManager2 {
 				  		" OR MARKET_TYPE_ID='6564' OR MARKET_TYPE_ID='8750' OR MARKET_TYPE_ID='8763' OR MARKET_TYPE_ID='9775' "+
 				  		" OR MARKET_TYPE_ID='10829' or MARKET_TYPE_ID='9321') ";
 		  
-		 //// Debug.out("[getMatchInfobyCompetition] query: " + query);		
-		 //// Debug.out("[getMatchInfobyCompetition] query2: " + query2);	
-		 //// Debug.out("[getMatchInfobyCompetition] query3: " + query3);	
-		 //// Debug.out("[getMatchInfobyCompetition] query4: " + query4);
+		 // //Debug.out("[getMatchInfobyCompetition] query: " + query);		
+		 // //Debug.out("[getMatchInfobyCompetition] query2: " + query2);	
+		 // //Debug.out("[getMatchInfobyCompetition] query3: " + query3);	
+		 // //Debug.out("[getMatchInfobyCompetition] query4: " + query4);
 		  
 		  try{	      	
 			 	//Context initContext = new InitialContext();
@@ -1337,7 +1337,10 @@ public class BetConManager2 {
 		  ResultSet rs = null;
 		  StringBuffer sb = new StringBuffer(""); 
 
-		  String query1 = "SELECT '\"'+ replace(JSON, ',' ,'\",\"') +'\"' as JSON  FROM BC_JSON WHERE KEYNAME='MARKET_TYPE'";
+		  //String query1 = "SELECT '\"'+ replace(JSON, ',' ,'\",\"') +'\"' as JSON  FROM BC_JSON WHERE KEYNAME='MARKET_TYPE'";
+		  String query1 = "SELECT JSON  as JSON  FROM BC_JSON WHERE KEYNAME='MARKET_TYPE'";
+		  
+		  //Debug.out("[getValidMarketType] : " + query1);
 		  
 		  try{	      	
 			 	//Context initContext = new InitialContext();
@@ -2908,7 +2911,206 @@ public class BetConManager2 {
 	
 	}
 	
+	public  String getMaxBetAmt(String sid,String uid,String sel) throws SQLException{
+		
+		  Connection con = null;
+		  PreparedStatement pstmt = null;
+		  ResultSet rs = null;
+		  String amt ="0";
 
+		  String query1 ="select top 1 dbo.fnMaxBet(?,?,?) amt from bc_sport ";
+		  String query2 ="select top 1 dbo.fnMaxBet("+sel+","+sid+","+uid+") amt from bc_sport ";
+
+		  //Debug.out("[getMaxBetAmt] : " + query2);
+		  //Debug.out("[sel] : " + sel);
+	  		
+		  try{	      	
+				con = ds.getConnection();			 
+			 	pstmt = con.prepareStatement(query1);				 	
+			 	pstmt.setString(1,sel);
+			 	pstmt.setString(2,sid);
+			 	pstmt.setString(3,uid);
+			 	
+		        rs = pstmt.executeQuery();
+		        
+		        if(rs.next()){     
+		        	amt = rs.getString("amt");
+		        }				  	
+	
+		        rs.close();
+		        pstmt.close();		        
+		        con.close();
+		        
+	        
+		  	}catch(Exception e){
+			  //Debug.out("[getMaxBetAmt] : " + e.getMessage());
+		
+		    }finally{
+		   	  if(rs!=null) rs.close();
+		   	  if(pstmt!=null)  pstmt.close();
+		   	  if(con!=null) con.close();
+		  	}
+	  
+		  return amt;
+	
+	}
+	
+
+	public String setBet(String sid,String uid,String sel) throws SQLException{
+		
+		  Connection con = null;
+		  PreparedStatement pstmt = null;
+		  ResultSet rs = null;
+		  String amt ="0";
+
+		  String query1 ="select top 1 dbo.fnMaxBet(?,?,?) amt from bc_sport ";
+		  String query2 ="select top 1 dbo.fnMaxBet("+sel+","+sid+","+uid+") amt from bc_sport ";
+
+		  //Debug.out("[getMaxBetAmt] : " + query2);
+		  //Debug.out("[sel] : " + sel);
+	  		
+		  try{	      	
+				con = ds.getConnection();			 
+			 	pstmt = con.prepareStatement(query1);				 	
+			 	pstmt.setString(1,sel);
+			 	pstmt.setString(2,sid);
+			 	pstmt.setString(3,uid);
+			 	
+		        rs = pstmt.executeQuery();
+		        
+		        if(rs.next()){     
+		        	amt = rs.getString("amt");
+		        }				  	
+	
+		        rs.close();
+		        pstmt.close();		        
+		        con.close();
+		        
+	        
+		  	}catch(Exception e){
+			  //Debug.out("[getMaxBetAmt] : " + e.getMessage());
+		
+		    }finally{
+		   	  if(rs!=null) rs.close();
+		   	  if(pstmt!=null)  pstmt.close();
+		   	  if(con!=null) con.close();
+		  	}
+	  
+		  return amt;
+	
+	}
+	
+	public String setMultiBet(String sid,String uid,String sel,String amt, String ips) throws SQLException{
+		
+		  Connection con = null;
+		  String result ="0";
+		  
+		  //Debug.out("[setMultiBet] : " + sel);
+		  //Debug.out("[setMultiBet] : " + amt);
+	  		
+		  try{	      	
+				con = ds.getConnection();	
+				
+				CallableStatement cs = con.prepareCall("{call SetBetMulti(?,?,?,?,?,?)}");
+				cs.registerOutParameter(1, java.sql.Types.LONGNVARCHAR);
+			    cs.setString(2,sid);
+			    cs.setString(3,uid);
+			    cs.setString(4,sel);
+			    cs.setString(5,ips);
+			    cs.setString(6,amt);			   
+			    cs.execute();
+			    
+			    result = (String) cs.getObject(1);	
+			    
+		        con.close();
+	        
+		  	}catch(Exception e){
+			  //Debug.out("[setMultiBet] : " + e.getMessage());
+			  result = "-1";
+		
+		    }finally{
+		   	  if(con!=null) con.close();
+		  	}
+	  
+		  return result;
+	
+	}
+	
+	public String setSingleBet(String sid,String uid,String sel,String selamt, String ips) throws SQLException{
+		
+		  Connection con = null;
+		  String result ="0";
+		  
+		  //Debug.out("[setSingleBet] : " + sel);
+		  //Debug.out("[setSingleBet] : " + selamt);
+	  		
+		  try{	      	
+				con = ds.getConnection();	
+
+				CallableStatement cs = con.prepareCall("{call SetBetSingle(?,?,?,?,?,?)}");
+				
+				cs.registerOutParameter(1, java.sql.Types.LONGNVARCHAR);
+			    cs.setString(2,sid);
+			    cs.setString(3,uid);
+			    cs.setString(4,sel);
+			    cs.setString(5,selamt);
+			    cs.setString(6,ips);
+			    cs.execute();
+			    
+		        result = (String) cs.getObject(1);		
+		        
+		        con.close();
+		        
+		  	}catch(Exception e){
+			  //Debug.out("[setSingleBet] : " + e.getMessage());
+			  result = "-1";
+		
+		    }finally{
+		   	  if(con!=null) con.close();
+		  	}
+	  
+		  return result;
+	
+	}
+	
+	
+	public String getUserBalance(String sid,String uid) throws SQLException{
+		
+		  Connection con = null;
+		  PreparedStatement pstmt = null;
+		  ResultSet rs = null;
+		  String bal ="0";
+	
+		  String query1 ="select money from user_mst where userid='"+uid+"'and siteid='"+sid+"' ";
+
+		  //Debug.out("[getUserBalance] : " + query1);
+
+		  try{	      	
+				con = ds.getConnection();			 
+			 	pstmt = con.prepareStatement(query1);				 				 	
+		        rs = pstmt.executeQuery();
+		        
+		        if(rs.next()){     
+		        	bal = rs.getString("money");
+		        }				  	
+	
+		        rs.close();
+		        pstmt.close();		        
+		        con.close();
+		        
+	        
+		  	}catch(Exception e){
+			  //Debug.out("[getMaxBetAmt] : " + e.getMessage());
+		
+		    }finally{
+		   	  if(rs!=null) rs.close();
+		   	  if(pstmt!=null)  pstmt.close();
+		   	  if(con!=null) con.close();
+		  	}
+	  
+		  return bal;
+	
+	}
 }
 
 
