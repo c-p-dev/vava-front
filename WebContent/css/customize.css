@@ -79,7 +79,13 @@
 .sports_4_2 {width:9% ;text-align:left; padding-left:10px; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;}
 .sports_5_2 {width:13% ;text-align:center; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;}
 .sports_6_2 {width:* ;text-align:center; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;}
+
 .sports_10_2 {width:6% ;text-align:center;border-bottom:solid 1px #1c2021;}
+
+.sports_10_3 {background: #222627 url("/images/accordion-closed.png") no-repeat 90% center ; width:6% ;text-align:center;border-bottom:solid 1px #1c2021;}
+.sports_10_3.open {background: #222627 url("/images/accordion-opened.png") no-repeat 90% center;}
+
+
 
 .sports_table_1 {background:#222627; width:100%; }
 .sports_table_1 tr td {cursor:pointer;height:34px; }
@@ -131,6 +137,7 @@
 
 .live_6_1 {color:#0792c4;text-align:center;background:#222627;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;-webkit-transition: all .2s ease-in-out;-moz-transition: all .2s ease-in-out;-o-transition: all .2s ease-in-out;-ms-transition: all .2s ease-in-out;transition: all .2s ease-in-out;}
 .live_6_1:hover {background:#2e3334}
+.live_6_3 {color:#0792c4;text-align:center;background:#222627;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;-webkit-transition: all .2s ease-in-out;-moz-transition: all .2s ease-in-out;-o-transition: all .2s ease-in-out;-ms-transition: all .2s ease-in-out;transition: all .2s ease-in-out;}
 .live_6_1.sel {background: #0792c4;}
 .live_6_2 {color:#0792c4;text-align:center;background:#222627;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;-webkit-transition: all .2s ease-in-out;-moz-transition: all .2s ease-in-out;-o-transition: all .2s ease-in-out;-ms-transition: all .2s ease-in-out;transition: all .2s ease-in-out;}
 
@@ -217,6 +224,8 @@
 .w3-animate-opacity{animation:opac 0.8s}@keyframes opac{from{opacity:0} to{opacity:1}}
 .w3-spin{animation:w3-spin 2s infinite linear}@keyframes w3-spin{0%{transform:rotate(0deg)}100%{transform:rotate(359deg)}}
 .w3-animate-zoom {animation:animatezoom 0.6s}@keyframes animatezoom{from{transform:scale(0)} to{transform:scale(1)}}
+
+.animate-zoom {animation:animatezoom 0.6s}@keyframes animatezoom{from{transform:scale(0.8)} to{transform:scale(1)}}
 
 .live_sport_b {background:rgba(0,0,0,0.8); width:30px; border-radius:0 0 5px 5px; height:40px; text-align:center; font-size:17px; color:#ffffff; font-weight:700; letter-spacing:-1px}
 
@@ -426,8 +435,13 @@
 
 
 .sports_7_1.sel {background: #0792c4;}
+
 .sports_8_1 {width:9% ;text-align:center; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;color:#0792c4;background:#222627;}
 .sports_8_1:hover { background:#2e3334; } 
+
+.sports_8_2 {width:9% ;text-align:center; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;color:#0792c4;background:#222627;}
+
+
 .sports_8_1.sel {background: #0792c4;}
 .sports_9_1 {width:9% ;text-align:center; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;color:#0792c4;background:#222627;}
 .sports_9_1:hover { background:#2e3334; } 

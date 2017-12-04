@@ -35,3 +35,7 @@
 	
 %>
 
+<script>
+var checkSession = <%=checkSession%>
+var UBAL = <%=UBAL%>
+</script>
