@@ -165,6 +165,13 @@ ul.casino_board_list  + .btn_wrap{
     left: 20px;
     position: relative;
     display: none;
+    height: 30px;
+    line-height: 30px;
+    font-size: 10px;
+}
+
+.l_tabs li.subm-manual a {
+	height: 30px;
 }
 
 </style>
@@ -222,17 +229,17 @@ ul.casino_board_list  + .btn_wrap{
 
 						if( providers.getGame_provider() == 2){
 							
-							html +=("<li id = 'agmanual-lnk' class = 'subm-manual'><a href='#l-tab3' class='get-manual agtab' data-val='manual'>아시안게임 메뉴얼</a></li>");
+							html +=("<li id = 'agmanual-lnk' class = 'subm-manual'><a href='#l-tab3' class='get-manual agtab' data-val='manual'>아시안게임 이용안내</a></li>");
 						
 						}
 						else if(providers.getGame_provider() == 1 ){
 							
-							html +=("<li id = 'mgmanual-lnk' class = 'subm-manual'><a href='#l-tab5' class='get-manual mgtab' data-val='manual2'>마이크로게임 메뉴얼</a></li>");
+							html +=("<li id = 'mgmanual-lnk' class = 'subm-manual'><a href='#l-tab5' class='get-manual mgtab' data-val='manual2'>마이크로게임 이용안내</a></li>");
 						
 						}
 						else if(providers.getGame_provider() == 3){
 							
-							html +=("<li id = 'bcmanual-lnk' class = 'subm-manual'><a href='#l-tab=7' class='get-manual' data-val=''>벳컨 메뉴얼</a></li>");
+							html +=("<li id = 'bcmanual-lnk' class = 'subm-manual'><a href='#l-tab=7' class='get-manual' data-val=''>벳컨 카지노 이용안내</a></li>");
 						
 						}
 
