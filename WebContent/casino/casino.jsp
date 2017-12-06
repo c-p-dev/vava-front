@@ -160,6 +160,13 @@ ul.casino_board_list  + .btn_wrap{
     width: 100%!important;
 }
 
+.l_tabs li.subm-manual {
+	width: 220px;
+    left: 20px;
+    position: relative;
+    display: none;
+}
+
 </style>
 
 
@@ -215,15 +222,17 @@ ul.casino_board_list  + .btn_wrap{
 
 						if( providers.getGame_provider() == 2){
 							
-							html +=("<li><a href='#l-tab3' class='get-manual agtab' data-val='manual'>아시안게임 메뉴얼</a></li>");
+							html +=("<li id = 'agmanual-lnk' class = 'subm-manual'><a href='#l-tab3' class='get-manual agtab' data-val='manual'>아시안게임 메뉴얼</a></li>");
 						
-						}else if(providers.getGame_provider() == 1 ){
+						}
+						else if(providers.getGame_provider() == 1 ){
 							
-							html +=("<li><a href='#l-tab5' class='get-manual mgtab' data-val='manual2'>마이크로게임 메뉴얼</a></li>");
+							html +=("<li id = 'mgmanual-lnk' class = 'subm-manual'><a href='#l-tab5' class='get-manual mgtab' data-val='manual2'>마이크로게임 메뉴얼</a></li>");
 						
-						}else if(providers.getGame_provider() == 3){
+						}
+						else if(providers.getGame_provider() == 3){
 							
-							html +=("<li><a href='#l-tab=7' class='get-manual' data-val=''>벳컨 메뉴얼</a></li>");
+							html +=("<li id = 'bcmanual-lnk' class = 'subm-manual'><a href='#l-tab=7' class='get-manual' data-val=''>벳컨 메뉴얼</a></li>");
 						
 						}
 
@@ -336,12 +345,33 @@ ul.casino_board_list  + .btn_wrap{
 			e.preventDefault();
 			if($(this).parent().hasClass('active') == false){
 				$(".casino_right").html(spin);
-				var data = $(this).attr("data-val");
-				if($(this).hasClass('get-game')){
+				var game_prvdr = $(this).attr("data-val");
+				
+				if ($(this).hasClass('get-game')) {
+					
+					/*	Intializes all manuals to hidden display	*/
+					$('.subm-manual').hide();
+					
+					/*	Asian Gaming	*/
+					if (2 == game_prvdr) {
+						$('#agmanual-lnk').show();
+					}
+					/*	Microgaming		*/
+					else if (1 == game_prvdr) {
+						$('#mgmanual-lnk').show();
+					}
+					/*	Betconstruct	*/
+					else if (3 == game_prvdr) {
+						$('#bcmanual-lnk').show();
+					}
+					else {
+						/* Default. Do nothing	*/
+					}
+					
 					//get Game
 					$.ajax({
 							url : 'jsp/get_game.jsp',
-							data : {gp:data},
+							data : {gp:game_prvdr},
 							method: 'GET',
 							error: function(){
 								toaster.success("Failed to load games. Please try again.");
@@ -349,13 +379,14 @@ ul.casino_board_list  + .btn_wrap{
 							}
 						}).done(function(data){
 							var obj = JSON.parse(data);
-							doList(obj,data);
+							doList(obj, data);
 					});
-				}else{
+				}
+				else {
 					// get Manual
 					$.ajax({
 						url : 'jsp/get_manual.jsp',
-						data : {man:data},
+						data : {man:game_prvdr},
 						method: 'GET',
 					}).done(function(data){
 						loadManual(data);
@@ -394,29 +425,12 @@ ul.casino_board_list  + .btn_wrap{
 			$("body").on("mouseenter",".img",function(){
 				$(this).addClass("hover");
 			})
-			// handle the mouseleave functionality
-			// .mouseleave(function(){
-			// 	$(this).removeClass("hover");
-			// });
+
 			.on("mouseleave",".img",function(){
 				$(this).removeClass("hover");
 			});
 		}
 
-		// $("body").on("click","ul.tabs li",function(){
-		// 	var container = $("#contents_wrap");
-
-		// 	var options = {
-		// 	  	valueNames: ['casino_name'],
-		// 	  	listClass: 'casino_board_list',
-		// 	  	page: 3,
-	 //  			pagination: true
-		// 	};
-
-		// 	var hackerList = new List(container, options);
-
-		// 	console.log(hackerList);
-		// });
 
 		$(".input_style05 .search").on("change",function(){
 			if($('.casino_board_list').children().length === 0) { // Checking if list is empty
