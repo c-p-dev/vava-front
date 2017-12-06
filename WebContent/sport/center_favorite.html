@@ -44,7 +44,7 @@
 											<div ng-switch-when="true">		
 																		
 												<ul class="nav-tabs" style="display:table; width:100%;">              					 
-											  <li class="soprts_in_acc_2"  ng-class="{'sel' : (bet|filter:{Sd:sel.Id}).length>0}" ng-click="addBet(sel.Id,sel.MkId,value[0].Nm,sel.Nm,(LS|filter:{MId:tabMId})[0].HT,(LS|filter:{MId:tabMId})[0].AT,sel.P,sel.P)" 
+											  <li class="soprts_in_acc_2"  ng-class="{'sel' : (bet|filter:{Sd:sel.Id}).length>0}" ng-click="addBet(sel.Id,sel.MkId,value[0].Nm,sel.Nm,(LS|filter:{MId:tabMId})[0].HT,(LS|filter:{MId:tabMId})[0].AT,sel.P,sel.P,value[0].MId)" 
 											  	 style="display:table-cell;float:left; width:24.9%; border-right:solid 0.1em #17191a; padding: 0;"  ng-repeat="sel in sel2.Se  | orderBy:'MkId' "> 			
 											  	 				  	
 													<div class="sports_v_l_1">{{sel.Nm}}</div>	
@@ -64,7 +64,7 @@
 													<div ng-switch-when="true">	
 															
 															<ul class="nav-tabs" style="display:table; width:100%;">              					 
-															  <li class="soprts_in_acc_2"  ng-class="{'sel' : (bet|filter:{Sd:sel.Id}).length>0}" ng-click="addBet(sel.Id,sel.MkId,value[0].Nm,sel.Nm,(LS|filter:{MId:tabMId})[0].HT,(LS|filter:{MId:tabMId})[0].AT,sel.P,sel.P)" 
+															  <li class="soprts_in_acc_2"  ng-class="{'sel' : (bet|filter:{Sd:sel.Id}).length>0}" ng-click="addBet(sel.Id,sel.MkId,value[0].Nm,sel.Nm,(LS|filter:{MId:tabMId})[0].HT,(LS|filter:{MId:tabMId})[0].AT,sel.P,sel.P,value[0].MId)" 
 															  	 style="display:table-cell;float:center; width:33.23%; border-right:solid 0.1em #17191a; padding: 0;"  ng-repeat="sel in sel2.Se  | orderBy:'MkId' "> 							  	
 																	<div class="sports_v_l_1">{{sel.Nm}} </div>	
 													  				<div ng-show="sel.BP<sel.P" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <b class="font_002">{{sel.P}}</b> <i style="color:grey;font-size:10px;"> (<del>{{sel.BP}}</del>)</i> </div>
@@ -77,7 +77,7 @@
 													<div ng-switch-default>
 															
 															<ul class="nav-tabs" style="display:table; width:100%;">              					 
-															  <li class="soprts_in_acc_2"  ng-class="{'sel' : (bet|filter:{Sd:sel.Id}).length>0}" ng-click="addBet(sel.Id,sel.MkId,value[0].Nm,sel.Nm,(LS|filter:{MId:tabMId})[0].HT,(LS|filter:{MId:tabMId})[0].AT,sel.P,sel.P)" 
+															  <li class="soprts_in_acc_2"  ng-class="{'sel' : (bet|filter:{Sd:sel.Id}).length>0}" ng-click="addBet(sel.Id,sel.MkId,value[0].Nm,sel.Nm,(LS|filter:{MId:tabMId})[0].HT,(LS|filter:{MId:tabMId})[0].AT,sel.P,sel.P,value[0].MId)" 
 															  	 style="display:table-cell;float:center; width:49.9%; border-right:solid 0.1em #17191a; padding: 0;"  ng-repeat="sel in sel2.Se  | orderBy:'MkId' "> 							  	
 																	<div class="sports_v_l_1">{{sel.Nm}}</div>	
 													  				<div ng-show="sel.BP<sel.P" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <b class="font_002">{{sel.P}}</b> <i style="color:grey;font-size:10px;"> (<del>{{sel.BP}}</del>)</i> </div>
