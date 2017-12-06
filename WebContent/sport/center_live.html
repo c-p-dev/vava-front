@@ -68,11 +68,14 @@
 						-->
 						<table class="live_table" cellpadding="0" cellspacing="0" >
 										<tr>
-											<td class="live_table_t_1" colspan="8"> <span class="live_tab_text_1">{{lm[0].SN}} ({{lm.length}})</span> <!--<span class="live_tab_count_l">{{lm.length}}</span> --></td>  
-											<td class="live_table_t_1" width="9%">승</td>
-											<td class="live_table_t_1" width="9%">무</td>
-											<td class="live_table_t_1" width="9%">패</td>
-											<td class="live_table_t_2" ng-class="{'open' : $pane.isExpanded() }" width="7%">더보기</td>
+											<td class="live_table_t_1"> <span class="live_tab_text_2"><img width="15" src="/images/sport_s/{{lm[0].SId}}.png"/>&nbsp;&nbsp;{{lm[0].SN}} </span> 
+											<!--<td class="live_table_t_1"> <span class="live_tab_text_2"><img width="15" src="/images/sport_s/{{lm[0].SId}}.png"/>&nbsp;&nbsp;{{lm[0].SN}} ({{lm.length}})</span> -->
+												<!--<span class="live_tab_count_l">{{lm.length}}</span> --></td>  
+											<td class="live_table_t_1" width="11%">승</td>
+											<td class="live_table_t_1" width="11%">무</td>
+											<td class="live_table_t_1" width="11%">패</td>
+											<!--<td class="live_table_t_2" width="7%" width="7%"><i class="fa fa-fw fa-plus" ng-class="{'fa-minus' : $pane.isExpanded() }"></i></td> -->
+											<td class="live_table_t_2" width="7%" ng-class="{'open' : $pane.isExpanded() }"></td>
 										</tr>
 									</table>	
 									
@@ -97,26 +100,30 @@
 																	</td>	
 																	<td class="live_0_1" onmouseover="CBg(this)" onmouseout="RBg(this)" ng-bind="(periodName|where:{Id:sp.SId,P:sp.Pe})[0].KN">
 																	</td>																				
+																	<!--
 																	<td class="live_1_1" onmouseover="CBg(this)" onmouseout="RBg(this)">																					  	
 																		<div ng-if="sp.Rem" ng-bind="'남은 시간 '+ sp.Rem.substring(3,8)"> </div>	
 																		<div ng-if="sp.Cur" ng-bind="'진행 시간 '+ sp.Cur+'분' "> </div>		
 																		<div ng-if="sp.Rem.length < 1 && sp.Cur.length < 1" ng-bind="'진행중' "> </div>																																					 
 																	</td>
+																	-->
 																	<td class="live_2_1" onmouseover="CBg(this)" onmouseout="RBg(this)">												
 																		 <div>  
 																		<!-- <div class="js-mytooltip2 type-inline-block style-block style-block-one" data-mytooltip-custom-class="align-center" data-mytooltip-template="이탈리아 > 세리에 A">-->
-																			{{sp.HTS}} - {{sp.ATS}} 
+																			{{sp.HTS}}-{{sp.ATS}} 
 																		</div>
 																	</td>
-																	<td class="live_3_1" onmouseover="CBg(this)" onmouseout="RBg(this)"><span ng-bind="sp.CN.substring(0,20)"></span></td>
+																	<td class="live_3_1" onmouseover="CBg(this)" onmouseout="RBg(this)">
+																		<img style="vertical-align:middle;width:14px;height:10px;margin-bottom:3px;" src="/images/region_s/{{sp.RId}}.png">&nbsp;<span>{{sp.CN.substring(0,13)}}</span>
+																	</td>
 																	
-																	<td class="live_4_1_1" onmouseover="CBg(this)" onmouseout="RBg(this)">{{sp.HT.substring(0,20)}}</td>																				
+																	<td class="live_4_1_1" onmouseover="CBg(this)" onmouseout="RBg(this)">{{sp.HT.substring(0,13)}}</td>																				
 																	<td class="live_4_1_2" onmouseover="CBg(this)" onmouseout="RBg(this)">vs</td>																					
-																	<td class="live_4_1_3" onmouseover="CBg(this)" onmouseout="RBg(this)">{{sp.AT.substring(0,20)}}</td>	
+																	<td class="live_4_1_3" onmouseover="CBg(this)" onmouseout="RBg(this)">{{sp.AT.substring(0,13)}}</td>	
 																																																														
-																	<td width="9%" class="live_5_2"><i class='fa fa-fw fa-lock'></i></td>																				
-																	<td width="9%" class="live_6_2"><i class='fa fa-fw fa-lock'></i></td>																				
-																	<td width="9%" class="live_7_2"><i class='fa fa-fw fa-lock'></i></td>								
+																	<td width="11%" class="live_5_2"><i class='fa fa-fw fa-lock'></i></td>																				
+																	<td width="11%" class="live_6_2"><i class='fa fa-fw fa-lock'></i></td>																				
+																	<td width="11%" class="live_7_2"><i class='fa fa-fw fa-lock'></i></td>								
 																													
 																	<td width="7%" class="live_8_1"><i class='fa fa-fw fa-lock'></i></td>
 																</tr>
@@ -139,29 +146,33 @@
 																				</a> 
 																			</td>	
 																			<td class="live_0_1" onmouseover="CBg(this)" onmouseout="RBg(this)" ng-click="goMatchMarket('center_market.html',sp.SId,sp.MId)" ng-bind="(periodName|where:{Id:sp.SId,P:sp.Pe})[0].KN">
-																			</td>																				
+																			</td>	
+																			<!--																			
 																			<td class="live_1_1" onmouseover="CBg(this)" onmouseout="RBg(this)"  ng-click="goMatchMarket('center_market.html',sp.SId,sp.MId)">																					  	
 																				<div ng-if="sp.Rem" ng-bind="'남은 시간 '+ sp.Rem.substring(3,8)"> </div>	
 																				<div ng-if="sp.Cur" ng-bind="'진행 시간 '+ sp.Cur+'분' "> </div>
 																				<div ng-if="sp.Rem.length < 1 && sp.Cur.length < 1" ng-bind="'진행중' "> </div>																		 
 																			</td>
+																			-->
 																			<td class="live_2_1" onmouseover="CBg(this)" onmouseout="RBg(this)" ng-click="goMatchMarket('center_market.html',sp.SId,sp.MId)">
 																				<!-- <div class="js-mytooltip2 type-inline-block style-block style-block-one" data-mytooltip-custom-class="align-center" data-mytooltip-template="이탈리아 > 세리에 A">-->
 																				<div>
 																					{{sp.HTS}} - {{sp.ATS}} 
 																				</div>
 																			</td>																			
-																			<td class="live_3_1" onmouseover="CBg(this)" onmouseout="RBg(this)" ng-click="goMatchMarket('center_market.html',sp.SId,sp.MId)"><span ng-bind="sp.CN.substring(0,20)"></span></td>		
+																			<td class="live_3_1" onmouseover="CBg(this)" onmouseout="RBg(this)" ng-click="goMatchMarket('center_market.html',sp.SId,sp.MId)">
+																				<img style="vertical-align:middle;width:14px;height:10px;margin-bottom:3px;" src="/images/region_s/{{sp.RId}}.png">&nbsp;<span>{{sp.CN.substring(0,13)}}</span>
+																			</td>		
 																																				
-																			<td class="live_4_1_1" onmouseover="CBg(this)" onmouseout="RBg(this)" ng-click="goMatchMarket('center_market.html',sp.SId,sp.MId)">{{sp.HT.substring(0,20)}}</td>																				
+																			<td class="live_4_1_1" onmouseover="CBg(this)" onmouseout="RBg(this)" ng-click="goMatchMarket('center_market.html',sp.SId,sp.MId)">{{sp.HT.substring(0,13)}}</td>																				
 																			<td class="live_4_1_2" onmouseover="CBg(this)" onmouseout="RBg(this)" ng-click="goMatchMarket('center_market.html',sp.SId,sp.MId)">vs</td>																					
-																			<td class="live_4_1_3" onmouseover="CBg(this)" onmouseout="RBg(this)" ng-click="goMatchMarket('center_market.html',sp.SId,sp.MId)">{{sp.AT.substring(0,20)}}</td>		
+																			<td class="live_4_1_3" onmouseover="CBg(this)" onmouseout="RBg(this)" ng-click="goMatchMarket('center_market.html',sp.SId,sp.MId)">{{sp.AT.substring(0,13)}}</td>		
 																																						
-																			<td width="9%" class="live_5_2"><i class='fa fa-fw fa-lock'></i></td>																				
-																			<td width="9%" class="live_6_2"><i class='fa fa-fw fa-lock'></i></td>																				
-																			<td width="9%" class="live_7_2"><i class='fa fa-fw fa-lock'></i></td>						
+																			<td width="11%" class="live_5_2"><i class='fa fa-fw fa-lock'></i></td>																				
+																			<td width="11%" class="live_6_2"><i class='fa fa-fw fa-lock'></i></td>																				
+																			<td width="11%" class="live_7_2"><i class='fa fa-fw fa-lock'></i></td>						
 																																	
-																			<td width="7%" class="live_8_1" onmouseover="CBg(this)" onmouseout="RBg(this)" ng-click="goMatchMarket('center_market.html',sp.SId,sp.MId)">+ {{ (LMKc|filter:{M:sp.MId,S:false,V:true}).length }}&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/arrow_right.png"></td>
+																			<td width="7%" class="live_8_1" onmouseover="CBg(this)" onmouseout="RBg(this)" ng-click="goMatchMarket('center_market.html',sp.SId,sp.MId)">+ {{ (LMKc|filter:{M:sp.MId,S:false,V:true}).length }}</td>
 																		</tr>
 																	</table>
 																																	
@@ -181,6 +192,7 @@
 										
 																			<td class="live_0_1" onmouseover="CBg(this)" onmouseout="RBg(this)" ng-click="goMatchMarket('center_market.html',sp.SId,sp.MId)" ng-bind="(periodName|where:{Id:sp.SId,P:sp.Pe})[0].KN">
 																			</td>	
+																			<!--
 																			<td class="live_1_1" onmouseover="CBg(this)" onmouseout="RBg(this)" ng-click="goMatchMarket('center_market.html',sp.SId,sp.MId)">
 																				  	
 																				<div ng-if="sp.Rem" ng-bind="'남은 시간 '+ sp.Rem.substring(3,8)"> </div>	
@@ -188,42 +200,45 @@
 																				<div ng-if="sp.Rem.length < 1 && sp.Cur.length < 1" ng-bind="'진행중' "> </div>
 																				 
 																			</td>
+																			-->
 																			<td class="live_2_1" onmouseover="CBg(this)" onmouseout="RBg(this)" ng-click="goMatchMarket('center_market.html',sp.SId,sp.MId)">
 																				<!-- <div class="js-mytooltip2 type-inline-block style-block style-block-one" data-mytooltip-custom-class="align-center" data-mytooltip-template="이탈리아 > 세리에 A">-->
 																				<div>
 																					{{sp.HTS}} - {{sp.ATS}} 
 																				</div>
 																			</td>
-																			<td class="live_3_1" onmouseover="CBg(this)" onmouseout="RBg(this)" ng-click="goMatchMarket('center_market.html',sp.SId,sp.MId)"><span ng-bind="sp.CN.substring(0,20)"></span></td>
+																			<td class="live_3_1" onmouseover="CBg(this)" onmouseout="RBg(this)" ng-click="goMatchMarket('center_market.html',sp.SId,sp.MId)">
+																				<img style="vertical-align:middle;width:14px;height:10px;margin-bottom:3px;" src="/images/region_s/{{sp.RId}}.png">&nbsp;<span>{{sp.CN.substring(0,13)}}</span> 
+																			</td>
 																			
-																			<td class="live_4_1_1" onmouseover="CBg(this)" onmouseout="RBg(this)" ng-click="goMatchMarket('center_market.html',sp.SId,sp.MId)">{{sp.HT.substring(0,20)}}</td>																				
+																			<td class="live_4_1_1" onmouseover="CBg(this)" onmouseout="RBg(this)" ng-click="goMatchMarket('center_market.html',sp.SId,sp.MId)">{{sp.HT.substring(0,13)}}</td>																				
 																			<td class="live_4_1_2" onmouseover="CBg(this)" onmouseout="RBg(this)" ng-click="goMatchMarket('center_market.html',sp.SId,sp.MId)">vs</td>																					
-																			<td class="live_4_1_3" onmouseover="CBg(this)" onmouseout="RBg(this)" ng-click="goMatchMarket('center_market.html',sp.SId,sp.MId)">{{sp.AT.substring(0,20)}}</td>	
+																			<td class="live_4_1_3" onmouseover="CBg(this)" onmouseout="RBg(this)" ng-click="goMatchMarket('center_market.html',sp.SId,sp.MId)">{{sp.AT.substring(0,13)}}</td>	
 																																						
 																			<!-- <td width="9%" class="live_5_1" 	>  -->
-																			<td width="9%" class="live_5_1" ng-class="{'sel' : (bet|where:{Sd:sp.W1SD}).length>0}" ng-click="addBet(sp.W1SD,sp.MkId,'승무패',sp.HT,sp.HT,sp.AT,sp.W1P,sp.BW1P,sp.MId)">
-																				<div ng-show="parseFloat(sp.BW1P)<parseFloat(sp.W1P)"><i class="fa fa-fw fa-chevron-up" style="color:green"></i><span class="font_002">{{sp.W1P}}</span><i class="sel_old">(<del>{{sp.BW1P}}</del>)</i> </div>
-																				<div ng-show="parseFloat(sp.BW1P)>parseFloat(sp.W1P)"><i class="fa fa-fw fa-chevron-down" style="color:red"></i><span class="font_002">{{sp.W1P}}</span><i class="sel_old">(<del>{{sp.BW1P}}</del>)</i> </div>
+																			<td width="11%" class="live_5_1" ng-class="{'sel' : (bet|where:{Sd:sp.W1SD}).length>0}" ng-click="addBet(sp.W1SD,sp.MkId,'승무패',sp.HT,sp.HT,sp.AT,sp.W1P,sp.BW1P,sp.MId)">
+																				<div ng-show="parseFloat(sp.BW1P)<parseFloat(sp.W1P)"><i class="fa fa-fw fa-chevron-up" style="color:green"></i><span class="font_002">{{sp.W1P}}</span><i class="sel_old">({{sp.BW1P}})</i> </div>
+																				<div ng-show="parseFloat(sp.BW1P)>parseFloat(sp.W1P)"><i class="fa fa-fw fa-chevron-down" style="color:red"></i><span class="font_002">{{sp.W1P}}</span><i class="sel_old">({{sp.BW1P}})</i> </div>
 																				<div ng-show="parseFloat(sp.BW1P)==parseFloat(sp.W1P)"><span class="font_002">{{sp.W1P}}</span></div>					
 																			</td>
 																			
-																			<td width="9%" ng-if="sp.XP=='0'" class="live_6_2">
+																			<td width="11%" ng-if="sp.XP=='0'" class="live_6_2">
 																				<div class="font_002"> <b>-</b></div>
 																			</td>
 																			
-																			<td width="9%" ng-if="sp.XP!= '0'" class="live_6_1" ng-class="{'sel' : (bet|where:{Sd:sp.XSD}).length>0 }" ng-click="addBet(sp.XSD,sp.MkId,'승무패','무승부',sp.HT,sp.AT,sp.XP,sp.BXP,sp.MId)">
-																				<div ng-show="parseFloat(sp.BXP)<parseFloat(sp.XP)"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sp.XP}}</span> <i class="sel_old">(<del>{{sp.BXP}}</del>)</i> </div>								
-																				<div ng-show="parseFloat(sp.BXP)>parseFloat(sp.XP)"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sp.XP}}</span> <i class="sel_old">(<del>{{sp.BXP}}</del>)</i> </div>	
+																			<td width="11%" ng-if="sp.XP!= '0'" class="live_6_1" ng-class="{'sel' : (bet|where:{Sd:sp.XSD}).length>0 }" ng-click="addBet(sp.XSD,sp.MkId,'승무패','무승부',sp.HT,sp.AT,sp.XP,sp.BXP,sp.MId)">
+																				<div ng-show="parseFloat(sp.BXP)<parseFloat(sp.XP)"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sp.XP}}</span> <i class="sel_old">({{sp.BXP}})</i> </div>								
+																				<div ng-show="parseFloat(sp.BXP)>parseFloat(sp.XP)"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sp.XP}}</span> <i class="sel_old">({{sp.BXP}})</i> </div>	
 																				<div ng-show="parseFloat(sp.BXP)==parseFloat(sp.XP)" ng-if="sp.XP !='0'"> <span class="font_002">{{sp.XP}}</span></div>		
 																			</td>
 																			
-																			<td width="9%" class="live_7_1" ng-class="{'sel' : (bet|where:{Sd:sp.W2SD}).length>0}" ng-click="addBet(sp.W2SD,sp.MkId,'승무패',sp.AT,sp.HT,sp.AT,sp.W2P,sp.BW2P,sp.MId)">
-																				<div ng-show="parseFloat(sp.BW2P)<parseFloat(sp.W2P)"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sp.W2P}}</span> <i class="sel_old">(<del>{{sp.BW2P}}</del>)</i></div>
-																				<div ng-show="parseFloat(sp.BW2P)>parseFloat(sp.W2P)"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sp.W2P}}</span> <i class="sel_old">(<del>{{sp.BW2P}}</del>)</i></div>
+																			<td width="11%" class="live_7_1" ng-class="{'sel' : (bet|where:{Sd:sp.W2SD}).length>0}" ng-click="addBet(sp.W2SD,sp.MkId,'승무패',sp.AT,sp.HT,sp.AT,sp.W2P,sp.BW2P,sp.MId)">
+																				<div ng-show="parseFloat(sp.BW2P)<parseFloat(sp.W2P)"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sp.W2P}}</span> <i class="sel_old">({{sp.BW2P}})</i></div>
+																				<div ng-show="parseFloat(sp.BW2P)>parseFloat(sp.W2P)"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sp.W2P}}</span> <i class="sel_old">({{sp.BW2P}})</i></div>
 																				<div ng-show="parseFloat(sp.BW2P)==parseFloat(sp.W2P)"> <span class="font_002">{{sp.W2P}}</span></div>																					     	
 																			</td>
 																			
-																			<td width="7%" class="live_8_1" onmouseover="CBg(this)" onmouseout="RBg(this)" ng-click="goMatchMarket('center_market.html',sp.SId,sp.MId)">+ {{ (LMKc|filter:{M:sp.MId,S:false,V:true}).length }} &nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/arrow_right.png"></td>
+																			<td width="7%" class="live_8_1" onmouseover="CBg(this)" onmouseout="RBg(this)" ng-click="goMatchMarket('center_market.html',sp.SId,sp.MId)">+ {{ (LMKc|filter:{M:sp.MId,S:false,V:true}).length }}</td>
 																		</tr>
 																	</table>
 															

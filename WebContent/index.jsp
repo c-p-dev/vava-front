@@ -116,6 +116,74 @@ Type type2 = new TypeToken<List<DepositListBean>>() {}.getType();
 <script>
 	var mainAngular = angular.module('Vava', [ 'ngAnimate', 'vAccordion' ]);
 
+mainAngular.directive('tooltip', function ($document, $compile) {
+  return {
+    restrict: 'A',
+    scope: true,
+    link: function (scope, element, attrs) {
+      var tip = $compile('<div ng-class="tipClass">{{ text }}<div class="tooltip-arrow"></div></div>')(scope),
+          tipClassName = 'tooltip',
+          tipActiveClassName = 'tooltip-show';
+
+      scope.tipClass = [tipClassName];
+      scope.text = attrs.tooltip;
+      
+      if(attrs.tooltipPosition) {
+        scope.tipClass.push('tooltip-' + attrs.tooltipPosition);
+      }
+      else {
+       scope.tipClass.push('tooltip-down'); 
+      }
+      $document.find('body').append(tip);
+      
+      element.bind('mouseover', function (e) {
+        tip.addClass(tipActiveClassName);
+        
+        var pos = e.target.getBoundingClientRect(),
+            offset = tip.offset(),
+            tipHeight = tip.outerHeight(),
+            tipWidth = tip.outerWidth(),
+            elWidth = pos.width || pos.right - pos.left,
+            elHeight = pos.height || pos.bottom - pos.top,
+            tipOffset = 10;
+        
+        if(tip.hasClass('tooltip-right')) {
+          offset.top = pos.top - (tipHeight / 2) + (elHeight / 2);
+          offset.left = pos.right + tipOffset;
+        }
+        else if(tip.hasClass('tooltip-left')) {
+          offset.top = pos.top - (tipHeight / 2) + (elHeight / 2);
+          offset.left = pos.left - tipWidth - tipOffset;
+        }
+        else if(tip.hasClass('tooltip-down')) {
+          offset.top = pos.top + elHeight + tipOffset;
+          offset.left = pos.left - (tipWidth / 2) + (elWidth / 2);
+        }
+        else {
+          offset.top = pos.top - tipHeight - tipOffset;
+          offset.left = pos.left - (tipWidth / 2) + (elWidth / 2);
+        }
+
+        tip.offset(offset);
+      });
+      
+      element.bind('mouseout', function () {
+        tip.removeClass(tipActiveClassName);
+      });
+
+      tip.bind('mouseover', function () {
+        tip.addClass(tipActiveClassName);
+      });
+
+      tip.bind('mouseout', function () {
+        tip.removeClass(tipActiveClassName);
+      });
+
+      
+    }
+  }
+});
+
 	var s = [ {
 		"PID" : 0,
 		"u" : "center_live.html"
@@ -1304,7 +1372,7 @@ Type type2 = new TypeToken<List<DepositListBean>>() {}.getType();
 											<a style="cursor: pointer" ng-click="vM('1',ml.SD,ml.MD)">
 												<div class="main_bet_time">
 													<p class="main_bet_time_icon">
-														<img src="/images/comp_m/538.png">
+														<img src="/images/comp_m/{{ml.CD}}.png">
 													</p>
 													<p class="main_bet_time_text">
 														{{ml.MT.substring(0,10)}}<br>{{ml.MT.substring(10,16)}}
@@ -1368,25 +1436,31 @@ Type type2 = new TypeToken<List<DepositListBean>>() {}.getType();
 								<div class="main_title_2">실시간 경기목록</div>
 								<div id="tabs">
 									<ul>
-										<li><a ng-class="{tabulous_active:tabSId=='0'}"
-											style="cursor: pointer" style="cursor:pointer"
-											ng-click="selLS('0')">&nbsp;&nbsp;&nbsp;전체&nbsp;&nbsp;&nbsp;</a></li>
-										<li
-											ng-repeat="(key,value) in LS | orderBy:'SId' |  groupBy:'SId'"><a
-											ng-class="{tabulous_active:tabSId==key}" style="cursor: pointer"
-											style="cursor:pointer" ng-click="selLS(key)"><img
-												src="/images/sport_m/{{key}}.png" width="15">&nbsp;{{value[0].SN}}</a></li>
+										<li>
+											<a ng-class="{tabulous_active:tabSId=='0'}" style="cursor: pointer" style="cursor:pointer" ng-click="selLS('0')">&nbsp;&nbsp;&nbsp;전체&nbsp;&nbsp;&nbsp;</a>
+										</li>
+											
+										<!--
+										<li ng-repeat="(key,value) in LS | orderBy:'SId' |  groupBy:'SId'"><a ng-class="{tabulous_active:tabSId==key}" style="cursor: pointer" style="cursor:pointer" ng-click="selLS(key)">
+												<img src="/images/sport_m/{{key}}.png" width="15">&nbsp;{{value[0].SN}}</a>
+										</li>
+										-->
+										
+										<li ng-repeat="(key,value) in LS | orderBy:'SId' |  groupBy:'SId'"><a ng-class="{tabulous_active:tabSId==key}" style="cursor:pointer" ng-click="selLS(key)">
+												&nbsp;&nbsp;&nbsp;<img src="/images/sport_s/{{key}}.png" width="15">&nbsp;&nbsp;&nbsp;</a>
+										</li>
+										
 									</ul>
 								</div>
 
 								<table width="100%" cellpadding="0" cellspacing="0"
 									class="board_table_2">
 									<tr>
-										<td width="28%" class="board_table_2_t">홈</td>
-										<td width="28%" class="board_table_2_t">원정</td>
-										<td width="12%" class="board_table_2_t">승</td>
-										<td width="12%" class="board_table_2_t">무</td>
-										<td width="12%" class="board_table_2_t">패</td>
+										<td width="28%" class="board_table_2_t" style="color:#0792c4">홈</td>
+										<td width="28%" class="board_table_2_t" style="color:#0792c4">원정</td>
+										<td width="12%" class="board_table_2_t" style="color:#0792c4">승</td>
+										<td width="12%" class="board_table_2_t" style="color:#0792c4">무</td>
+										<td width="12%" class="board_table_2_t" style="color:#0792c4">패</td>
 										<td width="8%" class="board_table_2_t">&nbsp;</td>
 									</tr>
 								</table>
@@ -1413,7 +1487,7 @@ Type type2 = new TypeToken<List<DepositListBean>>() {}.getType();
 											<tbody>
 												<tr ng-if="tabSId==ls.SId||tabSId=='0'" ng-init="oIndex = $index"  ng-repeat="ls in LS">
 													<td>
-														<table width="100%" cellpadding="0" cellspacing="0" class="board_table_1_1" ng-class="{'on':oIndex%2=='0'}">
+														<table width="100%" cellpadding="0" cellspacing="0" class="board_table_1_1">
 															<tr ng-if="ls.SusS">
 																<td width="28%" class="board_bet_home_2">{{ls.HT.substring(0,10)}}</td>
 																<td width="28%" class="board_bet_expedition_2" ng-bind="ls.AT.substring(0,10)"></td>
@@ -1423,8 +1497,7 @@ Type type2 = new TypeToken<List<DepositListBean>>() {}.getType();
 																<td width="8%" class="board_bet_score_1"><i class='fa fa-fw fa-lock'></i></td>
 															</tr>
 
-															<tr ng-if="!ls.SusS && ls.SusM" style="cursor: pointer"
-																ng-click="vM('2',ls.SId,ls.MId)">
+															<tr ng-if="!ls.SusS && ls.SusM" style="cursor: pointer" ng-click="vM('2',ls.SId,ls.MId)">
 																<td width="28%" class="board_bet_home_2" ng-bind="ls.HT.substring(0,10)"></td>
 																<td width="28%" class="board_bet_expedition_2" ng-bind="ls.AT.substring(0,10)"></td>
 																<td width="12%" class="board_bet_victory_1"><i class='fa fa-fw fa-lock'></i></td>
@@ -1433,8 +1506,7 @@ Type type2 = new TypeToken<List<DepositListBean>>() {}.getType();
 																<td width="8%" class="board_bet_score_1">+{{(LMKc|filter:{M:ls.MId,S:false,V:true}).length}}</td>
 															</tr>
 
-															<tr ng-if="!ls.SusS && !ls.SusM" style="cursor: pointer"
-																ng-click="vM('2',ls.SId,ls.MId)">
+															<tr ng-if="!ls.SusS && !ls.SusM" style="cursor: pointer" ng-click="vM('2',ls.SId,ls.MId)">
 																<td width="28%" class="board_bet_home_2" ng-bind="ls.HT.substring(0,10)"></td>
 																<td width="28%" class="board_bet_expedition_2" ng-bind="ls.AT.substring(0,10)"></td>
 																<td width="12%" class="board_bet_victory_1">
@@ -1486,7 +1558,7 @@ Type type2 = new TypeToken<List<DepositListBean>>() {}.getType();
 
 												<tr ng-if="tabSId==ls.SId||tabSId=='0'" ng-init="oIndex = $index" ng-repeat="ls in LS">
 													<td>
-														<table width="100%" cellpadding="0" cellspacing="0" class="board_table_1_1" ng-class="{'on':oIndex%2=='0'}">
+														<table width="100%" cellpadding="0" cellspacing="0" class="board_table_1_1">
 															<tr ng-if="ls.SusS">
 																<td width="28%" class="board_bet_home_2" ng-bind="ls.HT.substring(0,10)"></td>
 																<td width="28%" class="board_bet_expedition_2" ng-bind="ls.AT.substring(0,10)"></td>
@@ -1618,18 +1690,12 @@ Type type2 = new TypeToken<List<DepositListBean>>() {}.getType();
 								<div id="tabs2">
 									<ul>
 										<li><a ng-class="{tabulous_active:PMSD=='0'}"
-											style="cursor: pointer" ng-click="getPM('0',TM)">&nbsp;&nbsp;&nbsp;전체
-												&nbsp;&nbsp;&nbsp; </a></li>
-										<li><a ng-class="{tabulous_active:PMSD=='1'}"
-											style="cursor: pointer" ng-click="getPM('1',TM)"><img src="/images/sport_m/1.png" width="15"> 축구</a></li>
-										<li><a ng-class="{tabulous_active:PMSD=='3'}"
-											style="cursor: pointer" ng-click="getPM('3',TM)"><img src="/images/sport_m/3.png" width="15"> 농구</a></li>
-										<li><a ng-class="{tabulous_active:PMSD=='11'}"
-											style="cursor: pointer" ng-click="getPM('11',TM)"><img src="/images/sport_m/11.png" width="15"> 야구</a></li>
-										<li><a ng-class="{tabulous_active:PMSD=='5'}"
-											style="cursor: pointer" ng-click="getPM('5',TM)"><img src="/images/sport_m/5.png" width="15"> 배구</a></li>
-										<li><a ng-class="{tabulous_active:PMSD=='4'}"
-											style="cursor: pointer" ng-click="getPM('4',TM)"><img src="/images/sport_m/4.png" width="15"> 테니스</a></li>
+											style="cursor: pointer" ng-click="getPM('0',TM)">&nbsp;&nbsp;&nbsp;전체&nbsp;&nbsp;&nbsp; </a></li>
+										<li><a ng-class="{tabulous_active:PMSD=='1'}" style="cursor: pointer" ng-click="getPM('1',TM)">&nbsp;&nbsp;&nbsp;<img src="/images/sport_s/1.png" width="15">&nbsp;&nbsp;&nbsp;</a></li>
+										<li><a ng-class="{tabulous_active:PMSD=='3'}" style="cursor: pointer" ng-click="getPM('3',TM)">&nbsp;&nbsp;&nbsp;<img src="/images/sport_s/3.png" width="15">&nbsp;&nbsp;&nbsp;</a></li>
+										<li><a ng-class="{tabulous_active:PMSD=='11'}" style="cursor: pointer" ng-click="getPM('11',TM)">&nbsp;&nbsp;&nbsp;<img src="/images/sport_s/11.png" width="15">&nbsp;&nbsp;&nbsp;</a></li>
+										<li width="30"><a ng-class="{tabulous_active:PMSD=='5'}" style="cursor: pointer" ng-click="getPM('5',TM)">&nbsp;&nbsp;&nbsp;<img src="/images/sport_s/5.png" width="15">&nbsp;&nbsp;&nbsp;</a></li>
+										<li><a ng-class="{tabulous_active:PMSD=='4'}" style="cursor: pointer" ng-click="getPM('4',TM)">&nbsp;&nbsp;&nbsp;<img src="/images/sport_s/4.png" width="15">&nbsp;&nbsp;&nbsp;</a></li>
 									</ul>
 								</div>
 
@@ -1637,12 +1703,12 @@ Type type2 = new TypeToken<List<DepositListBean>>() {}.getType();
 								<table width="100%" cellpadding="0" cellspacing="0"
 									class="board_table_2">
 									<tr>
-										<td width="13%" class="board_table_2_t">시간</td>
-										<td width="22%" class="board_table_2_t">홈</td>
-										<td width="22%" class="board_table_2_t">원정</td>
-										<td width="12%" class="board_table_2_t">승</td>
-										<td width="12%" class="board_table_2_t">무</td>
-										<td width="12%" class="board_table_2_t">패</td>
+										<td width="13%" class="board_table_2_t" style="color:#0792c4">시각</td>
+										<td width="22%" class="board_table_2_t" style="color:#0792c4">홈</td>
+										<td width="22%" class="board_table_2_t" style="color:#0792c4">원정</td>
+										<td width="12%" class="board_table_2_t" style="color:#0792c4">승</td>
+										<td width="12%" class="board_table_2_t" style="color:#0792c4">무</td>
+										<td width="12%" class="board_table_2_t" style="color:#0792c4">패</td>
 										<td width="7%" class="board_table_2_t">&nbsp;</td>
 									</tr>
 								</table>
@@ -1673,7 +1739,7 @@ Type type2 = new TypeToken<List<DepositListBean>>() {}.getType();
 
 												<tr class="active" ng-init="oIndex = $index" ng-repeat="ps in PS | orderBy:'Dt' ">
 													<td>
-														<table width="100%" cellpadding="0" cellspacing="0" class="board_table_2" ng-class="{'on':oIndex%2=='0'}">
+														<table width="100%" cellpadding="0" cellspacing="0" class="board_table_2">
 
 															<tr  ng-if="ps.SusS">
 																<td width="13%" class="board_bet_time_1" ng-bind="ps.Dt"></td>
@@ -1745,7 +1811,7 @@ Type type2 = new TypeToken<List<DepositListBean>>() {}.getType();
 
 												<tr class="active" ng-if="PS.length!=0" ng-init="oIndex = $index"  ng-repeat="ps in PS | orderBy:'Dt'">
 													<td>
-														<table ng-show="PS.length!=0" width="100%" cellpadding="0" cellspacing="0" class="board_table_2" ng-class="{'on':oIndex%2=='0'}">
+														<table ng-show="PS.length!=0" width="100%" cellpadding="0" cellspacing="0" class="board_table_2">
 
 															<tr ng-if="ps.SusS">
 																<td width="13%" class="board_bet_time_1" ng-bind="ps.Dt"></td>
