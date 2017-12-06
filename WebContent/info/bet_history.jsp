@@ -95,38 +95,38 @@ String bsj = gson.toJson(bs, type);
 				console.log("ft_sday:"+ft_sday);
 				
 				
-				$.fn.dataTable.ext.search.push(
-		   		function( settings, data, dataIndex ) {
-		       // var min = parseInt( $('#min').val(), 10 );
-		       // var max = parseInt( $('#max').val(), 10 );
-		        var age = parseFloat( moment(data[2]).format('YYYYMMDD') ) || 0; // use data for the age column
-		        console.log("");
-		        console.log(age);
-		       // var dt = table.columns(2);
-		        console.log(ft_eday <= age);
-		 				console.log(age <= ft_sday);
+		// 		$.fn.dataTable.ext.search.push(
+		//    		function( settings, data, dataIndex ) {
+		//        // var min = parseInt( $('#min').val(), 10 );
+		//        // var max = parseInt( $('#max').val(), 10 );
+		//         var age = parseFloat( moment(data[2]).format('YYYYMMDD') ) || 0; // use data for the age column
+		//         console.log("");
+		//         console.log(age);
+		//        // var dt = table.columns(2);
+		//         console.log(ft_eday <= age);
+		//  				console.log(age <= ft_sday);
 		 				
-		 				/* 
-		        if ( ( isNaN( ft_sday ) && isNaN( ft_eday ) ) ||
-		             ( isNaN( ft_sday ) && age <= ft_eday ) ||
-		             ( ft_sday <= age   && isNaN( ft_eday ) ) ||
-		             ( ft_sday <= age   && age <= ft_eday ) )
-		        {
-		            return true;
-		        }
-		        */
+		//  				/* 
+		//         if ( ( isNaN( ft_sday ) && isNaN( ft_eday ) ) ||
+		//              ( isNaN( ft_sday ) && age <= ft_eday ) ||
+		//              ( ft_sday <= age   && isNaN( ft_eday ) ) ||
+		//              ( ft_sday <= age   && age <= ft_eday ) )
+		//         {
+		//             return true;
+		//         }
+		//         */
 		        
-		        if ( ft_sday <= age  && age <= ft_eday  ) {
-		            return true;
-		        }
+		//         if ( ft_sday <= age  && age <= ft_eday  ) {
+		//             return true;
+		//         }
 		        
-		        return false;
-		    }
-		);
+		//         return false;
+		//     }
+		// );
 
 
 				
-		table.draw();
+		// table.draw();
 				
 			//string p1date =DateTimeValue1.ToString("MM/dd/yyyy HH:mm:ss");
 			//string p2date =DateTimeValue2.ToString("MM/dd/yyyy HH:mm:ss");
@@ -259,9 +259,9 @@ String bsj = gson.toJson(bs, type);
 						<table cellspacing="0" cellpadding="0" class="my_search_select">
 							<tr>
 								<td>
-									<select ng-model="selectedItem" ng-change="updateSport(selectedItem)">
+									<select id="sport_type" >
 										<option value=""> 종목</option>	
-										<option value=""> 전체</option>	
+										<option value="전체"> 전체</option>
 										<option ng-repeat="(key,value) in BSJ |orderBy:'snames'|groupBy:'snames'" value="{{key}}"> {{key}} </option>
 									</select>
 								</td>
@@ -345,6 +345,7 @@ String bsj = gson.toJson(bs, type);
 									
 													}
 											}
+											System.out.println("blb result : " + blb.getBresult());
 									
 							%>
 								<tr id='<%=blb.getBgid()%>' style="cursor: pointer">
@@ -379,8 +380,17 @@ String bsj = gson.toJson(bs, type);
 									<td class="acc_list_dividend"  style="border-right:solid 1px #2e3032;" onClick="selBat('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>"><%=blb.getErate()%> 배</td>
 									<td class="acc_list_price2" style="border-right:solid 1px #2e3032;" onClick="selBat('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>"><%=dfrmt.format(Integer.parseInt(blb.getEmoney()))%> 원</td>
 							<%
-							}
+								} else {
 							%>	
+									<td class="beting_btn" style="border-right:solid 1px #2e3032;" onClick="selBat('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>">취소</td>
+									<td class="acc_list_price1"  style="border-right:solid 1px #2e3032;" onClick="selBat('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>"><%=dfrmt.format(Integer.parseInt(blb.getBmoney()))%> 원</td>
+									<td class="acc_list_dividend"  style="border-right:solid 1px #2e3032;" onClick="selBat('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>"><%=blb.getErate()%> 배</td>
+									<td class="acc_list_price2" style="border-right:solid 1px #2e3032;" onClick="selBat('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>"><%=dfrmt.format(Integer.parseInt(blb.getEmoney()))%> 원</td>
+							<%
+								}
+							%>
+
+
 									<td class="acc_list_folder" style="border-right:solid 1px #2e3032;" onClick="selBat('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>"><%=blb.getScnt()%></td>												
 								</tr>
 											
@@ -399,7 +409,7 @@ String bsj = gson.toJson(bs, type);
 					<div class="left_btn_wrap"><span class="btn7" id="sa_sp2" style="cursor: pointer">전체 선택</span> &nbsp;<span class="btn8" id="del_all" style="cursor: pointer">선택 삭제</span></div>
 											
 						<script type="text/javascript">
-									
+						
 							$('#sa_sp').click(function(event) {	
 
 							  if(this.checked) {
@@ -494,22 +504,22 @@ String bsj = gson.toJson(bs, type);
 								return false;
 							}
 
-							var table =jQuery('#table1').DataTable( {
+							var table = jQuery('#table1').DataTable( {
 								"columnDefs": [ 
-									{
-				            			"targets": [2],
-				              			"visible": true,
-				              			"searchable": true
-				            		},
-				            		{
-				            			"targets": [3],
-				              			"visible": true,
-				              			"searchable": true
-				            		}
+									// {
+				     //        			"targets": [2],
+				     //          			"visible": true,
+				     //          			"searchable": true
+				     //        		},
+				     //        		{
+				     //        			"targets": [3],
+				     //          			"visible": true,
+				     //          			"searchable": true
+				     //        		}
 								],        
 						      	"paging": true,
 						      	"lengthChange": false,
-						      	"searching": false,
+						      	"searching": true,
 						      	"ordering": true,
 						      	"info": false,
 						      	"autoWidth": true,
@@ -524,6 +534,12 @@ String bsj = gson.toJson(bs, type);
 									emptyTable: "결과가 없습니다.",
 								},
 						    });
+
+
+
+						    
+
+						    
 						    
 						</script>
 						
@@ -748,6 +764,7 @@ String bsj = gson.toJson(bs, type);
 				</div>
 			</div>
 		</li>
+
 		<li>
 			<div class="acc_head"><h3>가상 게임 베팅내역 [<%=bl_sc.size()%>]</h3></div>
 			<div class="acc_content">
@@ -939,6 +956,7 @@ String bsj = gson.toJson(bs, type);
 				</div>
 			</div>		
 		</li>
+
 		<li>
 			<div class="acc_head"><h3>마이크로 게임 베팅내역  [<%=bl_mg.size()%>] </h3></div>
 			<div class="acc_content">
@@ -1129,6 +1147,7 @@ String bsj = gson.toJson(bs, type);
 				</div>
 			</div>			
 		</li>
+
 	</ul>	
 			
 
@@ -1277,6 +1296,8 @@ String bsj = gson.toJson(bs, type);
 
 		// calendar 1
 
+		
+
 		var bpf1 = new Pikaday({ 
 			field: document.getElementById('bfd1'), 
 			bound: false, 
@@ -1307,13 +1328,17 @@ String bsj = gson.toJson(bs, type);
        	d1();
 
        	$(".bhdp1").on("change",function(e){
+       		// alert("changed!");
         	d1();
+        	// table.draw();
         });
 
         $("#dpbtn1").on("click",function(e){
         	e.preventDefault();
-        	$moneyUseTable.ajax.reload();
+        	
         	$("#bet-depth1").hide();
+        	console.log(table);
+        	table.draw();
         });
 
         $(".showdp1").on("click",function(e){
@@ -1359,12 +1384,16 @@ String bsj = gson.toJson(bs, type);
 
        	$(".bhdp2").on("change",function(e){
         	d2();
+        	// table4.draw();
         });
 
         $("#dpbtn2").on("click",function(e){
+        	// alert("clicked");
         	e.preventDefault();
-        	$moneyUseTable.ajax.reload();
+        	
         	$("#bet-depth2").hide();
+        	table4.draw();
+        	console.log(table4);
         });
 
         $(".showdp2").on("click",function(e){
@@ -1377,6 +1406,7 @@ String bsj = gson.toJson(bs, type);
         $(".bclose2 ").on("click",function(e){
         	e.preventDefault();
         	$("#bet-depth2").hide();
+
         });
 
 
@@ -1416,8 +1446,10 @@ String bsj = gson.toJson(bs, type);
 
         $("#dpbtn3").on("click",function(e){
         	e.preventDefault();
-        	$moneyUseTable.ajax.reload();
+        	
         	$("#bet-depth3").hide();
+        	table2.draw();
+
         });
 
         $(".showdp3").on("click",function(e){
@@ -1468,8 +1500,9 @@ String bsj = gson.toJson(bs, type);
 
         $("#dpbtn4").on("click",function(e){
         	e.preventDefault();
-        	$moneyUseTable.ajax.reload();
+        	
         	$("#bet-depth4").hide();
+        	table3.draw();
         });
 
         $(".showdp4").on("click",function(e){
@@ -1484,6 +1517,83 @@ String bsj = gson.toJson(bs, type);
         	$("#bet-depth4").hide();
         });
 
+        $.fn.dataTable.ext.search.push(
+		    function( settings, data, dataIndex ) {
+		   
+    		if(settings.nTable.id == "table4"){
+    			
+    			var from =  moment($("#bfd2").val(),"YYYY-MM-DD");
+				var to = moment($("#bdt2").val(),"YYYY-MM-DD");
+				var column_date = moment(data[2],"YYYY-MM-DD");
+				
+				if(moment(column_date).isBetween(from,to)){
+					return true;
+			
+				}else{
+					return false;
+				}
+
+    		}else if(settings.nTable.id == "table1"){
+    			
+    			var from =  moment($("#bfd1").val(),"YYYY-MM-DD");
+				var to = moment($("#bdt1").val(),"YYYY-MM-DD");
+				var selected_sport_type = $("#sport_type").val();
+				var column_date = moment(data[2],"YYYY-MM-DD");
+				
+				if(selected_sport_type != "전체"){
+					
+					if(moment(column_date).isBetween(from,to) && data[3] == selected_sport_type){
+						
+						return true;
+		
+					}else{
+
+						return false;
+					}
+				}else{
+					
+					if(moment(column_date).isBetween(from,to)){
+
+						return true;
+						
+					}else{
+
+						return false;
+					}
+				}
+				
+    		}else if(settings.nTable.id == "table2"){
+    			
+    			var from =  moment($("#bfd3").val(),"YYYY-MM-DD");
+				var to = moment($("#bdt3").val(),"YYYY-MM-DD");
+				var column_date = moment(data[2],"YYYY-MM-DD");
+				
+				if(moment(column_date).isBetween(from,to)){
+
+					return true;
+	
+				}else{
+
+					return false;
+				}
+    		}else if(settings.nTable.id == "table3"){
+    			
+    			var from =  moment($("#bfd4").val(),"YYYY-MM-DD");
+				var to = moment($("#bdt4").val(),"YYYY-MM-DD");
+				var column_date = moment(data[2],"YYYY-MM-DD");
+				
+				if(moment(column_date).isBetween(from,to)){
+					
+					return true;
+					
+				}else{
+
+					return false;
+
+				}
+    		}
+
+	    });
 	});
 
 
