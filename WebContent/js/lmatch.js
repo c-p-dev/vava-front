@@ -272,6 +272,12 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 		$scope.betG = false;
 		$scope.betH = false;
 		$scope.paneIdx = -1;
+		
+		$scope.betFix = 1;
+		
+		$scope.betFix2 = function(f){
+			$scope.betFix = f;
+		}
 			
 	  var mode = "LiveMatch"; 
 	  //	$scope.mode = mode;
@@ -2940,6 +2946,15 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 		$scope.Fav_mode = true;
 	}
 	
+	
+	$scope.getTr = function(n) {			
+		var res = [];			
+			for (var i = 0; i < n; i++) {
+        res.push(i);
+      }
+      return res;
+	}
+		
 	$scope.us_mkt = function(mid,mkid) {		
 		
 		//console.log("mid:"+ mid);

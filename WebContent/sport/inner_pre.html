@@ -61,188 +61,306 @@
 						</tr>
 					</table>
 					
-	<v-pane-header></v-pane-header>	
-	<v-pane-content expanded="true" ng-show="true">	
-	
-	
-	<div ng-switch="Fav_mode">
-	 				
-		<div ng-switch-when="true">	
-		 							
-			<v-pane style="padding:0 0 0 0;box-shadow: 0 0px 0px 0px rgba(0, 0, 0, 0.8)" expanded="true" ng-if="(savedFavM|filter:{mkid:value[0].Id})[0].mid !== undefined" ng-repeat="(key,value) in MK|filter:{Sus:false,Vis:true} | orderBy:['MTyId','Id','Sq'] | groupBy:'MTyId' ">
-			<v-pane-header inactive>
-				
-			<div class="accordion-header_2" ng-class="{'open' : $pane.isExpanded() }">
+					<v-pane-header></v-pane-header>	
+					<v-pane-content expanded="true" ng-show="true">	
 					
-				<span>
-					<a href="#"  class="left_menu_in_1_l_1" ng-click="us_mkt(value[0].MId,value[0].Id)">		
-						
-						<i ng-if="(savedFavM|filter:{mkid:value[0].Id})[0].mid == undefined" id="{{value[0].Id}}" class="fa fa-star-o"></i>
-						<i ng-if="(savedFavM|filter:{mkid:value[0].Id})[0].mid !== undefined" id="{{value[0].Id}}" class="fa fa-star"></i>
-																	
-					</a>
-				</span>	
-				
-					<span ng-click="$pane.toggle()" style="padding-left:10px; display:table; width:90%;"><b>{{value[0].Nm}}</b> </span>
-				</div> 
-													
-			</v-pane-header>			
-				<v-pane-content expanded="true" ng-show="true">	
-					<v-pane expanded="true"  ng-repeat="sel2 in value | orderBy:'Id'">	
-						<v-pane-header>
-							
-							<div ng-switch="sel2.Se.length>3"> 					
-								<div ng-switch-when="true">		
-															
-									<ul class="nav-tabs" style="display:table; width:100%;">              					 
-								  <li class="soprts_in_acc_2" ng-class="{'sel' : (bet|filter:{Sd:sel.Id}).length>0}" ng-click="addBet(sel.Id,sel.MkId,sel.Nm,sel.Nm,preHT,preAT,sel.P,sel.P)" 
-								  	 style="display:table-cell;float:left; width:24.9%; border-right:solid 0.1em #17191a; padding: 0;"  ng-repeat="sel in sel2.Se  | orderBy:'MkId' "> 							  	
-										<div class="sports_v_l_1">{{sel.Nm}}</div>	
-						  				<div ng-show="sel.BP<sel.P" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel.P}}</span> <i class="sel_old"> (<del>{{sel.BP}}</del>)</i> </div>
-											<div ng-show="sel.BP>sel.P" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel.P}}</span> <i class="sel_old"> (<del>{{sel.BP}}</del>)</i> </div>
-											<div ng-show="sel.BP==sel.P" class="sports_v_r_1"><span class="font_002">{{sel.P}}</span><i class="sel_old"> (<del>{{sel.BP}}</del>)</i></div>
-													
-									</li>																																								
-								</ul>								
-								
-								</div>
-								
-								<div ng-switch-default>
-									
-									<div ng-switch="sel2.Se.length==3"> 					
-										<div ng-switch-when="true">	
-												
-												<ul class="nav-tabs" style="display:table; width:100%;">              					 
-												  <li class="soprts_in_acc_2" ng-class="{'sel' : (bet|filter:{Sd:sel.Id}).length>0}" ng-click="addBet(sel.Id,sel.MkId,sel.Nm,sel.Nm,preHT,preAT,sel.P,sel.P)" 
-												  	 style="display:table-cell;float:center; width:33.23%; border-right:solid 0.1em #17191a; padding: 0;"  ng-repeat="sel in sel2.Se  | orderBy:'MkId' "> 							  	
-														<div class="sports_v_l_1">{{sel.Nm}}</div>	
-										  				<div ng-show="sel.BP<sel.P" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel.P}}</span> <i class="sel_old"> (<del>{{sel.BP}}</del>)</i> </div>
-															<div ng-show="sel.BP>sel.P" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel.P}}</span> <i class="sel_old"> (<del>{{sel.BP}}</del>)</i> </div>
-															<div ng-show="sel.BP==sel.P" class="sports_v_r_1"><span class="font_002">{{sel.P}}</span><i class="sel_old"> (<del>{{sel.BP}}</del>)</i></div>
-													</li>																																								
-												</ul>		
-								
-										</div>
-										<div ng-switch-default>
-												
-												<ul class="nav-tabs" style="display:table; width:100%;">              					 
-												  <li class="soprts_in_acc_2" ng-class="{'sel' : (bet|filter:{Sd:sel.Id}).length>0}" ng-click="addBet(sel.Id,sel.MkId,sel.Nm,sel.Nm,preHT,preAT,sel.P,sel.P)" 
-												  	 style="display:table-cell;float:center; width:49.9%; border-right:solid 0.1em #17191a; padding: 0;"  ng-repeat="sel in sel2.Se  | orderBy:'MkId' "> 							  	
-														<div class="sports_v_l_1">{{sel.Nm}}</div>	
-										  				<div ng-show="sel.BP<sel.P" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel.P}}</span> <i class="sel_old"> (<del>{{sel.BP}}</del>)</i> </div>
-															<div ng-show="sel.BP>sel.P" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel.P}}</span> <i class="sel_old"> (<del>{{sel.BP}}</del>)</i> </div>
-															<div ng-show="sel.BP==sel.P" class="sports_v_r_1"><span class="font_002">{{sel.P}}</span><i class="sel_old"> (<del>{{sel.BP}}</del>)</i></div>
-													</li>																																								
-												</ul>		
-												
-										</div>	
-									</div>	
-									
-							</div>
-						</div>		
-							
-							
-						</v-pane-header>	
-								
-				 		<v-pane-content>			 	
-						</v-pane-content>
-
-					</v-pane>		
-				</v-pane-content>				
-			</v-pane>	
-			
-		</div>
-		
-		<div ng-switch-default>
-			
-			<v-pane style="padding:0 0 0 0;box-shadow: 0 0px 0px 0px rgba(0, 0, 0, 0.8)" ng-if="(MKCAT.indexOf(value[0].MTyId)>-1)||mTyId =='ALL'" expanded="true" ng-repeat="(key,value) in MK|filter:{Sus:false,Vis:true} | orderBy:['MTyId','Id','Sq'] | groupBy:'MTyId' ">
-			<v-pane-header inactive>
-				
-			<div class="accordion-header_2" ng-class="{'open' : $pane.isExpanded() }">
 					
-				<span>
-					<a href="#"  class="left_menu_in_1_l_1" ng-click="us_mkt(value[0].MId,value[0].Id)">		
-						
-						<i ng-if="(savedFavM|filter:{mkid:value[0].Id})[0].mid == undefined" id="{{value[0].Id}}" class="fa fa-star-o"></i>
-						<i ng-if="(savedFavM|filter:{mkid:value[0].Id})[0].mid !== undefined" id="{{value[0].Id}}" class="fa fa-star"></i>
+					<div ng-switch="Fav_mode">
+					 				
+						<div ng-switch-when="true">	
+						 							
+							<v-pane style="padding:0 0 0 0;box-shadow: 0 0px 0px 0px rgba(0, 0, 0, 0.8)" expanded="true" ng-if="(savedFavM|filter:{mkid:value[0].Id})[0].mid !== undefined" ng-repeat="(key,value) in MK|filter:{Sus:false,Vis:true} | orderBy:['MTyId','Id','Sq'] | groupBy:'MTyId' ">
+							<v-pane-header inactive>
+								
+							<div class="accordion-header_2" ng-class="{'open' : $pane.isExpanded() }">
+									
+								<span>
+									<a href="#"  class="left_menu_in_1_l_1" ng-click="us_mkt(value[0].MId,value[0].Id)">		
+										
+										<i style="padding-top:10px;" ng-if="(savedFavM|filter:{mkid:value[0].Id})[0].mid == undefined" id="{{value[0].Id}}" class="fa fa-star-o"></i>
+										<i style="padding-top:10px;" ng-if="(savedFavM|filter:{mkid:value[0].Id})[0].mid !== undefined" id="{{value[0].Id}}" class="fa fa-star"></i>
+																					
+									</a>
+								</span>	
+								
+									<span ng-click="$pane.toggle()" style="padding-left:10px; display:table; width:90%;"><b>{{value[0].Nm}}</b> </span>
+								</div> 
 																	
-					</a>
-				</span>	
-				
-					<span ng-click="$pane.toggle()" style="padding-left:10px; display:table; width:90%;"><b>{{value[0].Nm}}</b> </span>
-				</div> 
-													
-			</v-pane-header>			
-				<v-pane-content expanded="true" ng-show="true">	
-					<v-pane expanded="true"  ng-repeat="sel2 in value | orderBy:'Id'">	
-						<v-pane-header>
-							
-							<div ng-switch="sel2.Se.length>3"> 					
-								<div ng-switch-when="true">		
+							</v-pane-header>			
+								<v-pane-content expanded="true" ng-show="true">	
+									<v-pane expanded="true"  ng-repeat="sel2 in value | orderBy:'Id'">	
+										<v-pane-header>
+											
+											<div ng-switch="sel2.Se.length>3"> 					
+												<div ng-switch-when="true">		
+																			
+													<table class="nav-tabs" cellpadding="0" cellspacing="0" style=width:100%;margin:0px">  
+														
+														<tr ng-repeat="i in getTr(sel2.Se.length/4)"> 
+													  	 
+													  	 <td ng-if="$index*4<sel2.Se.length" class="soprts_in_acc_2" ng-class="{'sel' : (bet|where:{Sd:sel2.Se[$index*4].Id}).length>0}" ng-click="addBet(sel2.Se[$index*4].Id,sel2.Se[$index*4].MkId,sel2.Se[$index*4].Nm,sel2.Se[$index*4].Nm,preHT,preAT,sel2.Se[$index*4].P,sel2.Se[$index*4].P,value[0].MId)" 
+													  	 	width="25%" style="border-right:solid 1px #17191a; border-bottom:solid 1px #17191a; padding: 0;"> 		
+													  	 	<div class="sports_v_l_1">{{sel2.Se[$index*4].Nm}}</div>	
+											  				<div ng-show="parseFloat(sel2.Se[$index*4].BP)<parseFloat(sel2.Se[$index*4].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*4].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*4].BP}}</del>)</i> </div>
+																<div ng-show="parseFloat(sel2.Se[$index*4].BP)>parseFloat(sel2.Se[$index*4].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*4].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*4].BP}}</del>)</i> </div>
+																<div ng-show="parseFloat(sel2.Se[$index*4].BP)==parseFloat(sel2.Se[$index*4].P)" class="sports_v_r_1"><span class="font_002">{{sel2.Se[$index*4].P}}</span></div>
+															</td>	
 															
-									<ul class="nav-tabs" style="display:table; width:100%;">              					 
-								  <li class="soprts_in_acc_2" ng-class="{'sel' : (bet|filter:{Sd:sel.Id}).length>0}" ng-click="addBet(sel.Id,sel.MkId,sel.Nm,sel.Nm,preHT,preAT,sel.P,sel.P)" 
-								  	 style="display:table-cell;float:left; width:24.9%; border-right:solid 0.1em #17191a; padding: 0;"  ng-repeat="sel in sel2.Se  | orderBy:'MkId' "> 							  	
-										<div class="sports_v_l_1">{{sel.Nm}}</div>	
-						  				<div ng-show="sel.BP<sel.P" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel.P}}</span> <i class="sel_old"> (<del>{{sel.BP}}</del>)</i> </div>
-											<div ng-show="sel.BP>sel.P" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel.P}}</span> <i class="sel_old"> (<del>{{sel.BP}}</del>)</i> </div>
-											<div ng-show="sel.BP==sel.P" class="sports_v_r_1"><span class="font_002">{{sel.P}}</span><i class="sel_old"> (<del>{{sel.BP}}</del>)</i></div>
+															<td ng-if="$index*4+1<sel2.Se.length"class="soprts_in_acc_2" ng-class="{'sel' : (bet|where:{Sd:sel2.Se[$index*4+1].Id}).length>0}" ng-click="addBet(sel2.Se[$index*4+1].Id,sel2.Se[$index*4+1].MkId,sel2.Se[$index*4+1].Nm,sel2.Se[$index*4+1].Nm,preHT,preAT,sel2.Se[$index*4+1].P,sel2.Se[$index*4+1].P,value[0].MId)" 
+													  	 	width="25%" style="border-right:solid 1px #17191a; border-bottom:solid 1px #17191a; padding: 0;"> 		
+													  	 	<div class="sports_v_l_1">{{sel2.Se[$index*4+1].Nm}}</div>	
+											  				<div ng-show="parseFloat(sel2.Se[$index*4+1].BP)<parseFloat(sel2.Se[$index*4+1].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*4+1].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*4+1].BP}}</del>)</i> </div>
+																<div ng-show="parseFloat(sel2.Se[$index*4+1].BP)>parseFloat(sel2.Se[$index*4+1].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*4+1].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*4+1].BP}}</del>)</i> </div>
+																<div ng-show="parseFloat(sel2.Se[$index*4+1].BP)==parseFloat(sel2.Se[$index*4+1].P)" class="sports_v_r_1"><span class="font_002">{{sel2.Se[$index*4+1].P}}</span></div>
+															</td>	
+															
+															<td ng-if="$index*4+2<sel2.Se.length"class="soprts_in_acc_2" ng-class="{'sel' : (bet|where:{Sd:sel2.Se[$index*4+2].Id}).length>0}" ng-click="addBet(sel2.Se[$index*4+2].Id,sel2.Se[$index*4+2].MkId,sel2.Se[$index*4+2].Nm,sel2.Se[$index*4+2].Nm,preHT,preAT,sel2.Se[$index*4+2].P,sel2.Se[$index*4+2].P,value[0].MId)" 
+													  	 	width="25%" style="border-right:solid 1px #17191a; border-bottom:solid 1px #17191a; padding: 0;"> 		
+													  	 	<div class="sports_v_l_1">{{sel2.Se[$index*4+2].Nm}}</div>	
+											  				<div ng-show="parseFloat(sel2.Se[$index*4+2].BP)<parseFloat(sel2.Se[$index*4+2].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*4+2].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*4+2].BP}}</del>)</i> </div>
+																<div ng-show="parseFloat(sel2.Se[$index*4+2].BP)>parseFloat(sel2.Se[$index*4+2].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*4+2].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*4+2].BP}}</del>)</i> </div>
+																<div ng-show="parseFloat(sel2.Se[$index*4+2].BP)==parseFloat(sel2.Se[$index*4+2].P)" class="sports_v_r_1"><span class="font_002">{{sel2.Se[$index*4+2].P}}</span></div>
+															</td>	
+															
+															<td ng-if="$index*4+3<sel2.Se.length"class="soprts_in_acc_2" ng-class="{'sel' : (bet|where:{Sd:sel2.Se[$index*4+3].Id}).length>0}" ng-click="addBet(sel2.Se[$index*4+3].Id,sel2.Se[$index*4+3].MkId,sel2.Se[$index*4+3].Nm,sel2.Se[$index*4+3].Nm,preHT,preAT,sel2.Se[$index*4+3].P,sel2.Se[$index*4+3].P,value[0].MId)" 
+													  	 	width="25%" style="border-bottom:solid 1px #17191a; padding: 0;"> 		
+													  	 	<div class="sports_v_l_1">{{sel2.Se[$index*4+3].Nm}}</div>	
+											  				<div ng-show="parseFloat(sel2.Se[$index*4+3].BP)<parseFloat(sel2.Se[$index*4+3].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*4+3].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*4+3].BP}}</del>)</i> </div>
+																<div ng-show="parseFloat(sel2.Se[$index*4+3].BP)>parseFloat(sel2.Se[$index*4+3].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*4+3].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*4+3].BP}}</del>)</i> </div>
+																<div ng-show="parseFloat(sel2.Se[$index*4+3].BP)==parseFloat(sel2.Se[$index*4+3].P)" class="sports_v_r_1"><span class="font_002">{{sel2.Se[$index*4+3].P}}</span></div>
+															</td>	
+																
+													</tr>    																																							
+												</table>								
+												
+												</div>
+												
+												<div ng-switch-default>
 													
-									</li>																																								
-								</ul>								
-								
-								</div>
-								
-								<div ng-switch-default>
-									
-									<div ng-switch="sel2.Se.length==3"> 					
-										<div ng-switch-when="true">	
+													<div ng-switch="sel2.Se.length==3"> 					
+														<div ng-switch-when="true">	
+																
+																<table class="nav-tabs" cellpadding="0" cellspacing="0" style=width:100%;margin:0px">       
+																	
+																	<tr ng-repeat="i in getTr(sel2.Se.length/3)">          					 
+																		
+																	<td ng-if="$index*3<sel2.Se.length" class="soprts_in_acc_2" ng-class="{'sel' : (bet|where:{Sd:sel2.Se[$index*3].Id}).length>0}" ng-click="addBet(sel2.Se[$index*3].Id,sel2.Se[$index*3].MkId,sel2.Se[$index*3].Nm,sel2.Se[$index*3].Nm,preHT,preAT,sel2.Se[$index*3].P,sel2.Se[$index*3].P,value[0].MId)" 
+															  	 	width="25%" style="border-right:solid 1px #17191a; border-bottom:solid 1px #17191a; padding: 0;"> 		
+															  	 	<div class="sports_v_l_1">{{sel2.Se[$index*3].Nm}}</div>	
+													  				<div ng-show="parseFloat(sel2.Se[$index*3].BP)<parseFloat(sel2.Se[$index*3].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*3].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*3].BP}}</del>)</i> </div>
+																		<div ng-show="parseFloat(sel2.Se[$index*3].BP)>parseFloat(sel2.Se[$index*3].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*3].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*3].BP}}</del>)</i> </div>
+																		<div ng-show="parseFloat(sel2.Se[$index*3].BP)==parseFloat(sel2.Se[$index*3].P)" class="sports_v_r_1"><span class="font_002">{{sel2.Se[$index*3].P}}</span></div>
+																	</td>	
+																	
+																	<td ng-if="$index*3+1<sel2.Se.length"class="soprts_in_acc_2" ng-class="{'sel' : (bet|where:{Sd:sel2.Se[$index*3+1].Id}).length>0}" ng-click="addBet(sel2.Se[$index*3+1].Id,sel2.Se[$index*3+1].MkId,sel2.Se[$index*3+1].Nm,sel2.Se[$index*3+1].Nm,preHT,preAT,sel2.Se[$index*3+1].P,sel2.Se[$index*3+1].P,value[0].MId)" 
+															  	 	width="25%" style="border-right:solid 1px #17191a; border-bottom:solid 1px #17191a; padding: 0;"> 		
+															  	 	<div class="sports_v_l_1">{{sel2.Se[$index*3+1].Nm}}</div>	
+													  				<div ng-show="parseFloat(sel2.Se[$index*3+1].BP)<parseFloat(sel2.Se[$index*3+1].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*3+1].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*3+1].BP}}</del>)</i> </div>
+																		<div ng-show="parseFloat(sel2.Se[$index*3+1].BP)>parseFloat(sel2.Se[$index*3+1].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*3+1].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*3+1].BP}}</del>)</i> </div>
+																		<div ng-show="parseFloat(sel2.Se[$index*3+1].BP)==parseFloat(sel2.Se[$index*3+1].P)" class="sports_v_r_1"><span class="font_002">{{sel2.Se[$index*3+1].P}}</span></div>
+																	</td>	
+																	
+																	<td ng-if="$index*3+2<sel2.Se.length"class="soprts_in_acc_2" ng-class="{'sel' : (bet|where:{Sd:sel2.Se[$index*3+2].Id}).length>0}" ng-click="addBet(sel2.Se[$index*3+2].Id,sel2.Se[$index*3+2].MkId,sel2.Se[$index*3+2].Nm,sel2.Se[$index*3+2].Nm,preHT,preAT,sel2.Se[$index*3+2].P,sel2.Se[$index*3+2].P,value[0].MId)" 
+															  	 	width="25%" style="border-bottom:solid 1px #17191a; padding: 0;"> 		
+															  	 	<div class="sports_v_l_1">{{sel2.Se[$index*3+2].Nm}}</div>	
+													  				<div ng-show="parseFloat(sel2.Se[$index*3+2].BP)<parseFloat(sel2.Se[$index*3+2].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*3+2].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*3+2].BP}}</del>)</i> </div>
+																		<div ng-show="parseFloat(sel2.Se[$index*3+2].BP)>parseFloat(sel2.Se[$index*3+2].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*3+2].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*3+2].BP}}</del>)</i> </div>
+																		<div ng-show="parseFloat(sel2.Se[$index*3+2].BP)==parseFloat(sel2.Se[$index*3+2].P)" class="sports_v_r_1"><span class="font_002">{{sel2.Se[$index*3+2].P}}</span></div>
+																	</td>	
+																		
+																	</tr>																																					
+																</table>		
 												
-												<ul class="nav-tabs" style="display:table; width:100%;">              					 
-												  <li class="soprts_in_acc_2" ng-class="{'sel' : (bet|filter:{Sd:sel.Id}).length>0}" ng-click="addBet(sel.Id,sel.MkId,sel.Nm,sel.Nm,preHT,preAT,sel.P,sel.P)" 
-												  	 style="display:table-cell;float:center; width:33.23%; border-right:solid 0.1em #17191a; padding: 0;"  ng-repeat="sel in sel2.Se  | orderBy:'MkId' "> 							  	
-														<div class="sports_v_l_1">{{sel.Nm}}</div>	
-										  				<div ng-show="sel.BP<sel.P" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel.P}}</span> <i class="sel_old"> (<del>{{sel.BP}}</del>)</i> </div>
-															<div ng-show="sel.BP>sel.P" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel.P}}</span> <i class="sel_old"> (<del>{{sel.BP}}</del>)</i> </div>
-															<div ng-show="sel.BP==sel.P" class="sports_v_r_1"><span class="font_002">{{sel.P}}</span><i class="sel_old"> (<del>{{sel.BP}}</del>)</i></div>
-													</li>																																								
-												</ul>		
-								
-										</div>
-										<div ng-switch-default>
+														</div>
+														<div ng-switch-default>
+																
+																<table class="nav-tabs" cellpadding="0" cellspacing="0" style=width:100%;margin:0px">          					 
+																  <tr ng-repeat="i in getTr(sel2.Se.length/2)">     					 
+																	  
+																	  <td ng-if="$index*2<sel2.Se.length" class="soprts_in_acc_2" ng-class="{'sel' : (bet|where:{Sd:sel2.Se[$index*2].Id}).length>0}" ng-click="addBet(sel2.Se[$index*2].Id,sel2.Se[$index*2].MkId,sel2.Se[$index*2].Nm,sel2.Se[$index*2].Nm,preHT,preAT,sel2.Se[$index*2].P,sel2.Se[$index*2].P,value[0].MId)" 
+																  	 	width="25%" style="border-right:solid 1px #17191a; border-bottom:solid 1px #17191a; padding: 0;"> 		
+																  	 	<div class="sports_v_l_1">{{sel2.Se[$index*2].Nm}}</div>	
+														  				<div ng-show="parseFloat(sel2.Se[$index*2].BP)<parseFloat(sel2.Se[$index*2].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*2].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*2].BP}}</del>)</i> </div>
+																			<div ng-show="parseFloat(sel2.Se[$index*2].BP)>parseFloat(sel2.Se[$index*2].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*2].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*2].BP}}</del>)</i> </div>
+																			<div ng-show="parseFloat(sel2.Se[$index*2].BP)==parseFloat(sel2.Se[$index*2].P)" class="sports_v_r_1"><span class="font_002">{{sel2.Se[$index*2].P}}</span></div>
+																		</td>	
+																		
+																		<td ng-if="$index*2+1<sel2.Se.length"class="soprts_in_acc_2" ng-class="{'sel' : (bet|where:{Sd:sel2.Se[$index*2+1].Id}).length>0}" ng-click="addBet(sel2.Se[$index*2+1].Id,sel2.Se[$index*2+1].MkId,sel2.Se[$index*2+1].Nm,sel2.Se[$index*2+1].Nm,preHT,preAT,sel2.Se[$index*2+1].P,sel2.Se[$index*2+1].P,value[0].MId)" 
+																  	 	width="25%" style="border-bottom:solid 1px #17191a; padding: 0;"> 		
+																  	 	<div class="sports_v_l_1">{{sel2.Se[$index*2+1].Nm}}</div>	
+														  				<div ng-show="parseFloat(sel2.Se[$index*2+1].BP)<parseFloat(sel2.Se[$index*2+1].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*2+1].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*2+1].BP}}</del>)</i> </div>
+																			<div ng-show="parseFloat(sel2.Se[$index*2+1].BP)>parseFloat(sel2.Se[$index*2+1].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*2+1].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*2+1].BP}}</del>)</i> </div>
+																			<div ng-show="parseFloat(sel2.Se[$index*2+1].BP)==parseFloat(sel2.Se[$index*2+1].P)" class="sports_v_r_1"><span class="font_002">{{sel2.Se[$index*2+1].P}}</span></div>
+																		</td>						
+																	</tr>																																		
+																</table>		
+																
+														</div>	
+													</div>	
+													
+											</div>
+										</div>		
+											
+											
+										</v-pane-header>	
 												
-												<ul class="nav-tabs" style="display:table; width:100%;">              					 
-												  <li class="soprts_in_acc_2" ng-class="{'sel' : (bet|filter:{Sd:sel.Id}).length>0}" ng-click="addBet(sel.Id,sel.MkId,sel.Nm,sel.Nm,preHT,preAT,sel.P,sel.P)" 
-												  	 style="display:table-cell;float:center; width:49.9%; border-right:solid 0.1em #17191a; padding: 0;"  ng-repeat="sel in sel2.Se  | orderBy:'MkId' "> 							  	
-														<div class="sports_v_l_1">{{sel.Nm}}</div>	
-										  				<div ng-show="sel.BP<sel.P" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel.P}}</span> <i class="sel_old"> (<del>{{sel.BP}}</del>)</i> </div>
-															<div ng-show="sel.BP>sel.P" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel.P}}</span> <i class="sel_old"> (<del>{{sel.BP}}</del>)</i> </div>
-															<div ng-show="sel.BP==sel.P" class="sports_v_r_1"><span class="font_002">{{sel.P}}</span><i class="sel_old"> (<del>{{sel.BP}}</del>)</i></div>
-													</li>																																								
-												</ul>		
-												
-										</div>	
-									</div>	
-									
-							</div>
-						</div>		
-							
-							
-						</v-pane-header>	
-								
-				 		<v-pane-content>			 	
-						</v-pane-content>
+								 		<v-pane-content>			 	
+										</v-pane-content>
 
-					</v-pane>		
-				</v-pane-content>				
-			</v-pane>	
-			
-		</div>	
-		
-	</div>	
+									</v-pane>		
+								</v-pane-content>				
+							</v-pane>	
+							
+						</div>
+						
+						<div ng-switch-default>
+							
+							<v-pane style="padding:0 0 0 0;box-shadow: 0 0px 0px 0px rgba(0, 0, 0, 0.8)" ng-if="(MKCAT.indexOf(value[0].MTyId)>-1)||mTyId =='ALL'" expanded="true" ng-repeat="(key,value) in MK|filter:{Sus:false,Vis:true} | orderBy:['MTyId','Id','Sq'] | groupBy:'MTyId' ">
+							<v-pane-header inactive>
+								
+							<div class="accordion-header_2" ng-class="{'open' : $pane.isExpanded() }">
+									
+								<span>
+									<a href="#"  class="left_menu_in_1_l_1" ng-click="us_mkt(value[0].MId,value[0].Id)">	
+										<i style="padding-top:10px;" ng-if="(savedFavM|filter:{mkid:value[0].Id})[0].mid == undefined" id="{{value[0].Id}}" class="fa fa-star-o"></i>
+										<i style="padding-top:10px;" ng-if="(savedFavM|filter:{mkid:value[0].Id})[0].mid !== undefined" id="{{value[0].Id}}" class="fa fa-star"></i>
+									</a>
+								</span>	
+								
+									<span ng-click="$pane.toggle()" style="padding-left:10px; display:table; width:90%;"><b>{{value[0].Nm}}</b> </span>
+								</div> 
+																	
+							</v-pane-header>			
+								<v-pane-content expanded="true" ng-show="true">	
+									<v-pane expanded="true"  ng-repeat="sel2 in value|orderBy:'Id'">	
+										<v-pane-header>
+											
+											<div ng-switch="sel2.Se.length>3"> 					
+												<div ng-switch-when="true">		
+																	
+													<table class="nav-tabs" cellpadding="0" cellspacing="0" style=width:100%;margin:0px"> 
+														<tr ng-repeat="i in getTr(sel2.Se.length/4)"> 
+													  	 
+													  	 <td ng-if="$index*4<sel2.Se.length" class="soprts_in_acc_2" ng-class="{'sel' : (bet|where:{Sd:sel2.Se[$index*4].Id}).length>0}" ng-click="addBet(sel2.Se[$index*4].Id,sel2.Se[$index*4].MkId,sel2.Se[$index*4].Nm,sel2.Se[$index*4].Nm,preHT,preAT,sel2.Se[$index*4].P,sel2.Se[$index*4].P,value[0].MId)" 
+													  	 	width="25%" style="border-right:solid 1px #17191a; border-bottom:solid 1px #17191a; padding: 0;"> 		
+													  	 	<div class="sports_v_l_1">{{sel2.Se[$index*4].Nm}}</div>	
+											  				<div ng-show="parseFloat(sel2.Se[$index*4].BP)<parseFloat(sel2.Se[$index*4].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*4].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*4].BP}}</del>)</i> </div>
+																<div ng-show="parseFloat(sel2.Se[$index*4].BP)>parseFloat(sel2.Se[$index*4].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*4].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*4].BP}}</del>)</i> </div>
+																<div ng-show="parseFloat(sel2.Se[$index*4].BP)==parseFloat(sel2.Se[$index*4].P)" class="sports_v_r_1"><span class="font_002">{{sel2.Se[$index*4].P}}</span></div>
+															</td>	
+															
+															<td ng-if="$index*4+1<sel2.Se.length"class="soprts_in_acc_2" ng-class="{'sel' : (bet|where:{Sd:sel2.Se[$index*4+1].Id}).length>0}" ng-click="addBet(sel2.Se[$index*4+1].Id,sel2.Se[$index*4+1].MkId,sel2.Se[$index*4+1].Nm,sel2.Se[$index*4+1].Nm,preHT,preAT,sel2.Se[$index*4+1].P,sel2.Se[$index*4+1].P,value[0].MId)" 
+													  	 	width="25%" style="border-right:solid 1px #17191a; border-bottom:solid 1px #17191a; padding: 0;"> 		
+													  	 	<div class="sports_v_l_1">{{sel2.Se[$index*4+1].Nm}}</div>	
+											  				<div ng-show="parseFloat(sel2.Se[$index*4+1].BP)<parseFloat(sel2.Se[$index*4+1].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*4+1].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*4+1].BP}}</del>)</i> </div>
+																<div ng-show="parseFloat(sel2.Se[$index*4+1].BP)>parseFloat(sel2.Se[$index*4+1].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*4+1].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*4+1].BP}}</del>)</i> </div>
+																<div ng-show="parseFloat(sel2.Se[$index*4+1].BP)==parseFloat(sel2.Se[$index*4+1].P)" class="sports_v_r_1"><span class="font_002">{{sel2.Se[$index*4+1].P}}</span></div>
+															</td>	
+															
+															<td ng-if="$index*4+2<sel2.Se.length"class="soprts_in_acc_2" ng-class="{'sel' : (bet|where:{Sd:sel2.Se[$index*4+2].Id}).length>0}" ng-click="addBet(sel2.Se[$index*4+2].Id,sel2.Se[$index*4+2].MkId,sel2.Se[$index*4+2].Nm,sel2.Se[$index*4+2].Nm,preHT,preAT,sel2.Se[$index*4+2].P,sel2.Se[$index*4+2].P,value[0].MId)" 
+													  	 	width="25%" style="border-right:solid 1px #17191a; border-bottom:solid 1px #17191a; padding: 0;"> 		
+													  	 	<div class="sports_v_l_1">{{sel2.Se[$index*4+2].Nm}}</div>	
+											  				<div ng-show="parseFloat(sel2.Se[$index*4+2].BP)<parseFloat(sel2.Se[$index*4+2].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*4+2].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*4+2].BP}}</del>)</i> </div>
+																<div ng-show="parseFloat(sel2.Se[$index*4+2].BP)>parseFloat(sel2.Se[$index*4+2].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*4+2].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*4+2].BP}}</del>)</i> </div>
+																<div ng-show="parseFloat(sel2.Se[$index*4+2].BP)==parseFloat(sel2.Se[$index*4+2].P)" class="sports_v_r_1"><span class="font_002">{{sel2.Se[$index*4+2].P}}</span></div>
+															</td>	
+															
+															<td ng-if="$index*4+3<sel2.Se.length"class="soprts_in_acc_2" ng-class="{'sel' : (bet|where:{Sd:sel2.Se[$index*4+3].Id}).length>0}" ng-click="addBet(sel2.Se[$index*4+3].Id,sel2.Se[$index*4+3].MkId,sel2.Se[$index*4+3].Nm,sel2.Se[$index*4+3].Nm,preHT,preAT,sel2.Se[$index*4+3].P,sel2.Se[$index*4+3].P,value[0].MId)" 
+													  	 	width="25%" style="border-bottom:solid 1px #17191a; padding: 0;"> 		
+													  	 	<div class="sports_v_l_1">{{sel2.Se[$index*4+3].Nm}}</div>	
+											  				<div ng-show="parseFloat(sel2.Se[$index*4+3].BP)<parseFloat(sel2.Se[$index*4+3].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*4+3].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*4+3].BP}}</del>)</i> </div>
+																<div ng-show="parseFloat(sel2.Se[$index*4+3].BP)>parseFloat(sel2.Se[$index*4+3].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*4+3].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*4+3].BP}}</del>)</i> </div>
+																<div ng-show="parseFloat(sel2.Se[$index*4+3].BP)==parseFloat(sel2.Se[$index*4+3].P)" class="sports_v_r_1"><span class="font_002">{{sel2.Se[$index*4+3].P}}</span></div>
+															</td>	
+
+														</tr>																																						
+													</table>								
+												
+												</div>
+												
+												<div ng-switch-default>
+													
+													<div ng-switch="sel2.Se.length==3"> 					
+														<div ng-switch-when="true">	
+																
+																<table class="nav-tabs" cellpadding="0" cellspacing="0" style=width:100%;margin:0px">    
+																	<tr ng-repeat="i in getTr(sel2.Se.length/3)">          					 
+																		
+																	<td ng-if="$index*3<sel2.Se.length" class="soprts_in_acc_2" ng-class="{'sel' : (bet|where:{Sd:sel2.Se[$index*3].Id}).length>0}" ng-click="addBet(sel2.Se[$index*3].Id,sel2.Se[$index*3].MkId,sel2.Se[$index*3].Nm,sel2.Se[$index*3].Nm,preHT,preAT,sel2.Se[$index*3].P,sel2.Se[$index*3].P,value[0].MId)" 
+															  	 	width="25%" style="border-right:solid 1px #17191a; border-bottom:solid 1px #17191a; padding: 0;"> 		
+															  	 	<div class="sports_v_l_1">{{sel2.Se[$index*3].Nm}}</div>	
+													  				<div ng-show="parseFloat(sel2.Se[$index*3].BP)<parseFloat(sel2.Se[$index*3].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*3].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*3].BP}}</del>)</i> </div>
+																		<div ng-show="parseFloat(sel2.Se[$index*3].BP)>parseFloat(sel2.Se[$index*3].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*3].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*3].BP}}</del>)</i> </div>
+																		<div ng-show="parseFloat(sel2.Se[$index*3].BP)==parseFloat(sel2.Se[$index*3].P)" class="sports_v_r_1"><span class="font_002">{{sel2.Se[$index*3].P}}</span></div>
+																	</td>	
+																	
+																	<td ng-if="$index*3+1<sel2.Se.length"class="soprts_in_acc_2" ng-class="{'sel' : (bet|where:{Sd:sel2.Se[$index*3+1].Id}).length>0}" ng-click="addBet(sel2.Se[$index*3+1].Id,sel2.Se[$index*3+1].MkId,sel2.Se[$index*3+1].Nm,sel2.Se[$index*3+1].Nm,preHT,preAT,sel2.Se[$index*3+1].P,sel2.Se[$index*3+1].P,value[0].MId)" 
+															  	 	width="25%" style="border-right:solid 1px #17191a; border-bottom:solid 1px #17191a; padding: 0;"> 		
+															  	 	<div class="sports_v_l_1">{{sel2.Se[$index*3+1].Nm}}</div>	
+													  				<div ng-show="parseFloat(sel2.Se[$index*3+1].BP)<parseFloat(sel2.Se[$index*3+1].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*3+1].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*3+1].BP}}</del>)</i> </div>
+																		<div ng-show="parseFloat(sel2.Se[$index*3+1].BP)>parseFloat(sel2.Se[$index*3+1].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*3+1].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*3+1].BP}}</del>)</i> </div>
+																		<div ng-show="parseFloat(sel2.Se[$index*3+1].BP)==parseFloat(sel2.Se[$index*3+1].P)" class="sports_v_r_1"><span class="font_002">{{sel2.Se[$index*3+1].P}}</span></div>
+																	</td>	
+																	
+																	<td ng-if="$index*3+2<sel2.Se.length"class="soprts_in_acc_2" ng-class="{'sel' : (bet|where:{Sd:sel2.Se[$index*3+2].Id}).length>0}" ng-click="addBet(sel2.Se[$index*3+2].Id,sel2.Se[$index*3+2].MkId,sel2.Se[$index*3+2].Nm,sel2.Se[$index*3+2].Nm,preHT,preAT,sel2.Se[$index*3+2].P,sel2.Se[$index*3+2].P,value[0].MId)" 
+															  	 	width="25%" style="border-bottom:solid 1px #17191a; padding: 0;"> 		
+															  	 	<div class="sports_v_l_1">{{sel2.Se[$index*3+2].Nm}}</div>	
+													  				<div ng-show="parseFloat(sel2.Se[$index*3+2].BP)<parseFloat(sel2.Se[$index*3+2].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*3+2].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*3+2].BP}}</del>)</i> </div>
+																		<div ng-show="parseFloat(sel2.Se[$index*3+2].BP)>parseFloat(sel2.Se[$index*3+2].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*3+2].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*3+2].BP}}</del>)</i> </div>
+																		<div ng-show="parseFloat(sel2.Se[$index*3+2].BP)==parseFloat(sel2.Se[$index*3+2].P)" class="sports_v_r_1"><span class="font_002">{{sel2.Se[$index*3+2].P}}</span></div>
+																	</td>	
+															
+																	
+																	</tr>																																							
+																</table>		
+												
+														</div>
+														<div ng-switch-default>
 	
-</v-pane-content>	
-	</v-pane>	
+																<table class="nav-tabs" cellpadding="0" cellspacing="0" style=width:100%;margin:0px">   
+																	<tr ng-repeat="i in getTr(sel2.Se.length/2)">     					 
+																	  
+																	  <td ng-if="$index*2<sel2.Se.length" class="soprts_in_acc_2" ng-class="{'sel' : (bet|where:{Sd:sel2.Se[$index*2].Id}).length>0}" ng-click="addBet(sel2.Se[$index*2].Id,sel2.Se[$index*2].MkId,sel2.Se[$index*2].Nm,sel2.Se[$index*2].Nm,preHT,preAT,sel2.Se[$index*2].P,sel2.Se[$index*2].P,value[0].MId)" 
+																  	 	width="25%" style="border-right:solid 1px #17191a; border-bottom:solid 1px #17191a; padding: 0;"> 		
+																  	 	<div class="sports_v_l_1">{{sel2.Se[$index*2].Nm}}</div>	
+														  				<div ng-show="parseFloat(sel2.Se[$index*2].BP)<parseFloat(sel2.Se[$index*2].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*2].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*2].BP}}</del>)</i> </div>
+																			<div ng-show="parseFloat(sel2.Se[$index*2].BP)>parseFloat(sel2.Se[$index*2].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*2].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*2].BP}}</del>)</i> </div>
+																			<div ng-show="parseFloat(sel2.Se[$index*2].BP)==parseFloat(sel2.Se[$index*2].P)" class="sports_v_r_1"><span class="font_002">{{sel2.Se[$index*2].P}}</span></div>
+																		</td>	
+																		
+																		<td ng-if="$index*2+1<sel2.Se.length"class="soprts_in_acc_2" ng-class="{'sel' : (bet|where:{Sd:sel2.Se[$index*2+1].Id}).length>0}" ng-click="addBet(sel2.Se[$index*2+1].Id,sel2.Se[$index*2+1].MkId,sel2.Se[$index*2+1].Nm,sel2.Se[$index*2+1].Nm,preHT,preAT,sel2.Se[$index*2+1].P,sel2.Se[$index*2+1].P,value[0].MId)" 
+																  	 	width="25%" style="border-bottom:solid 1px #17191a; padding: 0;"> 		
+																  	 	<div class="sports_v_l_1">{{sel2.Se[$index*2+1].Nm}}</div>	
+														  				<div ng-show="parseFloat(sel2.Se[$index*2+1].BP)<parseFloat(sel2.Se[$index*2+1].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*2+1].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*2+1].BP}}</del>)</i> </div>
+																			<div ng-show="parseFloat(sel2.Se[$index*2+1].BP)>parseFloat(sel2.Se[$index*2+1].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*2+1].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*2+1].BP}}</del>)</i> </div>
+																			<div ng-show="parseFloat(sel2.Se[$index*2+1].BP)==parseFloat(sel2.Se[$index*2+1].P)" class="sports_v_r_1"><span class="font_002">{{sel2.Se[$index*2+1].P}}</span></div>
+																		</td>	
+															
+																	</tr>																																							
+																</table>		
+																
+																
+														</div>	
+													</div>	
+													
+											</div>
+										</div>	
+											
+										</v-pane-header>	
+												
+								 		<v-pane-content>			 	
+										</v-pane-content>
+
+									</v-pane>		
+								</v-pane-content>				
+							</v-pane>	
+							
+						</div>	
+						
+					</div>	
+					
+					</v-pane-content>	
+					</v-pane>	
 	
 </div>
 

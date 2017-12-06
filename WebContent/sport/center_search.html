@@ -31,7 +31,7 @@
 								<v-pane-header>
 									<div>	
 							 		<ul class="nav-tabs">              					 
-        					  <li class="soprts_in_acc_2" ng-click="addBet(sel.Id,sel.MkId,value[0].Nm,sel.Nm,(LS|filter:{MId:tabMId})[0].HT,(LS|filter:{MId:tabMId})[0].AT,sel.P,sel.P)" 
+        					  <li class="soprts_in_acc_2" ng-click="addBet(sel.Id,sel.MkId,value[0].Nm,sel.Nm,(LS|filter:{MId:tabMId})[0].HT,(LS|filter:{MId:tabMId})[0].AT,sel.P,sel.P,value[0].MId)" 
         					  	 ng-style="{'width' : {{getWidth(value[0].Se.length)}}+'%'}" ng-repeat="sel in sel2.Se | orderBy:'MkId' "> 	
 											<div>{{sel.Nm}}
 							  				<div ng-show="sel.BP<sel.P" class="sports_v_r_1" ><i class="fa fa-fw fa-chevron-up" style="color:green"></i><b ng-bind="sel.P"></b> <i style="color:grey;font-size:10px;"> (<del>{{sel.BP}}</del>)</i> </div>

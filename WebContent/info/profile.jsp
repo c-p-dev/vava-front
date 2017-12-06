@@ -378,7 +378,7 @@
 			},
 			messages: {
 				current_password :{
-					required:"현재 사용중인 비빌번호를 입력해 주세요.",
+					required:"현재 사용중인 비밀번호를 입력해 주세요.",
 					remote : "비밓번호를 확인 후 다시 입력해 주세요.",
 				},
 				new_passowrd :{

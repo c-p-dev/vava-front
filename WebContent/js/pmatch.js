@@ -257,6 +257,11 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 		$scope.betG = false;
 		$scope.betH = false;
 		$scope.paneIdx = -1;
+		$scope.betFix = 1;
+		
+		$scope.betFix2 = function(f){
+			$scope.betFix = f;
+		}
 		
 
 		$scope.savedFavM = JSON.parse(localStorage.getItem('SFM'));
@@ -264,7 +269,15 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 		if($scope.savedFavM  === null){
 			$scope.savedFavM = [];
 		}
-			
+		
+		$scope.getTr = function(n) {			
+			var res = [];			
+			for (var i = 0; i < n; i++) {
+        res.push(i);
+      }
+      return res;
+		}
+	
 		//console.log("$scope.savedFavM = " + $scope.savedFavM);
 		
 		//$scope.savedFavM = JSON.parse(chrome.storage.local.getItem('SFM'));

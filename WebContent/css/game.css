@@ -68,15 +68,29 @@
  *  right                                                                              *
  *-------------------------------------------------------------------------------------*/
 .game_right_wrap {width:260px; }
+/*
 .slip_title_wrap {width:100%; height:43px; line-height:43px;float:left; margin:0 0 1px 0; background:#262a2b }
 .slip_title_wrap p{color:#ffffff; float:left;margin:0 0 0 10px}
 .slip_title_wrap ul{float:right;margin:0 10px 0 0}
 .slip_title_wrap ul li {float:left; margin:0 0 0 5px}
+*/
+
+.slip_title_wrap {width:100%; height:43px; line-height:43px;float:left; border-bottom:solid 1px #1c2021; background:#0792c4; float:left; }
+.slip_title_wrap p{color:#ffffff; float:left;margin:0 0 0 10px; font-weight:bold}
+.slip_title_wrap ul{float:right;margin:0 10px 0 0; color:#f8f8f8;}
+.slip_title_wrap ul li {float:left; margin:0 0 0 5px}
+
 .slip_tab_wrap {width:100%; float:left;margin:0 0 1px 0}
 .slip_tab_wrap ul {width:100%; float:left;}
 .slip_tab_wrap ul li{float:left; margin:0 1px 0 0}
+/*
 .slip_tab_on {width:110px; height:34px; display:inline-block; background:#353b3b; color:#ffffff; text-align:center; line-height:34px}
 .slip_tab {width:109px; height:34px; display:inline-block; background:#222627; text-align:center; line-height:34px}
+*/
+
+.slip_tab_on {width:110px; height:34px; display:inline-block; background:#586969; color:#b7ffff; text-align:center; line-height:34px}
+.slip_tab {width:109px; height:34px; display:inline-block; background:#222627; text-align:center; line-height:34px}
+
 .slip_tab_wrap ul li.slip_tab_on {width:110px; border:none}
 
 .slip_bet_table_wrap {padding:10px;  width:240px; float:left; background:#262a2b}
@@ -138,8 +152,8 @@
 .live_tab_wrap {width:100%; float:left; background:#2d3232; margin:0 0 10px 0 }
 .live_tab_table {display:table; clear:both}
 .live_row {display:table-row}
-.live_tab_on {display:table-cell ; vertical-align:middle; padding:10px 15px 10px 15px; border:solid 1px #0792c4;background:#293133; }
-.live_tab {padding:10px 15px 10px 15px; background:#293133; display:table-cell ; vertical-align:middle; border-right:solid 1px #262a2b}
+.live_tab_on {display:table-cell ; vertical-align:middle; padding:10px 10px 10px 10px; border:solid 1px #0792c4;background:#293133; }
+.live_tab {padding:10px 5px 10px 5px; background:#293133; display:table-cell ; vertical-align:middle; border-right:solid 1px #262a2b}
 .live_tab_on .live_tab_text {float:left; color:#0792c4}
 .live_tab .live_tab_text {float:left; color:#8a8c8d}
 .live_tab:hover {background:#2f383a}
@@ -283,7 +297,7 @@
 .sports_in_bookmark {position:absolute; right:40px}
 
 
-.sports_in_tab {border-right:solid 1px #17191a;  border-bottom:solid 1px #17191a}
+.sports_in_tab {}
 .sports_in_tab_on {padding:11px 29px 11px 29px;  border:solid 1px #0792c4 ; margin-right:0; color:#0792c4;display:inline-block; background:#293133}
 .sports_in_tab_off {color:#ffffff;padding:11px 30px 11px 30px;  background:#293133; margin-right:1px ;display:inline-block}
 .sports_in_tab_off:hover {background:#2f383a}
@@ -326,7 +340,7 @@
 .casino_left {width:260px; margin:0 30px 0 0; float:left;}
 .casino_right {width:1040px;float:left;}
 .casino_visual_wrap {width:100%; float:left; margin:0 0 15px 0}
-.casino_board_wrap {width:100%; float:left; margin:10px 0 20px 0}
+.casino_board_wrap {width:100%; float:left; margin:0 0 20px 0}
 .casino_board_list {}
 .casino_board_list li {float:left; margin:0 40px 40px 0; width:320px;}
 .casino_board_list li:nth-child(3),

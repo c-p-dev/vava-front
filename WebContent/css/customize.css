@@ -51,15 +51,15 @@
 .live_table {background:#222627;width:100%; }
 
 .live_0_0 {text-align:center; width:3% ;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;}
-.live_0_1 {text-align:center; width:7% ;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;}
+.live_0_1 {text-align:center; width:8% ;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;}
 .live_0_1:hover {background:#2e3334}
 .live_1_1 {text-align:center; width:10% ;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;}
 
 /*.live_1_1:hover {background:#2e3334}*/
 
-.live_2_1 {text-align:center; text-align:center; color:#ffa800; width:5%;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021; }
+.live_2_1 {text-align:center; text-align:center; color:#ffa800; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021; }
 /*.live_2_1:hover {background:#2e3334}*/
-.live_3_1 {text-align:center; width:13%;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;  }
+.live_3_1 {text-align:center; width:15%;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;  }
 /*.live_3_1:hover {background:#2e3334}*/
 .live_4_1 {text-align:center; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;-webkit-transition: all .2s ease-in-out;-moz-transition: all .2s ease-in-out;-o-transition: all .2s ease-in-out;-ms-transition: all .2s ease-in-out;transition: all .2s ease-in-out;}
 /*.live_4_1:hover {background:#2e3334}*/
@@ -74,9 +74,9 @@
 
 .pre_0_0 {text-align:center; width:3% ;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;}
 
-.sports_2_2 {width:9% ;text-align:left; padding-left:10px; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;}
-.sports_3_2 {width:9% ;text-align:center; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;}
-.sports_4_2 {width:9% ;text-align:left; padding-left:10px; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;}
+.sports_2_2 {width:12% ;text-align:left; padding-left:10px; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;}
+.sports_3_2 {width:10% ;text-align:center; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;}
+.sports_4_2 {width:10% ;text-align:left; padding-left:10px; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;}
 .sports_5_2 {width:13% ;text-align:center; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;}
 .sports_6_2 {width:* ;text-align:center; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;}
 
@@ -85,7 +85,10 @@
 .sports_10_3 {background: #222627 url("/images/accordion-closed.png") no-repeat 90% center ; width:6% ;text-align:center;border-bottom:solid 1px #1c2021;}
 .sports_10_3.open {background: #222627 url("/images/accordion-opened.png") no-repeat 90% center;}
 
-
+.sports_10_4 {width:4% ;text-align:center; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;color:#0792c4;background:#222627;}
+.sports_10_4:hover { background:#2e3334; } 
+.sports_10_4.sel {background: #0792c4;}
+.fa-plus-square.open {color:#0792c4;}
 
 .sports_table_1 {background:#222627; width:100%; }
 .sports_table_1 tr td {cursor:pointer;height:34px; }
@@ -128,6 +131,7 @@
 .live_vs_1 {color:#5c7785}
 
 .live_tab_text_1 {float:left; color:#0792c4}
+.live_tab_text_2 {float:left; margin-left: 2%; color:#ffffff}
 
 .live_5_1 {color:#0792c4;text-align:center;background:#222627;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;-webkit-transition: all .2s ease-in-out;-moz-transition: all .2s ease-in-out;-o-transition: all .2s ease-in-out;-ms-transition: all .2s ease-in-out;transition: all .2s ease-in-out;}
 .live_5_1:hover {background:#2e3334;}
@@ -159,7 +163,7 @@
 
 .soprts_in_acc_2 {background: #262a2b;color: #b7b7b7;text-align: left;padding:0 15px 0 20px;cursor: pointer;margin-top: 0;margin-right: 0px;margin-bottom: 1px;transition: 0.25s all;position: relative;height:30px; line-height:30px;}
 .soprts_in_acc_2.sel {background:#0792c4;color:#ffa800;font-weight:bold;}
-
+.soprts_in_acc_2:hover {background:#293133}
 
 .soprts_in_acc_3 {background: #262a2b;color: #b7b7b7;text-align: left;padding:0 15px 0 15px;cursor: pointer;margin-top: 0;margin-right: 1px;margin-bottom: 1px;transition: 0.25s all;position: relative;height:30px; line-height:30px;}
 
@@ -199,8 +203,13 @@
 
 .live_table_t_1{background:#262a2b; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021; height:34px;text-align:center}
 
-.live_table_t_2{background: #262a2b url("/images/accordion-closed.png") no-repeat 65px center ;text-align:center; padding: 0 5px 0 0px;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021; cursor: pointer;position: relative; height:34px; line-height:34px;margin:0 0 1px 0; cursor:pointer}
-.live_table_t_2.open{background: #262a2b url("/images/accordion-opened.png") no-repeat 65px center;}
+.live_table_t_2{background: #262a2b url("/images/accordion-closed.png") no-repeat ;background-position:50%; text-align:center; padding: 0 5px 0 0px;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021; cursor: pointer;position: relative; height:34px; line-height:34px;margin:0 0 1px 0; cursor:pointer}
+.live_table_t_2.open{background: #262a2b url("/images/accordion-opened.png") no-repeat ;background-position:50%;}
+
+.pre_table_t_2{background: #222627 url("/images/accordion-closed.png") no-repeat ;background-position:50%; text-align:center; padding: 0 5px 0 0px;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021; cursor: pointer;position: relative; height:34px; line-height:34px;margin:0 0 1px 0; cursor:pointer}
+.pre_table_t_2.open{background: #222627 url("/images/accordion-opened.png") no-repeat ;background-position:50%;}
+
+
 
 .sports_title_table_1 {width:100%;}
 .sports_title_table_1 tr td {background:#262a2b;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021; height:34px;text-align:center}
@@ -232,10 +241,10 @@
 .slip_notice_wrap {width:100%; height:43px; line-height:43px;align:center; margin:5px 0 1px 0; background:#384447 }
 
 .accordion-header_1 {background: #2d3232 url("/images/accordion-closed.png") no-repeat 240px ;color: #0792c4; padding: 0 15px 0 15px;cursor: pointer;position: relative; height:34px; line-height:34px;margin:0 0 1px 0; cursor:pointer}
-.accordion-header_2 {background: #2e3334 url("/images/accordion-closed.png") no-repeat ; background-position:95% 50%;  padding: 0 15px 0 15px;cursor: pointer;position: relative; height:34px; line-height:34px;margin:0 0 1px 0; cursor:pointer}
-/*.accordion-header_2.open {background: #2e3334 url("/images/accordion-opened.png") no-repeat ;background-position:95% 50%;}*/
-.accordion-header_3 {background: #3a3a3a url("/images/accordion-closed.png") no-repeat ; background-position:95% 50%;  padding: 0 15px 0 15px;cursor: pointer;position: relative; height:34px; line-height:34px;margin:0 0 1px 0; cursor:pointer}
-.accordion-header_4 {background: #677173 url("/images/accordion-closed.png") no-repeat ; background-position:95% 50%;  padding: 0 15px 0 15px;cursor: pointer;position: relative; height:34px; line-height:34px;margin:0 0 1px 0; cursor:pointer}
+.accordion-header_2 {background: #2e3334 url("/images/accordion-closed.png") no-repeat ; background-position:98%;  padding: 0 15px 0 15px;cursor: pointer;position: relative; height:34px; line-height:34px;margin:0 0 1px 0; cursor:pointer}
+.accordion-header_2.open {background: #2e3334 url("/images/accordion-opened.png") no-repeat ;background-position:98%;}
+.accordion-header_3 {background: #293133 url("/images/accordion-closed.png") no-repeat ; background-position:95% 50%;  padding: 0 15px 0 15px;cursor: pointer;position: relative; height:34px; line-height:34px;margin:0 0 1px 0; cursor:pointer}
+.accordion-header_4 {background: #494d4d url("/images/accordion-closed.png") no-repeat ; background-position:95% 50%;  padding: 0 15px 0 15px;cursor: pointer;position: relative; height:34px; line-height:34px;margin:0 0 1px 0; cursor:pointer}
 
 
 .soprts_in_acc_1 {background: #2d3232;color: #0792c4; text-align:left;padding:0 15px 0 15px;cursor: pointer;margin-top: 7px;margin-bottom: 1px;transition: 0.25s all;position: relative;height:40px; line-height:40px;}
@@ -247,12 +256,12 @@
 .effect_tab_1:hover {background:#37393b;}
 
 
-.select button.effect_tab_select_t_1{ position:relative;z-index:2; cursor:pointer; padding:13px 10px 10px 10px; border:none; background:none; outline:none; color:#c1c3c4; width:180px;clear:both }
+.select button.effect_tab_select_t_1{ position:relative;z-index:2; cursor:pointer; padding:13px 10px 10px 10px; border:none; background:none; outline:none; color:#c1c3c4; width:90px;clear:both }
 .select button.effect_tab_select_t_1 span{ float:left;}
 .select button.effect_tab_select_t_1 img{ float:right;}
 
 
-.select ul.effect_tab_select_1{ display:none; background:#293133; position:absolute; top:41px; left:0; width:200px; z-index:10;}
+.select ul.effect_tab_select_1{ display:none; background:#293133; position:absolute; top:41px; left:0; width:150px; z-index:10;}
 .select ul.effect_tab_select_1:hover {background:#37393b;}
 
 .select ul.effect_tab_select_1 li{width:100%; position:relative; overflow:hidden; height:30px; line-height:30px; border-bottom:1px solid #292f30;  background:#1c2021; text-align:left; padding:0 10px 0 10px; cursor:pointer}
@@ -298,11 +307,10 @@
 
 .main_bet_name_text_1 {color:#ffffff; position:absolute; left:0; top:0;  padding:14px 0 0 14px; line-height:16px;-webkit-transition: all 0.5s ease; -moz-transition: all 0.5s ease; -ms-transition: all 0.5s ease; -o-transition: all 0.5s ease; transition: all 0.5s ease;  }
 
-.board_table_1_1 {border-bottom:solid 1px #1c2021;background:#262a2b;}
-.board_table_1_1 tr td {height:34px;}
+
 .board_time_1 {width:40%;text-align:center;}
 .board_name_1 {width:30%;text-align:center;}
-.board_money_1 {text-align:right;padding:0 14px 0 14px; color:#00afed}
+.board_money_1 {text-align:right;padding:0 14px 0 14px;}
 
 .top_btn1_1 {width:90px; height:32px; line-height:32px;  display:inline-block; background:#ffa800; color:#ffffff; font-size:14px; text-align:center; font-weight:700}
 .top_btn1_1:hover {background:#ffaf14}
@@ -432,21 +440,30 @@
 .sports_6_1:hover { background:#2e3334; }
 .sports_7_1 {width:9% ;text-align:center; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;color:#0792c4;background:#222627;}
 .sports_7_1:hover { background:#2e3334; } 
-
-
 .sports_7_1.sel {background: #0792c4;}
+
+.sports_7_3 {width:7% ;text-align:center; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;background:#222627;}
+.sports_7_3:hover { background:#2e3334; } 
+.sports_7_3.sel {background: #0792c4;}
 
 .sports_8_1 {width:9% ;text-align:center; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;color:#0792c4;background:#222627;}
 .sports_8_1:hover { background:#2e3334; } 
+.sports_8_1.sel {background: #0792c4;}
 
 .sports_8_2 {width:9% ;text-align:center; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;color:#0792c4;background:#222627;}
 
+.sports_8_3 {width:7% ;text-align:center; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;background:#222627;}
+.sports_8_3:hover { background:#2e3334; } 
+.sports_8_3.sel {background: #0792c4;}
 
-.sports_8_1.sel {background: #0792c4;}
+
 .sports_9_1 {width:9% ;text-align:center; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;color:#0792c4;background:#222627;}
 .sports_9_1:hover { background:#2e3334; } 
-
 .sports_9_1.sel {background: #0792c4;}
+
+.sports_9_3 {width:7% ;text-align:center; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;background:#222627;}
+.sports_9_3:hover { background:#2e3334; } 
+.sports_9_3.sel {background: #0792c4;}
 
 .sports_10_1 {width:6% ;text-align:center;border-bottom:solid 1px #1c2021;background:#222627;}
 
@@ -468,11 +485,11 @@
 .select ul.sports_tab_select li:hover .select_arrow{ }
 
 
-.board_bet_home_1{width:28%; color:#7da0b2;text-align:center;}
-.board_bet_expedition_1{width:28%; color:#7da0b2;text-align:center;}
-.board_bet_victory_1{width:12%; color:#00afed;text-align:center;}
-.board_bet_draw_1{width:12%; color:#00afed;text-align:center;}
-.board_bet_loss_1{width:12%; color:#00afed;text-align:center;}
+.board_bet_home_1{width:28%;text-align:center;}
+.board_bet_expedition_1{width:28%; text-align:center;}
+.board_bet_victory_1{width:12%; text-align:center;}
+.board_bet_draw_1{width:12%; text-align:center;}
+.board_bet_loss_1{width:12%; text-align:center;}
 .board_bet_score_1{width:8%; text-align:center; }
 
 .soccer_score_t_1 {width:100%; height:40px; text-align:center; font-size:17px; color:#ffffff; font-weight:700; letter-spacing:-1px}
@@ -529,19 +546,27 @@
 .board_bet_time_1{width:13%; border-right:}
 
 
-.board_bet_home_1{width:22%; color:#7da0b2; }
-.board_bet_expedition_1{width:22%; color:#7da0b2;}
-.board_bet_victory_1{width:12%; color:#00afed;}
-.board_bet_draw_1{width:12%; color:#00afed;}
-.board_bet_loss_1{width:12%; color:#00afed;}
+.board_bet_home_1{width:22%;}
+.board_bet_expedition_1{width:22%;}
+.board_bet_victory_1{width:12%;}
+.board_bet_draw_1{width:12%;}
+.board_bet_loss_1{width:12%;}
 .board_bet_score_1{width:8%;  }
 
-.board_bet_home_2{width:28%; color:#7da0b2; text-align:center;}
-.board_bet_expedition_2{width:28%; color:#7da0b2;text-align:center;}
+.board_bet_home_2{width:28%; text-align:center;}
+.board_bet_expedition_2{width:28%; text-align:center;}
 
 
-.board_table_2.on{background:#293133}
-.board_table_1_1.on{background:#293133}
+.board_table_2_1 {border-bottom:solid 1px #1c2021;background:#2e3334;}
+.board_table_2_1 tr td {height:34px; text-align:center}
+.board_table_2_1.on{background:#262a2b}
+
+.board_table_2:hover {background:#2e3334;}
+
+.board_table_1_1 {border-bottom:solid 1px #1c2021;background:#262a2b;}
+.board_table_1_1:hover {background:#2e3334;}
+.board_table_1_1 tr td {height:34px;}
+.board_table_1_1.on{background:#262a2b }
 .board_table_1_1.on:hover {color:#ffffff; font-weight:700}
 
 .search_table_1 {width:100%; border-bottom:solid 1px #313435; cursor:pointer;}
@@ -581,3 +606,8 @@
      animation: top-arrow-down 1s 10!important;
  }
  
+.slip_tab_1_on {width:90px; height:34px; display:inline-block; background:#586969; color:#b7ffff; text-align:center; line-height:34px}
+.slip_tab_1 {width:89px; height:34px; display:inline-block; background:#222627; text-align:center; line-height:34px}
+
+
+.live_tab_count_1 {border-radius:10px; padding:1px 5px 2px 5px ; background:#384447; color:#f6f6f6;  margin:0 0 0 2px; float:right;}
