@@ -213,8 +213,8 @@ public class NoticeEventDao {
 		Connection con 			= null;
 		PreparedStatement pstmt = null;
 		ResultSet rs 			= null;
-//		String  query 			= "SELECT * FROM bbs_lst WHERE begindate IS NOT NULL AND enddate IS  NOT NULL AND gubun='POPUP' AND viewtype='Y' AND (enddate >= CAST (GETDATE() AS DATE) AND begindate <= CAST (GETDATE() AS DATE)) " ;
-		String  query 			= "SELECT * FROM bbs_lst WHERE gubun='POPUP' AND viewtype='Y'" ;
+		String  query 			= "SELECT * FROM bbs_lst WHERE begindate IS NOT NULL AND enddate IS  NOT NULL AND gubun='POPUP' AND viewtype='Y' AND (enddate >= CAST (GETDATE() AS DATE) AND begindate <= CAST (GETDATE() AS DATE)) " ;
+		//String  query 			= "SELECT * FROM bbs_lst WHERE gubun='POPUP' AND viewtype='Y'" ;
 		List<NoticeEventBean>	ne_list = new ArrayList<>();
 		
 		try {
