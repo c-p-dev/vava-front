@@ -161,17 +161,39 @@ ul.casino_board_list  + .btn_wrap{
 }
 
 .l_tabs li.subm-manual {
-	width: 220px;
+	width: 200px;
     left: 20px;
     position: relative;
     display: none;
-    height: 30px;
-    line-height: 30px;
+    height: 35px;
+    line-height: 33px;
     font-size: 10px;
+    background-color: #54595a;
+    margin-left: 20px;
 }
 
 .l_tabs li.subm-manual a {
 	height: 30px;
+}
+
+.subm-arr-right {
+	height: 30px;
+    width: 20px;
+    position: absolute;
+    left: -15px;
+}
+
+.subm-arr-right i.fa {
+	line-height: 30px;
+}
+
+.subm-arr-right img {
+	height: 35px;
+    position: absolute;
+    top: -10px;
+    left: 1px;
+    width: 30px;
+    display: none;
 }
 
 </style>
@@ -229,17 +251,17 @@ ul.casino_board_list  + .btn_wrap{
 
 						if( providers.getGame_provider() == 2){
 							
-							html +=("<li id = 'agmanual-lnk' class = 'subm-manual'><a href='#l-tab3' class='get-manual agtab' data-val='manual'>아시안게임 이용안내</a></li>");
+							html +=("<li id = 'agmanual-lnk' class = 'subm-manual'><div class = 'subm-arr-right'><img src = '/images/arr-right.png' /></div><a href='#l-tab3' class='get-manual agtab' data-val='manual'>아시안게임 이용안내</a></li>");
 						
 						}
 						else if(providers.getGame_provider() == 1 ){
 							
-							html +=("<li id = 'mgmanual-lnk' class = 'subm-manual'><a href='#l-tab5' class='get-manual mgtab' data-val='manual2'>마이크로게임 이용안내</a></li>");
+							html +=("<li id = 'mgmanual-lnk' class = 'subm-manual'><div class = 'subm-arr-right'><img src = '/images/arr-right.png' /></div><a href='#l-tab5' class='get-manual mgtab' data-val='manual2'>마이크로게임 이용안내</a></li>");
 						
 						}
 						else if(providers.getGame_provider() == 3){
 							
-							html +=("<li id = 'bcmanual-lnk' class = 'subm-manual'><a href='#l-tab=7' class='get-manual' data-val=''>벳컨 카지노 이용안내</a></li>");
+							html +=("<li id = 'bcmanual-lnk' class = 'subm-manual'><div class = 'subm-arr-right'><img src = '/images/arr-right.png' /></div><a href='#l-tab=7' class='get-manual' data-val=''>벳컨 카지노 이용안내</a></li>");
 						
 						}
 
@@ -358,22 +380,31 @@ ul.casino_board_list  + .btn_wrap{
 					
 					/*	Intializes all manuals to hidden display	*/
 					$('.subm-manual').hide();
+					$('.subm-arr-right img').hide();
 					
 					/*	Asian Gaming	*/
 					if (2 == game_prvdr) {
-						$('#agmanual-lnk').show();
+						$('#agmanual-lnk').slideDown(function(){
+							$('.subm-arr-right img').fadeIn();
+						});
 					}
 					/*	Microgaming		*/
 					else if (1 == game_prvdr) {
-						$('#mgmanual-lnk').show();
+						$('#mgmanual-lnk').slideDown(function(){
+							$('.subm-arr-right img').fadeIn();
+						});
 					}
 					/*	Betconstruct	*/
 					else if (3 == game_prvdr) {
-						$('#bcmanual-lnk').show();
+						$('#bcmanual-lnk').slideDown(function(){
+							$('.subm-arr-right img').fadeIn();
+						});
 					}
 					else {
 						/* Default. Do nothing	*/
 					}
+					
+					
 					
 					//get Game
 					$.ajax({

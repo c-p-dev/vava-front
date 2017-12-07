@@ -15,6 +15,8 @@ import javax.crypto.spec.SecretKeySpec;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import bean.BcTransactionLogBean;
@@ -309,7 +311,7 @@ public class BetConstructController {
 	{
 		Gson gson					= new Gson();
 		BetConDao betcon_db			= new BetConDao();
-		DecimalFormat dfrmt			= new DecimalFormat("#.####");
+		DecimalFormat dfrmt			= new DecimalFormat("#.0000");
 		
 		UserDao user_db				= new UserDao();
 		BcTransactionLogDao	log_db	= new BcTransactionLogDao();
@@ -337,6 +339,29 @@ public class BetConstructController {
 		
 		json_body	= gson.toJson(json_data, WithdrawAndDeposit.class);
 		json_data.setPublicKey(pubkey);
+		
+		JsonElement json_elem	= gson.fromJson(json_body, JsonElement.class);
+		JsonObject json_obj		= json_elem.getAsJsonObject();
+		
+		if (null != json_obj.get("DepositAmount")) {
+			BigDecimal depo_amt		= json_obj.get("DepositAmount").getAsBigDecimal();
+			json_obj.addProperty("DepositAmount", dfrmt.format(depo_amt.longValue()));
+			json_body	= json_obj.toString();
+			json_body	= json_body.replace(":\"".concat(dfrmt.format(depo_amt.longValue())).concat("\""), ":".concat(dfrmt.format(depo_amt.longValue())));
+			
+			json_elem	= gson.fromJson(json_body, JsonElement.class);
+			json_obj	= json_elem.getAsJsonObject();
+		}
+		
+		if (null != json_obj.get("WithdrawAmount")) {
+			BigDecimal widro_amt	= json_obj.get("WithdrawAmount").getAsBigDecimal();
+			json_obj.addProperty("WithdrawAmount", dfrmt.format(widro_amt.longValue()));
+			json_body	= json_obj.toString();
+			json_body	= json_body.replace(":\"".concat(dfrmt.format(widro_amt.longValue())).concat("\""), ":".concat(dfrmt.format(widro_amt.longValue())));
+			
+			json_elem	= gson.fromJson(json_body, JsonElement.class);
+			json_obj	= json_elem.getAsJsonObject();
+		}
 		
 		/*--------------------------------------------------------------------
         |	Check Parameter Hashing
@@ -511,7 +536,7 @@ public class BetConstructController {
 						resp_data.setErrorDescription("Not Enough Balance");
 					}
 				}
-				System.out.println(trans_valid);
+				
 				if (true == trans_valid) {
 					/*--------------------------------------------------------------------
 			        |	Sets status of transaction to processed
