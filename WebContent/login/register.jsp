@@ -223,7 +223,7 @@
 			IBET25에서 다양한 베팅의 세계를 마음껏 경험하세요!<br>
 		</div>
 		<div class="btn_wrap">
-			<a href="app/sub04.jsp"><span class="btn3c">충전하기</span></a> 
+			<a href="/cash/cash.jsp"><span class="btn3c">충전하기</span></a> 
 			<a href="/"><span class="btn3">확인</span></a>
 		</div>
 	</div>
@@ -593,7 +593,7 @@
 			var keyCode = e.keyCode || e.which;
 				if (keyCode === 13) { 
 				e.preventDefault();
-				alert("no entering");
+				// alert("no entering");
 				return false;
 			}
 		});
