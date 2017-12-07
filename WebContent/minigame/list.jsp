@@ -97,14 +97,25 @@
 <div id="contents_wrap">
 	<div class="contents">
 		<div class="casino_visual_wrap">
-			<div id="jssor_1" style="position:relative;width:750px;height:250px;overflow:hidden;visibility:hidden;">
-				<div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:723px;height:250px;overflow:hidden;">
-					<div>
+<!-- 			<div id="jssor_1" style="position:relative;width:750px;height:250px;overflow:hidden;visibility:hidden;">
+				<div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:723px;height:250px;overflow:hidden;"> -->
+			<div id="jssor_1" style="position:relative;width:1330px;height:270px;overflow:hidden;visibility:hidden;">
+				<div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:1330px;height:270px;overflow:hidden;">
+					<!-- <div>
 						<img src="/images/betcon_casino/bc-banner1.png" style = 'width: 100%; height: 100%;'/>
+					</div> -->
+					<div>
+						<img src="/images/casino_visual001.jpg" />
+					</div>
+					<div>
+						<img src="/images/casino_visual001.jpg" />
+					</div>
+					<div>
+						<img src="/images/casino_visual001.jpg" />
 					</div>
 				</div>
 				<!-- Bullet Navigator -->
-				<!--
+				
 				<div data-u="navigator" class="jssorb051" style="position:absolute;bottom:14px;right:12px;" data-autocenter="1" data-scale="0.5" data-scale-bottom="0.75">
 					<div data-u="prototype" class="i" style="width:18px;height:18px;">
 						<svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
@@ -112,7 +123,7 @@
 						</svg>
 					</div>
 				</div>
-				 -->
+				 
 				<script type="text/javascript">jssor_1_slider_init();</script>
 			</div>
 		</div>
@@ -144,7 +155,7 @@
 								<li>
 									<a href="#" data-gm-provdr = '<%=cur_vgame.getGame_provider()%>' data-link-dsp = '<%=cur_vgame.getLink_dsp()%>'>
 										<div class="img racing_board_img">
-											<img src="/images/<%=cur_vgame.getGame_img()%>" style = 'width: 290px; height: 195px;'>
+											<img src="/images/<%=cur_vgame.getGame_img()%>" style = 'width: 320px; height: 195px;'>
 											<div class="overlay">
 												 <span class="expand" style = "width: 125px; font-size: 20px;">Play now</span>
 											</div>
@@ -154,6 +165,7 @@
 										<p class="casino_name"><%=cur_vgame.getGame_name()%></p>
 									</div>
 								</li>
+								
 								<%
 									}
 								%>
@@ -182,7 +194,7 @@
 								<li>
 									<a href="#" data-gm-provdr = '<%=cur_igame.getGame_provider()%>' data-link-dsp = '<%=cur_igame.getLink_dsp()%>'>
 										<div class="img racing_board_img">
-											<img src="/images/<%=cur_igame.getGame_img()%>" style = 'width: 290px; height: 195px;'>
+											<img src="/images/<%=cur_igame.getGame_img()%>" style = 'width: 320px; height: 195px;'>
 											<div class="overlay">
 												 <span class="expand" style = "width: 125px; font-size: 20px;" style = "width: 125px; font-size: 20px;">Play now</span>
 											</div>
@@ -218,7 +230,7 @@
 								<li>
 									<a href="#" data-gm-provdr = '<%=cur_vgame.getGame_provider()%>' data-link-dsp = '<%=cur_vgame.getLink_dsp()%>'>
 										<div class="img racing_board_img">
-											<img src="/images/<%=cur_vgame.getGame_img()%>" style = 'width: 290px; height: 195px;'>
+											<img src="/images/<%=cur_vgame.getGame_img()%>" style = 'width: 320px; height: 195px;'>
 											<div class="overlay">
 												 <span class="expand" style = "width: 125px; font-size: 20px;">Play now</span>
 											</div>
