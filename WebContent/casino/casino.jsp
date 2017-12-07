@@ -161,13 +161,12 @@ ul.casino_board_list  + .btn_wrap{
 }
 
 .l_tabs li.subm-manual {
-	width: 200px;
-    left: 20px;
+	width: 220px;
     position: relative;
     display: none;
-    height: 35px;
-    line-height: 33px;
-    font-size: 10px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 12px;
     background-color: #54595a;
     margin-left: 20px;
 }
@@ -188,11 +187,11 @@ ul.casino_board_list  + .btn_wrap{
 }
 
 .subm-arr-right img {
-	height: 35px;
+	height: 23px;
     position: absolute;
-    top: -10px;
-    left: 1px;
-    width: 30px;
+    top: -6px;
+    left: 8px;
+    width: 18px;
     display: none;
 }
 
