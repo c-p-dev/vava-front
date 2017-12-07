@@ -6,7 +6,14 @@
 <%@page import="com.google.gson.Gson"%>
 <%@page import="java.lang.reflect.Type"%>
 <%@page import="com.google.gson.reflect.TypeToken"%>
+<%@page import="dao.NoticeEventDao"%>
+<%@page import="bean.NoticeEventBean"%>
 
+<%
+	NoticeEventDao ne_dao			= new NoticeEventDao();
+	List<NoticeEventBean> all_banner	= ne_dao.getAllBanner();	
+		
+%>
 
 
 <jsp:useBean id="bm" class="bc4.BetConManager2" />
@@ -1316,18 +1323,27 @@ mainAngular.directive('tooltip', function ($document, $compile) {
 							<div id="jssor_1" style="position: relative; width: 930px; height: 225px; overflow: hidden; visibility: hidden;">
 								<div data-u="slides"
 									style="cursor: default; position: relative; top: 0px; left: 0px; width: 930px; height: 225px; overflow: hidden;">
+									<%
+										for (int i = 0; i < all_banner.size(); i++) {
+											NoticeEventBean ne = all_banner.get(i);
+											
+											String img_path = "http://admin.vava21.com:88/contents/";
+											String img_folder = (ne.getGubun().toString().equals("BANNER") ? "banner/" : "event/");
+											String img = img = img_path + img_folder + ne.getImg();
+											
+										
+											if(ne.getImg() == null){
+												img = "images/notice_ready.jpg";
+											}
+									%>
+									
 									<div>
 										<a class='<%=(!checkSession) ? "fade_1_open" : ""%>'
-											href="#fade_1"><img src="/images/visual001.jpg" /></a>
+											href="#fade_1"><img src="<%=img %>" /></a>
 									</div>
-									<div>
-										<a class='<%=(!checkSession) ? "fade_1_open" : ""%>'
-											href="#fade_1"><img src="/images/visual001.jpg" /></a>
-									</div>
-									<div>
-										<a class='<%=(!checkSession) ? "fade_1_open" : ""%>'
-											href="#fade_1"><img src="/images/visual001.jpg" /></a>
-									</div>
+									<%
+										}
+									%>
 								</div>
 								<!-- Bullet Navigator -->
 								<div data-u="navigator" class="jssorb051"
