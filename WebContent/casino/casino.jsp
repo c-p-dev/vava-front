@@ -95,12 +95,7 @@
 
 
 <style>
-.casino_board_list li {
-	margin: 0 25px 0px 0!important;
-}
-.casino_board_text {
-    margin: 15px 0 15px 0!important; 
-}
+
 ul.pagination li{
 	display: inline;
 	margin-left: 5px;

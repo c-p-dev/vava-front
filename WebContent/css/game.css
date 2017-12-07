@@ -343,9 +343,9 @@
 .casino_board_wrap {width:100%; float:left; margin:0 0 20px 0}
 .casino_board_list {}
 .casino_board_list li {float:left; margin:0 40px 40px 0; width:320px;}
-.casino_board_list li:nth-child(3),
-.casino_board_list li:nth-child(6),
-.casino_board_list li:nth-child(9) {margin:0}
+.casino_board_list li:nth-child(3), .racing_board_list li:nth-child(3),
+.casino_board_list li:nth-child(6), .racing_board_list li:nth-child(6),
+.casino_board_list li:nth-child(9), .racing_board_list li:nth-child(9) {margin:0; margin-right: 0px!important;}
 .casino_board_img {width:320px; height:195px; clear:both;}
 .casino_board_text {width:100%;margin:15px 0 0 0; float:left;}
 .casino_name {text-align:center; color:#ffffff; }

@@ -92,13 +92,17 @@
 
 
 <%@ include file="/inc/header.jsp"%>
-
+<style>
+	
+</style>
 <div id="contents_wrap">
 	<div class="contents">
 		<div class="casino_visual_wrap">
-			<div id="jssor_1" style="position:relative;width:750px;height:250px;overflow:hidden;visibility:hidden;">
-				<div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:723px;height:250px;overflow:hidden;">
-					<div>
+			<!-- <div id="jssor_1" style="position:relative;width:750px;height:250px;overflow:hidden;visibility:hidden;">
+				<div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:723px;height:250px;overflow:hidden;"> -->
+			<div id="jssor_1" style="position:relative;width:1330px;height:270px;overflow:hidden;visibility:hidden;">
+				<div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:1330px;height:270px;overflow:hidden;">
+					<!-- <div>
 						<img src="/images/spincube/racing-banner.jpg" style = 'width: 100%; height: 100%;'/>
 					</div>
 					<div>
@@ -112,6 +116,15 @@
 					</div>
 					<div>
 						<img src="/images/spincube/racing-banner6.jpg" style = 'width: 100%; height: 100%;'/>
+					</div> -->
+					<div>
+						<img src="/images/casino_visual001.jpg" />
+					</div>
+					<div>
+						<img src="/images/casino_visual001.jpg" />
+					</div>
+					<div>
+						<img src="/images/casino_visual001.jpg" />
 					</div>
 				</div>
 				<!-- Bullet Navigator -->
@@ -154,7 +167,7 @@
 								<li>
 									<a href="#" data-gm-provdr = '<%=cur_vgame.getGame_provider()%>' data-link-dsp = '<%=cur_vgame.getLink_dsp()%>'>
 										<div class="img racing_board_img">
-											<img src="/images/<%=cur_vgame.getGame_img()%>" style = 'width: 290px; height: 195px;'>
+											<img src="/images/<%=cur_vgame.getGame_img()%>" style = 'width: 320px; height: 195px;'>
 											<div class="overlay">
 												 <span class="expand" style = "width: 125px; font-size: 20px;">Play now</span>
 											</div>
@@ -183,7 +196,7 @@
 								<li>
 									<a href="#" data-gm-provdr = '<%=cur_igame.getGame_provider()%>' data-link-dsp = '<%=cur_igame.getLink_dsp()%>'>
 										<div class="img racing_board_img">
-											<img src="/images/<%=cur_igame.getGame_img()%>" style = 'width: 290px; height: 195px;'>
+											<img src="/images/<%=cur_igame.getGame_img()%>" style = 'width: 320px; height: 195px;'>
 											<div class="overlay">
 												 <span class="expand" style = "width: 125px; font-size: 20px;">Play now</span>
 											</div>
@@ -220,7 +233,7 @@
 								<li>
 									<a href="#" data-gm-provdr = '<%=cur_igame.getGame_provider()%>' data-link-dsp = '<%=cur_igame.getLink_dsp()%>'>
 										<div class="img racing_board_img">
-											<img src="/images/<%=cur_igame.getGame_img()%>" style = 'width: 290px; height: 195px;'>
+											<img src="/images/<%=cur_igame.getGame_img()%>" style = 'width: 320px; height: 195px;'>
 											<div class="overlay">
 												 <span class="expand" style = "width: 125px; font-size: 20px;" style = "width: 125px; font-size: 20px;">Play now</span>
 											</div>
@@ -256,7 +269,7 @@
 								<li>
 									<a href="#" data-gm-provdr = '<%=cur_vgame.getGame_provider()%>' data-link-dsp = '<%=cur_vgame.getLink_dsp()%>'>
 										<div class="img racing_board_img">
-											<img src="/images/<%=cur_vgame.getGame_img()%>" style = 'width: 290px; height: 195px;'>
+											<img src="/images/<%=cur_vgame.getGame_img()%>" style = 'width: 320px; height: 195px;'>
 											<div class="overlay">
 												 <span class="expand" style = "width: 125px; font-size: 20px;">Play now</span>
 											</div>
