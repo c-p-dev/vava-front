@@ -74,11 +74,13 @@
 <script>
 	$(document).ready(function(){
 		
-		loadMessage();
-	
 
-		
-		$(".inquiry_wrap_1").mCustomScrollbar();
+		$(".inquiry_wrap_1").mCustomScrollbar({
+			setTop: "-999999px",
+		});
+
+		loadMessage();
+
 		$('#messageModal').popup({
 	      	transition: 'all 0.3s',
 	      	scrolllock: true,
@@ -94,6 +96,7 @@
 
 	    setInterval(function() {
     		loadMessage();
+  
 		}, 60 * 1000);  // load messages every minute
 
 	    $("#messageFrom").validate({
@@ -153,6 +156,15 @@
 		  	}
 
 		});
+
+		$("#tab3").on("fadeInComplete", function() {
+    		$(".inquiry_wrap_1").mCustomScrollbar("update");
+    		
+    		setTimeout(function() {
+			  	$(".inquiry_wrap_1").mCustomScrollbar("scrollTo","bottom");
+			}, 100);
+    		
+		});
 		
 	});
 
@@ -165,6 +177,8 @@
 			drawMessages(data);
 			
 		});
+
+		
 	}
 
 	function drawMessages(data){
@@ -179,9 +193,12 @@
 				html = '<div class="inquiry"> <div class="inquiry_user"> <span class="user_tag"><img src="../images/user_tag.jpg"></span> <div class="inquiry_text"> '+el.txt+' </div> <div class="user_date">'+el.send_date+'</div> </div> </div>'; 
 			}
 			$("#con-com").append(html);
-			$("#con-com").mCustomScrollbar("update");
-			$("#con-com").mCustomScrollbar("scrollTo", "bottom");
 
+			$(".inquiry_wrap_1").mCustomScrollbar("update");
+
+			setTimeout(function(){
+		        $(".inquiry_wrap_1").mCustomScrollbar("scrollTo","bottom");
+		    },100);
 
 	
 		});

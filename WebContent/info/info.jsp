@@ -172,6 +172,8 @@
 	  document.getElementById("spin_clive").style.display  = "none";
 	  document.getElementById("clive").style.display = "block";
 	  $("#tab4").trigger("fadeInComplete");
+	  $("#tab3").trigger("fadeInComplete");
+
 	}
 	
 </script>
