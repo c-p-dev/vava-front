@@ -164,7 +164,7 @@
 				<div class="bet_table">
 					<div class="bet_table_row">
 						<div class="bet_table_cell_l">예상당첨</div>
-						<div class="bet_table_cell_r"><span id="exptAmt" class="font_002">{{ (betPrice*betAmt)|number:0 }}</span> 원</div>
+						<div class="bet_table_cell_r"><span id="exptAmt" class="font_002">{{ (betPrice_p*betAmt)|number:0 }}</span> 원</div>
 					</div>
 				</div>
 			</div>
@@ -241,6 +241,18 @@
 					<td><a href="#"><span class="btn9"  ng-click="conAlert(6)">예</span></a>
 							<a href="#"><span class="btn9"  ng-click="conAlert(7)">아니요</span></a>
 					</td>
+				</tr>
+			</table>
+			
+			<table id="betJ" class="animate-bottom bet_table_2" cellpadding="0" cellspacing="0"  ng-if="betJ">
+				<tr>
+					<td><img src="/images/icon_ck.png"></td>
+				</tr>
+				<tr>
+					<td>배당률은 <br> 최대 1000배를 넘을 수 없습니다. </td>
+				</tr>
+				<tr>
+					<td><a href="#"><span class="btn9"  ng-click="conAlert(9)">확인</span></a></td>
 				</tr>
 			</table>
 			
@@ -443,7 +455,7 @@
 				<div class="bet_table">
 					<div class="bet_table_row">
 						<div class="bet_table_cell_l">예상당첨</div>
-						<div class="bet_table_cell_r"><span id="exptAmt" class="font_002">{{ (betPrice*betAmt)|number:0 }}</span> 원</div>
+						<div class="bet_table_cell_r"><span id="exptAmt" class="font_002">{{ (betPrice_p*betAmt)|number:0 }}</span> 원</div>
 					</div>
 				</div>
 			</div>
@@ -523,6 +535,18 @@
 				</tr>
 			</table>
 			
+			<table id="betJ" class="animate-bottom bet_table_2" cellpadding="0" cellspacing="0"  ng-if="betJ">
+				<tr>
+					<td><img src="/images/icon_ck.png"></td>
+				</tr>
+				<tr>
+					<td>배당률은 <br>  최대 1000배를 넘을 수 없습니다. </td>
+				</tr>
+				<tr>
+					<td><a href="#"><span class="btn9"  ng-click="conAlert(9)">확인</span></a></td>
+				</tr>
+			</table>
+			
 			<table id="betH" class="animate-bottom bet_table_2" cellpadding="0" cellspacing="0"  ng-if="betH">
 				<tr>
 					<td><img src="/images/icon_ck.png"></td>
@@ -534,6 +558,9 @@
 					<td><a href="#"><span class="btn9"  ng-click="conAlert(8)">확인</span></a></td>
 				</tr>
 			</table>
+			
+
+			
 			<!--
 			<div class="bet_btn_wrap" ng-if="betM==1&&bet.length>0" ng-show="!betA&&!betB&&!betC&&betE&&!betF" ng-click="betProcS()"><a href="#"><span class="bet_btn">베팅하기</span></a></div>
 			<div class="bet_btn_wrap" ng-if="betM!=1&&bet.length>0" ng-show="!betA&&!betB&&!betC&&betE&&!betF" ng-click="betProcM()"><a href="#"><span class="bet_btn">베팅하기</span></a></div>

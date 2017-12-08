@@ -33,6 +33,7 @@ Type type = new TypeToken<List<MatchResultBean>>() {}.getType();
 <meta http-equiv="cache-control" content="no-cache" />
 <meta http-equiv="expires" content="0" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">		
+<link href="/images/favicon.ico" rel="icon">
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.1.min.js"></script>
 <script type="text/javascript" src="/js/header.js" charset="utf-8"></script><!-- header -->
@@ -86,7 +87,7 @@ Type type = new TypeToken<List<MatchResultBean>>() {}.getType();
 <link href="/css/font-awesome.css" rel="stylesheet" type="text/css">
 <link href="/css/spin.css" rel="stylesheet" type="text/css">
 <link href="/css/nice-select.css" rel="stylesheet" type="text/css"><!-- select -->
-<link href="/css/common2.css" rel="stylesheet" type="text/css">
+<link href="/css/common3.css" rel="stylesheet" type="text/css">
 
 
 <link href="/css/custom.css" rel="stylesheet" type="text/css"><!--공통-->
@@ -112,8 +113,6 @@ Type type = new TypeToken<List<MatchResultBean>>() {}.getType();
 display: none; 
 }
 
-
-
 .pagination a {
     color: #fff ;
     text-decoration: none;
@@ -122,7 +121,29 @@ display: none;
 .disabled {
 	background: #dddddd;
 	}
-	
+
+table.dataTable tbody td {
+    padding: 0px!important;
+    text-align: center!important;
+    border-bottom: solid 1px #17191a!important;
+    height: 35px!important;
+    border-right: solid 1px #17191a!important;
+}
+
+table.dataTable tbody tr:nth-child(odd) {
+	cursor:pointer;
+	background:#262a2b;
+}
+
+table.dataTable tbody tr:nth-child(even) {
+	cursor:pointer;
+	background:#262a2b;
+}	
+
+table.dataTable tbody tr{
+	background:#262a2b;
+}
+
 </style>
 
 
@@ -224,7 +245,33 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http) {
 		$scope.clive_load = function() {
 	    var myVar = setTimeout(showPage_clive, 2000);
 	};
+		
+		$scope.date = [];
+		$scope.date[0] = moment().utcOffset('+0800').format('YYYYMMDD');
+		$scope.date[1] = moment().add(-1, 'days').utcOffset('+0800').format('YYYYMMDD');
+		$scope.date[2] = moment().add(-2, 'days').utcOffset('+0800').format('YYYYMMDD');
+		$scope.date[3] = moment().add(-3, 'days').utcOffset('+0800').format('YYYYMMDD');
+		$scope.date[4] = moment().add(-4, 'days').utcOffset('+0800').format('YYYYMMDD');
+		$scope.date[5] = moment().add(-5, 'days').utcOffset('+0800').format('YYYYMMDD');
+		$scope.date[6] = moment().add(-6, 'days').utcOffset('+0800').format('YYYYMMDD');
+		
+		$scope.date_1 = [];
+		$scope.date_1[0] = moment().utcOffset('+0800').format('YYYY-MM-DD');
+		$scope.date_1[1] = moment().add(-1, 'days').utcOffset('+0800').format('YYYY-MM-DD');
+		$scope.date_1[2] = moment().add(-2, 'days').utcOffset('+0800').format('YYYY-MM-DD');
+		$scope.date_1[3] = moment().add(-3, 'days').utcOffset('+0800').format('YYYY-MM-DD');
+		$scope.date_1[4] = moment().add(-4, 'days').utcOffset('+0800').format('YYYY-MM-DD');
+		$scope.date_1[5] = moment().add(-5, 'days').utcOffset('+0800').format('YYYY-MM-DD');
+		$scope.date_1[6] = moment().add(-6, 'days').utcOffset('+0800').format('YYYY-MM-DD');
+		
 	
+	$scope.getDayLabel = function(ldate) { 
+		var week = new Array('(일)', '(월)', '(화)', '(수)', '(목)', '(금)', '(토)');  
+		var today = new Date(ldate).getDay(); 
+		var todayLabel = week[today]; 
+		return todayLabel; 
+	}
+
 });
 	
 		function showPage_clive() {
@@ -316,9 +363,32 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http) {
 										<span class="effect_tab_text">전체</span>
 									</a>
 									
-									<a href="#" ng-class="{effect_tab_1_on:tabDate == key,effect_tab_1:tabDate != key}" ng-click="MatchDate(key)" 
-											ng-repeat="(key,value) in MR |orderBy:'MT':true |groupBy:'MT'" >
-												<span class="effect_tab_text">{{ key.substring(4,6) }}월 {{key.substring(6,8)}}일 </span> <!-- <span class="live_tab_count">{{value.length}}</span> -->
+									<a href="#" ng-class="{effect_tab_1_on:tabDate==date[0],effect_tab_1:tabDate != date[0]}" ng-click="MatchDate(date[0])"> 
+												<span class="effect_tab_text">{{ date_1[0].substring(5,10) }} {{ getDayLabel(date_1[0]) }}</span> 
+									</a>
+									
+									<a href="#" ng-class="{effect_tab_1_on:tabDate==date[1],effect_tab_1:tabDate != date[1]}" ng-click="MatchDate(date[1])"> 
+												<span class="effect_tab_text">{{ date_1[1].substring(5,10) }} {{ getDayLabel(date_1[1]) }} </span> 
+									</a>
+									
+									<a href="#" ng-class="{effect_tab_1_on:tabDate==date[2],effect_tab_1:tabDate != date[2]}" ng-click="MatchDate(date[2])"> 
+												<span class="effect_tab_text">{{ date_1[2].substring(5,10) }} {{ getDayLabel(date_1[2]) }} </span> 
+									</a>
+									
+									<a href="#" ng-class="{effect_tab_1_on:tabDate==date[3],effect_tab_1:tabDate != date[3]}" ng-click="MatchDate(date[3])"> 
+												<span class="effect_tab_text">{{ date_1[3].substring(5,10) }} {{ getDayLabel(date_1[3]) }} </span> 
+									</a>
+									
+									<a href="#" ng-class="{effect_tab_1_on:tabDate==date[4],effect_tab_1:tabDate != date[4]}" ng-click="MatchDate(date[4])"> 
+												<span class="effect_tab_text">{{ date_1[4].substring(5,10) }} {{ getDayLabel(date_1[4]) }} </span> 
+									</a>
+									
+									<a href="#" ng-class="{effect_tab_1_on:tabDate==date[5],effect_tab_1:tabDate != date[5]}" ng-click="MatchDate(date[5])"> 
+												<span class="effect_tab_text">{{ date_1[5].substring(5,10) }} {{ getDayLabel(date_1[5]) }} </span> 
+									</a>
+									
+									<a href="#" ng-class="{effect_tab_1_on:tabDate==date[6],effect_tab_1:tabDate != date[6]}" ng-click="MatchDate(date[6])"> 
+												<span class="effect_tab_text">{{ date_1[6].substring(5,10) }} {{ getDayLabel(date_1[6]) }} </span> 
 									</a>
 
 								</div>
@@ -329,25 +399,25 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http) {
 								<div class="panel panel-primary"><!-- 1 -->
 									<div class="accOpen panel-heading" >
 										
-							<table id="table1" ng-table="tableParams" class="table"  width="100%" cellpadding="0" cellspacing="0">
+							<table id="table1" ng-table="tableParams" class="table2"  width="100%" cellpadding="0" cellspacing="0">
 								<thead>
 									<tr>
-										<td class="effect_table_t" width="0%">SID</td>
-										<td class="effect_table_t" width="0%">RID</td>
-										<td class="effect_table_t" width="0%">CID</td>
-										<td class="effect_table_t" width="0%">MT</td>
-										<td class="effect_table_t" width="13%">경기시각</td>
-										<td class="effect_table_t" width="7%">종목</td>
-										<td class="effect_table_t" width="8%">국가</td>
-										<td class="effect_table_t" width="15%">리그</td>
-										<td class="effect_table_t" width="6%">결과</td>
-										<td class="effect_table_t" width="20%">홈팀</td>
-										<td class="effect_table_t" width="5%">무승부</td>
-										<td class="effect_table_t" width="20%">원정팀</td>
-										<td class="effect_table_t">더보기</td>
+										<td class="effect_table_t_1" width="0%">SID</td>
+										<td class="effect_table_t_1" width="0%">RID</td>
+										<td class="effect_table_t_1" width="0%">CID</td>
+										<td class="effect_table_t_1" width="0%">MT</td>
+										<td class="effect_table_t_1" width="13%">경기시각</td>
+										<td class="effect_table_t_1" width="7%">종목</td>
+										<td class="effect_table_t_1" width="8%">국가</td>
+										<td class="effect_table_t_1" width="15%">리그</td>
+										<td class="effect_table_t_1" width="6%">점수</td>
+										<td class="effect_table_t_1" width="20%">홈팀</td>
+										<td class="effect_table_t_1" width="5%">무</td>
+										<td class="effect_table_t_1" width="20%">원정팀</td>
+										<td class="effect_table_t_1">더보기</td>
 									</tr>
 								</thead>
-								<tbody>
+
 						
 						<%
 								for (int k=0; k < mr.size() ; k++){
@@ -357,42 +427,42 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http) {
 									int ascore = Integer.parseInt(mrb.getScore().trim().split(":")[1]);
 						%>
 										
-									<tr id='<%=mrb.getMid()%>' style="cursor:pointer">
-										<td class="effect_table_t" width="0%"><%=mrb.getSid()%></td>
-										<td class="effect_table_t" width="0%"><%=mrb.getRid()%></td>
-										<td class="effect_table_t" width="0%"><%=mrb.getCid()%></td>
-										<td class="effect_table_t" width="0%"><%=mrb.getMdate()%></td>
-										<td class="effect_time_1" data-acc-link="<%=mrb.getMid()%>" onClick="selMatch('<%=mrb.getMid()%>')"><%=mrb.getMdate3()%></td>
-										<td class="effect_name_1" data-acc-link="<%=mrb.getMid()%>" onClick="selMatch('<%=mrb.getMid()%>')"><%=mrb.getSname()%></td>
-										<td class="effect_nation_1" data-acc-link="<%=mrb.getMid()%>" onClick="selMatch('<%=mrb.getMid()%>')"><!--<img src="/images/af.png">--> <%=mrb.getRname()%></td>
-										<td class="effect_league_1" data-acc-link="<%=mrb.getMid()%>" onClick="selMatch('<%=mrb.getMid()%>')"><%=mrb.getCname()%></td>
-										<td class="effect_effect_1" data-acc-link="<%=mrb.getMid()%>" onClick="selMatch('<%=mrb.getMid()%>')"><%=mrb.getScore()%></td>
+									<tr id='<%=mrb.getMid()%>'>
+										<td class="effect_table_t_1" width="0%"><%=mrb.getSid()%></td>
+										<td class="effect_table_t_1" width="0%"><%=mrb.getRid()%></td>
+										<td class="effect_table_t_1" width="0%"><%=mrb.getCid()%></td>
+										<td class="effect_table_t_1" width="0%"><%=mrb.getMdate()%></td>
+										<td class="effect_time_1" data-acc-link="<%=mrb.getMid()%>" onmouseover="CBg(this)" onmouseout="RBg(this)" onClick="selMatch('<%=mrb.getMid()%>')"><%=mrb.getMdate3()%></td>
+										<td class="effect_name_1" data-acc-link="<%=mrb.getMid()%>" onmouseover="CBg(this)" onmouseout="RBg(this)"  onClick="selMatch('<%=mrb.getMid()%>')"><img width="15" src="/images/sport_s/<%=mrb.getSid()%>.png"/>&nbsp;<%=mrb.getSname()%></td>
+										<td class="effect_nation_1" data-acc-link="<%=mrb.getMid()%>" onmouseover="CBg(this)" onmouseout="RBg(this)"  onClick="selMatch('<%=mrb.getMid()%>')"><img style="vertical-align:middle;width:14px;height:10px;margin-bottom:3px;" src="/images/region_s/<%=mrb.getRid()%>.png"> <%=mrb.getRname()%></td>
+										<td class="effect_league_1" data-acc-link="<%=mrb.getMid()%>" onmouseover="CBg(this)" onmouseout="RBg(this)"  onClick="selMatch('<%=mrb.getMid()%>')"><%=mrb.getCname()%></td>
+										<td class="effect_effect_1" data-acc-link="<%=mrb.getMid()%>" onmouseover="CBg(this)" onmouseout="RBg(this)"  onClick="selMatch('<%=mrb.getMid()%>')"><%=hscore%> : <%=ascore%></td>
 										
 						<%
 						if(hscore == ascore){
 						%>
-										<td class="effect_home_1" data-acc-link="<%=mrb.getMid()%>" onClick="selMatch('<%=mrb.getMid()%>')"><div class="effect_right_1"><%=mrb.getHteam()%>&nbsp;&nbsp;&nbsp;<img src="/images/res_icon001-1.png"></div></td>
-										<td class="effect_vs_1" data-acc-link="<%=mrb.getMid()%>" onClick="selMatch('<%=mrb.getMid()%>')"><div class="effect_center_1"><img src="/images/res_icon002.png"></div></td>
-										<td class="effect_loss_1" data-acc-link="<%=mrb.getMid()%>" onClick="selMatch('<%=mrb.getMid()%>')"> <div class="effect_left_1"><img src="/images/res_icon003-1.png">&nbsp;&nbsp;&nbsp;<%=mrb.getAteam()%> </div> </td> 
+										<td class="effect_home_1" data-acc-link="<%=mrb.getMid()%>" onmouseover="CBg(this)" onmouseout="RBg(this)"  onClick="selMatch('<%=mrb.getMid()%>')"><div class="effect_right_1"><%=mrb.getHteam()%>&nbsp;&nbsp;&nbsp;<img src="/images/res_icon001-1.png"></div></td>
+										<td class="effect_vs_1" data-acc-link="<%=mrb.getMid()%>" onmouseover="CBg(this)" onmouseout="RBg(this)"  onClick="selMatch('<%=mrb.getMid()%>')"><div class="effect_center_1"><img src="/images/res_icon002.png"></div></td>
+										<td class="effect_loss_1" data-acc-link="<%=mrb.getMid()%>" onmouseover="CBg(this)" onmouseout="RBg(this)"  onClick="selMatch('<%=mrb.getMid()%>')"> <div class="effect_left_1"><img src="/images/res_icon003-1.png">&nbsp;&nbsp;&nbsp;<%=mrb.getAteam()%> </div> </td> 
 						
 						<%
 						} else if(hscore > ascore){
 						%>
-										<td class="effect_home_1" data-acc-link="<%=mrb.getMid()%>" onClick="selMatch('<%=mrb.getMid()%>')"><div class="effect_right_2"><%=mrb.getHteam()%>&nbsp;&nbsp;&nbsp;<img src="/images/res_icon001.png"></div></td>
-										<td class="effect_vs_1" data-acc-link="<%=mrb.getMid()%>" onClick="selMatch('<%=mrb.getMid()%>')"><div class="effect_center_1"><img src="/images/res_icon002-1.png"></div></td>
-										<td class="effect_loss_1" data-acc-link="<%=mrb.getMid()%>" onClick="selMatch('<%=mrb.getMid()%>')"> <div class="effect_left_1"><img src="/images/res_icon003-1.png">&nbsp;&nbsp;&nbsp;<%=mrb.getAteam()%> </div> </td> 
+										<td class="effect_home_1" data-acc-link="<%=mrb.getMid()%>" onmouseover="CBg(this)" onmouseout="RBg(this)"  onClick="selMatch('<%=mrb.getMid()%>')"><div class="effect_right_2"><%=mrb.getHteam()%>&nbsp;&nbsp;&nbsp;<img src="/images/res_icon001.png"></div></td>
+										<td class="effect_vs_1" data-acc-link="<%=mrb.getMid()%>" onmouseover="CBg(this)" onmouseout="RBg(this)"  onClick="selMatch('<%=mrb.getMid()%>')"><div class="effect_center_1"><img src="/images/res_icon002-1.png"></div></td>
+										<td class="effect_loss_1" data-acc-link="<%=mrb.getMid()%>" onmouseover="CBg(this)" onmouseout="RBg(this)"  onClick="selMatch('<%=mrb.getMid()%>')"> <div class="effect_left_1"><img src="/images/res_icon003-1.png">&nbsp;&nbsp;&nbsp;<%=mrb.getAteam()%> </div> </td> 
 										
 						<%
 						} else if(hscore < ascore){
 						%>
-										<td class="effect_home_1" data-acc-link="<%=mrb.getMid()%>" onClick="selMatch('<%=mrb.getMid()%>')"><div class="effect_right_1"><%=mrb.getHteam()%>&nbsp;&nbsp;&nbsp;<img src="/images/res_icon003-1.png"></div></td>
-										<td class="effect_vs_1" data-acc-link="<%=mrb.getMid()%>" onClick="selMatch('<%=mrb.getMid()%>')"><div class="effect_center_1"><img src="/images/res_icon002-1.png"></div></td>
-										<td class="effect_loss_1" data-acc-link="<%=mrb.getMid()%>" onClick="selMatch('<%=mrb.getMid()%>')"> <div class="effect_left_2"><img src="/images/res_icon001.png">&nbsp;&nbsp;&nbsp;<%=mrb.getAteam()%> </div> </td> 
+										<td class="effect_home_1" data-acc-link="<%=mrb.getMid()%>" onmouseover="CBg(this)" onmouseout="RBg(this)"  onClick="selMatch('<%=mrb.getMid()%>')"><div class="effect_right_1"><%=mrb.getHteam()%>&nbsp;&nbsp;&nbsp;<img src="/images/res_icon003-1.png"></div></td>
+										<td class="effect_vs_1" data-acc-link="<%=mrb.getMid()%>" onmouseover="CBg(this)" onmouseout="RBg(this)"  onClick="selMatch('<%=mrb.getMid()%>')"><div class="effect_center_1"><img src="/images/res_icon002-1.png"></div></td>
+										<td class="effect_loss_1" data-acc-link="<%=mrb.getMid()%>" onmouseover="CBg(this)" onmouseout="RBg(this)"  onClick="selMatch('<%=mrb.getMid()%>')"> <div class="effect_left_2"><img src="/images/res_icon001.png">&nbsp;&nbsp;&nbsp;<%=mrb.getAteam()%> </div> </td> 
 										
 						<%
 						}
 						%>												
-										<td class="effect_m_1"  data-acc-link="<%=mrb.getMid()%>" onClick="selMatch('<%=mrb.getMid()%>')">+ <%=mrb.getMcount()%>&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/arrow_right.png"></td>
+										<td class="effect_m_1"  data-acc-link="<%=mrb.getMid()%>" onmouseover="CBg(this)" onmouseout="RBg(this)"  onClick="selMatch('<%=mrb.getMid()%>')">+ <%=mrb.getMcount()%></td>
 									</tr>
 						<%
 						}
@@ -408,6 +478,8 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http) {
 							</div>
 							
 							<script type="text/javascript">
+							
+
 								$(function() {
 									$('.example1').accordion({ multiOpen: true });
 								});
@@ -471,7 +543,8 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http) {
               "visible": false,
               "searchable": true
             }
-        ],        
+        ],
+      "order": [[ 4, "desc" ]] ,       
       "paging": true,
       "lengthChange": false,
       "searching": true,
@@ -540,39 +613,92 @@ function selMatch(mid,$scope){
 						headers: {'Content-Type': 'application/json; charset=utf-8'} 
 				}).success(function(data, status, headers, config) {
 											
+				//$scope.MKTY = $filter('groupBy')(data,'MKD');  // delete ID	
 				$scope.MKTY = $filter('groupBy')(data,'MTD');  // delete ID	
+				
+				//console.log($scope.MKTY);
 				
 				var count=0;
 				for(var i in $scope.MKTY){
-  	 			count++;
+  	 			//count++;
+  	 			count = count+$scope.MKTY[i].length;
+  	 			//console.log("$scope.MKTY[i].length:"+$scope.MKTY[i].length);
+  	 			
   			}
+				//console.log("count:"+count);
+				//console.log("$scope.MKTY.length:"+$scope.MKTY.length);
+				//console.log("data2.length:"+data2.length);
 				
 				var s="<div  id='sub_"+mid+"' class='panel-body'>"+
 							"<div class='sports_dd_p'><table style='width:100%'><tr><td style='width:50%'  valign='top'>";
 				
 				var k=0;
+				var MN = [];
+				var ss = false;
 											
 				angular.forEach($scope.MKTY, function(obj,idx) {
-					
+
 					k+=1;
+		
 					var im = "/images/arrow_top.png";
+					
 										
-					if(Math.ceil(count/2)+1 == k){
+					if(ss){
 						s +="</td></tr></table> <td style='width:50%' valign='top'>"
+						ss = false;
 					}
 					
-					s += "	<table class='effect_table_1' style='width:100%'>"+
+					
+					/*
+					if(MN != obj[0].MN){
+					
+					s += "	<table class='effect_table_1' cellspacing='0' style='width:100%;border-top: solid 4px #17191a;'>"+
 							"		<tr>"+
-							"			<td style='height:30px !important' data-acc-link='"+ obj[0].MD+"_"+obj[0].MTD+"' class='effect_in_t_1' >"+
-							"				" + obj[0].MN +
+							"			<td style='height:30px !important; text-align: left!important;' data-acc-link='"+ obj[0].MD+"_"+obj[0].MKD+"' class='effect_in_t_1' >"+
+							"				" + obj[0].MN  + 
 							"			</td>"+
-							"		</tr>"+
-							"		</table>"+
-							" <table class='acc-open effect_table_1' style='width:100%' data-acc-content='"+ obj[0].MD+"_"+obj[0].MTD+"'>";
+							"			</tr>"+
+							"		</table>"+		
+							" <table class='acc-open effect_table_1' cellspacing='0' padding='0' style='width:100%' data-acc-content='"+ obj[0].MD+"_"+obj[0].MKD+"'>";
+							// " <tr> "; //<td><table cellspacing='0' padding='0' style='width:100%'>";
+							//"<table class='acc-open effect_table_1' cellspacing='0' padding='0' style='width:100%'>";
 							//"		<tr class='panel-body acc-open' data-acc-content='"+ obj[0].MD+"_"+obj[0].MTD+"'>";
 							
+							//k+=1;
+					} else {
+					//s += "<table class='acc-open effect_table_1' cellspacing='0' padding='0' style='width:100%'><tr><td><table>";
+					//s +="	</table>";
+					}
+						*/
+						
 					angular.forEach(obj, function(obj2,idx2) { 
 						
+							k+=1;
+							
+							if(Math.ceil(count/2)+1 == k){
+								ss = true;
+							}
+					
+							if(!MN.includes(obj2.MN)){
+					
+						s += "	<table class='effect_table_1' cellspacing='0' style='width:100%;border-top: solid 4px #17191a;'>"+
+							"		<tr>"+
+							"			<td style='height:30px !important; text-align: left!important;' data-acc-link='"+ obj2.MD+"_"+obj2.MKD+"' class='effect_in_t_1' >"+
+							"				" + obj2.MN  + 
+							"			</td>"+
+							"			</tr>"+
+							"		</table>"+		
+							" <table class='acc-open effect_table_1' cellspacing='0' padding='0' style='width:100%' data-acc-content='"+ obj2.MD+"_"+obj2.MKD+"'>";
+							// " <tr> "; //<td><table cellspacing='0' padding='0' style='width:100%'>";
+							//"<table class='acc-open effect_table_1' cellspacing='0' padding='0' style='width:100%'>";
+							//"		<tr class='panel-body acc-open' data-acc-content='"+ obj[0].MD+"_"+obj[0].MTD+"'>";
+							
+							//k+=1;
+					} else {
+					//s += "<table class='acc-open effect_table_1' cellspacing='0' padding='0' style='width:100%'><tr><td><table>";
+					//s +="	</table>";
+					}
+												
 						var mSel = data2.filter(function (el) { return el.MKD ==obj2.MKD; })	
 							s +="		<tr>";							
 						angular.forEach(mSel, function(obj3,idx3) { 
@@ -612,20 +738,28 @@ function selMatch(mid,$scope){
 								}
 								s +=	"<td class='effect_table_in_t_1 "+cla2+"' style='height:30px !important' width='25%'><span class='effect_in_left_1'>"+obj3.SN+"</span><span class='"+cla+"'>" +win+" </span></td>";
 							}
-						});
-												
-					});		
-							
-					s +="	</tr>";
-					 		
+						});						
+						s +="	</tr>	";		
 						
+							MN.push(obj2.MN);	
+							
+							if(!MN.includes(obj2.MN)){
+							s +="	</table>";
+					}
+							
+					});		
+					
+				
+					
+				
+					
 				});	
 					//s += "</table>"+
 					//		"</div>"+
 					//			"</div>";	
 					
-					s += "</table></td></tr></table></div>"+
-					"</div></div>";
+					s += "</td></tr></table></div></div>";
+					//"</div></div>";
 					
 					row.child(s).show();
 
@@ -649,6 +783,18 @@ $(document).ready(function() {
       .draw(false);
       });
 });
+
+
+var NColor= "#262a2b";
+var CColor= "#293133";
+
+function CBg(row) { 
+	row.parentNode.style.backgroundColor = CColor; 
+}
+
+function RBg(row) { 
+	row.parentNode.style.backgroundColor = NColor; 
+}
 
 </script>
 

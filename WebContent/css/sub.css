@@ -165,11 +165,11 @@ table.acc_list_table_in {width:100%;background:#202122}
 .bet_home {background:#262a2b; height:40px;  text-align:center; cursor:pointer;}
 .bet_vs {background:#262a2b; height:40px;  text-align:center; cursor:pointer;}
 .bet_loss {background:#262a2b; height:40px;  text-align:center; cursor:pointer;}
-.beting_in_btn {background:#262a2b; color:#ffa800; height:40px;  text-align:center; cursor:pointer;}
+.beting_in_btn {background:#262a2b; height:40px;  text-align:center; cursor:pointer;}
 .bet_select {background:#2e3334;}
 .bet_time:hover { }
 .acc_list_in_l {float:left; padding:0 0 0 10px}
-.acc_list_in_r {float:right; padding:0 10px 0 0; color:#00afed}
+.acc_list_in_r {float:center; padding:0 10px 0 0; color:#ffa800}
 
 
 
