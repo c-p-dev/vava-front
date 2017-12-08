@@ -194,17 +194,10 @@
         });
 
 
-
-   		$("#point-use").hide();
-   		$("#point-use").before('<div class="spn" id="point-use-spn" style="width:100%!important;">'+lgSpin+'</div>');
-
    		$("#tab5").on("fadeInComplete", function() {
-    		setTimeout(function() {
-    			$("#point-use-spn").remove();
-    			$("#point-use").show();
-			  	$pointUseTable.columns.adjust().draw();
-			}, 300);
-    		
+			
+			$pointUseTable.columns.adjust().draw();
+			
 		});
 
         $("#showCalendarBtn").on("click",function(e){

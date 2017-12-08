@@ -81,7 +81,7 @@
 <!-- custom scrollbar test -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css" />
 </head>
-<body> 
+<body onLoad="clive_load()"> 
 	
 <%@ include file="/inc/header.jsp"%>
 <style>
@@ -94,33 +94,53 @@
 
 <div id="contents_wrap" class="cash_tab">
 	<div class="contents">
-		<ul class="tabs">
-			<li><a href="#tab1">충전신청</a></li>
-			<li><a href="#tab2">환전신청</a></li>
-			<li><a href="#tab3">포인트전환</a></li>
-			<!-- <li><a href="#tab4">머니전환</a></li> -->
-			<li><a href="#tab5" class="dt-point-tab">포인트 사용 내역</a></li>
-			<li><a href="#tab6" class="dt-money-use">머니 사용 내역</a></li>
-		</ul>
-		
-		<div class="tab_container">
-			<div id="tab1" class="tab_content">
-				<jsp:include page="/cash/charge_tab.jsp" /> 
-			</div>
-			<div id="tab2" class="tab_content">
-				<jsp:include page="/cash/exchange_tab.jsp" />
-			</div>
-			<div id="tab3" class="tab_content">
-				<jsp:include page="/cash/switch_points.jsp" />
-			</div>
-			<div id="tab5" class="tab_content">
-				<jsp:include page="/cash/point_tab.jsp" /> 
-			</div>
-			<div id="tab6" class="tab_content">
-				<jsp:include page="/cash/moneyuse_tab.jsp" /> 
-			</div>
+
+		<div id="spin_clive" class="sk-fading-circle_s">
+			<div class="sk-circle1 sk-circle"></div>
+			<div class="sk-circle2 sk-circle"></div>
+			<div class="sk-circle3 sk-circle"></div>
+			<div class="sk-circle4 sk-circle"></div>
+			<div class="sk-circle5 sk-circle"></div>
+			<div class="sk-circle6 sk-circle"></div>
+			<div class="sk-circle7 sk-circle"></div>
+			<div class="sk-circle8 sk-circle"></div>
+			<div class="sk-circle9 sk-circle"></div>
+			<div class="sk-circle10 sk-circle"></div>
+			<div class="sk-circle11 sk-circle"></div>
+			<div class="sk-circle12 sk-circle"></div>
 		</div>
-		
+	
+
+		<div  style="display:none;" id="clive" class="animate-bottom">
+
+			<ul class="tabs">
+				<li><a href="#tab1">충전신청</a></li>
+				<li><a href="#tab2">환전신청</a></li>
+				<li><a href="#tab3">포인트전환</a></li>
+				<!-- <li><a href="#tab4">머니전환</a></li> -->
+				<li><a href="#tab5" class="dt-point-tab">포인트 사용 내역</a></li>
+				<li><a href="#tab6" class="dt-money-use">머니 사용 내역</a></li>
+			</ul>
+			
+			<div class="tab_container">
+				<div id="tab1" class="tab_content">
+					<jsp:include page="/cash/charge_tab.jsp" /> 
+				</div>
+				<div id="tab2" class="tab_content">
+					<jsp:include page="/cash/exchange_tab.jsp" />
+				</div>
+				<div id="tab3" class="tab_content">
+					<jsp:include page="/cash/switch_points.jsp" />
+				</div>
+				<div id="tab5" class="tab_content">
+					<jsp:include page="/cash/point_tab.jsp" /> 
+				</div>
+				<div id="tab6" class="tab_content">
+					<jsp:include page="/cash/moneyuse_tab.jsp" /> 
+				</div>
+			</div>
+
+		</div>
 	</div>
 </div><!-- contents -->
 <script>
@@ -135,6 +155,17 @@
 			$(".conf_modal").popup("hide");
 		});
 	});
+
+	function clive_load() {
+		console.log("clive_load");
+	    var myVar = setTimeout(showPage_clive, 1000);
+	};
+	
+	function showPage_clive() {
+		document.getElementById("spin_clive").style.display  = "none";
+		document.getElementById("clive").style.display = "block";
+		$("#tab3, #tab5, #tab6").trigger("fadeInComplete");
+	}
 
 
 </script>
