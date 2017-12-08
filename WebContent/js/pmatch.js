@@ -201,6 +201,7 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 	  $scope.betA = false;
 	  $scope.betE = false;
 	  $scope.betPrice = 1;
+	  $scope.betPrice_p  = 1;
 	  $scope.betAmt = [];	
 		$scope.betAmt[0] = "1000";
 	  $scope.liveTop = [];		
@@ -256,6 +257,11 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 		$scope.betF = false;
 		$scope.betG = false;
 		$scope.betH = false;
+		$scope.betJ = false;
+		
+		//console.log("$scope.betJ:"+$scope.betJ);
+		
+		
 		$scope.paneIdx = -1;
 		$scope.betFix = 1;
 		
@@ -593,6 +599,12 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 	  if(alert == "8") {
 	  	document.getElementById("betH").style="display:none;"
 	  	$scope.betH = false; 
+	  }
+	  
+	  if(alert == "9") {
+	  	document.getElementById("betJ").style="display:none;"
+	  	$scope.betJ = false; 
+	  	$scope.betClick = true;
 	  }
 	  
 	 	//var element =  document.getElementById("betPrice");
@@ -1504,7 +1516,7 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
  
   function getTodayMatchInfo(dt) {	 
   	
-  	 console.log("dt:"+dt);
+  	// console.log("dt:"+dt);
   	 
   	if(dt != "1"){
 	
@@ -2015,9 +2027,9 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 							}
 						};
 						
-						console.log("w1Price : " + w1Price);
-						console.log("xPrice : " + xPrice);
-						console.log("w2Price : " + w2Price);
+						//console.log("w1Price : " + w1Price);
+						//console.log("xPrice : " + xPrice);
+						//console.log("w2Price : " + w2Price);
 						
 						
 	      									
@@ -2061,7 +2073,9 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 				
 				
 				if($scope.pm_mode == "p" ){	
-
+						
+						//console.log("$scope.pm_mode == p");
+						
 					for (var c = 0; c < $scope.PMk.length; c++) {		
 								
 				 		var pm = $scope.PMk[c];	
@@ -2145,6 +2159,8 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 					
 				}else if ($scope.pm_mode == "t" ){	
 					
+					//console.log("$scope.pm_mode == t");
+					
 					for (var c1 = 0; c1 < $scope.toPMk.length; c1++) {		
 								
 				 		var topm = $scope.toPMk[c1];	
@@ -2186,7 +2202,7 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 							if(w1Price != topm.W1P || xPrice != topm.XP || w2Price != topm.W2P ||  topm.Sus != obj.IsSuspended){							
 								$scope.toPMk = $filter('omit')($scope.toPMk,'MkId ==' + obj.Id);  
 								
-								console.log("omit: 'MkId =='" + obj.Id);
+								console.log("omit[toPMk]: 'MkId =='" + obj.Id);
 					 										
 				        $scope.toPMk.push({
 				        	Dt:topm.Dt,
@@ -2219,7 +2235,7 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 					      	W2P:w2Price,
 				  			});
 				  			
-				  			//console.log("push: 'MkId =='" + obj.Id);
+				  			console.log("push[toPMk]: 'MkId =='" + obj.Id);
 				  			
 					  	};				  						 
 						};						
@@ -2227,7 +2243,9 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 				}
 				
 			}
-
+			
+			//console.log("$scope.tabMId ==" + $scope.tabMId);
+			
 			if($scope.tabMId !="0" && $scope.tabMId == obj.MatchId){			
 				var newCmarket = true;	
 				
@@ -2260,6 +2278,8 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 						
 							$scope.MK = $filter('omit')($scope.MK,'Id ==' + obj.Id);  	
 							
+							console.log("omit[MK]: 'MkId =='" + obj.Id);
+							
 							$scope.MK.push({
 								Id:mk.Id,
 								MTyId:mk.MTyId,
@@ -2269,8 +2289,14 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 								Nm: mk.Nm,
 								Se: sel_tmp,
 								Sq: obj.Sequence,
-							});										
+							});	
+						
+						console.log("push[MK]: 'MkId =='" + obj.Id);
+																
 					   sel_tmp = [];
+					   
+					   sonsole.log($scope.MK);
+					   
 				  	}
 				 };
 				 
@@ -2784,6 +2810,7 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 		for(var h = $scope.bet.length - 1;h >= 0; h--){	
 			tBetP = tBetP * $scope.bet[h].P;
 		}
+			$scope.betPrice_p = tBetP;
 			$scope.betPrice = $filter('number')(tBetP, 2);
 			return $scope.betPrice;
 	};
@@ -3164,6 +3191,13 @@ $scope.betProcM = function() {
 		return;
 	}
 	
+	if($scope.betPrice_p > 1000){
+		$scope.betJ = true;
+		$scope.betClick = false;
+		console.log("$scope.betPrice_p:"+$scope.betPrice_p);
+		return;
+	}
+	
 	if(!document.getElementById("cb").checked && chbet>0 && !$scope.betConf){
 		$scope.betG = true;
 		$scope.betClick = false;
@@ -3222,15 +3256,19 @@ $scope.betProcS = function() {
 	
 	var tamt = 0;	
 	var chbet = 0;
+	//var trate = 1;	
 	
 	for(var i = $scope.bet.length - 1; i >= 0; i--){  
 		tamt += parseInt($scope.bet[i].Amt);
+		//trate = trate*($scope.bet[i].P).replace(',','');
+		
 		 
 		 if($scope.bet[i].P != $scope.bet[i].BP)
 		 	chbet = 1;
 	};	
 	
 	console.log("tamt:"+tamt);
+	//console.log("trate:"+trate);
 	console.log("chbet:"+chbet);
 		
 	if(tamt > $scope.ubal){
@@ -3238,6 +3276,7 @@ $scope.betProcS = function() {
 		$scope.betClick = false;
 		return
 	}
+	
 	
 	console.log("$scope.betConf:"+$scope.betConf);
 	console.log("$scope.betG:"+$scope.betG);
@@ -3247,6 +3286,14 @@ $scope.betProcS = function() {
 		$scope.betClick = false;
 		return
 	}
+	
+	/*
+	if(trate > 1000){
+		$scope.betJ = true;
+		console.log("trate:"+trate);
+		return;
+	}
+	*/
 	
 	$scope.betConf = false;
 	
@@ -3302,9 +3349,9 @@ $scope.getHeader = function() {
 		headers: {'Content-Type': 'application/json; charset=utf-8'} 
 	}).success(function(data, status, headers, config) {	
 	
-		console.log(data)
+		//console.log(data)
 		
-		$("#uhead").html(data);
+		$("#uhead").html(data.header);
 		
 		data=null;
 		

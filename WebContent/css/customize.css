@@ -184,7 +184,7 @@
 .etc_score_c_1 {width:60px; height:60px;line-height:60px;background:rgba(189,189,189,0.6);color:#ffffff; font-size:40px; font-weight:bold; text-align:center; border-radius:5px; margin:0 0 5px 0}
 .etc_score_c_2 {width:60px; height:60px;line-height:60px;background:rgba(215,223,1,0.6);color:#ffffff; font-size:40px; font-weight:bold; text-align:center; border-radius:5px; margin:0 0 5px 0}
 .etc_score_c_2_long {width:70px; height:60px;line-height:60px;background:rgba(215,223,1,0.6);color:#ffffff; font-size:40px; font-weight:bold; text-align:center; border-radius:5px; margin:0 0 5px 0}
-.etc_score_c_3 {width:60px; height:60px;line-height:60px; margin:0 0 5px 0}
+.etc_score_c_3 {width:30px; height:60px;line-height:60px; margin:0 0 5px 0}
 
 .etc_score_b_1 {width:60px; height:60px;line-height:60px;background:rgba(189,189,189,0.6);color:#ffffff; font-size:40px; font-weight:bold; text-align:center; border-radius:5px}
 .etc_score_b_2 {width:60px; height:60px;line-height:60px;background:rgba(215,223,1,0.6);color:#ffffff; font-size:40px; font-weight:bold; text-align:center; border-radius:5px}
@@ -251,9 +251,10 @@
 
 
 
-.effect_tab_1_on {display:table-cell ; vertical-align:middle; text-align:center; border:solid 1px #0792c4;background:#293133;width:6%;  }
-.effect_tab_1 {text-align:center; background:#293133; display:table-cell ; vertical-align:middle; border-right:solid 1px #262a2b;width:6%; }
-.effect_tab_1:hover {background:#37393b;}
+
+.effect_tab_1 {text-align:center; background:#293133; display:table-cell ; color:#8a8c8d; vertical-align:middle; border-right:solid 1px #262a2b;width:8%; }
+.effect_tab_1:hover {background:#2e3334;}
+.effect_tab_1_on {display:table-cell ; vertical-align:middle; color:#c1c3c4!important; text-align:center; border:solid 1px #0792c4; background:#262a2b;width:8%;  }
 
 
 .select button.effect_tab_select_t_1{ position:relative;z-index:2; cursor:pointer; padding:13px 10px 10px 10px; border:none; background:none; outline:none; color:#c1c3c4; width:90px;clear:both }
@@ -267,38 +268,42 @@
 .select ul.effect_tab_select_1 li{width:100%; position:relative; overflow:hidden; height:30px; line-height:30px; border-bottom:1px solid #292f30;  background:#1c2021; text-align:left; padding:0 10px 0 10px; cursor:pointer}
 .select.open ul.effect_tab_select_1{display:block;} 
 
+.effect_table_t_1{background:#2e3334; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021; height:34px;text-align:center}
 
-.effect_time_1 {width:13%;text-align:center; background:#262a2b; border-right:solid 1px #1c2021; border-bottom:solid 1px #1c2021}
-.effect_time_1:hover {background:#2e3334;}
 
-.effect_name_1 {width:7%;text-align:center; background:#262a2b; border-right:solid 1px #1c2021; border-bottom:solid 1px #1c2021}
-.effect_name_1:hover {background:#2e3334;}
+.result_1 {background:#262a2b;}
 
-.effect_nation_1 {width:8%;text-align:center; background:#262a2b; border-right:solid 1px #1c2021; border-bottom:solid 1px #1c2021}
-.effect_nation_1:hover {background:#2e3334;}
+.effect_time_1 {width:13%;text-align:center;border-right:solid 1px #17191a; border-bottom:solid 1px #17191a}
+/*.effect_time_1:hover {background:#37393b;} */
 
-.effect_league_1 {width:15%;text-align:center; background:#262a2b; border-right:solid 1px #1c2021; border-bottom:solid 1px #1c2021}
-.effect_league_1:hover {background:#2e3334;}
+.effect_name_1 {width:7%;text-align:left;border-right:solid 1px #17191a; border-bottom:solid 1px #17191a}
+/*.effect_name_1:hover {background:#37393b;} */
 
-.effect_effect_1 {width:6%;color:#ffa800; text-align:center; background:#262a2b; border-right:solid 1px #1c2021; border-bottom:solid 1px #1c2021}
-.effect_effect_1:hover {background:#2e3334;}
+.effect_nation_1 {width:8%;text-align:center; border-right:solid 1px #17191a; border-bottom:solid 1px #17191a}
+/*.effect_nation_1:hover {background:#2e3334;} */
 
-.effect_home_1 {width:20%;  background:#262a2b; border-right:solid 1px #1c2021; border-bottom:solid 1px #1c2021;}
-.effect_home_1:hover {background:#2e3334;}
+.effect_league_1 {width:15%;text-align:center;border-right:solid 1px #17191a; border-bottom:solid 1px #17191a}
+/*.effect_league_1:hover {background:#2e3334;} */
 
-.effect_vs_1 {width:5%;text-align:center; background:#262a2b; border-right:solid 1px #1c2021; border-bottom:solid 1px #1c2021;}
-.effect_vs_1:hover {background:#2e3334;}
+.effect_effect_1 {width:6%;color:#ffa800; text-align:center; border-right:solid 1px #17191a; border-bottom:solid 1px #17191a}
+/*.effect_effect_1:hover {background:#2e3334;} */
 
-.effect_loss_1 {width:20%;background:#262a2b; border-right:solid 1px #1c2021; border-bottom:solid 1px #1c2021;}
-.effect_loss_1:hover {background:#2e3334;}
+.effect_home_1 {width:20%;  border-right:solid 1px #17191a; border-bottom:solid 1px #17191a;}
+/*.effect_home_1:hover {background:#2e3334;} */
 
-.effect_m_1 {text-align:center;background:#262a2b;border-bottom:solid 1px #1c2021;-webkit-transition: all .2s ease-in-out;-moz-transition: all .2s ease-in-out;-o-transition: all .2s ease-in-out;-ms-transition: all .2s ease-in-out;transition: all .2s ease-in-out;}
-.effect_m_1:hover {background:#2e3334;}
+.effect_vs_1 {width:5%;text-align:center;border-right:solid 1px #17191a; border-bottom:solid 1px #17191a;}
+/*.effect_vs_1:hover {background:#2e3334;} */
+
+.effect_loss_1 {width:20%; border-right:solid 1px #17191a; border-bottom:solid 1px #17191a;}
+/*.effect_loss_1:hover {background:#2e3334;} */
+
+.effect_m_1 {text-align:center;border-bottom:solid 1px #17191a;-webkit-transition: all .2s ease-in-out;-moz-transition: all .2s ease-in-out;-o-transition: all .2s ease-in-out;-ms-transition: all .2s ease-in-out;transition: all .2s ease-in-out;}
+/*.effect_m_1:hover {background:#2e3334;} */
 
 .effect_left_1 {float:left; padding:0 0 0 10px}
-.effect_left_2 {float:left; padding:0 0 0 10px;color:#00afed}
+.effect_left_2 {float:left; padding:0 0 0 10px; color:#ffffff; font-weight:700}
 .effect_right_1 {float:right; padding:0 10px 0 0;}
-.effect_right_2 {float:right; padding:0 10px 0 0;color:#00afed}
+.effect_right_2 {float:right; padding:0 10px 0 0; color:#ffffff; font-weight:700}
 .effect_center_1 {float:center; padding:0 0 0 0;}
 .effect_m_1:hover {background:#37393b;}
 
@@ -317,7 +322,7 @@
 
 
 .effect_in_t_1 {
-	color:#ffa800;
+	color:#ffffff;
 	width:50%;
 	background: #2d3232 url("/images/accordion-opened.png") no-repeat right 10px center;
 	text-align: left !important;
@@ -335,7 +340,8 @@
 .effect_in_right_1 {float:right;padding-right:20px}
 .effect_in_right_y {float:right;padding-right:20px;color:#ffffff;}
 
-.effect_table_in_t_1.sel {background: #293133;color:#00afed;line-height:30px;}
+/*.effect_table_in_t_1.sel {background: #293133;color:#ffa800;line-height:30px;}*/
+.effect_table_in_t_1.sel {color:#ffa800;line-height:30px;}
 
 .animate-bottom {
   position: relative;
@@ -509,7 +515,7 @@
 
 .etc_left_in {position:relative; top:50%; margin-top:-25px; color:#ffffff; font-size:17px; font-weight:700;}
 
-.soccer_wrap_1 {width:100%; height:200px; float:left; background:url(../images/live_bg_1.jpg) center no-repeat;margin:0 0 10px 0}
+.soccer_wrap_1 {width:100%; height:200px; float:left; background:url(/images/live_bg_1.jpg) center no-repeat;margin:0 0 10px 0}
 
 .bg_mask_pop2_1{display: none; position:absolute;z-index:10000000; width:200px;}
 .bg_mask_pop2_1_in{width:200px; float:left; background:#191a1b;border-radius:5px;padding:40px;}
@@ -611,3 +617,14 @@
 
 
 .live_tab_count_1 {border-radius:10px; padding:1px 5px 2px 5px ; background:#384447; color:#f6f6f6;  margin:0 0 0 2px; float:right;}
+
+.list_table_t_1 {color:#c1c3c4; background:#2e3334; height:40px;  text-align:center; border-bottom:solid 1px #000000;}
+
+.acc_list_check_1 { height:40px; text-align:center;  border-bottom:solid 1px #2e3032}
+.acc_list_num_1 { height:40px; text-align:center;  border-bottom:solid 1px #2e3032}
+.acc_list_time_1 { height:40px; text-align:center;  border-bottom:solid 1px #2e3032}
+.acc_list_id_1 { height:40px; text-align:center;  border-bottom:solid 1px #2e3032}
+.acc_list_event_1 { height:40px; text-align:center;  border-bottom:solid 1px #2e3032}
+
+.beting_btn_1 { height:40px; text-align:center;  border-bottom:solid 1px #2e3032;}
+.acc_list_price1_1 { height:40px; text-align:center;  border-bottom:solid 1px #2e3032}

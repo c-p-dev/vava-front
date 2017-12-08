@@ -1,4 +1,4 @@
-.input_warning{
+﻿.input_warning{
 	display: none;
 }
 .btn3c {
@@ -36,43 +36,29 @@
     border-top: solid 1px #0792c4!important;
 }
 table.dataTable thead th{ 
-    color: #c1c3c4;
-    background: #2e3334;
-    height: 40px;
-    text-align: center;
-    border-bottom: solid 1px #000000;
-    border-right: solid 1px #1c2021;
-    font-size: 12px!important;
-    font-family: Nanum Gothic, 굴림, 돋음, Dotum, Arial, Helvetica, sans-serif!important;
+    color: white!important;
+    /*background: #151516!important;*/
+    /*height: 40px!important;*/
+    text-align: center!important;
+    border-bottom: solid 1px #000000!important;
+    border-right: solid 1px #2e3032;
 }
 table.dataTable thead th:first-child{
-    /*border-left: solid 1px #2e3032!important;*/
-    border-left: solid 1px #1c2021!important;
+    border-left: solid 1px #2e3032!important;
 }
 
-table.dataTable tbody tr {
-    background-color: transparent!important;
-    background: #262a2b!important;
-}
+
 table.dataTable tbody td {
-    padding: 0px!important;
+    padding: 0px!important ;
     text-align: center!important;
     border-bottom: solid 1px #1c2021!important;
     border-left: solid 1px #1c2021!important;
-    height: 35px!important;
-    border-right: solid 1px #1c2021!important;
-    font-size: 12px!important;
-    font-family: Nanum Gothic, 굴림, 돋음, Dotum, Arial, Helvetica, sans-serif!important;
-
-
-
+  	height: 35px!important;    
 }
 
 table.dataTable tbody td:first-child{
-     border-left: solid 1px #2e3032!important;
+     border-left: solid 1px #1c2021!important;
 }
-/*table.dataTable tbody tr:nth-child(even){background-color: #2e3233!important;}*/
-/*table.dataTable tbody tr:nth-child(odd){background-color: #252b2b!important;}*/
 
 
 .dataTables_wrapper .dataTables_paginate .paginate_button.disabled, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {
@@ -428,31 +414,3 @@ button.btn5:disabled {
     to { opacity: 1 }
 
 }
-
-
-/*casino vgaming mingame*/
-
-.casino_board_list li {
-    margin: 0 40px 0px 0!important;
-}
-.casino_board_text {
-    margin: 15px 0 15px 0!important; 
-}
-
-.racing_board_list li {
-    margin: 0 40px 0px 0!important;
-    width: 320px!important;
-}
-
-.racing_board_img{
-    width: 320px!important;
-    height: 195px!important;
-    clear: both;
-}
-
-
-
-
-
-
-

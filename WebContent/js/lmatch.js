@@ -224,6 +224,8 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 	  $scope.betA = false;
 	  $scope.betE = false;
 	  $scope.betPrice = 1;
+	  $scope.betPrice_p  = 1;
+	  
 	  $scope.betAmt = [];	
 		$scope.betAmt[0] = "1000";	
 	  $scope.liveTop = [];		
@@ -271,6 +273,10 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 		$scope.betF = false;
 		$scope.betG = false;
 		$scope.betH = false;
+		$scope.betJ = false;
+		
+		console.log("$scope.betJ:"+$scope.betJ);
+		
 		$scope.paneIdx = -1;
 		
 		$scope.betFix = 1;
@@ -364,6 +370,8 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 			    	MId:obj2.Id,
 			    	HT:obj2.HT,
 			    	AT:obj2.AT,
+			    	HD:obj2.HD,
+			    	AD:obj2.AD,
 			    	Pe:mStat[0].Pe,
 			    	//EType : mMatchStat[0].EventType,
 			    	HTS:HTeamScore,
@@ -717,7 +725,7 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 	  	$scope.betG = false; 
 	  	
 	  	$scope.betConf = true;
-	  	console.log("$scope.betM:" + $scope.betM);
+	  	//console.log("$scope.betM:" + $scope.betM);
 	  	
 	  	if($scope.betM =="2")
 	  		$scope.betProcM();
@@ -735,6 +743,13 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 	  if(alert == "8") {
 	  	document.getElementById("betH").style="display:none;"
 	  	$scope.betH = false; 
+	  }
+	  
+	  
+	  if(alert == "9") {
+	  	document.getElementById("betJ").style="display:none;"
+	  	$scope.betJ = false; 
+	  	$scope.betClick = true;
 	  }
 	  
 	 	//var element =  document.getElementById("betPrice");
@@ -1337,7 +1352,8 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 				console.log("data[0].Market.length : " + data[0].Mk.length);
 				console.log("data[0].Result.length : " + data[0].Re.length);
 				console.log("data[0].Selections.length : " + data[0].Se.length);
-
+				
+				console.log("mode:"+ mode);	
 				
 				if(mode != "PreMatch"){
 					
@@ -1381,6 +1397,7 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 						}
 					};
 					
+					/*
 					console.log("w1SelId : " + w1SelId);
 					console.log("w1Price : " + w1Price);
 					
@@ -1402,6 +1419,8 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 					console.log("data[0].Mt[0].AT : " + data[0].Mt[0].AT);
 					
 					console.log("data[0].Mt[0].Sus: " + data[0].Mt[0].Sus);
+					*/
+					
 				}
 			}
 			
@@ -1422,6 +1441,8 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 			    	MId:data[0].Mt[0].Id,
 			    	HT:data[0].Mt[0].HT,
 			    	AT:data[0].Mt[0].AT,
+			    	HD:data[0].Mt[0].HD,
+			    	AD:data[0].Mt[0].AD,
 			    	Pe:"0",
 			    	//EType : mMatchStat[0].EventType,
 			    	HTS:"0",
@@ -1478,11 +1499,12 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
  
    function getTodayMatchInfo(dt) {	 
   	
+  	console.log("getTodayMatchInfo")
+  	
   	 
-  	if(dt != "1"){
-	
-	  		document.getElementById("spin_clive2").style.display  = "block";
-	  		document.getElementById("clive2").style.display = "none";
+  	if(dt != "1"){	
+	  //		document.getElementById("spin_clive2").style.display  = "block";
+	  //		document.getElementById("clive2").style.display = "none";
 	  		//console.log("dt==" + dt);
 	  		
 	  } else {
@@ -1609,8 +1631,8 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 			data = null;				
 		
 	  		
-	  	document.getElementById("clive2").style.display  = "block";
-	  	document.getElementById("spin_clive2").style.display = "none";
+	  	//document.getElementById("clive2").style.display  = "block";
+	  	//document.getElementById("spin_clive2").style.display = "none";
 
 	  	console.log($scope.toPMk);
 	  
@@ -1626,8 +1648,8 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
  		//console.log(sd);
  		//console.log(dt);
  		
- 		document.getElementById("spin_clive2").style.display  = "block";
-	  document.getElementById("clive2").style.display = "none";
+ 		//document.getElementById("spin_clive2").style.display  = "block";
+	  //document.getElementById("clive2").style.display = "none";
 	  
 	  $scope.tabDate = dt; 
 	    
@@ -1756,8 +1778,8 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
    	//document.getElementById("selsport1").innerHTML = ss.SN;
 	  //document.getElementById("selcomp1").innerHTML = ss.CN;
 			
-		document.getElementById("spin_clive2").style.display  = "none";
-	  document.getElementById("clive2").style.display = "block";
+		//document.getElementById("spin_clive2").style.display  = "none";
+	  //document.getElementById("clive2").style.display = "block";
 	  	
 		}).error(function(data, status, headers, config) {
 			console.log(status);
@@ -2294,6 +2316,8 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 				      	MId:LS_obj.MId,
 				      	HT:LS_obj.HT,
 				      	AT:LS_obj.AT,
+				      	HD:LS_obj.HD,
+			    			AD:LS_obj.AD,
 				      	Pe:obj.Period,				      	
 				      	//GScore : GameScore,
 				      	//EType : obj.EventType,	
@@ -2352,6 +2376,8 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 				      	MId:LS_obj.MId,
 				      	HT:LS_obj.HT,
 				      	AT:LS_obj.AT,
+				      	HD:LS_obj.HD,
+			    			AD:LS_obj.AD,
 				      	Pe:obj.Period,				      	
 				      	//GScore : GameScore,
 				      	//EType : obj.EventType,	
@@ -2653,6 +2679,8 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 					      	MId:Ls_obj.MId,
 					      	HT:Ls_obj.HT,
 					      	AT:Ls_obj.AT,
+					      	HD:LS_obj.HD,
+			    				AD:LS_obj.AD,
 					      	Pe:obj.Period,				      	
 					      	//GScore : GameScore,
 					      	//EType : '',	
@@ -2801,7 +2829,10 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 		for(var h = $scope.bet.length - 1;h >= 0; h--){	
 			tBetP = tBetP * $scope.bet[h].P;
 		}
+			$scope.betPrice_p = tBetP;
+			
 			$scope.betPrice = $filter('number')(tBetP, 2);
+			
 			return $scope.betPrice;
 	};
 	
@@ -3192,6 +3223,13 @@ $scope.betProcM = function() {
 		return;
 	}
 	
+	if($scope.betPrice_p > 1000){
+		$scope.betJ = true;
+		$scope.betClick = false;
+		//console.log("$scope.betPrice_p:"+$scope.betPrice_p);
+		return;
+	}
+	
 	if(!document.getElementById("cb").checked && chbet>0 && !$scope.betConf){
 		$scope.betG = true;
 		$scope.betClick = false;
@@ -3249,9 +3287,11 @@ $scope.betProcS = function() {
 	
 	var tamt = 0;	
 	var chbet = 0;
+	//var trate = 1;
 	
 	for(var i = $scope.bet.length - 1; i >= 0; i--){  
 		tamt += parseInt($scope.bet[i].Amt);
+		//trate = trate*($scope.bet[i].P).replace(',','');
 		 
 		 if($scope.bet[i].P != $scope.bet[i].BP)
 		 	chbet = 1;
@@ -3274,6 +3314,14 @@ $scope.betProcS = function() {
 		$scope.betClick = false;
 		return
 	}
+	
+	/*
+	if(trate > 1000){
+		$scope.betJ = true;
+		console.log("trate:"+trate);
+		return;
+	}
+	*/
 	
 	$scope.betConf = false;
 	
@@ -3329,9 +3377,9 @@ $scope.getHeader = function() {
 		headers: {'Content-Type': 'application/json; charset=utf-8'} 
 	}).success(function(data, status, headers, config) {	
 	
-		console.log(data)
+		//console.log(data.header)
 		
-		$("#uhead").html(data);
+		$("#uhead").html(data.header);
 		
 		data=null;
 		

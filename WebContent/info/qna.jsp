@@ -25,7 +25,45 @@
     	padding-left: 10px!important;
 	}
 	table#qnaDt tbody tr:hover {
-		background: #2e3334!important;
+		/*background: #2e3334!important;*/
+		background: #293133!important;
+	}
+
+	table.dataTable thead th{ 
+	    color: #c1c3c4;
+	    background: #2e3334;
+	    height: 40px;
+	    text-align: center;
+	    /*border-bottom: solid 1px #000000!important;*/
+	    border-right: solid 1px #1c2021;
+	    font-size: 12px!important;
+	    font-family: Nanum Gothic, 굴림, 돋음, Dotum, Arial, Helvetica, sans-serif!important;
+	    color: #c1c3c4!important;
+	}
+	table.dataTable thead th:first-child{
+	    /*border-left: solid 1px #2e3032!important;*/
+	    border-left: solid 1px #1c2021!important;
+
+	}
+	table.dataTable tbody tr {
+	    background-color: transparent!important;
+	    background: #262a2b!important;
+	}
+	table.dataTable tbody td {
+	    padding: 0px!important;
+	    text-align: center!important;
+	    /*border-bottom: solid 1px #1c2021!important;*/
+	    border-left: solid 1px #1c2021!important;
+	    height: 35px!important;
+	    border-right: solid 1px #1c2021!important;
+	    font-size: 12px!important;
+	    font-family: Nanum Gothic, 굴림, 돋음, Dotum, Arial, Helvetica, sans-serif!important;
+
+
+
+	}
+	table#qnaDT.dataTable.no-footer thead{
+		display: none;
 	}
 </style>
 <ul class="smk_accordion">
@@ -51,6 +89,7 @@
 		var $qnaDt;
 		$qnaDt = $('#qnaDt').DataTable({
 			ajax : '/info/jsp/getQnaList.jsp',
+			bProcessing: true,
 			sAjaxDataProp:"",
 			searching: false,
 			bInfo : false,
@@ -103,23 +142,13 @@
         	}
         });
 
-		// $(".dt-qna-tab").on("click",function(){
-		// 	setTimeout(function() {
-  //  			  	$qnaDt.columns.adjust().draw();
-		// 	}, 100);
-			
-		// });
-
-
-		$("#qna-div").hide();
-   		$("#qna-div").before('<div class="spn" id="qna-div-spn" style="width:100%!important;">'+lgSpin+'</div>');
+		
 
    		$("#tab4").on("fadeInComplete", function() {
     		setTimeout(function() {
-    			$("#qna-div-spn").remove();
-    			$("#qna-div").show();
+  
 			  	$qnaDt.columns.adjust().draw();
-			}, 300);
+			}, 100);
     		
 		});
 

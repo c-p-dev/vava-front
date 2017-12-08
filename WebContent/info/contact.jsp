@@ -3,14 +3,32 @@
 	input.btn5{
 	    border-width: 0px!important;
    	 	border-radius: 5px!important;
+   	 	cursor: pointer;
 	}
+	
+	.inquiry_wrap_1 {
+		width:100%; 
+		float:left; 
+		height: 30%;
+		/*overflow: hidden;
+		overflow-y: scroll;*/
+		max-height: 350px!important;
+	}
+
+	#con-com{
+		padding: 0px 15px 0px 15px;
+	}
+	
 </style>
 <ul class="smk_accordion">
 	<li>
 		<div class="acc_head"><h3>1:1문의</h3></div>
 		<div class="acc_content" style="display: inline-block!important;width: 100%!important;">
 			<div class="acc_content_in_2">
-				<div class="inquiry_wrap">
+				<div class="inquiry_wrap_1">
+					<div id="con-com">
+						
+					</div>
 				</div>
 				<div class="inquiry_select_wrap" id="inquiry_select_wrap_contact">
 					<form id="messageFrom">
@@ -22,7 +40,7 @@
 								<td>
 									<!-- <a href="#"><span class="btn5">전송</span></a> -->
 									<!-- <button class="btn5" id="sendMsgBtn">전송</button> -->
-									<input type="submit" value="전송" class="btn5">
+									<input type="submit" value="전송" class="btn5" >
 								</td>
 							</tr>
 						</table>
@@ -55,8 +73,12 @@
 
 <script>
 	$(document).ready(function(){
-		loadMessage();
 		
+		loadMessage();
+	
+
+		
+		$(".inquiry_wrap_1").mCustomScrollbar();
 		$('#messageModal').popup({
 	      	transition: 'all 0.3s',
 	      	scrolllock: true,
@@ -90,7 +112,7 @@
 			},
 			messages: {
 			    txt :{
-					required:"Text is required",
+					required:"메시지를 입력해 주세요.",
 				},
 			},
 			errorPlacement: function(error, element) {
@@ -149,14 +171,18 @@
 		
 		var data = data.trim();
 		var obj = JSON.parse(data);
-		$(".inquiry_wrap").html("");
+		$("#con-com").html("");
 		$.each( obj, function(index, el) {
 			
 			var html  = '<div class="inquiry"> <div class="inquiry_admin"> <span class="admin_tag"><img src="../images/admin_tag.jpg"></span> <div class="inquiry_text">' + el.txt+ '</div> <div class="admin_date">'+el.send_date+'</div></div></div>'; 
 			if(el.class_name == "inquiry_user"){
 				html = '<div class="inquiry"> <div class="inquiry_user"> <span class="user_tag"><img src="../images/user_tag.jpg"></span> <div class="inquiry_text"> '+el.txt+' </div> <div class="user_date">'+el.send_date+'</div> </div> </div>'; 
 			}
-			$(".inquiry_wrap").append(html);
+			$("#con-com").append(html);
+			$("#con-com").mCustomScrollbar("update");
+			$("#con-com").mCustomScrollbar("scrollTo", "bottom");
+
+
 	
 		});
 	}

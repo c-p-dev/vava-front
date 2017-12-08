@@ -1374,10 +1374,8 @@ mainAngular.directive('tooltip', function ($document, $compile) {
 						<div class="contents_in_m20">
 							<div class="main_title_1">인기베팅경기</div>
 							<div id="third" class="carouseller">
-								<a href="javascript:void(0)" class="carouseller__left"> <img
-									src="/images/arrow_left.png">
-								</a> <a href="javascript:void(0)" class="carouseller__right"> <img
-									src="/images/arrow_right.png">
+								<a href="javascript:void(0)" class="carouseller__left"> <img src="/images/arrow_left.png" style="vertical-align:middle;margin-top:5px;">
+								</a> <a href="javascript:void(0)" class="carouseller__right"> <img src="/images/arrow_right.png" style="vertical-align:middle;margin-top:5px;">
 								</a>
 								<div class="carouseller__wrap">
 									<div class="carouseller__list">
@@ -1409,6 +1407,17 @@ mainAngular.directive('tooltip', function ($document, $compile) {
 											</a>
 
 										</div>
+										
+										<script type="text/javascript">
+											$(function() {
+												$('#third').carouseller({ 
+													scrollSpeed: 500,
+													autoScrollDelay: 6000,
+													easing: 'linear'
+												});
+											});
+										</script>
+						
 
 										<form id="formId" name="form" method="post"
 											action="/sport/livematch.jsp">
