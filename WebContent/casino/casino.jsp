@@ -156,38 +156,26 @@ ul.casino_board_list  + .btn_wrap{
 }
 
 .l_tabs li.subm-manual {
-	width: 220px;
-    position: relative;
-    display: none;
-    height: 30px;
-    line-height: 30px;
-    font-size: 12px;
-    background-color: #54595a;
-    margin-left: 20px;
+    background-color: #000000;
+    border-bottom: solid 1px rgba(255,255,255,0.1);
+}
+
+li.subm-manual {
+	display: none;
 }
 
 .l_tabs li.subm-manual a {
 	height: 30px;
 }
 
-.subm-arr-right {
-	height: 30px;
-    width: 20px;
-    position: absolute;
-    left: -15px;
+div.chevy-cntr {
+    float: right;
+    margin-top: 12px;
+    margin-right: 12px;
 }
 
-.subm-arr-right i.fa {
-	line-height: 30px;
-}
-
-.subm-arr-right img {
-	height: 23px;
-    position: absolute;
-    top: -6px;
-    left: 8px;
-    width: 18px;
-    display: none;
+.l_tabs li {
+	cursor: pointer;
 }
 
 </style>
@@ -241,21 +229,21 @@ ul.casino_board_list  + .btn_wrap{
 						GameBean providers = game_providers.get(i);
 						int tab = i + 2;
 						
-						String html = "<li><a href=#l-tab"+tab+" class=get-game data-val="+providers.getGame_provider()+">"+providers.getProvider_name()+"</a></li>";
+						String html = "<li><a href=#l-tab"+tab+" class=get-game data-val="+providers.getGame_provider()+">"+providers.getProvider_name()+" <div class = 'chevy-cntr'><i class = 'chevy fa fa-chevron-up'></i></div></a></li>";
 
 						if( providers.getGame_provider() == 2){
 							
-							html +=("<li id = 'agmanual-lnk' class = 'subm-manual'><div class = 'subm-arr-right'><img src = '/images/arr-right.png' /></div><a href='#l-tab3' class='get-manual agtab' data-val='manual'>아시안게임 이용안내</a></li>");
+							html +=("<li id = 'agmanual-lnk' class = 'subm-manual'><a href='#l-tab3' class='get-manual agtab' data-val='manual'>아시안게임 이용안내</a></li>");
 						
 						}
 						else if(providers.getGame_provider() == 1 ){
 							
-							html +=("<li id = 'mgmanual-lnk' class = 'subm-manual'><div class = 'subm-arr-right'><img src = '/images/arr-right.png' /></div><a href='#l-tab5' class='get-manual mgtab' data-val='manual2'>마이크로게임 이용안내</a></li>");
+							html +=("<li id = 'mgmanual-lnk' class = 'subm-manual'><a href='#l-tab5' class='get-manual mgtab' data-val='manual2'>마이크로게임 이용안내</a></li>");
 						
 						}
 						else if(providers.getGame_provider() == 3){
 							
-							html +=("<li id = 'bcmanual-lnk' class = 'subm-manual'><div class = 'subm-arr-right'><img src = '/images/arr-right.png' /></div><a href='#l-tab=7' class='get-manual' data-val=''>벳컨 카지노 이용안내</a></li>");
+							html +=("<li id = 'bcmanual-lnk' class = 'subm-manual'><a href='#l-tab=7' class='get-manual' data-val=''>벳컨 카지노 이용안내</a></li>");
 						
 						}
 
@@ -367,38 +355,39 @@ ul.casino_board_list  + .btn_wrap{
 		$("#game-cat li a").on("click",function(e){
 			e.preventDefault();
 			if($(this).parent().hasClass('active') == false){
+				
 				$(".casino_right").html(spin);
+				
 				var game_prvdr = $(this).attr("data-val");
 				
 				if ($(this).hasClass('get-game')) {
 					
+					var chev_mark	= $(this).find('.chevy-cntr .chevy');
+					
 					/*	Intializes all manuals to hidden display	*/
 					$('.subm-manual').hide();
-					$('.subm-arr-right img').hide();
+					
+					$('.chevy').removeClass('fa-chevron-down');
+					$('.chevy').addClass('fa-chevron-up');
 					
 					/*	Asian Gaming	*/
 					if (2 == game_prvdr) {
-						$('#agmanual-lnk').slideDown(function(){
-							$('.subm-arr-right img').fadeIn();
-						});
+						$('#agmanual-lnk').slideDown();
 					}
 					/*	Microgaming		*/
 					else if (1 == game_prvdr) {
-						$('#mgmanual-lnk').slideDown(function(){
-							$('.subm-arr-right img').fadeIn();
-						});
+						$('#mgmanual-lnk').slideDown();
 					}
 					/*	Betconstruct	*/
 					else if (3 == game_prvdr) {
-						$('#bcmanual-lnk').slideDown(function(){
-							$('.subm-arr-right img').fadeIn();
-						});
+						$('#bcmanual-lnk').slideDown();
 					}
 					else {
 						/* Default. Do nothing	*/
 					}
 					
-					
+					chev_mark.removeClass('fa-chevron-up');
+					chev_mark.addClass('fa-chevron-down');
 					
 					//get Game
 					$.ajax({
