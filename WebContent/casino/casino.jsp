@@ -155,17 +155,10 @@ ul.casino_board_list  + .btn_wrap{
     width: 100%!important;
 }
 
-.l_tabs li.subm-manual {
-    background-color: #000000;
-    border-bottom: solid 1px rgba(255,255,255,0.1);
-}
-
 li.subm-manual {
 	display: none;
-}
-
-.l_tabs li.subm-manual a {
-	height: 30px;
+	background-color: #000000;
+    border-bottom: solid 1px rgba(255,255,255,0.1);
 }
 
 div.chevy-cntr {
@@ -352,9 +345,9 @@ div.chevy-cntr {
 			return false;
 		});
 
-		$("#game-cat li a").on("click",function(e){
-			e.preventDefault();
-			if($(this).parent().hasClass('active') == false){
+		$("#game-cat li").on("click", 'a', function(e){
+					
+			if ($(this).parent().hasClass('active') == false) {
 				
 				$(".casino_right").html(spin);
 				
@@ -410,13 +403,16 @@ div.chevy-cntr {
 						data : {man:game_prvdr},
 						method: 'GET',
 					}).done(function(data){
-						loadManual(data);
+						setTimeout(function(){
+							loadManual(data);
+						}, 1000);
 					});
 				}
-			}else{
-				return false;
+				
+				$(this).parent().click();
 			}
 			
+			return false;
 		});
 
 		if (Modernizr.touch) {
