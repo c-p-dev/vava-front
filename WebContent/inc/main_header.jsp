@@ -44,6 +44,7 @@
 <script type="text/javascript" src="/js/v-accordion.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28//angular-route.min.js"></script>
 <script type="text/javascript" src="/js/accordion.js"></script><!-- sub_아코디언 -->
+<script type="text/javascript" src="/js/refresh-money.js"></script>
 
 <script type="text/javascript" src="/js/common.js"></script>
 
