@@ -55,6 +55,12 @@
 </div>
 
 <script type="text/javascript" src="/js/refresh-money.js"></script>
+<script>
+
+$(document).ready(function(){
+	refreshMoney();
+});
+</script>
 <!--
 
 //-->
