@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="/inc/session.jsp"%>
-<%@ include file="/inc/session_checker.jsp"%>
+<%@ page isErrorPage="true" import="java.io.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
 
 <!DOCTYPE html>
 <head>
@@ -79,96 +78,27 @@
 <!-- custom scrollbar test -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css" />
 </head>
-<body onLoad="clive_load()"> 
-	
-<%@ include file="/inc/header.jsp"%>
+<body > 
+
 <style>
 	.cash_tab .btn3c {
 		cursor: pointer;
 		margin-top: 5px;
 	}
-	
+	h1{
+		font-size: 25px;
+	}
+	p{
+		text-align: left;
+	}
 </style>
 
 <div id="contents_wrap" class="cash_tab">
-	<div class="contents">
-
-		<div id="spin_clive" class="sk-fading-circle_s">
-			<div class="sk-circle1 sk-circle"></div>
-			<div class="sk-circle2 sk-circle"></div>
-			<div class="sk-circle3 sk-circle"></div>
-			<div class="sk-circle4 sk-circle"></div>
-			<div class="sk-circle5 sk-circle"></div>
-			<div class="sk-circle6 sk-circle"></div>
-			<div class="sk-circle7 sk-circle"></div>
-			<div class="sk-circle8 sk-circle"></div>
-			<div class="sk-circle9 sk-circle"></div>
-			<div class="sk-circle10 sk-circle"></div>
-			<div class="sk-circle11 sk-circle"></div>
-			<div class="sk-circle12 sk-circle"></div>
-		</div>
-	
-
-		<div  style="display:none;" id="clive" class="animate-bottom">
-
-			<ul class="tabs">
-				<li><a href="#tab1">충전신청</a></li>
-				<li><a href="#tab2">환전신청</a></li>
-				<li><a href="#tab3">포인트전환</a></li>
-				<!-- <li><a href="#tab4">머니전환</a></li> -->
-				<li><a href="#tab5" class="dt-point-tab">포인트 사용 내역</a></li>
-				<li><a href="#tab6" class="dt-money-use">머니 사용 내역</a></li>
-			</ul>
-			
-			<div class="tab_container">
-				<div id="tab1" class="tab_content">
-					<jsp:include page="/cash/charge_tab.jsp" /> 
-				</div>
-				<div id="tab2" class="tab_content">
-					<jsp:include page="/cash/exchange_tab.jsp" />
-				</div>
-				<div id="tab3" class="tab_content">
-					<jsp:include page="/cash/switch_points.jsp" />
-				</div>
-				<div id="tab5" class="tab_content">
-					<jsp:include page="/cash/point_tab.jsp" /> 
-				</div>
-				<div id="tab6" class="tab_content">
-					<jsp:include page="/cash/moneyuse_tab.jsp" /> 
-				</div>
-			</div>
-
-		</div>
+	<div id="main_spin" style="text-align: center;">
+		<div style="margin: 50px auto; width: 156px; height: 75px; position: relative; background-image: url('/images/logo.png')"></div>
+		<h1>An Error Occured</h1>
+		<p style="text-align: center;">Try reloading the page.</p>
 	</div>
 </div><!-- contents -->
-<script>
-	$(document).ready(function(){
-		// setTabActive($.urlParam("tab"));
-		var tab = '<%=session.getAttribute("tb")%>';
-		if(tab != ""){
-			$("ul.tabs li a[href='#"+tab+"']").click();
-		}
-
-		$(".conf_modal_close").on("click",function(){
-			$(".conf_modal").popup("hide");
-		});
-	});
-
-	function clive_load() {
-		console.log("clive_load");
-	    var myVar = setTimeout(showPage_clive, 1000);
-	};
-	
-	function showPage_clive() {
-		document.getElementById("spin_clive").style.display  = "none";
-		document.getElementById("clive").style.display = "block";
-		$("#tab3, #tab5, #tab6").trigger("fadeInComplete");
-	}
-
-
-</script>
-<%@ include file="/inc/footer.jsp"%>
-</div>
 </body>
 </html>
-

@@ -1,3 +1,5 @@
+<%@ include file="/inc/session.jsp"%>
+<%@ include file="/inc/session_checker.jsp"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@page import="dao.GameDao"%> 
@@ -7,14 +9,16 @@
 <%@page import="bean.UserBean"%>
 
 <%
-	DecimalFormat dfrmt				= new DecimalFormat("#,###,###,###,###");
-	boolean checkSession = false;
+	
 	UserDao user_db			= new UserDao();
 	UserBean user_data		= (UserBean)session.getAttribute("currentSessionUser");
 	UserBean currentUser 	= user_data;
-	if(session.getAttribute("currentSessionUser") != null) {
+	
+	if(checkSession) {
+		
+
 		currentUser 		= user_db.getUserByUserId(user_data.getUserid());
-		checkSession = true;
+		
 	}
 %>
 <ul class="smk_accordion">

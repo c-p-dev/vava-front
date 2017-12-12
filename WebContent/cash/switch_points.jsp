@@ -1,3 +1,5 @@
+<%@ include file="/inc/session.jsp"%>
+<%@ include file="/inc/session_checker.jsp"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="dao.GameDao, java.text.DecimalFormat, java.util.*,dao.UserDao,bean.UserBean;"%>		
 <style>
@@ -20,15 +22,11 @@
 
 </style>
 <%
-	DecimalFormat dfrmt				= new DecimalFormat("#,###,###,###,###");
-	boolean checkSession = false;
+
 	UserDao user_db			= new UserDao();
 	UserBean user_data		= (UserBean)session.getAttribute("currentSessionUser");
-	UserBean currentUser 	= user_data;
-	if(session.getAttribute("currentSessionUser") != null) {
-		currentUser 		= user_db.getUserByUserId(user_data.getUserid());
-		checkSession = true;
-	}
+	UserBean currentUser 		= user_db.getUserByUserId(user_data.getUserid());
+
 %>	
 			
 			<ul class="smk_accordion">

@@ -93,6 +93,8 @@ var lgSpin = '<div id="spin_clive" class="sk-circle ng-scope" style="">';
 	lgSpin += '<div class="sk-circle12 sk-child"></div>';
 	lgSpin += '</div>';
 
+var lgCheck;
+
 $(window).scroll(function(event){
   	var scroll = $(window).scrollTop();
 	    if (scroll >= 50) {
@@ -111,6 +113,7 @@ $(window).scroll(function(event){
 
 
 	$(document).ready(function(){
+		console.log(navigator.userAgent);
 		if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 			window.location = "http://www.vava21.com";
 		}
@@ -144,6 +147,17 @@ $(window).scroll(function(event){
 	      	escape: false,
 	      	blur:false,
 
+	    });
+
+
+	    $('#user_invalid_modal').popup({
+	      	transition: 'all 0.3s',
+	      	escape: false,
+	      	blur:false,
+	      	onclose: function(){
+	      		
+	      		window.location = "/login/jsp/logout_process.jsp";
+	      	}
 	    });	
 
 		$("body").on("submit","#login_header",function(e){
@@ -312,6 +326,16 @@ $(window).scroll(function(event){
 			$(this).parent().parent().popup("hide");
 		});
 
+		// show invalid user
+		
+		cValU();
+
+		$(".uIM_close").on("click",function(e){
+			e.preventDefault();
+			$("#user_invalid_modal").html(lgSpin);
+			window.location = "/login/jsp/logout_process.jsp";
+		})
+
 	});
 
 	function submitLoginHeader(data){
@@ -328,6 +352,9 @@ $(window).scroll(function(event){
 
 				// toastr.success('Login Successful');
 				// $("#loginModal").html(lgMsg);
+
+				cValU();
+
 				$.ajax({
 					url : '/login/jsp/get_header.jsp', //jsp				
 					data : {},
@@ -340,6 +367,7 @@ $(window).scroll(function(event){
 					$("#loginModal").html(lgMsg);	
 					$("#fade_3").popup("hide");
 					$('a.get-vbet-hist').parent().show();
+					
 				});
 
 			}else if(obj.result == 1 ){
@@ -414,6 +442,34 @@ $(window).scroll(function(event){
 		$(html).insertAfter('#logoutModal');
 
 
+	}
+
+	function cValU(){
+		
+		clearInterval(lgCheck);
+		lgCheck = setInterval(function(){
+			console.log("check validity user");
+			$.ajax({
+				url : '/login/jsp/get_session.jsp',
+				data : {},
+				method: 'GET',
+				cache: false,
+			}).done(function(data){
+				var obj = JSON.parse(data);
+				
+				var valid = obj.validUser;
+				var loggedIn = obj.result; 
+				if(!valid && loggedIn){
+					$("#user_invalid_modal").popup("show");		
+				}	
+				
+
+				
+			});
+
+		}, 60000); //1 min
+
+		
 	}
 
 </script>
@@ -595,6 +651,26 @@ $(window).scroll(function(event){
 		<div class="btn_wrap">
 			<a href="/login/jsp/logout_process.jsp"><span class="btn3 logOutBn ">확인</span></a>
 			<a href="" class="closeLogoutBtn"><span class="btn3">취소</span></a>			
+		</div>
+	</div>
+</div>
+
+<!-- show invalid user -->
+<div id="user_invalid_modal" class="bg_mask_pop2">
+	<div class="bg_mask_pop_title">
+		<span class="popup_logo"><img src="/images/popup_logo.png"></span>
+		<span  class="popup_close uIM_close"><img src="/images/popup_close.png"></span>
+	</div>
+	<div class="bg_mask_pop2_in">
+		<div class="pop_icon_center">
+			<img src="/images/exclamation_icon.png">
+		</div>
+		<div class="pop_text">
+			Account is already logged in.
+		</div>
+		<div class="btn_wrap">
+			<a href="/login/jsp/logout_process.jsp"><span class="btn3 logOutBn ">ok</span></a>
+			<!-- <a href="" class="closeLogoutBtn"><span class="btn3">취소</span></a>			 -->
 		</div>
 	</div>
 </div>

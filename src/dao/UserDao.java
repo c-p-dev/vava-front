@@ -60,6 +60,7 @@ public class UserDao {
 					uib.setUserid(rs.getString("userid"));
 					uib.setNick(rs.getString("nick"));
 					uib.setCharge_level(rs.getString("charge_level"));
+					uib.setSess(rs.getString("sess"));
 					
 				}else{
 					uib.setLoginStatus(1); // wrong password
@@ -253,6 +254,7 @@ public class UserDao {
             	user_data.setBank_owner(rs.getString("bank_owner"));
             	user_data.setBank_num(rs.getString("bank_num"));
             	user_data.setRecommend(rs.getString("recommend"));
+            	user_data.setSess(rs.getString("sess"));
             }
             
             rs.close();
@@ -984,5 +986,70 @@ public class UserDao {
 		
 		return result;
 	}
-
+	
+	public boolean checkUserSess(String userid,String sessionId){
+		boolean result = false;
+		Connection con 			= null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String  query 			= "SELECT * FROM user_mst WHERE userid = ? AND sess = ?";		
+		
+		try {
+			DBConnector.getInstance();
+			con = DBConnector.getConnection();			 	
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1,userid);
+			pstmt.setString(2,sessionId);
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				result = true;
+			}
+		}
+		catch(Exception e) {
+			System.out.println(e);
+			logger.debug(e);
+		}
+		
+		return result;
+	}
+	
+	public boolean checkIPBlockList(String ip){
+		
+		boolean result = false;
+		Connection con 			= null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String  query 			= "SELECT ipid FROM ip_lst where "
+				+ " CONVERT(BIGINT,PARSENAME(?,4)) * POWER(256,3) "
+				+ " + CONVERT(BIGINT,PARSENAME(?,3)) * POWER(256,2) "
+				+ " + CONVERT(BIGINT,PARSENAME(?,2)) * 256 "
+				+ " + CONVERT(BIGINT,PARSENAME(? ,1)) between num_ip AND num_ip2  "
+				+ " AND gubun = 'U'AND viewtype = 'Y'";		
+		
+		try {
+			if(!ip.equals("0:0:0:0:0:0:0:1")){
+				DBConnector.getInstance();
+				con = DBConnector.getConnection();			 	
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1,ip);
+				pstmt.setString(2,ip);
+				pstmt.setString(3,ip);
+				pstmt.setString(4,ip);
+				rs = pstmt.executeQuery();
+				if(rs.next()){
+					result = true;
+				}
+			}else{
+				System.out.println("Ip is : " + ip);
+			}
+			
+		}
+		catch(Exception e) {
+			System.out.println(e);
+			logger.debug(e);
+		}
+		
+		return result;
+	}
+	
 }

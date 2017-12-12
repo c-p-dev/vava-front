@@ -1,3 +1,6 @@
+<%@ include file="/inc/session.jsp"%>
+<%@ include file="/inc/session_checker.jsp"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@page import="java.text.DecimalFormat"%> 
@@ -201,16 +204,11 @@
 
         });
 
-   		$("#money-use").hide();
-   		$("#money-use").before('<div class="spn" id="money-use-spn" style="width:100%!important;">'+lgSpin+'</div>');
-
+   		
    		$("#tab6").on("fadeInComplete", function() {
-    		setTimeout(function() {
-    			$("#money-use-spn").remove();
-    			$("#money-use").show();
-			  	$moneyUseTable.columns.adjust().draw();
-			}, 300);
     		
+		  	$moneyUseTable.columns.adjust().draw();
+			
 		});
 
         $(".money_pikaday_input").on("change",function(e){
