@@ -23,6 +23,10 @@
 		
 		if(bean.getSess().equals(session.getId())){
 			validUser = true;
+		}else{
+			//destroy session
+			HttpSession user_session = request.getSession(true);	    
+			session.invalidate(); 
 		}
 	}
 

@@ -59,7 +59,7 @@
 
 .live_2_1 {text-align:center; text-align:center; color:#ffa800; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021; }
 /*.live_2_1:hover {background:#2e3334}*/
-.live_3_1 {text-align:center; width:15%;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;  }
+.live_3_1 {text-align:left; padding-left:10px; width:15%;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;  }
 /*.live_3_1:hover {background:#2e3334}*/
 .live_4_1 {text-align:center; border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;-webkit-transition: all .2s ease-in-out;-moz-transition: all .2s ease-in-out;-o-transition: all .2s ease-in-out;-ms-transition: all .2s ease-in-out;transition: all .2s ease-in-out;}
 /*.live_4_1:hover {background:#2e3334}*/
@@ -184,7 +184,7 @@
 .etc_score_c_1 {width:60px; height:60px;line-height:60px;background:rgba(189,189,189,0.6);color:#ffffff; font-size:40px; font-weight:bold; text-align:center; border-radius:5px; margin:0 0 5px 0}
 .etc_score_c_2 {width:60px; height:60px;line-height:60px;background:rgba(215,223,1,0.6);color:#ffffff; font-size:40px; font-weight:bold; text-align:center; border-radius:5px; margin:0 0 5px 0}
 .etc_score_c_2_long {width:70px; height:60px;line-height:60px;background:rgba(215,223,1,0.6);color:#ffffff; font-size:40px; font-weight:bold; text-align:center; border-radius:5px; margin:0 0 5px 0}
-.etc_score_c_3 {width:30px; height:60px;line-height:60px; margin:0 0 5px 0}
+.etc_score_c_3 {width:30px; height:60px;line-height:60px;}
 
 .etc_score_b_1 {width:60px; height:60px;line-height:60px;background:rgba(189,189,189,0.6);color:#ffffff; font-size:40px; font-weight:bold; text-align:center; border-radius:5px}
 .etc_score_b_2 {width:60px; height:60px;line-height:60px;background:rgba(215,223,1,0.6);color:#ffffff; font-size:40px; font-weight:bold; text-align:center; border-radius:5px}

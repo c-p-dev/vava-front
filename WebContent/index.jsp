@@ -1395,9 +1395,9 @@ mainAngular.directive('tooltip', function ($document, $compile) {
 													<div class="main_bet_name">
 														<img src="/images/main_bet_name_{{ml.SD}}.jpg">
 														<div class="main_bet_name_text_1">
-															<span><img src="/images/team_s/410.png">{{ml.HT}}</span><br>
+															<span><img src="/images/team_s/{{ml.HID}}.png" width="23">&nbsp;&nbsp;{{ml.HT}}</span><br>
 															<br>
-															<span><img src="/images/team_s/618.png">{{ml.AT}}</span>
+															<span><img src="/images/team_s/{{ml.AID}}.png" width="23">&nbsp;&nbsp;{{ml.AT}}</span>
 														</div>
 													</div>
 													<span class="main_bet_btn">베팅하기</span>

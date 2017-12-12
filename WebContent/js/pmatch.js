@@ -28,7 +28,10 @@ var s=[
 		{"PID":23,"u":"jsp/getMatchInfobySport.jsp"},
 		{"PID":24,"u":"jsp/getMaxBetAmt.jsp"},
 		{"PID":25,"u":"jsp/setMultiBet.jsp"},
-		{"PID":26,"u":"jsp/setSingleBet.jsp"}
+		{"PID":26,"u":"jsp/setSingleBet.jsp"},
+		{"PID":27,"u":"jsp/getUserBalance.jsp"},
+		{"PID":28,"u":"jsp/getCart.jsp"}
+		
 		]
   		
 mainAngular.factory('wss', function($window) {
@@ -154,7 +157,7 @@ mainAngular.directive('format', ['$filter', function ($filter) {
 }]);
 
      
-mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, wss) {		
+mainAngular.controller("mc", function($window,$scope, $templateCache, $compile, $http, wss) {		
 	wss.subscribe(function( message) {		
 		try {
 						
@@ -258,6 +261,8 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 		$scope.betG = false;
 		$scope.betH = false;
 		$scope.betJ = false;
+		$scope.betK =  false;
+		$scope.UID = "";
 		
 		//console.log("$scope.betJ:"+$scope.betJ);
 		
@@ -292,8 +297,95 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
     $scope.parseFloat = parseFloat;
     
     $scope.ISLG = checkSession;
+    $scope.UID = UID;
 	  $scope.ubal = UBAL;
 	  
+	console.log("$scope.UID :"+$scope.UID );
+	
+	$scope.getCart = function(){
+      var cart = [];
+      //var cart = [];
+      var c = false;
+      //var data = sessionStorage.getItem('key');
+      $.each($window.sessionStorage, function(i, v){
+        cart.push(angular.fromJson(v));
+        c = true;     
+        $scope.betE = true;  	
+	  		$scope.betClick = true;
+	  	   
+        //console.log(cart[0].Sd);
+      });
+    
+		
+		
+		if(c){
+			var sd = [];
+			for(var i = cart[0].length - 1; i >= 0; i--){  
+				sd.push(cart[0][i].Sd);
+			}
+			  		 
+			$http({
+					method: 'GET', 
+					url: s[28].u, 
+					params: {'selid':sd},
+					headers: {'Content-Type': 'application/json; charset=utf-8'} 
+			}).success(function(data, status, headers, config) {
+		
+				if(data) {			
+					
+					angular.forEach(data, function(obj,idx) {	
+						
+						//console.log("obj");
+						
+						for(var i=cart[0].length-1;i>=0;i--){  
+							
+
+							if(obj.sel_id==cart[0][i].Sd){ 							
+								cart[0][i].P = obj.sel_price;
+								
+								if(obj.match_vis=='F' || obj.match_sus=='T'){
+									cart[0][i].SuM = true;
+								}
+								
+								if(obj.market_vis=='F' || obj.market_sus=='T'){
+									cart[0][i].SuK = true;
+								}
+							
+							$scope.bet.push(cart[0][i]);	
+						}
+						
+						
+					}		
+					
+					console.log("$scope.bet");
+					console.log($scope.bet);
+
+				});
+				data = null;
+				
+			};
+			
+			}).error(function(data, status, headers, config) {
+				console.log(status);
+				data = null;
+			});
+			
+	  
+	  };
+		
+	};
+	
+	$scope.addCart = function(id){
+		$window.sessionStorage.clear();
+  	$window.sessionStorage.setItem(id, JSON.stringify($scope.bet));        
+    
+    console.log("$window.sessionStorage:"+$window.sessionStorage.length);
+  }
+  
+  if($scope.ISLG&&$scope.UID!="-1"){
+		$scope.getCart(); 
+	}
+	   
 	    
 	 $scope.goLiveMatch = function (left,center) {	  	
 	  	loadLiveMatchInit();
@@ -462,6 +554,11 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 										
 					if($scope.bet[i].Sd == sd){
 						$scope.bet = $filter('omit')($scope.bet,'Sd ==' + sd);  // delete ID		
+						
+						if($scope.ISLG&&$scope.UID!="-1"){
+							$scope.addCart($scope.UID);
+						}
+						
 						return;
 					};
 					
@@ -483,9 +580,15 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 	   		AT:at,
 	   		P:$filter('number')(p, 2),
 	   		BP:$filter('number')(bp, 2),
-	   		Amt:1000
+	   		Amt:1000,
+	   		SuM:false,
+	   		SuK:false
 			});		
 			
+			if($scope.ISLG&&$scope.UID!="-1"){
+				$scope.addCart($scope.UID);
+			}
+				
 			if($scope.bet.length<2)
 				$scope.betM ="1";
 				
@@ -495,7 +598,8 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 		var element =  document.getElementById("betPrice");
 		if(element) element.focus();          
 	 };
- 
+
+/* 
 	 $scope.setBet  = function (sd,mkid,sn,st,ht,at,p,bp,mid) { 	
 	  	$scope.betE = true;  	
 	  	for(var i = $scope.bet.length - 1; i >= 0; i--){  									
@@ -514,12 +618,15 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 	   		AT:at,
 	   		P:$filter('number')(p, 2),
 	   		BP:$filter('number')(bp, 2),
-	   		Amt:1000
-			});		
+	   		Amt:1000,
+	   		SuM:false,
+	   		SuK:false
+			});
+					
 		var element =  document.getElementById("betPrice");
 		if(element) element.focus();          
 	 };
- 
+*/ 
 	  $scope.delBet  = function (sd) { 	  	
 	  	for(var i = $scope.bet.length - 1; i >= 0; i--){							
 				if($scope.bet[i].Sd == sd){
@@ -527,6 +634,9 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 				};
 			};
 			
+			if($scope.ISLG&&$scope.UID!="-1")
+				$scope.addCart($scope.UID);
+				
 			if($scope.bet.length < 1) $scope.betE = false;	
 			else {	
 				var element =  document.getElementById("betPrice");
@@ -538,6 +648,10 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 	  	for(var i = $scope.bet.length - 1; i >= 0; i--){							
 						$scope.bet.splice(i,1);
 			};	
+			
+			if($scope.ISLG&&$scope.UID!="-1")
+				$scope.addCart($scope.UID);
+				
 			$scope.betE = false;
 			$scope.betA = false;
 	 };
@@ -604,6 +718,12 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 	  if(alert == "9") {
 	  	document.getElementById("betJ").style="display:none;"
 	  	$scope.betJ = false; 
+	  	$scope.betClick = true;
+	  }
+	  
+	  if(alert == "10") {
+	  	document.getElementById("betK").style="display:none;"
+	  	$scope.betK = false; 
 	  	$scope.betClick = true;
 	  }
 	  
@@ -1520,8 +1640,8 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
   	 
   	if(dt != "1"){
 	
-	  		document.getElementById("spin_clive2").style.display  = "block";
-	  		document.getElementById("clive2").style.display = "none";
+	  //		document.getElementById("spin_clive2").style.display  = "block";
+	  //		document.getElementById("clive2").style.display = "none";
 	  		//console.log("dt==" + dt);
 	  		
 	  } else {
@@ -1645,8 +1765,8 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 			data = null;				
 		
 	  		
-	  	document.getElementById("clive2").style.display  = "block";
-	  	document.getElementById("spin_clive2").style.display = "none";
+	  	//document.getElementById("clive2").style.display  = "block";
+	  	//document.getElementById("spin_clive2").style.display = "none";
 
 	  	console.log($scope.toPMk);
 	  	
@@ -1943,13 +2063,31 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 		$scope.LMK = $filter('omit')($scope.LMK,'MId ==' + mid);  // delete ID			
 		$scope.MK = $filter('omit')($scope.MK,'MId ==' + mid);  // delete ID			
 		$scope.LMKc = $filter('omit')($scope.LMKc,'M ==' + mid);  // delete ID	
+		$scope.bet = $filter('omit')($scope.bet,'MId ==' + mid);  // delete ID	
+		
+		for(var r = $scope.bet.length - 1;r >= 0; r--){																	
+			if($scope.bet[r].MId == obj.Id){				
+					$scope.bet[r].SuM = true ;	
+				console.log("$scope.bet[r].Su");										
+			};
+		};	
+			
 		//check favorite match and bet match
 	}
 	
 	function finishPreMatch(mid) {		
 		$scope.PM = $filter('omit')($scope.PM,'MId ==' + mid);  // delete ID					
 		$scope.PMk = $filter('omit')($scope.PMk,'MId ==' + mid);  // delete ID			
-		$scope.toPMk = $filter('omit')($scope.toPMk,'MId ==' + mid);  // delete ID			
+		$scope.toPMk = $filter('omit')($scope.toPMk,'MId ==' + mid);  // delete ID	
+		$scope.bet = $filter('omit')($scope.bet,'MId ==' + mid);  // delete ID			
+	
+		for(var r = $scope.bet.length - 1;r >= 0; r--){																	
+			if($scope.bet[r].MId == obj.Id){				
+					$scope.bet[r].SuM = true ;	
+				console.log("$scope.bet[r].Su");										
+			};
+		};	
+		
 		//$scope.PMkC = $filter('omit')($scope.PMkC,'MId ==' + mid);  // delete ID			
 		//$scope.toPMkC = $filter('omit')($scope.toPMkC,'MId ==' + mid);  // delete ID	
 		//check favorite match and bet match
@@ -2308,13 +2446,14 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 			for(var r = $scope.bet.length - 1;r >= 0; r--){					
 					var betMk = $scope.bet[r];			
 											
-					if(betMk.Mkid == obj.Id){																
+					if(betMk.Mkid == obj.Id){	
+						$scope.bet[r].SuK = obj.IsSuspended;															
 						for (var j = 0; j < obj.Selections.length; j++) {		    					    				
 		    				if(obj.Selections[j].Id == betMk.Sd) {
 									$scope.bet[r].P = obj.Selections[j].Price;							
 								};
 						};	
-					};
+					};					
 			};				
 		});			
 	};
@@ -2635,13 +2774,21 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http, w
 		  			}; 		
 				  };
 				}); 
-			};						
+			};	
+			
+			for(var r = $scope.bet.length - 1;r >= 0; r--){					
+				var betMk = $scope.bet[r];														
+				if(betMk.MId == obj.Id){				
+					$scope.bet[r].SuM = obj.IsSuspended ;	
+					console.log("$scope.bet[r].Su");										
+				};
+			};	
+								
 		});	
 	};
 		
   function sub_loadGetMatch(res) {		  	  	
-  	
-  	  	
+  	  	  	
   	angular.forEach(res.Objects, function(obj,idx) {						
 			
 			if(!obj.IsBooked){
@@ -3179,11 +3326,22 @@ $scope.betProcM = function() {
 	}
 	
 	var chbet = 0;
+	var betSus = false;
+	
 	for(var i = $scope.bet.length - 1; i >= 0; i--){  
 		//tamt += parseInt($scope.bet[i].Amt);		 
 		 if($scope.bet[i].P != $scope.bet[i].BP)
 		 	chbet = 1;
+		 	
+		  if($scope.bet[i].SuM||$scope.bet[i].SuK)
+		 	betSus = true;
 	};		
+	
+	if(betSus){
+		$scope.betK = true;
+		$scope.betClick = false;
+		return;
+	}
 	
 	if(parseInt($scope.betAmt[0]) > $scope.ubal){
 		$scope.betF = true;
@@ -3197,6 +3355,8 @@ $scope.betProcM = function() {
 		console.log("$scope.betPrice_p:"+$scope.betPrice_p);
 		return;
 	}
+	
+	console.log("document.getElementById('cb').checked = "+document.getElementById('cb').checked)
 	
 	if(!document.getElementById("cb").checked && chbet>0 && !$scope.betConf){
 		$scope.betG = true;
@@ -3222,6 +3382,11 @@ $scope.betProcM = function() {
 			//console.log("OK:"+data);
 			$scope.getHeader(); 	
 			$scope.bet = [];
+			
+			if($scope.ISLG&&$scope.UID!="-1"){
+				$scope.addCart($scope.UID);
+			}
+			
 	  	$scope.betC = true; 
 	  	$scope.betE = false;
 	  	
@@ -3256,30 +3421,41 @@ $scope.betProcS = function() {
 	
 	var tamt = 0;	
 	var chbet = 0;
+	var betSus = false;
 	//var trate = 1;	
 	
 	for(var i = $scope.bet.length - 1; i >= 0; i--){  
 		tamt += parseInt($scope.bet[i].Amt);
 		//trate = trate*($scope.bet[i].P).replace(',','');
-		
-		 
+				 
 		 if($scope.bet[i].P != $scope.bet[i].BP)
 		 	chbet = 1;
+		 	
+		 	if($scope.bet[i].SuM || $scope.bet[i].SuK)
+		 		betSus = true;
+		 		
 	};	
 	
-	console.log("tamt:"+tamt);
+	if(betSus){
+		$scope.betK = true;
+		$scope.betClick = false;
+		return;
+	}
+	
+	//console.log("tamt:"+tamt);
 	//console.log("trate:"+trate);
-	console.log("chbet:"+chbet);
+	//console.log("chbet:"+chbet);
 		
 	if(tamt > $scope.ubal){
 		$scope.betF = true;
 		$scope.betClick = false;
 		return
 	}
-	
-	
+		
 	console.log("$scope.betConf:"+$scope.betConf);
 	console.log("$scope.betG:"+$scope.betG);
+	
+	console.log("document.getElementById('cb').checked = "+document.getElementById('cb').checked)
 	
 	if(!document.getElementById("cb").checked && chbet>0 && !$scope.betConf){
 		$scope.betG = true;
@@ -3324,6 +3500,11 @@ $scope.betProcS = function() {
 			//console.log("OK:"+data);
 			$scope.getHeader(); 
 			$scope.bet = [];
+			
+			if($scope.ISLG&&$scope.UID!="-1"){
+				$scope.addCart($scope.UID);
+			}
+			
 	  	$scope.betC = true; 
 	  	$scope.betE = false;
 	  	
