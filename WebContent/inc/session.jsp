@@ -35,6 +35,18 @@
 	
 %>
 
+
+<!-- ip block list checker -->
+<%
+	UserDao user_db2 	=  new UserDao();
+	boolean invalidIp = user_db2.checkIPBlockList(IP);
+	if(invalidIp){
+		System.out.println("Redirecting to Error...");
+		response.sendRedirect("/error.jsp"); 
+		return;
+	}	
+%>
+
 <script>
 var checkSession = <%=checkSession%>
 var UBAL = <%=UBAL%>
