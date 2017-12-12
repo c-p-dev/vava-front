@@ -381,7 +381,7 @@ public class SpinCubeController {
         |	Get the last Bet saved from the database
         |-------------------------------------------------------------------*/
 		json_data 	= this.getBetDetails();
-		
+		System.out.println(json_data);
 		/*--------------------------------------------------------------------
         |	Save Bet details to database
         |-------------------------------------------------------------------*/

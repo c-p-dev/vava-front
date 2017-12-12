@@ -112,8 +112,8 @@ public class BcTransactionLogDao {
 		PreparedStatement pstmt = null;
 		int result 				= 0;
 		String query 			= "INSERT INTO bc_transaction_log "
-				+ "(player_id, rgs_id, rgs_related_id, token, currency, withdraw_amount, deposit_amount, transaction_type, type_description, date_added, status) "
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "(player_id, game_id, rgs_id, rgs_related_id, token, currency, withdraw_amount, deposit_amount, transaction_type, type_description, date_added, status) "
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		try {
 			DBConnector.getInstance();
@@ -121,16 +121,17 @@ public class BcTransactionLogDao {
 		    
 		    pstmt   			= con.prepareStatement(query);
             pstmt.setInt(1, trans_data.getPlayerId());
-            pstmt.setInt(2, trans_data.getRgs_id());
-            pstmt.setInt(3, trans_data.getRgs_related_id());
-            pstmt.setString(4, trans_data.getToken());
-            pstmt.setString(5, trans_data.getCurrency());
-            pstmt.setDouble(6, trans_data.getWithdraw_amount());
-            pstmt.setDouble(7, trans_data.getDeposit_amount());
-            pstmt.setInt(8, trans_data.getTransaction_type());
-            pstmt.setInt(9, trans_data.getType_description());
-            pstmt.setString(10, sdf.format(date));
-            pstmt.setInt(11, trans_data.getStatus());
+            pstmt.setInt(2, trans_data.getGameId());
+            pstmt.setInt(3, trans_data.getRgs_id());
+            pstmt.setInt(4, trans_data.getRgs_related_id());
+            pstmt.setString(5, trans_data.getToken());
+            pstmt.setString(6, trans_data.getCurrency());
+            pstmt.setDouble(7, trans_data.getWithdraw_amount());
+            pstmt.setDouble(8, trans_data.getDeposit_amount());
+            pstmt.setInt(9, trans_data.getTransaction_type());
+            pstmt.setInt(10, trans_data.getType_description());
+            pstmt.setString(11, sdf.format(date));
+            pstmt.setInt(12, trans_data.getStatus());
 			
             result	= pstmt.executeUpdate();
             
@@ -152,7 +153,7 @@ public class BcTransactionLogDao {
 		PreparedStatement pstmt = null;
 		int result 				= 0;
 		String query 			= "UPDATE bc_transaction_log SET "
-				+ "player_id = ?, rgs_id = ?, rgs_related_id = ?, token = ?, currency = ?, "
+				+ "player_id = ?, game_id = ?, rgs_id = ?, rgs_related_id = ?, token = ?, currency = ?, "
 				+ "withdraw_amount = ?, deposit_amount = ?, transaction_type = ?, type_description = ?, date_added = ?, status = ? "
 				+ "WHERE transaction_id = ?";
 		
@@ -162,17 +163,18 @@ public class BcTransactionLogDao {
 		    
 		    pstmt   			= con.prepareStatement(query);
             pstmt.setInt(1, trans_data.getPlayerId());
-            pstmt.setInt(2, trans_data.getRgs_id());
-            pstmt.setInt(3, trans_data.getRgs_related_id());
-            pstmt.setString(4, trans_data.getToken());
-            pstmt.setString(5, trans_data.getCurrency());
-            pstmt.setDouble(6, trans_data.getWithdraw_amount());
-            pstmt.setDouble(7, trans_data.getDeposit_amount());
-            pstmt.setInt(8, trans_data.getTransaction_type());
-            pstmt.setInt(9, trans_data.getType_description());
-            pstmt.setString(10, sdf.format(date));
-            pstmt.setInt(11, trans_data.getStatus());
-            pstmt.setInt(12, trans_data.getTransaction_id());
+            pstmt.setInt(2, trans_data.getGameId());
+            pstmt.setInt(3, trans_data.getRgs_id());
+            pstmt.setInt(4, trans_data.getRgs_related_id());
+            pstmt.setString(5, trans_data.getToken());
+            pstmt.setString(6, trans_data.getCurrency());
+            pstmt.setDouble(7, trans_data.getWithdraw_amount());
+            pstmt.setDouble(8, trans_data.getDeposit_amount());
+            pstmt.setInt(9, trans_data.getTransaction_type());
+            pstmt.setInt(10, trans_data.getType_description());
+            pstmt.setString(11, sdf.format(date));
+            pstmt.setInt(12, trans_data.getStatus());
+            pstmt.setInt(13, trans_data.getTransaction_id());
 			
             result	= pstmt.executeUpdate();
             
