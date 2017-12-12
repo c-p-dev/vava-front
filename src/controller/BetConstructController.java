@@ -343,21 +343,27 @@ public class BetConstructController {
 		JsonElement json_elem	= gson.fromJson(json_body, JsonElement.class);
 		JsonObject json_obj		= json_elem.getAsJsonObject();
 		
+		JsonElement raw_jel		= gson.fromJson(json_input, JsonElement.class);
+		JsonObject raw_job		= raw_jel.getAsJsonObject();
+		
 		if (null != json_obj.get("DepositAmount")) {
-			BigDecimal depo_amt		= json_obj.get("DepositAmount").getAsBigDecimal();
-			json_obj.addProperty("DepositAmount", dfrmt.format(depo_amt.longValue()));
+			/*	Extract Deposit Amount as String	*/
+			String depo_amt			= raw_job.get("DepositAmount").toString();
+			
+			json_obj.addProperty("DepositAmount", depo_amt);
 			json_body	= json_obj.toString();
-			json_body	= json_body.replace(":\"".concat(dfrmt.format(depo_amt.longValue())).concat("\""), ":".concat(dfrmt.format(depo_amt.longValue())));
+			json_body	= json_body.replace(":\"".concat(depo_amt).concat("\""), ":".concat(depo_amt));
 			
 			json_elem	= gson.fromJson(json_body, JsonElement.class);
 			json_obj	= json_elem.getAsJsonObject();
 		}
 		
 		if (null != json_obj.get("WithdrawAmount")) {
-			BigDecimal widro_amt	= json_obj.get("WithdrawAmount").getAsBigDecimal();
-			json_obj.addProperty("WithdrawAmount", dfrmt.format(widro_amt.longValue()));
+			String widro_amt	= raw_job.get("WithdrawAmount").toString();
+			
+			json_obj.addProperty("WithdrawAmount", widro_amt);
 			json_body	= json_obj.toString();
-			json_body	= json_body.replace(":\"".concat(dfrmt.format(widro_amt.longValue())).concat("\""), ":".concat(dfrmt.format(widro_amt.longValue())));
+			json_body	= json_body.replace(":\"".concat(widro_amt).concat("\""), ":".concat(widro_amt));
 			
 			json_elem	= gson.fromJson(json_body, JsonElement.class);
 			json_obj	= json_elem.getAsJsonObject();
@@ -422,6 +428,7 @@ public class BetConstructController {
 			else if (0 == trans_data.getTransaction_id()) {
 				/*	Setup data for new entry	*/
 				trans_data.setPlayerId(json_data.getPlayerId());
+				trans_data.setGameId(json_data.getGameId());
 				trans_data.setRgs_id(json_data.getRgsTransactionId());
 				trans_data.setToken(json_data.getToken());
 				trans_data.setCurrency(BC_CURRENCY_KRW);
