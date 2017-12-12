@@ -6,7 +6,7 @@
 
 <%
 	boolean checkSession = false;		
-	String UID = "";
+	String UID = "-1";
 	String SITEID = "1";
 	String UCLEVEL = "";
 	String NICK = "";
@@ -48,6 +48,7 @@
 %>
 
 <script>
-var checkSession = <%=checkSession%>
-var UBAL = <%=UBAL%>
+var checkSession = <%=checkSession%>;
+var UID = '<%=UID%>';
+var UBAL = <%=UBAL%>;
 </script>

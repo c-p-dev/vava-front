@@ -57,9 +57,41 @@
 <script type="text/javascript" src="/js/refresh-money.js"></script>
 <script>
 
+var lgCheck;
+
 $(document).ready(function(){
+	cValU();
 	refreshMoney();
 });
+
+
+function cValU(){
+	clearInterval(lgCheck);
+	lgCheck = setInterval(function(){
+		console.log("check validity user");
+
+		$.ajax({
+			url : '/login/jsp/get_session.jsp',
+			data : {},
+			method: 'GET',
+			cache: false,
+		}).done(function(data){
+			var obj = JSON.parse(data);
+			
+			var valid = obj.validUser;
+			var loggedIn = obj.result; 
+			if(!valid && loggedIn){
+					
+				$('#fade_9').popup('hide');				
+				$("#user_invalid_modal").popup("show");	
+			}	
+			
+		});
+
+	}, 60000); //1 min
+
+	
+}
 </script>
 <!--
 

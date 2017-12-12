@@ -1,4 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%
+String cp = request.getRequestURI();
+%>
+
 <style>
 	#toast-container.toast-top-full-width > div, #toast-container.toast-bottom-full-width > div {
 		width: 30%!important;
@@ -58,6 +63,9 @@
 <!-- top버튼 -->
 <a href="#myAnchor" class="go-top">▲</a>
 <script>
+	
+	//console.log(location.pathname.substring(location.pathname.lastIndexOf("/") + 1);
+	
 	console.log("<%=IP%>");
 /*Add class when scroll down*/
 var lgMsg = '<div class="bg_mask_pop_title">'
@@ -93,7 +101,7 @@ var lgSpin = '<div id="spin_clive" class="sk-circle ng-scope" style="">';
 	lgSpin += '<div class="sk-circle12 sk-child"></div>';
 	lgSpin += '</div>';
 
-var lgCheck;
+
 
 $(window).scroll(function(event){
   	var scroll = $(window).scrollTop();
@@ -328,8 +336,6 @@ $(window).scroll(function(event){
 
 		// show invalid user
 		
-		cValU();
-
 		$(".uIM_close").on("click",function(e){
 			e.preventDefault();
 			$("#user_invalid_modal").html(lgSpin);
@@ -444,33 +450,7 @@ $(window).scroll(function(event){
 
 	}
 
-	function cValU(){
-		
-		clearInterval(lgCheck);
-		lgCheck = setInterval(function(){
-			console.log("check validity user");
-			$.ajax({
-				url : '/login/jsp/get_session.jsp',
-				data : {},
-				method: 'GET',
-				cache: false,
-			}).done(function(data){
-				var obj = JSON.parse(data);
-				
-				var valid = obj.validUser;
-				var loggedIn = obj.result; 
-				if(!valid && loggedIn){
-					$("#user_invalid_modal").popup("show");		
-				}	
-				
-
-				
-			});
-
-		}, 60000); //1 min
-
-		
-	}
+	
 
 </script>
 
@@ -595,11 +575,11 @@ $(window).scroll(function(event){
         <div class="nav_wrap">
 			<div class="stroke">
 				<ul>
-					<li><a href="/sport/livematch.jsp?m=<%=System.currentTimeMillis()%>">실시간</a></li>
-					<li><a href="/sport/prematch.jsp?p=<%=System.currentTimeMillis()%>">스포츠</a></li>
-					<li><a href="/virtual/vgaming.jsp">가상게임</a></li>
-					<li><a href="/casino/casino.jsp">카지노</a></li>
-					<li><a href="/minigame/list.jsp">미니게임</a></li>
+					<li><a href="/sport/livematch.jsp?m=<%=System.currentTimeMillis()%>"><%if(cp.equals("/sport/livematch.jsp")){%><span style="color:00afed"><%}%> 실시간</span></a></li>
+					<li><a href="/sport/prematch.jsp?p=<%=System.currentTimeMillis()%>"><%if(cp.equals("/sport/prematch.jsp")){%><span style="color:00afed"><%}%>스포츠</a></li>
+					<li><a href="/virtual/vgaming.jsp"><%if(cp.equals("/virtual/vgaming.jsp")){%><span style="color:00afed"><%}%>가상게임</a></li>
+					<li><a href="/casino/casino.jsp"><%if(cp.equals("/casino/casino.jsp")){%><span style="color:00afed"><%}%>카지노</a></li>
+					<li><a href="/minigame/list.jsp"><%if(cp.equals("/minigame/list.jsp")){%><span style="color:00afed"><%}%>미니게임</a></li>
 				</ul>
 			</div>
         </div>

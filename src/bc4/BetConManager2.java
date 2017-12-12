@@ -88,7 +88,7 @@ public class BetConManager2 {
 		        }
 		        rs.close();
 		        pstmt.close();
-		        con.close();
+		        con.close();		        
 		        
 		        //if(mk_cat.length() > 2)
 		        //	mk_cat = mk_cat.substring(0, mk_cat.length()-1); //(json_mk.length()-1);
@@ -133,6 +133,8 @@ public class BetConManager2 {
 					//" \"IsLive\":\"'+CASE WHEN live ='T' THEN 'true' ELSE 'false' END+'\","+
 					//" \"IsStarted\":\"'+CASE WHEN match_start ='T' THEN 'true' ELSE 'false' END+'\", "+
 					"\"HT\":\"'+home_name+'\","+
+					"\"HD\":\"'+CAST(home_team_id as varchar(10))+'\","+
+					"\"AD\":\"'+CAST(away_team_id as varchar(10))+'\","+
 					"\"AT\":\"'+away_name+'\"},' AS match  "+
 					" FROM bc_match A ,"+
 					" (SELECT SPORT_ID,CASE WHEN LEN(TXT) > 0 THEN TXT ELSE SPORT_NAME END  AS SNAME "+
@@ -318,6 +320,8 @@ public class BetConManager2 {
 				//	" \"IsLive\":\"'+CASE WHEN live ='T' THEN 'true' ELSE 'false' END+'\","+
 				//	" \"IsStarted\":\"'+CASE WHEN match_start ='T' THEN 'true' ELSE 'false' END+'\", "+
 					" \"HT\":\"'+home_name+'\","+
+					"\"HD\":\"'+CAST(home_team_id as varchar(10))+'\","+
+					"\"AD\":\"'+CAST(away_team_id as varchar(10))+'\","+
 					" \"AT\":\"'+away_name+'\"},' AS match  "+
 					" FROM bc_match A ,"+
 					" (SELECT SPORT_ID,CASE WHEN LEN(TXT) > 0 THEN TXT ELSE SPORT_NAME END  AS SNAME "+
@@ -372,11 +376,11 @@ public class BetConManager2 {
 				  		" OR MARKET_TYPE_ID='10829' or MARKET_TYPE_ID='9321') ";
 
 		  
-		 //// Debug.out("query1 : " + query);	
-		 //// Debug.out("query2 : " + query2);	
-		 //// Debug.out("query3 : " + query3);	
-		 //// Debug.out("query4 : " + query4);	
-		 //// Debug.out("query5 : " + query4);
+		 // //Debug.out("query1 : " + query);	
+		 // //Debug.out("query2 : " + query2);	
+		 // //Debug.out("query3 : " + query3);	
+		 // //Debug.out("query4 : " + query4);	
+		 // //Debug.out("query5 : " + query4);
 
 		  try{	      	
 			 	//Context initContext = new InitialContext();
@@ -556,7 +560,7 @@ public class BetConManager2 {
 					" and convert(char(8),match_date,112) <= convert(char(8),getdate()+6,112) "+
 					" and home_name is not null and away_name is not null";
 		  
-		 //// Debug.out("[getPreMatches] :" + query);		
+		 // //Debug.out("[getPreMatches] :" + query);		
 		  
 		  try{	      	
 			 	//Context initContext = new InitialContext();
@@ -924,7 +928,7 @@ public class BetConManager2 {
 				  		" OR MARKET_TYPE_ID='10829' or MARKET_TYPE_ID='9321') ";
 		  
 		  //Debug.out("[getMatchInfobySport] query: " + query);		
-		////  Debug.out("[getMatchInfobySport] query2: " + query2);	
+		//  //Debug.out("[getMatchInfobySport] query2: " + query2);	
 		  //Debug.out("[getMatchInfobySport] query3: " + query3);	
 		  //Debug.out("[getMatchInfobySport] query4: " + query4);
 		  
@@ -1097,10 +1101,10 @@ public class BetConManager2 {
 				  		" OR MARKET_TYPE_ID='6564' OR MARKET_TYPE_ID='8750' OR MARKET_TYPE_ID='8763' OR MARKET_TYPE_ID='9775' "+
 				  		" OR MARKET_TYPE_ID='10829' or MARKET_TYPE_ID='9321') ";
 		  
-		 //// Debug.out("[getMatchInfobyCompetition] query: " + query);		
-		 //// Debug.out("[getMatchInfobyCompetition] query2: " + query2);	
-		 //// Debug.out("[getMatchInfobyCompetition] query3: " + query3);	
-		 //// Debug.out("[getMatchInfobyCompetition] query4: " + query4);
+		 // //Debug.out("[getMatchInfobyCompetition] query: " + query);		
+		 // //Debug.out("[getMatchInfobyCompetition] query2: " + query2);	
+		 // //Debug.out("[getMatchInfobyCompetition] query3: " + query3);	
+		 // //Debug.out("[getMatchInfobyCompetition] query4: " + query4);
 		  
 		  try{	      	
 			 	//Context initContext = new InitialContext();
@@ -1287,7 +1291,8 @@ public class BetConManager2 {
 			  		" as sel from bc_selection a, (SELECT MATCH_ID,MARKET_ID,HANDICAP FROM bc_market WHERE MARKET_TYPE_ID in (SELECT splitdata FROM SplitString(@list,',')) "+
 			  		" and MATCH_ID = '"+mid+"'  AND suspend = 'F' AND visible='T'  ) B, "+
 			  		" (SELECT MATCH_ID,home_name,away_name from bc_match  where MATCH_ID = '"+mid+"') C " +
-			  		" where a.MARKET_ID = B.MARKET_ID and B.MATCH_ID = C.MATCH_ID";
+			  		" where a.MARKET_ID = B.MARKET_ID and B.MATCH_ID = C.MATCH_ID "+
+			  		"and SEL_PRICE !='0.00' and SEL_PRICE !='101.00'";
 		  
 
 		  
@@ -1589,7 +1594,7 @@ public class BetConManager2 {
 				  	//	" (SELECT MATCH_ID,MARKET_ID,HANDICAP FROM bc_market WHERE MARKET_TYPE_ID in (SELECT splitdata FROM SplitString(@list,',')) and Market_Id = '"+mkid+"' ) B, "+
 				  		" (SELECT bb.home_name,bb.away_name, aa.MATCH_ID,aa.MARKET_ID,HANDICAP FROM bc_market aa, bc_match bb WHERE MARKET_TYPE_ID in (SELECT splitdata FROM SplitString(@list,',')) "+
 				  		" and aa.Market_Id = '"+mkid+"' and aa.match_id = bb.match_id ) B " +
-				  		" where a.MARKET_ID = B.MARKET_ID ";
+				  		" where a.MARKET_ID = B.MARKET_ID and SEL_PRICE !='0.00' and SEL_PRICE !='101.00'";
 
 		  
 		  
@@ -1966,7 +1971,7 @@ public class BetConManager2 {
 		  
 		  List<MatchListBean> ml = new ArrayList<MatchListBean>();
 		  
-		  query1 ="  select top 10 convert(char(19),match_date,120) MT,A.sport_id as SId,SNAME as SN,A.region_id as RId,RNAME as RN,A.compet_id as CId,CNAME as CN,"+
+		  query1 ="  select top 10 convert(char(19),match_date,120) MT,A.sport_id as SId,SNAME as SN,A.region_id as RId,RNAME as RN,A.compet_id as CId,CNAME as CN,home_team_id HID, away_team_id AID,"+
 				  " home_name as HN,away_name as AN,a.match_id as MId "+
 				" from bc_match a, "+
 				" (SELECT SPORT_ID,CASE WHEN LEN(TXT) > 0 THEN TXT ELSE SPORT_NAME END  AS SNAME FROM bc_sport A LEFT OUTER JOIN BC_TRANS B ON A.SPORT_NAMEID = B.NAMEID) B, "+ 					
@@ -2002,15 +2007,17 @@ public class BetConManager2 {
 		        	mlb.setCname(rs.getString("CN"));
 		        	mlb.setHteam(rs.getString("HN"));
 		        	mlb.setAteam(rs.getString("AN"));
+		        	mlb.setHId(rs.getString("HID"));
+		        	mlb.setAId(rs.getString("AID"));
 		        	
 		        	ml.add(mlb); 
 		        }				  	
 	
+		        
 		        rs.close();
 		        pstmt.close();		        
 		        con.close();
-		        
-	        
+		        		        
 		  	}catch(Exception e){
 			  //Debug.out("[getFavoriteMatch] : " + e.getMessage());
 		
@@ -2443,9 +2450,10 @@ public class BetConManager2 {
 						" where a2.nameid = b2.sport_nameid "+
 						" group by txt,bgid";
 		   */
+		  
 		  try{	      	
 			 				 	
-			 	con = ds.getConnection();		 	
+			 	con = ds.getConnection();			
 			 	
 			 	pstmt = con.prepareStatement(query1);				 	
 		        rs = pstmt.executeQuery();	
@@ -3121,6 +3129,66 @@ public class BetConManager2 {
 		  	}
 	  
 		  return bal;
+	
+	}
+	
+	public List<CartSelList> getCart(String selid) throws SQLException{
+		
+		  Connection con = null;
+		  PreparedStatement pstmt = null;
+		  ResultSet rs = null;
+		  //String bal ="0";
+		  
+		  String selids = selid.substring(0,selid.length()-1);
+		  
+		  String query1 ="select a.sel_id Sd,a.sel_price P,b.suspend susK, b.visible viK,c.suspend susM,c.visible viM,c.booked bookM, c.live_stat statL,c.match_stat statM,c.live live  "+
+					" from bc_selection a, bc_market b,  bc_match c "+
+					" where a.market_id = b.market_id and b.match_id = c.match_id "+
+					" and a.sel_id in ("+selids+")";
+
+		  //Debug.out("[getCart] : " + query1);
+		  
+		  List<CartSelList> csl = new ArrayList<CartSelList>();
+		  
+		  try{	      	
+				con = ds.getConnection();			 
+			 	pstmt = con.prepareStatement(query1);				 				 	
+		        rs = pstmt.executeQuery();
+		        
+		        while(rs.next()){     
+		        	
+		        	CartSelList cs = new CartSelList();
+		        	
+		        	cs.setSelid(rs.getString("Sd"));
+		        	cs.setSelprice(rs.getString("P"));
+		        	cs.setKsus(rs.getString("susK"));
+		        	cs.setKvis(rs.getString("viK"));
+		        	cs.setMsus(rs.getString("susM"));
+		        	cs.setMvis(rs.getString("viM"));
+		        	cs.setMbook(rs.getString("bookM"));
+		        	cs.setLstat(rs.getString("statL"));
+		        	cs.setMstat(rs.getString("statM"));
+		        	cs.setLive(rs.getString("live"));
+		        	
+		        	csl.add(cs); 
+
+		        }
+
+		        rs.close();
+		        pstmt.close();		        
+		        con.close();
+		        
+	        
+		  	}catch(Exception e){
+			  //Debug.out("[getCart] : " + e.getMessage());
+		
+		    }finally{
+		   	  if(rs!=null) rs.close();
+		   	  if(pstmt!=null)  pstmt.close();
+		   	  if(con!=null) con.close();
+		  	}
+	  
+		  return csl;
 	
 	}
 }

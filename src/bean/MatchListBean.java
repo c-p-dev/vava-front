@@ -15,8 +15,9 @@ public class MatchListBean {
 	private String CN;
 	private String HT;
  	private String AT;
-	
-	
+ 	private String HID;
+ 	private String AID;
+ 	
   	public void setMdate(String MT){
     	this.MT = MT;
   	}	  	  	
@@ -28,6 +29,7 @@ public class MatchListBean {
   	public void setSid(String SD){
     	this.SD = SD;
   	}	 
+  	
   	
   	public void setSname(String SN){
     	this.SN = SN;
@@ -56,7 +58,15 @@ public class MatchListBean {
   	public void setAteam(String AT){
     	this.AT = AT;
   	}	  	  	
-	 
+	
+  	public void setHId(String HID){
+    	this.HID = HID;
+  	}	  	
+  	
+  	public void setAId(String AID){
+    	this.AID = AID;
+  	}
+  	
   	public String getMdate(){
     	return this.MT;
   	}	  	
@@ -96,6 +106,14 @@ public class MatchListBean {
   	public String getAteam(){
   		return this.AT;
   	}	  	
+  	
+  	public String getHId(){
+  		return this.HID;
+  	}	  	
+  	
+  	public String getAId(){
+  		return this.AID;
+  	}
   	
 	  	
 }
