@@ -20,6 +20,10 @@
 	#con-com{
 		padding: 0px 15px 0px 15px;
 	}
+
+	input.btn5.dis:hover {
+		cursor:not-allowed!important;
+	}
 	
 </style>
 <ul class="smk_accordion">
@@ -40,9 +44,7 @@
 									<input class="inquiry_input" name="txt" id="txt">
 								</td>
 								<td>
-									<!-- <a href="#"><span class="btn5">전송</span></a> -->
-									<!-- <button class="btn5" id="sendMsgBtn">전송</button> -->
-									<input type="submit" value="전송" class="btn5" >
+									<input type="submit" id="sndMsgtBtn" value="전송" class="btn5" >
 								</td>
 							</tr>
 						</table>
@@ -189,10 +191,14 @@
 		var obj = JSON.parse(data);
 		$("#con-com").html("");
 		$.each( obj, function(index, el) {
-			
-			var html  = '<div class="inquiry"> <div class="inquiry_admin"> <span class="admin_tag"><img src="../images/admin_tag.jpg"></span> <div class="inquiry_text">' + el.txt+ '</div> <div class="admin_date">'+el.send_date+'</div></div></div>'; 
-			if(el.class_name == "inquiry_user"){
-				html = '<div class="inquiry"> <div class="inquiry_user"> <span class="user_tag"><img src="../images/user_tag.jpg"></span> <div class="inquiry_text"> '+el.txt+' </div> <div class="user_date">'+el.send_date+'</div> </div> </div>'; 
+			console.log(obj);
+			var html  = '<div class="inquiry"> <div class="inquiry_user"> <span class="user_tag"><img src="../images/user_tag.jpg"></span> <div class="inquiry_text">' + el.txt+ '</div> <div class="user_date">'+el.regdate+'</div></div></div>'; 
+				disbleCht(false);
+			if(el.class_name == "inquiry_admin"){
+				html = '<div class="inquiry"> <div class="inquiry_admin"> <span class="admin_tag"><img src="../images/admin_tag.jpg"></span> <div class="inquiry_text"> '+el.txt+' </div> <div class="admin_date">'+el.regdate+'</div> </div> </div>'; 
+
+				disbleCht(true);
+
 			}
 			$("#con-com").append(html);
 
@@ -220,5 +226,17 @@
 
 	function resetMessageForm(){
 		$("#messageFrom")[0].reset();
+	}
+
+	function disbleCht(flg){
+		if(flg){
+			$("#txt").prop("disabled",true);
+			$("#sndMsgtBtn").attr("disabled", true);
+			$("#sndMsgtBtn").addClass('dis');
+		}else{
+			$("#txt").prop("disabled",false);
+			$("#sndMsgtBtn").attr("disabled", false);
+			$("#sndMsgtBtn").removeClass('dis');
+		}
 	}
 </script>
