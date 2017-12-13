@@ -220,6 +220,7 @@
 		}).done(function(data){
 			if(data){
 				$('#messageModal').popup("show");
+				disbleCht(true);
 			}
 		});
 	}
