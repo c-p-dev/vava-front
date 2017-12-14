@@ -5,10 +5,10 @@
 	.dt-txt{
 		/*overflow-y: scroll!important;*/
 	    height: 100px!important;
-	    background: #202122!important;
+	    /*background: #202122!important;*/
 	    /*padding: 25px 10px 25px 10px!important;*/
-	    padding:0px!important;
-	    /*text-align: left!important;*/
+	    /*padding:0px!important;*/
+	    text-align: left!important;
 	    /*transition: all 0.1s ease;*/
 	}
 	div.slider {
@@ -26,7 +26,6 @@
     	padding-left: 10px!important;
 	}
 	table#qnaDt tbody tr:hover {
-		/*background: #2e3334!important;*/
 		background: #293133!important;
 	}
 
@@ -35,14 +34,14 @@
 	    background: #2e3334;
 	    height: 40px;
 	    text-align: center;
-	    /*border-bottom: solid 1px #000000!important;*/
 	    border-right: solid 1px #1c2021;
+	    border-bottom: none!important;
 	    font-size: 12px!important;
 	    font-family: Nanum Gothic, 굴림, 돋음, Dotum, Arial, Helvetica, sans-serif!important;
 	    color: #c1c3c4!important;
 	}
 	table.dataTable thead th:first-child{
-	    /*border-left: solid 1px #2e3032!important;*/
+	
 	    border-left: solid 1px #1c2021!important;
 
 	}
@@ -53,19 +52,17 @@
 	table.dataTable tbody td {
 	    padding: 0px!important;
 	    text-align: center!important;
-	    /*border-bottom: solid 1px #1c2021!important;*/
 	    border-left: solid 1px #1c2021!important;
 	    height: 35px!important;
 	    border-right: solid 1px #1c2021!important;
 	    font-size: 12px!important;
 	    font-family: Nanum Gothic, 굴림, 돋음, Dotum, Arial, Helvetica, sans-serif!important;
-
-
-
 	}
-	table#qnaDT.dataTable.no-footer thead{
-		display: none;
+	.dataTables_scrollBody{
+		border-top: 1px solid #000000!important;
 	}
+
+
 </style>
 <ul class="smk_accordion">
 	<li>
@@ -102,15 +99,15 @@
                     title  : '제목',	
                 },
                 { 
-                    data   : 'userid',
+                    data   : 'send_userid',
                     title  : '보낸이',
                 },
                 { 
-                    data   : 'ansdate',
+                    data   : 'recv_date',
                     title  : '수신일시',
                 },
                 { 
-                    data   : 'regdate',
+                    data   : 'send_date',
                     title  : '확인일시',
                 }
         
