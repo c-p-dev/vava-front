@@ -33,9 +33,5 @@
 				});
 	    	}
 	    });
-	    
-	    $('#game-pop-frame').load(function(){
-	    	console.log($(this));
-	    });
 	});
 </script>

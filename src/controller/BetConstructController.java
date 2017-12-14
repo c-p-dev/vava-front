@@ -44,7 +44,7 @@ public class BetConstructController {
 	public static final String SHARED_KEY		= "JKGS*&D^ST*&JBDSN";
 	public static final String HASH_TYPE		= "SHA-256";
 	public static final String HASH_ENCODING	= "UTF-8";
-	public static final String GAME_LANG		= "kr";
+	public static final String GAME_LANG		= "kor";
 	public static final String OPEN_TYPE		= "real";
 	public static final String BC_CURRENCY_KRW	= "KRW";
 	public static final String BC_COUNTRY_KR	= "KR";

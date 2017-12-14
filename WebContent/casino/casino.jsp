@@ -152,7 +152,8 @@ ul.casino_board_list  + .btn_wrap{
     width: 100%!important;
 }
 
-li.subm-manual {
+li.subm-manual,
+li.pcheck-lnk {
 	display: none;
 	background-color: #000000;
     border-bottom: solid 1px rgba(255,255,255,0.1);
@@ -229,6 +230,7 @@ div.chevy-cntr {
 						else if(providers.getGame_provider() == 1 ){
 							
 							html +=("<li id = 'mgmanual-lnk' class = 'subm-manual'><a href='#l-tab5' class='get-manual mgtab' data-val='manual2'>마이크로게임 이용안내</a></li>");
+							html +=("<li id = 'get-mgpcheck-li' class = 'pcheck-lnk'><a href='#l-tab6' id = 'get-mgpcheck-lnk'>베팅내역 확인하기</a></li>");
 						
 						}
 						else if(providers.getGame_provider() == 3){
@@ -342,76 +344,107 @@ div.chevy-cntr {
 			return false;
 		});
 
-		$("#game-cat li").on("click", 'a', function(e){
-					
-			if ($(this).parent().hasClass('active') == false) {
+		$("#game-cat li").on("click", 'a', function(e) {
+			
+			var lnk_clicked	= $(this);
+			
+			if (lnk_clicked.parent().hasClass('active') == false) {
 				
-				$(".casino_right").html(spin);
-				
-				var game_prvdr = $(this).attr("data-val");
-				
-				if ($(this).hasClass('get-game')) {
+				$.get('/login/jsp/get_session.jsp', function(sess_check) {
 					
-					var chev_mark	= $(this).find('.chevy-cntr .chevy');
+					var game_prvdr = lnk_clicked.attr("data-val");
 					
-					/*	Intializes all manuals to hidden display	*/
-					$('.subm-manual').hide();
-					
-					$('.chevy').removeClass('fa-chevron-down');
-					$('.chevy').addClass('fa-chevron-up');
-					
-					/*	Asian Gaming	*/
-					if (2 == game_prvdr) {
-						$('#agmanual-lnk').slideDown();
+					if (lnk_clicked.hasClass('get-game')) {
+						
+						var chev_mark	= lnk_clicked.find('.chevy-cntr .chevy');
+						
+						/*	Intializes all manuals to hidden display	*/
+						$(".casino_right").html(spin);
+						$('.subm-manual').hide();
+						$('.pcheck-lnk').hide();
+						
+						$('.chevy').removeClass('fa-chevron-down');
+						$('.chevy').addClass('fa-chevron-up');
+						
+						/*	Asian Gaming	*/
+						if (2 == game_prvdr) {
+							$('#agmanual-lnk').slideDown();
+						}
+						/*	Microgaming		*/
+						else if (1 == game_prvdr) {
+							$('#mgmanual-lnk').slideDown();
+							
+							if (sess_check.result) {
+								$('#get-mgpcheck-li').slideDown();
+							}
+						}
+						/*	Betconstruct	*/
+						else if (3 == game_prvdr) {
+							$('#bcmanual-lnk').slideDown();
+						}
+						else {
+							/* Default. Do nothing	*/
+						}
+						
+						chev_mark.removeClass('fa-chevron-up');
+						chev_mark.addClass('fa-chevron-down');
+						
+						//get Game
+						$.ajax({
+								url : 'jsp/get_game.jsp',
+								data : {gp:game_prvdr},
+								method: 'GET',
+								error: function(){
+									toaster.success("Failed to load games. Please try again.");
+									$(".l_tabs li:first a ").click();
+								}
+							}).done(function(data){
+								var obj = JSON.parse(data);
+								doList(obj, data);
+						});
+						
+						lnk_clicked.parent().click();
 					}
-					/*	Microgaming		*/
-					else if (1 == game_prvdr) {
-						$('#mgmanual-lnk').slideDown();
-					}
-					/*	Betconstruct	*/
-					else if (3 == game_prvdr) {
-						$('#bcmanual-lnk').slideDown();
+					else if (lnk_clicked.hasClass('get-manual')) {
+						$(".casino_right").html(spin);
+						// get Manual
+						$.ajax({
+							url : 'jsp/get_manual.jsp',
+							data : {man:game_prvdr},
+							method: 'GET',
+						}).done(function(data){
+							setTimeout(function(){
+								loadManual(data);
+							}, 1000);
+						});
+						
+						lnk_clicked.parent().click();
 					}
 					else {
-						/* Default. Do nothing	*/
+						/*	Do nothing	*/
 					}
 					
-					chev_mark.removeClass('fa-chevron-up');
-					chev_mark.addClass('fa-chevron-down');
-					
-					//get Game
-					$.ajax({
-							url : 'jsp/get_game.jsp',
-							data : {gp:game_prvdr},
-							method: 'GET',
-							error: function(){
-								toaster.success("Failed to load games. Please try again.");
-								$(".l_tabs li:first a ").click();
-							}
-						}).done(function(data){
-							var obj = JSON.parse(data);
-							doList(obj, data);
-					});
-				}
-				else {
-					// get Manual
-					$.ajax({
-						url : 'jsp/get_manual.jsp',
-						data : {man:game_prvdr},
-						method: 'GET',
-					}).done(function(data){
-						setTimeout(function(){
-							loadManual(data);
-						}, 1000);
-					});
-				}
-				
-				$(this).parent().click();
+				}, 'json');
 			}
 			
 			return false;
 		});
+		
+		$('#game-cat li').on('click', 'a#get-mgpcheck-lnk', function() {
 
+			var newWindow = window.open("","_blank");
+			
+			$.get('/TegServlet?method=6', function(srv_resp) {
+				
+				newWindow.location.href = srv_resp;
+				newWindow.blur;
+				newWindow.focus;
+				
+			});
+			
+			return false;
+		});
+		
 		if (Modernizr.touch) {
 			// show the close overlay button
 			$(".close-overlay").removeClass("hidden");

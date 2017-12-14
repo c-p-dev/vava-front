@@ -117,6 +117,16 @@ public class TegServlet extends HttpServlet {
 				
 				output.print(srv_resp_5);
 				break;
+			
+			case 6:
+				UserBean udata_6	= (UserBean)request.getSession().getAttribute("currentSessionUser");
+				String uname_6 		= udata_6.getUserid();
+				String srv_resp_6	= "";
+				
+				srv_resp_6	= teg_ctrl.getBetPlaycheck(uname_6);
+				
+				output.print(srv_resp_6);
+				break;
 				
 			case 0:
 			default:

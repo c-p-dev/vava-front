@@ -71,15 +71,13 @@
 	try {
 		
 		status = ud.setUser(post_ub);
-		if(status){
+		
+		if (status) {
 			String mb_pref	= request.getParameter("cell_prefix").trim().substring(1);
 			
 			boolean updateJoinCode = jcDao.updateJoinCodeRegister(jcBean);
 			boolean updateSms = smsDao.updateUserAuthSms(smsBean);
 
-			System.out.println("join code update result : " + updateJoinCode);
-			System.out.println("sms update result : " + updateSms);
-			
 			UserBean ub = new UserBean();
 			ub = ud.getUser(request.getParameter("userid"),request.getParameter("passwd"));
 			
@@ -114,17 +112,15 @@
 			
 	        bc_db.addNewBcUser(bc_user);
 	        
-			HttpSession user_session = request.getSession(true);	    
-			session.setMaxInactiveInterval(7200);
-	        session.setAttribute("currentSessionUser",ub);
-	        int updateSession = ud.updateUserAfterLogin(ub.getUserid(), session.getId());
-	        System.out.println(ub.getLoginStatus());	
-	        System.out.println(updateSession);
-	        
 	        /*--------------------------------------------------------------------
 	        |	Add User to SpinCube
 	        |-------------------------------------------------------------------*/
 	        sc_ctrl.createPlayer();
+	        
+			HttpSession user_session = request.getSession(true);	    
+			session.setMaxInactiveInterval(7200);
+	        session.setAttribute("currentSessionUser",ub);
+	        int updateSession = ud.updateUserAfterLogin(ub.getUserid(), session.getId());
 		}
 		
 		out.println(status);

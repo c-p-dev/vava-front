@@ -59,6 +59,7 @@ public class UserDao {
 					uib.setSiteid(rs.getInt("siteid"));
 					uib.setUserid(rs.getString("userid"));
 					uib.setNick(rs.getString("nick"));
+					uib.setCell(rs.getString("cell"));
 					uib.setCharge_level(rs.getString("charge_level"));
 					uib.setSess(rs.getString("sess"));
 					

@@ -210,7 +210,30 @@ public class TotalEgameController {
         |	Execute HTTP POST Request to TEG
         |-------------------------------------------------------------------*/
 		srv_resp 	= this.postToTeg(url, json_param);
-		System.out.println(srv_resp);
+		
+		return srv_resp;
+	}
+	
+	public String checkIsAccountAvailable(String username)
+	{
+		/*	Variable Declaration	*/
+		Gson gson							= new Gson();
+		String url							= api_base+"IsAccountAvailable";
+		String json_param					= "";
+		String srv_resp						= "";
+		HashMap<String, Object>	teg_param	= new HashMap<String, Object>();
+		
+		/*	Parameters to be passed to TEG	*/
+		teg_param.put("AccountNumber", username);
+		
+		/*	Convert parameters to JSON	*/
+		json_param		= gson.toJson(teg_param, new TypeToken<HashMap<String, Object>>(){}.getType());
+		
+		/*--------------------------------------------------------------------
+        |	Execute HTTP POST Request to TEG
+        |-------------------------------------------------------------------*/
+		srv_resp 	= this.postToTeg(url, json_param);
+		
 		return srv_resp;
 	}
 	
@@ -448,6 +471,41 @@ public class TotalEgameController {
 		}
 		
 		return user_profile;
+	}
+	
+	public String getBetPlaycheck(String username)
+	{
+		UserDao user_db			= new UserDao();
+		StringManipulator strlib	= new StringManipulator();
+		
+		MgPlayerAccountBean edit_data	= new MgPlayerAccountBean();
+		UserBean user_profile			= new UserBean();
+		
+		String srv_resp 	= "https://redirector3.valueactive.eu/casino/default.aspx?applicationid=1001&serverid=2635&lang=ko-kr&timezone=+9.0";
+		String mg_username	= "";
+		String mg_pincode	= "";
+		
+		/*--------------------------------------------------------------------
+        |	Query Database
+        |-------------------------------------------------------------------*/
+		user_profile 	= user_db.getUserByUserId(username);
+		mg_username		= Integer.toString(user_profile.getSiteid()).concat("_").concat(username);
+		
+		/*--------------------------------------------------------------------
+        |	Change PinCode of MG User
+        |-------------------------------------------------------------------*/
+		/*	Get a random pincode	*/
+		mg_pincode	= strlib.getSaltString(7);
+		
+		edit_data.setAccountNumber(mg_username);
+		edit_data.setPinCode(mg_pincode);
+		
+		this.editAccount(edit_data);
+		
+		srv_resp	= srv_resp.concat("&username=").concat(mg_username);
+		srv_resp	= srv_resp.concat("&password=").concat(mg_pincode);
+		
+		return srv_resp;
 	}
 	
 	public String postToTeg(String url, String json_param)
