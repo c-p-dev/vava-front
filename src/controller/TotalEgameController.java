@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -15,6 +16,7 @@ import java.util.Arrays;
 import java.util.Base64;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -23,6 +25,7 @@ import java.util.Scanner;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import bean.FinTokenBean;
 import bean.MgBettingProfileBean;
 import bean.MgDepositBean;
 import bean.MgLiveGamesTransBean;
@@ -31,6 +34,7 @@ import bean.MgResponseStatusBean;
 import bean.MgWithdrawAllBean;
 import bean.ScTransactionBean;
 import bean.UserBean;
+import dao.FinTokenDao;
 import dao.FinancialMovementDao;
 import dao.MgLiveTransLogDao;
 import dao.UserDao;
@@ -163,7 +167,7 @@ public class TotalEgameController {
         |	Execute HTTP POST Request to TEG
         |-------------------------------------------------------------------*/
 		srv_resp 		= this.postToTeg(url, json_param);
-		System.out.println(srv_resp);
+		
 		return srv_resp;
 	}
 	
@@ -266,8 +270,10 @@ public class TotalEgameController {
 	}
 	
 	public String userPlayCheck(String username, int game_provider, String lnk_dsp) throws MalformedURLException, IOException, ParseException
-	{	
+	{
 		/*	Variable Declaration	*/
+		DateFormat dfrmt 			= new SimpleDateFormat("yyyyMMddHHmmss");
+		Date date_now				= new Date();
 		Gson gson					= new Gson();
 		StringManipulator strlib	= new StringManipulator();
 				
@@ -279,6 +285,7 @@ public class TotalEgameController {
 		String mg_pincode		= "";
 		String session_id		= "";
 		double money			= 0;
+		int site_id				= 1;
 		
 		AsianGamingController ag_ctrl	= new AsianGamingController();
 		BetConstructController bc_ctrl	= new BetConstructController();
@@ -291,127 +298,154 @@ public class TotalEgameController {
 		MgPlayerAccountBean mg_user		= new MgPlayerAccountBean();
 		MgBettingProfileBean bet_profl	= new MgBettingProfileBean();
 		ScTransactionBean sc_trans_data	= new ScTransactionBean();
-				
+		FinTokenBean fintoken_data		= new FinTokenBean();
+		
 		UserBean user_profile	= new UserBean();
 		UserDao user_db			= new UserDao();
+		FinTokenDao fintoken_db	= new FinTokenDao();
 		
 		/*--------------------------------------------------------------------
-        |	Query Database and Update Money
+        |	Check existing financial exchange process
         |-------------------------------------------------------------------*/
-		user_profile 	= user_db.getUserByUserId(username);
-		money 			= user_profile.getMoney();
-		mg_username		= Integer.toString(user_profile.getSiteid()).concat("_").concat(username);
+		fintoken_data			= fintoken_db.getLatestFinToken(username, site_id);
 		
 		/*--------------------------------------------------------------------
-        |	Withdraw all cash from TEG System
+        |	All financial processes are closed
         |-------------------------------------------------------------------*/
-		srv_resp		= this.withdrawAll(mg_username);
-		withdraw_data	= gson.fromJson(srv_resp, MgWithdrawAllBean.class);
-		
-		if (0 == withdraw_data.getStatus().getErrorCode()) {
+		if (null == fintoken_data.getFinToken()) {
+			/*--------------------------------------------------------------------
+	        |	Create new Financial process token
+	        |-------------------------------------------------------------------*/
+			fintoken_data.setUsername(username);
+			fintoken_data.setSiteId(site_id);
+			fintoken_data.setFinToken(Integer.toString(site_id).concat("_").concat(username).concat(dfrmt.format(date_now)));
+			fintoken_data.setStatus(0);
 			
-			money 	= money + withdraw_data.getResult().getTransactionAmount();
+			fintoken_db.addNewFinToken(fintoken_data);
 			
-			user_profile.setMoney((int)money);
-			user_db.setUserMoney(username, new BigDecimal(money).setScale(0, BigDecimal.ROUND_HALF_UP).doubleValue());
-		}
-		else {
+			/*--------------------------------------------------------------------
+	        |	Query Database and Update Money
+	        |-------------------------------------------------------------------*/
+			user_profile 	= user_db.getUserByUserId(username);
+			money 			= user_profile.getMoney();
+			mg_username		= Integer.toString(user_profile.getSiteid()).concat("_").concat(username);
 			
-			switch (withdraw_data.getStatus().getErrorCode()) {
-				/*	MG Account does not Exist	*/
-				case ACCOUNT_NOT_EXIST:
-					/*	Create account for MG	*/
-					bet_profl.setCategory("LGBetProfile");
-					bet_profl.setProfileId(1202);
-					
-					bet_profls.add(bet_profl);
-					
-					mg_user.setPreferredAccountNumber(mg_username);
-					mg_user.setFirstName(user_profile.getUserid().trim().concat("FNAME"));
-					mg_user.setLastName(user_profile.getUserid().trim().concat("LNAME"));
-					mg_user.setEmail("");
-					mg_user.setMobilePrefix(user_profile.getCell().substring(1, 3));
-					mg_user.setMobileNumber(user_profile.getCell().substring(3));
-					mg_user.setDepositAmount(0);
-					mg_user.setPinCode("newplayer1");
-					mg_user.setIsProgressive(0);
-					mg_user.setBettingProfiles(bet_profls);
-					this.addPlayerAccount(mg_user);
-					break;
-			}
+			/*--------------------------------------------------------------------
+	        |	Withdraw all cash from TEG System
+	        |-------------------------------------------------------------------*/
+			srv_resp		= this.withdrawAll(mg_username);
+			withdraw_data	= gson.fromJson(srv_resp, MgWithdrawAllBean.class);
 			
-		}
-		
-		/*--------------------------------------------------------------------
-        |	Withdraw all cash from SpinCube System
-        |-------------------------------------------------------------------*/
-		sc_ctrl			= new SpinCubeController(mg_username);
-		sc_resp			= sc_ctrl.makeTransaction(null, "withdraw");
-		sc_trans_data	= gson.fromJson(sc_resp, ScTransactionBean.class);
-		
-		if (null != sc_trans_data) {
-			if (0 < sc_trans_data.getAmount()) {
-				money 	= money + sc_trans_data.getAmount();
+			if (0 == withdraw_data.getStatus().getErrorCode()) {
 				
+				money 	= money + withdraw_data.getResult().getTransactionAmount();
+	
 				user_profile.setMoney((int)money);
-				user_db.setUserMoney(username, money);
+				user_db.setUserMoney(username, new BigDecimal(money).setScale(0, BigDecimal.ROUND_HALF_UP).doubleValue());
 			}
-		}
-		
-		/*--------------------------------------------------------------------
-        |	Game is from MicroGaming (TotalEgame API)
-        |-------------------------------------------------------------------*/
-		if (1 == game_provider) {
-			/*	Deposit all money from VAVA to MG	*/
-			srv_resp		= this.deposit(mg_username, money);
-			deposit_data	= gson.fromJson(srv_resp, MgDepositBean.class);
+			else {
+				
+				switch (withdraw_data.getStatus().getErrorCode()) {
+					/*	MG Account does not Exist	*/
+					case ACCOUNT_NOT_EXIST:
+						/*	Create account for MG	*/
+						bet_profl.setCategory("LGBetProfile");
+						bet_profl.setProfileId(1202);
+						
+						bet_profls.add(bet_profl);
+						
+						mg_user.setPreferredAccountNumber(mg_username);
+						mg_user.setFirstName(user_profile.getUserid().trim().concat("FNAME"));
+						mg_user.setLastName(user_profile.getUserid().trim().concat("LNAME"));
+						mg_user.setEmail("");
+						mg_user.setMobilePrefix(user_profile.getCell().substring(1, 3));
+						mg_user.setMobileNumber(user_profile.getCell().substring(3));
+						mg_user.setDepositAmount(0);
+						mg_user.setPinCode("newplayer1");
+						mg_user.setIsProgressive(0);
+						mg_user.setBettingProfiles(bet_profls);
+						this.addPlayerAccount(mg_user);
+						break;
+				}
+				
+			}
 			
-			if (0 == deposit_data.getStatus().getErrorCode()) {
+			/*--------------------------------------------------------------------
+	        |	Withdraw all cash from SpinCube System
+	        |-------------------------------------------------------------------*/
+			sc_ctrl			= new SpinCubeController(mg_username);
+			sc_resp			= sc_ctrl.makeTransaction(null, "withdraw");
+			sc_trans_data	= gson.fromJson(sc_resp, ScTransactionBean.class);
+			
+			if (null != sc_trans_data) {
+				if (0 < sc_trans_data.getAmount()) {
+					money 	= money + sc_trans_data.getAmount();
+	
+					user_profile.setMoney((int)money);
+					user_db.setUserMoney(username, money);
+				}
+			}
+			
+			/*--------------------------------------------------------------------
+	        |	Game is from MicroGaming (TotalEgame API)
+	        |-------------------------------------------------------------------*/
+			if (1 == game_provider) {
+				/*	Deposit all money from VAVA to MG	*/
+				srv_resp		= this.deposit(mg_username, money);
+				deposit_data	= gson.fromJson(srv_resp, MgDepositBean.class);
+				
+				if (0 == deposit_data.getStatus().getErrorCode()) {
+					/*	Update database to empty VAVA money of user	*/
+					user_db.setUserMoney(username, 0);
+					
+					/*--------------------------------------------------------------------
+			        |	Change PinCode of MG User
+			        |-------------------------------------------------------------------*/
+					/*	Get a random pincode	*/
+					mg_pincode	= strlib.getSaltString(7);
+					
+					edit_data.setAccountNumber(mg_username);
+					edit_data.setPinCode(mg_pincode);
+					
+					this.editAccount(edit_data);
+					
+					/*--------------------------------------------------------------------
+			        |	Sets the Game URL
+			        |-------------------------------------------------------------------*/
+					game_url_full	= game_url_base.concat("LoginName=").concat(mg_username);
+					game_url_full	= game_url_full.concat("&Password=").concat(mg_pincode);
+					game_url_full	= game_url_full.concat("&UL=ko-kr&CasinoID=2635&ClientID=7&BetProfileID=MobilePostLogin&StartingTab=");
+					game_url_full	= game_url_full.concat(lnk_dsp);
+					game_url_full	= game_url_full.concat("Baccarat&BrandID=igaming&altProxy=TNG");
+				}
+			}
+			/*--------------------------------------------------------------------
+	        |	Game is from Asian Gaming
+	        |-------------------------------------------------------------------*/
+			else if (2 == game_provider) {
+				game_url_full		= ag_ctrl.launchGame(username, lnk_dsp);
+			}
+			/*--------------------------------------------------------------------
+	        |	Game is from SpinCube
+	        |-------------------------------------------------------------------*/
+			else if (4 == game_provider) {
+				sc_ctrl.makeTransaction(money, "deposit");
+				
+				game_url_full		= sc_ctrl.getGameUrl(lnk_dsp);
+				
 				/*	Update database to empty VAVA money of user	*/
-				user_db.setUserMoney(username, 0);
-				
-				/*--------------------------------------------------------------------
-		        |	Change PinCode of MG User
-		        |-------------------------------------------------------------------*/
-				/*	Get a random pincode	*/
-				mg_pincode	= strlib.getSaltString(7);
-				
-				edit_data.setAccountNumber(mg_username);
-				edit_data.setPinCode(mg_pincode);
-				
-				this.editAccount(edit_data);
-				
-				/*--------------------------------------------------------------------
-		        |	Sets the Game URL
-		        |-------------------------------------------------------------------*/
-				game_url_full	= game_url_base.concat("LoginName=").concat(mg_username);
-				game_url_full	= game_url_full.concat("&Password=").concat(mg_pincode);
-				game_url_full	= game_url_full.concat("&UL=ko-kr&CasinoID=2635&ClientID=7&BetProfileID=MobilePostLogin&StartingTab=");
-				game_url_full	= game_url_full.concat(lnk_dsp);
-				game_url_full	= game_url_full.concat("Baccarat&BrandID=igaming&altProxy=TNG");
+				if (!game_url_full.equals("")) {
+					user_db.setUserMoney(username, 0);
+				}
 			}
-		}
-		/*--------------------------------------------------------------------
-        |	Game is from Asian Gaming
-        |-------------------------------------------------------------------*/
-		else if (2 == game_provider) {
-			game_url_full		= ag_ctrl.launchGame(username, lnk_dsp);
-		}
-		/*--------------------------------------------------------------------
-        |	Game is from SpinCube
-        |-------------------------------------------------------------------*/
-		else if (4 == game_provider) {
-			sc_ctrl.makeTransaction(money, "deposit");
-			
-			game_url_full		= sc_ctrl.getGameUrl(lnk_dsp);
-			
-			/*	Update database to empty VAVA money of user	*/
-			if (!game_url_full.equals("")) {
-				user_db.setUserMoney(username, 0);
+			else {
+				game_url_full		= bc_ctrl.launchGame(username, lnk_dsp);
 			}
-		}
-		else {
-			game_url_full		= bc_ctrl.launchGame(username, lnk_dsp);
+			
+			/*--------------------------------------------------------------------
+	        |	Close Latest Financial Exchange process
+	        |-------------------------------------------------------------------*/
+			fintoken_db.updateFinTokenSts(fintoken_data.getFinToken(), 1);
 		}
 		
 		return game_url_full;
@@ -419,19 +453,51 @@ public class TotalEgameController {
 	
 	public String getAllMoney(String username) throws ParseException
 	{
+		DateFormat dfrmt 				= new SimpleDateFormat("yyyyMMddHHmmss");
+		Date date_now					= new Date();
 		Gson gson						= new Gson();
 		String json_data				= "";
 		SpinCubeController sc_ctrl		= null;
+		int site_id						= 1;
+		
 		UserBean user_data				= new UserBean();
+		FinTokenBean fintoken_data		= new FinTokenBean();
+		
 		UserDao user_db					= new UserDao();
+		FinTokenDao fintoken_db			= new FinTokenDao();
 		
-		user_data	= user_db.getUserByUserId(username);
-		sc_ctrl		= new SpinCubeController(Integer.toString(user_data.getSiteid()).concat("_").concat(user_data.getUserid()));
+		/*--------------------------------------------------------------------
+        |	Check existing financial exchange process
+        |-------------------------------------------------------------------*/
+		fintoken_data			= fintoken_db.getLatestFinToken(username, site_id);
 		
-		user_data	= this.transferMoneyToVava(username);
-		user_data	= sc_ctrl.transferMoneyToVava(username);
-		
-		json_data	= gson.toJson(user_data, UserBean.class);
+		/*--------------------------------------------------------------------
+        |	All financial exchange processes are close
+        |-------------------------------------------------------------------*/
+		if (null == fintoken_data.getFinToken()) {
+			/*--------------------------------------------------------------------
+	        |	Create new Financial Exchange token
+	        |-------------------------------------------------------------------*/
+			fintoken_data.setUsername(username);
+			fintoken_data.setSiteId(site_id);
+			fintoken_data.setFinToken(Integer.toString(site_id).concat("_").concat(username).concat(dfrmt.format(date_now)));
+			fintoken_data.setStatus(0);
+			
+			fintoken_db.addNewFinToken(fintoken_data);
+			
+			user_data	= user_db.getUserByUserId(username);
+			sc_ctrl		= new SpinCubeController(Integer.toString(user_data.getSiteid()).concat("_").concat(user_data.getUserid()));
+			
+			user_data	= this.transferMoneyToVava(username);
+			user_data	= sc_ctrl.transferMoneyToVava(username);
+			
+			json_data	= gson.toJson(user_data, UserBean.class);
+			
+			/*--------------------------------------------------------------------
+	        |	Close Latest Financial Exchange process
+	        |-------------------------------------------------------------------*/
+			fintoken_db.updateFinTokenSts(fintoken_data.getFinToken(), 1);
+		}
 		
 		return json_data;
 	}
@@ -465,7 +531,7 @@ public class TotalEgameController {
 	        |	Update Money
 	        |-------------------------------------------------------------------*/
 			money 			= user_profile.getMoney() + withdraw_data.getResult().getTransactionAmount();
-			
+
 			user_profile.setMoney((int)money);
 			user_db.setUserMoney(username, new BigDecimal(money).setScale(0, BigDecimal.ROUND_HALF_UP).doubleValue());
 		}

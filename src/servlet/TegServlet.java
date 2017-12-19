@@ -105,7 +105,6 @@ public class TegServlet extends HttpServlet {
 					if (null != udata5) {
 						if (0 >= udata5.getMoney()) {
 							try {
-								System.out.println(udata5.getUserid());
 								srv_resp_5 = teg_ctrl.getAllMoney(udata5.getUserid());
 							} catch (ParseException e) {
 								// TODO Auto-generated catch block
@@ -114,7 +113,7 @@ public class TegServlet extends HttpServlet {
 						}
 					}
 				}
-				
+				response.setContentType("application/json");
 				output.print(srv_resp_5);
 				break;
 			

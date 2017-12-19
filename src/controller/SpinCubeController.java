@@ -225,6 +225,8 @@ public class SpinCubeController {
 		StringManipulator str_lib	= new StringManipulator();
 		FinancialMovementDao fin_db	= new FinancialMovementDao();
 		ScTransactionBean fin_data	= new ScTransactionBean();
+		ScTokenLog sc_log_db		= new ScTokenLog();
+		ScTokenLogBean token_data	= sc_log_db.getLatestToken();
 		
 		String url				= SC_BASE_URL.concat("agents/").concat(SC_AGENT_UNAME).concat("/Transactions");
 		String post_param		= "";
@@ -265,16 +267,16 @@ public class SpinCubeController {
 			
 			srv_resp 	= this.postToSc(url, post_param, "application/x-www-form-urlencoded");
 			
-			if ((type.equals("withdraw")) && (null == amount)) {
-				amount 		= 0.00;
-			}
-			else if ((type.equals("withdraw")) && (null != amount)) {
+			if (type.equals("withdraw")) {
 				fin_data	= gson.fromJson(srv_resp, ScTransactionBean.class);
 				amount		= fin_data.getAmount();
 			}
 			
 			if (!srv_resp.equals("")) {
 				fin_db.addScTransactionLog(this.player_id, (new Double(amount)).longValue(), type);
+				if (0 < amount) {
+					fin_db.addScMobileLst(this.player_id, (new Double(amount)).longValue(), type, token_data.getToken());
+				}
 			}
 		}
 		
@@ -323,7 +325,7 @@ public class SpinCubeController {
 		String srv_resp			= "";
 		
 		/*	Convert parameters to JSON	*/
-		post_param	= "utcOffset=8&";
+		post_param	= "utcOffset=9&";
 		post_param	= post_param.concat("langCode=ko-KR");
 		
 		/*--------------------------------------------------------------------
@@ -362,7 +364,7 @@ public class SpinCubeController {
         |	Update Money
         |-------------------------------------------------------------------*/
 		money 			= user_profile.getMoney() + withdraw_data.getAmount();
-		
+
 		user_profile.setMoney((int)money);
 		user_db.setUserMoney(username, money);
 
@@ -381,7 +383,7 @@ public class SpinCubeController {
         |	Get the last Bet saved from the database
         |-------------------------------------------------------------------*/
 		json_data 	= this.getBetDetails();
-		System.out.println(json_data);
+		
 		/*--------------------------------------------------------------------
         |	Save Bet details to database
         |-------------------------------------------------------------------*/
@@ -493,7 +495,7 @@ public class SpinCubeController {
 			
 			/*	Get SpinCube response		*/
 			resp_code				= connection.getResponseCode();
-			System.out.println(resp_code);
+			
 			if ((200 == resp_code) || (201 == resp_code)) {
 				InputStream response 	= connection.getInputStream();
 				
@@ -505,7 +507,7 @@ public class SpinCubeController {
 				this.getToken();
 				responseBody = this.postToSc(url, post_param, content_type);
 			}
-			System.out.println(responseBody);
+			
 		}
 		catch (MalformedURLException e) {
 			/*	Auto-generated catch block	*/
