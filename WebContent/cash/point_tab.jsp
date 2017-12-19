@@ -1,12 +1,18 @@
-<%@ include file="/inc/session.jsp"%>
-<%@ include file="/inc/session_checker.jsp"%>
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@page import="java.text.DecimalFormat"%> 
 <%@page import="java.util.*"%>
 <%@page import="dao.UserDao"%>
 <%@page import="bean.UserBean"%>
+<%@page import="dao.AccountDao"%>
+<%@page import="bean.AccountListBean"%>
+
+<%@ include file="/inc/session_checker.jsp"%>
+
+<%
+AccountDao aDao = new AccountDao();
+List<AccountListBean> res = aDao.getPointKind(SITEID);
+%>
 
 <%--
 	 ********************************
@@ -22,27 +28,27 @@
 					<div class="my_search_wrap">
 						<table cellspacing="0" cellpadding="0" class="my_search_select">
 							<tr>
+								
+							
 								<td>
 									
 									<select class="input_style02" id="divisionSelect">
 										<option value="ALL" selected>전체</option>
-										<option value="POINT2MONEY">POINT2MONEY</option>
-										<option value="ADMIN">ADMIN</option>
-										<option value="ADMIN_BET_CANCEL">ADMIN_BET_CANCEL</option>
-										<option value="AG_BET">AG_BET</option>
-										<option value="AG_HIT">AG_HIT</option>
-										<option value="BC_BET">BC_BET</option>
-										<option value="BC_BET_CANCEL">BC_BET_CANCEL</option>
-										<option value="BC_HIT">BC_HIT</option>
-										<option value="BC_RE_CALC">BC_RE_CALC</option>
-										<option value="CHARGE">CHARGE</option>
-										<option value="CHARGE_CANCEL">CHARGE_CANCEL</option>
-										<option value="MICRO_DEPOSIT">MICRO_DEPOSIT</option>
-										<option value="MICRO_WITHDRAW">MICRO_WITHDRAW</option>
-										<option value="WITHDRAW">WITHDRAW</option>
-									</select>
+										
+									<%
+									for (int k=0; k < res.size() ; k++){
+									AccountListBean alb = (AccountListBean) res.get(k);
+									%>
 									
-								</td>
+									<option value="<%=alb.getJob()%>"><%=alb.getTitle()%></option>
+									
+								<%
+								}
+								%>
+									</select>									
+								</td>								
+								
+								
 								<td>
 									<input class="input_style04" id="dateSearch" placeholder="기간" value="2017-00-00 ~ 2017-00-00" readonly>
 									<span class="showDatePkr"><img src="/images/car_icon.jpg"></span>
@@ -153,7 +159,7 @@
                     },
                     { 
                         data   : 'deduct_point',
-                        title  : '가산포인트',
+                        title  : '차감 포인트',
                         render : function(data,type,row,meta){
                         	var html = (data != 0 || data != "0" ?  '<span class="font_008">'+data+'</span> 원' : "");
                         	return html;
@@ -161,7 +167,7 @@
                     },
                     { 
                         data   : 'added_point',
-                        title  : '가산포인트',
+                        title  : '가산 포인트',
                         render : function(data,type,row,meta){
                         	var html = (data != 0 || data != "0" ? '<span class="font_004">'+data+'</span> 원' : "");
                         	return html;
@@ -169,7 +175,7 @@
                     },
                     { 
                         data   : 'remain_point',
-                        title  : '잔여포인트',
+                        title  : '잔여 포인트',
                         render : function(data,type,row,meta){
                         	var html = '<span class="font_002">'+data+'</span>원</td>';
                         	return html;
@@ -178,6 +184,7 @@
                        
                     },
                 ],
+          "order": [[ 0, "desc" ]] ,         
         	pagingType: "full_numbers",
             language: {
 			    paginate: {

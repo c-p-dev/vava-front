@@ -8,16 +8,15 @@
 <%@ page import = "com.google.gson.reflect.TypeToken" %>
 <%@ page import = "java.util.StringTokenizer" %>
 <%@ page import = "com.google.gson.Gson" %>
+<%@ include file="/inc/session_checker.jsp"%>
 
 <%
-	if(session.getAttribute("currentSessionUser") != null){
 		Gson gson = new Gson();
-		UserBean bean = (UserBean) session.getAttribute("currentSessionUser");
 		UserDao ud = new UserDao();
-		List res = ud.getWithdrawList(bean.getUserid());
+		List res = ud.getWithdrawList(UID);
 		
 		out.println(gson.toJson(res).toString());
-	}	
+	
 %>
 
 

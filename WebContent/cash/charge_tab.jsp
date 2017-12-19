@@ -1,25 +1,16 @@
-<%@ include file="/inc/session.jsp"%>
-<%@ include file="/inc/session_checker.jsp"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
 <%@page import="dao.GameDao"%> 
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.*"%>
 <%@page import="dao.UserDao"%>
 <%@page import="bean.UserBean"%>
 
-<%
-	
-	UserDao user_db			= new UserDao();
-	UserBean user_data		= (UserBean)session.getAttribute("currentSessionUser");
-	UserBean currentUser 	= user_data;
-	
-	if(checkSession) {
-		
+<%@ include file="/inc/session_checker.jsp"%>
 
-		currentUser 		= user_db.getUserByUserId(user_data.getUserid());
-		
-	}
+<%
+//	UserDao user_db			= new UserDao();	
+//	UserBean currentUser 	= user_db.getUserByUserId(UID);
+	
 %>
 <ul class="smk_accordion">
 	<li>
@@ -39,13 +30,14 @@
 						</div>
 						<form name="chargeForm" id="chargeForm">
 						<div class="cash_in">
-							<div class="cash_10"><p style="float:left">보유금액</p><p style="float:right"><span class="font_002 money_dsp"><%=dfrmt.format(currentUser.getMoney())%></span> 원</p></div>
+							<div class="cash_10"><p style="float:left">보유금액</p><p style="float:right"><span class="font_002 money_dsp"><%=dfrmt.format(UBAL)%></span> 원</p></div>
 							<div class="cash_9">
-									<input class="input_style03" type="text" style="text-align: right;padding-right: 5%;" type="number" id="money" name="money"  placeholder="충전금액">		
+									<input class="input_style03" type="text" style="text-align: right;padding-right: 5%;" type="number" id="money" name="money"  placeholder="충전금액">	
 							</div>	
 						</div>
 						
 							<div class="cash_in">
+								<!--
 								<div class="cash_4">
 									<select class="input_style02" id="ct_bank_name" name="bank_name">
 										 	<option value="국민은행" selected>국민은행</option>
@@ -82,7 +74,10 @@
 										    <option value="카카오뱅크">카카오뱅크</option>
 									</select>
 								</div>
-								<div class="cash_11">
+								
+								-->
+								
+								<div class="cash_11_1">
 									<input class="input_style03"  id="ct_bank_owner" name="bank_owner" placeholder="입금자명">		
 								</div>
 <!-- 								<div class="cash_4">
@@ -174,10 +169,10 @@
 			<img src="/images/check_icon.png">
 		</div>
 		<div class="pop_text">
-			Charge Application Submited<br>			
+			충전 신청이 접수 되었습니다.<br>			
 		</div>
 		<div class="btn_wrap">
-			<span class="btn3c cs_close_charge">충전하기</span>
+			<span class="btn3c cs_close_charge" style="cursor: pointer;">닫기</span>
 		</div>
 	</div>
 </div>
@@ -190,14 +185,14 @@
 	</div>
 	<div class="bg_mask_pop2_in">
 		<div class="pop_icon_center">
-			<img src="/images/exclamation_icon.png">
+			<img src="/images/question_icon.png">
 		</div>
 		<div class="pop_text">
-			Are you sure?
+			충전 신청 하시겠습니까?
 		</div>
-		<div class="btn_wrap">
-			<span class="btn3 conf_modal_close">No</span>
-			<span class="btn3 conf_modal_yes ">Yes</span>
+		<div class="btn_wrap">			
+			<span class="btn3 conf_modal_yes ">확인</span>
+			<span class="btn3 conf_modal_close">취소</span>
 		</div>
 	</div>
 </div>
@@ -223,7 +218,7 @@
 					$("#bankInfoTxt").val(data); 
 
 				}else{
-					alert("something went wrong");
+					alert("처리중 오류가 발생하였습니다.");
 				}
 			});
 		});
@@ -270,7 +265,7 @@
                         data   : 'money',
                         title  : '금액',
                         render : function(data,type,row,meta){
-                        	var html = '<span class="font_002">'+data+'</span> 원';
+                        	var html = '<span class="font_002">'+comma(data)+'</span> 원';
                         	return html;
                         }
                     },
@@ -338,13 +333,18 @@
 				$(this).focusin();
 			}			
 		});
-
+		
 		submitCharge();
 
 		
 
 	});
 
+	function uncomma(str) {
+	    str = String(str);
+	    return str.replace(/[^\d]+/g, '');
+	}
+	
 
 	$("#chargeForm").validate({
   		errorClass: 'form1-invalid',
@@ -354,13 +354,13 @@
 			bank_name :{
 				required:true,
 			},
-			bank_num :{
-				required:true,
-				digits: true,
-			},
+			//bank_num :{
+			//	required:true,
+			//	digits: true,
+			//},
 			bank_owner :{
 				required:true,
-				alphanumeric: true,
+				//alphanumeric: true,
 			},
 			money:{
 				required:true,
@@ -373,12 +373,12 @@
 		    bank_name :{
 				required:"은행을 선택해 주세요.",
 			},
-			bank_num :{
-				required:"계좌번호를 입력해 주세요.",
-				digits: "계좌번호를 숫자로 입력해 주세요.",
-			},
+			//bank_num :{
+			//	required:"계좌번호를 입력해 주세요.",
+			//	digits: "계좌번호를 숫자로 입력해 주세요.",
+			//},
 			bank_owner :{
-				required:"예금주명을 입력해 주세요.",
+				required:"입금자명을 입력해 주세요.",
 			},
 			money:{
 				required:"금액을 입력해 주세요.",
@@ -431,6 +431,11 @@
 	});
 
 	
+	function comma(str) {
+	    str = String(str);
+	    return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+	}
+	
 	function addAmount(amount){
 		
 		var current_am = parseInt($("#money").val()) || 0;
@@ -474,7 +479,12 @@
 	function submitCharge(){
 
 		$("#conf_modal1 .conf_modal_yes").on("click",function(){
+			
+		//var sss = $("#money").val(); //$(this).attr("#money"); //$("#money").val;
+		$("#money").val(uncomma($("#money").val()));
+			
 			var data = $("#chargeForm").serializeJSON();
+			
 			$.ajax({
 				url:'/cash/jsp/setChargeApplication.jsp',
 				data:data,
@@ -482,6 +492,9 @@
 			}).done(function(data){
 				// console.log(data);
 				if(data){
+					
+					console.log("data:" + data);
+					
 					$("#chargeSuccesModal").popup("show");
 					
 					$.get("TegServlet?method=3", function(srv_resp) {

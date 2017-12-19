@@ -1,8 +1,5 @@
 ﻿
 
-
-
-
 <div ng-show="betFix==1" id="sidebar" class="game_right_wrap">		
 		<div class="slip_title_wrap">
 			<p ng-click="betFix2(2)"><img src="/images/pinoff.png"> 베팅슬립</p>
@@ -71,29 +68,29 @@
 			
 			<div ng-switch-default>	
 
-				<div ng-class="{slip_bet_ing:(!bet.SuM&&!bet.SuK),slip_bet_end:(bet.SuM||bet.SuK)}" ng-show="betE" ng-repeat="bet in bet track by $index">
+				<div ng-class="{slip_bet_ing:(!bet.SuM&&!bet.SuK&&!bet.B),slip_bet_end:(bet.SuM||bet.SuK||bet.B)}" ng-show="betE" ng-repeat="bet in bet track by $index">
 			
 					<div class="slip_bet_in">
 						<div class="slip_bet_row">
-							<div ng-class="{slip_bet_cell_l:(!bet.SuM&&!bet.SuK),end_bet_cell_l_1:(bet.SuM||bet.SuK)}" >{{bet.HT}}<span style="color:#5c7785"> vs </span><br>{{bet.AT}}</div>
+							<div ng-class="{slip_bet_cell_l:(!bet.SuM&&!bet.SuK&&!bet.B),end_bet_cell_l_1:(bet.SuM||bet.SuK||bet.B)}" >{{bet.HT}}<span style="color:#5c7785"> vs </span><br>{{bet.AT}}</div>
 							<div class="slip_bet_cell_r">
-								<a ng-if="(!bet.SuM&&!bet.SuK)" href="#" ng-click="delBet(bet.Sd)" class="notify-close-btn"><img src="/images/ing_close.jpg"></a>
-								<a ng-if="(bet.SuM||bet.SuK)" href="#" ng-click="delBet(bet.Sd)" class="notify-close-btn"><img src="/images/end_close.jpg"></a>								
+								<a ng-if="(!bet.SuM&&!bet.SuK&&!bet.B)" href="#" ng-click="delBet(bet.Sd)" class="notify-close-btn"><img src="/images/ing_close.jpg"></a>
+								<a ng-if="(bet.SuM||bet.SuK||bet.B)" href="#" ng-click="delBet(bet.Sd)" class="notify-close-btn"><img src="/images/end_close.jpg"></a>								
 							</div>
 						</div>
 						<div class="slip_bet_row">
-							<div ng-class="{slip_bet_cell_l:(!bet.SuM&&!bet.SuK),end_bet_cell_l_1:(bet.SuM||bet.SuK)}" ng-bind="bet.Sn">
+							<div ng-class="{slip_bet_cell_l:(!bet.SuM&&!bet.SuK&&!bet.B),end_bet_cell_l_1:(bet.SuM||bet.SuK||bet.B)}" ng-bind="bet.Sn">
 								
 							</div>
-							<div ng-if="(!bet.SuM&&!bet.SuK)" class="slip_bet_cell_r" ng-show="bet.P != bet.BP" >  <i style="color:grey;">({{bet.BP|number:2}})</i> </div>
-							<div ng-if="(bet.SuM||bet.SuK)" class="slip_bet_cell_r"> &nbsp; </div>
+							<div ng-if="(!bet.SuM&&!bet.SuK&&!bet.B)" class="slip_bet_cell_r" ng-show="bet.P != bet.BP" >  <i style="color:grey;">({{bet.BP|number:2}})</i> </div>
+							<div ng-if="(bet.SuM||bet.SuK||bet.B)" class="slip_bet_cell_r"> &nbsp; </div>
 						</div>
 						<div class="slip_bet_row">
 							<div class="slip_bet_cell_l">
 								<span class="font_002" ng-bind="bet.ST"></span>
 							</div>
-							<div ng-if="(!bet.SuM&&!bet.SuK)" class="slip_bet_cell_r font_002">{{bet.P|number:2}}</div>
-							<div ng-if="(bet.SuM||bet.SuK)" class="slip_bet_cell_r font_002"><i class='fa fa-fw fa-lock'></i></div>
+							<div ng-if="(!bet.SuM&&!bet.SuK&&!bet.B)" class="slip_bet_cell_r font_002">{{bet.P|number:2}}</div>
+							<div ng-if="(bet.SuM||bet.SuK||bet.B)" class="slip_bet_cell_r font_002"><i class='fa fa-fw fa-lock'></i></div>
 						</div>			
 					</div>				
 					
@@ -101,8 +98,8 @@
 					<div class="slip_bet_row">
 						<div class="slip_bet_cell_ll">베팅금액</div>
 						<div class="slip_bet_cell_cc">
-							<input ng-if="(!bet.SuM&&!bet.SuK)" type="text" class="input_style06" style="text-align:right;" ng-model="bet.Amt" format="number" restrict-to="[0-9]"><!--  restrict-to="[0-9]"-->
-							<input ng-if="(bet.SuM||bet.SuK)" type="text"  class="input_style06" style="text-align:right;"  ng-model="bet.Amt" format="number" restrict-to="[0-9]" disabled>
+							<input ng-if="(!bet.SuM&&!bet.SuK&&!bet.B)" type="text" class="input_style06" style="text-align:right;" ng-model="bet.Amt" format="number" restrict-to="[0-9]"><!--  restrict-to="[0-9]"-->
+							<input ng-if="(bet.SuM||bet.SuK||bet.B)" type="text"  class="input_style06" style="text-align:right;"  ng-model="bet.Amt" format="number" restrict-to="[0-9]" disabled>
 						</div>
 						<div class="slip_bet_cell_rr" ng-click="getMaxBetS(bet.Sd)">
 							<a href="#"><span class="btn10">맥스</span></a>
@@ -369,29 +366,29 @@
 	<div ng-switch-default>	
 		
 		
-		<div ng-class="{slip_bet_ing:(!bet.SuM&&!bet.SuK),slip_bet_end:(bet.SuM||bet.SuK)}" ng-show="betE" ng-repeat="bet in bet track by $index">
+		<div ng-class="{slip_bet_ing:(!bet.SuM&&!bet.SuK&&!bet.B),slip_bet_end:(bet.SuM||bet.SuK||bet.B)}" ng-show="betE" ng-repeat="bet in bet track by $index">
 
 			<div class="slip_bet_in">
 				<div class="slip_bet_row">
-					<div ng-class="{slip_bet_cell_l:(!bet.SuM&&!bet.SuK),end_bet_cell_l_1:(bet.SuM||bet.SuK)}" >{{bet.HT}}<span style="color:#5c7785"> vs </span><br>{{bet.AT}}</div>
+					<div ng-class="{slip_bet_cell_l:(!bet.SuM&&!bet.SuK&&!bet.B),end_bet_cell_l_1:(bet.SuM||bet.SuK||bet.B)}" >{{bet.HT}}<span style="color:#5c7785"> vs </span><br>{{bet.AT}}</div>
 					<div class="slip_bet_cell_r">
-						<a ng-if="(!bet.SuM&&!bet.SuK)" href="#" ng-click="delBet(bet.Sd)" class="notify-close-btn"><img src="/images/ing_close.jpg"></a>
-						<a ng-if="(bet.SuM||bet.SuK)" href="#" ng-click="delBet(bet.Sd)" class="notify-close-btn"><img src="/images/end_close.jpg"></a>								
+						<a ng-if="(!bet.SuM&&!bet.SuK&&!bet.B)" href="#" ng-click="delBet(bet.Sd)" class="notify-close-btn"><img src="/images/ing_close.jpg"></a>
+						<a ng-if="(bet.SuM||bet.SuK||bet.B)" href="#" ng-click="delBet(bet.Sd)" class="notify-close-btn"><img src="/images/end_close.jpg"></a>								
 					</div>
 				</div>
 				<div class="slip_bet_row">
-					<div ng-class="{slip_bet_cell_l:(!bet.SuM&&!bet.SuK),end_bet_cell_l_1:(bet.SuM||bet.SuK)}" ng-bind="bet.Sn">
+					<div ng-class="{slip_bet_cell_l:(!bet.SuM&&!bet.SuK&&!bet.B),end_bet_cell_l_1:(bet.SuM||bet.SuK||bet.B)}" ng-bind="bet.Sn">
 						
 					</div>
-					<div ng-if="(!bet.SuM&&!bet.SuK)" class="slip_bet_cell_r" ng-show="bet.P != bet.BP" >  <i style="color:grey;">({{bet.BP|number:2}})</i> </div>
-					<div ng-if="(bet.SuM||bet.SuK)" class="slip_bet_cell_r"> &nbsp; </div>
+					<div ng-if="(!bet.SuM&&!bet.SuK&&!bet.B)" class="slip_bet_cell_r" ng-show="bet.P != bet.BP" >  <i style="color:grey;">({{bet.BP|number:2}})</i> </div>
+					<div ng-if="(bet.SuM||bet.SuK||bet.B)" class="slip_bet_cell_r"> &nbsp; </div>
 				</div>
 				<div class="slip_bet_row">
 					<div class="slip_bet_cell_l">
 						<span class="font_002" ng-bind="bet.ST"></span>
 					</div>
-					<div ng-if="(!bet.SuM&&!bet.SuK)" class="slip_bet_cell_r font_002">{{bet.P|number:2}}</div>
-					<div ng-if="(bet.SuM||bet.SuK)" class="slip_bet_cell_r font_002"><i class='fa fa-fw fa-lock'></i></div>
+					<div ng-if="(!bet.SuM&&!bet.SuK&&!bet.B)" class="slip_bet_cell_r font_002">{{bet.P|number:2}}</div>
+					<div ng-if="(bet.SuM||bet.SuK||bet.B)" class="slip_bet_cell_r font_002"><i class='fa fa-fw fa-lock'></i></div>
 				</div>			
 			</div>				
 			
@@ -399,8 +396,8 @@
 			<div class="slip_bet_row">
 				<div class="slip_bet_cell_ll">베팅금액</div>
 				<div class="slip_bet_cell_cc">
-					<input ng-if="(!bet.SuM&&!bet.SuK)" type="text" class="input_style06" style="text-align:right;" ng-model="bet.Amt" format="number" restrict-to="[0-9]"><!--  restrict-to="[0-9]"-->
-					<input ng-if="(bet.SuM||bet.SuK)" type="text"  class="input_style06" style="text-align:right;"  ng-model="bet.Amt" format="number" restrict-to="[0-9]" disabled>
+					<input ng-if="(!bet.SuM&&!bet.SuK&&!bet.B)" type="text" class="input_style06" style="text-align:right;" ng-model="bet.Amt" format="number" restrict-to="[0-9]"><!--  restrict-to="[0-9]"-->
+					<input ng-if="(bet.SuM||bet.SuK||bet.B)" type="text"  class="input_style06" style="text-align:right;"  ng-model="bet.Amt" format="number" restrict-to="[0-9]" disabled>
 				</div>
 				<div class="slip_bet_cell_rr" ng-click="getMaxBetS(bet.Sd)">
 					<a href="#"><span class="btn10">맥스</span></a>

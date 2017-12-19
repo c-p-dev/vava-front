@@ -66,7 +66,7 @@ String cp = request.getRequestURI();
 	
 	//console.log(location.pathname.substring(location.pathname.lastIndexOf("/") + 1);
 	
-	console.log("<%=IP%>");
+	
 /*Add class when scroll down*/
 var lgMsg = '<div class="bg_mask_pop_title">'
 	lgMsg += '	<span class="popup_logo"><img src="/images/popup_logo.png"></span>';
@@ -175,8 +175,8 @@ $(window).scroll(function(event){
 			var validator = $( "#login_header" ).validate(); 
 			var vUser = validator.element("#userid-header-input");
 			var vPass = validator.element("#passwd-header-input");
-			console.log(!vUser);
-			console.log(!vPass);
+			//console.log(!vUser);
+			//console.log(!vPass);
 			if(!vUser && !vPass){
 				toastr.success("아이디와 비밀번호를 입력해 주세요.");
 			}else if (vUser && !vPass){
@@ -355,17 +355,21 @@ $(window).scroll(function(event){
 		}).done(function(data){
 			var obj = JSON.parse(data);
 			if(obj.result == 0 ){
-
+				
+	
 				// toastr.success('Login Successful');
 				// $("#loginModal").html(lgMsg);
 
-				cValU();
+				//cValU();
 
 				$.ajax({
 					url : '/login/jsp/get_header.jsp', //jsp				
 					data : {},
 					method: 'GET',
 				}).done(function(data){
+					
+					console.log(data);
+					
 
 					var obj = JSON.parse(data);
 					$("#uhead").html(obj.header);
@@ -454,6 +458,8 @@ $(window).scroll(function(event){
 
 </script>
 
+<div style="display:none"> <%=checkSession%></div>
+
 <div id="wrap">
 <div id="header_wrap">
 	<div class="nav">
@@ -521,9 +527,10 @@ $(window).scroll(function(event){
 	               			if(checkSession){
 	      				%>
 		                <ul class="top_right" id="user_menu_lst">
+		                	<li><img src = "/images/level/<%=UGRADE%>.png" style="position: relative; top: -11px; left: -1px; height: 45px;"></li>
 		                    <li>
 								<div class="select open">
-									<button type="button" class="myValue top_value">LV.<%=UCLEVEL%>   <%=NICK%></button>
+									<button type="button" class="myValue top_value"><%=NICK%></button>
 									<ul class="aList top_alist">
 										<li style="height:11px; width:152px; background:url(/images/select_top_bg.png) no-repeat"></li>
 										<li>

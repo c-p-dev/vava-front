@@ -1,4 +1,21 @@
 ﻿
+<div id="spin_clive" class="sk-fading-circle_s">
+  <div class="sk-circle1 sk-circle"></div>
+  <div class="sk-circle2 sk-circle"></div>
+  <div class="sk-circle3 sk-circle"></div>
+  <div class="sk-circle4 sk-circle"></div>
+  <div class="sk-circle5 sk-circle"></div>
+  <div class="sk-circle6 sk-circle"></div>
+  <div class="sk-circle7 sk-circle"></div>
+  <div class="sk-circle8 sk-circle"></div>
+  <div class="sk-circle9 sk-circle"></div>
+  <div class="sk-circle10 sk-circle"></div>
+  <div class="sk-circle11 sk-circle"></div>
+  <div class="sk-circle12 sk-circle"></div>
+</div>
+
+<div ng-init="clive_load()" style="display:none;" id="clive" class="animate-bottom">
+	
 	<div ng-include src="topLive">											
 	</div> 
 	
@@ -14,7 +31,7 @@
 																				
 			<div ng-switch-default>			
 				
-				<div ng-switch="(LS|filter:{MId:tabMId})[0].Sus"> 	
+				<div ng-switch="(LS|filter:{MId:tabMId})[0].Sus||(LS|filter:{MId:tabMId})[0].B"> 	
 					
 				<div ng-switch-when="true">				
 					
@@ -386,9 +403,9 @@
 	</div>
 	</div>
 
-	
+	</div>
 
-
+</div>
 		
 
 

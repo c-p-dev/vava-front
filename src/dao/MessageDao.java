@@ -25,20 +25,19 @@ import com.google.gson.reflect.TypeToken;
 
 import bean.MessageBean;
 import bean.UserBean;
+import bean.QnaBean;
 
 public class MessageDao {
 	private static final DateFormat	sdf		= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	public static Logger			logger	= Logger.getLogger(MessageDao.class);
-
-	public List<HashMap> getUserQnaList(String userid){
+	
+	public List<HashMap> getUserQnaList(MessageBean mBean){
 		List<HashMap> data = new ArrayList<HashMap>();
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String query = "SELECT '∞¸∏Æ¿⁄' as send_userid1, * FROM msg_lst WHERE recv_userid = ? AND gubun = 'MSG' AND viewtype='Y' ORDER BY send_date ASC";
+		String query = "SELECT 'Í¥ÄÎ¶¨Ïûê' as send_userid1, * FROM msg_lst WHERE recv_userid = ? AND gubun = 'MSG' AND viewtype='Y' AND send_siteid = ?  ORDER BY send_date ASC";
 		
-
-
 		DateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		try {
 
@@ -46,7 +45,8 @@ public class MessageDao {
 			DBConnector.getInstance();
 			con = DBConnector.getConnection();
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, userid);
+			pstmt.setString(1, mBean.getRecv_userid());
+			pstmt.setInt(2, mBean.getSend_siteid());
 
 			rs = pstmt.executeQuery();
 			System.out.println(query);
@@ -65,7 +65,7 @@ public class MessageDao {
 				        ? dateFormater.format(dateFormater.parse(rs.getString("send_date"))) : ""));
 				hsm.put("title", (rs.getString("title") != null ? rs.getString("title") : "    "));
 				hsm.put("txt", (rs.getString("txt")));
-				hsm.put("class_name", (userid.equals(rs.getString("send_userid")) ? "inquiry_admin" : "inquiry_user"));
+				hsm.put("class_name", (mBean.getRecv_userid().equals(rs.getString("send_userid")) ? "inquiry_admin" : "inquiry_user"));
 				data.add(hsm);
 			}
 
@@ -83,4 +83,6 @@ public class MessageDao {
 		return data;
 		
 	}
+	
+	
 }

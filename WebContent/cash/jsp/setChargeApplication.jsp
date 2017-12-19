@@ -1,44 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
-<%@ page import = "bean.ChargeBean" %>
-<%@ page import = "dao.ChargeDao" %>
-<%@ page import = "bean.UserBean" %>
-<%@ page import = "java.sql.SQLException" %>
-<%@ page import = "java.util.ArrayList" %>
-<%@ page import = "java.util.List" %>
-<%@ page import = "com.google.gson.reflect.TypeToken" %>
-<%@ page import = "java.util.StringTokenizer" %>
+<%@ include file="/inc/session_checker.jsp"%>
 
+<jsp:useBean id="CDao" class="dao.ChargeDao" />
+	
 <%
 	
-	
-	if(session.getAttribute("currentSessionUser") != null){
-		UserBean bean = (UserBean) session.getAttribute("currentSessionUser");
+	/*
+		UserDao ud = new UserDao();
+		UserBean bean = (UserBean)  ud.getUserByUserId(UID);
 		ChargeBean chargeBean = new ChargeBean();
 		ChargeDao chargeDao = new ChargeDao();
 		boolean result = false;
-		
-		String ip = "";
-		String xForwardedForHeader = request.getHeader("X-Forwarded-For");	 
-	    if (xForwardedForHeader == null) {
-	        ip = request.getRemoteAddr();
-	    }else{
-	        ip =  new StringTokenizer(xForwardedForHeader, ",").nextToken().trim();
-	    }
-
-		chargeBean.setBank_name(request.getParameter("bank_name").trim());
+	
+		//chargeBean.setBank_name(request.getParameter("bank_name").trim());
 		chargeBean.setBank_owner(request.getParameter("bank_owner").trim());
 		chargeBean.setMoney_req(Integer.parseInt(request.getParameter("money").replace(",", "")));
-		chargeBean.setIp(ip);
+		chargeBean.setIp(IP);
+	*/
 	
-		result = chargeDao.saveChargeApplication(bean, chargeBean);
-		out.println(result);
-		
-	}else{
-		response.sendRedirect("index.jsp");
-		return;
+	String ao="";
+	String m="";
+	
+	if(request.getParameter("bank_owner") != null && request.getParameter("bank_owner").trim().length() > 0){
+   ao =request.getParameter("bank_owner") ;
 	}
-			
+
+	if(request.getParameter("money") != null && request.getParameter("money").trim().length() > 0){
+   m =request.getParameter("money") ;
+	}
+	
+
+		//result = new ChargeDao().saveChargeApplication(bean, chargeBean);
+		boolean result = CDao.saveChargeApplication(SITEID,UID,ao,m,IP);
+		out.println(result);
 %>
 
 

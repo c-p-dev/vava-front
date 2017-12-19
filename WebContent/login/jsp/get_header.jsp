@@ -5,33 +5,14 @@
 <%@ page import="java.text.DecimalFormat" %>
 <%@ page import = "com.google.gson.Gson" %>
 
+<%@ include file="/inc/session.jsp"%>
+
 <%
-
-	boolean checkSession = false;	
-	DecimalFormat dfrmt	= new DecimalFormat("#,###,###,###,###");
-	String UID = "";
-	String SITEID = "1";
-	String UCLEVEL = "";
-	String NICK = "";
-	int UBAL = 0;
-	int UPOINT = 0;
 	
-	UserDao user_db 	=  new UserDao();
-	UserBean sess_data 	=  (UserBean) session.getAttribute("currentSessionUser");
-	UserBean bean 		=  user_db.getUserByUserId(sess_data.getUserid());
-
 	NoticeEventDao ne_dao = new NoticeEventDao();
 	List<NoticeEventBean> ne_bean = ne_dao.getAllPopup();
 	
-	SITEID = String.valueOf(bean.getSiteid());
-	UID = bean.getUserid();		
-	UCLEVEL = bean.getCharge_level(); 
-	NICK = bean.getNick();
-	UBAL = bean.getMoney();
-	UPOINT = bean.getPoint();
-
-	checkSession = true;		
-	
+		
 	String html = "<ul class='util_right'>\n" + 
 			"	<li class = 'hdr-money-row'>머니 <span class='util_money money_dsp'>" + dfrmt.format(UBAL)+ "</span></li>\n" + 
 			"	<li>포인트 <span class=\"util_point point_dsp\">" + dfrmt.format(UPOINT)+ "</span></li>\n" + 
@@ -75,10 +56,11 @@
 			"<div class=\"top_wrap\">\n" + 
 			"    <div class=\"top\" id=\"user-header\">\n" + 
 			"        <span class=\"logo\"><a href=\"/\"><img src=\"/images/logo.png\"></a></span>\n" + 
-			"            <ul class=\"top_right\" id=\"user_menu_lst\">\n" + 
+			"            <ul class=\"top_right\" id=\"user_menu_lst\">\n " + 
+			"                <li><img src = \"/images/level/"+ UGRADE+".png\" style=\"position: relative; top: -11px; left: -1px; height: 45px;\" ></li> " +
 			"                <li>\n" + 
 			"					<div class=\"select open\">\n" + 
-			"						<button type=\"button\" class=\"myValue top_value\">LV. "+ UCLEVEL+ "    "+ NICK + " </button>\n" + 
+			"						<button type=\"button\" class=\"myValue top_value\"> "+ NICK + " </button>\n" + 
 			"						<ul class=\"aList top_alist\">\n" + 
 			"							<li style=\"height:11px; width:152px; background:url(/images/select_top_bg.png) no-repeat\"></li>\n" + 
 			"							<li>\n" + 
@@ -199,9 +181,7 @@
 					"		<img src=\"http://admin.vava21.com:88/contents/event/10.jpg\">\r\n" + 
 					"	</div>\r\n" + 
 					"</div>";
-			
 		}
-	
 	}
 
 	
@@ -213,8 +193,8 @@
 	hsm.put("popup", ne_bean);
 	out.println(gson.toJson(hsm).toString());
 
-
 %>
+
 
 
 

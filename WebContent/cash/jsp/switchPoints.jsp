@@ -6,35 +6,34 @@
 	java.util.List,
 	com.google.gson.reflect.TypeToken,
 	com.google.gson.Gson,
-	java.util.StringTokenizer;" %>
-<%
+	java.util.StringTokenizer" 
+%>
+<%@ include file="/inc/session_checker.jsp"%>
 
-	if(session.getAttribute("currentSessionUser") != null){
-		UserBean bean = (UserBean) session.getAttribute("currentSessionUser");
-	 	UserDao ud = new UserDao();
-	 	Gson gson = new Gson();
-	 	bean.setRegdate("20202020");
-		boolean result = false;
-		int points = Integer.parseInt(request.getParameter("point"));
-		String xForwardedForHeader = request.getHeader("X-Forwarded-For");	 
-	    if (xForwardedForHeader == null) {
-	    	bean.setIp(request.getRemoteAddr());
-	    }else{
-	    	bean.setIp(new StringTokenizer(xForwardedForHeader, ",").nextToken().trim());  
-	    }
-	    
-		
-		UserBean user_data  = ud.getUserByUserId(bean.getUserid());
-		user_data.getMoney();
-		
-		result = ud.switchpoints(bean,user_data.getMoney(),user_data.getPoint(),points);
-		result = ud.userpoints(bean,user_data.getMoney(),user_data.getPoint(),points);	
-		UserBean usermoney = ud.getUserByUserId(bean.getUserid());
-		out.println(gson.toJson(usermoney, UserBean.class));
-		
-	}else{
-		response.sendRedirect("index.jsp");
-		return;
+
+<%
+	//boolean result = false;
+	Gson gson = new Gson();
+	UserDao ud = new UserDao();
+	//UserBean bean = (UserBean) ud.getUserByUserId(UID);
+	
+	String amt="";
+	
+	if(request.getParameter("point") != null && request.getParameter("point").trim().length() > 0){
+   amt =request.getParameter("point") ;
 	}
+	
+	//int points = Integer.parseInt(request.getParameter("point"));
+	//bean.setIp(IP);
+
+	UserBean bean =  (UserBean) ud.switchpoints(SITEID,UID,amt);
+	
+	//result = ud.switchpoints(bean,bean.getMoney(),bean.getPoint(),points);
+	//result = ud.userpoints(bean,bean.getMoney(),bean.getPoint(),points);	
+	
+	//UserBean usermoney = ud.getUserByUserId(UID);
+	
+	out.println(gson.toJson(bean, UserBean.class));
+		
 	
 %>

@@ -19,11 +19,11 @@
 	</div> 			
 
 	<div class="soccer_table">									
-		<div ng-switch="MI[0].Sus"> 		
+		<div ng-switch="MI.Sus||(favM|filter:{Id:MI.Id})[0].B"> 		
 			<div ng-switch-when="true">			
 				<table class="bet_table_2" style="height:400px; width:100%; font-weight: 700; font-size:15px;" cellpadding="0" cellspacing="0">
 					<tr>
-						<td> 경기가 종료 되었거나 현재 베팅을 할수 없는 상태입니다.<br><br><br> 베팅 가능한 항목이 있는경우 화면에 자동으로 나타납니다. </td>
+						<td> {{MI[0].MI}}경기가 종료 되었거나 현재 베팅을 할수 없는 상태입니다.<br><br><br> 베팅 가능한 항목이 있는경우 화면에 자동으로 나타납니다. </td>
 					</tr>
 				</table>
 			</div>
@@ -108,8 +108,8 @@
 																				ng-click="addBet(sel2.Se[$index*4].Id,sel2.Se[$index*4].MkId,value[0].Nm,sel2.Se[$index*4].Nm,(LS|filter:{MId:tabMId})[0].HT,(LS|filter:{MId:tabMId})[0].AT,sel2.Se[$index*4].P,sel2.Se[$index*4].P,value[0].MId)" 																				
 																		  	 width="25%" style="border-right:solid 1px #17191a; border-bottom:solid 1px #17191a; padding: 0;"> 
 																					<div class="sports_v_l_1">{{sel2.Se[$index*4].Nm}}</div>	
-																  				<div ng-show="parseFloat(sel2.Se[$index*4].BP)<parseFloat(sel2.Se[$index*4].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*4].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*4].BP}}</del>)</i> </div>
-																					<div ng-show="parseFloat(sel2.Se[$index*4].BP)>parseFloat(sel2.Se[$index*4].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*4].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*4].BP}}</del>)</i> </div>
+																  				<div ng-show="parseFloat(sel2.Se[$index*4].BP)<parseFloat(sel2.Se[$index*4].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*4].P}}</span> <i class="sel_old"> ({{sel2.Se[$index*4].BP}})</i> </div>
+																					<div ng-show="parseFloat(sel2.Se[$index*4].BP)>parseFloat(sel2.Se[$index*4].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*4].P}}</span> <i class="sel_old"> ({{sel2.Se[$index*4].BP}})</i> </div>
 																					<div ng-show="parseFloat(sel2.Se[$index*4].BP)==parseFloat(sel2.Se[$index*4].P)" class="sports_v_r_1"><span class="font_002">{{sel2.Se[$index*4].P}}</span></div>
 																		 </td>		
 																		 
@@ -117,8 +117,8 @@
 																				ng-click="addBet(sel2.Se[$index*4+1].Id,sel2.Se[$index*4+1].MkId,value[0].Nm,sel2.Se[$index*4+1].Nm,(LS|filter:{MId:tabMId})[0].HT,(LS|filter:{MId:tabMId})[0].AT,sel2.Se[$index*4+1].P,sel2.Se[$index*4+1].P,value[0].MId)" 																				
 																		  	 width="25%" style="border-right:solid 1px #17191a; border-bottom:solid 1px #17191a; padding: 0;"> 
 																					<div class="sports_v_l_1">{{sel2.Se[$index*4+1].Nm}}</div>	
-																  				<div ng-show="parseFloat(sel2.Se[$index*4+1].BP)<parseFloat(sel2.Se[$index*4+1].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*4+1].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*4+1].BP}}</del>)</i> </div>
-																					<div ng-show="parseFloat(sel2.Se[$index*4+1].BP)>parseFloat(sel2.Se[$index*4+1].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*4+1].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*4+1].BP}}</del>)</i> </div>
+																  				<div ng-show="parseFloat(sel2.Se[$index*4+1].BP)<parseFloat(sel2.Se[$index*4+1].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*4+1].P}}</span> <i class="sel_old"> ({{sel2.Se[$index*4+1].BP}})</i> </div>
+																					<div ng-show="parseFloat(sel2.Se[$index*4+1].BP)>parseFloat(sel2.Se[$index*4+1].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*4+1].P}}</span> <i class="sel_old"> ({{sel2.Se[$index*4+1].BP}})</i> </div>
 																					<div ng-show="parseFloat(sel2.Se[$index*4+1].BP)==parseFloat(sel2.Se[$index*4+1].P)" class="sports_v_r_1"><span class="font_002">{{sel2.Se[$index*4+1].P}}</span></div>
 																		 </td>
 																		 
@@ -126,8 +126,8 @@
 																				ng-click="addBet(sel2.Se[$index*4+2].Id,sel2.Se[$index*4+2].MkId,value[0].Nm,sel2.Se[$index*4+2].Nm,(LS|filter:{MId:tabMId})[0].HT,(LS|filter:{MId:tabMId})[0].AT,sel2.Se[$index*4+2].P,sel2.Se[$index*4+2].P,value[0].MId)" 																				
 																		  	 width="25%" style="border-right:solid 1px #17191a; border-bottom:solid 1px #17191a; padding: 0;"> 
 																					<div class="sports_v_l_1">{{sel2.Se[$index*4+2].Nm}}</div>	
-																  				<div ng-show="parseFloat(sel2.Se[$index*4+2].BP)<parseFloat(sel2.Se[$index*4+2].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*4+2].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*4+2].BP}}</del>)</i> </div>
-																					<div ng-show="parseFloat(sel2.Se[$index*4+2].BP)>parseFloat(sel2.Se[$index*4+2].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*4+2].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*4+2].BP}}</del>)</i> </div>
+																  				<div ng-show="parseFloat(sel2.Se[$index*4+2].BP)<parseFloat(sel2.Se[$index*4+2].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*4+2].P}}</span> <i class="sel_old"> ({{sel2.Se[$index*4+2].BP}})</i> </div>
+																					<div ng-show="parseFloat(sel2.Se[$index*4+2].BP)>parseFloat(sel2.Se[$index*4+2].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*4+2].P}}</span> <i class="sel_old"> ({{sel2.Se[$index*4+2].BP}})</i> </div>
 																					<div ng-show="parseFloat(sel2.Se[$index*4+2].BP)==parseFloat(sel2.Se[$index*4+2].P)" class="sports_v_r_1"><span class="font_002">{{sel2.Se[$index*4+2].P}}</span></div>
 																		 </td>
 																		 
@@ -135,8 +135,8 @@
 																				ng-click="addBet(sel2.Se[$index*4+3].Id,sel2.Se[$index*4+3].MkId,value[0].Nm,sel2.Se[$index*4+3].Nm,(LS|filter:{MId:tabMId})[0].HT,(LS|filter:{MId:tabMId})[0].AT,sel2.Se[$index*4+3].P,sel2.Se[$index*4+3].P,value[0].MId)" 																				
 																		  	 width="25%" style="border-bottom:solid 1px #17191a; padding: 0;"> 
 																					<div class="sports_v_l_1">{{sel2.Se[$index*4+3].Nm}}</div>	
-																  				<div ng-show="parseFloat(sel2.Se[$index*4+3].BP)<parseFloat(sel2.Se[$index*4+3].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*4+3].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*4+3].BP}}</del>)</i> </div>
-																					<div ng-show="parseFloat(sel2.Se[$index*4+3].BP)>parseFloat(sel2.Se[$index*4+3].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*4+3].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*4+3].BP}}</del>)</i> </div>
+																  				<div ng-show="parseFloat(sel2.Se[$index*4+3].BP)<parseFloat(sel2.Se[$index*4+3].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*4+3].P}}</span> <i class="sel_old"> ({{sel2.Se[$index*4+3].BP}})</i> </div>
+																					<div ng-show="parseFloat(sel2.Se[$index*4+3].BP)>parseFloat(sel2.Se[$index*4+3].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*4+3].P}}</span> <i class="sel_old"> ({{sel2.Se[$index*4+3].BP}})</i> </div>
 																					<div ng-show="parseFloat(sel2.Se[$index*4+3].BP)==parseFloat(sel2.Se[$index*4+3].P)" class="sports_v_r_1"><span class="font_002">{{sel2.Se[$index*4+3].P}}</span></div>
 																		 </td>
 
@@ -155,8 +155,8 @@
 																						ng-click="addBet(sel2.Se[$index*3].Id,sel2.Se[$index*3].MkId,value[0].Nm,sel2.Se[$index*3].Nm,(LS|filter:{MId:tabMId})[0].HT,(LS|filter:{MId:tabMId})[0].AT,sel2.Se[$index*3].P,sel2.Se[$index*3].P,value[0].MId)" 																				
 																				  	 width="33.33%" style="border-right:solid 1px #17191a; border-bottom:solid 1px #17191a; padding: 0;"> 
 																							<div class="sports_v_l_1">{{sel2.Se[$index*3].Nm}}</div>	
-																		  				<div ng-show="parseFloat(sel2.Se[$index*3].BP)<parseFloat(sel2.Se[$index*3].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*3].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*3].BP}}</del>)</i> </div>
-																							<div ng-show="parseFloat(sel2.Se[$index*3].BP)>parseFloat(sel2.Se[$index*3].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*3].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*3].BP}}</del>)</i> </div>
+																		  				<div ng-show="parseFloat(sel2.Se[$index*3].BP)<parseFloat(sel2.Se[$index*3].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*3].P}}</span> <i class="sel_old"> ({{sel2.Se[$index*3].BP}})</i> </div>
+																							<div ng-show="parseFloat(sel2.Se[$index*3].BP)>parseFloat(sel2.Se[$index*3].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*3].P}}</span> <i class="sel_old"> ({{sel2.Se[$index*3].BP}})</i> </div>
 																							<div ng-show="parseFloat(sel2.Se[$index*3].BP)==parseFloat(sel2.Se[$index*3].P)" class="sports_v_r_1"><span class="font_002">{{sel2.Se[$index*3].P}}</span></div>
 																				 </td>		
 																				 
@@ -164,8 +164,8 @@
 																						ng-click="addBet(sel2.Se[$index*3+1].Id,sel2.Se[$index*3+1].MkId,value[0].Nm,sel2.Se[$index*3+1].Nm,(LS|filter:{MId:tabMId})[0].HT,(LS|filter:{MId:tabMId})[0].AT,sel2.Se[$index*3+1].P,sel2.Se[$index*3+1].P,value[0].MId)" 																				
 																				  	 width="33.33%" style="border-right:solid 1px #17191a; border-bottom:solid 1px #17191a; padding: 0;"> 
 																							<div class="sports_v_l_1">{{sel2.Se[$index*3+1].Nm}}</div>	
-																		  				<div ng-show="parseFloat(sel2.Se[$index*3+1].BP)<parseFloat(sel2.Se[$index*3+1].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*3+1].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*3+1].BP}}</del>)</i> </div>
-																							<div ng-show="parseFloat(sel2.Se[$index*3+1].BP)>parseFloat(sel2.Se[$index*3+1].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*3+1].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*3+1].BP}}</del>)</i> </div>
+																		  				<div ng-show="parseFloat(sel2.Se[$index*3+1].BP)<parseFloat(sel2.Se[$index*3+1].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*3+1].P}}</span> <i class="sel_old"> ({{sel2.Se[$index*3+1].BP}})</i> </div>
+																							<div ng-show="parseFloat(sel2.Se[$index*3+1].BP)>parseFloat(sel2.Se[$index*3+1].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*3+1].P}}</span> <i class="sel_old"> ({{sel2.Se[$index*3+1].BP}})</i> </div>
 																							<div ng-show="parseFloat(sel2.Se[$index*3+1].BP)==parseFloat(sel2.Se[$index*3+1].P)" class="sports_v_r_1"><span class="font_002">{{sel2.Se[$index*3+1].P}}</span></div>
 																				 </td>
 																				 
@@ -173,8 +173,8 @@
 																						ng-click="addBet(sel2.Se[$index*3+2].Id,sel2.Se[$index*3+2].MkId,value[0].Nm,sel2.Se[$index*3+2].Nm,(LS|filter:{MId:tabMId})[0].HT,(LS|filter:{MId:tabMId})[0].AT,sel2.Se[$index*3+2].P,sel2.Se[$index*3+2].P,value[0].MId)" 																				
 																				  	 width="33.33%" style="border-bottom:solid 1px #17191a; padding: 0;"> 
 																							<div class="sports_v_l_1">{{sel2.Se[$index*3+2].Nm}}</div>	
-																		  				<div ng-show="parseFloat(sel2.Se[$index*3+2].BP)<parseFloat(sel2.Se[$index*3+2].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*3+2].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*3+2].BP}}</del>)</i> </div>
-																							<div ng-show="parseFloat(sel2.Se[$index*3+2].BP)>parseFloat(sel2.Se[$index*3+2].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*3+2].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*3+2].BP}}</del>)</i> </div>
+																		  				<div ng-show="parseFloat(sel2.Se[$index*3+2].BP)<parseFloat(sel2.Se[$index*3+2].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*3+2].P}}</span> <i class="sel_old"> ({{sel2.Se[$index*3+2].BP}})</i> </div>
+																							<div ng-show="parseFloat(sel2.Se[$index*3+2].BP)>parseFloat(sel2.Se[$index*3+2].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*3+2].P}}</span> <i class="sel_old"> ({{sel2.Se[$index*3+2].BP}})</i> </div>
 																							<div ng-show="parseFloat(sel2.Se[$index*3+2].BP)==parseFloat(sel2.Se[$index*3+2].P)" class="sports_v_r_1"><span class="font_002">{{sel2.Se[$index*3+2].P}}</span></div>
 																				 </td>
 																			</tr>
@@ -189,8 +189,8 @@
 																						ng-click="addBet(sel2.Se[$index*2].Id,sel2.Se[$index*2].MkId,value[0].Nm,sel2.Se[$index*2].Nm,(LS|filter:{MId:tabMId})[0].HT,(LS|filter:{MId:tabMId})[0].AT,sel2.Se[$index*2].P,sel2.Se[$index*2].P,value[0].MId)" 																				
 																				  	 width="50%" style="border-right:solid 1px #17191a; border-bottom:solid 1px #17191a; padding: 0;"> 
 																							<div class="sports_v_l_1">{{sel2.Se[$index*2].Nm}}</div>	
-																		  				<div ng-show="parseFloat(sel2.Se[$index*2].BP)<parseFloat(sel2.Se[$index*2].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*2].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*2].BP}}</del>)</i> </div>
-																							<div ng-show="parseFloat(sel2.Se[$index*2].BP)>parseFloat(sel2.Se[$index*2].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*2].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*2].BP}}</del>)</i> </div>
+																		  				<div ng-show="parseFloat(sel2.Se[$index*2].BP)<parseFloat(sel2.Se[$index*2].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*2].P}}</span> <i class="sel_old"> ({{sel2.Se[$index*2].BP}})</i> </div>
+																							<div ng-show="parseFloat(sel2.Se[$index*2].BP)>parseFloat(sel2.Se[$index*2].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*2].P}}</span> <i class="sel_old"> ({{sel2.Se[$index*2].BP}})</i> </div>
 																							<div ng-show="parseFloat(sel2.Se[$index*2].BP)==parseFloat(sel2.Se[$index*2].P)" class="sports_v_r_1"><span class="font_002">{{sel2.Se[$index*2].P}}</span></div>
 																				 </td>		
 																				 
@@ -198,8 +198,8 @@
 																						ng-click="addBet(sel2.Se[$index*2+1].Id,sel2.Se[$index*2+1].MkId,value[0].Nm,sel2.Se[$index*2+1].Nm,(LS|filter:{MId:tabMId})[0].HT,(LS|filter:{MId:tabMId})[0].AT,sel2.Se[$index*2+1].P,sel2.Se[$index*2+1].P,value[0].MId)" 																				
 																				  	 width="50%" style="border-bottom:solid 1px #17191a; padding: 0;"> 
 																							<div class="sports_v_l_1">{{sel2.Se[$index*2+1].Nm}}</div>	
-																		  				<div ng-show="parseFloat(sel2.Se[$index*2+1].BP)<parseFloat(sel2.Se[$index*2+1].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*2+1].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*2+1].BP}}</del>)</i> </div>
-																							<div ng-show="parseFloat(sel2.Se[$index*2+1].BP)>parseFloat(sel2.Se[$index*2+1].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*2+1].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*2+1].BP}}</del>)</i> </div>
+																		  				<div ng-show="parseFloat(sel2.Se[$index*2+1].BP)<parseFloat(sel2.Se[$index*2+1].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*2+1].P}}</span> <i class="sel_old"> ({{sel2.Se[$index*2+1].BP}})</i> </div>
+																							<div ng-show="parseFloat(sel2.Se[$index*2+1].BP)>parseFloat(sel2.Se[$index*2+1].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*2+1].P}}</span> <i class="sel_old"> ({{sel2.Se[$index*2+1].BP}})</i> </div>
 																							<div ng-show="parseFloat(sel2.Se[$index*2+1].BP)==parseFloat(sel2.Se[$index*2+1].P)" class="sports_v_r_1"><span class="font_002">{{sel2.Se[$index*2+1].P}}</span></div>
 																				 </td>	
 																				</tr>
@@ -258,8 +258,8 @@
 																						ng-click="addBet(sel2.Se[$index*4].Id,sel2.Se[$index*4].MkId,value[0].Nm,sel2.Se[$index*4].Nm,(LS|filter:{MId:tabMId})[0].HT,(LS|filter:{MId:tabMId})[0].AT,sel2.Se[$index*4].P,sel2.Se[$index*4].P,value[0].MId)" 																				
 																				  	 width="25%" style="border-right:solid 1px #17191a; border-bottom:solid 1px #17191a; padding: 0;"> 
 																							<div class="sports_v_l_1">{{sel2.Se[$index*4].Nm}}</div>	
-																		  				<div ng-show="parseFloat(sel2.Se[$index*4].BP)<parseFloat(sel2.Se[$index*4].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*4].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*4].BP}}</del>)</i> </div>
-																							<div ng-show="parseFloat(sel2.Se[$index*4].BP)>parseFloat(sel2.Se[$index*4].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*4].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*4].BP}}</del>)</i> </div>
+																		  				<div ng-show="parseFloat(sel2.Se[$index*4].BP)<parseFloat(sel2.Se[$index*4].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*4].P}}</span> <i class="sel_old"> ({{sel2.Se[$index*4].BP}})</i> </div>
+																							<div ng-show="parseFloat(sel2.Se[$index*4].BP)>parseFloat(sel2.Se[$index*4].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*4].P}}</span> <i class="sel_old"> ({{sel2.Se[$index*4].BP}})</i> </div>
 																							<div ng-show="parseFloat(sel2.Se[$index*4].BP)==parseFloat(sel2.Se[$index*4].P)" class="sports_v_r_1"><span class="font_002">{{sel2.Se[$index*4].P}}</span></div>
 																				 </td>		
 																				 
@@ -267,8 +267,8 @@
 																						ng-click="addBet(sel2.Se[$index*4+1].Id,sel2.Se[$index*4+1].MkId,value[0].Nm,sel2.Se[$index*4+1].Nm,(LS|filter:{MId:tabMId})[0].HT,(LS|filter:{MId:tabMId})[0].AT,sel2.Se[$index*4+1].P,sel2.Se[$index*4+1].P,value[0].MId)" 																				
 																				  	 width="25%" style="border-right:solid 1px #17191a; border-bottom:solid 1px #17191a; padding: 0;"> 
 																							<div class="sports_v_l_1">{{sel2.Se[$index*4+1].Nm}}</div>	
-																		  				<div ng-show="parseFloat(sel2.Se[$index*4+1].BP)<parseFloat(sel2.Se[$index*4+1].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*4+1].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*4+1].BP}}</del>)</i> </div>
-																							<div ng-show="parseFloat(sel2.Se[$index*4+1].BP)>parseFloat(sel2.Se[$index*4+1].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*4+1].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*4+1].BP}}</del>)</i> </div>
+																		  				<div ng-show="parseFloat(sel2.Se[$index*4+1].BP)<parseFloat(sel2.Se[$index*4+1].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*4+1].P}}</span> <i class="sel_old"> ({{sel2.Se[$index*4+1].BP}})</i> </div>
+																							<div ng-show="parseFloat(sel2.Se[$index*4+1].BP)>parseFloat(sel2.Se[$index*4+1].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*4+1].P}}</span> <i class="sel_old"> ({{sel2.Se[$index*4+1].BP}})</i> </div>
 																							<div ng-show="parseFloat(sel2.Se[$index*4+1].BP)==parseFloat(sel2.Se[$index*4+1].P)" class="sports_v_r_1"><span class="font_002">{{sel2.Se[$index*4+1].P}}</span></div>
 																				 </td>
 																				 
@@ -276,8 +276,8 @@
 																						ng-click="addBet(sel2.Se[$index*4+2].Id,sel2.Se[$index*4+2].MkId,value[0].Nm,sel2.Se[$index*4+2].Nm,(LS|filter:{MId:tabMId})[0].HT,(LS|filter:{MId:tabMId})[0].AT,sel2.Se[$index*4+2].P,sel2.Se[$index*4+2].P,value[0].MId)" 																				
 																				  	 width="25%" style="border-right:solid 1px #17191a; border-bottom:solid 1px #17191a; padding: 0;"> 
 																							<div class="sports_v_l_1">{{sel2.Se[$index*4+2].Nm}}</div>	
-																		  				<div ng-show="parseFloat(sel2.Se[$index*4+2].BP)<parseFloat(sel2.Se[$index*4+2].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*4+2].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*4+2].BP}}</del>)</i> </div>
-																							<div ng-show="parseFloat(sel2.Se[$index*4+2].BP)>parseFloat(sel2.Se[$index*4+2].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*4+2].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*4+2].BP}}</del>)</i> </div>
+																		  				<div ng-show="parseFloat(sel2.Se[$index*4+2].BP)<parseFloat(sel2.Se[$index*4+2].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*4+2].P}}</span> <i class="sel_old"> ({{sel2.Se[$index*4+2].BP}})</i> </div>
+																							<div ng-show="parseFloat(sel2.Se[$index*4+2].BP)>parseFloat(sel2.Se[$index*4+2].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*4+2].P}}</span> <i class="sel_old"> ({{sel2.Se[$index*4+2].BP}})</i> </div>
 																							<div ng-show="parseFloat(sel2.Se[$index*4+2].BP)==parseFloat(sel2.Se[$index*4+2].P)" class="sports_v_r_1"><span class="font_002">{{sel2.Se[$index*4+2].P}}</span></div>
 																				 </td>
 																				 
@@ -285,8 +285,8 @@
 																						ng-click="addBet(sel2.Se[$index*4+3].Id,sel2.Se[$index*4+3].MkId,value[0].Nm,sel2.Se[$index*4+3].Nm,(LS|filter:{MId:tabMId})[0].HT,(LS|filter:{MId:tabMId})[0].AT,sel2.Se[$index*4+3].P,sel2.Se[$index*4+3].P,value[0].MId)" 																				
 																				  	 width="25%" style="border-bottom:solid 1px #17191a; padding: 0;"> 
 																							<div class="sports_v_l_1">{{sel2.Se[$index*4+3].Nm}}</div>	
-																		  				<div ng-show="parseFloat(sel2.Se[$index*4+3].BP)<parseFloat(sel2.Se[$index*4+3].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*4+3].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*4+3].BP}}</del>)</i> </div>
-																							<div ng-show="parseFloat(sel2.Se[$index*4+3].BP)>parseFloat(sel2.Se[$index*4+3].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*4+3].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*4+3].BP}}</del>)</i> </div>
+																		  				<div ng-show="parseFloat(sel2.Se[$index*4+3].BP)<parseFloat(sel2.Se[$index*4+3].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*4+3].P}}</span> <i class="sel_old"> ({{sel2.Se[$index*4+3].BP}})</i> </div>
+																							<div ng-show="parseFloat(sel2.Se[$index*4+3].BP)>parseFloat(sel2.Se[$index*4+3].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*4+3].P}}</span> <i class="sel_old"> ({{sel2.Se[$index*4+3].BP}})</i> </div>
 																							<div ng-show="parseFloat(sel2.Se[$index*4+3].BP)==parseFloat(sel2.Se[$index*4+3].P)" class="sports_v_r_1"><span class="font_002">{{sel2.Se[$index*4+3].P}}</span></div>
 																				 </td>
 
@@ -305,8 +305,8 @@
 																						ng-click="addBet(sel2.Se[$index*3].Id,sel2.Se[$index*3].MkId,value[0].Nm,sel2.Se[$index*3].Nm,(LS|filter:{MId:tabMId})[0].HT,(LS|filter:{MId:tabMId})[0].AT,sel2.Se[$index*3].P,sel2.Se[$index*3].P,value[0].MId)" 																				
 																				  	 width="33.33%" style="border-right:solid 1px #17191a; border-bottom:solid 1px #17191a; padding: 0;"> 
 																							<div class="sports_v_l_1">{{sel2.Se[$index*3].Nm}}</div>	
-																		  				<div ng-show="parseFloat(sel2.Se[$index*3].BP)<parseFloat(sel2.Se[$index*3].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*3].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*3].BP}}</del>)</i> </div>
-																							<div ng-show="parseFloat(sel2.Se[$index*3].BP)>parseFloat(sel2.Se[$index*3].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*3].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*3].BP}}</del>)</i> </div>
+																		  				<div ng-show="parseFloat(sel2.Se[$index*3].BP)<parseFloat(sel2.Se[$index*3].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*3].P}}</span> <i class="sel_old"> ({{sel2.Se[$index*3].BP}})</i> </div>
+																							<div ng-show="parseFloat(sel2.Se[$index*3].BP)>parseFloat(sel2.Se[$index*3].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*3].P}}</span> <i class="sel_old"> ({{sel2.Se[$index*3].BP}})</i> </div>
 																							<div ng-show="parseFloat(sel2.Se[$index*3].BP)==parseFloat(sel2.Se[$index*3].P)" class="sports_v_r_1"><span class="font_002">{{sel2.Se[$index*3].P}}</span></div>
 																				 </td>		
 																				 
@@ -314,8 +314,8 @@
 																						ng-click="addBet(sel2.Se[$index*3+1].Id,sel2.Se[$index*3+1].MkId,value[0].Nm,sel2.Se[$index*3+1].Nm,(LS|filter:{MId:tabMId})[0].HT,(LS|filter:{MId:tabMId})[0].AT,sel2.Se[$index*3+1].P,sel2.Se[$index*3+1].P,value[0].MId)" 																				
 																				  	 width="33.33%" style="border-right:solid 1px #17191a; border-bottom:solid 1px #17191a; padding: 0;"> 
 																							<div class="sports_v_l_1">{{sel2.Se[$index*3+1].Nm}}</div>	
-																		  				<div ng-show="parseFloat(sel2.Se[$index*3+1].BP)<parseFloat(sel2.Se[$index*3+1].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*3+1].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*3+1].BP}}</del>)</i> </div>
-																							<div ng-show="parseFloat(sel2.Se[$index*3+1].BP)>parseFloat(sel2.Se[$index*3+1].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*3+1].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*3+1].BP}}</del>)</i> </div>
+																		  				<div ng-show="parseFloat(sel2.Se[$index*3+1].BP)<parseFloat(sel2.Se[$index*3+1].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*3+1].P}}</span> <i class="sel_old"> ({{sel2.Se[$index*3+1].BP}})</i> </div>
+																							<div ng-show="parseFloat(sel2.Se[$index*3+1].BP)>parseFloat(sel2.Se[$index*3+1].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*3+1].P}}</span> <i class="sel_old"> ({{sel2.Se[$index*3+1].BP}})</i> </div>
 																							<div ng-show="parseFloat(sel2.Se[$index*3+1].BP)==parseFloat(sel2.Se[$index*3+1].P)" class="sports_v_r_1"><span class="font_002">{{sel2.Se[$index*3+1].P}}</span></div>
 																				 </td>
 																				 
@@ -323,8 +323,8 @@
 																						ng-click="addBet(sel2.Se[$index*3+2].Id,sel2.Se[$index*3+2].MkId,value[0].Nm,sel2.Se[$index*3+2].Nm,(LS|filter:{MId:tabMId})[0].HT,(LS|filter:{MId:tabMId})[0].AT,sel2.Se[$index*3+2].P,sel2.Se[$index*3+2].P,value[0].MId)" 																				
 																				  	 width="33.33%" style="border-bottom:solid 1px #17191a; padding: 0;"> 
 																							<div class="sports_v_l_1">{{sel2.Se[$index*3+2].Nm}}</div>	
-																		  				<div ng-show="parseFloat(sel2.Se[$index*3+2].BP)<parseFloat(sel2.Se[$index*3+2].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*3+2].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*3+2].BP}}</del>)</i> </div>
-																							<div ng-show="parseFloat(sel2.Se[$index*3+2].BP)>parseFloat(sel2.Se[$index*3+2].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*3+2].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*3+2].BP}}</del>)</i> </div>
+																		  				<div ng-show="parseFloat(sel2.Se[$index*3+2].BP)<parseFloat(sel2.Se[$index*3+2].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*3+2].P}}</span> <i class="sel_old"> ({{sel2.Se[$index*3+2].BP}})</i> </div>
+																							<div ng-show="parseFloat(sel2.Se[$index*3+2].BP)>parseFloat(sel2.Se[$index*3+2].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*3+2].P}}</span> <i class="sel_old"> ({{sel2.Se[$index*3+2].BP}})</i> </div>
 																							<div ng-show="parseFloat(sel2.Se[$index*3+2].BP)==parseFloat(sel2.Se[$index*3+2].P)" class="sports_v_r_1"><span class="font_002">{{sel2.Se[$index*3+2].P}}</span></div>
 																				 </td>
 																			</tr>
@@ -340,8 +340,8 @@
 																						ng-click="addBet(sel2.Se[$index*2].Id,sel2.Se[$index*2].MkId,value[0].Nm,sel2.Se[$index*2].Nm,(LS|filter:{MId:tabMId})[0].HT,(LS|filter:{MId:tabMId})[0].AT,sel2.Se[$index*2].P,sel2.Se[$index*2].P,value[0].MId)" 																				
 																				  	 width="50%" style="border-right:solid 1px #17191a; border-bottom:solid 1px #17191a; padding: 0;"> 
 																							<div class="sports_v_l_1">{{sel2.Se[$index*2].Nm}}</div>	
-																		  				<div ng-show="parseFloat(sel2.Se[$index*2].BP)<parseFloat(sel2.Se[$index*2].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*2].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*2].BP}}</del>)</i> </div>
-																							<div ng-show="parseFloat(sel2.Se[$index*2].BP)>parseFloat(sel2.Se[$index*2].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*2].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*2].BP}}</del>)</i> </div>
+																		  				<div ng-show="parseFloat(sel2.Se[$index*2].BP)<parseFloat(sel2.Se[$index*2].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*2].P}}</span> <i class="sel_old"> ({{sel2.Se[$index*2].BP}})</i> </div>
+																							<div ng-show="parseFloat(sel2.Se[$index*2].BP)>parseFloat(sel2.Se[$index*2].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*2].P}}</span> <i class="sel_old"> ({{sel2.Se[$index*2].BP}})</i> </div>
 																							<div ng-show="parseFloat(sel2.Se[$index*2].BP)==parseFloat(sel2.Se[$index*2].P)" class="sports_v_r_1"><span class="font_002">{{sel2.Se[$index*2].P}}</span></div>
 																				 </td>		
 																				 
@@ -349,8 +349,8 @@
 																						ng-click="addBet(sel2.Se[$index*2+1].Id,sel2.Se[$index*2+1].MkId,value[0].Nm,sel2.Se[$index*2+1].Nm,(LS|filter:{MId:tabMId})[0].HT,(LS|filter:{MId:tabMId})[0].AT,sel2.Se[$index*2+1].P,sel2.Se[$index*2+1].P,value[0].MId)" 																				
 																				  	 width="50%" style="border-bottom:solid 1px #17191a; padding: 0;"> 
 																							<div class="sports_v_l_1">{{sel2.Se[$index*2+1].Nm}}</div>	
-																		  				<div ng-show="parseFloat(sel2.Se[$index*2+1].BP)<parseFloat(sel2.Se[$index*2+1].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*2+1].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*2+1].BP}}</del>)</i> </div>
-																							<div ng-show="parseFloat(sel2.Se[$index*2+1].BP)>parseFloat(sel2.Se[$index*2+1].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*2+1].P}}</span> <i class="sel_old"> (<del>{{sel2.Se[$index*2+1].BP}}</del>)</i> </div>
+																		  				<div ng-show="parseFloat(sel2.Se[$index*2+1].BP)<parseFloat(sel2.Se[$index*2+1].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-up" style="color:green"></i> <span class="font_002">{{sel2.Se[$index*2+1].P}}</span> <i class="sel_old"> ({{sel2.Se[$index*2+1].BP}})</i> </div>
+																							<div ng-show="parseFloat(sel2.Se[$index*2+1].BP)>parseFloat(sel2.Se[$index*2+1].P)" class="sports_v_r_1"><i class="fa fa-fw fa-chevron-down" style="color:red"></i> <span class="font_002">{{sel2.Se[$index*2+1].P}}</span> <i class="sel_old"> ({{sel2.Se[$index*2+1].BP}})</i> </div>
 																							<div ng-show="parseFloat(sel2.Se[$index*2+1].BP)==parseFloat(sel2.Se[$index*2+1].P)" class="sports_v_r_1"><span class="font_002">{{sel2.Se[$index*2+1].P}}</span></div>
 																				 </td>	
 																				</tr>

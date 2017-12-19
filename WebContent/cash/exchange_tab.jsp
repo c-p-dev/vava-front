@@ -1,14 +1,8 @@
-<%@ include file="/inc/session.jsp"%>
-<%@ include file="/inc/session_checker.jsp"%>
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="bean.UserBean, dao.UserDao, java.text.DecimalFormat"%>
 
-<%
 
-	UserDao user_db			= new UserDao();
-	UserBean user_data		= (UserBean)session.getAttribute("currentSessionUser");
-	UserBean currentUser 	= user_db.getUserByUserId(user_data.getUserid());
-%>
+<%@ include file="/inc/session_checker.jsp"%>
+
 
 <ul class="smk_accordion">
 		<li>
@@ -19,7 +13,7 @@
 					<div class="blue_wrap">
 						<div class="cash_box">
 							<div class="cash_in">
-								<div class="cash_10"><p style="float:left">보유금액</p><p style="float:right"><span class="font_002 money_dsp" id="money"><%=dfrmt.format(currentUser.getMoney())%></span>원 </p></div>
+								<div class="cash_10"><p style="float:left">보유금액</p><p style="float:right"><span class="font_002 money_dsp" id="money"><%=dfrmt.format(UBAL)%></span>원 </p></div>
 								<div class="cash_9">
 									<input class="input_style03" type="text" style="text-align: right;padding-right: 5%;" placeholder="환전금액" id="withdraw" name="withdraw">
 								</div>	
@@ -45,7 +39,7 @@
 			</div>
 		</li>
 		<li>
-		<div class="acc_head dt_div"><h3>충전신청 리스트</h3></div>
+		<div class="acc_head dt_div"><h3>환전신청 리스트</h3></div>
 		<div class="acc_content">
 			<div class="acc_content_in_2">
 				<table id="dataTable2" cellspacing="0" cellpadding="0" data-scroll-x="true" style="width: 100%!important;">
@@ -111,7 +105,7 @@
 			환전 신청이 접수 되었습니다.<br>			
 		</div>
 		<div class="btn_wrap">
-			<span class="btn3c cs_close_exchange">확인</span>
+			<span class="btn3c cs_close_exchange">닫기</span>
 		</div>
 	</div>
 </div>
@@ -124,14 +118,14 @@
 	</div>
 	<div class="bg_mask_pop2_in">
 		<div class="pop_icon_center">
-			<img src="/images/exclamation_icon.png">
+			<img src="/images/question_icon.png">
 		</div>
 		<div class="pop_text">
-			Are you sure?
+			환전 신청 하시겠습니까?
 		</div>
 		<div class="btn_wrap">
-			<span class="btn3 conf_modal_close">No</span>
-			<span class="btn3 conf_modal_yes ">Yes</span>
+			<span class="btn3 conf_modal_yes ">확인</span>
+			<span class="btn3 conf_modal_close">취소</span>			
 		</div>
 	</div>
 </div>
@@ -217,9 +211,9 @@
 		},
 		messages: {
 			withdraw :{
-				required:"입력이 필요합니다.",
-				money_number: "입력은 숫자 여야합니다.",
-				money_min:"교환 가능한 최소 금액은 10,000입니다.",
+				required:"금액을 입력해 주세요.",
+				money_number: "금액을 숫자로 입력해 주세요.",
+				money_min:"환전 가능한 최소 금액은 만원입니다.",
 			},
 		},
 		errorPlacement: function(error, element) {
@@ -276,7 +270,7 @@
 			}
 
 			$.ajax({
-				url:'jsp/withdrawprocess.jsp',
+				url:'/cash/jsp/withdrawprocess.jsp',
 				data:data,
 				type:'POST'
 			}).done(function(data){

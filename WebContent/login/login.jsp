@@ -78,7 +78,7 @@
 
 		$('#lgInMdl2').popup({
 	      	transition: 'all 0.3s',
-	      	// scrolllock: true,
+	      	scrolllock: true,
 	      	escape: false,
 	      	blur:false,
 	      	onclose:function(){
@@ -126,7 +126,7 @@
 
 		$('#fade_3').popup({
 	      	transition: 'all 0.3s',
-	      	// scrolllock: true,
+	      	scrolllock: true,
 	      	escape: false,
 	      	blur:false,
 	      	onclose:function(){
@@ -195,7 +195,8 @@
 			}
 		}).done(function(data){
 			var obj = JSON.parse(data);
-			// console.log(obj);
+			console.log("obj");
+			 console.log(obj);
 			if(obj.result == 0 ){
 
 				$.ajax({
