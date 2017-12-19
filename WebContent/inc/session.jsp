@@ -1,54 +1,51 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.util.*"%>
-<%@ page import="bean.*" %>
-<%@ page import="dao.*" %>
-<%@ page import="java.text.DecimalFormat" %>
 
-<%
-	boolean checkSession = false;		
-	String UID = "-1";
-	String SITEID = "1";
-	String UCLEVEL = "";
-	String NICK = "";
-	int UBAL = 0;
-	int UPOINT = 0;
-	String IP = request.getRemoteAddr();
+<%@ page import="dao.UserDao" %>
+<%@ page import="java.text.DecimalFormat" %>
+<%@ page import="java.util.*" %>
+
+	<%!
+	boolean checkSession;
+	String SITEID; 
+	String UID;
+	String NICK;
+	String UCLEVEL;
+	int UGRADE;
+	int UBAL;
+	int UPOINT;
+	String IP;
+	%>
 	
-	if(session.getAttribute("currentSessionUser") != null){
-		UserDao user_db 	=  new UserDao();
-		UserBean sess_data 	=  (UserBean) session.getAttribute("currentSessionUser");
-		UserBean bean 		=  user_db.getUserByUserId(sess_data.getUserid());
-		
-		checkSession = true;
-		SITEID = String.valueOf(bean.getSiteid());
-		UID = bean.getUserid();		
-		UCLEVEL = bean.getCharge_level(); 
-		NICK = bean.getNick();
-		UBAL = bean.getMoney();
-		UPOINT = bean.getPoint();
-		IP = bean.getIp();
-		
-		//out.print(bean.getNick());  
+	<%
+	
+	SITEID = "1";	
+	 session = request.getSession(false);		
+	 
+	if((String) session.getAttribute("UID") != null){			
+		checkSession = true;			
+	 	UID = (String)session.getAttribute("UID");		
+		NICK  = (String)session.getAttribute("NICK");
+		UCLEVEL = (String)session.getAttribute("UCLEVEL");
+		UGRADE = (Integer)session.getAttribute("UGRADE");
+		UBAL = (Integer)session.getAttribute("UBAL");
+		UPOINT = (Integer)session.getAttribute("UPOINT");
 	}
 	
-	DecimalFormat dfrmt	= new DecimalFormat("#,###,###,###,###");
+	IP = request.getRemoteAddr();
 	
-%>
-
-
-<!-- ip block list checker -->
-<%
+	// ip block
 	UserDao user_db2 	=  new UserDao();
 	boolean invalidIp = user_db2.checkIPBlockList(IP);
+	
 	if(invalidIp){
 		System.out.println("Redirecting to Error...");
 		response.sendRedirect("/error.jsp"); 
 		return;
 	}	
+	
+	
+	DecimalFormat dfrmt	= new DecimalFormat("#,###,###,###,###");	
+	
+	//	session.invalidate(); 
+		
 %>
-
-<script>
-var checkSession = <%=checkSession%>;
-var UID = '<%=UID%>';
-var UBAL = <%=UBAL%>;
-</script>

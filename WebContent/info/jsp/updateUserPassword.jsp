@@ -8,21 +8,21 @@
 <%@ page import = "com.google.gson.reflect.TypeToken" %>
 <%@ page import = "java.util.StringTokenizer" %>
 
+<%@ include file="/inc/session.jsp" %>	
+
 <%
+	
+	
+ 	UserDao ud = new UserDao();
+	boolean result = false;
+	
+	String current_passwd = request.getParameter("current_password").trim();
+	String new_passwd = request.getParameter("new_passowrd").trim();
 
+	result = ud.updateUserPasswd(UID,current_passwd,new_passwd);
+	out.println(result);
 
-	if(session.getAttribute("currentSessionUser") != null){
-		UserBean bean = (UserBean) session.getAttribute("currentSessionUser");
-	 	UserDao ud = new UserDao();
-		boolean result = false;
-		
-		String current_passwd = request.getParameter("current_password").trim();
-		String new_passwd = request.getParameter("new_passowrd").trim();
-
-		result = ud.updateUserPasswd(bean.getUserid(),current_passwd,new_passwd);
-		out.println(result);
-
-	}
+	
 %>
 
 

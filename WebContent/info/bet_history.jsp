@@ -23,7 +23,6 @@ Type type2 = new TypeToken<List<BettingSName>>() {}.getType();
 
 String blj = gson.toJson(bl, type);      
 String bsj = gson.toJson(bs, type);   
- 
 %>
 
 <style>

@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="/inc/session.jsp"%>
-<%@ include file="/inc/session_checker.jsp" %>
+<%@ include file="/inc/session_checker.jsp"%>
 <style>
 	input.btn5{
 	    border-width: 0px!important;
@@ -178,6 +177,7 @@
 			data : {},
 			method: 'GET',
 		}).done(function(data){ 
+			// console.log(data);
 			drawMessages(data);
 			
 		});
@@ -191,7 +191,7 @@
 		var obj = JSON.parse(data);
 		$("#con-com").html("");
 		$.each( obj, function(index, el) {
-			console.log(obj);
+			// console.log(obj);
 			var html  = '<div class="inquiry"> <div class="inquiry_user"> <span class="user_tag"><img src="../images/user_tag.jpg"></span> <div class="inquiry_text">' + el.txt+ '</div> <div class="user_date">'+el.regdate+'</div></div></div>'; 
 				disbleCht(false);
 			if(el.class_name == "inquiry_admin"){

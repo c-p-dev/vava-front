@@ -286,6 +286,11 @@ input::-moz-placeholder {
 .cash_11{
     width: 374px; height: 40px; margin: 0 5px 0 0; float: left;
 }
+
+.cash_11_1{
+    width: 580px; height: 40px; margin: 0 5px 0 0; float: left;
+}
+
 .cash_13{
     width: 455px; height: 40px; margin: 0 5px 0 0; float: left;
 }

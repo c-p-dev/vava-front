@@ -15,7 +15,17 @@ String tab="";
 if(request.getParameter("tab") != null && request.getParameter("tab").trim().length() > 0){
    tab =request.getParameter("tab") ;
 }
+
+
+int iterationCount = 1000;
+int keySize = 128;
+
+String salt = "dc0da04af8fee58593442bf834b30739";
+String iv = "dc0da04af8fee58593442bf834b30739";
+String passphrase = "vava!@#$";       
+
 %>
+
 
 <!DOCTYPE html>
 <head>
@@ -72,13 +82,20 @@ if(request.getParameter("tab") != null && request.getParameter("tab").trim().len
 <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.js"></script>
 
 
+<script type="text/javascript" src="/js/cip/aes.js"></script>
+<script type="text/javascript" src="/js/cip/pbkdf2.js"></script>
+<script type="text/javascript" src="/js/cip/AesUtil.js"></script>
+
+
 <link href="/css/common.css" rel="stylesheet" type="text/css">
 <link href="/css/layout.css" rel="stylesheet" type="text/css">
 <link href="/css/main.css" rel="stylesheet" type="text/css"><!-- main -->
 <link href="/css/sub.css" rel="stylesheet" type="text/css"><!-- sub -->
 <link href="/css/game.css" rel="stylesheet" type="text/css"><!-- game -->
 <link href="/css/gateway.css" rel="stylesheet" type="text/css"><!-- gateway -->
+
 <link href="/css/customize.css" rel="stylesheet" type="text/css">
+
 <link href="/css/font-awesome.css" rel="stylesheet" type="text/css">
 <link href="/css/spin.css" rel="stylesheet" type="text/css">
 <link href="/css/nice-select.css" rel="stylesheet" type="text/css"><!-- select -->
@@ -103,6 +120,14 @@ if(request.getParameter("tab") != null && request.getParameter("tab").trim().len
 <script type="text/javascript" src="/js/lmatch.js"></script>
 
 <link href="/css/v-accordion.css" rel="stylesheet" type="text/css">
+
+<script>
+var checkSession = <%=checkSession%>;
+var UID = '<%=UID%>';
+var UBAL = <%=UBAL%>;
+</script>
+
+
 </head>
 
 <body id="myAnchor" ng-app="Vava" ng-controller="mc"> 
@@ -112,12 +137,8 @@ if(request.getParameter("tab") != null && request.getParameter("tab").trim().len
 	
 
 <%@ include file="/inc/header.jsp" %>
-<script>
-	$("div.stroke ul li:nth-child(1) a").on("click",function(e){
-		e.preventDefault();
-		window.location.reload();
-	});
-</script>
+
+
 <div id="contents_wrap">
 	<div class="game_contents">
 		<table width="100%" valign="top" border="0" cellspacing="0" cellpadding="0">

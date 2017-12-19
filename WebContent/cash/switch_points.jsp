@@ -1,7 +1,7 @@
-<%@ include file="/inc/session.jsp"%>
 <%@ include file="/inc/session_checker.jsp"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="dao.GameDao, java.text.DecimalFormat, java.util.*,dao.UserDao,bean.UserBean;"%>		
+
 <style>
 	.add-money{
 		cursor: pointer;
@@ -22,33 +22,30 @@
 
 </style>
 <%
-
 	UserDao user_db			= new UserDao();
-	UserBean user_data		= (UserBean)session.getAttribute("currentSessionUser");
-	UserBean currentUser 		= user_db.getUserByUserId(user_data.getUserid());
-
+	UserBean currentUser 		= user_db.getUserByUserId(UID);
 %>	
 			
 			<ul class="smk_accordion">
 					<li>
-						<div class="accordion_title"><h3>포인트전환</h3></div>
+						<div class="accordion_title"><h3>포인트 전환</h3></div>
 						<div class="acc_content" id="acc_content_in_pointtb">
 							<div class="acc_content_in_2">
 								<div class="blue_wrap">
 								<form id="pointform">
 									<div class="float_inline">
 										<div class="cash_in">
-											<div class="cash_10"><p style="float:left">보유포인트</p><p style="float:right" class="font_002 pointavail" id="showpoint"><%=dfrmt.format(currentUser.getPoint())%></p></div>
+											<div class="cash_10"><p style="float:left">보유 포인트</p><p style="float:right" class="font_002 pointavail" id="showpoint"><%=dfrmt.format(UPOINT)%></p></div>
 											<div class="cash_9">
-												<input class="input_style03" id="point" name="point" style="text-align: right; padding-right:10px;" placeholder="입금자명">		
+												<input class="input_style03" id="point" name="point" style="text-align: right; padding-right:10px;" placeholder="전환할 포인트">		
 											</div>
 										</div>
 										<div class="cash_in">
-											<span class="ebtn btn1" id="p1">1만원</span>
-		 									<span class="ebtn btn1" id="p2">5만원</span>
-		 									<span class="ebtn btn1" id="p3">10만원</span>
-		 									<span class="ebtn btn1" id="p5">50만원</span>
-		 									<span class="ebtn btn1" id="p4">100만원</span>
+											<span class="ebtn btn1" id="p1">100포인트</span>
+		 									<span class="ebtn btn1" id="p2">300포인트</span>
+		 									<span class="ebtn btn1" id="p3">500포인트</span>
+		 									<span class="ebtn btn1" id="p5">1000포인트</span>
+		 									<span class="ebtn btn1" id="p4">5000포인트</span>
 		 									<span class="ebtn btn1" id="reset">정정</span>
 										</div>
 										<div class="cash_in exbtn">
@@ -72,10 +69,10 @@
 							<img src="/images/check_icon.png">
 						</div>
 						<div class="pop_text">
-							Point Switch Success<br>			
+							포인트 전환 신청이 접수 되었습니다.<br>			
 						</div>
 						<div class="btn_wrap">
-							<span class="btn3c cs_close">충전하기</span></a>
+							<span class="btn3c cs_close">닫기</span></a>
 						</div>
 					</div>
 				</div>
@@ -88,20 +85,24 @@
 					</div>
 					<div class="bg_mask_pop2_in">
 						<div class="pop_icon_center">
-							<img src="/images/exclamation_icon.png">
+							<img src="/images/question_icon.png">
 						</div>
 						<div class="pop_text">
-							Are you sure?
+							포인트 전환 신청 하시겠습니까?
 						</div>
 						<div class="btn_wrap">
-							<span class="btn3 conf_modal_close">No</span>
-							<span class="btn3 conf_modal_yes ">Yes</span>
+							<span class="btn3 conf_modal_yes ">확인</span>
+							<span class="btn3 conf_modal_close">취소</span>
+							
 						</div>
 					</div>
 				</div>
 <script>
 $(document).ready(function(){
-	var p = <%=currentUser.getPoint()%>;
+	//console.log("point");
+	var p = <%=UPOINT%>;
+	//console.log("point : " + p);
+	
 	$("#pointform").validate({
 		errorClass: 'form1-invalid',
 		validClass: 'form1-valid',
@@ -110,20 +111,20 @@ $(document).ready(function(){
 				point :{
 				required:true,
 				money_number:true,
-				money_min: true,
+				//money_min: false,
 				max_point:p,
 				// digits: true,
-				// min: 10000,
+				// min: 1000,
 				// max: p,
 			},
 		},
 			
 		messages: {
 			point :{
-				required:"입력이 필요합니다.",
-				money_number: "입력은 숫자 여야합니다.",
-				money_min:"교환 가능한 최소 금액은 10,000입니다.",
-				max_point:"불충분 한 포인트"
+				required:"전환할 포인트를 입력해 주세요.",
+				money_number: "전환할 포인트를 숫자로 입력해 주세요.",
+				money_min:"전환 가능한 최소 포인트는 천(1000) 포인트입니다.",
+				max_point:"전환할 포인트가 충분하지 않습니다."
 			},
 		},
 		errorPlacement: function(error, element) {
@@ -189,13 +190,51 @@ function submitPoint(){
 			dataType: 'JSON',
 			method: 'POST',
 		}).done(function(data){ 
-			// console.log(data);
+			
+			if(data){
+			 //console.log("submitPoint:"+data);
+			 
+			 console.log(data);
+			 
+			 /*
+			 if(data.isValid){
+
+				$.ajax({
+					url : '/login/jsp/get_header.jsp', //jsp				
+					data : {},
+					method: 'GET',
+					error: function(){
+						toastr.success("처리중 오류가 발생했습니다.");
+					}
+				}).done(function(data){
+					var obj = JSON.parse(data);
+					$("#uhead").html(obj.header);
+					$("#fade_3").popup("hide");
+					$("#lgInMdl2").popup("show");
+					createPopup(obj.popup);
+					$('a.get-vbet-hist').parent().show();
+				});
+				// toastr.success('Login Successful');
+				// $("#fade_3").popup("hide");
+				// $("#loginModal").popup("show");
+				
+
+			}
+			*/
+			
 			// console.log(data.money);
-			$('.money_dsp').text(number_format(data.money, 2));
-			$('.point_dsp').text(number_format(data.point, 2));
-			$('.pointavail').text(number_format(data.point, 2));
+			
+			//getheader
+			
+			$('.money_dsp').text(number_format(data.money,0));
+			$('.point_dsp').text(number_format(data.point,0));
+			$('.pointavail').text(number_format(data.point,0));
 			$("#pointform").validate().settings.rules.point.max = data.point;
 			$("#PointSuccesModal").popup("show");
+			
+			
+			
+		}
 		});
 		// alert("switch true");
 		$("#conf_modal1").popup("hide")
@@ -262,30 +301,30 @@ $('#reset').click(function(){
 $('#p1').click(function(){
 	// var num = + $("#point").val() + 10000;
 	// $("#point").val(numberWithCommas(num));
-	addVal(10000);
+	addVal(100);
 });
 
 $('#p2').click(function(){
 	// var num = + $("#point").val() + 50000;
 	// $("#point").val(numberWithCommas(num));
-	addVal(50000);
+	addVal(300);
 });
 
 $('#p3').click(function(){
 	// var num = + $("#point").val() + 100000;
 	// $("#point").val(numberWithCommas(num));
-	addVal(100000);
+	addVal(500);
 });
 
 $('#p4').click(function(){
 	// var num = + $("#point").val() + 1000000;
 	// $("#point").val(numberWithCommas(num));
-	addVal(1000000);
+	addVal(5000);
 });
 $('#p5').click(function(){
 	// var num = + $("#point").val() + 1000000;
 	// $("#point").val(numberWithCommas(num));
-	addVal(500000);
+	addVal(1000);
 });
 
 

@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="/inc/session.jsp"%>
-<%@ include file="/inc/session_checker.jsp" %>
+
 <style>
 	.dt-txt{
 		/*overflow-y: scroll!important;*/
@@ -152,6 +151,7 @@
 
         $('#qnaDt tbody').on('click', 'tr', function () {
 	        var row = $qnaDt.row(this);
+	        console.log(row.data().msgid);
 	        if($(this).hasClass('s_close')){
 
 	        	row.child(childRowFormat(row.data().txt),'dt-txt').show();
@@ -159,6 +159,7 @@
 
     			$(this).removeClass('s_close');
     			$(this).addClass('s_open');
+    			//updateMsg(row.data().msgid);
 
 	        }else{
 
@@ -168,16 +169,6 @@
 	        	$(this).removeClass('s_open');
     			$(this).addClass('s_close');
 	        }
-
-	        // if(!$(this).hasClass('dt-txt'))
-	        // if(!$(this).hasClass('dt-txt')){
-	        	// $('#qnaDt tbody').find('.slider').slideUp(function(){
-					// $(this).closest('tr').hide();
-	        	// });
-
-	        	// row.child(childRowFormat(row.data().txt),'dt-txt').show();
-    			// $(row.child()).find('.slider').stop(false, true).slideToggle();
-	        // }
 	    });
 
 
@@ -188,5 +179,28 @@
 		// return '<div class="slider">' + d + '</div>';
 		return  d;
 
+	}
+
+	function updateMsg(id){
+		$.ajax({
+			url : '/info/jsp/updateMsg.jsp',
+			data : {msgid:id},
+			method: 'GET',
+		}).done(function(data){ 
+			updateMsgIcon(data);
+
+		});
+	}
+
+	function updateMsgIcon(data){
+		console.log(data);
+		var obj = JSON.parse(data);
+		if(obj.updated){
+			if(obj.count > 0 ){
+				$("#un_msg").html(obj.count);
+			}else{
+				$("#un_msg").hide();
+			}
+		}		
 	}
 </script>

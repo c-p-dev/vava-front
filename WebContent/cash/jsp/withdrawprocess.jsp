@@ -5,29 +5,26 @@
 	java.util.ArrayList,
 	java.util.List,
 	com.google.gson.reflect.TypeToken,
-	java.util.StringTokenizer;" %>
+	java.util.StringTokenizer" 
+%>
+
+
+<%@ include file="/inc/session_checker.jsp"%>
+
 <%
-
-	if(session.getAttribute("currentSessionUser") != null){
-		UserBean bean = (UserBean) session.getAttribute("currentSessionUser");
-	 	UserDao ud = new UserDao();
-	 	UserBean bean2 = ud.getUserByUserId(bean.getUserid()); 
-	 	bean.setRegdate("20202020");
-		boolean result = false;
-		int withdraw = Integer.parseInt(request.getParameter("withdraw"));
-		String xForwardedForHeader = request.getHeader("X-Forwarded-For");	 
-	    if (xForwardedForHeader == null) {
-	    	bean.setIp(request.getRemoteAddr());
-	    }else{
-	    	bean.setIp(new StringTokenizer(xForwardedForHeader, ",").nextToken().trim());  
-	    }
-	    
-		result = ud.withdraw(bean2,withdraw);	
-		out.println(result);
-
-	}else{
-		response.sendRedirect("index.jsp");
-		return;
+	UserDao ud = new UserDao();
+ 	//UserBean bean = ud.getUserByUserId(UID); 
+	//int withdraw = Integer.parseInt(request.getParameter("withdraw"));
+	//bean.setIp(IP);
+	//boolean result = ud.withdraw(bean,withdraw);	
+	
+	String amt="";
+	
+	if(request.getParameter("withdraw") != null && request.getParameter("withdraw").trim().length() > 0){
+   amt =request.getParameter("withdraw") ;
 	}
 	
+	boolean result = ud.withdraw(SITEID,UID,amt,IP);
+	out.println(result);	
 %>
+<%=SITEID%>,<%=UID%>,<%=amt%>,<%=IP%>

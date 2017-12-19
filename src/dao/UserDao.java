@@ -30,6 +30,7 @@ import bean.UserBean;
 import controller.SpinCubeController;
 import controller.TotalEgameController;
 import dao.SmsDao;
+import bc4.*;
 
 public class UserDao {
 	
@@ -59,9 +60,10 @@ public class UserDao {
 					uib.setSiteid(rs.getInt("siteid"));
 					uib.setUserid(rs.getString("userid"));
 					uib.setNick(rs.getString("nick"));
-					uib.setCell(rs.getString("cell"));
 					uib.setCharge_level(rs.getString("charge_level"));
-					uib.setSess(rs.getString("sess"));
+					uib.setGrade(rs.getInt("grade"));					
+					uib.setMoney(rs.getInt("money"));
+					uib.setPoint(rs.getInt("point"));
 					
 				}else{
 					uib.setLoginStatus(1); // wrong password
@@ -73,6 +75,70 @@ public class UserDao {
 	        rs.close();
 	        pstmt.close();
 	        con.close();
+	  		    
+		} catch(Exception e){
+		       	e.printStackTrace();
+		
+		} finally{
+		 	  if(rs!=null) rs.close();
+		 	  if(pstmt!=null) pstmt.close();
+		 	  if(con!=null) con.close();
+		}
+  	
+	  	return uib;
+	}
+	
+	
+	//updated
+	public UserBean checkLogin(String SITEID, String UID,String password,String IP, String ssid) throws SQLException{
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;		
+		UserBean uib = new UserBean();
+		String query = "SELECT * FROM user_mst WHERE state='NORMAL' and userid = ? and siteid= ?";
+		
+		int nproc = 0;
+
+		try {
+			DBConnector.getInstance();
+			con = DBConnector.getConnection();
+			
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1,UID);
+			pstmt.setString(2,SITEID);
+			rs = pstmt.executeQuery();
+					   
+			if(rs.next()){
+				if (rs.getString("passwd").equals(password)){
+					//uib.setLoginStatus(0); //success
+					uib.setSiteid(rs.getInt("siteid"));
+					uib.setUserid(rs.getString("userid"));
+					uib.setNick(rs.getString("nick"));
+					uib.setCharge_level(rs.getString("charge_level"));
+					uib.setGrade(rs.getInt("grade"));					
+					uib.setMoney(rs.getInt("money"));
+					uib.setPoint(rs.getInt("point"));					
+					nproc = 1;
+					
+				}else{
+					uib.setLoginStatus(1); // wrong password
+				}
+			}else{
+				uib.setLoginStatus(2); // no account
+			}
+			
+	        rs.close();
+	        pstmt.close();
+	        con.close();
+	        
+//	        Debug.out("[checkLogin:nproc]:"+nproc);
+	        
+	        if(nproc>0) {	     
+	        	
+	        	if(updateUserAfterLogin(SITEID, UID,password,ssid,IP))
+	        		uib.setLoginStatus(0); //success
+	        }
 	  		    
 		} catch(Exception e){
 		       	e.printStackTrace();
@@ -219,6 +285,41 @@ public class UserDao {
 		
 	}
 	
+	public boolean getUserSSID(String SITEID,String UID,String ssid){
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String  query = "SELECT sess FROM user_mst WHERE siteid="+SITEID+"  and userid = '"+UID+"'" ;
+		boolean result = false;
+		
+		
+		try {
+			DBConnector.getInstance();
+			con = DBConnector.getConnection();
+		    
+		    pstmt = con.prepareStatement(query);
+            //pstmt.setString(1, user_id);
+            
+			rs = pstmt.executeQuery();
+            
+            if (rs.next()) {
+            	if(ssid.trim().equals(rs.getString("sess").trim()))
+            		result = true;            	
+            }
+            
+            rs.close();
+	        pstmt.close();
+	        con.close();
+		}
+		catch(Exception e) {
+			logger.debug(e);
+		}
+		
+		return result;
+	}
+	
+	
 	public UserBean getUserByUserId(String user_id)
 	{
 		Connection con 			= null;
@@ -255,7 +356,6 @@ public class UserDao {
             	user_data.setBank_owner(rs.getString("bank_owner"));
             	user_data.setBank_num(rs.getString("bank_num"));
             	user_data.setRecommend(rs.getString("recommend"));
-            	user_data.setSess(rs.getString("sess"));
             }
             
             rs.close();
@@ -283,6 +383,34 @@ public class UserDao {
 		    pstmt   			= con.prepareStatement(query);
             pstmt.setDouble(1, money);
             pstmt.setString(2, user_id);
+            
+			sts      = pstmt.executeUpdate();
+           
+	        pstmt.close();
+	        con.close();
+		}
+		catch(Exception e) {
+			logger.debug(e);
+		}
+		
+		return sts;
+	}
+	
+	public int setUserMoney(String SITEID, String UID, double money) {
+
+		Connection con 			= null;
+		PreparedStatement pstmt = null;
+		int sts					= 0;
+		String  query 			= "UPDATE user_mst SET money = ? WHERE userid = ? and siteid= ?";		
+		
+		try {
+			DBConnector.getInstance();
+			con = DBConnector.getConnection();
+		    
+		    pstmt   			= con.prepareStatement(query);
+            pstmt.setDouble(1, money);
+            pstmt.setString(2, UID);
+            pstmt.setString(3, SITEID);
             
 			sts      = pstmt.executeUpdate();
            
@@ -335,40 +463,62 @@ public class UserDao {
 		
 	}
 	
-	public boolean withdraw(UserBean trans_data,int withdraw) throws SQLException{
-
+	//public boolean withdraw(UserBean trans_data,int withdraw) throws SQLException{
+	public boolean withdraw(String SITEID,String UID,String amt,String IP) throws SQLException{
+	
 		PreparedStatement pstmt = null;
 		Connection con = null;
 		Statement stmt = null;
 		int row = 0;
 		boolean result = false;
-		Date date = new Date();
+		//Date date = new Date();
 	
-		String  query = "INSERT INTO RT01.dbo.withdraw_lst (siteid,userid,bank_name,bank_owner,bank_num,money,regdate,wddate,wdstate,ip,viewtype,money_req) "+
-				" VALUES (?,?,?,?,?,?,?,?,'PEND',?,'y',?)";
+		String  query = " DECLARE @INS_ID INT "+
+						"   INSERT INTO withdraw_lst (siteid,userid,bank_name,bank_owner,bank_num,money,regdate,wdstate,ip,viewtype,money_req) " +
+						" SELECT top 1 "+SITEID+", '"+UID+"',bank_name,bank_owner, bank_num, "+amt+",GETDATE(),'WAIT', '"+IP+"', 'Y', "+amt+" from user_mst WHERE siteid="+SITEID+" and userid = '"+UID+"'  "+ 		
+						" SET @INS_ID = @@IDENTITY " +
+						" IF @INS_ID>0 "+
+						" BEGIN " + 						
+						" INSERT INTO account_lst (userid,siteid,job,jobid,moneypoint,money,regdate,remain_money,remain_point) "+
+						" SELECT top 1 '"+UID+"', "+SITEID+",'WITHDRAW',@INS_ID ,'M', "+amt+"*-1,GETDATE(), money-"+amt+", point from user_mst WHERE siteid="+SITEID+" and userid = '"+UID+"' " +
+						" UPDATE USER_MST SET MONEY = money-"+amt+", withdraw_cnt = withdraw_cnt+1, withdraw_money= withdraw_money+"+amt+" WHERE siteid="+SITEID+" and userid = '"+UID+"' " +
+						" END " ;
+						
+		//" VALUES (?,?,'WITHDRAW',0,'M', @amt,GETDATE(),@Mbal+@amt,@Pbal), (?,?,'POINT2MONEY',0,'P', @amt*-1,GETDATE(),@Mbal+@amt,@Pbal-@amt)"; 
+		
+		//Debug.out("[withdraw] :" + query);
+		
 		try{
 		
 			DBConnector.getInstance();
 			con = DBConnector.getConnection();
 			
 		    pstmt = con.prepareStatement(query);
-		    pstmt.setInt(1,trans_data.getSiteid());
-		    pstmt.setString(2,trans_data.getUserid());
-		    pstmt.setString(3,trans_data.getBank_name());
-		    pstmt.setString(4,trans_data.getBank_owner());
-		    pstmt.setString(5,trans_data.getBank_num());
-		    pstmt.setInt(6,withdraw);
-		    pstmt.setString(7,sdf.format(date));
-		    pstmt.setString(8,sdf.format(date));
-		    pstmt.setString(9,trans_data.getIp());
-		    pstmt.setInt(10,withdraw);
+		    //pstmt.setString(1,SITEID);
+		    //pstmt.setString(2,UID);
+		    //pstmt.setString(3,SITEID);
+		    //pstmt.setString(4,UID);
+		    //pstmt.setString(3,trans_data.getBank_name());
+		    //pstmt.setString(4,trans_data.getBank_owner());
+		    //pstmt.setString(5,trans_data.getBank_num());
+		    //pstmt.setInt(6,withdraw);
+		   // pstmt.setString(7,sdf.format(date));
+		   // pstmt.setString(8,sdf.format(date));
+		    //pstmt.setString(7,trans_data.getIp());
+		    //pstmt.setInt(8,withdraw);
 		    
 			row = pstmt.executeUpdate(); 
-			logger.debug(query);
-			logger.debug(row);
+			
+//			Debug.out("[withdraw:row] :" + row);
+			
+			if(row>0)
+				result = true;
+			
+			//logger.debug(query);
+			//logger.debug(row);
 			pstmt.close();
 			con.close();
-			logger.debug(row);
+			//logger.debug(row);
 			
 	  	}catch(Exception e){
 	  		logger.debug(query);
@@ -495,7 +645,7 @@ public class UserDao {
 	        		money 	= money + withdraw_data.getResult().getTransactionAmount();
 	    			
 	        		user_data.setMoney((int)money);
-	    			this.setUserMoney(userid, money);
+	    			this.setUserMoney(userid, money);	        		
 	        	default:
 	        		break;
 	        }
@@ -508,6 +658,109 @@ public class UserDao {
 		}
 		
 		return sts;
+		
+	}
+	
+	
+	//updated
+	public boolean updateUserAfterLogin(String SITEID, String UID,String pass, String sessionId, String IP){
+		
+		Gson gson				= new Gson();
+		Connection con 			= null;
+		PreparedStatement pstmt = null;
+		int sts = 0;
+		boolean result = false;
+		
+		String  query 			= "UPDATE user_mst SET sess=?, login_cnt = login_cnt + 1, IP= ?, logindate=GETDATE(), domain='VAVA26.com' WHERE userid=? and siteid=?";	
+		String  query2 			= "INSERT INTO LOG_LST (siteid, userid, gubun, device, verb, verbid, param, ip, regdate) " + 
+								" VALUES ("+SITEID+",'"+UID+"','U','P','LOGIN',0,'"+pass+"','"+IP+"',GETDATE())";		
+		try {
+			DBConnector.getInstance();
+			con = DBConnector.getConnection();
+			
+		    pstmt   			= con.prepareStatement(query);
+            pstmt.setString(1, sessionId);
+            pstmt.setString(2, IP);
+            pstmt.setString(3, UID);
+            pstmt.setString(4, SITEID);            
+			sts = pstmt.executeUpdate();
+			
+//			 Debug.out("[updateUserAfterLogin:sts1]:"+sts);
+			 
+			if(sts>0){
+				pstmt= con.prepareStatement(query2);
+				sts += pstmt.executeUpdate();				   
+			}
+			
+//			 Debug.out("[updateUserAfterLogin:sts2]:"+sts);
+			 
+	        pstmt.close();
+	        con.close();
+	        
+	        /*--------------------------------------------------------------------
+	        |	Withdraw all money from MG
+	        |-------------------------------------------------------------------*/
+	        ArrayList<MgBettingProfileBean> bet_profls	= new ArrayList<MgBettingProfileBean>();
+			MgPlayerAccountBean mg_user		= new MgPlayerAccountBean();
+			MgBettingProfileBean bet_profl	= new MgBettingProfileBean();
+			UserBean user_data				= this.getUserByUserId(UID);
+			SpinCubeController sc_ctrl		= new SpinCubeController(Integer.toString(user_data.getSiteid()).concat("_").concat(UID));
+			
+			double money					= user_data.getMoney();
+			
+	        TotalEgameController teg_ctrl 	= new TotalEgameController();
+	        MgWithdrawAllBean withdraw_data = new MgWithdrawAllBean();
+	        String mg_username				= Integer.toString(user_data.getSiteid()).concat("_").concat(UID);
+	        
+	        String withdraw_resp			= teg_ctrl.withdrawAll(mg_username);
+	        withdraw_data					= gson.fromJson(withdraw_resp, MgWithdrawAllBean.class);
+	        
+	        switch (withdraw_data.getStatus().getErrorCode()) {
+		        /*	MG Account does not Exist	*/
+		        case 46:
+		        	/*	Create account for MG	*/
+					bet_profl.setCategory("LGBetProfile");
+					bet_profl.setProfileId(1202);
+					
+					bet_profls.add(bet_profl);
+					
+					mg_user.setPreferredAccountNumber(mg_username);
+					mg_user.setFirstName(user_data.getUserid().trim().concat("FNAME"));
+					mg_user.setLastName(user_data.getUserid().trim().concat("LNAME"));
+					mg_user.setEmail("");
+					mg_user.setMobilePrefix(user_data.getCell().substring(1, 3));
+					mg_user.setMobileNumber(user_data.getCell().substring(3));
+					mg_user.setDepositAmount(0);
+					mg_user.setPinCode("newplayer1");
+					mg_user.setIsProgressive(0);
+					mg_user.setBettingProfiles(bet_profls);
+					teg_ctrl.addPlayerAccount(mg_user);
+	        		break;
+	        		
+	        	case 0:
+	        		money 	= money + withdraw_data.getResult().getTransactionAmount();
+	    			
+	        		user_data.setMoney((int)money);
+	    			//this.setUserMoney(userid, money);
+	        		sts += this.setUserMoney(SITEID, UID, money);
+	        		
+//	        		Debug.out("[updateUserAfterLogin:sts3]:"+sts);
+	        		 
+	        	default:
+	        		break;
+	        }
+	        
+	        sc_ctrl.transferMoneyToVava(UID); // need check..
+	        
+	        if(sts > 2)
+				result = true;
+	        
+		} catch(Exception e) {
+			System.out.println(e);
+			logger.debug(e);
+		}
+		
+		return result;
 		
 	}
 
@@ -671,25 +924,45 @@ public class UserDao {
 		
 	}
 	
-	public boolean switchpoints(UserBean trans_data,int money,int point,int points) throws SQLException{
-
+	//public boolean switchpoints(UserBean trans_data,int money,int point,int points) throws SQLException{
+	public UserBean switchpoints(String SITEID,String UID,String points) throws SQLException{
+		
 		PreparedStatement pstmt = null;
 		Connection con = null;
 		Statement stmt = null;
 		int row = 0;
-		boolean result = false;
-		Date date = new Date();
+		//boolean result = false;
+		//Date date = new Date();
+		UserBean ub = new UserBean();
+		ResultSet rs = null;
+		
 	
-		String  query = "INSERT INTO RT01.dbo.account_lst (userid,siteid,job,jobid,title,moneypoint,money,regdate,remain_money,remain_point,adminid) "+
-				" VALUES (?,?,'POINT2MONEY','','','P',?,?,?,?,'')," + 
-				"(?,?,'POINT2MONEY','','','M',?,?,?,?,'')";
+		String  query = " Declare @INS_ID int "+
+						" Declare @Mbal int "+
+						" Declare @Pbal int " + 
+						" Declare @amt int "+
+						" set @amt="+ Integer.parseInt(points) +		
+						" select @Mbal = money,@Pbal = point from user_mst WHERE siteid="+SITEID+" and userid = '"+UID+"'" +	
+						" INSERT INTO account_lst (userid,siteid,job,jobid,moneypoint,money,regdate,remain_money,remain_point) "+
+						" VALUES (?,?,'POINT2MONEY',0,'P', @amt*-1,GETDATE(),@Mbal+@amt,@Pbal-@amt),(?,?,'POINT2MONEY',0,'M', @amt,GETDATE(),@Mbal+@amt,@Pbal)"+
+						" SET @INS_ID = @@IDENTITY " +
+						" IF @INS_ID>0 "+
+						" UPDATE user_mst SET money = money+@amt, point = point-@amt WHERE siteid="+SITEID+" and userid = '"+UID+"'";
+		
+		String query2 = " select money,point from user_mst WHERE siteid="+SITEID+" and userid = '"+UID+"'";
+		
 		try{
 		
 			DBConnector.getInstance();
 			con = DBConnector.getConnection();
+			
 		    pstmt = con.prepareStatement(query);
-		    pstmt.setString(1,trans_data.getUserid());
-		    pstmt.setInt(2,trans_data.getSiteid());
+		    
+		    pstmt.setString(1,UID);
+		    pstmt.setString(2,SITEID);
+		    pstmt.setString(3,UID);
+		    pstmt.setString(4,SITEID);
+		    /*
 		    pstmt.setInt(3,(points*-1));
 		    pstmt.setString(4,sdf.format(date));
 		    pstmt.setInt(5,(money+points));
@@ -700,23 +973,44 @@ public class UserDao {
 		    pstmt.setString(10,sdf.format(date));
 		    pstmt.setInt(11,(money+points));
 		    pstmt.setInt(12,(point-points));
+		    */		    
 			row = pstmt.executeUpdate(); 
-			logger.debug(query);
-			logger.debug(row);
+			
+			//Debug.out("[switchpoints:row] :" + row);
+			
+			
+			if(row>0) {
+				pstmt = con.prepareStatement(query2);				
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()){	
+					//Debug.out("rs.getInt(money):" + rs.getInt("money"));
+					//Debug.out("rs.getInt(point) :" + rs.getInt("point"));					
+					ub.setMoney(rs.getInt("money"));
+					ub.setPoint(rs.getInt("point")); 
+					ub.setValid(true);
+				}
+			}			
+			
+			//logger.debug(query);
+			//logger.debug(row);
+			rs.close();
 			pstmt.close();
 			con.close();
-			logger.debug(row);
-			System.out.println("pasok sa app");
+			
+			//logger.debug(row);
+			//System.out.println("pasok sa app");
 	  	}catch(Exception e){
 	  		logger.debug(query);
 	  		e.printStackTrace();
 	  
 	  	}finally{
+	  		if(rs!=null) rs.close();
 	  		if(stmt!=null) stmt.close();
 	  		if(con!=null) con.close();
 	  	}
 		
-		return result;
+		return ub;
 			
 	}
 	
@@ -988,32 +1282,6 @@ public class UserDao {
 		return result;
 	}
 	
-	public boolean checkUserSess(String userid,String sessionId){
-		boolean result = false;
-		Connection con 			= null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String  query 			= "SELECT * FROM user_mst WHERE userid = ? AND sess = ?";		
-		
-		try {
-			DBConnector.getInstance();
-			con = DBConnector.getConnection();			 	
-			pstmt = con.prepareStatement(query);
-			pstmt.setString(1,userid);
-			pstmt.setString(2,sessionId);
-			rs = pstmt.executeQuery();
-			if(rs.next()){
-				result = true;
-			}
-		}
-		catch(Exception e) {
-			System.out.println(e);
-			logger.debug(e);
-		}
-		
-		return result;
-	}
-	
 	public boolean checkIPBlockList(String ip){
 		
 		boolean result = false;
@@ -1052,5 +1320,4 @@ public class UserDao {
 		
 		return result;
 	}
-	
 }

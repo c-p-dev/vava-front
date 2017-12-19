@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="/inc/session.jsp"%>
+
+
 <%@ include file="/inc/session_checker.jsp"%>
 
 <!DOCTYPE html>
@@ -70,6 +71,7 @@
 <link href="/css/common2.css" rel="stylesheet" type="text/css">
 <link href="/css/manual.css" rel="stylesheet" type="text/css"><!--slide-->
 <link href="/css/custom.css" rel="stylesheet" type="text/css"><!--공통-->
+
 <link rel="stylesheet" href="/css/datatables.net-bs/css/bootstrap-simple.css" /> 
 <link rel="stylesheet" href="/css/datatables.net-bs/css/dataTables.bootstrap.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css" rel="stylesheet" type="text/css"><!-- toaster test  -->
@@ -79,8 +81,11 @@
 <!-- custom scrollbar test -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css" />
 </head>
+
+
 <body onLoad="clive_load()"> 
-	
+
+
 <%@ include file="/inc/header.jsp"%>
 <style>
 	.cash_tab .btn3c {
@@ -134,7 +139,7 @@
 					<jsp:include page="/cash/point_tab.jsp" /> 
 				</div>
 				<div id="tab6" class="tab_content">
-					<jsp:include page="/cash/moneyuse_tab.jsp" /> 
+					<jsp:include page="/cash/moneyuse_tab.jsp" />
 				</div>
 			</div>
 

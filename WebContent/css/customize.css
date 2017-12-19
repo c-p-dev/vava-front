@@ -134,8 +134,8 @@
 .live_tab_text_2 {float:left; margin-left: 2%; color:#ffffff}
 
 .live_5_1 {color:#0792c4;text-align:center;background:#222627;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;-webkit-transition: all .2s ease-in-out;-moz-transition: all .2s ease-in-out;-o-transition: all .2s ease-in-out;-ms-transition: all .2s ease-in-out;transition: all .2s ease-in-out;}
-.live_5_1:hover {background:#2e3334;}
-.live_5_1.sel {background: #0792c4;}
+.live_5_1:hover {color:#000000;background:#2e3334;}
+.live_5_1.sel {color:#ffa800;background: #0792c4;}
 .live_5_2 {color:#0792c4;text-align:center;background:#222627;border-right:solid 1px #1c2021;border-bottom:solid 1px #1c2021;-webkit-transition: all .2s ease-in-out;-moz-transition: all .2s ease-in-out;-o-transition: all .2s ease-in-out;-ms-transition: all .2s ease-in-out;transition: all .2s ease-in-out;}
 
 
@@ -260,6 +260,11 @@
 .select button.effect_tab_select_t_1{ position:relative;z-index:2; cursor:pointer; padding:13px 10px 10px 10px; border:none; background:none; outline:none; color:#c1c3c4; width:90px;clear:both }
 .select button.effect_tab_select_t_1 span{ float:left;}
 .select button.effect_tab_select_t_1 img{ float:right;}
+
+
+.select button.effect_tab_select_t_2{ position:relative;z-index:2; cursor:pointer; padding:13px 10px 10px 10px; border:none; background:none; outline:none; color:#c1c3c4; width:170px;clear:both }
+.select button.effect_tab_select_t_2 span{ float:left;}
+.select button.effect_tab_select_t_2 img{ float:right;}
 
 
 .select ul.effect_tab_select_1{ display:none; background:#293133; position:absolute; top:41px; left:0; width:150px; z-index:10;}

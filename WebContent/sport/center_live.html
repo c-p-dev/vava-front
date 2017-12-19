@@ -85,8 +85,8 @@
 									<v-pane expanded="true" ng-repeat="sp in lm | orderBy:['SId','RId','CId','MId']">          							
     								<v-pane-header ng-show="false"></v-pane-header>							
 											<v-pane-content expanded="true">															
-												
-													<div ng-switch="(LS|filter:{MId:sp.MId})[0].Sus"> <!-- match suspended -->
+												<div style="display:none">{{len=(LMKc|filter:{M:sp.MId,S:false,V:true}).length}}</div>	
+													<div ng-switch="(LS|filter:{MId:sp.MId})[0].Sus||(LS|filter:{MId:sp.MId})[0].B||len<1"> <!-- match suspended -->
 										
 														<div ng-switch-when="true">
 															
@@ -133,7 +133,7 @@
 											
 														<div ng-switch-default>		
 																															
-															<div ng-switch="sp.Sus || !sp.Vis"> <!-- market suspended -->			
+															<div ng-switch="sp.Sus || !sp.Vis"> 	
 																														
 																<div ng-switch-when="true">	
 																	
@@ -172,7 +172,7 @@
 																			<td width="11%" class="live_6_2"><i class='fa fa-fw fa-lock'></i></td>																				
 																			<td width="11%" class="live_7_2"><i class='fa fa-fw fa-lock'></i></td>						
 																																	
-																			<td width="7%" class="live_8_1" onmouseover="CBg(this)" onmouseout="RBg(this)" ng-click="goMatchMarket('center_market.html',sp.SId,sp.MId)">+ {{ (LMKc|filter:{M:sp.MId,S:false,V:true}).length }}</td>
+																			<td width="7%" class="live_8_1" onmouseover="CBg(this)" onmouseout="RBg(this)" ng-click="goMatchMarket('center_market.html',sp.SId,sp.MId)">+ {{ len }}</td>
 																		</tr>
 																	</table>
 																																	
@@ -216,10 +216,10 @@
 																			<td class="live_4_1_3" onmouseover="CBg(this)" onmouseout="RBg(this)" ng-click="goMatchMarket('center_market.html',sp.SId,sp.MId)">{{sp.AT.substring(0,13)}}</td>	
 																																						
 																			<!-- <td width="9%" class="live_5_1" 	>  -->
-																			<td width="11%" class="live_5_1" ng-class="{'sel' : (bet|where:{Sd:sp.W1SD}).length>0}" ng-click="addBet(sp.W1SD,sp.MkId,'승무패',sp.HT,sp.HT,sp.AT,sp.W1P,sp.BW1P,sp.MId)">
-																				<div ng-show="parseFloat(sp.BW1P)<parseFloat(sp.W1P)"><i class="fa fa-fw fa-chevron-up" style="color:green"></i><span class="font_002">{{sp.W1P}}</span><i class="sel_old">({{sp.BW1P}})</i> </div>
-																				<div ng-show="parseFloat(sp.BW1P)>parseFloat(sp.W1P)"><i class="fa fa-fw fa-chevron-down" style="color:red"></i><span class="font_002">{{sp.W1P}}</span><i class="sel_old">({{sp.BW1P}})</i> </div>
-																				<div ng-show="parseFloat(sp.BW1P)==parseFloat(sp.W1P)"><span class="font_002">{{sp.W1P}}</span></div>					
+																			<td width="11%" class="live_5_1" ng-class="{'sel':(bet|where:{Sd:sp.W1SD}).length>0}" ng-click="addBet(sp.W1SD,sp.MkId,'승무패',sp.HT,sp.HT,sp.AT,sp.W1P,sp.BW1P,sp.MId)">
+																				<div style="color:#ffa800" ng-show="parseFloat(sp.BW1P)<parseFloat(sp.W1P)"><i class="fa fa-fw fa-chevron-up" style="color:green"></i>{{sp.W1P}}<i class="sel_old">({{sp.BW1P}})</i> </div>
+																				<div style="color:#ffa800"  ng-show="parseFloat(sp.BW1P)>parseFloat(sp.W1P)"><i class="fa fa-fw fa-chevron-down" style="color:red"></i>{{sp.W1P}}<i class="sel_old">({{sp.BW1P}})</i> </div>
+																				<div style="color:#ffa800"  ng-show="parseFloat(sp.BW1P)==parseFloat(sp.W1P)">{{sp.W1P}}</div>					
 																			</td>
 																			
 																			<td width="11%" ng-if="sp.XP=='0'" class="live_6_2">
@@ -238,7 +238,7 @@
 																				<div ng-show="parseFloat(sp.BW2P)==parseFloat(sp.W2P)"> <span class="font_002">{{sp.W2P}}</span></div>																					     	
 																			</td>
 																			
-																			<td width="7%" class="live_8_1" onmouseover="CBg(this)" onmouseout="RBg(this)" ng-click="goMatchMarket('center_market.html',sp.SId,sp.MId)">+ {{ (LMKc|filter:{M:sp.MId,S:false,V:true}).length }}</td>
+																			<td width="7%" class="live_8_1" onmouseover="CBg(this)" onmouseout="RBg(this)" ng-click="goMatchMarket('center_market.html',sp.SId,sp.MId)">+ {{ len }}</td>
 																		</tr>
 																	</table>
 															

@@ -5,36 +5,21 @@
 <%@ page import="java.text.DecimalFormat" %>
 <%@ page import = "com.google.gson.Gson" %>
 
-<%
 
-	boolean checkSession = false;	
-	boolean validUser = false;
-	boolean inValidIp = false;		
+<%@ include file="/inc/session.jsp" %>	
+
+<%	
+	boolean SSID = false;
+		
 	Gson gson = new Gson();
 	HashMap<String, Object> hsm = new HashMap<String, Object>();
 
-	
-	if(session.getAttribute("currentSessionUser") != null){
-		checkSession = true;
-
-		UserDao user_db 	=  new UserDao();
-		UserBean sess_data 	=  (UserBean) session.getAttribute("currentSessionUser");		
-		UserBean bean 		=  user_db.getUserByUserId(sess_data.getUserid());
-		
-		if(bean.getSess().equals(session.getId())){
-			validUser = true;
-		}else{
-			//destroy session
-			HttpSession user_session = request.getSession(true);	    
-			session.invalidate(); 
-		}
+	if(UID != null){
+			UserDao user_db 	=  new UserDao();
+			SSID = user_db.getUserSSID(SITEID,UID,session.getId());
 	}
 
-	hsm.put("result",checkSession);
-	hsm.put("validUser",validUser);
+	hsm.put("validUser",SSID);
 	out.println(gson.toJson(hsm).toString());
-	
-	
-	
 %>
 

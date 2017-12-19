@@ -1,16 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="/inc/session.jsp"%>
-<%@ include file="/inc/session_checker.jsp" %>
+
 <%@ page import = "dao.GameDao"%>
 <%@ page import = "java.text.DecimalFormat"%>
 <%@ page import = "java.util.*"%>
 <%@ page import = "dao.UserDao"%>
 <%@ page import = "bean.UserBean"%>
 
+
 <%
-	UserBean user_data	= (UserBean)session.getAttribute("currentSessionUser");
+	//UserBean user_data	= (UserBean)session.getAttribute("currentSessionUser");
 	UserDao user_db	= new UserDao();
-	UserBean currentUser = user_db.getUserByUserId(user_data.getUserid());
+	UserBean currentUser = user_db.getUserByUserId((String)session.getAttribute("UID"));
 %>
 
 <ul class="smk_accordion">
@@ -23,7 +23,7 @@
 						<table cellspacing="0" cellpadding="0" class="my_table" width="50%">
 							<tr>
 								<td class="my_info">
-									<span class="my_left">아이디</span><span class="my_right"><%=user_data.getUserid()%></span>
+									<span class="my_left">아이디</span><span class="my_right"><%=currentUser.getUserid()%></span>
 								</td>
 								<td class="my_center"></td>
 								<td class="my_info">
@@ -66,7 +66,7 @@
 			<div class="acc_content_in_2" id="acc_content_in_2_pass">
 				<div class="blue_wrap">
 					<form id="updatePasswordForm" name="updatePasswordForm">
-						<table cellspacing="0" cellpadding="0" class="my_table" width="25%" style="margin-bottom: 15px;">
+						<table cellspacing="0" cellpadding="0" class="my_table" width="25%" style="margin-bottom: 10px;">
 							<tr>
 								<td class="my_pass">
 									<input class="input_style03" id="current_password" name="current_password" placeholder="현재 비밀번호" >
@@ -92,7 +92,7 @@
 								<td class="my_text input_warning" id="confirm_new_passowrd-update-warn" >비밀번호가 일치하지 않습니다</td>
 							</tr>
 						</table>
-						<div class="cash_in" style="width:25%; text-align: center; margin-top: ">
+						<div class="cash_in">
 							<!-- <a href="#"><span class="btn3c">전환신청</span></a>	 -->
 							<input type="submit" id="updatePssBtn" value ="전환신청" class="btn3c">
 						</div>

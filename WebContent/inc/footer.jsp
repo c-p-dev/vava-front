@@ -58,28 +58,32 @@
 <script>
 
 var lgCheck;
+var loggedIn = <%=checkSession%>; 
 
-$(document).ready(function(){
-	cValU();
-	refreshMoney();
+$(document).ready(function(){	
+	if(loggedIn){
+		cValU();
+		//refreshMoney();
+	}		
 });
-
 
 function cValU(){
 	clearInterval(lgCheck);
 	lgCheck = setInterval(function(){
+		
 		console.log("check validity user");
-
 		$.ajax({
 			url : '/login/jsp/get_session.jsp',
 			data : {},
 			method: 'GET',
 			cache: false,
 		}).done(function(data){
-			var obj = JSON.parse(data);
 			
+			var obj = JSON.parse(data);
+			console.log(obj);
 			var valid = obj.validUser;
-			var loggedIn = obj.result; 
+			//var loggedIn = obj.result; 
+					
 			if(!valid && loggedIn){
 					
 				$('#fade_9').popup('hide');				
@@ -89,8 +93,6 @@ function cValU(){
 		});
 
 	}, 60000); //1 min
-
-	
 }
 </script>
 <!--

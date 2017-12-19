@@ -181,9 +181,13 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
 						
 					} else if (obj.Type == "Market") 
 						sub_loadGetMatchMarket(obj);			
-					break;									
+				  break;									
+				
 				case "GetMatchMarkets": loadGetMatchMarket(obj);
-					break;								
+					break;			
+					
+				case "GetBlock": sub_loadBlockMatch(obj);
+					break;							
 		 	} 		 	
 		} catch (exception) {			
 		}		
@@ -234,6 +238,7 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
 	  $scope.liveTop = [];		
 		$scope.PM = [];		
 		$scope.PMk = [];
+		$scope.toPMk = [];
 		//$scope.PMkC = []; 
 		$scope.CID = [];
 		$scope.LS = [];
@@ -242,6 +247,8 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
 		$scope.liveTop = [];					
 		$scope.validMKTypeId =[];	
 		$scope.lm =[];
+		$scope.favM = [];		
+		$scope.MK = [];
 		$scope.mTyId = "ALL";
 		$scope.MKCAT = [];
 		//$scope.MKCAT_l ="0";
@@ -249,6 +256,7 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
 		//$scope.savedFavM = [];
 		$scope.Fav_mode = false;
 		$scope.LMKc = [];
+		
 		
 		$scope.savedFavM = JSON.parse(localStorage.getItem('SFM'));
 		
@@ -300,7 +308,179 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
 	  //console.log($scope.UID);
 	  
 	  $scope.ubal = UBAL;
-	  
+	  $scope.BL = "N";	 
+
+	
+	function sub_loadBlockMatch(response) {		
+		//console.log("response.Type");
+		//console.log("response.Type : " + response.Type);
+		
+		$scope.BLR = response;
+				
+				if(response.Type =="N"){	
+									
+					if($scope.BL !="N"){
+					
+						for(var i=$scope.LS.length-1;i>=0;i--){  
+								$scope.LS[i].B = false;
+						}
+					
+						for(var i=$scope.LMK.length-1;i>=0;i--){  						
+								$scope.LMK[i].B = false;
+						}
+					}
+					
+					$scope.BL ="N";
+				
+				} else if(response.Type =="L"){
+					
+					for(var i=$scope.LS.length-1;i>=0;i--){  
+							$scope.LS[i].B = true;
+					}
+					
+					for(var i=$scope.LMK.length-1;i>=0;i--){  						
+							$scope.LMK[i].B = true;
+					}
+					
+					$scope.BL ="L";
+				
+				} else if(response.Type =="P"){
+					for(var i=$scope.LS.length-1;i>=0;i--){  
+							$scope.LS[i].B = true;
+					}
+					
+					for(var i=$scope.LMK.length-1;i>=0;i--){  						
+							$scope.LMK[i].B = true;
+					}
+					
+					for(var i=$scope.PMk.length-1;i>=0;i--){  
+							$scope.PMk[i].B = true;
+					}
+					
+					for(var i=$scope.toPMk.length-1;i>=0;i--){  
+							$scope.toPMk[i].B = true;
+					}
+					
+					for(var i=$scope.favM.length-1;i>=0;i--){  	
+								$scope.favM[i].B = true;
+					}
+					
+						$scope.BL ="P";
+				}
+				
+			angular.forEach(response.Objects, function(obj,idx) {	
+					
+					console.log("mode = "+ mode);
+					console.log(obj);					
+					console.log("obj.MId:"+obj.MId);
+					console.log("obj.AS:"+obj.AS);
+					
+					if(obj.AS=="F"){
+						
+						for(var i=$scope.favM.length-1;i>=0;i--){  
+								
+								if ($scope.favM[i].MId==obj.MId){	
+									$scope.favM[i].B = true;
+								}
+						}
+						
+						for(var i=$scope.bet.length-1;i>=0;i--){  
+								
+								if ($scope.bet[i].MId==obj.MId){	
+									$scope.bet[i].B = true;
+								}
+						}
+							
+						if(mode == "LiveMatch" || mode == "LiveMarket"){ 						
+							
+							for(var i=$scope.LS.length-1;i>=0;i--){  
+								
+								if ($scope.LS[i].MId==obj.MId){	
+									$scope.LS[i].B = true;
+								}
+							}
+							
+							for(var i=$scope.LMK.length-1;i>=0;i--){  
+								
+								if ($scope.LMK[i].MId==obj.MId){	
+									$scope.LMK[i].B = true;
+								}
+							}
+						
+						} else if(mode == "PreMatch" ){	
+							
+							console.log("pm_mode = "+ $scope.pm_mode);
+							
+							if ($scope.pm_mode=="m"){
+								
+								for(var i=$scope.PMk.length-1;i>=0;i--){  
+									
+									if ($scope.PMk[i].MId==obj.MId){	
+										$scope.PMk[i].B = true;
+									}
+								}
+							
+							} else if ($scope.pm_mode=="t"){ 
+								for(var i=$scope.toPMk.length-1;i>=0;i--){  
+									
+									if ($scope.toPMk[i].MId==obj.MId){	
+										$scope.toPMk[i].B = true;
+									}
+								}
+							}
+						}
+						
+					}	if(obj.AS=="M"){	
+						
+						for(var i=$scope.favM.length-1;i>=0;i--){  
+								
+								if ($scope.favM[i].MId==obj.MId){	
+									$scope.favM[i].B = false;
+								}
+						}
+							
+						if(mode == "LiveMatch" || mode == "LiveMarket"){ 						
+							
+							for(var i=$scope.LS.length-1;i>=0;i--){  
+								
+								if ($scope.LS[i].MId==obj.MId){	
+									$scope.LS[i].B = false;
+								}
+							}
+							
+							for(var i=$scope.LMK.length-1;i>=0;i--){  
+								
+								if ($scope.LMK[i].MId==obj.MId){	
+									$scope.LMK[i].B = false;
+								}
+							}
+						
+						} else if(mode == "PreMatch" ){	
+							
+							console.log("pm_mode = "+ $scope.pm_mode);
+							
+							if ($scope.pm_mode == "m"){
+								
+								for(var i=$scope.PMk.length-1;i>=0;i--){  
+									
+									if ($scope.PMk[i].MId==obj.MId){	
+										$scope.PMk[i].B = false;
+									}
+								}
+							
+							} else if ($scope.pm_mode == "t"){ 
+								for(var i=$scope.toPMk.length-1;i>=0;i--){  
+									
+									if ($scope.toPMk[i].MId==obj.MId){	
+										$scope.toPMk[i].B = false;
+									}
+								}
+							}
+						}
+					}
+			});			
+	};
+			 
 
 	$scope.getCart = function(){
       var cart = [];
@@ -385,8 +565,9 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
       $window.sessionStorage.removeItem(id);
     }
    
-  if($scope.ISLG)    
+ if($scope.ISLG&&$scope.UID!="-1"){
 		$scope.getCart(); 
+	}
 	  
  	$scope.loadLiveMatchInit = function() {		
  		
@@ -475,6 +656,7 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
 			    	Cur:(mStat[0].Cur == undefined) ? "" : mStat[0].Cur, //mStat[0].CurrentMinute,
 			    	Rem:(mStat[0].Rem == undefined) ? "" : mStat[0].Rem, //mStat[0].RemainingTime,
 			    	Inf:mStat.Inf,		    	
+			    	B:false,
 					});
 			  			  		
 					$scope.LMK.push({
@@ -505,6 +687,7 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
 			    	W1P:w1Price,
 			    	XP:xPrice,
 			    	W2P:w2Price,
+			    	B:false,
 					});				
 				};
 			  });
@@ -512,7 +695,13 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
 		 	}); 
 
 			data=null;
-				
+			
+			
+			setInterval(function() { sub_loadBlockMatch($scope.BLR); },3000); 
+			//console.log	("($scope.BLR) ;" + $scope.BLR);
+								
+		 	//sub_loadBlockMatch($scope.BLR) ;
+			
 			}).error(function(data, status, headers, config) {
 					console.log(status);
 					data=null;
@@ -537,6 +726,9 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
 					});	  		
 				};
 			});
+			
+			
+			
 			data=null;
 			}).error(function(data, status, headers, config) {
 				console.log(status);
@@ -566,7 +758,11 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
 	 $scope.goLiveMatch = function (left,center) {	  
 	 	//console.log("goLiveMatch : " + center);	
 	  	$scope.loadLiveMatchInit();
-	  	preMatchCnt();  	
+	  	$scope.loadPreMatchInit();  
+	  	//preMatchCnt();  	
+	  	//console.log("$scope.PM.length:"+$scope.PM.length);
+	  	
+	  	$scope.loadPreMatchInit();
 	  	islive = true;
 			$scope.PMk = [];	
 			$scope.tabMId = "0";
@@ -600,6 +796,9 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
 	    $scope.centerTab = "center_pre.html";
 	    $scope.leftTab = left;    
 	    $scope.toggleMId = "0";  
+	    
+	    
+	    
 	    mode = "PreMatch";  
 	    
 	  }
@@ -617,6 +816,13 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
  
  	
 	  $scope.goPreMatchMarket = function (tab,ht,at,sid,mid,idx) {	
+	  	
+		//	$scope.inner_load();
+			
+		//document.getElementById("spin_inner").style.display  = "block";
+	  //document.getElementById("pre_inner").style.display = "none";
+	  
+	  
 	  	$scope.mTyId ="ALL";
 	  	$scope.Fav_mode = false;
 	    $scope.centerTab = tab;
@@ -636,6 +842,10 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
 	    $scope.MK = [];    
 	    $scope.tabMkId = "0";  
 	    mode = "PreMatch";
+	    
+	  //document.getElementById("spin_inner").style.display  = "none";
+	  //document.getElementById("pre_inner").style.display = "block";
+	  
 	  };
     
 	 	$scope.setMTyId = function(mTyId) {	  	 		
@@ -701,9 +911,11 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
 					};
 					
 					if($scope.bet[i].MId == mid){
-						$scope.betA = true;
-						$scope.betClick = false;
-						return;
+						$scope.bet = $filter('omit')($scope.bet,'MId ==' + mid);  // delete ID	
+						
+						//$scope.betA = true;
+						//$scope.betClick = false;
+						//return;
 					};
 
 			};		
@@ -720,7 +932,8 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
 	   		BP:$filter('number')(bp, 2),
 	   		Amt:1000,
 	   		SuM:false,
-	   		SuK:false
+	   		SuK:false,
+	   		B:false,
 			});		
 			
 			if($scope.ISLG&&$scope.UID!="-1"){
@@ -989,7 +1202,8 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
 	});
 	
 	
-	if($scope.ISLG){	 
+	//if($scope.ISLG&&$scope.UID!="-1"){	 
+		
 		$http({
 				method: 'GET', 
 				url: s[8].u, //'jsp/getFavMatch.jsp', 
@@ -1008,6 +1222,7 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
 						HT:obj.HT,
 						AT:obj.AT,				
 						Dt:obj.Dt,
+						B:false,
 					});				
 				});	
 			};
@@ -1015,7 +1230,8 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
 			
 		}).error(function(data, status, headers, config) {
 		});
-	}
+	
+	//}
 	
 	
   function liveMatchCnt() {	  	
@@ -1103,6 +1319,12 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
  };
  
 	$scope.getMarketbyMatchId = function(mid) {	
+		
+		if(document.getElementById("spin_inner")){
+			document.getElementById("spin_inner").style.display  = "block";
+	  	document.getElementById("pre_inner").style.display = "none";
+		}
+		
 	   $http({
 				method: 'GET', 
 				url: s[11].u, 
@@ -1145,10 +1367,9 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
 			};
 			data = null;
 			
-			//console.log("$scope.MK");
-			//console.log($scope.MK);
-			
-			//$scope.mTyId ="ALL";
+			if(document.getElementById("spin_inner")){
+	  		setTimeout(showPage_inner, 2000);
+			}				
 			
 		}).error(function(data, status, headers, config) {
 		});
@@ -1444,7 +1665,8 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
 			data = null;
 		});
  }
- 
+ 	//var ret = 0;
+ 	
   function subLoadLiveMatch(mid) {
 	   $http({
 				method: 'GET', 
@@ -1452,7 +1674,18 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
 				params: { 'mid' : mid },
 				headers: {'Content-Type': 'application/json; charset=utf-8'} 
 		}).success(function(data, status, headers, config) {
-				
+			
+				//if(data[0].Re.length<1){
+				if(data[0].Re[0] == 'undefined' || data[0].Re.length<1){
+					//ret=ret+1;					
+					//var myVar = setTimeout(subLoadLiveMatch(mid), 5000);
+					
+					setInterval(function() { subLoadLiveMatch(mid); },1000*20); 
+					
+					console.log("data[0].Re.length<1");
+					console.log("return [MId]:" + mid);
+					return;
+				}
 				console.log(data);
 				console.log(data[0].Mt);
 				//console.log(data[0].Mt.Id);
@@ -1570,7 +1803,8 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
 			    	Sus:data[0].Mt[0].Sus,
 			    	Cur:"",
 			    	Rem:"",
-			    	Inf:"",			    	
+			    	Inf:"",	
+			    	B:false,		    	
 					});
 			
 			if(mode != "PreMatch"){
@@ -1606,6 +1840,7 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
 			    	W1P:w1Price,
 			    	XP:xPrice,
 			    	W2P:w2Price,
+			    	B:false,
 					});
 				}
 							
@@ -1714,6 +1949,7 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
 			      	W1P:w1Price,
 			      	XP:xPrice,
 			      	W2P:w2Price,
+			      	B:false,
 			  		});			  		
 
 			  	}else{
@@ -1742,12 +1978,17 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
 			      	W1P:"0",
 			      	XP:"0",
 			      	W2P:"0",
+			      	B:false,
 				  		});	
 			  		}
 		  				  	
 		    };
 		     
 	  	};
+	  	//console.log("sub_loadBlockMatch");
+	  	//console.log($scope.BLR);
+	  	sub_loadBlockMatch($scope.BLR) ;
+	  	
 			data = null;				
 		
 	  		
@@ -1784,7 +2025,7 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
 			$scope.PMk = [];
 			$scope.tabCId = "-2";
 			
-			console.log(data);
+			//console.log(data);
 			
 
 		//	if(data[0].Mk !== null &&  data[0].Mk !== undefined && data[0].Mk.length > 0){					
@@ -1853,6 +2094,7 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
 			      	W1P:w1Price,
 			      	XP:xPrice,
 			      	W2P:w2Price,
+			      	B:false,
 			  		});			  		
 
 			  	}else{
@@ -1881,6 +2123,7 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
 			      	W1P:"0",
 			      	XP:"0",
 			      	W2P:"0",
+			      	B:false,
 				  		});	
 			  		}
 		  				  	
@@ -1996,6 +2239,7 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
 			      	W1P:w1Price,
 			      	XP:xPrice,
 			      	W2P:w2Price,
+			      	B:false,
 			  		});			  		
 
 			  	}else{
@@ -2024,6 +2268,7 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
 			      	W1P:"0",
 			      	XP:"0",
 			      	W2P:"0",
+			      	B:false,
 				  		});	
 			  		}
 		  				  	
@@ -2037,7 +2282,7 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
    	//	console.log(ss);
    		
    	document.getElementById("selsport1").innerHTML = ss.SN;
-	  document.getElementById("selcomp1").innerHTML = ss.CN;			
+	  document.getElementById("selcomp1").innerHTML = ss.CN.substring(0,20);;			
 		document.getElementById("spin_clive2").style.display  = "none";
 	  document.getElementById("clive2").style.display = "block";
 	  
@@ -2192,6 +2437,7 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
 				      	W1P:w1Price,
 				      	XP:xPrice,
 				      	W2P:w2Price,
+				      	B:lm.B,
 			  			});
 				  	};				  						 
 					};						
@@ -2272,6 +2518,7 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
 					      	W1P:w1Price,
 					      	XP:xPrice,
 					      	W2P:w2Price,
+					      	B:pm.B,
 				  			});
 					  	};				  						 
 						};						
@@ -2350,6 +2597,7 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
 					      	W1P:w1Price,
 					      	XP:xPrice,
 					      	W2P:w2Price,
+					      	B:topm.B,
 				  			});
 					  	};				  						 
 						};						
@@ -2466,7 +2714,8 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
 				      	Sus:obj.IsSuspended,		
 				      	Cur:(obj.CurrentMinute == undefined) ? "" : obj.CurrentMinute,
 	    					Rem:(obj.RemainingTime == undefined) ? "" : obj.RemainingTime, //RemainingTime : obj.RemainingTime,
-				      	Inf:obj.Info,	      	
+				      	Inf:obj.Info,	      
+				      	B:LS_obj.B,	
 				  		});
 			  				  			
 			  			angular.forEach($scope.LMK, function(LMK_obj,i3) {
@@ -2526,7 +2775,8 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
 				      	Sus:obj.IsSuspended,		
 				      	Cur:(obj.CurrentMinute == undefined) ? "" : obj.CurrentMinute, //obj.CurrentMinute,
 	    					Rem:(obj.RemainingTime == undefined) ? "" : obj.RemainingTime, //obj.RemainingTime,
-				      	Inf:obj.Info,	      	
+				      	Inf:obj.Info,	     
+				      	B:LS_obj.B,	 	
 				  		});
 			  		};
 			  						   				
@@ -2839,7 +3089,8 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
 					      	Sus:obj.IsSuspended,	
 					      	Cur:(obj.CurrentMinute == undefined) ? "" : obj.CurrentMinute, //obj.CurrentMinute, obj.CurrentMinute,
 			    				Rem:(obj.RemainingTime == undefined) ? "" : obj.RemainingTime, //obj.RemainingTime, obj.,	
-					      	Inf:obj.Info,	      	
+					      	Inf:obj.Info,	      
+					      	B:LS_obj.B,		
 					  		});
 					  		
 					  		angular.forEach($scope.LMK, function(LMK_obj,i3) {
@@ -3003,10 +3254,12 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
 	    obj.value = comma(uncomma(obj.value));
 	};
 
+/*
 	$scope.$on('my-accordion:onExpandAnimationEnd', function () {
 		// console.log("onExpandAnimationEnd");
 	  $scope.tabMId = "0";
 	});
+*/
 	
 	$scope.openSel = function() {
 	  var cname = document.getElementById("selsport").className;	  
@@ -3054,7 +3307,7 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
 	  	document.getElementById("selcomp1").innerHTML ="리그 전체 ";
 	  	$scope.pm_mode = "t";
 	  } else { 
-	  	document.getElementById("selcomp1").innerHTML ="리그를 선택해 주세요";
+	  	document.getElementById("selcomp1").innerHTML ="리그 선택";
 	  }
 	
 	};
@@ -3063,7 +3316,7 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
 		$scope.innerTab = [];
 		$scope.toggleMId = "";
 		$scope.tabMId = "0"; 
-	  document.getElementById("selcomp1").innerHTML = cname;
+	  document.getElementById("selcomp1").innerHTML = cname.substring(0,20);	
 	  $scope.pm_mode = "p";	
 	  $scope.tabDate = "0";
 	  
@@ -3196,6 +3449,7 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
 						HT:obj.HT,
 						AT:obj.AT,				
 						Dt:obj.Dt,
+						B:false,
 					});
 				});	
 			};
@@ -3368,7 +3622,7 @@ $scope.betProcM = function() {
 		 if($scope.bet[i].P != $scope.bet[i].BP)
 		 	chbet = 1;
 		 	
-		 if($scope.bet[i].SuM||$scope.bet[i].SuK)
+		 if($scope.bet[i].SuM||$scope.bet[i].SuK||$scope.bet[i].B)
 		 	betSus = true;
 	};		
 	
@@ -3420,7 +3674,7 @@ $scope.betProcM = function() {
 			$scope.bet = [];
 			
 			if($scope.ISLG&&$scope.UID!="-1"){
-							$scope.addCart($scope.UID);
+				$scope.addCart($scope.UID);
 			}
 			
 	  	$scope.betC = true; 
@@ -3466,7 +3720,7 @@ $scope.betProcS = function() {
 		 if($scope.bet[i].P != $scope.bet[i].BP)
 		 	chbet = 1;
 		 	
-		 	if($scope.bet[i].SuM || $scope.bet[i].SuK)
+		 	if($scope.bet[i].SuM||$scope.bet[i].SuK||$scope.bet[i].B)
 		 		betSus = true;
 	};	
 	

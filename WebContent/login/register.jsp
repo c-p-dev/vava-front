@@ -223,7 +223,7 @@
 			IBET25에서 다양한 베팅의 세계를 마음껏 경험하세요!<br>
 		</div>
 		<div class="btn_wrap">
-			<a href="/cash/cash.jsp"><span class="btn3c">충전하기</span></a> 
+			<a href="app/sub04.jsp"><span class="btn3c">충전하기</span></a> 
 			<a href="/"><span class="btn3">확인</span></a>
 		</div>
 	</div>
@@ -338,8 +338,23 @@
 	    	else return false;
 	    });
 
+	    $.validator.addMethod("verify_nickname", function(value, element) {
+	    	var x = $.ajax({
+		        url:'/login/jsp/verify_nickname.jsp',
+		        async: false,
+		        type: 'post',
+		        data: {
+		          	nickname: function() {
+		            	return $( "#nick" ).val();
+		          	}
+		        },
+	    	}).responseText;
+	    	if(x.trim() =="true") return false;
+	    	else return true;
+	    });
+
 		$.validator.addMethod( "nowhitespace", function( value, element ) {
-			return this.optional( element ) || /^\S+$/i.test( value );
+			return value.indexOf(" ") < 0 && value != ""; 
 		}, "No white space please" );
 
 		$.validator.addMethod( "noHangul", function( value, element ) {
@@ -467,6 +482,7 @@
 				nick :{
 					required:true,
 					nowhitespace:true,
+					verify_nickname: true,
 					
 				},
 			},
@@ -518,6 +534,7 @@
 				},
 				nick :{
 					required:"별명을 입력해 주세요.",
+					verify_nickname:"이미 사용중인 별명입니다.",
 				},
 			
 			},
@@ -593,7 +610,7 @@
 			var keyCode = e.keyCode || e.which;
 				if (keyCode === 13) { 
 				e.preventDefault();
-				// alert("no entering");
+				//alert("no entering");
 				return false;
 			}
 		});

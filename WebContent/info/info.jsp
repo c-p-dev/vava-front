@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="/inc/session.jsp"%>
-<%@ include file="/inc/session_checker.jsp" %>
+
+<%@ include file="/inc/session_checker.jsp" %>		
+
 <!DOCTYPE html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>iBET25(TEST WEB)</title>
-
-
 <meta name="viewport" content="width=1400,minimum-scale=0,maximum-scale=5,target-densitydpi=device-dpi">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="pragma" content="no-cache" />
@@ -88,10 +87,35 @@
 <link href="/css/v-accordion.css" rel="stylesheet" type="text/css">
 
 
+<script>	
+	$(document).ready(function(){
+		// setTabActive($.urlParam("tab"));
+
+		var tab = '<%=session.getAttribute("tb")%>';
+		if(tab != ""){
+			$("ul.tabs li a[href='#"+tab+"']").click();
+		}
+	});
+	
+	function clive_load() {
+		console.log("clive_load");
+	    var myVar = setTimeout(showPage_clive, 1000);
+	};
+	
+	
+	function showPage_clive() {
+	  document.getElementById("spin_clive").style.display  = "none";
+	  document.getElementById("clive").style.display = "block";
+	}
+	
+</script>
+
 </head>
 
 <body onLoad="clive_load()"> 
-	
+
+
+
 <%@ include file="/inc/header.jsp"%>
 
 
@@ -138,6 +162,7 @@
 			<div id="tab3" class="tab_content">
 				<jsp:include page="contact.jsp" />
 			</div>
+			
 			<div id="tab4" class="tab_content">
 				<jsp:include page="qna.jsp" />
 			</div>
@@ -149,31 +174,7 @@
 
 </div>
 
-<script>
-	
-	$(document).ready(function(){
-		// setTabActive($.urlParam("tab"));
 
-		var tab = '<%=session.getAttribute("tb")%>';
-		if(tab != ""){
-			$("ul.tabs li a[href='#"+tab+"']").click();
-		}
-	});
-	
-	function clive_load() {
-		console.log("clive_load");
-	    var myVar = setTimeout(showPage_clive, 1000);
-	};
-	
-	function showPage_clive() {
-	  document.getElementById("spin_clive").style.display  = "none";
-	  document.getElementById("clive").style.display = "block";
-	  $("#tab4").trigger("fadeInComplete");
-	  $("#tab3").trigger("fadeInComplete");
-
-	}
-	
-</script>
 
 <%@ include file="/inc/footer.jsp"%>
 
