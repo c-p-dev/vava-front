@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ page import="bean.*" %>
 <%@ page import="dao.*" %>
@@ -16,7 +16,7 @@
 
 	if(UID != null){
 			UserDao user_db 	=  new UserDao();
-			SSID = user_db.getUserSSID(SITEID,UID,session.getId());
+			SSID = user_db.getUserSSID(SITEID,UID,sess.getId());
 	}
 
 	hsm.put("validUser",SSID);

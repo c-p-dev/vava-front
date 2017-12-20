@@ -20,7 +20,7 @@ public class DBConnector {
 
 	static {
 
-		try {
+	 try {
 
 			context = new InitialContext();
 			dataSource = (DataSource) context.lookup("java:comp/env/jdbc/ibet");

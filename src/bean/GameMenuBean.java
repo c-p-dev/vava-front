@@ -18,6 +18,7 @@ public class GameMenuBean {
 	public List<Object> getGames() {
 		return games;
 	}
+	
 
 	public void setGames(List<Object> games) {
 		this.games = games;

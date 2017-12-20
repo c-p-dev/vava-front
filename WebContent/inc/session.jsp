@@ -34,14 +34,14 @@
 	IP = request.getRemoteAddr();
 	
 	// ip block
-	UserDao user_db2 	=  new UserDao();
-	boolean invalidIp = user_db2.checkIPBlockList(IP);
+	// UserDao user_db2 	=  new UserDao();
+	// boolean invalidIp = user_db2.checkIPBlockList(IP);
 	
-	if(invalidIp){
-		System.out.println("Redirecting to Error...");
-		response.sendRedirect("/error.jsp"); 
-		return;
-	}	
+	// if(invalidIp){
+	// 	System.out.println("Redirecting to Error...");
+	// 	response.sendRedirect("/error.jsp"); 
+	// 	return;
+	// }	
 	
 	
 	DecimalFormat dfrmt	= new DecimalFormat("#,###,###,###,###");	

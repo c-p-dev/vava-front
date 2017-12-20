@@ -44,8 +44,8 @@ public class SpinWheelController {
 		int last_val	= ticket_num - 1;
 		
 		Integer[] ticket_vals	= new Integer[ticket_num];
-		Arrays.fill(ticket_vals, 0);
 		
+		Arrays.fill(ticket_vals, 0);		
 		Integer spinr_vals[]	= {
 			10000,
 			20000,

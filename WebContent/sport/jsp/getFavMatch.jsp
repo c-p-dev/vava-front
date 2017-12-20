@@ -1,5 +1,9 @@
-﻿<%@page contentType="text/html;charset=UTF-8"%>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@ include file="/inc/session.jsp"%>
+
 <jsp:useBean id="bm" class="bc4.BetConManager2" />
+
 <%
 String uid="";
 if(request.getParameter("uid") != null && request.getParameter("uid").trim().length() > 0){
@@ -9,4 +13,4 @@ if(request.getParameter("uid") != null && request.getParameter("uid").trim().len
 String sid="1"; //site_id
 
 %>
-<%=bm.getFavMatch(sid,uid).toString()%>
+<%=bm.getFavMatch(SITEID,UID).toString()%>

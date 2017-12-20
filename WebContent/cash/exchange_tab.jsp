@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="bean.UserBean, dao.UserDao, java.text.DecimalFormat"%>
 
-
-<%@ include file="/inc/session_checker.jsp"%>
-
+<%@ include file="/inc/session.jsp"%>
 
 <ul class="smk_accordion">
 		<li>

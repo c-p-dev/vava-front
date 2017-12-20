@@ -54,6 +54,7 @@ public class UserDao {
 			pstmt.setString(1,userid);
 			rs = pstmt.executeQuery();
 					   
+			
 			if(rs.next()){
 				if (rs.getString("passwd").equals(password)){
 					uib.setLoginStatus(0); //success
@@ -87,7 +88,6 @@ public class UserDao {
   	
 	  	return uib;
 	}
-	
 	
 	//updated
 	public UserBean checkLogin(String SITEID, String UID,String password,String IP, String ssid) throws SQLException{
@@ -132,7 +132,7 @@ public class UserDao {
 	        pstmt.close();
 	        con.close();
 	        
-//	        Debug.out("[checkLogin:nproc]:"+nproc);
+	        Debug.out("[checkLogin:nproc]:"+nproc);
 	        
 	        if(nproc>0) {	     
 	        	
@@ -486,7 +486,8 @@ public class UserDao {
 						
 		//" VALUES (?,?,'WITHDRAW',0,'M', @amt,GETDATE(),@Mbal+@amt,@Pbal), (?,?,'POINT2MONEY',0,'P', @amt*-1,GETDATE(),@Mbal+@amt,@Pbal-@amt)"; 
 		
-		//Debug.out("[withdraw] :" + query);
+		Debug.out("[withdraw] :" + query);
+		
 		
 		try{
 		
@@ -509,7 +510,7 @@ public class UserDao {
 		    
 			row = pstmt.executeUpdate(); 
 			
-//			Debug.out("[withdraw:row] :" + row);
+			Debug.out("[withdraw:row] :" + row);
 			
 			if(row>0)
 				result = true;
@@ -685,14 +686,14 @@ public class UserDao {
             pstmt.setString(4, SITEID);            
 			sts = pstmt.executeUpdate();
 			
-//			 Debug.out("[updateUserAfterLogin:sts1]:"+sts);
+			 Debug.out("[updateUserAfterLogin:sts1]:"+sts);
 			 
 			if(sts>0){
 				pstmt= con.prepareStatement(query2);
 				sts += pstmt.executeUpdate();				   
 			}
 			
-//			 Debug.out("[updateUserAfterLogin:sts2]:"+sts);
+			 Debug.out("[updateUserAfterLogin:sts2]:"+sts);
 			 
 	        pstmt.close();
 	        con.close();
@@ -744,7 +745,7 @@ public class UserDao {
 	    			//this.setUserMoney(userid, money);
 	        		sts += this.setUserMoney(SITEID, UID, money);
 	        		
-//	        		Debug.out("[updateUserAfterLogin:sts3]:"+sts);
+	        		Debug.out("[updateUserAfterLogin:sts3]:"+sts);
 	        		 
 	        	default:
 	        		break;
@@ -1281,43 +1282,5 @@ public class UserDao {
 		
 		return result;
 	}
-	
-	public boolean checkIPBlockList(String ip){
-		
-		boolean result = false;
-		Connection con 			= null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String  query 			= "SELECT ipid FROM ip_lst where "
-				+ " CONVERT(BIGINT,PARSENAME(?,4)) * POWER(256,3) "
-				+ " + CONVERT(BIGINT,PARSENAME(?,3)) * POWER(256,2) "
-				+ " + CONVERT(BIGINT,PARSENAME(?,2)) * 256 "
-				+ " + CONVERT(BIGINT,PARSENAME(? ,1)) between num_ip AND num_ip2  "
-				+ " AND gubun = 'U'AND viewtype = 'Y'";		
-		
-		try {
-			if(!ip.equals("0:0:0:0:0:0:0:1")){
-				DBConnector.getInstance();
-				con = DBConnector.getConnection();			 	
-				pstmt = con.prepareStatement(query);
-				pstmt.setString(1,ip);
-				pstmt.setString(2,ip);
-				pstmt.setString(3,ip);
-				pstmt.setString(4,ip);
-				rs = pstmt.executeQuery();
-				if(rs.next()){
-					result = true;
-				}
-			}else{
-				System.out.println("Ip is : " + ip);
-			}
-			
-		}
-		catch(Exception e) {
-			System.out.println(e);
-			logger.debug(e);
-		}
-		
-		return result;
-	}
+
 }

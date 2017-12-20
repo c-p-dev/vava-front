@@ -43,6 +43,7 @@ public class SmsDao {
 	
 	public boolean sendSms(String userid, String cell_prefix, String cell,String ip, int site_id,boolean rSend){
 		
+		
 	   boolean result = false;
 	   try {
 		   	String authcode = "";
@@ -56,6 +57,7 @@ public class SmsDao {
 	    		authcode = generateRandomNumber();
 	    	}
 	
+	    	
 	    	hsm = sendTextInfoBIP(userid, mobile_no, authcode);
 	    	int responseGroupId = (int) hsm.get("group_id");
 	    	

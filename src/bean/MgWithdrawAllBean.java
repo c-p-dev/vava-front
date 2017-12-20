@@ -21,6 +21,7 @@ public class MgWithdrawAllBean {
 		Result = result;
 	}
 	
+	
 	public class MgWithdrawAllData {
 		private long ConfirmationNumber;
 		private boolean IsSucceed;

@@ -22,13 +22,14 @@ import java.util.Date;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-//import bc4.Debug;
+import bc4.Debug;
 import bean.AccountListBean;
 import betconstruct.AuthenticationOutput;
 
 
 public class AccountDao {
 	private static final DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	
 	
 	public List<HashMap> getPointHistory(String userid, String job, String fromDate, String toDate){
 		List<HashMap> data = new ArrayList<HashMap>();
@@ -44,7 +45,8 @@ public class AccountDao {
 		if(!job.equals("ALL")){
 			dataQuery  = dataQuery + "AND job = ?";
 		}
-					
+				
+		
 		DateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
 		try{
@@ -97,7 +99,7 @@ public class AccountDao {
 		ResultSet rs = null;
 		String add = "";
 		
-		//Debug.out("getPointHistory2[job]:" + job);
+		Debug.out("getPointHistory2[job]:" + job);
 		
 		if(!job.equals("ALL")){
 			//pstmt.setObject(4,job);
@@ -114,7 +116,7 @@ public class AccountDao {
 		//	dataQuery  = dataQuery + "AND job = ?";
 		//}
 					
-		//Debug.out("getPointHistory2:" + dataQuery);
+		Debug.out("getPointHistory2:" + dataQuery);
 		
 		DateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 

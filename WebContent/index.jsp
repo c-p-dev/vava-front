@@ -35,8 +35,6 @@ Type type2 = new TypeToken<List<DepositListBean>>() {}.getType();
      
 %>
 
-<%@ include file="/inc/session.jsp"%>
-			
 <!DOCTYPE html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">

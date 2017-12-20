@@ -28,10 +28,12 @@ public class BetConDao {
 	{
 		UserBean user_data		= new UserBean();
 		
+		
 		Connection con 			= null;
 		PreparedStatement pstmt = null;
 		ResultSet rs 			= null;
 		String  query 			= "SELECT TOP 1 * FROM betcon_user_lst JOIN user_mst ON betcon_user_lst.username = user_mst.userid WHERE player_id = ?" ;
+		
 		
 		try {
 			DBConnector.getInstance();

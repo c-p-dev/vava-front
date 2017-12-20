@@ -29,7 +29,6 @@ public class NoticeEventDao {
 		ResultSet rs 			= null;
 //		String  query 			= "SELECT * FROM bbs_lst WHERE begindate IS NOT NULL AND enddate IS  NOT NULL AND gubun ='NOTICE' OR gubun='EVENT' AND viewtype='Y' AND (enddate >= CAST (GETDATE() AS DATE) AND begindate <= CAST (GETDATE() AS DATE))";
 		String  query 			= "SELECT * FROM bbs_lst WHERE  gubun ='NOTICE' OR gubun='EVENT' AND viewtype='Y' ORDER BY vieworder asc";
-	
 		
 		List<NoticeEventBean>	ne_list = new ArrayList<>();
 		
@@ -44,6 +43,7 @@ public class NoticeEventDao {
             	NoticeEventBean ne_bean = new NoticeEventBean();
             	
             	ne_bean.setBbsid(rs.getInt("bbsid"));
+            	
             	
             	ne_bean.setSiteid(rs.getInt("siteid"));
             	ne_bean.setAdminid(rs.getString("adminid"));

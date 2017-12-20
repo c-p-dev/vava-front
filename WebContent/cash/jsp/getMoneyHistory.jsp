@@ -5,7 +5,10 @@
 <%@ page import="com.google.gson.Gson" %>
 <%@ page import="com.google.gson.reflect.TypeToken" %>
 <%@ page import="java.util.StringTokenizer" %>
-<%@ include file="/inc/session_checker.jsp"%>
+
+
+<%@ include file="/inc/session.jsp"%>
+
 <%
 	Gson gson = new Gson();
  	AccountDao aDao = new AccountDao();

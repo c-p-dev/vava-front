@@ -17,6 +17,7 @@ public class MgDepositBean {
 		return Result;
 	}
 	
+	
 	public void setResult(MgDepositData result) {
 		Result = result;
 	}

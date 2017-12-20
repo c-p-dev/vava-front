@@ -21,6 +21,7 @@ public class JoinCodeBean {
 	public int getSiteid() {
 		return siteid;
 	}
+	
 	public void setSiteid(int siteid) {
 		this.siteid = siteid;
 	}

@@ -1,10 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@ include file="/inc/session.jsp"%>
-<%@ include file="/inc/session_checker2.jsp"%>
-
-
-
 
 <!DOCTYPE html>
 <head>
@@ -554,10 +549,8 @@
 						toastr.success('인증번호를 다시 확인해 주세요.');
 					}else{
 						toastr.clear();
-
 						$("#findIdUserid").html(obj.userid);
 						$("#modalShowUserId").popup("show");
-						f1cntdwnStop();
 					}
 				});
 			}
@@ -930,7 +923,6 @@
 					var obj = JSON.parse(data);
 					if(obj.result){
 						$("#pwmodal").popup("show");
-						f2cntdwnStop();
 					}else{
 						toastr.success('Incorrect Authenication Code');
 					}
@@ -1279,14 +1271,6 @@
 		},ti);
 	}
 
-	function f1cntdwnStop(){
-		$("#f1cdt").text(" ").hide();
-    	clearInterval(f1cntr);
-    	$("#fSndBtn").html("인증");
-    	f1rSnd = false;
-    	$("#fSndBtn").prop("disabled",false);	
-	}
-
 	
 
 
@@ -1297,7 +1281,7 @@
 		var ti = 1000;
 
 		$("#fSndBtn2").prop("disabled",true);
-		$("#fcdt").text("인증 남은 시간 : " + moment(td.asMilliseconds()).format('mm:ss ')).show();
+		$("#fcdt").text("Time Left to Verify : " + moment(td.asMilliseconds()).format('mm:ss ')).show();
 
 		f2cntr = setInterval(function(){
 			td = moment.duration(td.asMilliseconds() - ti, 'milliseconds');
@@ -1314,15 +1298,6 @@
 		    	// $("#fade_1").popup("hide");
     		}
 		},ti);
-	}
-
-
-	function f2cntdwnStop(){
-		$("#fcdt").text(" ").hide();
-    	clearInterval(f2cntr);
-    	$("#fSndBtn2").html("인증");
-    	f2rSnd = false;
-    	$("#fSndBtn2").prop("disabled",false);
 	}
 
 

@@ -23,11 +23,10 @@ public class UserBean {
 	private int loginStatus; //0  success //1 wrong passwrod // 2 no account 
 	private String cert;
 	private String cell_prefix;
-	private String sess;
-	
   
 	public String getCell_prefix() {
 		return cell_prefix;
+		
 	}
 	public void setCell_prefix(String cell_prefix) {
 		this.cell_prefix = cell_prefix;
@@ -157,12 +156,6 @@ public class UserBean {
 	}
 	public void setCert(String cert) {
 		this.cert = cert;
-	}
-	public String getSess() {
-		return sess;
-	}
-	public void setSess(String sess) {
-		this.sess = sess;
 	}
 
 	

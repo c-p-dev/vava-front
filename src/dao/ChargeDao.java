@@ -23,7 +23,7 @@ import java.util.Date;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-//import bc4.Debug;
+import bc4.Debug;
 import bean.ChargeBean;
 import bean.UserBean;
 
@@ -59,7 +59,7 @@ public class ChargeDao {
 						//" SELECT top 1 '"+UID+"', "+SITEID+",'WITHDRAW',@INS_ID ,'M', "+amt+"*-1,GETDATE(), money-"+amt+", point from user_mst WHERE siteid="+SITEID+" and userid = '"+UID+"' " +
 						" UPDATE USER_MST SET charge_cnt = charge_cnt+1, charge_money= charge_money+"+m+" WHERE siteid="+SITEID+" and userid = '"+UID+"'";
 		
-		//Debug.out("[saveChargeApplication] :" + query);
+		Debug.out("[saveChargeApplication] :" + query);
 		
 		try{
 		
@@ -87,7 +87,7 @@ public class ChargeDao {
 			con.close();
 			//logger.debug(row);
 			
-			//Debug.out("[saveChargeApplication:row] :" + row);
+			Debug.out("[saveChargeApplication:row] :" + row);
 			
 			if(row > 0) {
 				result = true;

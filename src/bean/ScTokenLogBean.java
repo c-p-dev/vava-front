@@ -10,6 +10,7 @@ public class ScTokenLogBean {
 		return scTokenId;
 	}
 	
+	
 	public void setScTokenId(long scTokenId) {
 		this.scTokenId = scTokenId;
 	}

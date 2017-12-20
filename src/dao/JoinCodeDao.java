@@ -35,9 +35,11 @@ public class JoinCodeDao {
 
 		String query = "SELECT * FROM RT01.dbo.joincode_lst WHERE  joincode = ? and recommend = ? AND state = 'WAIT'";
 		
+		
 		try{	      
 			
 			DBConnector.getInstance();
+			
 			con 				= DBConnector.getConnection();
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1,joincode);

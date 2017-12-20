@@ -55,6 +55,7 @@ public class AuthenticationOutput {
 		return operatorId;
 	}
 	
+	
 	public void setOperatorId(int operatorId) {
 		this.operatorId = operatorId;
 	}

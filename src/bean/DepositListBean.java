@@ -14,10 +14,12 @@ public class DepositListBean {
     	this.CD = CD;
   	}	  	  	
   	
+  	
   	public void setUid(String UD){
     	this.UD = UD;
   	}	  	
   
+  	
   	public void setChdt(String CT){
     	this.CT = CT;
   	}	 
@@ -25,8 +27,7 @@ public class DepositListBean {
   	public void setMoney(String MN){
     	this.MN = MN;
   	}	
-  	
-	 
+
   	public String getChid(){
     	return this.CD;
   	}	  	  	

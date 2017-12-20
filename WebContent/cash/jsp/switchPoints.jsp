@@ -8,8 +8,8 @@
 	com.google.gson.Gson,
 	java.util.StringTokenizer" 
 %>
-<%@ include file="/inc/session_checker.jsp"%>
 
+<%@ include file="/inc/session.jsp"%>
 
 <%
 	//boolean result = false;

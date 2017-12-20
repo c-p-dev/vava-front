@@ -8,7 +8,9 @@
 <%@ page import = "com.google.gson.reflect.TypeToken" %>
 <%@ page import = "java.util.StringTokenizer" %>
 <%@ page import = "com.google.gson.Gson" %>
-<%@ include file="/inc/session_checker.jsp"%>
+
+
+<%@ include file="/inc/session.jsp"%>
 
 <%
 		Gson gson = new Gson();

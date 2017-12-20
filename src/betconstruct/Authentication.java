@@ -29,6 +29,7 @@ public class Authentication {
 		this.operatorId = operatorId;
 	}
 	
+	
 	public String getToken() {
 		return token;
 	}

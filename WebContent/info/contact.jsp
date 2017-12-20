@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="/inc/session_checker.jsp"%>
+
 <style>
 	input.btn5{
 	    border-width: 0px!important;
    	 	border-radius: 5px!important;
    	 	cursor: pointer;
 	}
+
 	
 	.inquiry_wrap_1 {
 		width:100%; 
@@ -25,6 +26,7 @@
 	}
 	
 </style>
+
 <ul class="smk_accordion">
 	<li>
 		<div class="acc_head"><h3>1:1문의</h3></div>
@@ -43,6 +45,8 @@
 									<input class="inquiry_input" name="txt" id="txt">
 								</td>
 								<td>
+
+
 									<input type="submit" id="sndMsgtBtn" value="전송" class="btn5" >
 								</td>
 							</tr>
@@ -76,6 +80,7 @@
 
 <script>
 	$(document).ready(function(){
+
 		
 
 		$(".inquiry_wrap_1").mCustomScrollbar({
@@ -83,6 +88,7 @@
 		});
 
 		loadMessage();
+
 
 		$('#messageModal').popup({
 	      	transition: 'all 0.3s',
@@ -173,11 +179,12 @@
 
 	function loadMessage(){
 		$.ajax({
-			url : '/info/jsp/getMessages.jsp',
+			url : '/info/jsp/getQnaMsg.jsp',
 			data : {},
 			method: 'GET',
 		}).done(function(data){ 
-			// console.log(data);
+
+
 			drawMessages(data);
 			
 		});
@@ -189,17 +196,22 @@
 		
 		var data = data.trim();
 		var obj = JSON.parse(data);
+
 		$("#con-com").html("");
 		$.each( obj, function(index, el) {
+
+
 			// console.log(obj);
 			var html  = '<div class="inquiry"> <div class="inquiry_user"> <span class="user_tag"><img src="../images/user_tag.jpg"></span> <div class="inquiry_text">' + el.txt+ '</div> <div class="user_date">'+el.regdate+'</div></div></div>'; 
 				disbleCht(false);
 			if(el.class_name == "inquiry_admin"){
+
 				html = '<div class="inquiry"> <div class="inquiry_admin"> <span class="admin_tag"><img src="../images/admin_tag.jpg"></span> <div class="inquiry_text"> '+el.txt+' </div> <div class="admin_date">'+el.regdate+'</div> </div> </div>'; 
 
 				disbleCht(true);
 
 			}
+
 			$("#con-com").append(html);
 
 			$(".inquiry_wrap_1").mCustomScrollbar("update");
@@ -218,9 +230,13 @@
 			data : data,
 			method: 'POST',
 		}).done(function(data){
-			if(data){
+			// console.log(data);
+			var obj = JSON.parse(data);
+			if(obj.result){
 				$('#messageModal').popup("show");
 				disbleCht(true);
+			}else{
+				toastr.success("Something went wrong");
 			}
 		});
 	}

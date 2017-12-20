@@ -36,6 +36,7 @@ public class Rollback {
 		return playerId;
 	}
 	
+	
 	public void setPlayerId(int playerId) {
 		this.playerId = playerId;
 	}

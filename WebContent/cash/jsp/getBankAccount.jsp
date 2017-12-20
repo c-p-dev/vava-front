@@ -3,7 +3,8 @@
 <%@ page import ="dao.ChargeDao" %>
 <%@ page import ="bean.UserBean" %>
 <%@ page import ="dao.UserDao,java.sql.SQLException" %>
-<%@ include file="/inc/session_checker.jsp"%>
+
+<%@ include file="/inc/session.jsp"%>
 
 <%
 	

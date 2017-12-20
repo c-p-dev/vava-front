@@ -18,9 +18,11 @@ public class ChargeBean {
 	private String viewtype;
 	private int money_req;
 	
+	
 	public int getChid() {
 		return chid;
 	}
+	
 	public void setChid(int chid) {
 		this.chid = chid;
 	}

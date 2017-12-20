@@ -37,6 +37,7 @@ public class GetBalanceOutput {
 		return has_error;
 	}
 	
+	
 	public void setHas_error(boolean has_error) {
 		this.has_error = has_error;
 	}

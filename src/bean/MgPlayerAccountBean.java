@@ -20,6 +20,7 @@ public class MgPlayerAccountBean {
 		return CustomerId;
 	}
 	
+	
 	public void setCustomerId(int customerId) {
 		CustomerId = customerId;
 	}

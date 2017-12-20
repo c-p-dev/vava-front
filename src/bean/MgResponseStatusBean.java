@@ -15,6 +15,7 @@ public class MgResponseStatusBean {
 		ErrorCode = errorCode;
 	}
 	
+	
 	public String getErrorName() {
 		return ErrorName;
 	}

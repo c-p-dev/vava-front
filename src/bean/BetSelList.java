@@ -23,7 +23,6 @@ public class BetSelList {
 	private String ht;
 	private String at;
 	
-	
 	public void setBgid(String bgid) {
 		this.bgid = bgid;
 	}

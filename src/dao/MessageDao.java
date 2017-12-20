@@ -25,19 +25,20 @@ import com.google.gson.reflect.TypeToken;
 
 import bean.MessageBean;
 import bean.UserBean;
-import bean.QnaBean;
 
 public class MessageDao {
 	private static final DateFormat	sdf		= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	public static Logger			logger	= Logger.getLogger(MessageDao.class);
-	
-	public List<HashMap> getUserQnaList(MessageBean mBean){
+
+	public List<HashMap> getUserMsgList(MessageBean mBean){
 		List<HashMap> data = new ArrayList<HashMap>();
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String query = "SELECT '관리자' as send_userid1, * FROM msg_lst WHERE recv_userid = ? AND gubun = 'MSG' AND viewtype='Y' AND send_siteid = ?  ORDER BY send_date ASC";
 		
+
+
 		DateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		try {
 
@@ -56,14 +57,12 @@ public class MessageDao {
 				hsm.put("msgid", rs.getInt("msgid"));
 				hsm.put("recv_siteid", rs.getInt("recv_siteid"));
 				hsm.put("recv_userid", rs.getString("recv_userid"));
-				hsm.put("recv_date", (rs.getString("recv_date") != null
-				        ? dateFormater.format(dateFormater.parse(rs.getString("recv_date"))) : ""));
-				hsm.put("send_userid", rs.getString("send_userid1"));
+				hsm.put("recv_date", (rs.getString("recv_date") != null ? dateFormater.format(dateFormater.parse(rs.getString("recv_date"))) : ""));
+				hsm.put("send_userid1", rs.getString("send_userid1"));
 				hsm.put("gubun", rs.getString("gubun"));
 				hsm.put("viewtype", rs.getString("viewtype"));
-				hsm.put("send_date", (rs.getString("send_date") != null
-				        ? dateFormater.format(dateFormater.parse(rs.getString("send_date"))) : ""));
-				hsm.put("title", (rs.getString("title") != null ? rs.getString("title") : "    "));
+				hsm.put("send_date", (rs.getString("send_date") != null ? dateFormater.format(dateFormater.parse(rs.getString("send_date"))) : ""));
+				hsm.put("title", (rs.getString("title") != null ? rs.getString("title") : ""));
 				hsm.put("txt", (rs.getString("txt")));
 				hsm.put("class_name", (mBean.getRecv_userid().equals(rs.getString("send_userid")) ? "inquiry_admin" : "inquiry_user"));
 				data.add(hsm);
@@ -84,5 +83,39 @@ public class MessageDao {
 		
 	}
 	
-	
+	public boolean updateRecvMessage(MessageBean mBean){
+		boolean result = false;
+		Connection con 			= null;
+		PreparedStatement pstmt = null;
+		int sts = 0;
+		String  query  = "UPDATE msg_lst SET recv_date = ? WHERE msgid = ? AND recv_userid = ?";		
+		Date date = new Date();
+		try {
+			Context initContext = new InitialContext();
+			DBConnector.getInstance();
+			con = DBConnector.getConnection();
+		    pstmt   			= con.prepareStatement(query);
+            pstmt.setString(1, sdf.format(date));
+            pstmt.setInt(2, mBean.getMsgid());
+            pstmt.setString(3, mBean.getRecv_userid());
+			sts = pstmt.executeUpdate();
+			
+	        pstmt.close();
+	        con.close();
+	        
+	        if (sts > 0) {
+				result = true;
+			}
+		}
+		catch(Exception e) {
+			System.out.println(e);
+			logger.debug(e);
+		}
+		
+		if(sts > 0 ) result = true;
+		
+		return result;
+		
+	}
+
 }

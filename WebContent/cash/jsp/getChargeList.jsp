@@ -4,7 +4,7 @@
 <%@ page import = "java.util.List "%>
 <%@ page import = "com.google.gson.Gson" %>
 
-<%@ include file="/inc/session_checker.jsp"%>
+<%@ include file="/inc/session.jsp"%>
 
 
 <%	

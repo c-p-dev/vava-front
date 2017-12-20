@@ -23,3 +23,4 @@ public class BcGameInfBean {
 	String gameSkinId;
 	List<BcGameCatBean> cats;
 }
+

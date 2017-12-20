@@ -27,9 +27,11 @@ public class NoticeEventBean {
 	private String device;
 	private String img;
 	
+	
 	public int getBbsid() {
 		return bbsid;
 	}
+	
 	public void setBbsid(int bbsid) {
 		this.bbsid = bbsid;
 	}

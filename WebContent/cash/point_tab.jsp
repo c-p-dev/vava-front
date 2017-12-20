@@ -7,7 +7,7 @@
 <%@page import="dao.AccountDao"%>
 <%@page import="bean.AccountListBean"%>
 
-<%@ include file="/inc/session_checker.jsp"%>
+<%@ include file="/inc/session.jsp"%>
 
 <%
 AccountDao aDao = new AccountDao();
@@ -21,7 +21,7 @@ List<AccountListBean> res = aDao.getPointKind(SITEID);
 --%>
 <ul class="smk_accordion">
 	<li>
-		<div><h3>포인트사용내역</h3></div>
+		<div><h3>포인트사용내역<%=SITEID%> </h3></div>
 		<div class="acc_content">
 			<div class="acc_content_in_2">
 				<div class="float_inline">

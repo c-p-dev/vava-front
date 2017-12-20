@@ -15,8 +15,7 @@ public class AccountListBean {
 	private int remain_money;
 	private int remain_point;
 	private String adminid;
-	private String fromDate;
-	
+	private String fromDate;	
 //	for datatable 
 	
 	private int dt_Draw;

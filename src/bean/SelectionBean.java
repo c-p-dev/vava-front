@@ -13,6 +13,7 @@ public class SelectionBean {
 	public void setMkid(String MKD){
 	this.MKD = MKD;
 	}	  	
+	
 
 	public void setSelName(String SN){
 	this.SN = SN;

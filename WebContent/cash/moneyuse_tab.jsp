@@ -7,7 +7,7 @@
 <%@page import="dao.AccountDao"%>
 <%@page import="bean.AccountListBean"%>
 
-<%@ include file="/inc/session_checker.jsp"%>
+<%@ include file="/inc/session.jsp"%>
 
 <%
 AccountDao aDao = new AccountDao();

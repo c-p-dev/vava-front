@@ -1,6 +1,5 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@ include file="/inc/session.jsp" %>	
 
 <%
 String sid="";
@@ -121,11 +120,7 @@ String passphrase = "vava!@#$";
 
 <link href="/css/v-accordion.css" rel="stylesheet" type="text/css">
 
-<script>
-var checkSession = <%=checkSession%>;
-var UID = '<%=UID%>';
-var UBAL = <%=UBAL%>;
-</script>
+
 
 
 </head>
@@ -138,6 +133,11 @@ var UBAL = <%=UBAL%>;
 
 <%@ include file="/inc/header.jsp" %>
 
+<script>
+var checkSession = <%=checkSession%>;
+var UID = '<%=UID%>';
+var UBAL = <%=UBAL%>;
+</script>
 
 <div id="contents_wrap">
 	<div class="game_contents">
