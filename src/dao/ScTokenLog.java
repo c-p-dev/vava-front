@@ -21,6 +21,7 @@ public class ScTokenLog {
 				+ "(token, expire_date) "
 				+ "VALUES (?, ?)";
 		
+		
 		try {
 			DBConnector.getInstance();
 			con 				= DBConnector.getConnection();
@@ -31,7 +32,7 @@ public class ScTokenLog {
 			
             result	= pstmt.executeUpdate();
             
-	        pstmt.close();
+            pstmt.close();
 	        con.close();
 		}
 		catch(Exception e) {

@@ -34,6 +34,7 @@ public class RefreshTokenOutput {
 		this.errorId = errorId;
 	}
 	
+	
 	public String getErrorDescription() {
 		return errorDescription;
 	}

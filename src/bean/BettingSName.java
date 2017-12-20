@@ -9,8 +9,7 @@ public class BettingSName {
 	public void setBgid(String bgid) {
 		this.bgid = bgid;
 	}
-	
-	
+		
 	public void setSNames(String snames) {
 		this.snames = snames;
 	}
@@ -18,6 +17,7 @@ public class BettingSName {
 	public String getBgid() {
 		return this.bgid;
 	}
+	
 	
 	public String getSNames() {
 		return this.snames;

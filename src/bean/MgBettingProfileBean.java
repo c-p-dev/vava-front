@@ -16,6 +16,7 @@ public class MgBettingProfileBean {
 		return ProfileId;
 	}
 	
+	
 	public void setProfileId(int profileId) {
 		ProfileId = profileId;
 	}

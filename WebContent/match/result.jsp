@@ -291,7 +291,6 @@ mainAngular.controller("mc", function($scope, $templateCache, $compile, $http) {
 <a href="#myAnchor" class="go-top">▲</a>
 <div id="wrap">
 
-<%@ include file="/inc/session.jsp" %>
 <%@ include file="/inc/header.jsp" %>
 
 

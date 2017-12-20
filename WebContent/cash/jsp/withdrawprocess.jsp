@@ -9,7 +9,7 @@
 %>
 
 
-<%@ include file="/inc/session_checker.jsp"%>
+<%@ include file="/inc/session.jsp"%>
 
 <%
 	UserDao ud = new UserDao();

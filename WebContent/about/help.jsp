@@ -77,8 +77,6 @@
 <!-- custom scrollbar test -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css" />
 
-<%@ include file="/inc/session.jsp"%>
-
 <style>
 #tt1 {
     border-collapse: collapse;

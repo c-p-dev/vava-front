@@ -12,6 +12,7 @@ public class SmsAuthBean {
 	private String cell;
 	private String cell_prefix;
 	
+	
 	public String getCell() {
 		return cell;
 	}

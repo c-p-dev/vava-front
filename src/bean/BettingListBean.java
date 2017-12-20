@@ -15,9 +15,11 @@ public class BettingListBean {
 		this.bgid = bgid;
 	}
 	
+	
 	public void setBmoney(String bet_money) {
 		this.bet_money = bet_money;
 	}
+	
 	
 	public void setErate(String expect_rate) {
 		this.expect_rate = expect_rate;

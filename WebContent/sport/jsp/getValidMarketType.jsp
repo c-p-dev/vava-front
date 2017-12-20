@@ -1,1 +1,6 @@
-﻿<%@page contentType="text/html;charset=UTF-8"%><jsp:useBean id="bm" class="bc4.BetConManager2" /><%=bm.getValidMarketType().toString()%>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<jsp:useBean id="bm" class="bc4.BetConManager2" />
+
+	<%=bm.getValidMarketType().toString()%>
+	

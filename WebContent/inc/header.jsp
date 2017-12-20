@@ -1,5 +1,42 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<%@ page import="dao.UserDao" %>
+<%@ page import="java.text.DecimalFormat" %>
+
+
+	<%
+	boolean checkSession=false;
+	String SITEID=null; 
+	String UID=null;
+	String NICK=null;
+	String UCLEVEL=null;
+	int UGRADE=0;
+	int UBAL=0;
+	int UPOINT=0;
+	String IP=null;
+
+	SITEID = "1";	
+	
+	HttpSession sess = request.getSession(false);		
+	 
+	// out.print(sess);
+	 
+	if((String) sess.getAttribute("UID") != null){			
+		checkSession = true;			
+	 	UID = (String)sess.getAttribute("UID");		
+		NICK  = (String)sess.getAttribute("NICK");
+		UCLEVEL = (String)sess.getAttribute("UCLEVEL");
+		UGRADE = (Integer)sess.getAttribute("UGRADE");
+		UBAL = (Integer)sess.getAttribute("UBAL");
+		UPOINT = (Integer)sess.getAttribute("UPOINT");
+	}
+	
+	IP = request.getRemoteAddr();
+	DecimalFormat dfrmt	= new DecimalFormat("#,###,###,###,###");	
+%>
+
+
+
 <%
 String cp = request.getRequestURI();
 %>
@@ -333,9 +370,7 @@ $(window).scroll(function(event){
 		$("body").on("click",".popup_modal .popup_close",function(e){
 			$(this).parent().parent().popup("hide");
 		});
-
-		// show invalid user
-		
+		// show invalid user		
 		$(".uIM_close").on("click",function(e){
 			e.preventDefault();
 			$("#user_invalid_modal").html(lgSpin);
@@ -653,14 +688,15 @@ $(window).scroll(function(event){
 			<img src="/images/exclamation_icon.png">
 		</div>
 		<div class="pop_text">
-			Account is already logged in.
+			사용자가 다른 PC나 모바일로 접속하여 로그 아웃 되었습니다. 
 		</div>
 		<div class="btn_wrap">
-			<a href="/login/jsp/logout_process.jsp"><span class="btn3 logOutBn ">ok</span></a>
+			<a href="/login/jsp/logout_process.jsp"><span class="btn3 logOutBn ">확인</span></a>
 			<!-- <a href="" class="closeLogoutBtn"><span class="btn3">취소</span></a>			 -->
 		</div>
 	</div>
 </div>
+
 
 
 <!-- jsp include -->

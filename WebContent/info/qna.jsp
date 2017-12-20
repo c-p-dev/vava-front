@@ -4,10 +4,10 @@
 	.dt-txt{
 		/*overflow-y: scroll!important;*/
 	    height: 100px!important;
-	    /*background: #202122!important;*/
+	    background: #202122!important;
 	    /*padding: 25px 10px 25px 10px!important;*/
-	    /*padding:0px!important;*/
-	    text-align: left!important;
+	    padding:0px!important;
+	    /*text-align: left!important;*/
 	    /*transition: all 0.1s ease;*/
 	}
 	div.slider {
@@ -60,8 +60,6 @@
 	.dataTables_scrollBody{
 		border-top: 1px solid #000000!important;
 	}
-
-
 </style>
 <ul class="smk_accordion">
 	<li>
@@ -85,8 +83,7 @@
 
 		var $qnaDt;
 		$qnaDt = $('#qnaDt').DataTable({
-			ajax : '/info/jsp/getQnaList.jsp',
-			bProcessing: true,
+			ajax : '/info/jsp/getMsgLst.jsp',
 			sAjaxDataProp:"",
 			searching: false,
 			bInfo : false,
@@ -98,7 +95,7 @@
                     title  : '제목',	
                 },
                 { 
-                    data   : 'send_userid',
+                    data   : 'send_userid1',
                     title  : '보낸이',
                 },
                 { 
@@ -129,29 +126,27 @@
                 
             },
             createdRow: function ( row, data, index ) {  
-            	//console.log(row);
             	$(row).addClass('s_close');
-            	// if(index == 0){
-            	// 	var thisRow = $qnaDt.row(row);
-            	// 	thisRow.child(childRowFormat(data.txt),'dt-txt').show();
-            	// 	$(thisRow.child()).find('.slider').show();
-            	// }
         	}
         });
 
 		
 
+
+		$("#qna-div").hide();
+   		$("#qna-div").before('<div class="spn" id="qna-div-spn" style="width:100%!important;">'+lgSpin+'</div>');
+
    		$("#tab4").on("fadeInComplete", function() {
     		setTimeout(function() {
-  
+    			$("#qna-div-spn").remove();
+    			$("#qna-div").show();
 			  	$qnaDt.columns.adjust().draw();
-			}, 100);
+			}, 300);
     		
 		});
 
         $('#qnaDt tbody').on('click', 'tr', function () {
 	        var row = $qnaDt.row(this);
-	        console.log(row.data().msgid);
 	        if($(this).hasClass('s_close')){
 
 	        	row.child(childRowFormat(row.data().txt),'dt-txt').show();
@@ -159,8 +154,7 @@
 
     			$(this).removeClass('s_close');
     			$(this).addClass('s_open');
-    			//updateMsg(row.data().msgid);
-
+    			updateMsg(row.data());
 	        }else{
 
 	        	row.child(childRowFormat(row.data().txt),'dt-txt').hide();
@@ -176,31 +170,19 @@
 
 
 	function childRowFormat(d){
-		// return '<div class="slider">' + d + '</div>';
 		return  d;
-
 	}
 
-	function updateMsg(id){
-		$.ajax({
-			url : '/info/jsp/updateMsg.jsp',
-			data : {msgid:id},
-			method: 'GET',
-		}).done(function(data){ 
-			updateMsgIcon(data);
-
-		});
-	}
-
-	function updateMsgIcon(data){
-		console.log(data);
-		var obj = JSON.parse(data);
-		if(obj.updated){
-			if(obj.count > 0 ){
-				$("#un_msg").html(obj.count);
-			}else{
-				$("#un_msg").hide();
-			}
-		}		
+	function updateMsg(data){
+		if(data != null && (data.recv_date == "" || data.recv_date == null )){
+			$.ajax({
+				url : '/info/jsp/updateRecvMsg.jsp',
+				data : {msgid:data.msgid},
+				method: 'POST',
+			}).done(function(data){
+				console.log(data);
+			});	
+		}
+		
 	}
 </script>

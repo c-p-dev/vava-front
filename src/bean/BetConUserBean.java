@@ -20,6 +20,7 @@ public class BetConUserBean {
 		return username;
 	}
 	
+	
 	public int getSite_id() {
 		return site_id;
 	}

@@ -26,9 +26,11 @@ public class MatchListBean {
     	this.MD = MD;
   	}	  	
   
+  	
   	public void setSid(String SD){
     	this.SD = SD;
   	}	 
+  	
   	
   	
   	public void setSname(String SN){

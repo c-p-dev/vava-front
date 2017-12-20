@@ -6,3 +6,4 @@ public class BcGameLstBean {
 	String status;
 	List<BcGameInfBean> games;
 }
+

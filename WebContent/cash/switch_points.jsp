@@ -1,6 +1,9 @@
-<%@ include file="/inc/session_checker.jsp"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@page import="dao.GameDao, java.text.DecimalFormat, java.util.*,dao.UserDao,bean.UserBean;"%>		
+
+<%@page import="dao.GameDao, java.util.*, bean.UserBean"%>		
+
+<%@ include file="/inc/session.jsp"%>
+
 
 <style>
 	.add-money{
@@ -21,10 +24,7 @@
 	}	
 
 </style>
-<%
-	UserDao user_db			= new UserDao();
-	UserBean currentUser 		= user_db.getUserByUserId(UID);
-%>	
+
 			
 			<ul class="smk_accordion">
 					<li>

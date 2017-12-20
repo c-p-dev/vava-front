@@ -40,7 +40,7 @@ public class AsianGamingController {
 	
 	public static final String LANG_EN_PARAM	= "3";
 	public static final String LANG_KR_PARAM	= "5";
-
+	
 	public static final String GAME_ALL_PARAM	= "0";	
 	public static final String GAME_AGQ_PARAM	= "1";
 	public static final String GAME_AGIN_PARAM	= "2";
@@ -182,6 +182,7 @@ public class AsianGamingController {
 		/*	Convert String DES Key to Secret Key type	*/
 		SecretKey key 			= new SecretKeySpec(DES_KEY_BYTE, 0, DES_KEY_BYTE.length, ENC_PARAM_ALGO);
 		DesEncrypter encrypter 	= new DesEncrypter(key);
+		
 		
 		String enc_params 		= encrypter.encrypt(params);
 		

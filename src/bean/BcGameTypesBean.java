@@ -4,3 +4,4 @@ public class BcGameTypesBean {
 	Integer realMode;
 	Integer funMode;
 }
+

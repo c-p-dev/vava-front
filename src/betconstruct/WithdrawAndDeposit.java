@@ -46,6 +46,7 @@ public class WithdrawAndDeposit {
 		return operatorId;
 	}
 	
+	
 	public void setOperatorId(int operatorId) {
 		this.operatorId = operatorId;
 	}

@@ -20,8 +20,10 @@ public class MgLiveTransLogDao {
 				+ "(username, table_code, round_id, currency, bet_amount, payout, status, bet_type, date_added) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? )";
 		
+		
 		try {
 			DBConnector.getInstance();
+			
 			con 				= DBConnector.getConnection();
 		    
 		    pstmt   			= con.prepareStatement(query);

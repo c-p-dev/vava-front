@@ -94,7 +94,7 @@
 </head>
 <body> 
 
-<%@ include file="/inc/session.jsp"%>
+
 <%@ include file="/inc/header.jsp"%>
 <style>
 .picflex .resultitem{

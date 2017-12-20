@@ -39,6 +39,7 @@ public class WithdrawAndDepositOutput {
 		return errorId;
 	}
 	
+	
 	public void setErrorId(int errorId) {
 		this.errorId = errorId;
 	}

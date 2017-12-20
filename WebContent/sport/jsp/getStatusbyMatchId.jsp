@@ -1,5 +1,8 @@
-﻿<%@page contentType="text/html;charset=UTF-8"%>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+
 <jsp:useBean id="bm" class="bc4.BetConManager2" />
+
 <%
 String mid="";
 String sid="";
@@ -13,4 +16,5 @@ if(request.getParameter("sid") != null && request.getParameter("sid").trim().len
 
 //StringBuffer result = bc4.getStatusbyMatchId(mid,sid);
 %>
+
 <%=bm.getStatusbyMatchId(mid,sid).toString()%>

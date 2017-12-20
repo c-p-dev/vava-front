@@ -5,16 +5,17 @@
 <%@ page import="com.google.gson.Gson" %>
 <%@ page import="java.util.List" %>
 
-<%@ include file="/inc/session_checker.jsp" %>		
+<%@ include file="/inc/session.jsp" %>		
 
 <%
 	Gson gson = new Gson();
 	MessageDao mDao = new MessageDao();
 	MessageBean mBean = new MessageBean();
+
 	mBean.setRecv_userid(UID);
 	mBean.setSend_siteid(Integer.parseInt(SITEID));
-
-	List res = mDao.getUserQnaList(mBean);
+	
+	List res = mDao.getUserMsgList(mBean);
 	out.println(gson.toJson(res).toString());
 %>
 

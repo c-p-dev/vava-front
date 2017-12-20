@@ -26,6 +26,7 @@ public class MatchResultBean {
     	this.MT = MT;
   	}	  	
   	
+  	
   	public void setMdate3(String MT3){
     	this.MT3 = MT3;
   	}	

@@ -20,6 +20,7 @@ public class MatchSearchResultBean {
     	this.MDT = MDT;
   	}	  	
   	  	
+  	
   	public void setMid(String MID){
     	this.MID = MID;
   	}	  	

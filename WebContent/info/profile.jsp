@@ -65,7 +65,7 @@
 			<div class="acc_content_in_2" id="acc_content_in_2_pass">
 				<div class="blue_wrap">
 					<form id="updatePasswordForm" name="updatePasswordForm">
-						<table cellspacing="0" cellpadding="0" class="my_table" width="25%" style="margin-bottom: 10px;">
+						<table cellspacing="0" cellpadding="0" class="my_table" width="25%" style="margin-bottom: 15px;">
 							<tr>
 								<td class="my_pass">
 									<input class="input_style03" id="current_password" name="current_password" placeholder="현재 비밀번호" >
@@ -91,9 +91,9 @@
 								<td class="my_text input_warning" id="confirm_new_passowrd-update-warn" >비밀번호가 일치하지 않습니다</td>
 							</tr>
 						</table>
-						<div class="cash_in">
+						<div class="cash_in" style="width:25%; text-align: center;">
 							<!-- <a href="#"><span class="btn3c">전환신청</span></a>	 -->
-							<input type="submit" id="updatePssBtn" value ="전환신청" class="btn3c">
+							<input type="submit" id="updatePssBtn" value ="전환신청" class="btn3c" style="cursor:pointer;">
 						</div>
 					</form>
 				</div>
@@ -127,7 +127,7 @@
 <div id="updatePasswordModal" class="bg_mask_pop2">
 	<div class="bg_mask_pop_title">
 		<span class="popup_logo"><img src="/images/popup_logo.png"></span>
-		<span class="popup_close fade_2_close"><img src="/images/popup_close.png"></span>
+		<span class="popup_close close-updatePasswordModal"><img src="/images/popup_close.png"></span>
 	</div>
 	<div class="bg_mask_pop2_in">
 		<div class="pop_icon_center">
@@ -137,7 +137,6 @@
 			Update Password Success
 		</div>
 		<div class="btn_wrap">
-			<a href="/cash/cash.jsp" class="close-updatePasswordModal"><span class="btn3c ">충전하기</span></a> 
 			<a href="/" class="close-updatePasswordModal"><span class="btn3">확인</span></a>
 		</div>
 	</div>
@@ -164,7 +163,7 @@
 	      	escape: false,
 	      	blur: false,
 	      	onclose:function(){
-	      		location.reload();
+	      		// location.reload();
 
 	    	}
 	    });
@@ -460,12 +459,13 @@
 			method: 'POST',
 		}).done(function(data){ 
 			// console.log(data);
-			if(data){
+			var obj = JSON.parse(data);
+			if(data.result){
 				resetupdateProfileForm();
 				$('#updateProfileModal').popup('show');
 				$("#updateProfileBtn input").qtip("hide");
 			}else{
-				alert("something went wrong");
+				toastr.success("관리자에게 문의해 주세요.");
 			}
 		});
 	}
@@ -483,13 +483,14 @@
 			data : data,
 			method: 'POST',
 		}).done(function(data){ 
-			// console.log(data);
-			if(data){
+			console.log(data);
+			var obj = JSON.parse(data);
+			if(obj.result){
 				resetupdatePasswordForm();
 				$('#updatePasswordModal').popup('show');
 				$("#updatePasswordForm input").qtip("hide");
 			}else{
-				alert("관리자에게 문의해 주세요.");
+				toastr.success("관리자에게 문의해 주세요.");
 			}
 		});
 	}

@@ -16,6 +16,7 @@ public class MessageBean {
 	public int getMsgid() {
 		return msgid;
 	}
+	
 	public void setMsgid(int msgid) {
 		this.msgid = msgid;
 	}

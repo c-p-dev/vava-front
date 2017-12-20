@@ -1,7 +1,5 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@ include file="/inc/session.jsp" %>	
-
 <!DOCTYPE html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -81,6 +79,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css" />
 
 
+<link href="/css/pe-icon-7-stroke.css" rel="stylesheet" type="text/css">
+
 <script type="text/javascript" src="/js/angular.js"></script> 
 <script type="text/javascript" src="/js/angular-animate.min.js"></script> 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.16/angular-filter.js"></script>    
@@ -88,6 +88,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28//angular-route.min.js"></script>
 <script type="text/javascript" src="/js/pmatch.js"></script>
 <link href="/css/v-accordion.css" rel="stylesheet" type="text/css">
+
+
+
+
 </head>
 	
 <body id="myAnchor" ng-app="Vava" ng-controller="mc"> 
@@ -97,6 +101,13 @@
 	
 	
 <%@ include file="/inc/header.jsp" %>
+
+<script>
+var checkSession = <%=checkSession%>;
+var UID = '<%=UID%>';
+var UBAL = <%=UBAL%>;
+</script>
+
 <script>
 	$("div.stroke ul li:nth-child(2) a ").on("click",function(e){
 		e.preventDefault();
@@ -104,6 +115,7 @@
 	});
 </script>
 <div id="contents_wrap">
+					
 	<div class="game_contents">
 		<table width="100%" valign="top" border="0" cellspacing="0" cellpadding="0">
 			<tr>
@@ -129,11 +141,14 @@
 			</tr>
 		</table>
 	</div>
+					
 </div><!-- contents -->
 
 <%@ include file="/inc/footer.jsp" %>
 
 </div><!-- wrap -->
 </div><!-- wrap -->
+
+
 </body>
 </html>

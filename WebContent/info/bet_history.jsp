@@ -1,21 +1,37 @@
-﻿<%@ include file="/inc/session.jsp"%>
+﻿
 <%@page import="bean.*"%>
 <%@page import="dao.*"%>
 <%@page import="java.util.*"%>
 <%@page import="com.google.gson.Gson"%>
 <%@page import="java.lang.reflect.Type"%>
 <%@page import="com.google.gson.reflect.TypeToken"%>
+<%@ page import="java.text.DecimalFormat" %>
+
 
 <jsp:useBean id="bm" class="bc4.BetConManager2" />
 
 	
 <%
-List<BettingListBean> bl = bm.getBetList(UID);
-List<BettingSName> bs = bm.getBetSNames(UID);
 
-List<BettingListBean_SC> bl_sc = bm.getBetList_SC(UID);
-List<BettingListBean_SC> bl_mg = bm.getBetList_MG(UID);
-List<BettingListBean_SC> bl_ag = bm.getBetList_AG(UID);
+	boolean checkSession=false;
+	String SITEID = "1";	
+	String UID=null;
+	
+	HttpSession sess = request.getSession(false);		
+	 
+	if((String) sess.getAttribute("UID") != null){			
+		checkSession = true;			
+	 	UID = (String)sess.getAttribute("UID");		
+	}
+				
+	DecimalFormat dfrmt	= new DecimalFormat("#,###,###,###,###");	
+				
+List<BettingListBean> bl = bm.getBetList(SITEID,UID);
+List<BettingSName> bs = bm.getBetSNames(SITEID,UID);
+
+List<BettingListBean_SC> bl_sc = bm.getBetList_SC(SITEID,UID);
+List<BettingListBean_SC> bl_mg = bm.getBetList_MG(SITEID,UID);
+List<BettingListBean_SC> bl_ag = bm.getBetList_AG(SITEID,UID);
 
 Gson gson = new Gson();
 Type type = new TypeToken<List<BettingListBean>>() {}.getType();
@@ -311,8 +327,15 @@ table.dataTable tbody tr{
 								</td> -->
 								<td>
 									<input class="input_style04" id="bd1" placeholder="기간" value="2017-00-00 ~ 2017-00-00" readonly>
-									<span class="showdp1"><img src="/images/car_icon.jpg"></span>
+									<span class="showdp1" style="cursor:pointer"><img src="/images/car_icon.jpg"></span>
 									<div id="bet-depth1" style="display:none; width:; position:absolute; z-index:100000000; left: 230px; top:130px;">
+										
+										<div style="float:right;">
+											<span id="closeMoneyPikaday" class="bclose1" >
+												<img src="/images/car_close.png" class="bclose1">
+											</span>
+										</div>
+										
 										<table border="0" cellspacing="0" cellpadding="0" class="car_table">
 											<tr>
 												<td id="bdfdiv1" bgcolor="#303030" style="border-radius:3px; padding:5px; box-shadow: 10px 10px 20px -5px rgba(10, 10, 5, 5);">
@@ -321,19 +344,16 @@ table.dataTable tbody tr{
 												<td id="bdtdiv1" bgcolor="#303030" style="border-radius:3px; padding:5px; box-shadow: 10px 10px 20px -5px rgba(10, 10, 5, 5);">
 													<input type="text" id="bdt1" class="hidden bhdp1"  style="display: none;">
 												</td>
-											</tr>
-											
+											</tr>											
 										</table>
-										<div style="float:right; padding:7px 2px 7px 10px;">
-											<span id="closeMoneyPikaday" class="bclose1" >
-												<img src="/images/car_close.png" class="bclose1">
-											</span>
-										</div>
+										
 									</div>
 								</td>
+								<!--
 								<td>
 									<span class="btn1" id="dpbtn1">검색</span>
 								</td>
+								-->
 							</tr>
 						</table>
 					</div>
@@ -362,6 +382,7 @@ table.dataTable tbody tr{
 									
 								<%
 										
+										
 										for (int k=0; k < bl.size() ; k++){
 											String fn = "다폴더";
 											BettingListBean blb = (BettingListBean) bl.get(k);
@@ -370,14 +391,18 @@ table.dataTable tbody tr{
 												fn = "싱글";
 											}
 											String sname="";
+											
 											boolean chk = false;	
+											
 											for (int i = 0; i < bs.size(); i++){							
 												BettingSName bsn = bs.get(i);			
 															
 													if(bsn.getBgid().equals(blb.getBgid())){	
 														
-														if(!chk){							
-															sname +=bsn.getSNames() + " 외";
+														if(chk){							
+															sname += " 외";															
+														}else{
+															sname =bsn.getSNames();
 															chk = true;
 														}
 									
@@ -574,6 +599,40 @@ table.dataTable tbody tr{
 									emptyTable: "베팅 내역이 없습니다.",
 								},
 						    });
+						    
+						$.fn.dataTable.ext.search.push(
+					    function( settings, data, dataIndex ) {
+					        var min  = $('#bfd1').val();					        
+					        var max  = $('#bdt1').val();
+					        
+					        var createdAt = data[2] || 0; // Our date column in the table
+
+					        if((min== ""||max== "")||( moment(createdAt).isSameOrAfter(min) && moment(createdAt).isSameOrBefore(max) ) ){
+					            return true;
+					        }
+					        return false;
+					    }
+						);
+				
+						    	function d1(){
+										var dateFrom = $("#bfd1").val();
+								    var dateTo = $("#bdt1").val();
+								    $("#bd1").val(dateFrom + ' ~ '+ dateTo);
+								    table.draw();
+									}
+	
+						  	$(".bhdp1").on("change",function(e){
+        				d1();
+        				//table.draw();
+        				//console.log("change");
+        				
+        				
+	 			       });
+	 			       
+
+				
+
+
 						    
 						</script>
 						
@@ -1335,44 +1394,49 @@ table.dataTable tbody tr{
 
 		// calendar 1
 
+var i18n = {
+	previousMonth	: '이전 달',
+	nextMonth		: '다음 달',
+	months 			: ['1월','2월', '3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+	weekdays		: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
+	weekdaysShort	: ['일', '월', '화', '수', '목', '금', '토'],
+};
+    
 		var bpf1 = new Pikaday({ 
 			field: document.getElementById('bfd1'), 
 			bound: false, 
 			container: document.getElementById('bdfdiv1'),
 			format: 'YYYY-MM-DD',
-	        defaultDate: moment().toDate(),
-	        setDefaultDate : moment().toDate(),
-	        onSelect: function() {
-	        	console.log(this.getDate());
-	        	console.log(bpt1);
-	        	console.log(bpt1.minDate);
-	            bpt1.setMinDate(this.getDate());
-	            bpt1.setDate(this.getDate());
-	        },
-	        minDate : moment().subtract(30,'days').toDate()
+      defaultDate:moment().subtract(30,'days').toDate(),
+   		setDefaultDate:moment().subtract(30,'days').toDate(),
+      minDate : moment().subtract(30,'days').toDate(),
+      i18n : i18n,
 		});
 
-       	var bpt1 = new Pikaday({ 
-       		field: document.getElementById('bdt1'), 
-       		bound: false, 
-       		container: document.getElementById('bdtdiv1'),
-       		format :'YYYY-MM-DD',
-       		defaultDate: moment().toDate(),
-       		setDefaultDate : moment().toDate(),
-       		minDate : bpf1.getDate(),
-       	});
-
-       	d1();
-
-       	$(".bhdp1").on("change",function(e){
-        	d1();
-        });
-
+   	var bpt1 = new Pikaday({ 
+   		field: document.getElementById('bdt1'), 
+   		bound: false, 
+   		container: document.getElementById('bdtdiv1'),
+   		format :'YYYY-MM-DD',
+   		i18n : i18n,
+   		onSelect: function() {
+	    	$("#bet-depth1").hide();
+	    },	        
+   		defaultDate: moment().toDate(),
+   		setDefaultDate : moment().toDate(),       		
+   		minDate : bpf1.getDate(),
+   		maxDate : moment().toDate(),
+   	});
+   	
+    d1();
+       	
+/*
         $("#dpbtn1").on("click",function(e){
         	e.preventDefault();
         	$moneyUseTable.ajax.reload();
         	$("#bet-depth1").hide();
         });
+*/
 
         $(".showdp1").on("click",function(e){
         	e.preventDefault();
@@ -1388,42 +1452,44 @@ table.dataTable tbody tr{
 
         //  cal 2
 
-        var bpf2 = new Pikaday({ 
+     var bpf2 = new Pikaday({ 
 			field: document.getElementById('bfd2'), 
 			bound: false, 
 			container: document.getElementById('bdfdiv2'),
 			format: 'YYYY-MM-DD',
-	        defaultDate: moment().toDate(),
-	        setDefaultDate : moment().toDate(),
-	        onSelect: function() {
-
-	            bpt2.setMinDate(this.getDate());
-	            bpt2.setDate(this.getDate());
-	        },
-	        minDate : moment().subtract(30,'days').toDate()
+	    defaultDate:moment().subtract(30,'days').toDate(),
+   		setDefaultDate:moment().subtract(30,'days').toDate(),
+	    minDate : moment().subtract(30,'days').toDate(),
+	    i18n : i18n,
 		});
 
-       	var bpt2 = new Pikaday({ 
-       		field: document.getElementById('bdt2'), 
-       		bound: false, 
-       		container: document.getElementById('bdtdiv2'),
-       		format :'YYYY-MM-DD',
-       		defaultDate: moment().toDate(),
-       		setDefaultDate : moment().toDate(),
-       		minDate : bpf2.getDate(),
-       	});
+	   	var bpt2 = new Pikaday({ 
+	   		field: document.getElementById('bdt2'), 
+	   		bound: false, 
+	   		container: document.getElementById('bdtdiv2'),
+	   		format :'YYYY-MM-DD',
+	   		defaultDate: moment().toDate(),
+	   		setDefaultDate : moment().toDate(),
+	   		minDate : bpf2.getDate(),
+	   		maxDate : moment().toDate(),
+	   		i18n : i18n,
+	   		onSelect: function() {
+	    	$("#bet-depth2").hide();
+	    	},	
+	   	});
 
        	d2();
 
        	$(".bhdp2").on("change",function(e){
         	d2();
         });
-
+/*
         $("#dpbtn2").on("click",function(e){
         	e.preventDefault();
         	$moneyUseTable.ajax.reload();
         	$("#bet-depth2").hide();
         });
+*/
 
         $(".showdp2").on("click",function(e){
         	e.preventDefault();
@@ -1441,30 +1507,31 @@ table.dataTable tbody tr{
         // cal 3 
 
 
-        var bpf3 = new Pikaday({ 
+    var bpf3 = new Pikaday({ 
 			field: document.getElementById('bfd3'), 
 			bound: false, 
 			container: document.getElementById('bdfdiv3'),
 			format: 'YYYY-MM-DD',
-	        defaultDate: moment().toDate(),
-	        setDefaultDate : moment().toDate(),
-	        onSelect: function() {
-	        	
-	            bpt3.setMinDate(this.getDate());
-	            bpt3.setDate(this.getDate());
-	        },
-	        minDate : moment().subtract(30,'days').toDate()
+	    defaultDate:moment().subtract(30,'days').toDate(),
+   		setDefaultDate:moment().subtract(30,'days').toDate(),
+	    minDate : moment().subtract(30,'days').toDate(),
+	    i18n : i18n,
 		});
 
-       	var bpt3 = new Pikaday({ 
-       		field: document.getElementById('bdt3'), 
-       		bound: false, 
-       		container: document.getElementById('bdtdiv3'),
-       		format :'YYYY-MM-DD',
-       		defaultDate: moment().toDate(),
-       		setDefaultDate : moment().toDate(),
-       		minDate : bpf3.getDate(),
-       	});
+   	var bpt3 = new Pikaday({ 
+   		field: document.getElementById('bdt3'), 
+   		bound: false, 
+   		container: document.getElementById('bdtdiv3'),
+   		format :'YYYY-MM-DD',
+   		defaultDate: moment().toDate(),
+   		setDefaultDate : moment().toDate(),
+   		minDate : bpf3.getDate(),
+   		maxDate : moment().toDate(),
+   		i18n : i18n,
+   		onSelect: function() {
+	    	$("#bet-depth3").hide();
+	    },	
+   	});
 
        	d3();
 
@@ -1493,30 +1560,31 @@ table.dataTable tbody tr{
         // cal 4 
 
 
-         var bpf4 = new Pikaday({ 
+    var bpf4 = new Pikaday({ 
 			field: document.getElementById('bfd4'), 
 			bound: false, 
 			container: document.getElementById('bdfdiv4'),
 			format: 'YYYY-MM-DD',
-	        defaultDate: moment().toDate(),
-	        setDefaultDate : moment().toDate(),
-	        onSelect: function() {
-	        	
-	            bpt4.setMinDate(this.getDate());
-	            bpt4.setDate(this.getDate());
-	        },
-	        minDate : moment().subtract(30,'days').toDate()
+	    defaultDate:moment().subtract(30,'days').toDate(),
+   		setDefaultDate:moment().subtract(30,'days').toDate(),
+	    minDate : moment().subtract(30,'days').toDate(),
+	    i18n : i18n,
 		});
 
-       	var bpt4 = new Pikaday({ 
-       		field: document.getElementById('bdt4'), 
-       		bound: false, 
-       		container: document.getElementById('bdtdiv4'),
-       		format :'YYYY-MM-DD',
-       		defaultDate: moment().toDate(),
-       		setDefaultDate : moment().toDate(),
-       		minDate : bpf4.getDate(),
-       	});
+   	var bpt4 = new Pikaday({ 
+   		field: document.getElementById('bdt4'), 
+   		bound: false, 
+   		container: document.getElementById('bdtdiv4'),
+   		format :'YYYY-MM-DD',
+   		defaultDate: moment().toDate(),
+   		setDefaultDate : moment().toDate(),
+   		minDate : bpf4.getDate(),
+   		maxDate : moment().toDate(),
+   		i18n : i18n,
+   		onSelect: function() {
+	    	$("#bet-depth4").hide();
+	    },	
+   	});
 
        	d4();
 
@@ -1545,11 +1613,7 @@ table.dataTable tbody tr{
 	});
 
 
-	function d1(){
-		var dateFrom = $("#bfd1").val();
-    	var dateTo = $("#bdt1").val();
-    	$("#bd1").val(dateFrom + ' ~ '+ dateTo);
-	}
+
 
 	function d2(){
 		var dateFrom = $("#bfd2").val();
@@ -1573,10 +1637,10 @@ var NColor= "#262a2b";
 var CColor= "#293133";
 
 	function CBg(row) { 
-		console.log("A")
+		//console.log("A")
 		row.parentNode.style.backgroundColor = CColor; 
-		console.log(row.parentNode.style)
-		console.log(row.parentNode.style.backgroundColor)
+		//console.log(row.parentNode.style)
+		//console.log(row.parentNode.style.backgroundColor)
 	}
 
 	function RBg(row) { 

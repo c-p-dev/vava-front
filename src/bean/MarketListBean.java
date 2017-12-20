@@ -23,6 +23,7 @@ public class MarketListBean {
     	this.MD = MD;
   	}	 
   	
+  	
   	public void setMkname(String MN){
     	this.MN = MN;
   	}	

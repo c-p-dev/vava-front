@@ -21,6 +21,7 @@ public class BettingListBean_SC {
 		this.res_money = res_money;
 	}
 	
+	
 	public void setJob(String job) {
 		this.job = job;
 	}

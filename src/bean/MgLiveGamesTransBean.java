@@ -26,6 +26,7 @@ public class MgLiveGamesTransBean {
 		return this.result;
 	}
 	
+	
 	public void setResult(List<MgLiveGamesTransData> result) {
 		this.result = result;
 	}

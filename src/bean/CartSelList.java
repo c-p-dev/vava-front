@@ -14,6 +14,7 @@ public class CartSelList {
 	private String live;
 	
 	
+	
 	public void setSelid(String sel_id) {
 		this.sel_id = sel_id;
 	}
@@ -21,6 +22,7 @@ public class CartSelList {
 	public void setSelprice(String sel_price) {
 		this.sel_price = sel_price;
 	}
+	
 	
 	public void setKsus(String market_sus) {
 		this.market_sus = market_sus;

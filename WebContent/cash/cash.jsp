@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 
-<%@ include file="/inc/session_checker.jsp"%>
-
 <!DOCTYPE html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -80,6 +78,34 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.css" rel="stylesheet" type="text/css">
 <!-- custom scrollbar test -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css" />
+
+<script>
+	$(document).ready(function(){
+		// setTabActive($.urlParam("tab"));
+		var tab = '<%=session.getAttribute("tb")%>';
+		if(tab != ""){
+			$("ul.tabs li a[href='#"+tab+"']").click();
+		}
+
+		$(".conf_modal_close").on("click",function(){
+			$(".conf_modal").popup("hide");
+		});
+	});
+
+	function clive_load() {
+		console.log("clive_load");
+	    var myVar = setTimeout(showPage_clive, 1000);
+	};
+	
+	function showPage_clive() {
+		document.getElementById("spin_clive").style.display  = "none";
+		document.getElementById("clive").style.display = "block";
+		$("#tab3, #tab5, #tab6").trigger("fadeInComplete");
+	}
+
+
+</script>
+
 </head>
 
 
@@ -87,6 +113,8 @@
 
 
 <%@ include file="/inc/header.jsp"%>
+
+
 <style>
 	.cash_tab .btn3c {
 		cursor: pointer;
@@ -146,32 +174,7 @@
 		</div>
 	</div>
 </div><!-- contents -->
-<script>
-	$(document).ready(function(){
-		// setTabActive($.urlParam("tab"));
-		var tab = '<%=session.getAttribute("tb")%>';
-		if(tab != ""){
-			$("ul.tabs li a[href='#"+tab+"']").click();
-		}
 
-		$(".conf_modal_close").on("click",function(){
-			$(".conf_modal").popup("hide");
-		});
-	});
-
-	function clive_load() {
-		console.log("clive_load");
-	    var myVar = setTimeout(showPage_clive, 1000);
-	};
-	
-	function showPage_clive() {
-		document.getElementById("spin_clive").style.display  = "none";
-		document.getElementById("clive").style.display = "block";
-		$("#tab3, #tab5, #tab6").trigger("fadeInComplete");
-	}
-
-
-</script>
 <%@ include file="/inc/footer.jsp"%>
 </div>
 </body>

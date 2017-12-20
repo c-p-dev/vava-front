@@ -37,6 +37,7 @@ public class RollbackOutput {
 		this.errorId = errorId;
 	}
 	
+	
 	public String getErrorDescription() {
 		return errorDescription;
 	}

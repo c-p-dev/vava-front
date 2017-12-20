@@ -1,26 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-
 <%@ page import = "bean.UserBean" %>
 <%@ page import = "dao.UserDao" %>
-<%@ page import = "java.sql.SQLException" %>
-<%@ page import = "java.util.ArrayList" %>
-<%@ page import = "java.util.List" %>
-<%@ page import = "com.google.gson.reflect.TypeToken" %>
-<%@ page import = "java.util.StringTokenizer" %>
-
-<%@ include file="/inc/session.jsp" %>	
+<%@ include file="/inc/session.jsp" %>
+<%@ page import="com.google.gson.Gson" %>
+<%@ page import ="java.util.HashMap" %>		
 
 <%
-	
-	
- 	UserDao ud = new UserDao();
-	boolean result = false;
-	
-	String current_passwd = request.getParameter("current_password").trim();
-	String new_passwd = request.getParameter("new_passowrd").trim();
+	 	UserDao ud = new UserDao();
+		
+		String current_passwd = request.getParameter("current_password").trim();
+		String new_passwd = request.getParameter("new_passowrd").trim();
 
-	result = ud.updateUserPasswd(UID,current_passwd,new_passwd);
-	out.println(result);
+		Gson gson = new Gson();
+		HashMap<String, Object> hsm = new HashMap<String, Object>();
+		
+		boolean result = ud.updateUserPasswd(UID, current_passwd,new_passwd);
+		
+		hsm.put("result", result);
+		out.println(gson.toJson(hsm).toString());
 
 	
 %>

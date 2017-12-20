@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+
 <ul class="mtabs tabs">
 	<li class="liclass mt1"><a href="#mgTab1">메인화면 구성</a></li>
 	<li class="liclass mt2"><a href="#mgTab2">바카라</a></li>
