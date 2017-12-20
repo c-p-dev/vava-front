@@ -19,7 +19,7 @@
 	<%
 	
 	SITEID = "1";	
-	 session = request.getSession(false);		
+	 session = request.getSession(false);
 	 
 	if((String) session.getAttribute("UID") != null){			
 		checkSession = true;			

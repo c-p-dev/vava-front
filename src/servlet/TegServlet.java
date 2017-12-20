@@ -36,19 +36,19 @@ public class TegServlet extends HttpServlet {
 		TotalEgameController teg_ctrl	= new TotalEgameController();
 		
 		String method 					= request.getParameter("method");
+		String username					= (String)request.getSession().getAttribute("UID");
+		int site_id						= (int)request.getSession().getAttribute("SITEID");
 		
 		PrintWriter output				= response.getWriter();
 		
 		switch (Integer.valueOf(method)) {
 			case 1:
-				UserBean udata_1	= (UserBean)request.getSession().getAttribute("currentSessionUser");
-				String uname_1 		= udata_1.getUserid();
 				int game_provider	= Integer.valueOf(request.getParameter("gm_provdr"));
 				String lnk_dsp		= request.getParameter("lnk_dsp");
 				String srv_resp_1	= "";
 				
 				try {
-					srv_resp_1 			= teg_ctrl.userPlayCheck(uname_1, game_provider, lnk_dsp);
+					srv_resp_1 			= teg_ctrl.userPlayCheck(username, site_id, game_provider, lnk_dsp);
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -58,32 +58,14 @@ public class TegServlet extends HttpServlet {
 				break;
 			
 			case 2:
-				UserBean udata_2	= (UserBean)request.getSession().getAttribute("currentSessionUser");
-				String uname_2 		= udata_2.getUserid();
-				String srv_resp_2	= "";
-				
-				SpinCubeController sc_ctrl		= new SpinCubeController(Integer.toString(udata_2.getSiteid()).concat("_").concat(udata_2.getUserid()));
-				
-				srv_resp_2 			= gson.toJson(teg_ctrl.transferMoneyToVava(uname_2), UserBean.class);
-				
-				try {
-					srv_resp_2 			= gson.toJson(sc_ctrl.transferMoneyToVava(uname_2), UserBean.class);
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-				response.setContentType("application/json");
-				output.print(srv_resp_2);
+				/*	No Processing	*/
 				break;
 			
 			case 3:
 				UserDao user_db		= new UserDao();
-				UserBean udata_3	= (UserBean)request.getSession().getAttribute("currentSessionUser");
-				String uname_3 		= udata_3.getUserid();
 				String srv_resp_3	= "";
 				
-				srv_resp_3 			= gson.toJson(user_db.getUserByUserId(udata_3.getUserid()));
+				srv_resp_3 			= gson.toJson(user_db.getUserByUserId(username));
 				
 				response.setContentType("application/json");
 				output.print(srv_resp_3);
@@ -94,18 +76,17 @@ public class TegServlet extends HttpServlet {
 				break;
 			
 			case 5:
-				UserBean sess_data5	= (UserBean)request.getSession().getAttribute("currentSessionUser");
 				UserBean udata5		= new UserBean();
 				UserDao user_db5	= new UserDao();
 				String srv_resp_5	= "";
 				
-				if (null != sess_data5) {
-					udata5	= user_db5.getUserByUserId(sess_data5.getUserid());
+				if (null != username) {
+					udata5	= user_db5.getUserByUserId(username);
 					
 					if (null != udata5) {
 						if (0 >= udata5.getMoney()) {
 							try {
-								srv_resp_5 = teg_ctrl.getAllMoney(udata5.getUserid());
+								srv_resp_5 = teg_ctrl.getAllMoney(username, site_id);
 							} catch (ParseException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
@@ -113,16 +94,15 @@ public class TegServlet extends HttpServlet {
 						}
 					}
 				}
+				
 				response.setContentType("application/json");
 				output.print(srv_resp_5);
 				break;
 			
 			case 6:
-				UserBean udata_6	= (UserBean)request.getSession().getAttribute("currentSessionUser");
-				String uname_6 		= udata_6.getUserid();
 				String srv_resp_6	= "";
 				
-				srv_resp_6	= teg_ctrl.getBetPlaycheck(uname_6);
+				srv_resp_6	= teg_ctrl.getBetPlaycheck(username);
 				
 				output.print(srv_resp_6);
 				break;

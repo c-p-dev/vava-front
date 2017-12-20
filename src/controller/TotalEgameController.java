@@ -269,7 +269,7 @@ public class TotalEgameController {
 		}
 	}
 	
-	public String userPlayCheck(String username, int game_provider, String lnk_dsp) throws MalformedURLException, IOException, ParseException
+	public String userPlayCheck(String username, int site_id, int game_provider, String lnk_dsp) throws MalformedURLException, IOException, ParseException
 	{
 		/*	Variable Declaration	*/
 		DateFormat dfrmt 			= new SimpleDateFormat("yyyyMMddHHmmss");
@@ -285,7 +285,6 @@ public class TotalEgameController {
 		String mg_pincode		= "";
 		String session_id		= "";
 		double money			= 0;
-		int site_id				= 1;
 		
 		AsianGamingController ag_ctrl	= new AsianGamingController();
 		BetConstructController bc_ctrl	= new BetConstructController();
@@ -451,14 +450,13 @@ public class TotalEgameController {
 		return game_url_full;
 	}
 	
-	public String getAllMoney(String username) throws ParseException
+	public String getAllMoney(String username, int site_id) throws ParseException
 	{
 		DateFormat dfrmt 				= new SimpleDateFormat("yyyyMMddHHmmss");
 		Date date_now					= new Date();
 		Gson gson						= new Gson();
 		String json_data				= "";
 		SpinCubeController sc_ctrl		= null;
-		int site_id						= 1;
 		
 		UserBean user_data				= new UserBean();
 		FinTokenBean fintoken_data		= new FinTokenBean();

@@ -1,22 +1,25 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="
-	bean.UserBean,
-	bean.UserBean,
-	bean.BetConUserBean,
-	dao.UserDao,
-	dao.BetConDao,
-	java.sql.SQLException,
-	java.util.ArrayList,
-	java.util.List,
-	bean.MgBettingProfileBean,
-	bean.MgPlayerAccountBean,
-	controller.TotalEgameController,
-	controller.SpinCubeController,
-	com.google.gson.reflect.TypeToken,
-	java.util.StringTokenizer,
-	bean.JoinCodeBean,
-	dao.JoinCodeDao,
-	bean.SmsAuthBean,
-	dao.SmsDao;" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<%@ page import = "bean.UserBean" %>
+<%@ page import = "bean.BetConUserBean" %>
+<%@ page import = "dao.UserDao" %>
+<%@ page import = "dao.BetConDao" %>
+<%@ page import = java.util.ArrayList" %>
+<%@ page import = "bean.MgBettingProfileBean" %>
+<%@ page import = "bean.MgPlayerAccountBean" %>
+<%@ page import = "controller.TotalEgameController" %>
+<%@ page import = "controller.SpinCubeController" %>
+<%@ page import ="com.google.gson.reflect.TypeToken" %>
+<%@ page import ="java.util.StringTokenizer" %>
+<%@ page import ="java.sql.SQLException" %>
+<%@ page import ="bean.JoinCodeBean" %>
+<%@ page import ="dao.JoinCodeDao" %>
+<%@ page import ="bean.SmsAuthBean" %>
+<%@ page import ="dao.SmsDao" %>
+
+
+<%@ include file="/inc/session.jsp"%>
+
 <%
 	UserBean post_ub 		= new UserBean();
 	JoinCodeBean jcBean 	= new JoinCodeBean();
@@ -117,10 +120,26 @@
 	        |-------------------------------------------------------------------*/
 	        sc_ctrl.createPlayer();
 	        
+			/*--------------------------------------------------------------------
+	        |	Intialize user session
+	        |-------------------------------------------------------------------*/
 			HttpSession user_session = request.getSession(true);	    
 			session.setMaxInactiveInterval(7200);
-	        session.setAttribute("currentSessionUser",ub);
+	        
 	        int updateSession = ud.updateUserAfterLogin(ub.getUserid(), session.getId());
+	        
+	        checkSession 	= true;	
+			session 		= request.getSession(false);
+			session.setMaxInactiveInterval(7200);
+			
+			session.setAttribute("SITEID", ub.getSiteid());
+			session.setAttribute("SSID", ub.getUserid());
+			session.setAttribute("UID", ub.getUserid());
+			session.setAttribute("NICK", ub.getNick());
+			session.setAttribute("UCLEVEL", ub.getCharge_level());
+			session.setAttribute("UGRADE", ub.getGrade());
+			session.setAttribute("UBAL", ub.getMoney());
+			session.setAttribute("UPOINT", ub.getPoint());
 		}
 		
 		out.println(status);

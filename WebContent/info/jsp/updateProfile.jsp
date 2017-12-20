@@ -13,23 +13,23 @@
 	
 	
 
-	if(session.getAttribute("currentSessionUser") != null){
-		UserBean bean = (UserBean) session.getAttribute("currentSessionUser");
-	 	UserDao ud = new UserDao();
-	 	String bank_name = request.getParameter("bank_name").trim();
-		String bank_num = request.getParameter("bank_num").trim();
-		String bank_owner = request.getParameter("bank_owner").trim();
-		String cell = request.getParameter("cell").trim();
-		String cell_prefix = request.getParameter("cell_prefix").trim();
+	if(session.getAttribute("UID") != null){
+	 	UserDao ud 			= new UserDao();
+	 	String bank_name 	= request.getParameter("bank_name").trim();
+		String bank_num 	= request.getParameter("bank_num").trim();
+		String bank_owner 	= request.getParameter("bank_owner").trim();
+		String cell 		= request.getParameter("cell").trim();
+		String cell_prefix 	= request.getParameter("cell_prefix").trim();
 
 		boolean result = false;
 
-		result = ud.updateUserProfile(bean.getUserid(), bank_name, bank_owner,bank_num, cell_prefix,cell);
-		if(result){
-			//override session here
-			HttpSession user_session = request.getSession(true);	    
+		result = ud.updateUserProfile(session.getAttribute("UID"), bank_name, bank_owner,bank_num, cell_prefix,cell);
+		
+		if (result) {
+			/*	Override session here	*/
+			HttpSession user_session = request.getSession(true);
 			session.setMaxInactiveInterval(7200);
-	        session.setAttribute("currentSessionUser",ud.getUserInfoByUserid(bean.getUserid()));
+	        
 		}
 
 		out.println(result);

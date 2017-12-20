@@ -310,12 +310,11 @@
 			$.ajax({
 				url : '/login/jsp/get_session.jsp',
 				data : {},
+				dataType: 'json',
 				method: 'GET',
 				cache: false,
 			}).done(function(data){
-				var obj = JSON.parse(data);
-				var session = obj.result;
-			
+				var session = data.validUser;
 
 				if ((!session)
 				|| (false == session)

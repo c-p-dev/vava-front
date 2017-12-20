@@ -44,6 +44,9 @@ public class SpinCubeServlet extends HttpServlet {
 		SpinCubeController sc_ctrl		= new SpinCubeController("1_agent007");
 		PrintWriter output				= response.getWriter();
 		
+		String username					= "";
+		int site_id						= 0;
+		
 		if (method.equals(SC_METHOD_GET_TOKEN)) {
 			String srv_resp_1 	= "";
 			srv_resp_1 			= sc_ctrl.getToken();
@@ -118,10 +121,9 @@ public class SpinCubeServlet extends HttpServlet {
 			String srv_resp_7 	= "";
 			
 			try {
-				UserBean udata	=	(UserBean)request.getSession().getAttribute("currentSessionUser");
-				String uname	= Integer.toString(udata.getSiteid()).concat("_").concat(udata.getUserid());
+				username = Integer.toString(site_id).concat("_").concat(username);
 				
-				SpinCubeController sc_ctrl2		= new SpinCubeController(uname);
+				SpinCubeController sc_ctrl2		= new SpinCubeController(username);
 				srv_resp_7 			= sc_ctrl2.getBetPlaycheckUrl();
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block

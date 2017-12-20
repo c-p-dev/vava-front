@@ -8,7 +8,6 @@
 
 
 <%
-	//UserBean user_data	= (UserBean)session.getAttribute("currentSessionUser");
 	UserDao user_db	= new UserDao();
 	UserBean currentUser = user_db.getUserByUserId((String)session.getAttribute("UID"));
 %>

@@ -63,7 +63,6 @@ var loggedIn = <%=checkSession%>;
 $(document).ready(function(){	
 	if(loggedIn){
 		cValU();
-		//refreshMoney();
 	}		
 });
 
