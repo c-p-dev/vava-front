@@ -24,7 +24,7 @@
 	 	UID = (String)sess.getAttribute("UID");		
 	}
 				
-	DecimalFormat dfrmt	= new DecimalFormat("#,###,###,###,###");	
+DecimalFormat dfrmt	= new DecimalFormat("#,###,###,###,###");	
 				
 List<BettingListBean> bl = bm.getBetList(SITEID,UID);
 List<BettingSName> bs = bm.getBetSNames(SITEID,UID);
@@ -102,7 +102,7 @@ table.dataTable tbody tr{
 				console.log(item);
 				//console.log($scope.table);
 				//console.log(table);
-				table.columns(3).search(item).draw();
+				table.columns(9).search(item).draw();
 		  // $scope.sName = $scope.selectedItem.snames
 		  //console.log($scope.sName);
 		  
@@ -365,6 +365,7 @@ table.dataTable tbody tr{
 									<table  id="table1"  cellspacing="0" cellpadding="0" width="100%">
 										<thead>
 										<tr>
+											
 											<td class="list_table_t_1" width="5%" style="border-left:solid 1px #1c2021; border-right:solid 1px #1c2021;"><input type="checkbox"  name="sa_sp" id="sa_sp" ></td>
 											<td class="list_table_t_1" width="12%" style="border-right:solid 1px #1c2021;">베팅 NO.</td>
 											<td class="list_table_t_1" width="16%" style="border-right:solid 1px #1c2021;">일시</td>
@@ -374,6 +375,7 @@ table.dataTable tbody tr{
 											<td class="list_table_t_1" width="12%" style="border-right:solid 1px #1c2021;">배당율</td>
 											<td class="list_table_t_1" width="12%" style="border-right:solid 1px #1c2021;">예상적중금액</td>
 											<td class="list_table_t_1" width="6%" style="border-right:solid 1px #1c2021;">폴더</td>
+											<td class="list_table_t_1" width="12%" style="border-right:solid 1px #1c2021;">a</td>
 											
 										</tr>
 									</thead>
@@ -385,33 +387,41 @@ table.dataTable tbody tr{
 										
 										for (int k=0; k < bl.size() ; k++){
 											String fn = "다폴더";
+											String etc = " 외";
+											String fullsname = "";
+											
 											BettingListBean blb = (BettingListBean) bl.get(k);
 											
 											if(blb.getScnt().equals("1")){
 												fn = "싱글";
+												etc = "";
 											}
 											String sname="";
+												
+											for (int i = 0; i < bs.size(); i++){		
 											
-											boolean chk = false;	
-											
-											for (int i = 0; i < bs.size(); i++){							
 												BettingSName bsn = bs.get(i);			
+												boolean chk = false;
 															
 													if(bsn.getBgid().equals(blb.getBgid())){	
 														
-														if(chk){							
-															sname += " 외";															
-														}else{
-															sname =bsn.getSNames();
-															chk = true;
-														}
+														//if(chk){							
+														//	sname += " 외";		
+														//	chk = false;													
+														//}else{
+															sname = bsn.getSNames();
+															fullsname = fullsname+" "+sname;
+														//	chk = true;
+														//}
 									
 													}
 											}
+											
+											sname = sname + etc;
 									
 							%>
-								<tr id='<%=blb.getBgid()%>' style="cursor: pointer">
-									<td class="acc_list_check_1" style="border-left:solid 1px #1c2021; border-right:solid 1px #1c2021;"><input type="checkbox" id="cb2" name="cb" value="<%=blb.getBgid()%>"></td>
+								<tr id='<%=blb.getBgid()%>' style="cursor: pointer">									
+									<td class="acc_list_check_1" style="border-left:solid 1px #1c2021; border-right:solid 1px #1c2021;"><input type="checkbox" name="cb" value="<%=blb.getBgid()%>"></td>
 									<td class="acc_list_num"  onmouseover="CBg(this)" onmouseout="RBg(this)" style="border-right:solid 1px #1c2021;" onClick="selBet('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>"><%=blb.getBgid()%></td>
 									<td class="acc_list_time"  onmouseover="CBg(this)" onmouseout="RBg(this)" style="border-right:solid 1px #1c2021;" onClick="selBet('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>"><%=blb.getBdate()%></td>
 									<td class="acc_list_event"  onmouseover="CBg(this)" onmouseout="RBg(this)" style="border-right:solid 1px #1c2021;" onClick="selBet('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>"><%=sname%></td>
@@ -454,7 +464,8 @@ table.dataTable tbody tr{
 							<%
 							}
 							%>	
-									<td class="acc_list_folder" onmouseover="CBg(this)" onmouseout="RBg(this)" style="border-right:solid 1px #1c2021;" onClick="selBet('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>"><%=fn%></td>												
+									<td class="acc_list_folder" onmouseover="CBg(this)" onmouseout="RBg(this)" style="border-right:solid 1px #1c2021;" onClick="selBet('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>"><%=fn%></td>						
+									<td class="acc_list_check_1"><%=fullsname%></td>						
 								</tr>
 											
 						<%
@@ -571,6 +582,11 @@ table.dataTable tbody tr{
 
 								"columnDefs": [ 
 									{
+				            "targets": [9],
+				            "visible": false,
+				            "searchable": true
+				          },
+				          {
 				            "targets": [2],
 				            "visible": true,
 				            "searchable": true
@@ -604,15 +620,17 @@ table.dataTable tbody tr{
 					    function( settings, data, dataIndex ) {
 					        var min  = $('#bfd1').val();					        
 					        var max  = $('#bdt1').val();
+					        var max2 =  moment(max).add('days', 1);
 					        
 					        var createdAt = data[2] || 0; // Our date column in the table
 
-					        if((min== ""||max== "")||( moment(createdAt).isSameOrAfter(min) && moment(createdAt).isSameOrBefore(max) ) ){
+					        if((min== ""||max2== "")||( moment(createdAt).isSameOrAfter(min) && moment(createdAt).isSameOrBefore(max2) ) ){
 					            return true;
 					        }
 					        return false;
 					    }
 						);
+						
 				
 						    	function d1(){
 										var dateFrom = $("#bfd1").val();
@@ -702,7 +720,7 @@ table.dataTable tbody tr{
 																																				
 								%>
 								<tr style="cursor: pointer">
-									<td class="acc_list_check" style="border-left:solid 1px #1c2021; border-right:solid 1px #1c2021;"><input type="checkbox" id="cb2" name="cb" value="<%=blb_ag.getBgid()%>"></td>
+									<td class="acc_list_check" style="border-left:solid 1px #1c2021; border-right:solid 1px #1c2021;"><input type="checkbox" name="cb" value="<%=blb_ag.getBgid()%>"></td>
 									<td class="acc_list_num" style="border-right:solid 1px #1c2021;"><%=blb_ag.getBgid()%></td>
 									<td class="acc_list_time" style="border-right:solid 1px #1c2021;"><%=blb_ag.getRegdt()%></td>
 							
@@ -920,7 +938,7 @@ table.dataTable tbody tr{
 																				
 								%>
 								<tr style="cursor: pointer">
-									<td class="acc_list_check" width="5%"><input type="checkbox" id="cb2" name="cb" value="<%=blb_sc.getBgid()%>"></td>
+									<td class="acc_list_check" width="5%"><input type="checkbox"  name="cb" value="<%=blb_sc.getBgid()%>"></td>
 									<td class="acc_list_num" width="7%"><%=blb_sc.getBgid()%></td>
 									<td class="acc_list_time"  width="7%"><%=blb_sc.getRegdt()%></td>
 									<td class="acc_list_time"  width="21%"><%=wd%></td>
@@ -1116,7 +1134,7 @@ table.dataTable tbody tr{
 																						
 								%>
 								<tr style="cursor: pointer">
-									<td class="acc_list_check" width="5%"  ><input type="checkbox" id="cb2" name="cb" value="<%=blb_mg.getBgid()%>"></td>
+									<td class="acc_list_check" width="5%"  ><input type="checkbox"  name="cb" value="<%=blb_mg.getBgid()%>"></td>
 									<td class="acc_list_num" width="7%" ><%=blb_mg.getBgid()%></td>
 									<td class="acc_list_time"  width="7%" ><%=blb_mg.getRegdt()%></td>
 									<td class="acc_list_time"  width="21%" ><%=wd%></td>

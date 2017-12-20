@@ -72,7 +72,7 @@
 			
 			<div width="100%" ng-if="pm_mode=='t'">				
 						
-				<a href="#" ng-click="todayMatch(date0)" ng-class="{live_tab_on:tabDt == date0,live_tab:tabDt !=date0}" >
+				<a ng-if="(PM|where:{Dt:date0}).length>0" href="#" ng-click="todayMatch(date0)" ng-class="{live_tab_on:tabDt == date0,live_tab:tabDt !=date0}" >
 					<span class="live_tab_text">오늘 경기</span><span class="live_tab_count_1"> {{ (PM|where:{Dt:date0}).length }}</span>
 				</a>	
 				
