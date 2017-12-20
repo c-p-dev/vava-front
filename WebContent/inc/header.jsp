@@ -32,6 +32,7 @@
 	}
 	
 	IP = request.getRemoteAddr();
+	DecimalFormat dfrmt_h	= new DecimalFormat("#,###,###,###,###");	
 %>
 
 
@@ -514,8 +515,8 @@ $(window).scroll(function(event){
 	        	if(checkSession){
 	       	%>
 			<ul class="util_right">
-	        	<li class = 'hdr-money-row'>머니 <span class="util_money money_dsp"><%=dfrmt.format(UBAL)%></span></li>
-	        	<li>포인트 <span class="util_point point_dsp"><%=dfrmt.format(UPOINT)%></span></li>
+	        	<li class = 'hdr-money-row'>머니 <span class="util_money money_dsp"><%=dfrmt_h.format(UBAL)%></span></li>
+	        	<li>포인트 <span class="util_point point_dsp"><%=dfrmt_h.format(UPOINT)%></span></li>
 	            <li>
 					<span class="popover-wrapper right">
 						<a href="#" data-role="popover" data-target="example-popover-2"><img src="/images/select_mark.png"></a>
@@ -523,10 +524,10 @@ $(window).scroll(function(event){
 							<div class="popover-body" >
 								<a href="#" data-toggle-role="close" style="position:absolute; right:20px; top:0px">×</a>
 								<div class="popover-body-in">
-									<span class="popover_t">보유머니</span> <span class="popover_money"><%=dfrmt.format(UBAL)%></span>
+									<span class="popover_t">보유머니</span> <span class="popover_money"><%=dfrmt_h.format(UBAL)%></span>
 								</div>
 								<div class="popover-body-in">
-									<span class="popover_t">보유포인트</span> <span class="popover_money"><%=dfrmt.format(UPOINT)%></span>
+									<span class="popover_t">보유포인트</span> <span class="popover_money"><%=dfrmt_h.format(UPOINT)%></span>
 								</div>
 								<div class="popover-body-btn" id="user_popup_menu">
 									<div class="popover-body-btn_in">
