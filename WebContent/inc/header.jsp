@@ -32,7 +32,6 @@
 	}
 	
 	IP = request.getRemoteAddr();
-	DecimalFormat dfrmt	= new DecimalFormat("#,###,###,###,###");	
 %>
 
 
