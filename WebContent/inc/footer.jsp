@@ -59,10 +59,12 @@
 
 var lgCheck;
 var loggedIn = <%=checkSession%>; 
+var bal;
 
 $(document).ready(function(){	
 	if(loggedIn){
 		cValU();
+		updateBal();
 	}		
 });
 
@@ -70,7 +72,6 @@ function cValU(){
 	clearInterval(lgCheck);
 	lgCheck = setInterval(function(){
 		
-		console.log("check validity user");
 		$.ajax({
 			url : '/login/jsp/get_session.jsp',
 			data : {},
@@ -93,6 +94,61 @@ function cValU(){
 
 	}, 60000); //1 min
 }
+
+	function updateBal() {	
+		clearInterval(bal);		
+		bal = setInterval(function(){
+			
+	 		$.ajax({
+				url: '/inc/UpdateBal.jsp',
+				data : {},
+				method: 'GET',
+				cache: false,
+			}).done(function(data){				
+				
+				
+				var obj = JSON.parse(data);
+				console.log(obj);
+				console.log(obj.R);
+							
+				if(obj.R){
+					
+					var cp = '<%=cp%>';	
+					if(cp == '/sport/prematch.jsp' || cp == '/sport/livematch.jsp'){
+						ISLOGIN.a = obj.uid;
+						console.log("UPDATED BAL");
+					}	
+					
+					
+					$.ajax({
+						url : '/login/jsp/get_header.jsp', //jsp				
+						data : {},
+						method: 'GET',
+					}).done(function(data){					
+					//	console.log(data);		
+						var obj = JSON.parse(data);
+						$("#uhead").html(obj.header);
+						//createPopup(obj.popup);
+						//$("#loginModal").html(lgMsg);	
+						//$("#fade_3").popup("hide");
+						//$('a.get-vbet-hist').parent().show();
+						
+					});
+				
+					console.log("UPDATED BAL");
+					
+				} else {
+					console.log("NOT UPDATED BAL");
+				}
+				
+				data=null;
+			}).error(function(data, status, headers, config) {
+				console.log(status);
+				data=null;
+			});
+		}, 60*1000); //1 min
+	}
+ 	
 </script>
 <!--
 

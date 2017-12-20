@@ -30,8 +30,9 @@ var s=[
 		{"PID":25,"u":"jsp/setMultiBet.jsp"},
 		{"PID":26,"u":"jsp/setSingleBet.jsp"},
 		{"PID":27,"u":"jsp/getUserBalance.jsp"},
-		{"PID":28,"u":"jsp/getCart.jsp"}
-		
+		{"PID":28,"u":"jsp/getCart.jsp"},
+		{"PID":29,"u":"jsp/getUserInfo.jsp"},
+		{"PID":30,"u":"jsp/updateHeader.jsp"}
 		]
   		
 mainAngular.factory('wss', function($window) {
@@ -305,10 +306,53 @@ mainAngular.controller("mc", function($window,$scope, $templateCache, $compile, 
     $scope.ISLG = checkSession;
     $scope.UID = UID;
 	  $scope.ubal = UBAL;
-	  
-	  $scope.BL = "N";
-	  
-	
+	  	  
+		ISLOGIN = {
+	  aInternal: $scope.ISLG,
+	  aListener: function(val) {},
+	  set a(val) {
+	    this.aInternal = val;
+	    this.aListener(val);
+	  },
+	  get a() {
+	    return this.aInternal;
+	  },
+	  registerListener: function(listener) {
+	    this.aListener = listener;
+	  }
+	}
+
+		ISLOGIN.registerListener(function(val) {
+			$scope.ISLG = ISLOGIN.a;
+			console.log("ISLOGIN.a:"+ISLOGIN.a)
+		  //alert("Someone changed the value of x.a to " + val);
+		  console.log("getFavMatch");		
+			getFavMatch();
+			$scope.getCart(); 
+			//getUserInfo();
+			$scope.getHeader();
+			
+		});
+  
+  	$scope.BL = "N";
+  	
+ 		function getUserInfo() {	
+ 		
+		 $http({
+				method: 'GET', 
+				url: s[29].u,  
+				headers: {'Content-Type': 'application/json; charset=utf-8'} 
+			}).success(function(data, status, headers, config) {				
+			
+			$scope.ubal = data.M;
+			
+			data=null;
+			}).error(function(data, status, headers, config) {
+				console.log(status);
+				data=null;
+			});
+ 	};
+ 
 	function sub_loadBlockMatch(response) {		
 			
 			$scope.BLR = response;
@@ -535,17 +579,14 @@ mainAngular.controller("mc", function($window,$scope, $templateCache, $compile, 
 					console.log("$scope.bet");
 					console.log($scope.bet);
 
-				});
-				data = null;
-				
+				});				
+				data = null;				
 			};
 			
 			}).error(function(data, status, headers, config) {
 				console.log(status);
 				data = null;
 			});
-			
-	  
 	  };
 		
 	};
@@ -557,11 +598,10 @@ mainAngular.controller("mc", function($window,$scope, $templateCache, $compile, 
     console.log("$window.sessionStorage:"+$window.sessionStorage.length);
   }
   
-  if($scope.ISLG&&$scope.UID!="-1"){
+  if($scope.ISLG){
 		$scope.getCart(); 
 	}
 	   
-
 	 $scope.goLiveMatch = function (left,center) {	  	
 	  	loadLiveMatchInit();
 	  	//preMatchCnt();  
@@ -650,9 +690,7 @@ mainAngular.controller("mc", function($window,$scope, $templateCache, $compile, 
  
  
 	  $scope.goPreMatchMarket = function (tab,ht,at,sid,mid,idx) {	
-	  	
-	  	
-	  	
+
 	  	$scope.mTyId ="ALL";
 	  	
 	  	console.log("$scope.mTyId:"+$scope.mTyId);
@@ -734,7 +772,7 @@ mainAngular.controller("mc", function($window,$scope, $templateCache, $compile, 
 					if($scope.bet[i].Sd == sd){
 						$scope.bet = $filter('omit')($scope.bet,'Sd ==' + sd);  // delete ID		
 						
-						if($scope.ISLG&&$scope.UID!="-1"){
+						if($scope.ISLG){
 							$scope.addCart($scope.UID);
 						}
 						
@@ -765,7 +803,7 @@ mainAngular.controller("mc", function($window,$scope, $templateCache, $compile, 
 	   		SuK:false
 			});		
 			
-			if($scope.ISLG&&$scope.UID!="-1"){
+			if($scope.ISLG){
 				$scope.addCart($scope.UID);
 			}
 				
@@ -814,7 +852,7 @@ mainAngular.controller("mc", function($window,$scope, $templateCache, $compile, 
 				};
 			};
 			
-			if($scope.ISLG&&$scope.UID!="-1")
+			if($scope.ISLG)
 				$scope.addCart($scope.UID);
 				
 			if($scope.bet.length < 1) $scope.betE = false;	
@@ -829,7 +867,7 @@ mainAngular.controller("mc", function($window,$scope, $templateCache, $compile, 
 						$scope.bet.splice(i,1);
 			};	
 			
-			if($scope.ISLG&&$scope.UID!="-1")
+			if($scope.ISLG)
 				$scope.addCart($scope.UID);
 				
 			$scope.betE = false;
@@ -1022,7 +1060,11 @@ mainAngular.controller("mc", function($window,$scope, $templateCache, $compile, 
 	
 	
 	if($scope.ISLG){	
-			 
+		console.log("getFavMatch");		
+		getFavMatch();
+	}
+
+	function getFavMatch(){ 
 		$http({
 				method: 'GET', 
 				url: s[8].u, //'jsp/getFavMatch.jsp', 
@@ -1281,6 +1323,14 @@ mainAngular.controller("mc", function($window,$scope, $templateCache, $compile, 
 		  }); 
 		};
 		
+		if($scope.PM.filter(function (el) { return el.Dt == $scope.date0; }).length>0){
+  		getTodayMatchInfo("2");
+  		
+  	} else {
+			getTodayMatchInfo($scope.date1);
+			$scope.tabDt = $scope.date1;
+  	}
+
 		data = null;
 		
 		}).error(function(data, status, headers, config) {
@@ -1317,7 +1367,14 @@ mainAngular.controller("mc", function($window,$scope, $templateCache, $compile, 
   		//console.log($scope.tabCId);
   	
   		//getMatchInfobyCompetition($scope.tabCId);  	
-  		getTodayMatchInfo($scope.date0);
+  		
+  		if($scope.PM.filter(function (el) { return el.Dt == $scope.date0; }).length>0){
+  				getTodayMatchInfo($scope.date0);
+  		
+  		} else {
+  			 getTodayMatchInfo($scope.date1);
+  				$scope.tabDt = $scope.date1;
+  		}
   	
 			data = null;
 			
@@ -1726,7 +1783,7 @@ mainAngular.controller("mc", function($window,$scope, $templateCache, $compile, 
 				headers: {'Content-Type': 'application/json; charset=utf-8'} 
 		}).success(function(data, status, headers, config) {
 				
-				
+			/*	
 				if(data[0].Re[0] == 'undefined' || data[0].Re.length<1){
 					//ret=ret+1;					
 					//var myVar = setTimeout(subLoadLiveMatch(mid), 1000*20);
@@ -1736,6 +1793,7 @@ mainAngular.controller("mc", function($window,$scope, $templateCache, $compile, 
 					console.log("return [MId]:" + mid);
 					return;
 				}
+			*/
 				
 				console.log(data);
 				console.log(data[0].Mt);
@@ -3386,6 +3444,7 @@ mainAngular.controller("mc", function($window,$scope, $templateCache, $compile, 
 		$http({
 				method: 'GET', 
 				url: s[19].u, 
+				//params: {'mid':mid,'f':f},
 				params: {'mid':mid,'f':f},
 				headers: {'Content-Type': 'application/json; charset=utf-8'} 
 		}).success(function(data, status, headers, config) {
@@ -3629,7 +3688,7 @@ $scope.betProcM = function() {
 			$scope.getHeader(); 	
 			$scope.bet = [];
 			
-			if($scope.ISLG&&$scope.UID!="-1"){
+			if($scope.ISLG){
 				$scope.addCart($scope.UID);
 			}
 			
@@ -3747,7 +3806,7 @@ $scope.betProcS = function() {
 			$scope.getHeader(); 
 			$scope.bet = [];
 			
-			if($scope.ISLG&&$scope.UID!="-1"){
+			if($scope.ISLG){
 				$scope.addCart($scope.UID);
 			}
 			
@@ -3772,13 +3831,14 @@ $scope.getHeader = function() {
 	
 	 	$http({
 		method: 'POST', 
-		url: '/login/jsp/get_header.jsp',  
+		url: s[30].u, 
 		headers: {'Content-Type': 'application/json; charset=utf-8'} 
 	}).success(function(data, status, headers, config) {	
 	
-		//console.log(data)
+		//console.log(data.header)
 		
 		$("#uhead").html(data.header);
+		$scope.ubal = data.BAL;
 		
 		data=null;
 		
@@ -3787,6 +3847,7 @@ $scope.getHeader = function() {
 		data=null;
 	});
 }
+
 
 }); // end
 
