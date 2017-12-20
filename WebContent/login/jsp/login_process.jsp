@@ -126,5 +126,6 @@
 	HashMap<String, Object> hsm = new HashMap<String, Object>();
 	
 	hsm.put("result",response_code);
+	hsm.put("uid",userid);
 	out.println(gson.toJson(hsm).toString());
 %>

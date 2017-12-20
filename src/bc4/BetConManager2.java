@@ -16,6 +16,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import bean.*;
+import util.DBConnector;
 
 public class BetConManager2 {
 
@@ -2437,7 +2438,8 @@ public class BetConManager2 {
 		  
 		  List<BettingListBean> bl = new ArrayList<BettingListBean>();
 		  
-		  String query1 = " select bgid,bet_money,expect_rate,expect_money,sel_cnt,bgresult,convert(char(19),betdate,120) as betdate from bc_bet_grp where viewtype='Y' and siteid="+SITEID+" and userid='"+UID+"' ";
+		  String query1 = " select bgid,bet_money,expect_rate,expect_money,sel_cnt,bgresult,convert(char(19),betdate,120) as betdate "+
+				  		" from bc_bet_grp where viewtype='Y' and siteid="+SITEID+" and userid='"+UID+"' order by bgid desc";
 		  
 		  /*
 		  String query2 =" select txt,bgid,count(*) cnt from  bc_trans a2, ( "+
@@ -2552,7 +2554,7 @@ public class BetConManager2 {
 	}
 	
 	
-	public boolean detBetList(String[] bid,String st,String mid) throws SQLException{
+	public boolean detBetList(String SITEID, String UID, String[] bid,String st) throws SQLException{
 		
 		  Connection con = null;
 		  PreparedStatement pstmt = null;
@@ -2569,16 +2571,16 @@ public class BetConManager2 {
 		    
 		  //String query1 ="update bc_bet_grp set viewtype='N' where userid='matthew' and bgid IN ? ";
 		  if(st.equals("SP")){
-			  query1 ="update bc_bet_grp set viewtype='N' where userid='"+mid+"' and bgid IN (" + sb.toString() + ")";
+			  query1 ="update bc_bet_grp set viewtype='N' where siteid="+SITEID+" and userid='"+UID+"' and bgid IN (" + sb.toString() + ")";
 			  
 		  } else if(st.equals("SC")){
-			  query1 ="update spincube_lst set viewtype='N' where userid='"+mid+"' and scid IN (" + sb.toString() + ")";
+			  query1 ="update spincube_lst set viewtype='N' where siteid="+SITEID+" and userid='"+UID+"' and scid IN (" + sb.toString() + ")";
 		  
 		  } else if(st.equals("MG")){
-			  query1 ="update micro_game set viewtype='N' where userid='"+mid+"' and mgid IN (" + sb.toString() + ")";
+			  query1 ="update micro_game set viewtype='N' where siteid="+SITEID+" and userid='"+UID+"' and mgid IN (" + sb.toString() + ")";
 			  
 		  }  else if(st.equals("AG")){
-			  query1 ="update asiagame_lst set viewtype='N' where userid='"+mid+"' and agid IN (" + sb.toString() + ")";
+			  query1 ="update asiagame_lst set viewtype='N' where siteid="+SITEID+" and userid='"+UID+"' and agid IN (" + sb.toString() + ")";
 		  }
 		  
 		  Debug.out("query1 : " + query1);
@@ -2938,9 +2940,9 @@ public class BetConManager2 {
 		  String amt ="0";
 
 		  String query1 ="select top 1 dbo.fnMaxBet(?,?,?) amt from bc_sport ";
-		  String query2 ="select top 1 dbo.fnMaxBet("+sel+","+sid+","+uid+") amt from bc_sport ";
+		  //String query2 ="select top 1 dbo.fnMaxBet("+sel+","+sid+","+uid+") amt from bc_sport ";
 
-		  Debug.out("[getMaxBetAmt] : " + query2);
+		  Debug.out("[getMaxBetAmt] : " + query1);
 		  Debug.out("[sel] : " + sel);
 	  		
 		  try{	      	
@@ -3188,8 +3190,86 @@ public class BetConManager2 {
 		  	}
 	  
 		  return csl;
-	
 	}
+	
+	
+	public UserBean getUserInfo(String SITEID,String UID){
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String  query = "SELECT userid,money,point FROM user_mst WHERE siteid="+SITEID+"  and userid = '"+UID+"'" ;
+		//boolean result = false;
+		UserBean ub = new UserBean();
+		
+		try {
+			con = ds.getConnection();			    
+		    pstmt = con.prepareStatement(query);
+            
+			rs = pstmt.executeQuery();
+            
+            if (rs.next()) {
+            	ub.setPoint(rs.getInt("point"));
+            	ub.setUserid(rs.getString("userid"));
+            	ub.setMoney(rs.getInt("money"));    	            	
+            }
+            
+            rs.close();
+	        pstmt.close();
+	        con.close();
+		}
+		catch(Exception e) {
+			//logger.debug(e);
+		}
+		
+		return ub;
+	}
+	
+	public UserBean getHeader(String SITEID, String UID) throws SQLException{
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;		
+		UserBean uib = new UserBean();
+		String query = "SELECT * FROM user_mst WHERE state='NORMAL' and userid = ? and siteid= ?";
+		
+		int nproc = 0;
+
+		try {
+			con = ds.getConnection();			
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1,UID);
+			pstmt.setString(2,SITEID);
+			rs = pstmt.executeQuery();
+					   
+			if(rs.next()){
+				//uib.setLoginStatus(0); //success
+				uib.setSiteid(rs.getInt("siteid"));
+				uib.setUserid(rs.getString("userid"));
+				uib.setNick(rs.getString("nick"));
+				uib.setCharge_level(rs.getString("charge_level"));
+				uib.setGrade(rs.getInt("grade"));					
+				uib.setMoney(rs.getInt("money"));
+				uib.setPoint(rs.getInt("point"));					
+			}
+			
+	        rs.close();
+	        pstmt.close();
+	        con.close();
+	        	     
+		} catch(Exception e){
+		       	e.printStackTrace();
+		
+		} finally{
+		 	  if(rs!=null) rs.close();
+		 	  if(pstmt!=null) pstmt.close();
+		 	  if(con!=null) con.close();
+		}
+  	
+	  	return uib;
+	}
+
+
 }
 
 
