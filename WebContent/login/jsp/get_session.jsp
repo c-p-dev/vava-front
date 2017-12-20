@@ -16,7 +16,7 @@
 
 	if(UID != null){
 			UserDao user_db 	=  new UserDao();
-			SSID = user_db.getUserSSID(SITEID,UID,sess.getId());
+			SSID 				= user_db.getUserSSID(SITEID, UID, session.getId());
 	}
 
 	hsm.put("validUser",SSID);
