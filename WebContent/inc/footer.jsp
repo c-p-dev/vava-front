@@ -61,8 +61,9 @@ var lgCheck;
 var loggedIn = <%=checkSession%>; 
 
 $(document).ready(function(){	
-	if(loggedIn){
+	if (loggedIn) {
 		cValU();
+		refreshMoney();
 	}		
 });
 

@@ -4,6 +4,7 @@ public class BcTransactionLogBean {
 	
 	private int transaction_id;
 	private int playerId;
+	private int gameId;
 	private int rgs_id;
 	private int rgs_related_id;
 	private String token;
@@ -19,7 +20,6 @@ public class BcTransactionLogBean {
 		return transaction_id;
 	}
 	
-	
 	public void setTransaction_id(int transaction_id) {
 		this.transaction_id = transaction_id;
 	}
@@ -30,6 +30,14 @@ public class BcTransactionLogBean {
 	
 	public void setPlayerId(int playerId) {
 		this.playerId = playerId;
+	}
+	
+	public int getGameId() {
+		return gameId;
+	}
+
+	public void setGameId(int gameId) {
+		this.gameId = gameId;
 	}
 	
 	public int getRgs_id() {
