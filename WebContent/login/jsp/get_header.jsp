@@ -58,6 +58,9 @@
 			"        <span class=\"logo\"><a href=\"/\"><img src=\"/images/logo.png\"></a></span>\n" + 
 			"            <ul class=\"top_right\" id=\"user_menu_lst\">\n " + 
 			"                <li><img src = \"/images/level/"+ UGRADE+".png\" style=\"position: relative; top: -11px; left: -1px; height: 45px;\" ></li> " +
+			"				<li><a href=\"/info/info.jsp\" data-pg=\"sb5\" data-tab=\"tab4\" ><i class=\"fa fa-envelope msg-notif\" aria-hidden=\"true\"></i></a>"+
+            "					<div class=\"msg-cont\"></div>" + 
+            "				</li>\n" +
 			"                <li>\n" + 
 			"					<div class=\"select open\">\n" + 
 			"						<button type=\"button\" class=\"myValue top_value\"> "+ NICK + " </button>\n" + 

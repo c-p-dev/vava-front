@@ -24,6 +24,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import bean.MessageBean;
+import bean.QnaBean;
 import bean.UserBean;
 
 public class MessageDao {
@@ -117,5 +118,46 @@ public class MessageDao {
 		return result;
 		
 	}
+	
+	public int countMsg(MessageBean mBean) throws SQLException {
+		
+		int count = 0;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String query = "SELECT count(*) as msg_count FROM msg_lst WHERE recv_userid = ? AND gubun = 'MSG' AND viewtype='Y' AND send_siteid = ? AND recv_date IS NULL";
 
+		try {
+			DBConnector.getInstance();
+			con = DBConnector.getConnection();
+			
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, mBean.getRecv_userid());
+		    pstmt.setInt(2, mBean.getSend_siteid());
+			rs = pstmt.executeQuery();
+					   
+			if(rs.next()){
+				System.out.println("count : " + rs.getInt("msg_count"));
+				System.out.println("recv_userid : " + mBean.getRecv_userid());
+				System.out.println("siteid : " +  mBean.getRecv_siteid());
+				count = rs.getInt("msg_count");
+			}
+			
+	        rs.close();
+	        pstmt.close();
+	        con.close();
+	  		    
+		} catch(Exception e){
+		       	e.printStackTrace();
+		
+		} finally{
+		 	  if(rs!=null) rs.close();
+		 	  if(pstmt!=null) pstmt.close();
+		 	  if(con!=null) con.close();
+		}
+  	
+	  	return count;
+		
+	}
 }
