@@ -164,6 +164,7 @@ $(window).scroll(function(event){
 
 
 	$(document).ready(function(){
+		console.log('<%=IP%>');
 		console.log(navigator.userAgent);
 		if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 			window.location = "http://m.vava21.com";
