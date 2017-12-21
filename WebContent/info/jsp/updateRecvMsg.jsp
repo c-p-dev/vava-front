@@ -11,16 +11,17 @@
 
 <%
 
-	MessageDao qDao = new MessageDao();
-	MessageBean qBean = new MessageBean();
+	MessageDao mDao = new MessageDao();
+	MessageBean mBean = new MessageBean();
 
-	int msg = Integer.parse(request.getParameter('msgid'));
+	int msg = Integer.parseInt(request.getParameter("msgid"));
 	
-	qBean.setUserid(UID);
-	qBean.setMsgid(msg);
+	mBean.setRecv_userid(UID);
+	mBean.setMsgid(msg);
 	
+	Gson gson = new Gson();
 	HashMap<String, Object> hsm = new HashMap<String, Object>();
-	boolean res = qDao.updateRecvMessage(qBean);
+	boolean res = mDao.updateRecvMessage(mBean);
 	
 	hsm.put("result", res);
 	out.println(gson.toJson(res).toString());

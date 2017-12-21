@@ -98,6 +98,26 @@ var UBAL = <%=UBAL%>;
     	height: 600px!important;
 		
 	}
+	.msg-notif{
+		font-size: 30px;
+    	padding: 5px;
+   		margin-right: 10px;
+   		color: #3d4142;
+	}
+	.msg-cont{
+		position: relative;
+	}
+	.msg-notif-count{
+		width: 15px;
+	    height: 15px;
+	    border-radius: 50%;
+	    border: 3px solid #0c841b;
+	    box-shadow: 0 0 0 2px #2d3f35, 0 0 0 3px #0c841b;
+	    text-align: center;
+	    position: absolute;
+	    top: -44px;
+	    left: 23px;
+	}		
 
 </style>
 
@@ -384,6 +404,11 @@ $(window).scroll(function(event){
 			window.location = "/login/jsp/logout_process.jsp";
 		})
 
+		if(checkSession){
+			console.log('counting msgs...');
+			loadMsgCount();
+		}
+
 	});
 
 	function submitLoginHeader(data){
@@ -409,19 +434,19 @@ $(window).scroll(function(event){
 					url : '/login/jsp/get_header.jsp', //jsp				
 					data : {},
 					method: 'GET',
-				}).done(function(data){
-					
-					console.log(data);
-					
-
+				}).done(function(data){					
+				//	console.log(data);		
 					var obj = JSON.parse(data);
 					$("#uhead").html(obj.header);
 					createPopup(obj.popup);
 					$("#loginModal").html(lgMsg);	
 					$("#fade_3").popup("hide");
 					$('a.get-vbet-hist').parent().show();
+					loadMsgCount();
+
 					
 				});
+			
 
 			}else if(obj.result == 1 ){
 				
@@ -495,6 +520,23 @@ $(window).scroll(function(event){
 		$(html).insertAfter('#logoutModal');
 
 
+	}
+
+	function loadMsgCount(){
+		$.ajax({
+			url : '/login/jsp/get_msgcount.jsp',
+			data : {},
+			method: 'GET',
+		}).done(function(data){
+			var obj = JSON.parse(data);
+			var html = "";
+			if(obj.count > 0){
+				html  = "<span class='msg-notif-count'>"+obj.count+"</span>";
+			}
+
+			$(".msg-cont").html(html);
+
+		});
 	}
 
 	
@@ -571,6 +613,11 @@ $(window).scroll(function(event){
 	      				%>
 		                <ul class="top_right" id="user_menu_lst">
 		                	<li><img src = "/images/level/<%=UGRADE%>.png" style="position: relative; top: -11px; left: -1px; height: 45px;"></li>
+		                	<li>
+            					<a href="/info/info.jsp" data-pg="sb5" data-tab="tab4" > <i class="fa fa-envelope msg-notif" aria-hidden="true"></i> </a>
+            					<div class="msg-cont"></div>
+            					
+            				</li>
 		                    <li>
 								<div class="select open">
 									<button type="button" class="myValue top_value"><%=NICK%></button>

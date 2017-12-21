@@ -32,8 +32,7 @@ public class ChargeDao {
 	public static Logger logger = Logger.getLogger(ChargeDao.class);
 	
 	//public boolean saveChargeApplication(UserBean uBean,ChargeBean cBean) throws SQLException {
-	public boolean saveChargeApplication(String SITEID,String UID, String ao, String m, String IP) throws SQLException {
-	
+	public boolean saveChargeApplication(String SITEID,String UID, String ao, String m, String IP) throws SQLException {	
 	
 		//UserDao user_db		= new UserDao();
 		//UserBean user_data	= new UserBean(); 
@@ -43,16 +42,26 @@ public class ChargeDao {
 		Statement stmt = null;
 		int row = 0;
 		boolean result = false;
-		Date date = new Date();
+		//Date date = new Date();
 		
 		String  query = " DECLARE @INS_ID INT "+
 						" Declare @c_level varchar(10)"+
 						" Declare @c_cnt char(1)" + 
 						" Declare @u_grd int " +
-						" select @c_level = charge_level,@u_grd =grade from user_mst  WHERE siteid="+SITEID+" and userid = '"+UID+"'" +		
+						" Declare @bank_name varchar(30) " +
+						" Declare @bank_num varchar(30) " +
+						" Declare @bank_owner varchar(30) " +						
+						//" select @c_level = charge_level,@u_grd =grade from user_mst  WHERE siteid="+SITEID+" and userid = '"+UID+"'" +							
+						" select @c_level=charge_level,@u_grd=grade,@bank_name = bank_name, @bank_num=bank_num, @bank_owner=bank_owner from ( "+
+						" select charge_level,grade, "+
+						" case  when charge_level='JOIN' then bank_join_name when charge_level='LOW' then bank_low_name when  charge_level='MIDDLE' then bank_middle_name when  charge_level='HIGH' then bank_high_name end bank_name, "+
+						" case  when charge_level='JOIN' then bank_join_num when charge_level='LOW' then bank_low_num when  charge_level='MIDDLE' then bank_middle_num when  charge_level='HIGH' then bank_high_num end bank_num, "+
+						" case  when charge_level='JOIN' then bank_join_owner when charge_level='LOW' then bank_low_owner when  charge_level='MIDDLE' then bank_middle_owner when  charge_level='HIGH' then bank_high_owner end bank_owner "+
+						" from user_mst a, config_mst b WHERE a.siteid="+SITEID+" and a.userid = '"+UID+"' and a.siteid = b.siteid  "+
+						" ) aa "+						
 						" select @c_cnt = case when count(*)=0 then 'F' when  count(*) >0 then 'C' end from charge_lst  WHERE siteid="+SITEID+" and userid = '"+UID+"' and convert(char(8),regdate,112) = convert(char(8),getdate(),112)"+
-						"INSERT INTO charge_lst (userid,siteid,charge_level,bank_owner,money, user_grade,regdate,chstate,ip,viewtype,money_req,chtype,bonus) "+
-						" VALUES ('"+UID+"',"+SITEID+",@c_level,'"+ao+"','"+m+"',@u_grd,GETDATE(),'WAIT','"+IP+"','Y','"+m+"',@c_cnt,0)"+
+						"INSERT INTO charge_lst (userid,siteid,charge_level,bank_name, bank_owner, bank_num, money, user_grade,regdate,chstate,ip,viewtype,money_req,chtype,bonus) "+
+						" VALUES ('"+UID+"',"+SITEID+",@c_level,@bank_name,@bank_owner,@bank_num ,'"+m+"',@u_grd,GETDATE(),'WAIT','"+IP+"','Y','"+m+"',@c_cnt,0)"+
 						" SET @INS_ID = @@IDENTITY " +
 						" IF @INS_ID>0 "+						
 						//" INSERT INTO account_lst (userid,siteid,job,jobid,moneypoint,money,regdate,remain_money,remain_point) "+
