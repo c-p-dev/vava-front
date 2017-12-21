@@ -69,6 +69,23 @@ $(document).ready(function(){
 	}		
 });
 
+function IntervalloadMsgCount(){
+	setInterval(function(){
+		$.ajax({
+			url : '/login/jsp/get_msgcount.jsp',
+			data : {},
+			method: 'GET',
+		}).done(function(data){
+			var obj = JSON.parse(data);
+			var html = "";
+			if(obj.count > 0){
+				html  = "<span class='msg-notif-count'>"+obj.count+"</span>";
+			}
+			$(".msg-cont").html(html);
+		});
+	}, 60000); //1 min
+}
+
 function cValU(){
 	clearInterval(lgCheck);
 	lgCheck = setInterval(function(){

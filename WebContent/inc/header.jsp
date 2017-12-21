@@ -523,6 +523,7 @@ $(window).scroll(function(event){
 	}
 
 	function loadMsgCount(){
+		
 		$.ajax({
 			url : '/login/jsp/get_msgcount.jsp',
 			data : {},
@@ -533,10 +534,10 @@ $(window).scroll(function(event){
 			if(obj.count > 0){
 				html  = "<span class='msg-notif-count'>"+obj.count+"</span>";
 			}
-
 			$(".msg-cont").html(html);
-
+			IntervalloadMsgCount()
 		});
+		
 	}
 
 	

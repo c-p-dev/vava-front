@@ -214,6 +214,7 @@
 					$("#lgInMdl2").popup("show");
 					createPopup(obj.popup);
 					$('a.get-vbet-hist').parent().show();
+					loadMsgCount();
 				});
 				// toastr.success('Login Successful');
 				// $("#fade_3").popup("hide");
