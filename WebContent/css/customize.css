@@ -185,10 +185,12 @@
 .etc_score_c_2 {width:60px; height:60px;line-height:60px;background:rgba(215,223,1,0.6);color:#ffffff; font-size:40px; font-weight:bold; text-align:center; border-radius:5px; margin:0 0 5px 0}
 .etc_score_c_2_long {width:70px; height:60px;line-height:60px;background:rgba(215,223,1,0.6);color:#ffffff; font-size:40px; font-weight:bold; text-align:center; border-radius:5px; margin:0 0 5px 0}
 .etc_score_c_3 {width:30px; height:60px;line-height:60px;}
+.etc_score_c_3_long {width:90px; height:60px;line-height:60px;background:rgba(215,223,1,0.6);color:#ffffff; font-size:40px; font-weight:bold; text-align:center; border-radius:5px; margin:0 0 5px 0}
 
 .etc_score_b_1 {width:60px; height:60px;line-height:60px;background:rgba(189,189,189,0.6);color:#ffffff; font-size:40px; font-weight:bold; text-align:center; border-radius:5px}
 .etc_score_b_2 {width:60px; height:60px;line-height:60px;background:rgba(215,223,1,0.6);color:#ffffff; font-size:40px; font-weight:bold; text-align:center; border-radius:5px}
 .etc_score_b_2_long  {width:70px; height:60px;line-height:60px;background:rgba(215,223,1,0.6);color:#ffffff; font-size:40px; font-weight:bold; text-align:center; border-radius:5px}
+.etc_score_b_3_long  {width:90px; height:60px;line-height:60px;background:rgba(215,223,1,0.6);color:#ffffff; font-size:40px; font-weight:bold; text-align:center; border-radius:5px}
 
 .etc_left_1 {padding:0 0 0 2%; width:15%; height:50px; line-height:50px;color:#ffffff; font-size:17px; font-weight:700;}
 .etc_left_2 {padding:0 0 0 2%; width:15%; height:100px; line-height:100px;color:#ffffff; font-size:17px; font-weight:700;}

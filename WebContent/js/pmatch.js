@@ -1264,7 +1264,7 @@ mainAngular.controller("mc", function($window,$scope, $templateCache, $compile, 
 		 		
 		 	}); 
 			
-			sub_loadBlockMatch($scope.BLR) ;
+			//sub_loadBlockMatch($scope.BLR) ;
 			
 			data=null;
 				
@@ -1808,7 +1808,8 @@ mainAngular.controller("mc", function($window,$scope, $templateCache, $compile, 
 				console.log(data[0].Mk[0]);
 				console.log(data[0].St[0]);
 				console.log(data[0].Re[0]);
-				console.log(data[0].Se[0]);
+				console.log(data[0].Se[0]); 
+				
 				//console.log(data[0].Se[0].Selections[0]);
 				
 				console.log("data[0].Market.length : " + data[0].Mk.length);
@@ -2051,7 +2052,7 @@ mainAngular.controller("mc", function($window,$scope, $templateCache, $compile, 
 	  	};
 			data = null;				
 		
-			sub_loadBlockMatch($scope.BLR) ;
+			//sub_loadBlockMatch($scope.BLR) ;
 	  		
 	  	//document.getElementById("clive2").style.display  = "block";
 	  	//document.getElementById("spin_clive2").style.display = "none";
@@ -2415,7 +2416,6 @@ mainAngular.controller("mc", function($window,$scope, $templateCache, $compile, 
 				    		V:obj.IsVisible,
 				    		M:obj.MatchId,
 							});
-							break;
 						};
 					};		
 					
@@ -2684,6 +2684,9 @@ mainAngular.controller("mc", function($window,$scope, $templateCache, $compile, 
 				
 				for (var d = 0; d < $scope.MK.length; d++) {
 					var mk = $scope.MK[d];		
+					
+					//console.log("mk");
+					//console.log(mk);
 									
 						if(mk.Id == obj.Id){															
 							newCmarket = false;															
@@ -2691,16 +2694,29 @@ mainAngular.controller("mc", function($window,$scope, $templateCache, $compile, 
 																												
 			    		for (var j = 0; j < obj.Selections.length; j++) {				    					    			
 			    			for (var n = 0; n < mk.Se.length; n++) {						    				    				
-			    				if(obj.Selections[j].Id == mk.Se[n].Id) {			    					
+			    				if(obj.Selections[j].Id == mk.Se[n].Id) {		
+			    					
+			    					var P = $filter('number')(obj.Selections[j].Price, 2);
+										var BP = mk.Se[n].P
+										
+										if(P==BP)
+						    				BP = mk.Se[n].BP
+						    						    					
 					    			sel_tmp.push({
 												//BP:mk.Se[n].BP,
-											 	BP:$filter('number')(mk.Se[n].BP, 2),
+											 	//BP:$filter('number')(mk.Se[n].BP, 2),
+											 	//BP:mk.Se[n].P,
+											 	//BP:$filter('number')(mk.Se[n].P, 2),
+											 	BP:BP,
 												Id:obj.Selections[j].Id,
 												MkId:mk.Se[n].MkId,
 												Nm:mk.Se[n].Nm,
 												Or:obj.Selections[j].Order,
 												//P:obj.Selections[j].Price,	
-												P:$filter('number')(obj.Selections[j].Price, 2)												
+												//P:$filter('number')(obj.Selections[j].Price, 2)		
+												P:P,
+												S:obj.Selections[j].IsSuspended,
+												V:obj.Selections[j].IsVisible,										
 										});		
 										//console.log("mk.Se[n].BP:"+mk.Se[n].BP);
 										//console.log("$filter('number')(mk.Se[n].BP, 2):"+$filter('number')(mk.Se[n].BP, 2));
@@ -2724,11 +2740,11 @@ mainAngular.controller("mc", function($window,$scope, $templateCache, $compile, 
 								Sq: obj.Sequence,
 							});	
 						
-						console.log("push[MK]: 'MkId =='" + obj.Id);
+						//console.log("push[MK]: 'MkId =='" + obj.Id);
 																
 					   sel_tmp = [];
 					   
-					   sonsole.log($scope.MK);
+					  // sonsole.log($scope.MK);
 					   
 				  	}
 				 };

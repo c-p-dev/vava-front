@@ -743,7 +743,7 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
 			data=null;
 			
 			
-			setInterval(function() { sub_loadBlockMatch($scope.BLR); },3000); 
+			//setInterval(function() { sub_loadBlockMatch($scope.BLR); },3000); 
 			//console.log	("($scope.BLR) ;" + $scope.BLR);
 								
 		 	//sub_loadBlockMatch($scope.BLR) ;
@@ -2046,7 +2046,7 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
 	  	};
 	  	//console.log("sub_loadBlockMatch");
 	  	//console.log($scope.BLR);
-	  	sub_loadBlockMatch($scope.BLR) ;
+	  	//sub_loadBlockMatch($scope.BLR) ;
 	  	
 			data = null;				
 		
@@ -2388,7 +2388,8 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
 	
 	function sub_loadGetMatchMarket(response) {		
 		
-	
+	//console.log(response);
+
 //console.log("mode:"+mode);
 
 		angular.forEach(response.Objects, function(obj,idx) {	
@@ -2666,47 +2667,95 @@ mainAngular.controller("mc", function($window, $scope, $templateCache, $compile,
 				
 			};
 				
-			if($scope.tabMId !="0" && $scope.tabMId == obj.MatchId){			
+			if($scope.tabMId !="0" && $scope.tabMId == obj.MatchId){		
+				
+					//console.log(response.Objects.length);
+					//console.log(response.Objects);	
+					
 				var newCmarket = true;	
 				
 				for (var d = 0; d < $scope.MK.length; d++) {
-					var mk = $scope.MK[d];		
-									
-						if(mk.Id == obj.Id){															
+					var mk = $scope.MK[d];
+					
+					//console.log("mk");
+					//console.log(mk);
+								
+													
+						if(mk.Id == obj.Id){					
+							
+							//console.log("MATCHED : " + mk.Id);										
 							newCmarket = false;															
 							var sel_tmp = [];	
+							
+							//console.log("obj.Selections.length:" + obj.Selections.length);
+							//console.log("mk.Se.length:" + mk.Se.length);							
+							//console.log(obj.Selections);
+							//console.log(mk.Se);
 																												
-			    		for (var j = 0; j < obj.Selections.length; j++) {				    					    			
-			    			for (var n = 0; n < mk.Se.length; n++) {						    				    				
-			    				if(obj.Selections[j].Id == mk.Se[n].Id) {			    					
-					    			sel_tmp.push({
-												//BP:mk.Se[n].BP,
-												BP:$filter('number')(mk.Se[n].BP, 2),
-												Id:obj.Selections[j].Id,
-												MkId:mk.Se[n].MkId,
-												Nm:mk.Se[n].Nm,
-												Or:obj.Selections[j].Order,
-												//P:obj.Selections[j].Price,	
-												P:$filter('number')(obj.Selections[j].Price, 2)													
-										});										
+			    		for (var j = 0; j < obj.Selections.length; j++) {			
+			    			
+			    			//console.log("mk.Se[n]");
+			    				    					    			
+			    			for (var n = 0; n < mk.Se.length; n++) {	
+			    									    				    				
+			    				if(obj.Selections[j].Id == mk.Se[n].Id) {			  
+			    									    			
+											var P = $filter('number')(obj.Selections[j].Price, 2);
+											var BP = mk.Se[n].P
+											
+						    			if(P==BP)
+						    				BP = mk.Se[n].BP
+						    			
+						    			sel_tmp.push({
+													//BP:mk.Se[n].BP,
+													//BP:$filter('number')(mk.Se[n].BP, 2),
+													//BP:mk.Se[n].BP,
+													BP:BP,
+													Id:obj.Selections[j].Id,
+													MkId:mk.Se[n].MkId,
+													Nm:mk.Se[n].Nm,
+													Or:obj.Selections[j].Order,
+													//P:obj.Selections[j].Price,	
+													//P:$filter('number')(obj.Selections[j].Price, 2),
+													P:P,
+													S:obj.Selections[j].IsSuspended,
+													V:obj.Selections[j].IsVisible,												
+											});	
+											
+											//console.log(sel_tmp);
+										
+										
+										//sel_tmp = [];
+										//console.log("pushed");
+										//console.log(mk.Se[n].Nm);																			
 									};
 								};
 							};
-						
-							$scope.MK = $filter('omit')($scope.MK,'Id ==' + obj.Id);  	
 							
-							$scope.MK.push({
-								Id:mk.Id,
-								MTyId:mk.MTyId,
-								Sus: obj.IsSuspended,
-								Vis: obj.IsVisible, 
-								MId: mk.MId,
-								Nm: mk.Nm,
-								Se: sel_tmp,
-								Sq: obj.Sequence,
-							});										
+							/*	
+							if(sel_tmp.length>0)
+								$scope.MK.Se = sel_tmp;
+							
+							$scope.MK.Sus = obj.IsSuspended;
+							$scope.MK.Vis = obj.IsVisible;
+							*/
+							
+							$scope.MK = $filter('omit')($scope.MK,'Id ==' + obj.Id);  	
+								
+								$scope.MK.push({
+									Id:mk.Id,
+									MTyId:mk.MTyId,
+									Sus: obj.IsSuspended,
+									Vis: obj.IsVisible, 
+									MId: mk.MId,
+									Nm: mk.Nm,
+									Se: sel_tmp,
+									Sq: obj.Sequence,
+								});				
+													
 					   sel_tmp = [];
 				  	}
+				  	
 				 };
 				 
 			  if(newCmarket && obj.IsVisible){ 		 		

@@ -433,11 +433,8 @@ $(window).scroll(function(event){
 					url : '/login/jsp/get_header.jsp', //jsp				
 					data : {},
 					method: 'GET',
-				}).done(function(data){
-					
-					console.log(data);
-					
-
+				}).done(function(data){					
+				//	console.log(data);		
 					var obj = JSON.parse(data);
 					$("#uhead").html(obj.header);
 					createPopup(obj.popup);
@@ -448,6 +445,7 @@ $(window).scroll(function(event){
 
 					
 				});
+			
 
 			}else if(obj.result == 1 ){
 				
