@@ -3,6 +3,8 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import bean.ScBetBean;
@@ -12,14 +14,20 @@ import util.DBConnector;
 
 public class ScBetLogDao {
 	
-	public int addNewTransactionLog(ScBetBean bet_data){
-		Date date				= new Date();
-		Connection con 			= null;
-		PreparedStatement pstmt = null;
-		int result 				= 0;
-		String query 			= "INSERT INTO sc_bet_log "
-				+ "(sc_bet_uid, username, amount, payout, currency, game_code, platform, status, start_time, end_time, date_added) "
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
+	public int addNewTransactionLog(ScBetBean bet_data)
+	{
+		Date date_now					= new Date();
+		SimpleDateFormat date_format	= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Connection con 					= null;
+		PreparedStatement pstmt 		= null;
+		int result 						= 0;
+		String query 					= "INSERT INTO spincube_log "
+				+ "(betuid, playerid, betamount, payoutamount, currency, gamecode, platform, betstatus, gamestarttimeutc, gameendtimeutc, createddateutc, betdate, siteid, userid, productid) "
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
+		
+		String[] uname_split	= bet_data.getPlayerId().split("_");
+		Integer site_id			= Integer.valueOf(uname_split[0]);
+		String userid			= uname_split[1];
 		
 		try {
 			DBConnector.getInstance();
@@ -37,9 +45,12 @@ public class ScBetLogDao {
             pstmt.setString(9, bet_data.getGameStartTime());
             pstmt.setString(10, bet_data.getGameEndTime());
             pstmt.setString(11, bet_data.getCreatedDateUTC());
+            pstmt.setString(12, date_format.format(date_now));
+            pstmt.setInt(13, site_id);
+            pstmt.setString(14, uname_split[1]);
+            pstmt.setString(15, bet_data.getProductId());
 			
             result	= pstmt.executeUpdate();
-            
             
 	        pstmt.close();
 	        con.close();
@@ -57,21 +68,19 @@ public class ScBetLogDao {
 		Connection con 			= null;
 		PreparedStatement pstmt = null;
 		ResultSet rs 			= null;
-		String  query 			= "SELECT TOP 1 * FROM sc_bet_log ORDER BY bet_id DESC" ;
+		String  query 			= "SELECT TOP 1 * FROM spincube_log ORDER BY betdate DESC" ;
 		
 		ScBetBean bet_data		= new ScBetBean();
 		
 		try {
 			DBConnector.getInstance();
 			con 				= DBConnector.getConnection();
-		    
 		    pstmt   			= con.prepareStatement(query);
-			
             rs 					= pstmt.executeQuery();
             
             if (rs.next()) {
-            	bet_data.setBetUID(rs.getString("sc_bet_uid"));
-            	bet_data.setPlayerId(rs.getString("username"));
+            	bet_data.setBetUID(rs.getString("betuid"));
+            	bet_data.setPlayerId(rs.getString("playerid"));
             }
             
             rs.close();

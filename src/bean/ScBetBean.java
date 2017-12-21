@@ -10,8 +10,8 @@ public class ScBetBean {
 	private String createdDateUTC;
 	private String currency;
 	private String gameCode;
-	private String gameEndTime;
-	private String gameStartTime;
+	private String gameEndTimeUTC;
+	private String gameStartTimeUTC;
 	private Double payoutAmount;
 	private String platform;
 	private String playerId;
@@ -67,19 +67,19 @@ public class ScBetBean {
 	}
 	
 	public String getGameEndTime() {
-		return gameEndTime;
+		return gameEndTimeUTC;
 	}
 	
-	public void setGameEndTime(String gameEndTime) {
-		this.gameEndTime = gameEndTime;
+	public void setGameEndTime(String gameEndTimeUTC) {
+		this.gameEndTimeUTC = gameEndTimeUTC;
 	}
 	
 	public String getGameStartTime() {
-		return gameStartTime;
+		return gameStartTimeUTC;
 	}
 	
-	public void setGameStartTime(String gameStartTime) {
-		this.gameStartTime = gameStartTime;
+	public void setGameStartTime(String gameStartTimeUTC) {
+		this.gameStartTimeUTC = gameStartTimeUTC;
 	}
 	
 	public Double getPayoutAmount() {

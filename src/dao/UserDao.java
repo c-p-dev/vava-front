@@ -1282,5 +1282,44 @@ public class UserDao {
 		
 		return result;
 	}
+	
+	public boolean checkIPBlockList(String ip){
+		
+		boolean result = false;
+		Connection con 			= null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String  query 			= "SELECT ipid FROM ip_lst where "
+				+ " CONVERT(BIGINT,PARSENAME(?,4)) * POWER(256,3) "
+				+ " + CONVERT(BIGINT,PARSENAME(?,3)) * POWER(256,2) "
+				+ " + CONVERT(BIGINT,PARSENAME(?,2)) * 256 "
+				+ " + CONVERT(BIGINT,PARSENAME(? ,1)) between num_ip AND num_ip2  "
+				+ " AND gubun = 'U'AND viewtype = 'Y'";		
+		
+		try {
+			if(!ip.equals("0:0:0:0:0:0:0:1")){
+				DBConnector.getInstance();
+				con = DBConnector.getConnection();			 	
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1,ip);
+				pstmt.setString(2,ip);
+				pstmt.setString(3,ip);
+				pstmt.setString(4,ip);
+				rs = pstmt.executeQuery();
+				if(rs.next()){
+					result = true;
+				}
+			}else{
+				System.out.println("Ip is : " + ip);
+			}
+			
+		}
+		catch(Exception e) {
+			System.out.println(e);
+			logger.debug(e);
+		}
+		
+		return result;
+	}
 
 }

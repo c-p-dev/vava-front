@@ -41,6 +41,12 @@
 String cp = request.getRequestURI();
 %>
 
+<script>
+var checkSession = <%=checkSession%>;
+var UID = '<%=UID%>';
+var UBAL = <%=UBAL%>;
+</script>
+
 <style>
 	#toast-container.toast-top-full-width > div, #toast-container.toast-bottom-full-width > div {
 		width: 30%!important;
@@ -391,11 +397,12 @@ $(window).scroll(function(event){
 			var obj = JSON.parse(data);
 			if(obj.result == 0 ){
 				
-	
-				// toastr.success('Login Successful');
-				// $("#loginModal").html(lgMsg);
-
-				//cValU();
+				var cp = '<%=cp%>';				
+				
+				if(cp == '/sport/prematch.jsp' || cp == '/sport/livematch.jsp'){
+					ISLOGIN.a = obj.uid;
+				}
+				
 
 				$.ajax({
 					url : '/login/jsp/get_header.jsp', //jsp				
