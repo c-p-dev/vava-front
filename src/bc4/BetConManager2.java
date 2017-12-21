@@ -1287,7 +1287,7 @@ public class BetConManager2 {
 		 */
 		  String query2 =  " DECLARE @list varchar(MAX) "+
 			  		" SELECT @list = JSON FROM BC_JSON WHERE KEYNAME='MARKET_TYPE' "+
-			  		" SELECT  '{\"Id\":'+CAST(sel_id AS VARCHAR(10))+',\"MkId\":'+CAST(A.Market_Id AS VARCHAR(10))+',\"BP\":\"'+CAST(SEL_PRICE as varchar(10))+'\",\"P\":\"'+CAST(SEL_PRICE as varchar(10))+'\","+
+			  		" SELECT  '{\"Id\":'+CAST(sel_id AS VARCHAR(10))+',\"MkId\":'+CAST(A.Market_Id AS VARCHAR(10))+',\"S\":'+CASE WHEN suspend='T' THEN 'true' ELSE 'false' END+',\"V\":'+CASE WHEN visible='T' THEN 'true' ELSE 'false' END+',\"BP\":\"'+CAST(SEL_PRICE as varchar(10))+'\",\"P\":\"'+CAST(SEL_PRICE as varchar(10))+'\","+
 			  		" \"Nm\":\"'+ replace(replace(replace(replace(replace(replace(sel_name,'{h}',B.HANDICAP),'{-h}',B.HANDICAP*-1),'{hv}',isnull(home_value,'')),'{av}',isnull(away_value,'')),'W1',home_name),'W2',away_name)+'\",\"Or\":'+CAST(SEL_ORDER AS VARCHAR(10)) +'},' "+
 			  		" as sel from bc_selection a, (SELECT MATCH_ID,MARKET_ID,HANDICAP FROM bc_market WHERE MARKET_TYPE_ID in (SELECT splitdata FROM SplitString(@list,',')) "+
 			  		" and MATCH_ID = '"+mid+"'  AND suspend = 'F' AND visible='T'  ) B, "+
@@ -1589,15 +1589,13 @@ public class BetConManager2 {
 		  
 		  String query2 =  " DECLARE @list varchar(MAX) "+
 				  		" SELECT @list = JSON FROM BC_JSON WHERE KEYNAME='MARKET_TYPE' "+
-				  		" SELECT  '{\"Id\":'+CAST(sel_id AS VARCHAR(10))+',\"MkId\":'+CAST(A.Market_Id AS VARCHAR(10))+',\"BP\":\"'+CAST(SEL_PRICE as varchar(10))+'\",\"P\":\"'+CAST(SEL_PRICE as varchar(10))+'\","+
+				  		" SELECT  '{\"Id\":'+CAST(sel_id AS VARCHAR(10))+',\"MkId\":'+CAST(A.Market_Id AS VARCHAR(10))+',\"S\":'+CASE WHEN suspend='T' THEN 'true' ELSE 'false' END+',\"V\":'+CASE WHEN visible='T' THEN 'true' ELSE 'false' END+',\"BP\":\"'+CAST(SEL_PRICE as varchar(10))+'\",\"P\":\"'+CAST(SEL_PRICE as varchar(10))+'\","+
 				  		" \"Nm\":\"'+ replace(replace(replace(replace(replace(replace(sel_name,'{h}',B.HANDICAP),'{-h}',B.HANDICAP*-1),'{hv}',isnull(home_value,'')),'{av}',isnull(away_value,'')),'W1',home_name),'W2',away_name)+'\",\"Or\":'+CAST(SEL_ORDER AS VARCHAR(10)) +'},' "+
 				  		" as sel from bc_selection a, "+
 				  	//	" (SELECT MATCH_ID,MARKET_ID,HANDICAP FROM bc_market WHERE MARKET_TYPE_ID in (SELECT splitdata FROM SplitString(@list,',')) and Market_Id = '"+mkid+"' ) B, "+
 				  		" (SELECT bb.home_name,bb.away_name, aa.MATCH_ID,aa.MARKET_ID,HANDICAP FROM bc_market aa, bc_match bb WHERE MARKET_TYPE_ID in (SELECT splitdata FROM SplitString(@list,',')) "+
 				  		" and aa.Market_Id = '"+mkid+"' and aa.match_id = bb.match_id ) B " +
 				  		" where a.MARKET_ID = B.MARKET_ID and SEL_PRICE !='0.00' and SEL_PRICE !='101.00'";
-
-		  
 		  
 		  Debug.out("[getMarketbyMarketId] : " + query1);
 		  Debug.out("[getMarketbyMarketId] : " + query2);
@@ -2651,7 +2649,7 @@ public class BetConManager2 {
   		  //match
 		  query1 =" select * from ("+
 				  " select aa.match_id,compet_id,convert(char(19),match_date,120) match_date,sport_id,region_id,home_name,away_name,cc.*,bb.market_name from bc_match aa, bc_market bb, ( "+
-				  " select b.bgid,b.sel_id,bsresult,a.market_id,sel_name,sel_price  from bc_selection a,(select bgid,sel_id,bsresult from bc_bet_sel where bgid = '"+bid+"') b  "+
+				  " select b.bgid,b.sel_id,bsresult,a.market_id,sel_name,sel_price,rate  from bc_selection a,(select bgid,sel_id,bsresult,rate from bc_bet_sel where bgid = '"+bid+"') b  "+
 				  " where a.sel_id = b.sel_id) cc "+
 				  " where aa.match_id=bb.match_id and bb.market_id = cc.market_id "+
 				"  ) aaa,"+
@@ -2663,6 +2661,7 @@ public class BetConManager2 {
 				" FROM BC_COMPETITION A LEFT OUTER JOIN BC_TRANS B ON A.NAMEID = B.NAMEID) DDD "+
 				" WHERE AAA.sport_id = BBB.SPORT_ID  AND AAA.region_id = CCC.REGION_ID AND AAA.compet_id = DDD.COMPET_ID ";
 		
+		  Debug.out("[getBetDetail] : " + query1);
 
 		  try{	      	
 			 	con = ds.getConnection();			 
@@ -2678,7 +2677,8 @@ public class BetConManager2 {
 		        	bsl.setSelId(rs.getString("sel_id")); 
 		        	bsl.setBresult(rs.getString("bsresult"));	
 		        	bsl.setSelName(rs.getString("sel_name"));
-		        	bsl.setSelPrice(rs.getString("sel_price"));		
+		        	//bsl.setSelPrice(rs.getString("sel_price"));	
+		        	bsl.setSelPrice(rs.getString("rate"));
 		        	bsl.setMkid(rs.getString("market_id"));		
 		        	bsl.setMkName(rs.getString("market_name"));		
 		        	bsl.setMid(rs.getString("match_id"));		        	
