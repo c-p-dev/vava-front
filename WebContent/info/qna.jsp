@@ -99,11 +99,11 @@
                     title  : '보낸이',
                 },
                 { 
-                    data   : 'recv_date',
+                    data   : 'send_date',
                     title  : '수신일시',
                 },
                 { 
-                    data   : 'send_date',
+                    data   : 'recv_date',
                     title  : '확인일시',
                 }
         
