@@ -181,6 +181,7 @@
 				method: 'POST',
 			}).done(function(data){
 				console.log(data);
+				loadMsgCount();
 			});	
 		}
 		
