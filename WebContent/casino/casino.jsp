@@ -318,6 +318,7 @@ div.chevy-cntr {
 					$('#fade_3').popup('show');
 				}
 				else {
+					
 					$('.hdr-money-row').hide();
 					$('#fade_9').popup('show');
 					

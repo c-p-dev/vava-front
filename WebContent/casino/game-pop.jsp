@@ -27,7 +27,8 @@
 	      		$('#game-pop-frame').attr('src', '');
 	      		$('#gm-pop-errmsg').html("");
 				$.get("/TegServlet?method=5", function(srv_resp) {
-					if ('null' != srv_resp.money) {
+					console.log(srv_resp);
+					if (null != srv_resp.money) {
 						$('.money_dsp').text(number_format(srv_resp.money, 0));
 					}
 				}, 'json');

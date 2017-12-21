@@ -84,14 +84,14 @@ public class TegServlet extends HttpServlet {
 					udata5	= user_db5.getUserByUserId(username);
 					
 					if (null != udata5) {
-						if (0 >= udata5.getMoney()) {
-							try {
-								srv_resp_5 = teg_ctrl.getAllMoney(username, site_id);
-							} catch (ParseException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
+						
+						try {
+							srv_resp_5 = teg_ctrl.getAllMoney(username, site_id);
+						} catch (ParseException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
 						}
+						
 					}
 				}
 				
