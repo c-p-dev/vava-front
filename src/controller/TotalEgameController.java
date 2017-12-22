@@ -325,7 +325,7 @@ public class TotalEgameController {
 			/*--------------------------------------------------------------------
 	        |	Query Database and Update Money
 	        |-------------------------------------------------------------------*/
-			user_profile 	= user_db.getUserByUserId(username);
+			user_profile 	= user_db.getUserByUserId(username, site_id);
 			money 			= user_profile.getMoney();
 			mg_username		= Integer.toString(user_profile.getSiteid()).concat("_").concat(username);
 			
@@ -340,7 +340,7 @@ public class TotalEgameController {
 				money 	= money + withdraw_data.getResult().getTransactionAmount();
 	
 				user_profile.setMoney((int)money);
-				user_db.setUserMoney(username, new BigDecimal(money).setScale(0, BigDecimal.ROUND_HALF_UP).doubleValue());
+				user_db.setUserMoney(username, site_id, new BigDecimal(money).setScale(0, BigDecimal.ROUND_HALF_UP).doubleValue());
 			}
 			else {
 				
@@ -381,7 +381,7 @@ public class TotalEgameController {
 					money 	= money + sc_trans_data.getAmount();
 	
 					user_profile.setMoney((int)money);
-					user_db.setUserMoney(username, money);
+					user_db.setUserMoney(username, site_id, money);
 				}
 			}
 			
@@ -395,7 +395,7 @@ public class TotalEgameController {
 				
 				if (0 == deposit_data.getStatus().getErrorCode()) {
 					/*	Update database to empty VAVA money of user	*/
-					user_db.setUserMoney(username, 0);
+					user_db.setUserMoney(username, site_id, 0);
 					
 					/*--------------------------------------------------------------------
 			        |	Change PinCode of MG User
@@ -422,7 +422,7 @@ public class TotalEgameController {
 	        |	Game is from Asian Gaming
 	        |-------------------------------------------------------------------*/
 			else if (2 == game_provider) {
-				game_url_full		= ag_ctrl.launchGame(username, lnk_dsp);
+				game_url_full		= ag_ctrl.launchGame(username, lnk_dsp, site_id);
 			}
 			/*--------------------------------------------------------------------
 	        |	Game is from SpinCube
@@ -434,11 +434,11 @@ public class TotalEgameController {
 				
 				/*	Update database to empty VAVA money of user	*/
 				if (!game_url_full.equals("")) {
-					user_db.setUserMoney(username, 0);
+					user_db.setUserMoney(username, site_id, 0);
 				}
 			}
 			else {
-				game_url_full		= bc_ctrl.launchGame(username, lnk_dsp);
+				game_url_full		= bc_ctrl.launchGame(username, lnk_dsp, site_id);
 			}
 			
 			/*--------------------------------------------------------------------
@@ -483,11 +483,11 @@ public class TotalEgameController {
 			
 			fintoken_db.addNewFinToken(fintoken_data);
 			
-			user_data	= user_db.getUserByUserId(username);
+			user_data	= user_db.getUserByUserId(username, site_id);
 			sc_ctrl		= new SpinCubeController(Integer.toString(user_data.getSiteid()).concat("_").concat(user_data.getUserid()));
 			
-			user_data	= this.transferMoneyToVava(username);
-			user_data	= sc_ctrl.transferMoneyToVava(username);
+			user_data	= this.transferMoneyToVava(username, site_id);
+			user_data	= sc_ctrl.transferMoneyToVava(username, site_id);
 			
 			json_data	= gson.toJson(user_data, UserBean.class);
 			
@@ -500,7 +500,7 @@ public class TotalEgameController {
 		return json_data;
 	}
 	
-	public UserBean transferMoneyToVava(String username)
+	public UserBean transferMoneyToVava(String username, int site_id)
 	{
 		Gson gson				= new Gson();
 		UserDao user_db			= new UserDao();
@@ -515,7 +515,7 @@ public class TotalEgameController {
 		/*--------------------------------------------------------------------
         |	Query Database
         |-------------------------------------------------------------------*/
-		user_profile 	= user_db.getUserByUserId(username);
+		user_profile 	= user_db.getUserByUserId(username, site_id);
 		mg_username		= Integer.toString(user_profile.getSiteid()).concat("_").concat(username);
 		
 		/*--------------------------------------------------------------------
@@ -531,13 +531,13 @@ public class TotalEgameController {
 			money 			= user_profile.getMoney() + withdraw_data.getResult().getTransactionAmount();
 
 			user_profile.setMoney((int)money);
-			user_db.setUserMoney(username, new BigDecimal(money).setScale(0, BigDecimal.ROUND_HALF_UP).doubleValue());
+			user_db.setUserMoney(username, site_id, new BigDecimal(money).setScale(0, BigDecimal.ROUND_HALF_UP).doubleValue());
 		}
 		
 		return user_profile;
 	}
 	
-	public String getBetPlaycheck(String username)
+	public String getBetPlaycheck(String username, int site_id)
 	{
 		UserDao user_db			= new UserDao();
 		StringManipulator strlib	= new StringManipulator();
@@ -552,7 +552,7 @@ public class TotalEgameController {
 		/*--------------------------------------------------------------------
         |	Query Database
         |-------------------------------------------------------------------*/
-		user_profile 	= user_db.getUserByUserId(username);
+		user_profile 	= user_db.getUserByUserId(username, site_id);
 		mg_username		= Integer.toString(user_profile.getSiteid()).concat("_").concat(username);
 		
 		/*--------------------------------------------------------------------

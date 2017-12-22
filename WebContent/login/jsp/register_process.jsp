@@ -82,7 +82,7 @@
 			boolean updateSms = smsDao.updateUserAuthSms(smsBean);
 
 			UserBean ub = new UserBean();
-			ub = ud.getUser(request.getParameter("userid"),request.getParameter("passwd"));
+			ub = ud.getUser(request.getParameter("userid"), request.getParameter("passwd"), Integer.valueOf(site_id));
 			
 			/*--------------------------------------------------------------------
 	        |	Add user to Microgaming System
@@ -126,7 +126,7 @@
 			HttpSession user_session = request.getSession(true);	    
 			session.setMaxInactiveInterval(7200);
 	        
-	        int updateSession = ud.updateUserAfterLogin(ub.getUserid(), session.getId());
+	        boolean updateSession = ud.updateUserAfterLogin(Integer.toString(ub.getSiteid()), ub.getUserid(), request.getParameter("passwd").trim(), session.getId(), ip);
 	        
 	        checkSession 	= true;	
 			session 		= request.getSession(false);

@@ -9,7 +9,7 @@
 <%
 	
 	UserDao userDao = new UserDao();
-	UserBean userBean = (UserBean) userDao.getUserByUserId(UID);	
+	UserBean userBean = (UserBean) userDao.getUserByUserId(UID, Integer.valueOf(SITEID));	
 	String bank_info = userDao.getUserBankConfigAccount(userBean.getSiteid(),userBean.getCharge_level());
 	out.println(bank_info);
 	

@@ -5,11 +5,11 @@
 <%@ page import = "java.util.*"%>
 <%@ page import = "dao.UserDao"%>
 <%@ page import = "bean.UserBean"%>
-
+<%@ include file="/inc/session.jsp"%>
 
 <%
 	UserDao user_db	= new UserDao();
-	UserBean currentUser = user_db.getUserByUserId((String)session.getAttribute("UID"));
+	UserBean currentUser = user_db.getUserByUserId(UID, Integer.valueOf(SITEID));
 %>
 
 <ul class="smk_accordion">

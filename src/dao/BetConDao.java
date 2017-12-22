@@ -32,7 +32,11 @@ public class BetConDao {
 		Connection con 			= null;
 		PreparedStatement pstmt = null;
 		ResultSet rs 			= null;
-		String  query 			= "SELECT TOP 1 * FROM betcon_user_lst JOIN user_mst ON betcon_user_lst.username = user_mst.userid WHERE player_id = ?" ;
+		String  query 			= "SELECT TOP 1 * FROM betcon_user_lst"
+				+ " JOIN user_mst"
+				+ " ON betcon_user_lst.username = user_mst.userid"
+				+ " AND betcon_user_lst.site_id = user_mst.site_id"
+				+ " WHERE player_id = ?";
 		
 		
 		try {

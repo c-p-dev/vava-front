@@ -8,7 +8,7 @@
 	
 	/*
 		UserDao ud = new UserDao();
-		UserBean bean = (UserBean)  ud.getUserByUserId(UID);
+		UserBean bean = (UserBean)  ud.getUserByUserId(UID, Integer.valueOf(SITEID));
 		ChargeBean chargeBean = new ChargeBean();
 		ChargeDao chargeDao = new ChargeDao();
 		boolean result = false;

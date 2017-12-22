@@ -103,7 +103,7 @@ public class BetConstructController {
     //      Creates the URL to play BC Games
 	//		empty URL is error
     //-----------------------------------------------------
-	public String launchGame(String username, String game_id)
+	public String launchGame(String username, String game_id, int site_id)
 	{
 		SimpleDateFormat dfrmt 		= new SimpleDateFormat("yyyyMMddHHmmss");
 		Calendar cal_now			= Calendar.getInstance();
@@ -113,7 +113,7 @@ public class BetConstructController {
 		
 		String game_url		= "";
 		String params_str	= "";
-		UserBean user_data	= user_db.getUserByUserId(username);
+		UserBean user_data	= user_db.getUserByUserId(username, site_id);
 		String token		= Integer.toString(user_data.getSiteid()).concat("_").concat(username).concat("T").concat(dfrmt.format(cal_now.getTime()));
 		int create_token	= 0;
 		
@@ -574,7 +574,7 @@ public class BetConstructController {
 		        |	Transaction completed Successfully
 		        |-------------------------------------------------------------------*/
 				if (true == trans_valid) {
-					user_db.setUserMoney(user_data.getUserid(), bal_remain.setScale(0, BigDecimal.ROUND_HALF_UP).intValue());
+					user_db.setUserMoney(user_data.getUserid(), user_data.getSiteid(), bal_remain.setScale(0, BigDecimal.ROUND_HALF_UP).intValue());
 					
 					resp_data.setHasError(false);
 					resp_data.setErrorId(BC_ERR_NONE);
@@ -695,7 +695,7 @@ public class BetConstructController {
 					/*--------------------------------------------------------------------
 			        |	Update user money
 			        |-------------------------------------------------------------------*/
-					user_db.setUserMoney(user_data.getUserid(), balance);
+					user_db.setUserMoney(user_data.getUserid(), user_data.getSiteid(), balance);
 				}
 				else {
 					balance = user_data.getMoney();

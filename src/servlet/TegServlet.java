@@ -65,7 +65,7 @@ public class TegServlet extends HttpServlet {
 				UserDao user_db		= new UserDao();
 				String srv_resp_3	= "";
 				
-				srv_resp_3 			= gson.toJson(user_db.getUserByUserId(username));
+				srv_resp_3 			= gson.toJson(user_db.getUserByUserId(username, site_id));
 				
 				response.setContentType("application/json");
 				output.print(srv_resp_3);
@@ -81,7 +81,7 @@ public class TegServlet extends HttpServlet {
 				String srv_resp_5	= "";
 				
 				if (null != username) {
-					udata5	= user_db5.getUserByUserId(username);
+					udata5	= user_db5.getUserByUserId(username, site_id);
 					
 					if (null != udata5) {
 						
@@ -102,7 +102,7 @@ public class TegServlet extends HttpServlet {
 			case 6:
 				String srv_resp_6	= "";
 				
-				srv_resp_6	= teg_ctrl.getBetPlaycheck(username);
+				srv_resp_6	= teg_ctrl.getBetPlaycheck(username, site_id);
 				
 				output.print(srv_resp_6);
 				break;

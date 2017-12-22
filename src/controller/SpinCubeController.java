@@ -336,7 +336,7 @@ public class SpinCubeController {
 		return srv_resp;
 	}
 	
-	public UserBean transferMoneyToVava(String username) throws ParseException
+	public UserBean transferMoneyToVava(String username, int site_id) throws ParseException
 	{
 		Gson gson				= new Gson();
 		UserDao user_db			= new UserDao();
@@ -352,7 +352,7 @@ public class SpinCubeController {
 		/*--------------------------------------------------------------------
         |	Query Database
         |-------------------------------------------------------------------*/
-		user_profile 	= user_db.getUserByUserId(username);
+		user_profile 	= user_db.getUserByUserId(username, site_id);
 		
 		/*--------------------------------------------------------------------
         |	Withdraw all money from MG and save to database
@@ -366,7 +366,7 @@ public class SpinCubeController {
 		money 			= user_profile.getMoney() + withdraw_data.getAmount();
 
 		user_profile.setMoney((int)money);
-		user_db.setUserMoney(username, money);
+		user_db.setUserMoney(username, site_id, money);
 
 		return user_profile;
 	}

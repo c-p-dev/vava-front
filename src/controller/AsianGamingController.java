@@ -95,7 +95,7 @@ public class AsianGamingController {
 		return ag_create_url;
 	}
 	
-	public String createAgSession(String user_id, String session_id)
+	public String createAgSession(String user_id, String session_id, int site_id)
 	{
 		String sess_url_base	= "http://uatapi.hgline88.com:3381/resource/player-tickets.ucs?";
 		String url_full			= "";
@@ -106,7 +106,7 @@ public class AsianGamingController {
 		/*--------------------------------------------------------------------
         |	Get User information from Database
         |-------------------------------------------------------------------*/
-		user_profile			= user_db.getUserByUserId(user_id);
+		user_profile			= user_db.getUserByUserId(user_id, site_id);
 		
 		/*--------------------------------------------------------------------
         |	Build the GET Parameter String
@@ -155,13 +155,13 @@ public class AsianGamingController {
 		return ag_game_url;
 	}
 	
-	public String launchGame(String user_id, String lnk_dsp) throws MalformedURLException, IOException
+	public String launchGame(String user_id, String lnk_dsp, int site_id) throws MalformedURLException, IOException
 	{
 		StringManipulator str_lib	= new StringManipulator();
 		
 		String session_id		= str_lib.getSaltString(14);
 		String ag_create_url	= checkCreateAccount(user_id);
-		String ag_sess_url		= createAgSession(user_id, session_id);
+		String ag_sess_url		= createAgSession(user_id, session_id, site_id);
 		String ag_game_url		= forwardToAg(user_id, session_id, lnk_dsp);
 		
 		InputStream  con_create	= new URL(ag_create_url).openStream();

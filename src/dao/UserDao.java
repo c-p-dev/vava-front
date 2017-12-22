@@ -38,20 +38,21 @@ public class UserDao {
 	public static Logger logger = Logger.getLogger(UserDao.class);
 	public UserDao(){}
 	
-	public UserBean getUser(String userid,String password) throws SQLException{
+	public UserBean getUser(String userid, String password, int site_id) throws SQLException{
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
 		UserBean uib = new UserBean();
-		String query = "SELECT * FROM RT01.dbo.user_mst WHERE userid = ?";
+		String query = "SELECT * FROM RT01.dbo.user_mst WHERE userid = ? AND siteid = ?";
 
 		try {
 			DBConnector.getInstance();
 			con = DBConnector.getConnection();
 			
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1,userid);
+			pstmt.setString(1, userid);
+			pstmt.setInt(2, site_id);
 			rs = pstmt.executeQuery();
 					   
 			
@@ -320,12 +321,12 @@ public class UserDao {
 	}
 	
 	
-	public UserBean getUserByUserId(String user_id)
+	public UserBean getUserByUserId(String user_id, int site_id)
 	{
 		Connection con 			= null;
 		PreparedStatement pstmt = null;
 		ResultSet rs 			= null;
-		String  query 			= "SELECT TOP 1 * FROM user_mst WHERE userid = ?" ;
+		String  query 			= "SELECT TOP 1 * FROM user_mst WHERE userid = ? AND siteid = ?" ;
 		
 		UserBean user_data		= new UserBean();
 		
@@ -335,6 +336,7 @@ public class UserDao {
 		    
 		    pstmt   			= con.prepareStatement(query);
             pstmt.setString(1, user_id);
+            pstmt.setInt(2, site_id);
             
 			rs      = pstmt.executeQuery();
             
@@ -369,12 +371,14 @@ public class UserDao {
 		return user_data;
 	}
 	
-	public int setUserMoney(String user_id, double money) {
+	public int setUserMoney(String user_id, int site_id, double money) {
 
 		Connection con 			= null;
 		PreparedStatement pstmt = null;
 		int sts					= 0;
-		String  query 			= "UPDATE user_mst SET money = ? WHERE userid = ?";		
+		String  query 			= "UPDATE user_mst SET money = ?"
+				+ " WHERE userid = ?"
+				+ " AND siteid = ?";		
 		
 		try {
 			DBConnector.getInstance();
@@ -383,34 +387,7 @@ public class UserDao {
 		    pstmt   			= con.prepareStatement(query);
             pstmt.setDouble(1, money);
             pstmt.setString(2, user_id);
-            
-			sts      = pstmt.executeUpdate();
-           
-	        pstmt.close();
-	        con.close();
-		}
-		catch(Exception e) {
-			logger.debug(e);
-		}
-		
-		return sts;
-	}
-	
-	public int setUserMoney(String SITEID, String UID, double money) {
-
-		Connection con 			= null;
-		PreparedStatement pstmt = null;
-		int sts					= 0;
-		String  query 			= "UPDATE user_mst SET money = ? WHERE userid = ? and siteid= ?";		
-		
-		try {
-			DBConnector.getInstance();
-			con = DBConnector.getConnection();
-		    
-		    pstmt   			= con.prepareStatement(query);
-            pstmt.setDouble(1, money);
-            pstmt.setString(2, UID);
-            pstmt.setString(3, SITEID);
+            pstmt.setInt(3, site_id);
             
 			sts      = pstmt.executeUpdate();
            
@@ -580,91 +557,10 @@ public class UserDao {
 		} 
 	  	return list;
 		
-	}	
-	
-	public int updateUserAfterLogin(String userid,String sessionId){
-		
-		Gson gson				= new Gson();
-		Connection con 			= null;
-		PreparedStatement pstmt = null;
-		int sts = 0;
-		String  query 			= "UPDATE user_mst SET sess  = ?, login_cnt = login_cnt + 1 WHERE userid = ?";		
-		
-		try {
-			DBConnector.getInstance();
-			con = DBConnector.getConnection();
-			
-		    pstmt   			= con.prepareStatement(query);
-            pstmt.setString(1, sessionId);
-            pstmt.setString(2, userid);
-			sts = pstmt.executeUpdate();
-			
-	        pstmt.close();
-	        con.close();
-	        
-	        /*--------------------------------------------------------------------
-	        |	Withdraw all money from MG
-	        |-------------------------------------------------------------------*/
-	        ArrayList<MgBettingProfileBean> bet_profls	= new ArrayList<MgBettingProfileBean>();
-			MgPlayerAccountBean mg_user		= new MgPlayerAccountBean();
-			MgBettingProfileBean bet_profl	= new MgBettingProfileBean();
-			UserBean user_data				= this.getUserByUserId(userid);
-			SpinCubeController sc_ctrl		= new SpinCubeController(Integer.toString(user_data.getSiteid()).concat("_").concat(userid));
-			
-			double money					= user_data.getMoney();
-			
-	        TotalEgameController teg_ctrl 	= new TotalEgameController();
-	        MgWithdrawAllBean withdraw_data = new MgWithdrawAllBean();
-	        String mg_username				= Integer.toString(user_data.getSiteid()).concat("_").concat(userid);
-	        
-	        String withdraw_resp			= teg_ctrl.withdrawAll(mg_username);
-	        withdraw_data					= gson.fromJson(withdraw_resp, MgWithdrawAllBean.class);
-	        
-	        switch (withdraw_data.getStatus().getErrorCode()) {
-		        /*	MG Account does not Exist	*/
-		        case 46:
-		        	/*	Create account for MG	*/
-					bet_profl.setCategory("LGBetProfile");
-					bet_profl.setProfileId(1202);
-					
-					bet_profls.add(bet_profl);
-					
-					mg_user.setPreferredAccountNumber(mg_username);
-					mg_user.setFirstName(user_data.getUserid().trim().concat("FNAME"));
-					mg_user.setLastName(user_data.getUserid().trim().concat("LNAME"));
-					mg_user.setEmail("");
-					mg_user.setMobilePrefix(user_data.getCell().substring(1, 3));
-					mg_user.setMobileNumber(user_data.getCell().substring(3));
-					mg_user.setDepositAmount(0);
-					mg_user.setPinCode("newplayer1");
-					mg_user.setIsProgressive(0);
-					mg_user.setBettingProfiles(bet_profls);
-					teg_ctrl.addPlayerAccount(mg_user);
-	        		break;
-	        		
-	        	case 0:
-	        		money 	= money + withdraw_data.getResult().getTransactionAmount();
-	    			
-	        		user_data.setMoney((int)money);
-	    			this.setUserMoney(userid, money);	        		
-	        	default:
-	        		break;
-	        }
-	        
-	        sc_ctrl.transferMoneyToVava(userid);
-		}
-		catch(Exception e) {
-			System.out.println(e);
-			logger.debug(e);
-		}
-		
-		return sts;
-		
 	}
-	
-	
+		
 	//updated
-	public boolean updateUserAfterLogin(String SITEID, String UID,String pass, String sessionId, String IP){
+	public boolean updateUserAfterLogin(String SITEID, String UID, String pass, String sessionId, String IP){
 		
 		Gson gson				= new Gson();
 		Connection con 			= null;
@@ -704,7 +600,7 @@ public class UserDao {
 	        ArrayList<MgBettingProfileBean> bet_profls	= new ArrayList<MgBettingProfileBean>();
 			MgPlayerAccountBean mg_user		= new MgPlayerAccountBean();
 			MgBettingProfileBean bet_profl	= new MgBettingProfileBean();
-			UserBean user_data				= this.getUserByUserId(UID);
+			UserBean user_data				= this.getUserByUserId(UID, Integer.valueOf(SITEID));
 			SpinCubeController sc_ctrl		= new SpinCubeController(Integer.toString(user_data.getSiteid()).concat("_").concat(UID));
 			
 			double money					= user_data.getMoney();
@@ -742,8 +638,7 @@ public class UserDao {
 	        		money 	= money + withdraw_data.getResult().getTransactionAmount();
 	    			
 	        		user_data.setMoney((int)money);
-	    			//this.setUserMoney(userid, money);
-	        		sts += this.setUserMoney(SITEID, UID, money);
+	        		this.setUserMoney(UID, Integer.valueOf(SITEID), money);
 	        		
 	        		Debug.out("[updateUserAfterLogin:sts3]:"+sts);
 	        		 
@@ -751,10 +646,11 @@ public class UserDao {
 	        		break;
 	        }
 	        
-	        sc_ctrl.transferMoneyToVava(UID); // need check..
+	        sc_ctrl.transferMoneyToVava(UID, Integer.valueOf(SITEID)); // need check..
 	        
-	        if(sts > 2)
+	        if (sts > 2) {
 				result = true;
+	        }
 	        
 		} catch(Exception e) {
 			System.out.println(e);
@@ -798,56 +694,6 @@ public class UserDao {
 		
 		return result;
 		
-	}
-	
-	public UserBean getUserInfoByUserid (String userid) throws SQLException{
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		UserBean uib = new UserBean();
-		String query = "SELECT * FROM RT01.dbo.user_mst WHERE userid = ?";
-		
-		try{	      
-			
-			DBConnector.getInstance();
-			con = DBConnector.getConnection();	 	
-			pstmt = con.prepareStatement(query);
-			pstmt.setString(1,userid);
-			rs = pstmt.executeQuery();
-					   
-			if(rs.next()){
-				uib.setLoginStatus(0); //success
-				uib.setUserid(rs.getString("userid"));
-				uib.setNick(rs.getString("nick"));
-				uib.setCell(rs.getString("cell"));
-				uib.setGrade(rs.getInt("grade"));
-				uib.setWatch(rs.getString("watch"));
-				uib.setRecommend_yn(rs.getString("recommend_yn"));
-				uib.setMoney(rs.getInt("money"));
-				uib.setPoint(rs.getInt("point"));
-				uib.setBank_name(rs.getString("bank_name"));
-				uib.setBank_owner(rs.getString("bank_owner"));
-				uib.setBank_num(rs.getString("bank_num"));	
-				uib.setCharge_level(rs.getString("charge_level"));
-				uib.setSiteid(rs.getInt("siteid"));
-			}else{
-				uib.setLoginStatus(2); // no account
-			}
-			
-	        rs.close();
-	        pstmt.close();
-	        con.close();
-	  		    
-		} catch(Exception e){
-		       	e.printStackTrace();
-		
-		} finally{
-		 	  if(rs!=null) rs.close();
-		 	  if(pstmt!=null) pstmt.close();
-		 	  if(con!=null) con.close();
-		}
-  	
-	  	return uib;
 	}
 	
 	public boolean checkUserPassword(String userid, String passwd) throws SQLException{

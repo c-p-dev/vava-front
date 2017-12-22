@@ -15,7 +15,7 @@
 	//boolean result = false;
 	Gson gson = new Gson();
 	UserDao ud = new UserDao();
-	//UserBean bean = (UserBean) ud.getUserByUserId(UID);
+	//UserBean bean = (UserBean) ud.getUserByUserId(UID, SITEID);
 	
 	String amt="";
 	
@@ -31,7 +31,7 @@
 	//result = ud.switchpoints(bean,bean.getMoney(),bean.getPoint(),points);
 	//result = ud.userpoints(bean,bean.getMoney(),bean.getPoint(),points);	
 	
-	//UserBean usermoney = ud.getUserByUserId(UID);
+	//UserBean usermoney = ud.getUserByUserId(UID, SITEID);
 	
 	out.println(gson.toJson(bean, UserBean.class));
 		
