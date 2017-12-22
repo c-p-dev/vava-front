@@ -194,6 +194,7 @@
 	
 	hsm.put("header", html);
 	hsm.put("popup", ne_bean);
+	hsm.put("bal", UBAL);
 	out.println(gson.toJson(hsm).toString());
 
 %>

@@ -164,7 +164,7 @@
 					<jsp:include page="/cash/switch_points.jsp" />
 				</div>
 				<div id="tab5" class="tab_content">
-					<jsp:include page="/cash/point_tab.jsp" /> 
+					<jsp:include page="/cash/point_tab.jsp" />
 				</div>
 				<div id="tab6" class="tab_content">
 					<jsp:include page="/cash/moneyuse_tab.jsp" />
@@ -174,6 +174,24 @@
 		</div>
 	</div>
 </div><!-- contents -->
+
+<script>
+
+      $(".dt-point-tab").on("click",function(){
+      	console.log("$pointUseTable");      	
+      	$pointUseTable.ajax.reload();
+		  	$pointUseTable.columns.adjust().draw();
+      });
+      
+       $(".dt-money-use").on("click",function(){
+      	console.log("$moneyUseTable");      	
+      	$moneyUseTable.ajax.reload();
+		  	$moneyUseTable.columns.adjust().draw();
+      });
+      
+
+</script>
+      
 
 <%@ include file="/inc/footer.jsp"%>
 </div>

@@ -376,9 +376,7 @@ public class UserDao {
 		Connection con 			= null;
 		PreparedStatement pstmt = null;
 		int sts					= 0;
-		String  query 			= "UPDATE user_mst SET money = ?"
-				+ " WHERE userid = ?"
-				+ " AND siteid = ?";		
+		String  query 			= "UPDATE user_mst SET money = ? WHERE userid = ?";		
 		
 		try {
 			DBConnector.getInstance();
@@ -387,7 +385,34 @@ public class UserDao {
 		    pstmt   			= con.prepareStatement(query);
             pstmt.setDouble(1, money);
             pstmt.setString(2, user_id);
-            pstmt.setInt(3, site_id);
+            
+			sts      = pstmt.executeUpdate();
+           
+	        pstmt.close();
+	        con.close();
+		}
+		catch(Exception e) {
+			logger.debug(e);
+		}
+		
+		return sts;
+	}
+	
+	public int setUserMoney(String SITEID, String UID, double money) {
+
+		Connection con 			= null;
+		PreparedStatement pstmt = null;
+		int sts					= 0;
+		String  query 			= "UPDATE user_mst SET money = ? WHERE userid = ? and siteid= ?";		
+		
+		try {
+			DBConnector.getInstance();
+			con = DBConnector.getConnection();
+		    
+		    pstmt   			= con.prepareStatement(query);
+            pstmt.setDouble(1, money);
+            pstmt.setString(2, UID);
+            pstmt.setString(3, SITEID);
             
 			sts      = pstmt.executeUpdate();
            
@@ -437,6 +462,76 @@ public class UserDao {
 		}
 		
 		return bankAccount;
+		
+	}
+	
+	public UserBean getUserBankConfigAccount(String SITEID,String UID,String PW) throws SQLException{
+		
+		String bankAccount = "";
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		
+		UserBean ub = new UserBean();
+		
+		try {
+			
+			DBConnector.getInstance();
+			con = DBConnector.getConnection();
+			
+			String query1 ="select count(*) cnt from user_mst WHERE siteid="+SITEID+" and userid = '"+UID+"' and passwd='"+PW+"'";
+			
+			String query2 ="select bank_owner_user, bank_name+' '+bank_num +' [ ¿¹±ÝÁÖ : ' +bank_owner+' ]' as bank_account from ( " +
+					" select a.bank_owner bank_owner_user, case  when charge_level='JOIN' then bank_join_name when charge_level='LOW' then bank_low_name when  charge_level='MIDDLE' then bank_middle_name when  charge_level='HIGH' then bank_high_name end bank_name, " +
+					" case  when charge_level='JOIN' then bank_join_num when charge_level='LOW' then bank_low_num when  charge_level='MIDDLE' then bank_middle_num when  charge_level='HIGH' then bank_high_num end bank_num, " +
+					" case  when charge_level='JOIN' then bank_join_owner when charge_level='LOW' then bank_low_owner when  charge_level='MIDDLE' then bank_middle_owner when  charge_level='HIGH' then bank_high_owner end bank_owner " +
+					" from user_mst a, config_mst b WHERE a.siteid="+SITEID+" and a.userid = '"+UID+"' and a.siteid = b.siteid " +
+					" ) aa ";
+			/*
+		    String query = "";
+		    	query = "SELECT CONCAT(bank_low_name,' ' ,bank_low_owner,' ',bank_low_num) as bank_account from dbo.config_mst WHERE siteid=?";
+		    if(charge_level == "HIGH"){
+		    	query = "SELECT CONCAT(bank_high_name,' ' ,bank_high_owner,' ',bank_high_num) as bank_account from dbo.config_mst WHERE siteid=?"; 
+			}else if(charge_level == "MIDDLE"){
+				query = "SELECT CONCAT(bank_middle_name,' ' ,bank_middle_owner,' ',bank_middle_num) as bank_account from dbo.config_mst WHERE siteid=?"; 
+			}
+			*/
+			
+			pstmt = con.prepareStatement(query1);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				result = rs.getInt("cnt");
+			}
+			rs.close();
+			pstmt.close();
+			
+			if(result>0){
+				pstmt = con.prepareStatement(query2);
+				rs = pstmt.executeQuery();
+				if(rs.next()){
+					ub.setBank_name(rs.getString("bank_account")); 
+					ub.setBank_owner(rs.getString("bank_owner_user"));
+				}
+			} else {
+					ub.setBank_name("-1"); 
+					ub.setBank_owner("-1"); 
+					//ub.setBank_owner(rs.getString("bank_owner_user"));
+			}
+			rs.close();
+			pstmt.close();
+			
+		} catch(Exception e){
+			logger.debug(e);
+			
+		}finally {
+			if(rs!=null) rs.close();
+			if(pstmt!=null) pstmt.close();
+	  		if(con!=null) con.close();
+		}
+		
+		return ub;
 		
 	}
 	
@@ -557,10 +652,91 @@ public class UserDao {
 		} 
 	  	return list;
 		
-	}
+	}	
+	
+	// public int updateUserAfterLogin(String userid,String sessionId){
 		
+	// 	Gson gson				= new Gson();
+	// 	Connection con 			= null;
+	// 	PreparedStatement pstmt = null;
+	// 	int sts = 0;
+	// 	String  query 			= "UPDATE user_mst SET sess  = ?, login_cnt = login_cnt + 1 WHERE userid = ?";		
+		
+	// 	try {
+	// 		DBConnector.getInstance();
+	// 		con = DBConnector.getConnection();
+			
+	// 	    pstmt   			= con.prepareStatement(query);
+ //            pstmt.setString(1, sessionId);
+ //            pstmt.setString(2, userid);
+	// 		sts = pstmt.executeUpdate();
+			
+	//         pstmt.close();
+	//         con.close();
+	        
+	//         /*--------------------------------------------------------------------
+	//         |	Withdraw all money from MG
+	//         |-------------------------------------------------------------------*/
+	//         ArrayList<MgBettingProfileBean> bet_profls	= new ArrayList<MgBettingProfileBean>();
+	// 		MgPlayerAccountBean mg_user		= new MgPlayerAccountBean();
+	// 		MgBettingProfileBean bet_profl	= new MgBettingProfileBean();
+	// 		UserBean user_data				= this.getUserByUserId(userid);
+	// 		SpinCubeController sc_ctrl		= new SpinCubeController(Integer.toString(user_data.getSiteid()).concat("_").concat(userid));
+			
+	// 		double money					= user_data.getMoney();
+			
+	//         TotalEgameController teg_ctrl 	= new TotalEgameController();
+	//         MgWithdrawAllBean withdraw_data = new MgWithdrawAllBean();
+	//         String mg_username				= Integer.toString(user_data.getSiteid()).concat("_").concat(userid);
+	        
+	//         String withdraw_resp			= teg_ctrl.withdrawAll(mg_username);
+	//         withdraw_data					= gson.fromJson(withdraw_resp, MgWithdrawAllBean.class);
+	        
+	//         switch (withdraw_data.getStatus().getErrorCode()) {
+	// 	        /*	MG Account does not Exist	*/
+	// 	        case 46:
+	// 	        	/*	Create account for MG	*/
+	// 				bet_profl.setCategory("LGBetProfile");
+	// 				bet_profl.setProfileId(1202);
+					
+	// 				bet_profls.add(bet_profl);
+					
+	// 				mg_user.setPreferredAccountNumber(mg_username);
+	// 				mg_user.setFirstName(user_data.getUserid().trim().concat("FNAME"));
+	// 				mg_user.setLastName(user_data.getUserid().trim().concat("LNAME"));
+	// 				mg_user.setEmail("");
+	// 				mg_user.setMobilePrefix(user_data.getCell().substring(1, 3));
+	// 				mg_user.setMobileNumber(user_data.getCell().substring(3));
+	// 				mg_user.setDepositAmount(0);
+	// 				mg_user.setPinCode("newplayer1");
+	// 				mg_user.setIsProgressive(0);
+	// 				mg_user.setBettingProfiles(bet_profls);
+	// 				teg_ctrl.addPlayerAccount(mg_user);
+	//         		break;
+	        		
+	//         	case 0:
+	//         		money 	= money + withdraw_data.getResult().getTransactionAmount();
+	    			
+	//         		user_data.setMoney((int)money);
+	//     			this.setUserMoney(userid, money);	        		
+	//         	default:
+	//         		break;
+	//         }
+	        
+	//         sc_ctrl.transferMoneyToVava(userid);
+	// 	}
+	// 	catch(Exception e) {
+	// 		System.out.println(e);
+	// 		logger.debug(e);
+	// 	}
+		
+	// 	return sts;
+		
+	// }
+	
+	
 	//updated
-	public boolean updateUserAfterLogin(String SITEID, String UID, String pass, String sessionId, String IP){
+	public boolean updateUserAfterLogin(String SITEID, String UID,String pass, String sessionId, String IP){
 		
 		Gson gson				= new Gson();
 		Connection con 			= null;
@@ -694,6 +870,56 @@ public class UserDao {
 		
 		return result;
 		
+	}
+	
+	public UserBean getUserInfoByUserid (String userid) throws SQLException{
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		UserBean uib = new UserBean();
+		String query = "SELECT * FROM RT01.dbo.user_mst WHERE userid = ?";
+		
+		try{	      
+			
+			DBConnector.getInstance();
+			con = DBConnector.getConnection();	 	
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1,userid);
+			rs = pstmt.executeQuery();
+					   
+			if(rs.next()){
+				uib.setLoginStatus(0); //success
+				uib.setUserid(rs.getString("userid"));
+				uib.setNick(rs.getString("nick"));
+				uib.setCell(rs.getString("cell"));
+				uib.setGrade(rs.getInt("grade"));
+				uib.setWatch(rs.getString("watch"));
+				uib.setRecommend_yn(rs.getString("recommend_yn"));
+				uib.setMoney(rs.getInt("money"));
+				uib.setPoint(rs.getInt("point"));
+				uib.setBank_name(rs.getString("bank_name"));
+				uib.setBank_owner(rs.getString("bank_owner"));
+				uib.setBank_num(rs.getString("bank_num"));	
+				uib.setCharge_level(rs.getString("charge_level"));
+				uib.setSiteid(rs.getInt("siteid"));
+			}else{
+				uib.setLoginStatus(2); // no account
+			}
+			
+	        rs.close();
+	        pstmt.close();
+	        con.close();
+	  		    
+		} catch(Exception e){
+		       	e.printStackTrace();
+		
+		} finally{
+		 	  if(rs!=null) rs.close();
+		 	  if(pstmt!=null) pstmt.close();
+		 	  if(con!=null) con.close();
+		}
+  	
+	  	return uib;
 	}
 	
 	public boolean checkUserPassword(String userid, String passwd) throws SQLException{
@@ -1125,45 +1351,6 @@ public class UserDao {
 	       	result = false;
 		}
   	
-		
-		return result;
-	}
-	
-	public boolean checkIPBlockList(String ip){
-		
-		boolean result = false;
-		Connection con 			= null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String  query 			= "SELECT ipid FROM ip_lst where "
-				+ " CONVERT(BIGINT,PARSENAME(?,4)) * POWER(256,3) "
-				+ " + CONVERT(BIGINT,PARSENAME(?,3)) * POWER(256,2) "
-				+ " + CONVERT(BIGINT,PARSENAME(?,2)) * 256 "
-				+ " + CONVERT(BIGINT,PARSENAME(? ,1)) between num_ip AND num_ip2  "
-				+ " AND gubun = 'U'AND viewtype = 'Y'";		
-		
-		try {
-			if(!ip.equals("0:0:0:0:0:0:0:1")){
-				DBConnector.getInstance();
-				con = DBConnector.getConnection();			 	
-				pstmt = con.prepareStatement(query);
-				pstmt.setString(1,ip);
-				pstmt.setString(2,ip);
-				pstmt.setString(3,ip);
-				pstmt.setString(4,ip);
-				rs = pstmt.executeQuery();
-				if(rs.next()){
-					result = true;
-				}
-			}else{
-				System.out.println("Ip is : " + ip);
-			}
-			
-		}
-		catch(Exception e) {
-			System.out.println(e);
-			logger.debug(e);
-		}
 		
 		return result;
 	}
