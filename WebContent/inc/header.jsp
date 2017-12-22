@@ -111,8 +111,8 @@ var UBAL = <%=UBAL%>;
 		width: 15px;
 	    height: 15px;
 	    border-radius: 50%;
-	    border: 3px solid #0c841b;
-	    box-shadow: 0 0 0 2px #2d3f35, 0 0 0 3px #0c841b;
+	    border: 3px solid #f00;
+	   	background: #f00;
 	    text-align: center;
 	    position: absolute;
 	    top: -44px;
@@ -184,6 +184,7 @@ $(window).scroll(function(event){
 
 
 	$(document).ready(function(){
+		console.log('<%=IP%>');
 		console.log(navigator.userAgent);
 		if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 			window.location = "http://m.vava21.com";
@@ -522,6 +523,7 @@ $(window).scroll(function(event){
 	}
 
 	function loadMsgCount(){
+		
 		$.ajax({
 			url : '/login/jsp/get_msgcount.jsp',
 			data : {},
@@ -532,10 +534,10 @@ $(window).scroll(function(event){
 			if(obj.count > 0){
 				html  = "<span class='msg-notif-count'>"+obj.count+"</span>";
 			}
-
 			$(".msg-cont").html(html);
-
+			IntervalloadMsgCount()
 		});
+		
 	}
 
 	
