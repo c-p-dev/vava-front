@@ -368,7 +368,7 @@
         
 		$.get('/login/jsp/get_session.jsp', function(srv_resp) {
 			
-			if (!srv_resp.result) {
+			if (!srv_resp.validUser) {
 				$('a.get-vbet-hist').parent().hide();
 			}
 			else {
