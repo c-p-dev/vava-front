@@ -139,29 +139,69 @@
 					<span class="font_006">은행 점검 시간</span>	
 					<table cellspacing="0" cellpadding="0" class="back_table">
 						<tr>
-							<td class="bank_name b_left">국민은행</td>
-							<td class="bank_time">00 : 00 ~ 00 : 00</td>
-							<td class="bank_name">우리은행</td>
-							<td class="bank_time">00 : 00 ~ 00 : 00</td>
-						</tr>
-						<tr>
-							<td class="bank_name b_left">국민은행</td>
-							<td class="bank_time">00 : 00 ~ 00 : 00</td>
-							<td class="bank_name">우리은행</td>
-							<td class="bank_time">00 : 00 ~ 00 : 00</td>
-						</tr>
-						<tr>
-							<td class="bank_name b_left">국민은행</td>
-							<td class="bank_time">00 : 00 ~ 00 : 00</td>
-							<td class="bank_name">우리은행</td>
-							<td class="bank_time">00 : 00 ~ 00 : 00</td>
-						</tr>
-						<tr>
-							<td class="bank_name b_left">국민은행</td>
-							<td class="bank_time">00 : 00 ~ 00 : 00</td>
-							<td class="bank_name">우리은행</td>
-							<td class="bank_time">00 : 00 ~ 00 : 00</td>
-						</tr>
+								<td class="bank_name b_left">국민은행</td>
+								<td class="bank_time">23 : 30 ~ 00 : 30</td>
+								<td class="bank_name">광주은행</td>
+								<td class="bank_time">23 : 50 ~ 00 : 20</td>
+							</tr>
+							<tr>
+								<td class="bank_name b_left">기업은행	</td>
+								<td class="bank_time">00 : 00 ~ 00 : 30</td>
+								<td class="bank_name">경남은행	</td>
+								<td class="bank_time">23 : 30 ~ 01 : 00</td>
+							</tr>
+							<tr>
+								<td class="bank_name b_left">농협	</td>
+								<td class="bank_time">23 : 30 ~ 00 : 30</td>
+								<td class="bank_name">대구은행	</td>
+								<td class="bank_time">23 : 50 ~ 01 : 00</td>
+							</tr>
+							<tr>
+								<td class="bank_name b_left">부산은행	</td>
+								<td class="bank_time">00 : 00 ~ 00 : 30</td>
+								<td class="bank_name">삼성증권	</td>
+								<td class="bank_time">23 : 50 ~ 00 : 10</td>
+							</tr>
+							<tr>
+								<td class="bank_name b_left">수협	</td>
+								<td class="bank_time">23 : 30 ~ 00 : 30</td>
+								<td class="bank_name">씨티은행	</td>
+								<td class="bank_time">23 : 30 ~ 00 : 10</td>
+							</tr>
+							<tr>
+								<td class="bank_name b_left">신한은행	</td>
+								<td class="bank_time">23 : 50 ~ 00 : 10</td>
+								<td class="bank_name">신협	</td>
+								<td class="bank_time">00 : 00 ~ 00 : 30</td>
+							</tr>
+							<tr>
+								<td class="bank_name b_left">새마을금고	</td>
+								<td class="bank_time">23 : 00 ~ 00 : 30</td>
+								<td class="bank_name">산업은행	</td>
+								<td class="bank_time">23 : 00 ~ 01 : 00</td>
+							</tr>
+							<tr>
+								<td class="bank_name b_left">우체국	</td>
+								<td class="bank_time">23 : 40 ~ 00 : 30</td>
+								<td class="bank_name">외환은행	</td>
+								<td class="bank_time">23 : 55 ~ 00 : 05</td>
+							</tr>
+							<tr>
+								<td class="bank_name b_left">우리은행	</td>
+								<td class="bank_time">23 : 30 ~ 01 : 00</td>
+								<td class="bank_name">전북은행	</td>
+								<td class="bank_time">23 : 30 ~ 01 : 00</td>
+							</tr>
+							<tr>
+								<td class="bank_name b_left">제주은행	</td>
+								<td class="bank_time">23 : 50 ~ 00 : 20</td>
+								<td class="bank_name">제일은행	</td>
+								<td class="bank_time">23 : 40 ~ 00 : 30</td>
+							</tr>
+							<tr>
+								<td class="bank_name b_left">하나은행	</td>
+								<td class="bank_time">23 : 30 ~ 01 : 00</td>
+							</tr>
 					</table>	
 				</div>
 			</div>
