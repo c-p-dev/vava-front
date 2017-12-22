@@ -37,7 +37,7 @@ public class AccountDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		String dataQuery = "SELECT regdate, acid,job, remain_point, case when money  < 0 then money else null end deduct_point, "
+		String dataQuery = "SELECT  convert(char(19),regdate,120) regdate, acid,job, remain_point, case when money  < 0 then money else null end deduct_point, "
 				+ "case when money > 0  then money else null end added_point From account_lst "
 				+ " WHERE userid = ? "
 				+ "AND cast ([regdate] as date) BETWEEN ? AND ? "
@@ -69,8 +69,8 @@ public class AccountDao {
 					   
 			while(rs.next()){
 				HashMap<String, Object> hsm = new HashMap<String, Object>();
-				hsm.put("regdate", (rs.getString("regdate") != null ? dateFormater.format(dateFormater.parse(rs.getString("regdate"))) : null));
-				hsm.put("job", (rs.getString("job") != null ? rs.getString("job") : null));
+				hsm.put("regdate", (rs.getString("regdate")));
+				hsm.put("job", (rs.getString("job")));
 				hsm.put("deduct_point", (rs.getInt("deduct_point")));
 				hsm.put("added_point", (rs.getInt("added_point")));
 				hsm.put("remain_point", (rs.getInt("remain_point")));
@@ -82,7 +82,7 @@ public class AccountDao {
 	        con.close();
 	  		    
 		} catch(Exception e){
-			System.out.println(e);
+			//System.out.println(e);
 			e.printStackTrace();
 		} 
 		
@@ -92,24 +92,23 @@ public class AccountDao {
 	}
 	
 	
-	public List<HashMap> getPointHistory2(String SITEID, String UID, String job, String fromDate, String toDate){
+	public List<HashMap> getPointHistory2(String SITEID, String UID, String fromDate, String toDate){
 		List<HashMap> data = new ArrayList<HashMap>();
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String add = "";
+		//String add = "";
 		
-		Debug.out("getPointHistory2[job]:" + job);
-		
+		/*
 		if(!job.equals("ALL")){
 			//pstmt.setObject(4,job);
 			add = "and a.job='"+job+"'";
 		}
-		
-		String dataQuery = "SELECT regdate, acid, job_kor job, remain_point, case when money  < 0 then money else null end deduct_point, "
-				+ "case when money > 0  then money else null end added_point From account_lst a, job_trans b "
+		*/
+		String dataQuery = "SELECT  convert(char(19),regdate,120) regdate, acid, a.job job, job_kor job_kor, remain_point, isnull(case when money  < 0 then money else null end,0) deduct_point, "
+				+ "isnull(case when money > 0  then money else null end,0) added_point From account_lst a, job_trans b "
 				+ " WHERE a.job = b.job and userid = ? and siteid=? "
-				+  add + " AND cast ([regdate] as date) BETWEEN ? AND ? "
+				+ " AND cast ([regdate] as date) BETWEEN ? AND ? "
 				+ " AND a.moneypoint = 'P' ";
 		
 		//if(!job.equals("ALL")){
@@ -142,8 +141,10 @@ public class AccountDao {
 					   
 			while(rs.next()){
 				HashMap<String, Object> hsm = new HashMap<String, Object>();
-				hsm.put("regdate", (rs.getString("regdate") != null ? dateFormater.format(dateFormater.parse(rs.getString("regdate"))) : null));
-				hsm.put("job", (rs.getString("job") != null ? rs.getString("job") : null));
+				//hsm.put("regdate", (rs.getString("regdate") != null ? dateFormater.format(dateFormater.parse(rs.getString("regdate"))) : null));
+				hsm.put("regdate",(rs.getString("regdate")));
+				hsm.put("job", (rs.getString("job")));
+				hsm.put("job_kor", (rs.getString("job_kor")));
 				hsm.put("deduct_point", (rs.getInt("deduct_point")));
 				hsm.put("added_point", (rs.getInt("added_point")));
 				hsm.put("remain_point", (rs.getInt("remain_point")));
@@ -155,7 +156,7 @@ public class AccountDao {
 	        con.close();
 	  		    
 		} catch(Exception e){
-			System.out.println(e);
+			//System.out.println(e);
 			e.printStackTrace();
 		} 
 		
@@ -232,27 +233,38 @@ public class AccountDao {
 		
 	}
 */
-	public List<HashMap> getMoneyUseHistory(String SITEID, String UID,String job, String fromDate, String toDate){
+	public List<HashMap> getMoneyUseHistory(String SITEID, String UID, String fromDate, String toDate){
 		Gson gson = new Gson();
-		List<HashMap> list = new ArrayList<HashMap>();
+		List<HashMap> data = new ArrayList<HashMap>();
 		String result = "";
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String add="";
 		
+		//String add="";
+		/*
 		if(!job.equals("ALL")){
 			//pstmt.setObject(4,job);
 			add = "and a.job='"+job+"'";
 		}
 		
 		String query = "SELECT regdate, acid, b.job_kor job, "+ 
-				" case when a.moneypoint='M' then money else 0 end money, "+
-				" case when a.moneypoint='P' then money else 0 end point , " +
-				" remain_point,remain_money "
+				" isnull(money,0) money, "+
+				" isnull(remain_money,0) remain_money "
 				+ " From account_lst a, job_trans b "
 				+ " WHERE a.job = b.job and siteid= ? and userid = ? "
-				+ add + " AND cast ([regdate] as date) BETWEEN ? AND ? order by regdate desc";
+				+ " AND a.moneypoint = 'M' "
+				+ " AND cast ([regdate] as date) BETWEEN ? AND ? order by regdate desc";
+		*/
+		
+		String query = "SELECT  convert(char(19),regdate,120) regdate, acid, a.job job, job_kor job_kor, remain_money, isnull(case when money  < 0 then money else null end,0) deduct_money, "
+				+ "isnull(case when money > 0  then money else null end,0) added_money From account_lst a, job_trans b "
+				+ " WHERE a.job = b.job and siteid= ? and userid = ? "
+				+ " AND cast ([regdate] as date) BETWEEN ? AND ? "
+				+ " AND a.moneypoint = 'M' ";
+		
+		Debug.out("getMoneyUseHistory:"+query);
+		
 				
 	/*		
 		if(!job.equals("ALL")){
@@ -289,14 +301,23 @@ public class AccountDao {
 			rs = pstmt.executeQuery();
 					   
 			while(rs.next()){
+				/*
 				HashMap<String, Object> hsm = new HashMap<String, Object>();
 				hsm.put("regdate", (rs.getString("regdate") != null ? dateFormater.format(dateFormater.parse(rs.getString("regdate"))) : null));
 				hsm.put("job", (rs.getString("job") != null ? rs.getString("job") : null));
 				hsm.put("money", (rs.getInt("money")));
-				hsm.put("point", (rs.getInt("point")));
 				hsm.put("remain_money", (rs.getInt("remain_money")));
-				hsm.put("remain_point", (rs.getInt("remain_point")));
 				list.add(hsm);
+				*/
+				HashMap<String, Object> hsm = new HashMap<String, Object>();
+				hsm.put("regdate", (rs.getString("regdate")));
+				hsm.put("job", (rs.getString("job")));
+				hsm.put("job_kor", (rs.getString("job_kor")));
+				hsm.put("deduct_money", (rs.getInt("deduct_money")));
+				hsm.put("added_money", (rs.getInt("added_money")));
+				hsm.put("remain_money", (rs.getInt("remain_money")));
+				data.add(hsm);
+				
 			}
 			
 			rs.close();
@@ -304,11 +325,11 @@ public class AccountDao {
 	        con.close();
 	  		    
 		} catch(Exception e){
-			System.out.println(e);
+			//System.out.println(e);
 			e.printStackTrace();
 		} 
 		
-	  	return list;
+	  	return data;
 		
 	}
 	

@@ -27,4 +27,3 @@
 	boolean result = ud.withdraw(SITEID,UID,amt,IP);
 	out.println(result);	
 %>
-<%=SITEID%>,<%=UID%>,<%=amt%>,<%=IP%>

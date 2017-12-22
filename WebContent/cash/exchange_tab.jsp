@@ -11,7 +11,7 @@
 					<div class="blue_wrap">
 						<div class="cash_box">
 							<div class="cash_in">
-								<div class="cash_10"><p style="float:left">보유금액</p><p style="float:right"><span class="font_002 money_dsp" id="money"><%=dfrmt.format(UBAL)%></span>원 </p></div>
+								<div class="cash_10"><p style="float:left">보유금액</p><p style="float:right"><span class="font_002 money_dsp" id="balmoney"><%=dfrmt.format(UBAL)%></span>원 </p></div>
 								<div class="cash_9">
 									<input class="input_style03" type="text" style="text-align: right;padding-right: 5%;" placeholder="환전금액" id="withdraw" name="withdraw">
 								</div>	
@@ -196,6 +196,8 @@
 		}, 100);
 	});
 	
+	var BAL = <%=UBAL%>;
+	
 	$("#formwithdraw").validate({
   		errorClass: 'form1-invalid',
     	validClass: 'form1-valid',
@@ -205,6 +207,7 @@
 				required:true,
 				money_number:true,
 				money_min: true,
+				max_point:BAL,
 			},
 		},
 		messages: {
@@ -212,6 +215,7 @@
 				required:"금액을 입력해 주세요.",
 				money_number: "금액을 숫자로 입력해 주세요.",
 				money_min:"환전 가능한 최소 금액은 만원입니다.",
+				max_point:"잔액이 부족합니다."	,
 			},
 		},
 		errorPlacement: function(error, element) {
@@ -231,19 +235,19 @@
 			            when: false,
 			            ready: true, 
 			            event:false,
-			        },
-			        hide:{
-			        	fixed:true,
-			        	event:false,
-			        },
-			        position: {
-				        container: $("#acc_content_in_withdrawtb"),
-				        at: 'right center ',
-				        my: 'left center', 
-				        adjust : {
-				        	method : 'shift none',
-				        }
-				    }
+		        },
+		        hide:{
+		        	fixed:true,
+		        	event:false,
+		        },
+		        position: {
+			        container: $("#acc_content_in_withdrawtb"),
+			        at: 'right center ',
+			        my: 'left center', 
+			        adjust : {
+			        	method : 'shift none',
+			      }
+			    }
 				});
 		    
 			}else{
@@ -273,7 +277,15 @@
 				type:'POST'
 			}).done(function(data){
 				if(data){
-					$("#ExchangeSuccesModal").popup("show");
+					
+					console.log(data);
+					console.log(data.trim());
+					
+					if(data.trim()){
+						updateInstBal();
+						$("#ExchangeSuccesModal").popup("show");
+						
+					}
 				}
 			});
 			
@@ -282,6 +294,51 @@
 		});
 	}
 
+
+	function updateInstBal() {	
+			
+	 		$.ajax({
+				url: '/inc/UpdateBal.jsp',
+				data : {},
+				method: 'GET',
+				cache: false,
+			}).done(function(data){				
+				
+				var obj = JSON.parse(data);
+											
+				if(obj.R){
+				
+					$.ajax({
+						url : '/login/jsp/get_header.jsp', //jsp				
+						data : {},
+						method: 'GET',
+					}).done(function(data){					
+						var obj = JSON.parse(data);
+						$("#uhead").html(obj.header);
+						console.log(obj.bal)
+						$("#balmoney").text(numberWithCommas(obj.bal));
+						console.log($("#balmoney").val())
+						
+						console.log("$($pointUseTable");
+						console.log($($pointUseTable))
+
+			  	
+						//$("#withdraw").val(obj.bal);
+						
+					});				
+					//console.log("UPDATED BAL");					
+				} else {
+					//console.log("NOT UPDATED BAL");
+				}
+				
+				data=null;
+			}).error(function(data, status, headers, config) {
+				console.log(status);
+				data=null;
+			});
+		
+	}
+	
 	$("#formwithdraw input").on("blur",function(e){
 		e.preventDefault();
 		var validator = $( "#formwithdraw" ).validate(); 
@@ -339,7 +396,6 @@
 
 
 	}
-
 
 	function resetformwithdraw(){
 		$("#formwithdraw")[0].reset();

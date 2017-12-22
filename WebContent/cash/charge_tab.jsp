@@ -13,6 +13,14 @@
 //	UserBean currentUser 	= user_db.getUserByUserId(UID);
 	
 %>
+
+<style>
+.input_hidden
+{
+  display:none
+}
+</style>
+	
 <ul class="smk_accordion">
 	<li>
 		<div class="acc_head"><h3>충전신청</h3></div>
@@ -21,15 +29,17 @@
 				<div class="blue_wrap">
 					<div class="cash_box">
 						
+						<form name="chargeForm" id="chargeForm">
+							
 						<div class="cash_in">
-							<div class="cash_13">
-								<input class="input_style03" id="bankInfoTxt" placeholder="비밀번호 입력 후 “전용계좌확인” 버튼을 클릭해주세요">
+							<div class="row cash_13">
+								<input class="input_style03" id="bankInfoTxt" name="bank_acct" placeholder="비밀번호 입력 후 전용계좌확인 버튼을 클릭해주세요">
 							</div>
 							<div class="cash_3">
 								<span class="btn5" id="bankInfoBtn">전용계좌확인</span>
 							</div>
 						</div>
-						<form name="chargeForm" id="chargeForm">
+						
 						<div class="cash_in">
 							<div class="cash_10"><p style="float:left">보유금액</p><p style="float:right"><span class="font_002 money_dsp"><%=dfrmt.format(UBAL)%></span> 원</p></div>
 							<div class="cash_9">
@@ -79,7 +89,7 @@
 								-->
 								
 								<div class="cash_11_1">
-									<input class="input_style03"  id="ct_bank_owner" name="bank_owner" placeholder="입금자명">		
+									<input class="input_style03" readonly id="ct_bank_owner" name="bank_owner" placeholder="입금자명">		
 								</div>
 <!-- 								<div class="cash_4">
 									<input class="input_style03"  id="ct_bank_num" name="bank_num"  placeholder="계좌번호">		
@@ -205,18 +215,30 @@
 		$(".add-money").on("click",function(e){
 			var am = $(this).attr("data-am");
 			addAmount(am);
-
 		});
 
 		$("#bankInfoBtn").on("click",function(){
+			
+						
+			var s = $("#bankInfoTxt").val();
+			
 			$.ajax({
 				url:'/cash/jsp/getBankAccount.jsp',
-				data:{},
+				data:{'pw':s},
 				type:'POST'
 			}).done(function(data){
-				if(data !="" || data !=null){
+				
+				var obj = JSON.parse(data);
+				
+				console.log(obj.BN);
+				
+				if(obj.BN =="-1"){
+					$("#bankInfoTxt").val("비밀번호가 일치하지 않습니다.");
+					 
+				}	else if(data !="" || data !=null){
 					// data = bank_name - bank_owner - bank_number
-					$("#bankInfoTxt").val(data); 
+					$("#bankInfoTxt").val(obj.BN); 
+					$("#ct_bank_owner").val(obj.BO); 
 
 				}else{
 					alert("처리중 오류가 발생하였습니다.");
@@ -301,26 +323,28 @@
             drawCallback: function( settings ) {
                 
             }
-        });
+    });
 
 
-        $(".dt_div_cash").on("click",function(){
-        	
+      $(".dt_div_cash").on("click",function(){
         	setTimeout(function() {
 			  	$dataTable1_charge.columns.adjust().draw();
 			}, 100);
-        });
+      });
 
 
-        $("#ct_submit").on("click",function(e){
+     $("#ct_submit").on("click",function(e){
 			e.preventDefault();
+			
 			if($("#chargeForm").valid()){
+				$("#bankInfoTxt").qtip("hide");
 				$("#money").qtip("hide");
 				$("#ct_bank_owner").qtip("hide");
 				$("#conf_modal1").popup("show");
 				// var data = $("#chargeForm").serializeJSON();
 				//submitCharge(data);
-			}
+			}		
+				//$("#conf_modal1").popup("show");
 		});
 
 		$("#chargeForm input").on("blur",function(e){
@@ -337,28 +361,21 @@
 		
 		submitCharge();
 
-		
-
 	});
 
 	function uncomma(str) {
 	    str = String(str);
 	    return str.replace(/[^\d]+/g, '');
 	}
-	
 
 	$("#chargeForm").validate({
   		errorClass: 'form1-invalid',
     	validClass: 'form1-valid',
     	errorContainer: ".error_cash_in",
-  		rules: {
-			bank_name :{
+  		rules: {			
+			bank_acct:{
 				required:true,
 			},
-			//bank_num :{
-			//	required:true,
-			//	digits: true,
-			//},
 			bank_owner :{
 				required:true,
 				//alphanumeric: true,
@@ -367,25 +384,19 @@
 				required:true,
 				money_number:true,
 				money_min: true,
-
 			}
 		},
 		messages: {
-		    bank_name :{
-				required:"은행을 선택해 주세요.",
+			bank_acct :{
+					required:"비밀번호 입력후 전용계좌를 확인해 주세요.",
 			},
-			//bank_num :{
-			//	required:"계좌번호를 입력해 주세요.",
-			//	digits: "계좌번호를 숫자로 입력해 주세요.",
-			//},
 			bank_owner :{
-				required:"입금자명을 입력해 주세요.",
+				required:"비밀번호 입력후 전용계좌를 확인해 주세요.",
 			},
 			money:{
 				required:"금액을 입력해 주세요.",
 				money_number: "금액을 숫자로 입력해 주세요.",
-				money_min:"최소 만원 이상으로 입력해 주세요.",
-				
+				money_min:"최소 만원 이상으로 입력해 주세요.",				
 			}
 
 		},
@@ -393,8 +404,7 @@
 
 			var error_label = element.attr("name");
 			var id = element.attr("id");
-	
-			
+
 		    if(error.text() != ""){
 		    	element.qtip({ 
 				    overwrite: true,
@@ -403,13 +413,13 @@
 				        tooltipanchor: $(this),
 				    },
 				    show: {
-			            when: false,
+			            when: true,
 			            ready: true, 
 			            event:false,
 			        },
 			        hide:{
 			        	fixed:true,
-			        	event:false,
+			        	event:true,
 			        },
 			        position: {
 				        container: $("#acc_content_in_chargetb"),
@@ -426,9 +436,6 @@
 			}
 
 		}
-		
-
-
 	});
 
 	
@@ -478,7 +485,7 @@
 	}
 
 	function submitCharge(){
-
+		
 		$("#conf_modal1 .conf_modal_yes").on("click",function(){
 			
 		//var sss = $("#money").val(); //$(this).attr("#money"); //$("#money").val;
@@ -498,11 +505,13 @@
 					
 					$("#chargeSuccesModal").popup("show");
 					
+					/*
 					$.get("TegServlet?method=3", function(srv_resp) {
 						if ('null' != srv_resp.money) {
 							$('.money_dsp').text(number_format(srv_resp.money, 2));
 						}
 					});
+					*/
 				}
 			});
 			// alert("charge_true");
