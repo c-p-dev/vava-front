@@ -13,7 +13,15 @@
 AccountDao aDao = new AccountDao();
 List<AccountListBean> res = aDao.getPointKind(SITEID);
 %>
-
+<style>
+	
+.dataTables_wrapper .dataTables_filter {
+float: right;
+text-align: right;
+visibility: hidden;
+}
+	
+</style>
 <%--
 	 ********************************
 	 *  HTML CODE STARTS FROM HERE  *
@@ -21,7 +29,7 @@ List<AccountListBean> res = aDao.getPointKind(SITEID);
 --%>
 <ul class="smk_accordion">
 	<li>
-		<div><h3>포인트사용내역<%=SITEID%> </h3></div>
+		<div><h3>포인트사용내역</h3></div>
 		<div class="acc_content">
 			<div class="acc_content_in_2">
 				<div class="float_inline">
@@ -32,9 +40,8 @@ List<AccountListBean> res = aDao.getPointKind(SITEID);
 							
 								<td>
 									
-									<select class="input_style02" id="divisionSelect">
+									<select class="input_style02" id="divisionSelect" onChange="selPoint(this.selectedIndex,this.options[this.selectedIndex].value)">
 										<option value="ALL" selected>전체</option>
-										
 									<%
 									for (int k=0; k < res.size() ; k++){
 									AccountListBean alb = (AccountListBean) res.get(k);
@@ -71,15 +78,13 @@ List<AccountListBean> res = aDao.getPointKind(SITEID);
 										</div>
 									</div>
 								</td>
-								<td>
-									<span class="btn1" id="searchPointBtn">검색</span>
-								</td>
+
 							</tr>
 						</table>
 						
 					</div>
 					<div class="my_search_list" id="point-use" >
-						<table id="pointUseTable" cellspacing="0" cellpadding="0" data-scroll-x="true" style="width: 100%!important;">
+						<table id="pointUseTable" cellspacing="0" cellpadding="0" width="100%">
             			</table>
 					</div>
 				</div>
@@ -89,39 +94,43 @@ List<AccountListBean> res = aDao.getPointKind(SITEID);
 </ul>
 <script>
 	
+var $pointUseTable;
 
 	$(document).ready(function(){
-
-		var $pointUseTable;
+		
+		var i18n = {
+			previousMonth	: '이전 달',
+			nextMonth		: '다음 달',
+			months 			: ['1월','2월', '3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+			weekdays		: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
+			weekdaysShort	: ['일', '월', '화', '수', '목', '금', '토'],
+		};
 
 		var pickerFrom = new Pikaday({ 
 			field: document.getElementById('fromDate'), 
 			bound: false, 
 			container: document.getElementById('fromDateDiv'),
 			format: 'YYYY-MM-DD',
-	        defaultDate: moment().toDate(),
-	        setDefaultDate : moment().toDate(),
-	        onSelect: function() {
-	        	// console.log(this.getDate());
-	        	// console.log(pickerTo);
-	        	// console.log(pickerTo.minDate);
-	            pickerTo.setMinDate(this.getDate());
-	            pickerTo.setDate(this.getDate());
-	        },
-	        minDate : moment().subtract(30,'days').toDate()
+	    defaultDate: moment().subtract(30,'days').toDate(),
+	    setDefaultDate : moment().subtract(30,'days').toDate(),
+	    minDate : moment().subtract(30,'days').toDate(),
+	    i18n : i18n,
 		});
 
-       	var pickerTo = new Pikaday({ 
-       		field: document.getElementById('toDate'), 
-       		bound: false, 
-       		container: document.getElementById('toDateDiv'),
-       		format :'YYYY-MM-DD',
-       		defaultDate: moment().toDate(),
-       		setDefaultDate : moment().toDate(),
-       		minDate : pickerFrom.getDate(),
-       	});
-
-       	getDate();
+   	var pickerTo = new Pikaday({ 
+   		field: document.getElementById('toDate'), 
+   		bound: false, 
+   		container: document.getElementById('toDateDiv'),
+   		format :'YYYY-MM-DD',
+   		i18n : i18n,
+   		onSelect: function() {
+  			$("#depth2").hide();
+  		},	
+   		defaultDate: moment().toDate(),
+   		setDefaultDate : moment().toDate(),
+   		minDate : pickerFrom.getDate(),
+   		maxDate : moment().toDate(),
+   	});
 
 		$pointUseTable = $('#pointUseTable').DataTable({
 			ajax: {
@@ -142,105 +151,140 @@ List<AccountListBean> res = aDao.getPointKind(SITEID);
 			},
 			sAjaxDataProp:"",
 			bProcessing: true,
-			searching: false,
+			searching: true,
 			bInfo : false,
 			lengthChange: false,
-			autowWidth:true,
+			autowWidth:false,
+			scrollX: false,
 			pageLength: 10,
-            columns : [
-                	{ 
-                        data   : 'regdate',
-                        title  : '일시',
+      columns : [
+    	{ 
+        data   : 'regdate',
+        title  : '일시',
+        width : '20%',
+      },
+      { 
+        data   : 'job',
+        title  : '구분',
+        visible: false,
+        },
+      { 
+        data   : 'job_kor',
+        title  : '구분',
+      },
+      { 
+      data   : 'deduct_point',
+      title  : '차감 포인트',
+      width : '17%',
+      render : function(data,type,row,meta){
+      	var html = (data != 0 || data != "0" ?  '<span class="font_008" style="align:right">'+comma(data)+'</span> 원' : '<span>-</span>' );
+      	return html;
+      }
+      },
+      { 
+      data   : 'added_point',
+      title  : '가산 포인트',
+      width : '17%',
+      render : function(data,type,row,meta){
+      	var html = (data != 0 || data != "0" ? '<span class="font_004">'+comma(data)+'</span> 원' : '<span>-</span>' );
+      	return html;
+      }
+      },
+      { 
+      data   : 'remain_point',
+      title  : '잔여 포인트',
+      width : '17%',
+      render : function(data,type,row,meta){
+      	var html = '<span class="font_002">'+comma(data)+'</span> 원</td>';
+      	return html;
+      }          	
+           
+      },
+    ],
+    order: [[ 0, "desc" ]] ,         
+  	pagingType: "full_numbers",
+    language: {
+    paginate: {
+      	previous: "<",
+      	next: ">",
+      	first: "<<",
+      	last: ">>",
+    },
+    emptyTable: "결과가 없습니다.",
+		},
+    });
+		
+		$.fn.dataTable.ext.search.push(
+	    function( settings, data, dataIndex ) {
+	        var min  = $('#fromDate').val();					        
+	        var max  = $('#toDate').val();
+	        var max2 =  moment(max).add('days', 1);
+	        
+	        var createdAt = data[0] || 0; // Our date column in the table
 
-                    },
-                    { 
-                        data   : 'job',
-                        title  : '구분',
-                    },
-                    { 
-                        data   : 'deduct_point',
-                        title  : '차감 포인트',
-                        render : function(data,type,row,meta){
-                        	var html = (data != 0 || data != "0" ?  '<span class="font_008">'+data+'</span> 원' : "");
-                        	return html;
-                        }
-                    },
-                    { 
-                        data   : 'added_point',
-                        title  : '가산 포인트',
-                        render : function(data,type,row,meta){
-                        	var html = (data != 0 || data != "0" ? '<span class="font_004">'+data+'</span> 원' : "");
-                        	return html;
-                        }
-                    },
-                    { 
-                        data   : 'remain_point',
-                        title  : '잔여 포인트',
-                        render : function(data,type,row,meta){
-                        	var html = '<span class="font_002">'+data+'</span>원</td>';
-                        	return html;
-                        }
-                       	
-                       
-                    },
-                ],
-          "order": [[ 0, "desc" ]] ,         
-        	pagingType: "full_numbers",
-            language: {
-			    paginate: {
-			      	previous: "<",
-			      	next: ">",
-			      	first: "<<",
-			      	last: ">>",
-			    },
-			    emptyTable: "결과가 없습니다.",
-			},
-            rowCallback : function(row , data , index) {
-                
-            },
-            drawCallback: function( settings ) {
-                
-            }
-        });
+	        if((min== ""||max2== "")||( moment(createdAt).isSameOrAfter(min) && moment(createdAt).isSameOrBefore(max2) ) ){
+	            return true;
+	        }
+	        return false;
+	    }
+		);
+	
+		function getDate(){
+			var dateFrom = $("#fromDate").val();
+	  	var dateTo = $("#toDate").val();
+	  	$("#dateSearch").val(dateFrom + ' ~ '+ dateTo);
+	  	$pointUseTable.draw();
+	}
+		
+		 getDate();
+	
+	$(".pikaday_input").on("change",function(e){
+			console.log("aa");
+		getDate();			
+  });
+ 			       	 							
+ 	$("#tab5").on("fadeInComplete", function() {
+		$pointUseTable.columns.adjust().draw();	
+	});
+		/*
+    $("#showCalendarBtn").on("click",function(e){
+    	e.preventDefault();
+    	show_over(this);
+    	show_layer('depth1');
+    });
+		*/
+		
+    $(".showDatePkr").on("click",function(e){
+    	e.preventDefault();
+    	show_over(this);
+    	show_layer('depth2');
+    	
+    });
 
 
-   		$("#tab5").on("fadeInComplete", function() {
-			
-			$pointUseTable.columns.adjust().draw();
-			
-		});
-
-        $("#showCalendarBtn").on("click",function(e){
-        	e.preventDefault();
-        	show_over(this);
-        	show_layer('depth1');
-        });
-
-        $(".showDatePkr").on("click",function(e){
-        	e.preventDefault();
-        	show_over(this);
-        	show_layer('depth2');
-        	
-        });
-
-        $(".pikaday_input").on("change",function(e){
-        	getDate();
-        });
-
-        $(".closePikaday, .my_search_list, #divisionSelect, .input_style02 ").on("click",function(e){
-        	e.preventDefault();
-        	$("#depth2").hide();
-        });
-        $("#searchPointBtn").on("click",function(e){
-        	e.preventDefault();
-        	$pointUseTable.ajax.reload();
-        	$("#depth2").hide();
-        });
+    $(".closePikaday, .my_search_list, #divisionSelect, .input_style02 ").on("click",function(e){
+    	e.preventDefault();
+    	$("#depth2").hide();
+    });
+    /*
+    $("#searchPointBtn").on("click",function(e){
+    	e.preventDefault();
+    	$pointUseTable.ajax.reload();
+    	$("#depth2").hide();
+    });
+    */
 	});
 
-	function getDate(){
-		var dateFrom = $("#fromDate").val();
-    	var dateTo = $("#toDate").val();
-    	$("#dateSearch").val(dateFrom + ' ~ '+ dateTo);
+	function comma(str) {
+	    str = String(str);
+	    return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
 	}
+	
+	function selPoint(idx,item) {
+		if(idx==0)
+			$pointUseTable.columns(1).search("").draw();
+		else
+			$pointUseTable.columns(1).search("^" + item + "$", true, false, true).draw();
+	}
+	
 </script>

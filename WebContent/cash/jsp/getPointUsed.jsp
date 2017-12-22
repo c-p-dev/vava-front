@@ -17,11 +17,11 @@
 	Gson gson = new Gson();
  	AccountDao aDao = new AccountDao();
 	
-	String job = request.getParameter("job").trim();
+	//String job = request.getParameter("job").trim();
 	String fromDate = request.getParameter("fromDate").trim();
 	String toDate = request.getParameter("toDate").trim();
 
-	List res = aDao.getPointHistory2(SITEID, UID, job, fromDate, toDate);
+	List res = aDao.getPointHistory2(SITEID, UID, fromDate, toDate);
 	out.print(gson.toJson(res).toString());
 %>
 

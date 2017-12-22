@@ -163,7 +163,7 @@ function cValU(){
 				console.log(status);
 				data=null;
 			});
-		}, 60*1000); //1 min
+		}, 10*1000); //1 min
 	}
  	
 </script>
