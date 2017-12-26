@@ -15,10 +15,10 @@
 <%
 		Gson gson = new Gson();
 		UserDao ud = new UserDao();
-		List res = ud.getWithdrawList(UID);
+		List res = ud.getWithdrawList(SITEID,UID);
 		
-		out.println(gson.toJson(res).toString());
-	
+		out.println(gson.toJson(res).toString());	
 %>
+
 
 

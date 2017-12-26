@@ -654,6 +654,54 @@ public class UserDao {
 		
 	}	
 	
+	public List<HashMap> getWithdrawList(String SITEID, String UID){
+		Gson gson = new Gson();
+		List<HashMap> list = new ArrayList<HashMap>();
+		String result = "";
+	
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String query = "SELECT wdid,convert(char(19),regdate,120) regdate,money_req,isnull(convert(char(19),wddate,120),0) wddate,wdstate FROM withdraw_lst  WHERE siteid=? and userid = ?";
+		//DecimalFormat formatter = new DecimalFormat("#,###");
+		//DateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
+		try{	      
+			
+			DBConnector.getInstance();
+			con = DBConnector.getConnection();
+			
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1,SITEID);
+			pstmt.setString(2,UID);
+			rs = pstmt.executeQuery();
+					   
+			while(rs.next()){
+				HashMap<String, Object> hsm = new HashMap<String, Object>();
+				hsm.put("wdid", (rs.getString("wdid")));
+				hsm.put("regdate", (rs.getString("regdate")));
+				//double amount = (rs.getString("money_req") != null ? Double.parseDouble(rs.getString("money_req")) : 0);
+				hsm.put("money", (rs.getInt("money_req")));
+				hsm.put("wddate", (rs.getString("wddate")));
+				hsm.put("wdstate", (rs.getString("wdstate")));
+				
+				list.add(hsm);
+			}
+			
+			rs.close();
+	        pstmt.close();
+	        con.close();
+	        //System.out.print(query);
+		} catch(Exception e){
+			//System.out.println(e);
+			e.printStackTrace();
+		} 
+	  	return list;
+		
+	}	
+	
+	
 	// public int updateUserAfterLogin(String userid,String sessionId){
 		
 	// 	Gson gson				= new Gson();

@@ -119,8 +119,8 @@
 		<div class="acc_head dt_div_cash"><h3>충전신청 리스트</h3></div>
 		<div class="acc_content">
 			<div class="acc_content_in_2">
-				<table id="dataTable1_charge" cellspacing="0" cellpadding="0" data-scroll-x="true" style="width: 100%!important;">
-            	</table>
+				<table id="dataTable1_charge" cellspacing="0" cellpadding="0" width="100%">
+        </table>
 			</div>
 		</div>
 	</li>
@@ -135,6 +135,7 @@
 					<li>· 환전은 입금 후 5분 이내에 완료가 됩니다.</li>
 					<li>· 단, 해당 은행의 평일 점검, 서버 점검, 전산 장애가 있을 경우 환전이 지연 되오니 양해바랍니다.</li>
 				</ul>
+				
 				<div class="cash_bank">
 					<span class="font_006">은행 점검 시간</span>	
 					<table cellspacing="0" cellpadding="0" class="back_table">
@@ -204,6 +205,7 @@
 							</tr>
 					</table>	
 				</div>
+				
 			</div>
 		</div>
 	</li>
@@ -249,9 +251,10 @@
 </div>
 
 <script>
+	var $dataTable1_charge;
+	
 	$(document).ready(function(){
 		
-		var $dataTable1_charge;
 		$(".add-money").on("click",function(e){
 			var am = $(this).attr("data-am");
 			addAmount(am);
@@ -312,41 +315,40 @@
 			autowWidth:true,
 			pageLength: 10,
 			aaSorting: [[1,'desc']],
-            columns : [
-                	{ 
-                        data   : 'chid',
-                        title  : '번호',
-                        
-
-                    },
-                    { 
-                        data   : 'regdate',
-                        title  : '신청일시',
-
-                    },
-                    { 
-                        data   : 'money',
-                        title  : '금액',
-                        render : function(data,type,row,meta){
-                        	var html = '<span class="font_002">'+comma(data)+'</span> 원';
-                        	return html;
-                        }
-                    },
-                    { 
-                        data   : 'chstate',
-                        title  : '상태',
-                       	render : function(data,type,row,meta){
-                        	var html = '<span class="font_009">신청<span>'; // pending
-                        	if(data == "DONE"){
-                        		html = '<span>완료</span>'; // complete
-                        	}else if(data=="WAIT"){
-                        		html = '<span class="font_010">대기</span>';
-                        	}
-                        	return html;
-                        }
-                       
-                    },
-                ],
+      columns : [
+    	{ 
+        data   : 'chid',
+        title  : '번호',
+        width : '10%',
+      },
+      { 
+        data   : 'regdate',
+        title  : '신청일시',
+        width : '30%',
+      },
+      { 
+        data   : 'money',
+        title  : '금액',
+        width : '30%',
+        render : function(data,type,row,meta){
+        	var html = '<span class="font_002">'+comma(data)+'</span> 원';
+        	return html;
+        }
+      },
+      { 
+        data   : 'chstate',
+        title  : '상태',
+       	render : function(data,type,row,meta){
+        	var html = '<span class="font_009">신청<span>'; // pending
+        	if(data == "DONE"){
+        		html = '<span>완료</span>'; // complete
+        	}else if(data=="WAIT"){
+        		html = '<span class="font_010">대기</span>';
+        	}
+        	return html;
+        }           
+      },
+    ],
         	pagingType: "full_numbers",
             language: {
 			    paginate: {
@@ -357,21 +359,22 @@
 			    },
 			    emptyTable: "결과가 없습니다.",
 			},
-            rowCallback : function(row , data , index) {
-                
-            },
-            drawCallback: function( settings ) {
-                
-            }
+			
+			/*
+      rowCallback : function(row , data , index) {
+          
+      },
+      drawCallback: function( settings ) {
+          
+      }
+      */
     });
-
 
       $(".dt_div_cash").on("click",function(){
         	setTimeout(function() {
 			  	$dataTable1_charge.columns.adjust().draw();
 			}, 100);
       });
-
 
      $("#ct_submit").on("click",function(e){
 			e.preventDefault();
@@ -494,7 +497,7 @@
 			current_am = parseInt(numberParser($("#money").val()));
 		}
 
-		console.log(current_am);
+		//console.log(current_am);
 
 		var am = 0;
 		var sum = 0;
