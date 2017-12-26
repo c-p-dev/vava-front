@@ -219,7 +219,7 @@ div.chevy-cntr {
 						GameBean providers = game_providers.get(i);
 						int tab = i + 2;
 						
-						String html = "<li><a href=#l-tab"+tab+" class=get-game data-val="+providers.getGame_provider()+">"+providers.getProvider_name()+" <div class = 'chevy-cntr'><i class = 'chevy fa fa-chevron-up'></i></div></a></li>";
+						String html = "<li><a href=#l-tab"+tab+" class=get-game data-val="+providers.getGame_provider()+">"+providers.getProvider_name()+" <div class = 'chevy-cntr'><i class = 'chevy fa fa-chevron-down'></i></div></a></li>";
 
 						if( providers.getGame_provider() == 2){
 							
@@ -361,8 +361,8 @@ div.chevy-cntr {
 						$('.subm-manual').hide();
 						$('.pcheck-lnk').hide();
 						
-						$('.chevy').removeClass('fa-chevron-down');
-						$('.chevy').addClass('fa-chevron-up');
+						$('.chevy').removeClass('fa-chevron-up');
+						$('.chevy').addClass('fa-chevron-down');
 						
 						/*	Asian Gaming	*/
 						if (2 == game_prvdr) {
@@ -384,8 +384,8 @@ div.chevy-cntr {
 							/* Default. Do nothing	*/
 						}
 						
-						chev_mark.removeClass('fa-chevron-up');
-						chev_mark.addClass('fa-chevron-down');
+						chev_mark.removeClass('fa-chevron-down');
+						chev_mark.addClass('fa-chevron-up');
 						
 						//get Game
 						$.ajax({
