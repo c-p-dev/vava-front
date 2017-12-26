@@ -345,24 +345,17 @@ div.chevy-cntr {
 		$("#game-cat li").on("click", 'a', function(e) {
 			
 			var lnk_clicked	= $(this);
+			var game_prvdr 	= lnk_clicked.attr("data-val");
+			var chev_mark	= lnk_clicked.find('.chevy-cntr .chevy');
 			
 			if (lnk_clicked.parent().hasClass('active') == false) {
 				
 				$.get('/login/jsp/get_session.jsp', function(sess_check) {
 					
-					var game_prvdr = lnk_clicked.attr("data-val");
-					
 					if (lnk_clicked.hasClass('get-game')) {
-						
-						var chev_mark	= lnk_clicked.find('.chevy-cntr .chevy');
 						
 						/*	Intializes all manuals to hidden display	*/
 						$(".casino_right").html(spin);
-						$('.subm-manual').hide();
-						$('.pcheck-lnk').hide();
-						
-						$('.chevy').removeClass('fa-chevron-up');
-						$('.chevy').addClass('fa-chevron-down');
 						
 						/*	Asian Gaming	*/
 						if (2 == game_prvdr) {
@@ -423,6 +416,31 @@ div.chevy-cntr {
 					}
 					
 				}, 'json');
+			}
+
+			if (chev_mark.hasClass('fa-chevron-up')) {				
+				if (lnk_clicked.hasClass('get-game')) {
+					
+					/*	Asian Gaming	*/
+					if (2 == game_prvdr) {
+						$('#agmanual-lnk').slideUp();
+					}
+					/*	Microgaming		*/
+					else if (1 == game_prvdr) {
+						$('#mgmanual-lnk').slideUp();
+						$('#get-mgpcheck-li').slideUp();
+					}
+					/*	Betconstruct	*/
+					else if (3 == game_prvdr) {
+						$('#bcmanual-lnk').slideUp();
+					}
+					else {
+						/* Default. Do nothing	*/
+					}
+					
+					chev_mark.removeClass('fa-chevron-up');
+					chev_mark.addClass('fa-chevron-down');
+				}
 			}
 			
 			return false;

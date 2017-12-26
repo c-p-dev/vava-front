@@ -166,6 +166,10 @@ public class AsianGamingController {
 		String ag_game_url		= forwardToAg(user_id, session_id, lnk_dsp);
 		
 		InputStream  con_create	= new URL(ag_create_url).openStream();
+		try (Scanner scanner = new Scanner(con_create)) {
+			String responseBody = scanner.useDelimiter("\\A").next();
+			System.out.println(responseBody);
+		}
 		InputStream  con_sess	= new URL(ag_sess_url).openStream();
 		
 		return ag_game_url;
