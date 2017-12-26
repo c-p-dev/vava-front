@@ -145,12 +145,12 @@
 		<div  style="display:none;" id="clive" class="animate-bottom">
 
 			<ul class="tabs">
-				<li><a href="#tab1">충전신청</a></li>
-				<li><a href="#tab2">환전신청</a></li>
-				<li><a href="#tab3">포인트전환</a></li>
+				<li id="t_tab1"><a href="#tab1">충전신청</a></li>
+				<li id="t_tab2"><a href="#tab2">환전신청</a></li>
+				<li id="t_tab3"><a href="#tab3">포인트전환</a></li>
 				<!-- <li><a href="#tab4">머니전환</a></li> -->
-				<li><a href="#tab5" class="dt-point-tab">포인트 사용 내역</a></li>
-				<li><a href="#tab6" class="dt-money-use">머니 사용 내역</a></li>
+				<li id="t_tab5"><a href="#tab5" class="dt-point-tab">포인트 사용 내역</a></li>
+				<li id="t_tab6"><a href="#tab6" class="dt-money-use">머니 사용 내역</a></li>
 			</ul>
 			
 			<div class="tab_container">
@@ -176,18 +176,36 @@
 </div><!-- contents -->
 
 <script>
-
-      $(".dt-point-tab").on("click",function(){
+	
+		$(document).ready(function(){
+	    $("#t_tab1").on("click",function(){
+      	console.log("$dataTable1_charge");      	
+      	$dataTable1_charge.ajax.reload();
+		  	//$dataTable1_charge.columns.adjust().draw();
+      });
+      
+      $("#t_tab2").on("click",function(){
+      	console.log("$dataTable_exchange");      	
+      	$dataTable_exchange.ajax.reload();
+		  	//$dataTable_exchange.columns.adjust().draw();
+      });
+      
+      
+      $("#t_tab5").on("click",function(){
       	console.log("$pointUseTable");      	
       	$pointUseTable.ajax.reload();
 		  	$pointUseTable.columns.adjust().draw();
       });
       
-       $(".dt-money-use").on("click",function(){
+       $("#t_tab6").on("click",function(){
       	console.log("$moneyUseTable");      	
       	$moneyUseTable.ajax.reload();
 		  	$moneyUseTable.columns.adjust().draw();
       });
+    });
+      
+
+      
       
 
 </script>

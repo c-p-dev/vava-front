@@ -42,13 +42,14 @@ public class QnaDao {
 			con = DBConnector.getConnection();
 			Date date = new Date();
 			String query = "INSERT INTO RT01.dbo.qna_lst (siteid, userid, txt, gubun, viewtype, regdate, writer, ip, quizid) "
-			        + " VALUES (1,?,?,'QNA','Y',?,'U',?,IDENT_CURRENT('RT01.dbo.qna_lst'))";
+			        + " VALUES (?,?,?,'QNA','Y',?,'U',?,IDENT_CURRENT('RT01.dbo.qna_lst'))";
 
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, qBean.getUserid());
-			pstmt.setString(2, qBean.getTxt());
-			pstmt.setString(3, sdf.format(date));
-			pstmt.setString(4, qBean.getIp());
+			pstmt.setInt(1, qBean.getSiteid());
+			pstmt.setString(2, qBean.getUserid());
+			pstmt.setString(3, qBean.getTxt());
+			pstmt.setString(4, sdf.format(date));
+			pstmt.setString(5, qBean.getIp());
 
 			row = pstmt.executeUpdate();
 			logger.debug(query);
@@ -60,7 +61,6 @@ public class QnaDao {
 				result = true;
 			}
 
-			return result;
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -72,6 +72,8 @@ public class QnaDao {
 			if (con != null)
 				con.close();
 		}
+		
+		return result;
 	}
 	
 	public List<HashMap> getMessage(QnaBean qBean) {
