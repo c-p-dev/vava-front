@@ -446,6 +446,9 @@ public class TotalEgameController {
 	        |-------------------------------------------------------------------*/
 			fintoken_db.updateFinTokenSts(fintoken_data.getFinToken(), 1);
 		}
+		else {
+			fintoken_db.closeUserTokens(username, site_id);
+		}
 		
 		return game_url_full;
 	}
@@ -495,6 +498,9 @@ public class TotalEgameController {
 	        |	Close Latest Financial Exchange process
 	        |-------------------------------------------------------------------*/
 			fintoken_db.updateFinTokenSts(fintoken_data.getFinToken(), 1);
+		}
+		else {
+			fintoken_db.closeUserTokens(username, site_id);
 		}
 		
 		return json_data;

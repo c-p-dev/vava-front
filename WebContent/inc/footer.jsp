@@ -64,6 +64,7 @@ var bal;
 $(document).ready(function(){	
 	if (loggedIn) {
 		cValU();
+		refreshMoney();
 		updateBal();
 	}		
 });

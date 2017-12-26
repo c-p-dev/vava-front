@@ -116,6 +116,7 @@ public class UserDao {
 					uib.setSiteid(rs.getInt("siteid"));
 					uib.setUserid(rs.getString("userid"));
 					uib.setNick(rs.getString("nick"));
+					uib.setCell(rs.getString("cell"));
 					uib.setCharge_level(rs.getString("charge_level"));
 					uib.setGrade(rs.getInt("grade"));					
 					uib.setMoney(rs.getInt("money"));
@@ -482,7 +483,7 @@ public class UserDao {
 			
 			String query1 ="select count(*) cnt from user_mst WHERE siteid="+SITEID+" and userid = '"+UID+"' and passwd='"+PW+"'";
 			
-			String query2 ="select bank_owner_user, bank_name+' '+bank_num +' [ ©╧╠щаж : ' +bank_owner+' ]' as bank_account from ( " +
+			String query2 ="select bank_owner_user, bank_name+' '+bank_num +' [ О©╫О©╫О©╫О©╫О©╫О©╫ : ' +bank_owner+' ]' as bank_account from ( " +
 					" select a.bank_owner bank_owner_user, case  when charge_level='JOIN' then bank_join_name when charge_level='LOW' then bank_low_name when  charge_level='MIDDLE' then bank_middle_name when  charge_level='HIGH' then bank_high_name end bank_name, " +
 					" case  when charge_level='JOIN' then bank_join_num when charge_level='LOW' then bank_low_num when  charge_level='MIDDLE' then bank_middle_num when  charge_level='HIGH' then bank_high_num end bank_num, " +
 					" case  when charge_level='JOIN' then bank_join_owner when charge_level='LOW' then bank_low_owner when  charge_level='MIDDLE' then bank_middle_owner when  charge_level='HIGH' then bank_high_owner end bank_owner " +

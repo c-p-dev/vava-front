@@ -8,6 +8,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.security.MessageDigest;
 import java.util.Base64;
+import java.util.Scanner;
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
@@ -31,8 +32,8 @@ public class AsianGamingController {
 	public static final String DES_PARAM_SUFX	= "/\\\\/";
 	public static final String CAGENT_PARAM		= "BQ0_AGIN";
 	public static final String METHOD_PARAM		= "lg";
-	public static final String ACTYPE_PARAM		= "1";
-	public static final String CURRENCY_PARAM	= "CNY";
+	public static final String ACTYPE_PARAM		= "0";
+	public static final String CURRENCY_PARAM	= "KRW";
 	public static final String PROD_ID_PARAM	= "BQ0";
 	public static final String AG_DM_PARAM		= "m.vava21.com";
 	//public static final String AG_DM_PARAM		= "2deceb53.ngrok.io";
@@ -65,7 +66,7 @@ public class AsianGamingController {
     //-----------------------------------------------------
 	public String checkCreateAccount(String user_id)
 	{
-		String url_base			= "http://gi.aggdemo.com:81/doBusiness.do?";
+		String url_base			= "http://gi.ibet25.com:81/doBusiness.do?";
 		String params_str		= "";
 		String enc_params		= "";
 		String ag_create_url	= "";
@@ -123,7 +124,7 @@ public class AsianGamingController {
 	
 	public String forwardToAg(String user_id, String session_id, String lnk_dsp)
 	{
-		String url_base			= "http://gci.aggdemo.com:81/forwardGame.do?";
+		String url_base			= "http://gci.ibet25.com:81/forwardGame.do?";
 		String params_str		= "";
 		String enc_params		= "";
 		String ag_game_url		= "";
@@ -138,7 +139,7 @@ public class AsianGamingController {
 		params_str			= params_str.concat("sid=").concat(CAGENT_PARAM).concat(session_id).concat(DES_PARAM_SUFX);
 		params_str			= params_str.concat("mh5=").concat(MH5_PARAM).concat(DES_PARAM_SUFX);
 		params_str			= params_str.concat("actype=").concat(ACTYPE_PARAM).concat(DES_PARAM_SUFX);
-		params_str			= params_str.concat("lang=").concat(LANG_EN_PARAM).concat(DES_PARAM_SUFX);
+		params_str			= params_str.concat("lang=").concat(LANG_KR_PARAM).concat(DES_PARAM_SUFX);
 		params_str			= params_str.concat("gametype=").concat(lnk_dsp);
 		
 		/*--------------------------------------------------------------------

@@ -96,7 +96,9 @@
     			user_profile.setBettingProfiles(bet_profiles);
     			
     			String add_resp = teg_ctrl.addPlayerAccount(user_profile);
-    			System.out.println(add_resp);
+        	}
+        	else {
+        		teg_ctrl.getAllMoney(ub.getUserid(), ub.getSiteid());
         	}
         }
         
