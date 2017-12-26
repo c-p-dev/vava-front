@@ -42,7 +42,7 @@
 				PARTNER
 			</div>
 			<div class="f_site_partner">
-				<img src="/images/partner_1.jpg">
+				<img src="/images/partner_1.png">
 			</div>
 		</div>
 		
