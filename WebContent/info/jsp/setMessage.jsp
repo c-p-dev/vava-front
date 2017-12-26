@@ -30,7 +30,7 @@
 	boolean res = qDao.setMessage(qBean);
 	
 	hsm.put("result", res);
-	out.println(gson.toJson(res).toString());
+	out.println(gson.toJson(hsm).toString());
 %>
 
 
