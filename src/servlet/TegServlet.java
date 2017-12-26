@@ -87,6 +87,11 @@ public class TegServlet extends HttpServlet {
 						
 						try {
 							srv_resp_5 = teg_ctrl.getAllMoney(username, site_id);
+							
+							if (!srv_resp_5.equals("")) {
+								UserBean json_data	= gson.fromJson(srv_resp_5, UserBean.class);
+								request.getSession().setAttribute("UBAL", json_data.getMoney());
+							}
 						} catch (ParseException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();

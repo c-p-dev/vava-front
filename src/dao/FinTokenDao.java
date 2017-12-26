@@ -120,4 +120,36 @@ public class FinTokenDao {
 		
 		return token_data;
 	}
+	
+	public int closeUserTokens(String username, int site_id)
+	{
+		Connection con 			= null;
+		PreparedStatement pstmt = null;
+		int result 				= 0;
+		String  query 			= "UPDATE fin_token_lst"
+				+ " SET status = 1"
+				+ " WHERE username = ?"
+				+ " AND site_id	= ?"
+				+ " AND status = 0";
+		
+		try {
+			DBConnector.getInstance();
+			con 				= DBConnector.getConnection();
+		    
+		    pstmt   			= con.prepareStatement(query);
+		    pstmt.setString(1, username);
+		    pstmt.setInt(2, site_id);
+		    
+		    result				= pstmt.executeUpdate();
+            
+	        pstmt.close();
+	        con.close();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+	  		return 0;
+		}
+		
+		return result;
+	}
 }
