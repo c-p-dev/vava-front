@@ -73,7 +73,7 @@ public class QnaDao {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String query = "SELECT title,txt,viewtype,writer,ip,quizid,gubun,userid, convert(char(19),regdate,120) regdate, isnull(convert(char(19),ansdate,120),0) ansdate FROM qna_lst WHERE userid = ? AND gubun = 'QNA' OR quizid IN (select quizid from qna_lst where userid = ? and gubun = 'QNA' ) AND siteid = ? ORDER BY regdate ASC ";
+		String query = "SELECT title,REPLACE(txt,CHAR(10),'<br>') txt,viewtype,writer,ip,quizid,gubun,userid, convert(char(19),regdate,120) regdate, isnull(convert(char(19),ansdate,120),0) ansdate FROM qna_lst WHERE userid = ? AND gubun = 'QNA' OR quizid IN (select quizid from qna_lst where userid = ? and gubun = 'QNA' ) AND siteid = ? ORDER BY regdate ASC ";
 		
 		try{	      
 			

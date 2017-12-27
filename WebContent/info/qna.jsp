@@ -79,9 +79,9 @@
 	</li>
 </ul>
 <script>
+	var $qnaDt;
 	$(document).ready(function(){
-
-		var $qnaDt;
+	
 		$qnaDt = $('#qnaDt').DataTable({
 			ajax : '/info/jsp/getMsgLst.jsp',
 			sAjaxDataProp:"",
@@ -89,55 +89,44 @@
 			bInfo : false,
 			lengthChange: false,
 			autowWidth:true,
-      columns : [
-      	{ 
-              data:'title',
-              title:'제목',	             
-          },
-          { 
-              data   : 'send_userid1',
-              title  : '보낸이',
-              width: '20%',
-          },
-          { 
-              data   : 'send_date',
-              title  : '수신일시',
-              width: '20%',
-          },
-          { 
-              data   : 'recv_date',
-              title  : '확인일시',
-              width: '20%',
-          }
-  
-      ],
-    	pagingType: "full_numbers",
-    	pageLength: 10,
-        language: {
-	    paginate: {
-	      	previous: "<",
-	      	next: ">",
-	      	first: "<<",
-	      	last: ">>",
-	    },
-	    emptyTable: "결과가 없습니다.",
+			aaSorting: [[2,'desc']],
+	      	columns : [
+	      		{ 
+	            	data:'title',
+	              	title:'제목',	             
+	          	},
+	          	{ 
+	              	data   : 'send_userid1',
+	              	title  : '보낸이',
+	              	width: '20%',
+	          	},
+	          	{ 
+					data   : 'send_date',
+					title  : '수신일시',
+					width: '20%',
+	          	},
+	          	{ 
+					data   : 'recv_date',
+					title  : '확인일시',
+					width: '20%',
+	          	}
+	  
+	      	],
+	    	pagingType: "full_numbers",
+	    	pageLength: 10,
+	        language: {
+			    paginate: {
+			      	previous: "<",
+			      	next: ">",
+			      	first: "<<",
+			      	last: ">>",
+			    },
+		    	emptyTable: "결과가 없습니다.",
 			},
-			
-			/*
-            rowCallback : function(row , data , index) {
-
-            },
-            drawCallback: function( settings ) {
-                
-            },
-       */
-        createdRow: function ( row, data, index ) {  
-        	$(row).addClass('s_close');
+        	createdRow: function ( row, data, index ) {  
+        		$(row).addClass('s_close');
     		}
-   });
-
-		
-
+   		});
 
 		$("#qna-div").hide();
    		$("#qna-div").before('<div class="spn" id="qna-div-spn" style="width:100%!important;">'+lgSpin+'</div>');
@@ -180,7 +169,7 @@
 	}
 
 	function updateMsg(data){
-		if(data != null && (data.recv_date == "" || data.recv_date == null )){
+		if(data != null && $.trim(data.recv_date) == "-"){
 			$.ajax({
 				url : '/info/jsp/updateRecvMsg.jsp',
 				data : {msgid:data.msgid},
