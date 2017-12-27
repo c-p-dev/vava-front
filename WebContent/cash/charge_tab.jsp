@@ -330,6 +330,7 @@
 	      	transition: 'all 0.3s',
 	      	scrolllock: true,
 	      	onclose:function(){
+	      		$('#bankInfoTxt').addClass('pd');
 	      		$('#bankInfoTxt').attr('readonly', false);
 				$("#bankInfoBtn").attr("disabled", false);
 	      		resetChargeForm();
