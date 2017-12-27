@@ -19,6 +19,33 @@
 {
   display:none
 }
+.incp
+{
+	display:none
+}
+.incpw{
+	background-color: #424c4e!important;
+	color: #404654!important;
+	padding: 8px!important;
+	border-radius: 20px!important;
+	position: absolute;
+	top: 120px;
+	left: -108px; 
+}
+.incpwf{
+	vertical-align: inherit; 
+	color: white;
+}
+.arrow-right {
+  width: 0; 
+  height: 0; 
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent ;
+  border-left:9px solid #424c4e!important;
+  position: absolute;
+  left: 61px;
+  top: 131px;
+}
 </style>
 	
 <ul class="smk_accordion">
@@ -33,10 +60,14 @@
 							
 						<div class="cash_in">
 							<div class="row cash_13">
-								<input class="input_style03" id="bankInfoTxt" name="bank_acct" placeholder="비밀번호 입력 후 전용계좌확인 버튼을 클릭해주세요">
+								<input class="input_style03 pd" id="bankInfoTxt" name="bank_acct" placeholder="비밀번호 입력 후 전용계좌확인 버튼을 클릭해주세요">
+								<div id='inc' class="incp">
+									<span class="incpw "><font class="incpwf">비밀번호가 일치하지 않습니다. </font></span>
+									<span id='' class="arrow-right"></span>
+								</div>
 							</div>
 							<div class="cash_3">
-								<span class="btn5" id="bankInfoBtn">전용계좌확인</span>
+								<button class="btn5" id="bankInfoBtn" DISABLE>전용계좌확인 </button>
 							</div>
 						</div>
 						
@@ -276,12 +307,18 @@
 				console.log(obj.BN);
 				
 				if(obj.BN =="-1"){
-					$("#bankInfoTxt").val("비밀번호가 일치하지 않습니다.");
+					$("#bankInfoTxt").val();
+					$("#inc").removeClass('incp');
 					 
 				}	else if(data !="" || data !=null){
+					$("#inc").addClass("incp");
+					$('#bankInfoTxt').val(' ');
+					$('#bankInfoTxt').removeClass('pd');
 					// data = bank_name - bank_owner - bank_number
 					$("#bankInfoTxt").val(obj.BN); 
 					$("#ct_bank_owner").val(obj.BO); 
+					$('#bankInfoTxt').attr('readonly', true);
+					$("#bankInfoBtn").attr("disabled", true);
 
 				}else{
 					alert("처리중 오류가 발생하였습니다.");
@@ -293,6 +330,8 @@
 	      	transition: 'all 0.3s',
 	      	scrolllock: true,
 	      	onclose:function(){
+	      		$('#bankInfoTxt').attr('readonly', false);
+				$("#bankInfoBtn").attr("disabled", false);
 	      		resetChargeForm();
 	    	}
 	    });
@@ -419,10 +458,6 @@
 			bank_acct:{
 				required:true,
 			},
-			bank_owner :{
-				required:true,
-				//alphanumeric: true,
-			},
 			money:{
 				required:true,
 				money_number:true,
@@ -432,9 +467,6 @@
 		messages: {
 			bank_acct :{
 					required:"비밀번호 입력후 전용계좌를 확인해 주세요.",
-			},
-			bank_owner :{
-				required:"비밀번호 입력후 전용계좌를 확인해 주세요.",
 			},
 			money:{
 				required:"금액을 입력해 주세요.",
@@ -466,8 +498,8 @@
 			        },
 			        position: {
 				        container: $("#acc_content_in_chargetb"),
-				        at: 'right center ',
-				        my: 'left center',  
+				        at: (id =="bankInfoTxt" ? 'left center' : 'right center '),
+				        my: (id =="bankInfoTxt" ? 'right center' : 'left center') ,  
 				        adjust : {
 				        	method : 'shift none',
 				        }
