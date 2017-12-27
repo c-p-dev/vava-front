@@ -314,6 +314,8 @@
 	      	transition: 'all 0.3s',
 	      	scrolllock: true,
 	      	onclose:function(){
+	      		$('#bankInfoTxt').attr('readonly', false);
+				$("#bankInfoBtn").attr("disabled", false);
 	      		resetChargeForm();
 	    	}
 	    });
