@@ -70,7 +70,7 @@
 					<div class="my_search_wrap">						
 					</div>
 					<div class="my_search_list" id="qna-div" style="margin:0px" >
-						<table id="qnaDt" class="" cellspacing="0" cellpadding="0" data-scroll-x="true" style="width: 100%!important;">
+						<table id="qnaDt" class="" cellspacing="0" cellpadding="0" width="100%">
             			</table>
 					</div>
 				</div>
@@ -89,46 +89,52 @@
 			bInfo : false,
 			lengthChange: false,
 			autowWidth:true,
-            columns : [
-            	{ 
-                    data   : 'title',
-                    title  : '제목',	
-                },
-                { 
-                    data   : 'send_userid1',
-                    title  : '보낸이',
-                },
-                { 
-                    data   : 'send_date',
-                    title  : '수신일시',
-                },
-                { 
-                    data   : 'recv_date',
-                    title  : '확인일시',
-                }
-        
-            ],
-        	pagingType: "full_numbers",
-        	pageLength: 10,
-            language: {
-			    paginate: {
-			      	previous: "<",
-			      	next: ">",
-			      	first: "<<",
-			      	last: ">>",
-			    },
-			    emptyTable: "결과가 없습니다.",
+      columns : [
+      	{ 
+              data:'title',
+              title:'제목',	             
+          },
+          { 
+              data   : 'send_userid1',
+              title  : '보낸이',
+              width: '20%',
+          },
+          { 
+              data   : 'send_date',
+              title  : '수신일시',
+              width: '20%',
+          },
+          { 
+              data   : 'recv_date',
+              title  : '확인일시',
+              width: '20%',
+          }
+  
+      ],
+    	pagingType: "full_numbers",
+    	pageLength: 10,
+        language: {
+	    paginate: {
+	      	previous: "<",
+	      	next: ">",
+	      	first: "<<",
+	      	last: ">>",
+	    },
+	    emptyTable: "결과가 없습니다.",
 			},
+			
+			/*
             rowCallback : function(row , data , index) {
 
             },
             drawCallback: function( settings ) {
                 
             },
-            createdRow: function ( row, data, index ) {  
-            	$(row).addClass('s_close');
-        	}
-        });
+       */
+        createdRow: function ( row, data, index ) {  
+        	$(row).addClass('s_close');
+    		}
+   });
 
 		
 

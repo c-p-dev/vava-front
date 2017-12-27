@@ -3,21 +3,15 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.StringTokenizer;
-
-import javax.sql.*;
-import javax.naming.*;
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.log4j.Logger;
-import net.arnx.jsonic.JSON;
 import util.DBConnector;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
+
+
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -116,11 +110,12 @@ public class UserDao {
 					uib.setSiteid(rs.getInt("siteid"));
 					uib.setUserid(rs.getString("userid"));
 					uib.setNick(rs.getString("nick"));
-					uib.setCell(rs.getString("cell"));
 					uib.setCharge_level(rs.getString("charge_level"));
 					uib.setGrade(rs.getInt("grade"));					
 					uib.setMoney(rs.getInt("money"));
-					uib.setPoint(rs.getInt("point"));					
+					uib.setPoint(rs.getInt("point"));		
+					uib.setCell(rs.getString("cell"));
+					
 					nproc = 1;
 					
 				}else{
@@ -168,31 +163,33 @@ public class UserDao {
 				SmsDao sd = new SmsDao();
 				String mobile_no = sd.formatCellNumber(user.getCell_prefix(), user.getCell());
 				Date date = new Date();
-			    String  query = "INSERT INTO RT01.dbo.user_mst (userid,siteid,passwd,cell,bank_name,bank_owner,bank_num,regdate,state,watch,charge_level,ip,reg_ip,nick,recommend) "+
-						" VALUES (?,1,?,? ,?,?,?,?,'NORMAL','N','LOW',?,?,?,?)";
-									
+			    String  query = "INSERT INTO user_mst (userid,siteid,passwd,cell,bank_name,bank_owner,bank_num,regdate,state,watch,charge_level,sess,ip,reg_ip,nick,recommend) "+
+						" VALUES (?,?,?,? ,?,?,?,GETDATE(),'NORMAL','N','LOW',?,?,?,?,?)";
+				
 			    pstmt = con.prepareStatement(query);
+			    
 			    pstmt.setString(1,user.getUserid());
-			    pstmt.setString(2,user.getPasswd());
-			    pstmt.setString(3,mobile_no);
-			    pstmt.setString(4,user.getBank_name());
-			    pstmt.setString(5,user.getBank_owner());
-			    pstmt.setString(6,user.getBank_num());
-			    pstmt.setString(7,sdf.format(date));
-			    pstmt.setString(8,user.getIp());
+			    pstmt.setInt(2,user.getSiteid());
+			    pstmt.setString(3,user.getPasswd());
+			    pstmt.setString(4,mobile_no);
+			    pstmt.setString(5,user.getBank_name());
+			    pstmt.setString(6,user.getBank_owner());
+			    pstmt.setString(7,user.getBank_num());
+			    //pstmt.setString(7,sdf.format(date));
+			    pstmt.setString(8,user.getSSid());
 			    pstmt.setString(9,user.getIp());
-			    pstmt.setString(10,user.getNick());
-			    pstmt.setString(11,user.getRecommend());
+			    pstmt.setString(10,user.getIp());
+			    pstmt.setString(11,user.getNick());
+			    pstmt.setString(12,user.getRecommend());
 			    
 				row = pstmt.executeUpdate(); 
-				logger.debug(query);
-				logger.debug(row);
+
 				pstmt.close();
 				con.close();
-				logger.debug(row);
-				if(row > 0) {
 
+				if(row > 0) {
 					result = true;
+					createCasinoUser(user); //check. save log if fail create.
 				}
 			
 				return result;
@@ -207,6 +204,44 @@ public class UserDao {
 		  	}
 	}
 	
+	public String createCasinoUser(UserBean user) {     
+		
+		Debug.out("createCasinoUser..");
+		String teg_resp ="";
+		
+		try{
+			
+			MgBettingProfileBean bet_profile = new MgBettingProfileBean();
+			ArrayList<MgBettingProfileBean> bet_profiles	= new ArrayList<MgBettingProfileBean>();
+			  
+			bet_profile.setCategory("LGBetProfile");
+			bet_profile.setProfileId(1202);			
+			bet_profiles.add(bet_profile);
+			
+			TotalEgameController teg_ctrl = new TotalEgameController();
+			MgPlayerAccountBean user_profile = new MgPlayerAccountBean();
+			
+			user_profile.setPreferredAccountNumber(user.getSiteid()+"_"+user.getUserid());
+			user_profile.setFirstName(user.getUserid().concat("FNAME"));
+			user_profile.setLastName(user.getUserid().concat("LNAME"));
+			user_profile.setEmail("");
+			user_profile.setMobilePrefix(user.getCell_prefix().substring(1));
+			user_profile.setMobileNumber(user.getCell());
+			user_profile.setDepositAmount(0);
+			user_profile.setPinCode("newplayer1");
+			user_profile.setIsProgressive(0);
+			user_profile.setBettingProfiles(bet_profiles);
+			
+			teg_resp = teg_ctrl.addPlayerAccount(user_profile);	
+		
+		}catch(Exception e){
+			Debug.out("createCasinoUser.." + e.toString());
+		}
+
+		return teg_resp;
+  	
+	}
+		
 	public boolean checkUserId(UserBean user) throws SQLException{
 
 		Connection con = null;
@@ -483,7 +518,7 @@ public class UserDao {
 			
 			String query1 ="select count(*) cnt from user_mst WHERE siteid="+SITEID+" and userid = '"+UID+"' and passwd='"+PW+"'";
 			
-			String query2 ="select bank_owner_user, bank_name+' '+bank_num +' [ О©╫О©╫О©╫О©╫О©╫О©╫ : ' +bank_owner+' ]' as bank_account from ( " +
+			String query2 ="select bank_owner_user, bank_name+' '+bank_num +' [ ©╧╠щаж : ' +bank_owner+' ]' as bank_account from ( " +
 					" select a.bank_owner bank_owner_user, case  when charge_level='JOIN' then bank_join_name when charge_level='LOW' then bank_low_name when  charge_level='MIDDLE' then bank_middle_name when  charge_level='HIGH' then bank_high_name end bank_name, " +
 					" case  when charge_level='JOIN' then bank_join_num when charge_level='LOW' then bank_low_num when  charge_level='MIDDLE' then bank_middle_num when  charge_level='HIGH' then bank_high_num end bank_num, " +
 					" case  when charge_level='JOIN' then bank_join_owner when charge_level='LOW' then bank_low_owner when  charge_level='MIDDLE' then bank_middle_owner when  charge_level='HIGH' then bank_high_owner end bank_owner " +

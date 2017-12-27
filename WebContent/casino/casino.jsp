@@ -13,7 +13,6 @@
 	List<GameBean> game_type = game_dao.getGameType();
 %>
 
-<%@ include file="/inc/session.jsp"%>
 
 <!DOCTYPE html>
 <head>
@@ -219,7 +218,7 @@ div.chevy-cntr {
 						GameBean providers = game_providers.get(i);
 						int tab = i + 2;
 						
-						String html = "<li><a href=#l-tab"+tab+" class=get-game data-val="+providers.getGame_provider()+">"+providers.getProvider_name()+" <div class = 'chevy-cntr'><i class = 'chevy fa fa-chevron-down'></i></div></a></li>";
+						String html = "<li><a href=#l-tab"+tab+" class=get-game data-val="+providers.getGame_provider()+">"+providers.getProvider_name()+" <div class = 'chevy-cntr'><i class = 'chevy fa fa-chevron-up'></i></div></a></li>";
 
 						if( providers.getGame_provider() == 2){
 							
@@ -345,17 +344,24 @@ div.chevy-cntr {
 		$("#game-cat li").on("click", 'a', function(e) {
 			
 			var lnk_clicked	= $(this);
-			var game_prvdr 	= lnk_clicked.attr("data-val");
-			var chev_mark	= lnk_clicked.find('.chevy-cntr .chevy');
 			
 			if (lnk_clicked.parent().hasClass('active') == false) {
 				
 				$.get('/login/jsp/get_session.jsp', function(sess_check) {
 					
+					var game_prvdr = lnk_clicked.attr("data-val");
+					
 					if (lnk_clicked.hasClass('get-game')) {
+						
+						var chev_mark	= lnk_clicked.find('.chevy-cntr .chevy');
 						
 						/*	Intializes all manuals to hidden display	*/
 						$(".casino_right").html(spin);
+						$('.subm-manual').hide();
+						$('.pcheck-lnk').hide();
+						
+						$('.chevy').removeClass('fa-chevron-down');
+						$('.chevy').addClass('fa-chevron-up');
 						
 						/*	Asian Gaming	*/
 						if (2 == game_prvdr) {
@@ -377,8 +383,8 @@ div.chevy-cntr {
 							/* Default. Do nothing	*/
 						}
 						
-						chev_mark.removeClass('fa-chevron-down');
-						chev_mark.addClass('fa-chevron-up');
+						chev_mark.removeClass('fa-chevron-up');
+						chev_mark.addClass('fa-chevron-down');
 						
 						//get Game
 						$.ajax({
@@ -416,31 +422,6 @@ div.chevy-cntr {
 					}
 					
 				}, 'json');
-			}
-
-			if (chev_mark.hasClass('fa-chevron-up')) {				
-				if (lnk_clicked.hasClass('get-game')) {
-					
-					/*	Asian Gaming	*/
-					if (2 == game_prvdr) {
-						$('#agmanual-lnk').slideUp();
-					}
-					/*	Microgaming		*/
-					else if (1 == game_prvdr) {
-						$('#mgmanual-lnk').slideUp();
-						$('#get-mgpcheck-li').slideUp();
-					}
-					/*	Betconstruct	*/
-					else if (3 == game_prvdr) {
-						$('#bcmanual-lnk').slideUp();
-					}
-					else {
-						/* Default. Do nothing	*/
-					}
-					
-					chev_mark.removeClass('fa-chevron-up');
-					chev_mark.addClass('fa-chevron-down');
-				}
 			}
 			
 			return false;

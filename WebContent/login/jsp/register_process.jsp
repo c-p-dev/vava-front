@@ -4,14 +4,14 @@
 <%@ page import = "bean.BetConUserBean" %>
 <%@ page import = "dao.UserDao" %>
 <%@ page import = "dao.BetConDao" %>
-<%@ page import = java.util.ArrayList" %>
+
 <%@ page import = "bean.MgBettingProfileBean" %>
 <%@ page import = "bean.MgPlayerAccountBean" %>
 <%@ page import = "controller.TotalEgameController" %>
 <%@ page import = "controller.SpinCubeController" %>
 <%@ page import ="com.google.gson.reflect.TypeToken" %>
-<%@ page import ="java.util.StringTokenizer" %>
-<%@ page import ="java.sql.SQLException" %>
+
+
 <%@ page import ="bean.JoinCodeBean" %>
 <%@ page import ="dao.JoinCodeDao" %>
 <%@ page import ="bean.SmsAuthBean" %>
@@ -21,132 +21,72 @@
 <%@ include file="/inc/session.jsp"%>
 
 <%
-	UserBean post_ub 		= new UserBean();
+	
 	JoinCodeBean jcBean 	= new JoinCodeBean();
 	SmsAuthBean smsBean 	= new SmsAuthBean();
-	BetConUserBean bc_user	= new BetConUserBean();
+
 	
 	UserDao ud 			= new UserDao();
 	JoinCodeDao jcDao 	= new JoinCodeDao();
 	SmsDao smsDao 		= new SmsDao();
-	BetConDao bc_db		= new BetConDao();
+
+	String userid = request.getParameter("userid").trim();
+	String bank_name = request.getParameter("bank_name").trim();
+	String bank_num = request.getParameter("bank_num").trim();
+	String bank_owner = request.getParameter("bank_owner").trim();
+	String cell = request.getParameter("cell").trim();
+	String cell_prefix = request.getParameter("cell_prefix").trim();
+	String passwd = request.getParameter("passwd").trim();
+	String referrer = request.getParameter("referrer").trim();
+	String nick = request.getParameter("nick").trim();
+	String recommend = request.getParameter("recommend").trim();
+	String cert = request.getParameter("cert").trim();
 	
-	String xForwardedForHeader = request.getHeader("X-Forwarded-For");	 
-	String ip = "";
-    if (xForwardedForHeader == null) {
-        ip = request.getRemoteAddr();
-    }else{
-        ip =  new StringTokenizer(xForwardedForHeader, ",").nextToken().trim();
-    }
-	// String cell = request.getParameter("cell_prefix").trim().substring(1) + request.getParameter("cell").trim();
-
-	post_ub.setUserid(request.getParameter("userid").trim());
-	post_ub.setBank_name(request.getParameter("bank_name").trim());
-	post_ub.setBank_num(request.getParameter("bank_num").trim());
-	post_ub.setBank_owner(request.getParameter("bank_owner").trim());
-	post_ub.setCell(request.getParameter("cell"));
-	post_ub.setCell_prefix(request.getParameter("cell_prefix"));
-	post_ub.setPasswd(request.getParameter("passwd").trim());
-	post_ub.setRecommend(request.getParameter("referrer").trim());
-	post_ub.setNick(request.getParameter("nick").trim());
-	post_ub.setIp(ip);
-
-	jcBean.setUserid(request.getParameter("userid").trim());
-	jcBean.setJoincode(request.getParameter("recommend").trim());
-	jcBean.setRecommend(request.getParameter("referrer").trim());
-
-	smsBean.setUserid(request.getParameter("userid").trim());
-	// smsBean.setTel(cell);
-	smsBean.setCell(request.getParameter("cell"));
-	smsBean.setCell_prefix(request.getParameter("cell_prefix"));
-	smsBean.setAuthcode(request.getParameter("cert").trim());
+  	UserBean ub = new UserBean();
 	
-	String teg_resp	= "";
-	String site_id	= "1";
+		ub.setUserid(userid);
+		ub.setSiteid(Integer.parseInt(SITEID));
+		ub.setBank_name(bank_name);
+		ub.setBank_num(bank_num);
+		ub.setBank_owner(bank_owner);
+		ub.setCell(cell);
+		ub.setCell_prefix(cell_prefix);
+		ub.setPasswd(passwd);
+		ub.setRecommend(referrer);
+		ub.setNick(nick);
+		ub.setJoincode(recommend);
+		ub.setAuthcode(cert);
+		ub.setIp(IP);
+		ub.setSSid(sess.getId());
 	
-    TotalEgameController teg_ctrl					= new TotalEgameController();
-    SpinCubeController sc_ctrl						= new SpinCubeController(site_id.concat("_").concat(request.getParameter("userid")));
-	MgPlayerAccountBean user_profile 				= new MgPlayerAccountBean();
-	MgBettingProfileBean bet_profile				= new MgBettingProfileBean();
-	ArrayList<MgBettingProfileBean> bet_profiles	= new ArrayList<MgBettingProfileBean>();
+	boolean status = ud.setUser(ub);
+	
+	if (status) {
 
-    boolean status = false;
-	try {
-		
-		status = ud.setUser(post_ub);
-		
-		if (status) {
-			String mb_pref	= request.getParameter("cell_prefix").trim().substring(1);
-			
-			boolean updateJoinCode = jcDao.updateJoinCodeRegister(jcBean);
-			boolean updateSms = smsDao.updateUserAuthSms(smsBean);
+		boolean updateJoinCode = jcDao.updateJoinCodeRegister(ub);
+		boolean updateSms = smsDao.updateUserAuthSms(ub);
+	
+        
+		SpinCubeController sc_ctrl = new SpinCubeController(SITEID+"_"+userid);  
+		sc_ctrl.createPlayer();
 
-			UserBean ub = new UserBean();
-			ub = ud.getUser(request.getParameter("userid"), request.getParameter("passwd"), Integer.valueOf(site_id));
-			
-			/*--------------------------------------------------------------------
-	        |	Add user to Microgaming System
-	        |-------------------------------------------------------------------*/
-	        /*	Configure MG User parameters	*/
-			bet_profile.setCategory("LGBetProfile");
-			bet_profile.setProfileId(1202);
-			
-			bet_profiles.add(bet_profile);
-			
-			user_profile.setPreferredAccountNumber(site_id.concat("_").concat(request.getParameter("userid").trim()));
-			user_profile.setFirstName(request.getParameter("userid").trim().concat("FNAME"));
-			user_profile.setLastName(request.getParameter("userid").trim().concat("LNAME"));
-			user_profile.setEmail("");
-			user_profile.setMobilePrefix(mb_pref);
-			user_profile.setMobileNumber(request.getParameter("cell").trim());
-			user_profile.setDepositAmount(0);
-			user_profile.setPinCode("newplayer1");
-			user_profile.setIsProgressive(0);
-			user_profile.setBettingProfiles(bet_profiles);
-			
-			teg_resp = teg_ctrl.addPlayerAccount(user_profile);
-			
-			/*--------------------------------------------------------------------
-	        |	Add User to Betconstruct Table
-	        |-------------------------------------------------------------------*/
-	        bc_user.setUsername(ub.getUserid());
-	        bc_user.setSession_token(Integer.toString(ub.getSiteid()).concat("_").concat(ub.getUserid()));
-	        bc_user.setSite_id(ub.getSiteid());
-			
-	        bc_db.addNewBcUser(bc_user);
-	        
-	        /*--------------------------------------------------------------------
-	        |	Add User to SpinCube
-	        |-------------------------------------------------------------------*/
-	        sc_ctrl.createPlayer();
-	        
-			/*--------------------------------------------------------------------
-	        |	Intialize user session
-	        |-------------------------------------------------------------------*/
-			HttpSession user_session = request.getSession(true);	    
-			session.setMaxInactiveInterval(7200);
-	        
-	        boolean updateSession = ud.updateUserAfterLogin(Integer.toString(ub.getSiteid()), ub.getUserid(), request.getParameter("passwd").trim(), session.getId(), ip);
-	        
-	        checkSession 	= true;	
-			session 		= request.getSession(false);
-			session.setMaxInactiveInterval(7200);
-			
-			session.setAttribute("SITEID", ub.getSiteid());
-			session.setAttribute("SSID", ub.getUserid());
-			session.setAttribute("UID", ub.getUserid());
-			session.setAttribute("NICK", ub.getNick());
-			session.setAttribute("UCLEVEL", ub.getCharge_level());
-			session.setAttribute("UGRADE", ub.getGrade());
-			session.setAttribute("UBAL", ub.getMoney());
-			session.setAttribute("UPOINT", ub.getPoint());
+    BetConDao bc_db		= new BetConDao();    
+   	BetConUserBean bc_user	= new BetConUserBean();
+    bc_user.setUsername(userid);
+    bc_user.setSession_token(SITEID+"_"+userid);
+    bc_user.setSite_id(1);
+
+    bc_db.addNewBcUser(bc_user);	        
+
+		sess.setAttribute("SITEID", SITEID);
+		sess.setAttribute("SSID", sess.getId());
+		sess.setAttribute("UID", userid);
+		sess.setAttribute("NICK", nick);
+		sess.setAttribute("UCLEVEL", "LOW");
+		sess.setAttribute("UGRADE", 1);
+		sess.setAttribute("UBAL", 0);
+		sess.setAttribute("UPOINT",0);	
 		}
 		
 		out.println(status);
-
-	} catch (SQLException e) {
-		e.printStackTrace();
-	}
-
-
 %>
