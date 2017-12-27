@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+
+
 <%@page import="java.util.*"%>
 <%@page import="bean.*"%>
 <%@page import="java.lang.Integer"%>
@@ -9,14 +11,13 @@
 <%@page import="dao.NoticeEventDao"%>
 <%@page import="bean.NoticeEventBean"%>
 
+<jsp:useBean id="bm" class="bc4.BetConManager2" />
+	
 <%
 	NoticeEventDao ne_dao			= new NoticeEventDao();
 	List<NoticeEventBean> all_banner	= ne_dao.getAllBanner();	
 		
 %>
-
-
-<jsp:useBean id="bm" class="bc4.BetConManager2" />
 
 <%
 List<MatchListBean> mr = bm.getFavoriteMatch();
@@ -34,7 +35,7 @@ Type type2 = new TypeToken<List<DepositListBean>>() {}.getType();
  String dl_s = gson.toJson(dl, type2);   
      
 %>
-
+			
 <!DOCTYPE html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -89,7 +90,6 @@ Type type2 = new TypeToken<List<DepositListBean>>() {}.getType();
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.js"></script><!-- pickaday -->
 
 
-
 <link href="/css/common.css" rel="stylesheet" type="text/css">
 <link href="/css/layout.css" rel="stylesheet" type="text/css">
 <link href="/css/main.css" rel="stylesheet" type="text/css"><!-- main -->
@@ -113,81 +113,17 @@ Type type2 = new TypeToken<List<DepositListBean>>() {}.getType();
 
 <script type="text/javascript" src="/js/angular.js"></script> 
 <script type="text/javascript" src="/js/angular-animate.min.js"></script> 
+
+
+ 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.16/angular-filter.js"></script>    
 <script type="text/javascript" src="/js/v-accordion.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28//angular-route.min.js"></script>
 <link href="/css/v-accordion.css" rel="stylesheet" type="text/css">
-
+    	
 <script>
-	var mainAngular = angular.module('Vava', [ 'ngAnimate', 'vAccordion' ]);
-
-mainAngular.directive('tooltip', function ($document, $compile) {
-  return {
-    restrict: 'A',
-    scope: true,
-    link: function (scope, element, attrs) {
-      var tip = $compile('<div ng-class="tipClass">{{ text }}<div class="tooltip-arrow"></div></div>')(scope),
-          tipClassName = 'tooltip',
-          tipActiveClassName = 'tooltip-show';
-
-      scope.tipClass = [tipClassName];
-      scope.text = attrs.tooltip;
-      
-      if(attrs.tooltipPosition) {
-        scope.tipClass.push('tooltip-' + attrs.tooltipPosition);
-      }
-      else {
-       scope.tipClass.push('tooltip-down'); 
-      }
-      $document.find('body').append(tip);
-      
-      element.bind('mouseover', function (e) {
-        tip.addClass(tipActiveClassName);
-        
-        var pos = e.target.getBoundingClientRect(),
-            offset = tip.offset(),
-            tipHeight = tip.outerHeight(),
-            tipWidth = tip.outerWidth(),
-            elWidth = pos.width || pos.right - pos.left,
-            elHeight = pos.height || pos.bottom - pos.top,
-            tipOffset = 10;
-        
-        if(tip.hasClass('tooltip-right')) {
-          offset.top = pos.top - (tipHeight / 2) + (elHeight / 2);
-          offset.left = pos.right + tipOffset;
-        }
-        else if(tip.hasClass('tooltip-left')) {
-          offset.top = pos.top - (tipHeight / 2) + (elHeight / 2);
-          offset.left = pos.left - tipWidth - tipOffset;
-        }
-        else if(tip.hasClass('tooltip-down')) {
-          offset.top = pos.top + elHeight + tipOffset;
-          offset.left = pos.left - (tipWidth / 2) + (elWidth / 2);
-        }
-        else {
-          offset.top = pos.top - tipHeight - tipOffset;
-          offset.left = pos.left - (tipWidth / 2) + (elWidth / 2);
-        }
-
-        tip.offset(offset);
-      });
-      
-      element.bind('mouseout', function () {
-        tip.removeClass(tipActiveClassName);
-      });
-
-      tip.bind('mouseover', function () {
-        tip.addClass(tipActiveClassName);
-      });
-
-      tip.bind('mouseout', function () {
-        tip.removeClass(tipActiveClassName);
-      });
-
-      
-    }
-  }
-});
+	
+	var mainAngular = angular.module('Vava', ['ngAnimate', 'vAccordion']);
 
 	var s = [ {
 		"PID" : 0,
@@ -265,1006 +201,854 @@ mainAngular.directive('tooltip', function ($document, $compile) {
 
 	mainAngular.factory('wss', function($window) {
 
-		var sv = {};
-		sv.ws = new Object();
+    var sv = {};
+    sv.ws = new Object();
 
-		sv.con = function() {
-			var wsUrl = s[3].u;
-			var websocket = new WebSocket(wsUrl);
-			websocket.onopen = function() {
-				sv.callback("CONNECTED");
-			};
-			websocket.onerror = function() {
-				websocket = null;
-				sv.callback("Failed to open a connection");
-			};
-			websocket.onclose = function() {
-				websocket = null;
-				sv.ws.close();
-				sv.callback("DISCONNECTED");
-				setTimeout(function() {
-					sv.con()
-				}, 5000);
-			};
-			websocket.onmessage = function(message) {
-				sv.callback(message.data);
-			};
-			sv.ws = websocket;
-		};
+    sv.con = function() {
+        var wsUrl = s[3].u;
+        var websocket = new WebSocket(wsUrl);
+        websocket.onopen = function() {
+            sv.callback("CONNECTED");
+        };
+        websocket.onerror = function() {
+            websocket = null;
+            sv.callback("Failed to open a connection");
+        };
+        websocket.onclose = function() {
+            websocket = null;
+            sv.ws.close();
+            sv.callback("DISCONNECTED");
+            setTimeout(function() {
+                sv.con()
+            }, 5000);
+        };
+        websocket.onmessage = function(message) {
+            sv.callback(message.data);
+        };
+        sv.ws = websocket;
+    };
 
-		sv.disc = function() {
-			sv.ws.close();
-		};
-		sv.subscribe = function(callback) {
-			sv.callback = callback;
-		};
-		sv.loadGetMatchInit = function() {
+    sv.disc = function() {
+        sv.ws.close();
+    };
+    sv.subscribe = function(callback) {
+        sv.callback = callback;
+    };
+    sv.loadGetMatchInit = function() {
 
-		}
+    }
 
-		sv.sendMessage = function(msg) {
-			sv.ws.send(msg);
-		};
+    sv.sendMessage = function(msg) {
+        sv.ws.send(msg);
+    };
 
-		return sv;
+    return sv;
+});
+
+/*
+mainAngular.directive('mytip', function(){
+    return {
+        restrict: 'A',
+        scope: {
+            mytip: '@'  
+        },
+        link: function(scope, elem, attrs) {
+            Tipped.create(elem, scope.mytip, {
+                position: 'bottomLeft'
+            });
+        }
+    };
+});
+*/
+
+mainAngular.controller("mc", function($scope, $sce, $templateCache, $compile, $http, wss) {
+
+  wss.subscribe(function(message) {
+	  try {
+
+	    var obj = JSON.parse(message);
+	    switch (obj.Command) {
+	        case "MatchUpdate":
+	            if (obj.Type == "Match") {
+	                sub_loadGetMatch(obj);
+
+	            } else if (obj.Type == "Market") {
+	            	sub_loadGetMatchMarket(obj);
+	            }	            
+	          break;
+	          
+	        case "GetMatchMarkets":loadGetMatchMarket(obj);
+	          break;
+	        
+	        case "GetBlock": sub_loadBlockMatch(obj);
+						break;
+	    }
+	  } catch (exception) {
+	  }
+	  
+	  $scope.$apply();
+  });
+
+  wss.con();
+  
+
+      
+  $scope.tabSId = "0";
+  $scope.TM = "0";
+	$scope.PMSD = "0";
+  $scope.BL = "N";
+  
+  loadLiveMatch();
+
+  $scope.ML = <%=mr_s%>;
+  $scope.DL = <%=dl_s%>;
+  // getDepositList();
+  dl_load();
+  loadPreMatch();
+
+  $http({
+      method: 'GET',
+      url: s[7].u,
+      headers: {
+          'Content-Type': 'application/json; charset=utf-8'
+      }
+  }).success(function(data, status, headers, config) {
+    if (data) {
+
+        $scope.validMKTypeId = data;
+        // console.log($scope.validMKTypeId);
+    };
+    data = null;
+  }).error(function(data, status, headers, config) {
+    console.log("Error $scope.validMKTypeId");
+    data = null;
 	});
-
-	mainAngular
-			.controller(
-					"mc",
-					function($scope, $sce, $templateCache, $compile, $http, wss) {
-
-						wss.subscribe(function(message) {
-							try {
-
-								var obj = JSON.parse(message);
-								switch (obj.Command) {
-								//case "GetCompetitions": loadGetCompetitions(obj);
-								//	break;							
-								//case "MatchStat": sub_loadGetMatchStat(obj);
-								//	break;								
-								//case "GetMatches": loadGetMatch(obj); 
-								//	break;					
-								case "MatchUpdate":
-									if (obj.Type == "Match") {
-										sub_loadGetMatch(obj);
-
-										//} else if (obj.Type == "MatchStat") {
-										//	sub_loadGetMatchStat(obj);
-
-									} else if (obj.Type == "Market")
-										sub_loadGetMatchMarket(obj);
-									break;
-								case "GetMatchMarkets":
-									loadGetMatchMarket(obj);
-									break;
+	
+	function sub_loadBlockMatch(response) {		
+		console.log("response.Type");
+		console.log("response.Type : " + response.Type);
+		
+		$scope.BLR = response;
+				
+				if(response.Type =="N"){	
+									
+					if($scope.BL !="N"){
+					
+						for(var i=$scope.LS.length-1;i>=0;i--){  
+								$scope.LS[i].B = false;
+						}
+					
+						for(var i=$scope.PS.length-1;i>=0;i--){  						
+								$scope.PS[i].B = false;
+						}
+					}					
+					$scope.BL ="N";
+				
+				} else if(response.Type =="L"){
+					
+					for(var i=$scope.LS.length-1;i>=0;i--){  
+							$scope.LS[i].B = true;
+					}
+					
+					$scope.BL ="L";
+				
+				} else if(response.Type =="P"){
+					for(var i=$scope.LS.length-1;i>=0;i--){  
+							$scope.LS[i].B = true;
+					}
+					
+					for(var i=$scope.PS.length-1;i>=0;i--){  						
+							$scope.PS[i].B = true;
+					}
+										
+						$scope.BL ="P";
+				}
+				
+			angular.forEach(response.Objects, function(obj,idx) {	
+					
+					
+					if(obj.AS=="F"){
+						
+						/*
+						for(var i=$scope.favM.length-1;i>=0;i--){  
+								
+								if ($scope.favM[i].MId==obj.MId){	
+									$scope.favM[i].B = true;
 								}
-							} catch (exception) {
+						}
+						*/
+							
+						for(var i=$scope.LS.length-1;i>=0;i--){  
+							
+							if ($scope.LS[i].MId==obj.MId){	
+								$scope.LS[i].B = true;
 							}
-							$scope.$apply();
+						}
+						
+						for(var i=$scope.PS.length-1;i>=0;i--){  
+							
+							if ($scope.PS[i].MId==obj.MId){	
+								$scope.PS[i].B = true;
+							}
+						}
+						
+						
+						
+					}	if(obj.AS=="M"){							
+							
+						for(var i=$scope.LS.length-1;i>=0;i--){  
+							
+							if ($scope.LS[i].MId==obj.MId){	
+								$scope.LS[i].B = false;
+							}
+						}
+						
+						for(var i=$scope.PS.length-1;i>=0;i--){  
+							
+							if ($scope.PS[i].MId==obj.MId){	
+								$scope.PS[i].B = false;
+							}
+						}
+					}
+			});			
+	};
+	
+  function dl_load() {
+      var sp = setInterval(getDepositList, 1000 * 60 * 3);
+  };
+
+  function getDepositList() {
+
+      $http({
+	        method: 'GET',
+	        url: s[21].u,
+	        headers: {
+	            'Content-Type': 'application/json; charset=utf-8'
+	            
+	    }}).success(function(data, status, headers,config) {
+	      if (data) {
+
+	          $scope.DL = [];
+	          $scope.DL = data;
+	          console.log($scope.DL);
+
+	      };
+	      data = null;
+      }).error(function(data, status, headers,config) {
+	      console.log("Exception getDepositList");
+	      data = null;
+      });
+  };
+
+  $scope.vM = function(tab, sid, mid) {
+
+	  document.getElementById('formId').tab.value = tab
+	  document.getElementById('formId').sid.value = sid
+	  document.getElementById('formId').mid.value = mid
+	  document.getElementById('formId').submit()
+
+  };
+
+  $scope.vM2 = function(sid, mid) {
+      // console.log("$scope.vM");
+      document.form.mid.value = mid
+      document.form.sid.value = sid
+      document.form.tab.value = "2"
+      document.form.method = "post";
+      document.form.action = "/sport/livematch.jsp"
+      document.form.submit();
+  };
+
+  $scope.com = function(str) {
+      str = String(str);
+      return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g,
+          '$1,');
+  };
+
+  var $filter = angular.injector(['ng', 'Vava']).get('$filter');
+
+  function loadLiveMatch() {
+
+	  $scope.LS = [];
+	  $scope.LMKc = [];
+
+    $http({
+      method: 'GET',
+      url: s[22].u,
+      headers: {'Content-Type': 'application/json; charset=utf-8'}
+    }).success(function(data, status, headers,config) {
+                  
+      if (data) {
+
+	      angular.forEach(data,function(obj,idx) {
+	                  
+	        if (obj.Mk !== null &&obj.Mk !== undefined &&obj.Mk.length > 0) {
+	            for (var j = 0; j < obj.Mk.length; j++) {
+	                $scope.LMKc
+	                    .push(obj.Mk[j]);
+	            }
+	        }
+
+          angular.forEach(obj.Mt, function(obj2,idx2) {
+            
+            var mResult = obj.Re.filter(function(el) {return el.MId == obj2.Id; })            
+            var mSelect = obj.Se.filter(function(el) {return el.MId == obj2.Id; })
+
+            var w1Price, w2Price, xPrice = "-";
+            var SusM = true;
+            var Vis = true;
+            var MkId = "0";
+
+            if (mResult !== undefined &&mResult !== null &&mResult.length > 0) {
+
+                SusM = mResult[0].Sus;
+                Vis = mResult[0].Vis;
+                MkId = mResult[0].Id;
+
+                for (var i = mSelect.length - 1; i >= 0; i--) {
+	                if (mSelect[i].Nm == 'W1') {
+	                    w1Price = $filter('number')(mSelect[i].P, 2);
+
+	                } else if (mSelect[i].Nm == 'X') {
+	                    xPrice = $filter('number')(mSelect[i].P, 2);
+
+	                } else if (mSelect[i].Nm == 'W2') {
+	                    w2Price = $filter('number')(mSelect[i].P, 2);
+	                }
+                };
+            };
+
+            $scope.LS.push({
+              SId: obj2.SId,
+              SN: obj2.SN,
+              RId: obj2.RId,
+              RN: obj2.RN,
+              CId: obj2.CId,
+              CN: obj2.CN,
+              MId: obj2.Id,
+              HT: obj2.HT,
+              AT: obj2.AT,
+              // Pe:mStat[0].Pe,
+              // EType :
+              // mMatchStat[0].EventType,
+              // HTS:HTeamScore,
+              // ATS:ATeamScore,
+              SusS: obj2.Sus,
+              // Cur:(mStat[0].Cur
+              // ==
+              // undefined)
+              // ? "" :
+              // mStat[0].Cur,
+              // //mStat[0].CurrentMinute,
+              // Rem:(mStat[0].Rem
+              // ==
+              // undefined)
+              // ? "" :
+              // mStat[0].Rem,
+              // //mStat[0].RemainingTime,
+              // Inf:mStat.Inf,
+              MkId: MkId,
+              SusM: SusM,
+              Vis: Vis,
+              // W1SD:w1SelId,
+              // XSD:xSelId,
+              // W2SD:w2SelId,
+              BW1P: w1Price,
+              BXP: xPrice,
+              BW2P: w2Price,
+              W1P: w1Price,
+              XP: xPrice,
+              W2P: w2Price,
+              B:false,
+            });
+           });
+
+	      });
+
+      };
+      
+      //setInterval(function() { sub_loadBlockMatch($scope.BLR); },3000); 
+      
+       data = null;
+     }).error(function(data, status, headers,config) {
+        console.log("Exception loadLiveMatch");
+        data = null;
+     });
+  };
+
+  function loadPreMatch() {
+
+	  $scope.PS = [];
+	  $scope.PMKc = [];
+
+      $http({
+          method: 'GET',
+          url: s[23].u,
+          headers: {'Content-Type': 'application/json; charset=utf-8'}
+      }).success(function(data, status, headers,config) {
+      	
+	      if (data) {
+	        angular.forEach(data,function(obj,idx) {
+	        	
+	          if (obj.Mk !== null &&obj.Mk !== undefined &&obj.Mk.length > 0) {
+	              for (var j = 0; j < obj.Mk.length; j++) {
+	                  $scope.PMKc.push(obj.Mk[j]);
+	              }
+	          }
+
+	          angular.forEach(obj.Mt,function(obj2,idx2) {
+
+	            var mResult = obj.Re.filter(function(el) { return el.MId == obj2.Id; })
+	            var mSelect = obj.Se.filter(function(el) {return el.MId == obj2.Id;})
+
+
+	            var w1Price, w2Price, xPrice = "-";
+	            var SusM = true;
+	            var Vis = true;
+	            var MkId = "0";
+
+	            if (mResult !== undefined &&mResult !== null && mResult.length > 0) {
+
+	                SusM = mResult[0].Sus;
+	                Vis = mResult[0].Vis;
+	                MkId = mResult[0].Id;
+
+	                // console.log(mSelect);
+
+	                for (var i = mSelect.length - 1; i >= 0; i--) {
+	                    if (mSelect[i].Nm == 'W1') {
+	                        w1Price = $filter('number')(mSelect[i].P, 2);
+
+
+	                    } else if (mSelect[i].Nm == 'X') {
+	                        xPrice = $filter('number')(mSelect[i].P, 2);
+
+	                    } else if (mSelect[i].Nm == 'W2') {
+	                        w2Price = $filter('number')(mSelect[i].P, 2);
+	                    }
+	                };
+	            };
+
+	            $scope.PS.push({
+	              SId: obj2.SId,
+	              SN: obj2.SN,
+	              RId: obj2.RId,
+	              RN: obj2.RN,
+	              CId: obj2.CId,
+	              CN: obj2.CN,
+	              MId: obj2.Id,
+	              HT: obj2.HT,
+	              AT: obj2.AT,
+	              Dt: obj2.Dt,
+	              // Pe:mStat[0].Pe,
+	              // EType :
+	              // mMatchStat[0].EventType,
+	              // HTS:HTeamScore,
+	              // ATS:ATeamScore,
+	              SusS: obj2.SusS,
+	              // Cur:(mStat[0].Cur
+	              // ==
+	              // undefined)
+	              // ? "" :
+	              // mStat[0].Cur,
+	              // //mStat[0].CurrentMinute,
+	              // Rem:(mStat[0].Rem
+	              // ==
+	              // undefined)
+	              // ? "" :
+	              // mStat[0].Rem,
+	              // //mStat[0].RemainingTime,
+	              // Inf:mStat.Inf,
+	              // MkId:mResult[0].Id,
+	              // SusM:mResult[0].Sus,
+	              // Vis:mResult[0].Vis,
+	              SusM: SusM,
+	              Vis: Vis,
+	              MkId: MkId,
+	              // W1SD:w1SelId,
+	              // XSD:xSelId,
+	              // W2SD:w2SelId,
+	              BW1P: w1Price,
+	              BXP: xPrice,
+	              BW2P: w2Price,
+	              W1P: w1Price,
+	              XP: xPrice,
+	              W2P: w2Price,
+	              B:false,
+	              });
+							
 						});
 
-						wss.con();
-
-						loadLiveMatch();
-
-						$scope.ML =<%=mr_s%>;
-						$scope.DL =<%=dl_s%>;
-						//getDepositList();	
-						dl_load();
-
-						loadPreMatch();
-
-						$http(
-								{
-									method : 'GET',
-									url : s[7].u,
-									headers : {
-										'Content-Type' : 'application/json; charset=utf-8'
-									}
-								}).success(
-								function(data, status, headers, config) {
-									if (data) {
-
-										$scope.validMKTypeId = data;
-										//console.log($scope.validMKTypeId);
-									}
-									;
-									data = null;
-								}).error(
-								function(data, status, headers, config) {
-									;
-									console.log("Error $scope.validMKTypeId");
-									data = null;
-								});
-
-						function dl_load() {
-							var sp = setInterval(getDepositList, 1000 * 60 * 3);
-						}
-						;
-
-						function getDepositList() {
-
-							$http(
-									{
-										method : 'GET',
-										url : s[21].u,
-										headers : {
-											'Content-Type' : 'application/json; charset=utf-8'
-										}
-									})
-									.success(
-											function(data, status, headers,
-													config) {
-												if (data) {
-
-													$scope.DL = [];
-													$scope.DL = data;
-													console.log($scope.DL);
-
-												}
-												;
-												data = null;
-											})
-									.error(
-											function(data, status, headers,
-													config) {
-												;
-												console
-														.log("Exception getDepositList");
-												data = null;
-											});
-						}
-						;
-
-						$scope.vM = function(tab, sid, mid) {
-							console.log("$scope.vM");
-
-							console.log($scope.form);
-
-							document.getElementById('formId').tab.value = tab
-							document.getElementById('formId').sid.value = sid
-							document.getElementById('formId').mid.value = mid
-							console.log("$scope.form.mid:"
-									+ $scope.form.mid.value);
-							//console.log("$scope.mid:" + $scope.mid);
-
-							//$scope.form.action="/sport/livematch.jsp"
-
-							//$('#formId').attr('action', '/sport/livematch.jsp');
-
-							//$scope.formUrl = $sce.trustAsResourceUrl('/sport/livematch.jsp');
-
-							document.getElementById('formId').submit()
-							//$scope.form.$submitted = true;
-							//console.log("$scope.submitted");
-							/*		
-							 document.form.sid.value = sid		
-							 document.form.tab.value = tab
-							 document.form.method = "post";	
-							 document.form.action="/sport/livematch.jsp"
-							 document.form.submit();		
-							 */
-
-						};
-
-						$scope.vM2 = function(sid, mid) {
-							//console.log("$scope.vM");			
-							document.form.mid.value = mid
-							document.form.sid.value = sid
-							document.form.tab.value = "2"
-							document.form.method = "post";
-							document.form.action = "/sport/livematch.jsp"
-							document.form.submit();
-						};
-
-						$scope.com = function(str) {
-							str = String(str);
-							return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g,
-									'$1,');
-						};
-
-						var $filter = angular.injector([ 'ng', 'Vava' ]).get(
-								'$filter');
-
-						function loadLiveMatch() {
-
-							$scope.LS = [];
-							$scope.LMKc = [];
-
-							$http(
-									{
-										method : 'GET',
-										url : s[22].u,
-										headers : {
-											'Content-Type' : 'application/json; charset=utf-8'
-										}
-									})
-									.success(
-											function(data, status, headers,
-													config) {
-												if (data) {
-													
-													angular
-															.forEach(
-																	data,
-																	function(
-																			obj,
-																			idx) {
-																		if (obj.Mk !== null
-																				&& obj.Mk !== undefined
-																				&& obj.Mk.length > 0) {
-																			for (var j = 0; j < obj.Mk.length; j++) {
-																				$scope.LMKc
-																						.push(obj.Mk[j]);
-																			}
-																		}
-
-																		angular
-																				.forEach(
-																						obj.Mt,
-																						function(
-																								obj2,
-																								idx2) {
-
-																							//var mStat = obj.St.filter(function (el) { return el.MId == obj2.Id; })	
-																							var mResult = obj.Re
-																									.filter(function(
-																											el) {
-																										return el.MId == obj2.Id;
-																									})
-																							var mSelect = obj.Se
-																									.filter(function(
-																											el) {
-																										return el.MId == obj2.Id;
-																									})
-
-																							var w1Price, w2Price, xPrice = "-";
-																							var SusM = true;
-																							var Vis = true;
-																							var MkId = "0";
-
-																							if (mResult !== undefined
-																									&& mResult !== null
-																									&& mResult.length > 0) {
-																								//var w1Price, w2Price, xPrice  ="-";			
-																								//var w1SelId, xSelId, w2SelId ="";	
-
-																								SusM = mResult[0].Sus;
-																								Vis = mResult[0].Vis;
-																								MkId = mResult[0].Id;
-
-																								for (var i = mSelect.length - 1; i >= 0; i--) {
-																									if (mSelect[i].Nm == 'W1') {
-																										//w1SelId = mSelect[i].Id ;
-																										//w1Price = mSelect[i].P;			
-																										w1Price = $filter('number')(mSelect[i].P, 2);																							
-																										//console.log("w1Price:"+ w1Price)
-																										//console.log("w1Price-1:"+$filter('number')(w1Price, 2))
-																										
-																									} else if (mSelect[i].Nm == 'X') {
-																										//xSelId = mSelect[i].Id ;
-																										//xPrice = mSelect[i].P;
-																										xPrice = $filter('number')(mSelect[i].P, 2);
-																										//console.log("xPrice:"+ xPrice)
-																										//console.log("xPrice-1:"+$filter('number')(xPrice, 2))
-																										
-																									} else if (mSelect[i].Nm == 'W2') {
-																										//w2SelId = mSelect[i].Id ;
-																										//w2Price = mSelect[i].P;
-																										w2Price = $filter('number')(mSelect[i].P, 2);
-																										//console.log("w2Price:"+ w2Price)
-																										//console.log("w2Price-1:"+$filter('number')(w2Price, 2))
-																									}
-																								}
-																								;
-																							}
-																							;
-																							
-																							
-																							$scope.LS
-																									.push({
-																										SId : obj2.SId,
-																										SN : obj2.SN,
-																										RId : obj2.RId,
-																										RN : obj2.RN,
-																										CId : obj2.CId,
-																										CN : obj2.CN,
-																										MId : obj2.Id,
-																										HT : obj2.HT,
-																										AT : obj2.AT,
-																										//Pe:mStat[0].Pe,
-																										//EType : mMatchStat[0].EventType,
-																										//HTS:HTeamScore,
-																										//ATS:ATeamScore,
-																										SusS : obj2.Sus,
-																										//Cur:(mStat[0].Cur == undefined) ? "" : mStat[0].Cur, //mStat[0].CurrentMinute,
-																										//Rem:(mStat[0].Rem == undefined) ? "" : mStat[0].Rem, //mStat[0].RemainingTime,
-																										//Inf:mStat.Inf,	
-																										MkId : MkId,
-																										SusM : SusM,
-																										Vis : Vis,
-																										//W1SD:w1SelId,
-																										//XSD:xSelId,
-																										//W2SD:w2SelId,
-																										BW1P : w1Price,
-																										BXP : xPrice,
-																										BW2P : w2Price,
-																										W1P : w1Price,
-																										XP : xPrice,
-																										W2P : w2Price,
-																									});
-
-																							//};
-																						});
-
-																	});
-
-												}
-												;
-												data = null;
-											})
-									.error(
-											function(data, status, headers,
-													config) {
-												;
-												console
-														.log("Exception loadLiveMatch");
-												data = null;
-											});
-						}
-						;
-
-						//console.log("LS");
-						// console.log($scope.LS);
-
-						function loadPreMatch() {
-							//////
-							$scope.PS = [];
-							$scope.PMKc = [];
-
-							$http(
-									{
-										method : 'GET',
-										url : s[23].u,
-										headers : {
-											'Content-Type' : 'application/json; charset=utf-8'
-										}
-									})
-									.success(
-											function(data, status, headers,
-													config) {
-												if (data) {
-
-													angular
-															.forEach(
-																	data,
-																	function(
-																			obj,
-																			idx) {
-																		if (obj.Mk !== null
-																				&& obj.Mk !== undefined
-																				&& obj.Mk.length > 0) {
-																			for (var j = 0; j < obj.Mk.length; j++) {
-																				$scope.PMKc
-																						.push(obj.Mk[j]);
-																			}
-																		}
-
-																		angular
-																				.forEach(
-																						obj.Mt,
-																						function(
-																								obj2,
-																								idx2) {
-
-																							//var mStat = obj.St.filter(function (el) { return el.MId == obj2.Id; })	
-																							var mResult = obj.Re
-																									.filter(function(
-																											el) {
-																										return el.MId == obj2.Id;
-																									})
-																							var mSelect = obj.Se
-																									.filter(function(
-																											el) {
-																										return el.MId == obj2.Id;
-																									})
-
-																							//console.log(mResult);
-																							//console.log(mSelect);
-
-																							var w1Price, w2Price, xPrice = "-";
-																							var SusM = true;
-																							var Vis = true;
-																							var MkId = "0";
-
-																							if (mResult !== undefined
-																									&& mResult !== null
-																									&& mResult.length > 0) {
-																								//var w1Price, w2Price, xPrice  ="-";			
-																								//var w1SelId, xSelId, w2SelId ="";	
-
-																								SusM = mResult[0].Sus;
-																								Vis = mResult[0].Vis;
-																								MkId = mResult[0].Id;
-
-																								//console.log(mSelect);
-
-																								for (var i = mSelect.length - 1; i >= 0; i--) {
-																									if (mSelect[i].Nm == 'W1') {
-																										//w1SelId = mSelect[i].Id ;
-																										//w1Price = mSelect[i].P;
-																										w1Price = $filter('number')(mSelect[i].P, 2);
-																										//console.log("w1Price:"+ w1Price)
-																										//console.log("w1Price-1:"+$filter('number')(w1Price, 2))
-																										
-																									} else if (mSelect[i].Nm == 'X') {
-																										//xSelId = mSelect[i].Id ;
-																										//xPrice = mSelect[i].P;
-																										xPrice = $filter('number')(mSelect[i].P, 2);
-																										//console.log("xPrice"+ xPrice)
-																										//console.log("xPrice-1:"+$filter('number')(xPrice, 2))
-																										
-																									} else if (mSelect[i].Nm == 'W2') {
-																										//w2SelId = mSelect[i].Id ;
-																										//w2Price = mSelect[i].P;
-																										w2Price = $filter('number')(mSelect[i].P, 2);
-																										//console.log("w2Price:"+ w2Price)
-																										//console.log("w2Price-1:"+$filter('number')(w2Price, 2))
-																									}
-																								}
-																								;
-																							}
-																							;
-
-																							$scope.PS
-																									.push({
-																										SId : obj2.SId,
-																										SN : obj2.SN,
-																										RId : obj2.RId,
-																										RN : obj2.RN,
-																										CId : obj2.CId,
-																										CN : obj2.CN,
-																										MId : obj2.Id,
-																										HT : obj2.HT,
-																										AT : obj2.AT,
-																										Dt : obj2.Dt,
-																										//Pe:mStat[0].Pe,
-																										//EType : mMatchStat[0].EventType,
-																										//HTS:HTeamScore,
-																										//ATS:ATeamScore,
-																										SusS : obj2.SusS,
-																										//Cur:(mStat[0].Cur == undefined) ? "" : mStat[0].Cur, //mStat[0].CurrentMinute,
-																										//Rem:(mStat[0].Rem == undefined) ? "" : mStat[0].Rem, //mStat[0].RemainingTime,
-																										//Inf:mStat.Inf,	
-																										//MkId:mResult[0].Id, 
-																										//SusM:mResult[0].Sus, 
-																										//Vis:mResult[0].Vis,				    		
-																										SusM : SusM,
-																										Vis : Vis,
-																										MkId : MkId,
-																										//W1SD:w1SelId,
-																										//XSD:xSelId,
-																										//W2SD:w2SelId,
-																										BW1P : w1Price,
-																										BXP : xPrice,
-																										BW2P : w2Price,
-																										W1P : w1Price,
-																										XP : xPrice,
-																										W2P : w2Price,
-																									});
-
-																							//};
-																						});
-
-																	});
-
-												}
-												;
-											})
-									.error(
-											function(data, status, headers,
-													config) {
-												;
-												console
-														.log("Exception loadLiveMatch");
-												data = null;
-											});
-						}
-						;
-
-						function sub_loadGetMatchMarket(res) {
-
-							angular
-									.forEach(
-											res.Objects,
-											function(obj, idx) {
-
-												var v_market = $scope.validMKTypeId
-														.indexOf(obj.MarketTypeId);
-
-												if (v_market < 0) {
-													return; //un-used MarketTypeId
-												}
-												;
-
-												var nMK = true;
-
-												for (var a = 0; a < $scope.LMKc.length; a++) {
-													if ($scope.LMKc[a].Id == obj.Id) {
-														nMK = false;
-														$scope.LMKc[a].S = obj.IsSuspended;
-														$scope.LMKc[a].V = obj.IsVisible;
-
-														break;
-													}
-													;
-												}
-
-												for (var b = 0; b < $scope.PMKc.length; b++) {
-													if ($scope.PMKc[b].Id == obj.Id) {
-														nMK = false;
-														$scope.PMKc[b].S = obj.IsSuspended;
-														$scope.PMKc[b].V = obj.IsVisible;
-
-														break;
-													}
-													;
-												}
-
-												if (nMK) {
-
-													for (var b = 0; b < $scope.LS.length; b++) {
-														if ($scope.LS[b].MId == obj.MatchId) {
-
-															$scope.LMKc
-																	.push({
-																		Id : obj.Id,
-																		S : obj.IsSuspended,
-																		V : obj.IsVisible,
-																		M : obj.MatchId,
-																	});
-															break;
-														}
-														;
-													}
-													;
-
-													for (var k = 0; k < $scope.PS.length; k++) {
-														if ($scope.PS[k].MId == obj.MatchId) {
-
-															$scope.PMKc
-																	.push({
-																		Id : obj.Id,
-																		S : obj.IsSuspended,
-																		V : obj.IsVisible,
-																		M : obj.MatchId,
-																	});
-															break;
-														}
-														;
-													}
-													;
-												}
-												;
-
-												for (var c = 0; c < $scope.LS.length; c++) {
-
-													var lm = $scope.LS[c];
-
-													if (lm.MkId == obj.Id) {
-
-														var w1Price, w2Price, xPrice = "-";
-
-														for (var j = 0; j < obj.Selections.length; j++) {
-
-															if (obj.Selections[j].Name == 'W1') {
-																//w1Price = obj.Selections[j].Price;
-																w1Price = $filter('number')(obj.Selections[j].Price, 2);
-																//console.log("w1Price:"+ w1Price)
-																//console.log("w1Price-1:"+$filter('number')(w1Price, 2))
-																										
-
-															} else if (obj.Selections[j].Name == 'X') {
-																//xPrice = obj.Selections[j].Price;
-																xPrice = $filter('number')(obj.Selections[j].Price, 2);
-																//console.log("xPrice:"+ xPrice)
-																//console.log("xPrice-1:"+$filter('number')(xPrice, 2))
-
-															} else if (obj.Selections[j].Name == 'W2') {
-																//w2Price = obj.Selections[j].Price;
-																w2Price = $filter('number')(obj.Selections[j].Price, 2);
-																//console.log("w2Price:"+ w2Price)
-																//console.log("w2Price-1:"+$filter('number')(w2Price, 2))
-															}
-														}
-														;
-
-														$scope.LS[c].SusM = obj.IsSuspended;
-														$scope.LS[c].Vis = obj.IsVisible;
-														$scope.LS[c].BW1P = lm.W1P;
-														$scope.LS[c].BXP = lm.XP;
-														$scope.LS[c].BW2P = lm.W2P;
-
-														$scope.LS[c].W1P = w1Price;
-														$scope.LS[c].XP = xPrice;
-														$scope.LS[c].W2P = w2Price;
-													}
-													;
-												}
-												;
-
-												for (var c = 0; c < $scope.PS.length; c++) {
-
-													var pm = $scope.PS[c];
-
-													if (pm.MkId == obj.Id) {
-
-														var w1Price, w2Price, xPrice = "-";
-
-														for (var j = 0; j < obj.Selections.length; j++) {
-
-															if (obj.Selections[j].Name == 'W1') {
-																//w1Price = obj.Selections[j].Price;
-																w1Price = $filter('number')(obj.Selections[j].Price, 2);
-
-															} else if (obj.Selections[j].Name == 'X') {
-																//xPrice = obj.Selections[j].Price;
-																xPrice = $filter('number')(obj.Selections[j].Price, 2);
-
-															} else if (obj.Selections[j].Name == 'W2') {
-																//w2Price = obj.Selections[j].Price;
-																w2Price = $filter('number')(obj.Selections[j].Price, 2);
-															}
-														}
-														;
-
-														$scope.PS[c].SusM = obj.IsSuspended;
-														$scope.PS[c].Vis = obj.IsVisible;
-														$scope.PS[c].BW1P = pm.W1P;
-														$scope.PS[c].BXP = pm.XP;
-														$scope.PS[c].BW2P = pm.W2P;
-
-														$scope.PS[c].W1P = w1Price;
-														$scope.PS[c].XP = xPrice;
-														$scope.LP[c].W2P = w2Price;
-
-													}
-													;
-												}
-												;
-
-											});
-						}
-						;
-
-						function sub_loadGetMatch(res) {
-							var nlm = true;
-
-							console.log("sub_loadGetMatch");
-
-							angular
-									.forEach(
-											res.Objects,
-											function(obj, idx) {
-
-												if (!obj.IsBooked) {
-													console
-															.log("obj.IsBooked : "
-																	+ obj.IsBooked);
-													return;
-												}
-												;
-
-												console.log(obj);
-												console.log("MATCH ID:"
-														+ obj.Id);
-
-												angular
-														.forEach(
-																$scope.LS,
-																function(
-																		Ls_obj,
-																		i2) {
-
-																	if (Ls_obj.MId == obj.Id) {
-																		nlm = false;
-
-																		console
-																				.log("MATCH LIVE MatchId : "
-																						+ obj.MatchId);
-
-																		if (Ls_obj.IsVisible
-																				&& !obj.IsVisible) {
-																			finishLiveMatch(obj.Id);
-
-																		} else if (!obj.IsLive) {
-																			finishLiveMatch(obj.Id);
-
-																		} else if (obj.LiveStatus == '2') {
-																			finishLiveMatch(obj.Id);
-
-																		}
-																	}
-																	;
-																});
-
-												if (nlm && obj.IsVisible) {
-													if (obj.IsLive
-															&& obj.MatchStatus != '2') {
-														subLoadLiveMatch(obj.Id);
-													}
-													;
-												}
-												;
-
-												angular
-														.forEach(
-																$scope.PS,
-																function(
-																		Ps_obj,
-																		i3) {
-
-																	if (Ps_obj.MId == obj.Id) {
-																		nlm = false;
-																		console
-																				.log("MATCH PRE MatchId : "
-																						+ obj.MatchId);
-
-																		if (Ps_obj.SusS != obj.IsSuspended) {
-																			$scope.PS[i3].SusS = obj.IsSuspended;
-																		}
-
-																		if (Ps_obj.Vis != obj.IsVisible) {
-																			$scope.PS[i3].Vis = obj.IsVisible;
-																		}
-
-																		if (Ps_obj.MatchStatus == '1') {
-																			finishPreMatch(obj.Id);
-																			//$scope.PS[i3].Vis = obj.IsVisible;
-																			//delete //insert  
-																		}
-																	}
-																});
-
-											});
-						}
-						;
-
-						function subLoadLiveMatch(mid) {
-							loadLiveMatch();
-						}
-						;
-
-						function finishLiveMatch(mid) {
-							loadLiveMatch();
-						}
-						;
-
-						function finishPreMatch(mid) {
-							loadPreMatch()
-						}
-						;
-
-						$scope.tabSId = "0";
-
-						$scope.selLS = function(sid) {
-
-							document.getElementById("spin2").style.display = "none";
-							document.getElementById("lm_spin").style.display = "block";
-
-							$scope.lm_load();
-							console.log("selLS");
-
-							$scope.tabSId = sid;
-							//$scope.tableParams.reload();
-
-							//if(sid !="0"){
-							//stopTicker(".myTable2");
-
-							//} else {
-							//console.log("start");
-							//startTicker(".myTable2");		  
-							//	}
-
-						};
-
-						$scope.TM = "0";
-
-						$scope.setTM = function(tm) {
-							$scope.TM = tm;
-						}
-
-						$scope.pm_load = function() {
-							var sp = setTimeout(sp_pm, 1000);
-						};
-
-						$scope.main_load = function() {
-							var sp = setTimeout(sp_main, 2500);
-						};
-
-						$scope.lm_load = function() {
-							var sp = setTimeout(sp_lm, 1000);
-						};
-
-						$scope.PMSD = "0";
-
-						$scope.getPM = function(sid, min) {
-
-							$scope.PMSD = sid;
-
-							document.getElementById("spin1").style.display = "none";
-							document.getElementById("pm_spin").style.display = "block";
-
-							$http(
-									{
-										method : 'GET',
-										url : s[20].u,
-										params : {
-											'sid' : sid,
-											'min' : min
-										},
-										headers : {
-											'Content-Type' : 'application/json; charset=utf-8'
-										}
-									})
-									.success(
-											function(data, status, headers,
-													config) {
-
-												if (data) {
-
-													$scope.PS = [];
-
-													//console.log(data);
-
-													angular
-															.forEach(
-																	data,
-																	function(
-																			obj,
-																			idx) {
-
-																		if (obj.Mk !== null
-																				&& obj.Mk !== undefined
-																				&& obj.Mk.length > 0) {
-																			for (var j = 0; j < obj.Mk.length; j++) {
-																				$scope.PMKc
-																						.push(obj.Mk[j]);
-																			}
-																		}
-
-																		angular
-																				.forEach(
-																						obj.Mt,
-																						function(
-																								obj2,
-																								idx2) {
-
-																							//var mStat = obj.St.filter(function (el) { return el.MId == obj2.Id; })	
-																							var mResult = obj.Re
-																									.filter(function(
-																											el) {
-																										return el.MId == obj2.Id;
-																									})
-																							var mSelect = obj.Se
-																									.filter(function(
-																											el) {
-																										return el.MId == obj2.Id;
-																									})
-
-																							//console.log(mResult);
-																							//console.log(mSelect);
-
-																							var w1Price, w2Price, xPrice = "-";
-																							var SusM = true;
-																							var Vis = true;
-																							var MkId = "0";
-
-																							if (mResult !== undefined
-																									&& mResult !== null
-																									&& mResult.length > 0) {
-																								//var w1Price, w2Price, xPrice  ="-";			
-																								//var w1SelId, xSelId, w2SelId ="";	
-
-																								SusM = mResult[0].Sus;
-																								Vis = mResult[0].Vis;
-																								MkId = mResult[0].Id;
-
-																								for (var i = mSelect.length - 1; i >= 0; i--) {
-																									if (mSelect[i].Nm == 'W1') {
-																										//w1SelId = mSelect[i].Id ;
-																										//w1Price = mSelect[i].P;
-																										w1Price = $filter('number')(mSelect[i].P, 2);
-																										
-																									} else if (mSelect[i].Nm == 'X') {
-																										//xSelId = mSelect[i].Id ;
-																										//xPrice = mSelect[i].P;
-																										xPrice = $filter('number')(mSelect[i].P, 2);
-																										
-																									} else if (mSelect[i].Nm == 'W2') {
-																										//w2SelId = mSelect[i].Id ;
-																										//w2Price = mSelect[i].P;
-																										w2Price = $filter('number')(mSelect[i].P, 2);
-																									}
-																								}
-																								;
-																							}
-																							;
-
-																							$scope.PS
-																									.push({
-																										SId : obj2.SId,
-																										SN : obj2.SN,
-																										RId : obj2.RId,
-																										RN : obj2.RN,
-																										CId : obj2.CId,
-																										CN : obj2.CN,
-																										MId : obj2.Id,
-																										HT : obj2.HT,
-																										AT : obj2.AT,
-																										Dt : obj2.Dt,
-																										SusS : obj2.Sus,
-																										SusM : SusM,
-																										Vis : Vis,
-																										MkId : MkId,
-																										BW1P : w1Price,
-																										BXP : xPrice,
-																										BW2P : w2Price,
-																										W1P : w1Price,
-																										XP : xPrice,
-																										W2P : w2Price,
-																									});
-
-																						});
-
-																	});
-
-												}
-												;
-
-												data = null;
-
-												//document.getElementById("table").deleteRow(0);
-
-												//document.getElementById("pm_spin").style.display  = "none";
-												//document.getElementById("spin1").style.display = "block";
-
-												$scope.pm_load();
-
-											}).error(
-											function(data, status, headers,
-													config) {
-												console.log(status);
-												data = null;
-											});
-
-						};
-
-						function sp_pm() {
-							document.getElementById("pm_spin").style.display = "none";
-							document.getElementById("spin1").style.display = "block";
-						}
-
-						function sp_lm() {
-							document.getElementById("lm_spin").style.display = "none";
-							document.getElementById("spin2").style.display = "block";
-						}
-
-						function sp_main() {
-							document.getElementById("main_spin").style.display = "none";
-							document.getElementById("spin3").style.display = "block";
-							$('#videoId').get(0).play();
-						}
-
-						$scope.alertAction = function($event) {
-							alert($scope.action);
-							$event.preventDefault();
-						};
-					});
+	    		});
+	      };
+	      
+      }).error(function(data, status, headers,config) {
+	      console.log("Exception loadLiveMatch");
+	      data = null;
+      });
+  };
+
+  function sub_loadGetMatchMarket(res) {
+
+      angular.forEach(res.Objects,function(obj, idx) {
+
+	      var v_market = $scope.validMKTypeId.indexOf(obj.MarketTypeId);
+
+	      if (v_market < 0) {
+	      	return; // un-used MarketTypeId
+	      };
+
+	      var nMK = true;
+
+	      for (var a = 0; a < $scope.LMKc.length; a++) {
+	        if ($scope.LMKc[a].Id == obj.Id) {
+	          nMK = false;
+	          $scope.LMKc[a].S = obj.IsSuspended;
+	          $scope.LMKc[a].V = obj.IsVisible;
+
+	          break;
+	        };
+	      }
+
+	      for (var b = 0; b < $scope.PMKc.length; b++) {
+	        if ($scope.PMKc[b].Id == obj.Id) {
+	          nMK = false;
+	          $scope.PMKc[b].S = obj.IsSuspended;
+	          $scope.PMKc[b].V = obj.IsVisible;
+
+	          break;
+	        };
+	      }
+
+	      if (nMK) {
+
+	        for (var b = 0; b < $scope.LS.length; b++) {
+	          if ($scope.LS[b].MId == obj.MatchId) {
+
+	            $scope.LMKc.push({
+	                    Id: obj.Id,
+	                    S: obj.IsSuspended,
+	                    V: obj.IsVisible,
+	                    M: obj.MatchId,
+	            });
+	            break;
+	          };
+	        };
+
+	          for (var k = 0; k < $scope.PS.length; k++) {
+	            if ($scope.PS[k].MId == obj.MatchId) {
+                $scope.PMKc.push({
+                        Id: obj.Id,
+                        S: obj.IsSuspended,
+                        V: obj.IsVisible,
+                        M: obj.MatchId,
+                    });
+                break;
+	            };
+	          };
+	      };
+
+        for (var c = 0; c < $scope.LS.length; c++) {
+
+            var lm = $scope.LS[c];
+
+            if (lm.MkId == obj.Id) {
+
+                var w1Price, w2Price, xPrice = "-";
+
+                for (var j = 0; j < obj.Selections.length; j++) {
+
+                    if (obj.Selections[j].Name == 'W1') {
+                        w1Price = $filter('number')(obj.Selections[j].Price, 2);
+
+                    } else if (obj.Selections[j].Name == 'X') {
+                        xPrice = $filter('number')(obj.Selections[j].Price, 2);
+
+                    } else if (obj.Selections[j].Name == 'W2') {
+                        w2Price = $filter('number')(obj.Selections[j].Price, 2);
+                    }
+                };
+
+                $scope.LS[c].SusM = obj.IsSuspended;
+                $scope.LS[c].Vis = obj.IsVisible;
+                $scope.LS[c].BW1P = lm.W1P;
+                $scope.LS[c].BXP = lm.XP;
+                $scope.LS[c].BW2P = lm.W2P;
+
+                $scope.LS[c].W1P = w1Price;
+                $scope.LS[c].XP = xPrice;
+                $scope.LS[c].W2P = w2Price;
+            };
+        };
+
+        for (var c = 0; c < $scope.PS.length; c++) {
+
+            var pm = $scope.PS[c];
+
+            if (pm.MkId == obj.Id) {
+
+                var w1Price, w2Price, xPrice = "-";
+
+                for (var j = 0; j < obj.Selections.length; j++) {
+
+                    if (obj.Selections[j].Name == 'W1') {
+                        w1Price = $filter('number')(obj.Selections[j].Price, 2);
+
+                    } else if (obj.Selections[j].Name == 'X') {
+                        xPrice = $filter('number')(obj.Selections[j].Price, 2);
+
+                    } else if (obj.Selections[j].Name == 'W2') {
+                        w2Price = $filter('number')(obj.Selections[j].Price, 2);
+                    }
+                };
+
+                $scope.PS[c].SusM = obj.IsSuspended;
+                $scope.PS[c].Vis = obj.IsVisible;
+                $scope.PS[c].BW1P = pm.W1P;
+                $scope.PS[c].BXP = pm.XP;
+                $scope.PS[c].BW2P = pm.W2P;
+
+                $scope.PS[c].W1P = w1Price;
+                $scope.PS[c].XP = xPrice;
+                $scope.LP[c].W2P = w2Price;
+
+            };
+        };
+
+     });
+  };
+
+  function sub_loadGetMatch(res) {
+      var nlm = true;
+
+      console.log("sub_loadGetMatch");
+
+      angular.forEach(res.Objects,function(obj, idx) {
+
+        if (!obj.IsBooked) {
+            console
+                .log("obj.IsBooked : " +
+                    obj.IsBooked);
+            return;
+        };
+
+        console.log(obj);
+        console.log("MATCH ID:" +obj.Id);
+
+        angular.forEach( $scope.LS, function( Ls_obj, i2) {
+
+          if (Ls_obj.MId == obj.Id) {
+              nlm = false;
+
+              console.log("MATCH LIVE MatchId : " +obj.MatchId);
+
+              if (Ls_obj.IsVisible &&!obj.IsVisible) {
+                  finishLiveMatch(obj.Id);
+
+              } else if (!obj.IsLive) {
+                  finishLiveMatch(obj.Id);
+
+              } else if (obj.LiveStatus == '2') {
+                  finishLiveMatch(obj.Id);
+
+              }
+          };
+         });
+
+          if (nlm && obj.IsVisible) {
+              if (obj.IsLive &&obj.MatchStatus != '2') {
+                  subLoadLiveMatch(obj.Id);
+              };
+          };
+
+          angular.forEach( $scope.PS,function(Ps_obj,i3) {
+
+            if (Ps_obj.MId == obj.Id) {
+                nlm = false;
+
+                if (Ps_obj.SusS != obj.IsSuspended) {
+                    $scope.PS[i3].SusS = obj.IsSuspended;
+                }
+
+                if (Ps_obj.Vis != obj.IsVisible) {
+                    $scope.PS[i3].Vis = obj.IsVisible;
+                }
+
+                if (Ps_obj.MatchStatus == '1') {
+                    finishPreMatch(obj.Id);
+                }
+            }
+            
+          });
+
+              });
+  };
+
+  function subLoadLiveMatch(mid) {
+      loadLiveMatch();
+  };
+
+  function finishLiveMatch(mid) {
+      loadLiveMatch();
+  };
+
+  function finishPreMatch(mid) {
+      loadPreMatch()
+  };
+
+  $scope.selLS = function(sid) {
+
+      document.getElementById("spin2").style.display = "none";
+      document.getElementById("lm_spin").style.display = "block";
+
+      $scope.lm_load();
+      console.log("selLS");
+
+      $scope.tabSId = sid;
+
+  };
+	
+  $scope.setTM = function(tm) {
+      $scope.TM = tm;
+  }
+
+  $scope.pm_load = function() {
+      var sp = setTimeout(sp_pm, 1000);
+  };
+
+  $scope.main_load = function() {
+      var sp = setTimeout(sp_main, 2500);
+  };
+
+  $scope.lm_load = function() {
+      var sp = setTimeout(sp_lm, 1000);
+  };
+
+  $scope.getPM = function(sid, min) {
+
+      $scope.PMSD = sid;
+
+      document.getElementById("spin1").style.display = "none";
+      document.getElementById("pm_spin").style.display = "block";
+
+      $http({
+          method: 'GET',
+          url: s[20].u,
+          params: {'sid': sid,'min': min},
+          headers: {'Content-Type': 'application/json; charset=utf-8'}
+      }).success(function(data, status, headers,config) {
+
+        if (data) {
+          $scope.PS = [];
+          // console.log(data);
+
+          angular.forEach( data,function(obj,idx) {
+
+            if (obj.Mk !== null && obj.Mk !== undefined &&obj.Mk.length > 0) {
+                for (var j = 0; j < obj.Mk.length; j++) {
+                    $scope.PMKc.push(obj.Mk[j]);
+                }
+            }
+
+            angular.forEach(obj.Mt, function(obj2,idx2) {
+
+              var mResult = obj.Re.filter(function(el) {return el.MId == obj2.Id;})
+              var mSelect = obj.Se.filter(function( el) {return el.MId == obj2.Id;})
+
+              // console.log(mResult);
+              // console.log(mSelect);
+
+              var w1Price, w2Price, xPrice = "-";
+              var SusM = true;
+              var Vis = true;
+              var MkId = "0";
+
+              if (mResult !== undefined &&mResult !== null &&mResult.length > 0) {
+
+                  SusM = mResult[0].Sus;
+                  Vis = mResult[0].Vis;
+                  MkId = mResult[0].Id;
+
+                  for (var i = mSelect.length - 1; i >= 0; i--) {
+                      if (mSelect[i].Nm == 'W1') {
+                          w1Price = $filter('number')(mSelect[i].P, 2);
+
+                      } else if (mSelect[i].Nm == 'X') {
+                          xPrice = $filter('number')(mSelect[i].P, 2);
+
+                      } else if (mSelect[i].Nm == 'W2') {
+                          w2Price = $filter('number')(mSelect[i].P, 2);
+                      }
+                  };
+              };
+
+              $scope.PS.push({
+                  SId: obj2.SId,
+                  SN: obj2.SN,
+                  RId: obj2.RId,
+                  RN: obj2.RN,
+                  CId: obj2.CId,
+                  CN: obj2.CN,
+                  MId: obj2.Id,
+                  HT: obj2.HT,
+                  AT: obj2.AT,
+                  Dt: obj2.Dt,
+                  SusS: obj2.Sus,
+                  SusM: SusM,
+                  Vis: Vis,
+                  MkId: MkId,
+                  BW1P: w1Price,
+                  BXP: xPrice,
+                  BW2P: w2Price,
+                  W1P: w1Price,
+                  XP: xPrice,
+                  W2P: w2Price,
+                  B:false,
+               });
+
+            });
+
+          });
+
+        };
+
+        data = null;
+
+       $scope.pm_load();
+
+      }).error(
+      function(data, status, headers,config) {
+        console.log(status);
+        data = null;
+      });
+  };
+
+  function sp_pm() {
+      document.getElementById("pm_spin").style.display = "none";
+      document.getElementById("spin1").style.display = "block";
+  }
+
+  function sp_lm() {
+      document.getElementById("lm_spin").style.display = "none";
+      document.getElementById("spin2").style.display = "block";
+  }
+
+  function sp_main() {
+      document.getElementById("main_spin").style.display = "none";
+      document.getElementById("spin3").style.display = "block";
+      $('#videoId').get(0).play();
+  }
+
+  $scope.alertAction = function($event) {
+      alert($scope.action);
+      $event.preventDefault();
+  };
+  });
+  
 </script>
 
-<style>    
+<style>  
+	
 	.no-class{display:none}
 
 	.sk-circle {
@@ -1282,12 +1066,16 @@ mainAngular.directive('tooltip', function ($document, $compile) {
 	}
 	#tableTicker_wrap1{
 		width: 100%!important;
-	}
+	}	
+
 </style>
 
 
 </head>
 
+
+  
+  
 <body id="myAnchor" ng-app="Vava" ng-controller="mc"> 
 	<div id="main_spin">
 	 	<div class="sk-fading-circle">
@@ -1306,14 +1094,16 @@ mainAngular.directive('tooltip', function ($document, $compile) {
 	    </div>
 		<div style="margin: 50px auto; width: 156px; height: 75px; position: relative; background-image: url('/images/logo.png')"></div>
 	</div>
-
+ 
+  
 	<div ng-init="main_load()" style="display:none;" id="spin3" class="animate-bottom">	
 		<a href="#myAnchor" class="go-top">▲</a>
 
 		<div id="wrap">
 
 			<%@ include file="/inc/header.jsp"%>
-			
+				
+    
 			<div id="contents_wrap">
 				<div class="contents">
 					<div class="contents_in_m20">
@@ -1370,7 +1160,7 @@ mainAngular.directive('tooltip', function ($document, $compile) {
 
 
 						<div class="contents_in_m20">
-							<div class="main_title_1">인기베팅경기</div>
+							<div class="main_title_1" id="myid" mytip="this is my tooltip">인기베팅경기 </div>
 							<div id="third" class="carouseller">
 								<a href="javascript:void(0)" class="carouseller__left"> <img src="/images/arrow_left.png" style="vertical-align:middle;margin-top:5px;">
 								</a> <a href="javascript:void(0)" class="carouseller__right"> <img src="/images/arrow_right.png" style="vertical-align:middle;margin-top:5px;">
@@ -1430,7 +1220,7 @@ mainAngular.directive('tooltip', function ($document, $compile) {
 
 						<div class="contents_in_m20">
 							<div class="main_board_wrap">
-								<div class="main_title_2">실시간 환전현황</div>
+								<div class="main_title_2" id="tooltip1" dx-tooltip="defaultModeOptions">실시간 환전현황</div>
 								<div class="main_board">
 									<table width="100%" cellpadding="0" cellspacing="0"
 										class="myTable">
@@ -1511,7 +1301,7 @@ mainAngular.directive('tooltip', function ($document, $compile) {
 												<tr ng-if="tabSId==ls.SId||tabSId=='0'" ng-init="oIndex = $index"  ng-repeat="ls in LS">
 													<td>
 														<table width="100%" cellpadding="0" cellspacing="0" class="board_table_1_1">
-															<tr ng-if="ls.SusS">
+															<tr ng-if="ls.SusS||ls.B">
 																<td width="28%" class="board_bet_home_2">{{ls.HT.substring(0,10)}}</td>
 																<td width="28%" class="board_bet_expedition_2" ng-bind="ls.AT.substring(0,10)"></td>
 																<td width="12%" class="board_bet_victory_1"><i class='fa fa-fw fa-lock'></i></td>
@@ -1520,7 +1310,7 @@ mainAngular.directive('tooltip', function ($document, $compile) {
 																<td width="8%" class="board_bet_score_1"><i class='fa fa-fw fa-lock'></i></td>
 															</tr>
 
-															<tr ng-if="!ls.SusS && ls.SusM" style="cursor: pointer" ng-click="vM('2',ls.SId,ls.MId)">
+															<tr ng-if="!ls.SusS&&!ls.B&&ls.SusM" style="cursor: pointer" ng-click="vM('2',ls.SId,ls.MId)">
 																<td width="28%" class="board_bet_home_2" ng-bind="ls.HT.substring(0,10)"></td>
 																<td width="28%" class="board_bet_expedition_2" ng-bind="ls.AT.substring(0,10)"></td>
 																<td width="12%" class="board_bet_victory_1"><i class='fa fa-fw fa-lock'></i></td>
@@ -1529,7 +1319,7 @@ mainAngular.directive('tooltip', function ($document, $compile) {
 																<td width="8%" class="board_bet_score_1">+{{(LMKc|filter:{M:ls.MId,S:false,V:true}).length}}</td>
 															</tr>
 
-															<tr ng-if="!ls.SusS && !ls.SusM" style="cursor: pointer" ng-click="vM('2',ls.SId,ls.MId)">
+															<tr ng-if="!ls.SusS&&!ls.B&&!ls.SusM" style="cursor: pointer" ng-click="vM('2',ls.SId,ls.MId)">
 																<td width="28%" class="board_bet_home_2" ng-bind="ls.HT.substring(0,10)"></td>
 																<td width="28%" class="board_bet_expedition_2" ng-bind="ls.AT.substring(0,10)"></td>
 																<td width="12%" class="board_bet_victory_1">
@@ -1581,8 +1371,11 @@ mainAngular.directive('tooltip', function ($document, $compile) {
 
 												<tr ng-if="tabSId==ls.SId||tabSId=='0'" ng-init="oIndex = $index" ng-repeat="ls in LS">
 													<td>
+														
+														<div style="display:none">{{len=(LMKc|filter:{M:ls.MId,S:false,V:true}).length}}</div>	
+														
 														<table width="100%" cellpadding="0" cellspacing="0" class="board_table_1_1">
-															<tr ng-if="ls.SusS">
+															<tr ng-if="ls.SusS||ls.B||len<1">
 																<td width="28%" class="board_bet_home_2" ng-bind="ls.HT.substring(0,10)"></td>
 																<td width="28%" class="board_bet_expedition_2" ng-bind="ls.AT.substring(0,10)"></td>
 																<td width="12%" class="board_bet_victory_1"><i class='fa fa-fw fa-lock'></i></td>
@@ -1591,16 +1384,16 @@ mainAngular.directive('tooltip', function ($document, $compile) {
 																<td width="8%" class="board_bet_score_1"><i class='fa fa-fw fa-lock'></i></td>
 															</tr>
 
-															<tr ng-if="!ls.SusS && ls.SusM" style="cursor: pointer" ng-click="vM('2',ls.SId,ls.MId)">
+															<tr ng-if="!ls.SusS&&!ls.B&&ls.SusM&&len>0" style="cursor: pointer" ng-click="vM('2',ls.SId,ls.MId)">
 																<td width="28%" class="board_bet_home_2" ng-bind="ls.HT.substring(0,10)"></td>
 																<td width="28%" class="board_bet_expedition_2" ng-bind="ls.AT.substring(0,10)"></td>
 																<td width="12%" class="board_bet_victory_1"><i class='fa fa-fw fa-lock'></i></td>
 																<td width="12%" class="board_bet_draw_1"><i class='fa fa-fw fa-lock'></i></td>
 																<td width="12%" class="board_bet_victory_1"><i class='fa fa-fw fa-lock'></i></td>
-																<td width="8%" class="board_bet_score_1">+{{(LMKc|filter:{M:ls.MId,S:false,V:true}).length}}</td>
+																<td width="8%" class="board_bet_score_1">+{{len}}</td>
 															</tr>
 
-															<tr ng-if="!ls.SusS && !ls.SusM" style="cursor: pointer" ng-click="vM('2',ls.SId,ls.MId)">
+															<tr ng-if="!ls.SusS&&!ls.B&&!ls.SusM&&len>0" style="cursor: pointer" ng-click="vM('2',ls.SId,ls.MId)">
 																<td width="28%" class="board_bet_home_2"ng-bind="ls.HT.substring(0,10)"></td>
 																<td width="28%" class="board_bet_expedition_2" ng-bind="ls.AT.substring(0,10)"></td>
 																<td width="12%" class="board_bet_victory_1">
@@ -1633,7 +1426,7 @@ mainAngular.directive('tooltip', function ($document, $compile) {
 																	<div ng-show="ls.BW2P==ls.W2P"><span class="font_002">{{ls.W2P}}</span></div>
 																</td>
 
-																<td width="8%" class="board_bet_score_1">+{{(LMKc|filter:{M:ls.MId,S:false,V:true}).length}}</td>
+																<td width="8%" class="board_bet_score_1">+{{len}}</td>
 
 															</tr>
 
@@ -1762,9 +1555,12 @@ mainAngular.directive('tooltip', function ($document, $compile) {
 
 												<tr class="active" ng-init="oIndex = $index" ng-repeat="ps in PS | orderBy:'Dt' ">
 													<td>
+														
+														<div style="display:none">{{len=(PMKc|filter:{M:ps.MId,S:false,V:true}).length}}</div>	
+														
 														<table width="100%" cellpadding="0" cellspacing="0" class="board_table_2">
 
-															<tr  ng-if="ps.SusS">
+															<tr  ng-if="ps.SusS||ps.B||len<1">
 																<td width="13%" class="board_bet_time_1" ng-bind="ps.Dt"></td>
 																<td width="22%" class="board_bet_home_1" ng-bind="ps.HT.substring(0,8)"></td>
 																<td width="22%" class="board_bet_expedition_1" ng-bind="ps.AT.substring(0,8)"></td>
@@ -1774,17 +1570,17 @@ mainAngular.directive('tooltip', function ($document, $compile) {
 																<td width="7%" class="board_bet_score_1"><i class='fa fa-fw fa-lock'></i></td>
 															</tr>
 
-															<tr ng-if="!ps.SusS && ps.SusM" style="cursor: pointer" ng-click="vM('3',ps.SId,ps.MId)">
+															<tr ng-if="!ps.SusS&&!ps.B&&ps.SusM&&len>0" style="cursor: pointer" ng-click="vM('3',ps.SId,ps.MId)">
 																<td class="board_bet_time_1" ng-bind="ps.Dt"></td>
 																<td class="board_bet_home_1" ng-bind="ps.HT.substring(0,8)"></td>
 																<td class="board_bet_expedition_1" ng-bind="ps.AT.substring(0,8)"></td>
 																<td class="board_bet_victory_1"><i class='fa fa-fw fa-lock'></i></td>
 																<td class="board_bet_draw_1"><i class='fa fa-fw fa-lock'></i></td>
 																<td class="board_bet_loss_1" ><i class='fa fa-fw fa-lock'></i></td>
-																<td class="board_bet_score_1">+{{(PMKc|filter:{M:ps.MId,S:false,V:true}).length}}</td>
+																<td class="board_bet_score_1">+{{len}}</td>
 															</tr>
 
-															<tr ng-if="!ps.SusS && !ps.SusM" style="cursor: pointer" ng-click="vM('3',ps.SId,ps.MId)">
+															<tr ng-if="!ps.SusS&&!ps.B&&!ps.SusM&&len>0" style="cursor: pointer" ng-click="vM('3',ps.SId,ps.MId)">
 																<td class="board_bet_time_1" ng-bind="ps.Dt"></td>
 																<td class="board_bet_home_1" ng-bind="ps.HT.substring(0,8)"></td>
 																<td class="board_bet_expedition_1" ng-bind="ps.AT.substring(0,8)"></td>
@@ -1816,7 +1612,7 @@ mainAngular.directive('tooltip', function ($document, $compile) {
 																	</div>
 																	<div ng-show="ps.BW2P==ps.W2P"><span class="font_002">{{ps.W2P}}</span></div>
 																</td>
-																<td class="board_bet_score_1">+{{(PMKc|filter:{M:ps.MId,S:false,V:true}).length}}</td>
+																<td class="board_bet_score_1">+{{len}}</td>
 															</tr>
 
 														</table>
@@ -1834,9 +1630,11 @@ mainAngular.directive('tooltip', function ($document, $compile) {
 
 												<tr class="active" ng-if="PS.length!=0" ng-init="oIndex = $index"  ng-repeat="ps in PS | orderBy:'Dt'">
 													<td>
+														
+														<div style="display:none">{{len=(PMKc|filter:{M:ps.MId,S:false,V:true}).length}}</div>	
 														<table ng-show="PS.length!=0" width="100%" cellpadding="0" cellspacing="0" class="board_table_2">
 
-															<tr ng-if="ps.SusS">
+															<tr ng-if="ps.SusS||ps.B||len<1">
 																<td width="13%" class="board_bet_time_1" ng-bind="ps.Dt"></td>
 																<td width="22%" class="board_bet_home_1"
 																	ng-bind="ps.HT.substring(0,8)"></td>
@@ -1851,7 +1649,7 @@ mainAngular.directive('tooltip', function ($document, $compile) {
 																<td width="7%" class="board_bet_score_1"><i class='fa fa-fw fa-lock'></i></td>
 															</tr>
 
-															<tr ng-if="!ps.SusS && ps.SusM" style="cursor: pointer"
+															<tr ng-if="!ps.SusS&&!ps.B&&ps.SusM&&len>0" style="cursor: pointer"
 																ng-click="vM('3',ps.SId,ps.MId)">
 																<td class="board_bet_time_1" ng-bind="ps.Dt"></td>
 																<td class="board_bet_home_1" ng-bind="ps.HT.substring(0,8)"></td>
@@ -1862,10 +1660,10 @@ mainAngular.directive('tooltip', function ($document, $compile) {
 																<td class="board_bet_draw_1"><i class='fa fa-fw fa-lock'></i></td>
 																<td class="board_bet_loss_1"><i
 																	class='fa fa-fw fa-lock'></i></td>
-																<td class="board_bet_score_1">+{{(PMKc|filter:{M:ps.MId,S:false,V:true}).length}}</td>
+																<td class="board_bet_score_1">+{{len}}</td>
 															</tr>
 
-															<tr ng-if="!ps.SusS && !ps.SusM" style="cursor: pointer"
+															<tr ng-if="!ps.SusS&&!ps.B&&!ps.SusM&&len>0" style="cursor: pointer"
 																ng-click="vM('3',ps.SId,ps.MId)">
 																<td class="board_bet_time_1" ng-bind="ps.Dt"></td>
 																<td class="board_bet_home_1" ng-bind="ps.HT.substring(0,8)"></td>
@@ -1898,7 +1696,7 @@ mainAngular.directive('tooltip', function ($document, $compile) {
 																	</div>
 																	<div ng-show="ps.BW2P==ps.W2P"><span class="font_002">{{ps.W2P}}</span></div>
 																</td>
-																<td class="board_bet_score_1">+{{(PMKc|filter:{M:ps.MId,S:false,V:true}).length}}</td>
+																<td class="board_bet_score_1">+{{len}</td>
 															</tr>
 
 														</table>

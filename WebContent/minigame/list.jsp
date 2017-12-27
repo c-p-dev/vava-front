@@ -9,7 +9,6 @@
 	List<GameBean> cgame_list		= game_dao.getChingaGames();
 %>
 
-<%@ include file="/inc/session.jsp"%>
 
 <!DOCTYPE html>
 <head>

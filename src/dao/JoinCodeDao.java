@@ -27,20 +27,20 @@ public class JoinCodeDao {
 	public static Logger logger = Logger.getLogger(JoinCodeDao.class);
 	Date date = new Date();
 	
-	public boolean checkJoinCode(String recommend, String joincode) throws SQLException{
+	public boolean checkJoinCode(String SITEID, String recommend, String joincode) throws SQLException{
 		boolean result = false;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		String query = "SELECT * FROM RT01.dbo.joincode_lst WHERE  joincode = ? and recommend = ? AND state = 'WAIT'";
+		String query = "SELECT * FROM joincode_lst WHERE  joincode = ? and recommend = ? AND siteid = "+SITEID+" AND state = 'WAIT'";
 		
 		
 		try{	      
 			
 			DBConnector.getInstance();
 			
-			con 				= DBConnector.getConnection();
+			con = DBConnector.getConnection();
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1,joincode);
 			pstmt.setString(2,recommend);
@@ -62,11 +62,11 @@ public class JoinCodeDao {
 		 	  if(pstmt!=null) pstmt.close();
 		 	  if(con!=null) con.close();
 		}
-		System.out.println(result);
+		//System.out.println(result);
 		return result;
 	}
 	
-	public boolean updateJoinCodeRegister(JoinCodeBean jcb) throws SQLException{
+	public boolean updateJoinCodeRegister(UserBean jcb) throws SQLException{
 		boolean result = false;
 		Connection con = null;
 		PreparedStatement pstmt = null;
