@@ -21,17 +21,34 @@
 	      	scrolllock: true,
 	      	escape: false,
 	      	blur: false,
-	      	onclose: function(){
-	      		
-	      		$('.hdr-money-row').show();
+	      	beforeopen: function() {
+	      		$('.fade_9_close').hide();
 	      		$('#game-pop-frame').attr('src', '');
 	      		$('#gm-pop-errmsg').html("");
-				$.get("/TegServlet?method=5", function(srv_resp) {
-					
-					if (null != srv_resp.money) {
-						$('.money_dsp').text(number_format(srv_resp.money, 0));
-					}
-				}, 'json');
+	      	},
+	      	onclose: function(){
+	      		$('.casino_right').hide();
+	      		$('.casino-spinner').show();
+	      		
+	      		$('.hdr-money-row').show();
+	      		
+	      		$.ajax({
+	      			url : "/TegServlet?method=5",
+	      			dataType: 'json',
+	      			method: 'GET',
+	      			error: function() {
+	      				$('.casino-spinner').hide();
+	      				$(".casino_right").fadeIn();
+	      			},
+	      			success: function(srv_resp) {
+	      				if (null != srv_resp.money) {
+							$('.money_dsp').text(number_format(srv_resp.money, 0));
+						}
+						
+						$('.casino-spinner').hide();
+						$('.casino_right').fadeIn();
+	      			}
+	      		});
 	    	}
 	    });
 	});

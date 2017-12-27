@@ -334,6 +334,8 @@ div.chevy-cntr {
 						else {
 							$('#gm-pop-errmsg').html("An error occured. Please reload the game.");
 						}
+						
+						$('.fade_9_close').fadeIn();
 					});
 				}
 
@@ -568,7 +570,7 @@ div.chevy-cntr {
 		
 
 		setTimeout(function(){
-			$(".casino_right").hide().html(final_div).fadeIn();
+			$(".casino_right").html(final_div).fadeIn();
 			makeList();
 			
 		}, 600);	
