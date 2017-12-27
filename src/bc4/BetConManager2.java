@@ -2031,6 +2031,70 @@ public class BetConManager2 {
 	}
 	
 	
+	public  List<DepositListBean> getDepositList(String SITEID) throws SQLException{
+		
+		  Connection con = null;
+		  PreparedStatement pstmt = null;
+		  ResultSet rs = null;
+		 // StringBuffer sb = new StringBuffer(""); 
+		  String query1 ="";
+		  
+		  //HashMap<String, Object> mr = new HashMap<String, Object>();
+		  //Vector mr = new Vector();
+		  
+		  List<DepositListBean> dl = new ArrayList<DepositListBean>();
+		  
+		  //query1 ="select top 20 chid as CD,userid as UD,convert(char(16),regdate,120) as CT,money_req as MN from charge_lst order by chdate desc ";
+		  
+		  query1 ="  select * from (select top 20 wdid as CD,SUBSTRING(userid,0,3)+replicate('*',len(userid)-3)+SUBSTRING(userid,LEN(userid),LEN(userid))  as UD, "+
+				  " convert(char(19),regdate,120) as CT,money_req as MN from withdraw_lst WHERE siteid="+SITEID+" and wdstate='DONE' and  wddate > DATEADD(minute, -20, GETDATE()) order by wddate desc ) a "+
+				 " union  " +
+				 " select * from (select top 20 chid as CD,userid as UD,convert(char(19),regdate,120) as CT,money_req as MN from charge_lst2 where siteid="+SITEID+" order by REGdate desc) b " +
+				 " order by CT desc ";
+
+				 
+		  //Debug.out("[getDepositList] : " + query1);
+	  
+		
+		  try{	      	
+			 	//Context initContext = new InitialContext();
+			 	//Context envContext = (Context)initContext.lookup("java:/comp/env");
+			 	//DataSource ds = (DataSource)envContext.lookup("jdbc/ibet");
+			 				 	
+			 	con = ds.getConnection();			 
+			 	pstmt = con.prepareStatement(query1);	        
+		        rs = pstmt.executeQuery();
+		        
+		        while(rs.next()){
+		        			        
+		        	DepositListBean dlb = new DepositListBean();
+		        
+		        	dlb.setChid(rs.getString("CD"));
+		        	dlb.setUid(rs.getString("UD"));
+		        	dlb.setChdt(rs.getString("CT"));
+		        	dlb.setMoney(rs.getString("MN"));
+		        	
+		        	dl.add(dlb); 
+		        }				  	
+	
+		        rs.close();
+		        pstmt.close();		        
+		        con.close();
+		        
+	        
+		  	}catch(Exception e){
+			  Debug.out("[getFavoriteMatch] : " + e.getMessage());
+		
+		    }finally{
+		   	  if(rs!=null) rs.close();
+		   	  if(pstmt!=null)  pstmt.close();
+		   	  if(con!=null) con.close();
+		  	}
+	  
+		  return dl;
+	
+	}
+	
 	public  List<DepositListBean> getDepositList() throws SQLException{
 		
 		  Connection con = null;
@@ -2046,8 +2110,8 @@ public class BetConManager2 {
 		  
 		  //query1 ="select top 20 chid as CD,userid as UD,convert(char(16),regdate,120) as CT,money_req as MN from charge_lst order by chdate desc ";
 		  
-		  query1 =" select * from (select top 20 chid as CD,SUBSTRING(userid,0,3)+replicate('*',len(userid)-3)+SUBSTRING(userid,LEN(userid),LEN(userid))  as UD, " +
-				 " convert(char(19),regdate,120) as CT,money_req as MN from charge_lst WHERE chdate > DATEADD(minute, -10, GETDATE()) order by chdate desc ) a " +
+		  query1 ="  select * from (select top 50 wdid as CD,SUBSTRING(userid,0,3)+replicate('*',len(userid)-3)+SUBSTRING(userid,LEN(userid),LEN(userid))  as UD, "+
+				  " convert(char(19),regdate,120) as CT,money_req as MN from withdraw_lst WHERE wdstate='DONE' and  wddate > DATEADD(minute, -20, GETDATE()) order by wddate desc ) a "+
 				 " union  " +
 				 " select * from (select top 20 chid as CD,userid as UD,convert(char(19),regdate,120) as CT,money_req as MN from charge_lst2 order by REGdate desc) b " +
 				 " order by CT desc ";

@@ -8,7 +8,7 @@
 	List<GameBean> igame_list	= game_dao.getRacingGames();
 %>
 
-<%@ include file="/inc/session.jsp"%>
+
 
 <!DOCTYPE html>
 <head>
@@ -323,7 +323,7 @@
         
 		$.get('/login/jsp/get_session.jsp', function(srv_resp) {
 			
-			if (!srv_resp.validUser) {
+			if (!srv_resp.result) {
 				$('a.get-vbet-hist').parent().hide();
 			}
 			else {

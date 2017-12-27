@@ -148,7 +148,7 @@
 			<li><a href="#tab1"  >내정보</a></li>
 			<li><a href="#tab2"  class="dt-bet-div">베팅내역</a></li>
 			<li><a href="#tab3" >1:1문의</a></li>
-			<li class="dt-qna-tab"><a href="#tab4" class="dt-qna-tab" >쪽지함</a></li>
+			<li class="dt-qna-tab" id="q_tab4"><a href="#tab4" class="dt-qna-tab" >쪽지함</a></li>
 		</ul>
 		
 		<div class="tab_container">
@@ -174,6 +174,16 @@
 	</div>
 </div><!-- contents -->
 
+<script>
+	
+	$(document).ready(function(){
+	    $("#q_tab4").on("click",function(){
+      		$qnaDt.ajax.reload();
+      	});
+      
+    });
+ 
+</script>
 </div>
 
 

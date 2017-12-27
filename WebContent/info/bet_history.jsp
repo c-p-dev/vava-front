@@ -744,7 +744,14 @@ table.dataTable tbody tr{
 									<td class="acc_list_price1" style="border-right:solid 1px #1c2021;"><span class="font_004"><%=dfrmt.format(Integer.parseInt(blb_ag.getBmoney()))%></span> 원</td>
 									<td class="acc_list_price1" style="border-right:solid 1px #1c2021;"><span class="font_004"><%=dfrmt.format(Integer.parseInt(blb_ag.getRmoney()))%></span> 원</td>
 							<%		
+									} else if(blb_ag.getJob().equals("REFUND")){ 
+							%>
+									<td class="acc_list_time" style="border-right:solid 1px #1c2021;"><span class="font_004">환불</span></td>
+									<td class="acc_list_price1" style="border-right:solid 1px #1c2021;"><span class="font_004"><%=dfrmt.format(Integer.parseInt(blb_ag.getBmoney()))%></span> 원</td>
+									<td class="acc_list_price1" style="border-right:solid 1px #1c2021;"><span class="font_004"><%=dfrmt.format(Integer.parseInt(blb_ag.getRmoney()))%></span> 원</td>
+							<%		
 									}
+							%>
 							%>				
 
 								</tr>

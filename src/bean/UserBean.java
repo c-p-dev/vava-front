@@ -23,7 +23,10 @@ public class UserBean {
 	private int loginStatus; //0  success //1 wrong passwrod // 2 no account 
 	private String cert;
 	private String cell_prefix;
-  
+	private String joincode;
+	private String authcode;
+	private String ssid;
+
 	public String getCell_prefix() {
 		return cell_prefix;
 		
@@ -157,6 +160,31 @@ public class UserBean {
 	public void setCert(String cert) {
 		this.cert = cert;
 	}
+	
+	public void setJoincode(String joincode) {
+		this.joincode = joincode;
+	}
+	
+	public String getJoincode() {
+		return joincode;
+	}
+	
+	public void setAuthcode(String authcode) {
+		this.authcode = authcode;
+	}
+	
+	public String getAuthcode() {
+		return authcode;
+	}
+	
+	public void setSSid(String ssid) {
+		this.ssid = ssid;
+	}
+	
+	public String getSSid() {
+		return ssid;
+	}
+	
 
 	
 }

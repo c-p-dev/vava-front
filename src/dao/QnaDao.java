@@ -26,9 +26,7 @@ import com.google.gson.reflect.TypeToken;
 import bean.UserBean;
 import bean.QnaBean;
 public class QnaDao {
-	private static final DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	public static Logger logger = Logger.getLogger(QnaDao.class);
-	
 	public boolean setMessage(QnaBean qBean) throws SQLException {
 		Connection con = null;
 		Statement stmt = null;
@@ -37,20 +35,14 @@ public class QnaDao {
 		boolean result = false;
 
 		try {
-
 			DBConnector.getInstance();
 			con = DBConnector.getConnection();
-			Date date = new Date();
-			String query = "INSERT INTO RT01.dbo.qna_lst (siteid, userid, txt, gubun, viewtype, regdate, writer, ip, quizid) "
-			        + " VALUES (?,?,?,'QNA','Y',?,'U',?,IDENT_CURRENT('RT01.dbo.qna_lst'))";
-
+			String query = "INSERT INTO RT01.dbo.qna_lst (siteid, userid, txt, gubun, viewtype, regdate, writer, ip, quizid) VALUES (?,?,?,'QNA','Y',GETDATE(),'U',?,IDENT_CURRENT('RT01.dbo.qna_lst'))";
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, qBean.getSiteid());
 			pstmt.setString(2, qBean.getUserid());
 			pstmt.setString(3, qBean.getTxt());
-			pstmt.setString(4, sdf.format(date));
-			pstmt.setString(5, qBean.getIp());
-
+			pstmt.setString(4, qBean.getIp());
 			row = pstmt.executeUpdate();
 			logger.debug(query);
 			logger.debug(row);
@@ -60,8 +52,6 @@ public class QnaDao {
 			if (row > 0) {
 				result = true;
 			}
-
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -83,10 +73,7 @@ public class QnaDao {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String query = "SELECT * from qna_lst where userid = ? and gubun = 'QNA' OR quizid IN (select quizid from qna_lst where userid = ? and gubun = 'QNA' ) AND siteid = ? ORDER BY regdate ASC ";
-		DecimalFormat formatter = new DecimalFormat("#,###");
-		DateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		
+		String query = "SELECT title,REPLACE(txt,CHAR(10),'<br>') txt,viewtype,writer,ip,quizid,gubun,userid, convert(char(19),regdate,120) regdate, isnull(convert(char(19),ansdate,120),0) ansdate FROM qna_lst WHERE userid = ? AND gubun = 'QNA' OR quizid IN (select quizid from qna_lst where userid = ? and gubun = 'QNA' ) AND siteid = ? ORDER BY regdate ASC ";
 		
 		try{	      
 			
@@ -100,10 +87,9 @@ public class QnaDao {
 					   
 			while(rs.next()){
 				HashMap<String, Object> hsm = new HashMap<String, Object>();
-				
 				hsm.put("title", (rs.getString("title") == null ? "" : rs.getString("title")));
-				hsm.put("regdate", (rs.getString("regdate") == null ?  "" : sdf.format(dateFormater.parse(rs.getString("regdate"))) ));
-				hsm.put("ansdate", (rs.getString("ansdate") == null ? "" : sdf.format(dateFormater.parse(rs.getString("ansdate"))) ));
+				hsm.put("regdate", rs.getString("regdate"));
+				hsm.put("ansdate", rs.getString("ansdate"));
 				hsm.put("txt", (rs.getString("txt") == null ? "" : rs.getString("txt")));
 				hsm.put("viewtype", (rs.getString("viewtype") == null ?  "" :  rs.getString("viewtype") ));
 				hsm.put("writer", (rs.getString("writer") == null ?  "" :  rs.getString("writer") ));
@@ -112,21 +98,17 @@ public class QnaDao {
 				hsm.put("gubun", (rs.getString("gubun") == null ?  "" :  rs.getString("gubun") ));
 				hsm.put("userid", (rs.getString("userid") == null ?  "" :  rs.getString("userid") ));
 				hsm.put("class_name", (qBean.getUserid().equals(rs.getString("userid")) ? "inquiry_admin" : "inquiry_user"));
-				
 				list.add(hsm);
-				System.out.println(hsm);
 			}
 			
 			rs.close();
 	        pstmt.close();
 	        con.close();
-	  		    
+	        
 		} catch(Exception e){
 			System.out.println(e);
 			e.printStackTrace();
 		} 
-		
-		System.out.println(list);
 	  	return list;
 	}
 	
@@ -135,18 +117,15 @@ public class QnaDao {
 		Connection con 			= null;
 		PreparedStatement pstmt = null;
 		int sts = 0;
-		String  query 			= "UPDATE qna_lst SET viewdate = ?  WHERE qnaid IN (SELECT qnaid FROM qna_lst WHERE writer =  'A' and viewdate IS NULL AND quizid IN (SELECT quizid from qna_lst WHERE userid = ? and gubun = 'QNA' )) AND siteid = ?";		
-		Date date = new Date();
+		String  query = "UPDATE qna_lst SET viewdate = GETDATE()  WHERE qnaid IN (SELECT qnaid FROM qna_lst WHERE writer =  'A' and viewdate IS NULL AND quizid IN (SELECT quizid from qna_lst WHERE userid = ? and gubun = 'QNA' )) AND siteid = ?";		
 		try {
 			
 			Context initContext = new InitialContext();
 			DBConnector.getInstance();
 			con = DBConnector.getConnection();
-		    pstmt   			= con.prepareStatement(query);
-           
-		    pstmt.setString(1, sdf.format(date));
-            pstmt.setString(2, qBean.getUserid());
-            pstmt.setInt(3,qBean.getSiteid());
+		    pstmt = con.prepareStatement(query);
+            pstmt.setString(1, qBean.getUserid());
+            pstmt.setInt(2,qBean.getSiteid());
 			
             sts = pstmt.executeUpdate();
 			
@@ -162,7 +141,6 @@ public class QnaDao {
 		}
 		
 		if(sts > 0 ) result = true;
-		
 		return result;
 	}
 	
