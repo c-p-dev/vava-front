@@ -32,6 +32,9 @@
 	top: 120px;
 	left: -108px; 
 }
+.iincpw{
+	left: -94px!important;
+}
 .incpwf{
 	vertical-align: inherit; 
 	color: white;
@@ -65,9 +68,13 @@
 									<span class="incpw "><font class="incpwf">비밀번호가 일치하지 않습니다. </font></span>
 									<span id='' class="arrow-right"></span>
 								</div>
+								<div id='iinc' class="incp">
+									<span class="incpw iincpw"><font class="incpwf"> 귀하의 계정을 확인하십시오.</font></span>
+									<span id='' class="arrow-right"></span>
+								</div>
 							</div>
 							<div class="cash_3">
-								<button class="btn5" id="bankInfoBtn" DISABLE>전용계좌확인 </button>
+								<span class="btn5" id="bankInfoBtn">전용계좌확인 </span>
 							</div>
 						</div>
 						
@@ -307,11 +314,12 @@
 				console.log(obj.BN);
 				
 				if(obj.BN =="-1"){
-					$("#bankInfoTxt").val();
+					$("#bankInfoTxt").val('');
 					$("#inc").removeClass('incp');
-					 
+					$("#iinc").addClass('incp');					 
 				}	else if(data !="" || data !=null){
 					$("#inc").addClass("incp");
+					$("#iinc").addClass('incp');
 					$('#bankInfoTxt').val('');
 					$('#bankInfoTxt').removeClass('pd');
 					// data = bank_name - bank_owner - bank_number
@@ -319,7 +327,7 @@
 					$("#ct_bank_owner").val(obj.BO); 
 					$('#bankInfoTxt').attr('readonly', true);
 					$("#bankInfoBtn").attr("disabled", true);
-
+					$("#ct_submit").removeAttr("disabled");
 				}else{
 					alert("처리중 오류가 발생하였습니다.");
 				}
@@ -332,7 +340,6 @@
 	      	onclose:function(){
 	      		$('#bankInfoTxt').addClass('pd');
 	      		$('#bankInfoTxt').attr('readonly', false);
-				$("#bankInfoBtn").attr("disabled", false);
 	      		resetChargeForm();
 	    	}
 	    });
@@ -417,12 +424,15 @@
       });
 
      $("#ct_submit").on("click",function(e){
+    	 e.preventDefault();
+    	 
 			if ($('#ct_bank_owner').val() == "") {
 				$('#bankInfoTxt').val('');
+				$("#iinc").removeClass('incp');
+				$("#inc").addClass("incp");
 			}else{
-				e.preventDefault();
-				
 				if($("#chargeForm").valid()){
+					$("#iinc").addClass('incp');
 					$("#bankInfoTxt").qtip("hide");
 					$("#money").qtip("hide");
 					$("#ct_bank_owner").qtip("hide");
@@ -468,7 +478,7 @@
 				required:true,
 				money_number:true,
 				money_min: true,
-			}
+			},
 		},
 		messages: {
 			bank_acct :{
