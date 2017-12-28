@@ -312,7 +312,7 @@
 					 
 				}	else if(data !="" || data !=null){
 					$("#inc").addClass("incp");
-					$('#bankInfoTxt').val(' ');
+					$('#bankInfoTxt').val('');
 					$('#bankInfoTxt').removeClass('pd');
 					// data = bank_name - bank_owner - bank_number
 					$("#bankInfoTxt").val(obj.BN); 
@@ -417,17 +417,22 @@
       });
 
      $("#ct_submit").on("click",function(e){
-			e.preventDefault();
+			if ($('#ct_bank_owner').val() == "") {
+				$('#bankInfoTxt').val('');
+			}else{
+				e.preventDefault();
+				
+				if($("#chargeForm").valid()){
+					$("#bankInfoTxt").qtip("hide");
+					$("#money").qtip("hide");
+					$("#ct_bank_owner").qtip("hide");
+					$("#conf_modal1").popup("show");
+					// var data = $("#chargeForm").serializeJSON();
+					//submitCharge(data);
+				}		
+					//$("#conf_modal1").popup("show");	
+			}
 			
-			if($("#chargeForm").valid()){
-				$("#bankInfoTxt").qtip("hide");
-				$("#money").qtip("hide");
-				$("#ct_bank_owner").qtip("hide");
-				$("#conf_modal1").popup("show");
-				// var data = $("#chargeForm").serializeJSON();
-				//submitCharge(data);
-			}		
-				//$("#conf_modal1").popup("show");
 		});
 
 		$("#chargeForm input").on("blur",function(e){
