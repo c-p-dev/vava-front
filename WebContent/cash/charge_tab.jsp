@@ -57,6 +57,9 @@ background-color: transparent!important;
 border-color: transparent!important;
 color:white;
 }
+.spd { 
+pointer-events: none 
+}
 </style>
 	
 <ul class="smk_accordion">
@@ -82,7 +85,7 @@ color:white;
 								</div>
 							</div>
 							<div class="cash_3">
-								<span class="btn5"> <input class="pwdcmf" type="submit"  id="bankInfoBtn" value="전용계좌확인"></span>
+								<span class="btn5" id="bib"> <input class="pwdcmf" type="submit"  id="bankInfoBtn" value="전용계좌확인"></span>
 							</div>
 						</div>
 						
@@ -335,7 +338,7 @@ color:white;
 					$("#bankInfoTxt").val(obj.BN); 
 					$("#ct_bank_owner").val(obj.BO); 
 					$('#bankInfoTxt').attr('readonly', true);
-					$("#bankInfoBtn").attr("disabled", true);
+					$("#bib").addClass('spd');
 					$("#ct_submit").removeAttr("disabled");
 				}else{
 					alert("처리중 오류가 발생하였습니다.");
@@ -350,7 +353,7 @@ color:white;
 	      		$('#bankInfoTxt').addClass('pd');
 	      		$("#bankInfoTxt").removeClass('incpwb');
 	      		$('#bankInfoTxt').attr('readonly', false);
-	      		$("#bankInfoBtn").removeAttr("disabled");
+	      		$("#bib").removeClass("spd");
 	      		resetChargeForm();
 	    	}
 	    });
