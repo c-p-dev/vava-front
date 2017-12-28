@@ -36,24 +36,38 @@
    		passwd =request.getParameter("passwd") ;
 	}
 		
-	UserBean ub = new UserDao().checkLogin(SITEID, userid,passwd,IP,session.getId());
+	UserBean ub = new UserDao().checkLogin(SITEID, userid,passwd,IP,sess.getId());
 	
 	int response_code = ub.getLoginStatus();
 	
 	if ( response_code == 0) {			
-
-		checkSession 	= true;	
-		session 		= request.getSession(false);
-		session.setMaxInactiveInterval(7200);	
-		session.putValue("SITEID",ub.getSiteid());
-		session.putValue("SSID",ub.getUserid());
-		session.putValue("UID",ub.getUserid());
-		session.putValue("NICK",ub.getNick());
-		session.putValue("UCLEVEL",ub.getCharge_level());
-		session.putValue("UGRADE",ub.getGrade());
-		session.putValue("UBAL",ub.getMoney());
-		session.putValue("UPOINT",ub.getPoint());
 		
+		SpinCubeController sc_ctrl = new SpinCubeController(SITEID+"_"+userid);  
+		sc_ctrl.createPlayer();
+
+    BetConDao bc_db		= new BetConDao();    
+   	BetConUserBean bc_user	= new BetConUserBean();
+    bc_user.setUsername(userid);
+    bc_user.setSession_token(SITEID+"_"+userid);
+    bc_user.setSite_id(1);
+
+    bc_db.addNewBcUser(bc_user);	  
+    
+    
+    checkSession 	= true;	
+		//sess 		= request.getSession(false);
+		sess.setMaxInactiveInterval(7200);	
+		sess.putValue("SITEID",ub.getSiteid());
+		sess.putValue("SSID",ub.getUserid());
+		sess.putValue("UID",ub.getUserid());
+		sess.putValue("NICK",ub.getNick());
+		sess.putValue("UCLEVEL",ub.getCharge_level());
+		sess.putValue("UGRADE",ub.getGrade());
+		sess.putValue("UBAL",ub.getMoney());
+		sess.putValue("UPOINT",ub.getPoint());
+		
+		
+<<<<<<< HEAD
 		/*	Set Game Username	*/
         String game_username			= Integer.toString(ub.getSiteid()).concat("_").concat(ub.getUserid());
         
@@ -123,6 +137,9 @@
 			
 	        bc_db.addNewBcUser(bc_user);
         }
+=======
+    
+>>>>>>> f0eff0b4d78a46b187362c2569604537c22ba47a
 	}
 	
 	HashMap<String, Object> hsm = new HashMap<String, Object>();

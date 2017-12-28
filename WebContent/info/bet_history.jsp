@@ -234,7 +234,7 @@ table.dataTable tbody tr{
 				}).success(function(data, status, headers, config) {
 											
 				//console.log(data);
-				var s="<table  id='sub_"+bid+"' class='panel-body bet_dd_p acc_list_table_in' cellpadding='0' cellspacing='0' >"+
+				var s="<table  id='sub_"+bid+"' class='panel-body bet_dd_p acc_list_table_in_01' cellpadding='0' cellspacing='0' >"+
 					"<tr>"+			
 					"	<td class='acc_list_table_in_t' width='11%'>경기일시</td>"+
 					"	<td class='acc_list_table_in_t' width='8%'>종목</td>"+
@@ -250,12 +250,12 @@ table.dataTable tbody tr{
 				angular.forEach(data, function(obj,idx) {
 					
 					console.log(obj);
-					var ss = "<span class='font_004'>대기중 </span>";
+					var ss = "진행중";
 					
 					if(obj.bresult== 'MISS'){
-						ss = "미적중";
+						ss = "<span class='font_002'>미적중</span>";
 					} else if(obj.bresult=='HIT'){
-						ss = "<span class='font_002'>적중</span>";
+						ss = "<span class='font_004'>적중</span>";
 					} else if(obj.bresult=='CANCEL'){
 						ss = "취소";
 					}
@@ -430,7 +430,7 @@ table.dataTable tbody tr{
 									if(blb.getBresult().equals("HIT")){
 							%>
 									
-									<td class="beting_btn" onmouseover="CBg(this)" onmouseout="RBg(this)" style="border-right:solid 1px #1c2021;" onClick="selBet('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>"><span class="font_002">적중</span></td>
+									<td class="beting_btn" onmouseover="CBg(this)" onmouseout="RBg(this)" style="border-right:solid 1px #1c2021;" onClick="selBet('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>"><span class="font_004">적중</span></td>
 									<td class="acc_list_price1"  onmouseover="CBg(this)" onmouseout="RBg(this)" style="border-right:solid 1px #1c2021;" onClick="selBet('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>"><span class="font_002"><%=dfrmt.format(Integer.parseInt(blb.getBmoney()))%></span> 원</td>
 									<td class="acc_list_dividend" onmouseover="CBg(this)" onmouseout="RBg(this)" style="border-right:solid 1px #1c2021;" onClick="selBet('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>"><span class="font_002"><%=blb.getErate()%></span> 배</td>
 									<td class="acc_list_price2" onmouseover="CBg(this)" onmouseout="RBg(this)" style="border-right:solid 1px #1c2021;" onClick="selBet('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>"><span class="font_002"><%=dfrmt.format(Integer.parseInt(blb.getEmoney()))%></span> 원</td>
@@ -438,7 +438,7 @@ table.dataTable tbody tr{
 							<%
 									} else if(blb.getBresult().equals("MISS")){
 							%>
-									<td class="beting_btn_1" onmouseover="CBg(this)" onmouseout="RBg(this)" style="border-right:solid 1px #1c2021;" onClick="selBet('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>">미적중</td>
+									<td class="beting_btn_1" onmouseover="CBg(this)" onmouseout="RBg(this)" style="border-right:solid 1px #1c2021;color:red" onClick="selBet('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>"><span class="font_002">미적중</span></td>
 									<td class="acc_list_price1"  onmouseover="CBg(this)" onmouseout="RBg(this)" style="border-right:solid 1px #1c2021;" onClick="selBet('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>"><%=dfrmt.format(Integer.parseInt(blb.getBmoney()))%> 원</td>
 									<td class="acc_list_dividend"  onmouseover="CBg(this)" onmouseout="RBg(this)" style="border-right:solid 1px #1c2021;" onClick="selBet('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>"><%=blb.getErate()%> 배</td>
 									<td class="acc_list_price2" onmouseover="CBg(this)" onmouseout="RBg(this)" style="border-right:solid 1px #1c2021;" onClick="selBet('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>"><%=dfrmt.format(Integer.parseInt(blb.getEmoney()))%> 원</td>
@@ -447,7 +447,7 @@ table.dataTable tbody tr{
 							<%
 									} else if(blb.getBresult().equals("NO")){
 							%>
-									<td class="beting_btn_1" onmouseover="CBg(this)" onmouseout="RBg(this)" style="border-right:solid 1px #1c2021;" onClick="selBet('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>"><span class="font_004">대기중</span></td>
+									<td class="beting_btn_1" onmouseover="CBg(this)" onmouseout="RBg(this)" style="border-right:solid 1px #1c2021;" onClick="selBet('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>">진행중</td>
 									<td class="acc_list_price1"  onmouseover="CBg(this)" onmouseout="RBg(this)" style="border-right:solid 1px #1c2021;" onClick="selBet('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>"><%=dfrmt.format(Integer.parseInt(blb.getBmoney()))%> 원</td>
 									<td class="acc_list_dividend"  onmouseover="CBg(this)" onmouseout="RBg(this)" style="border-right:solid 1px #1c2021;" onClick="selBet('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>"><%=blb.getErate()%> 배</td>
 									<td class="acc_list_price2" onmouseover="CBg(this)" onmouseout="RBg(this)" style="border-right:solid 1px #1c2021;" onClick="selBet('<%=blb.getBgid()%>')" data-acc-link="<%=blb.getBgid()%>"><%=dfrmt.format(Integer.parseInt(blb.getEmoney()))%> 원</td>
@@ -632,20 +632,16 @@ table.dataTable tbody tr{
 						);
 						
 				
-						    	function d1(){
-										var dateFrom = $("#bfd1").val();
-								    var dateTo = $("#bdt1").val();
-								    $("#bd1").val(dateFrom + ' ~ '+ dateTo);
-								    table.draw();
-									}
+				    	function d1(){
+								var dateFrom = $("#bfd1").val();
+						    var dateTo = $("#bdt1").val();
+						    $("#bd1").val(dateFrom + ' ~ '+ dateTo);
+						    table.draw();
+							}
 	
-						  	$(".bhdp1").on("change",function(e){
-        				d1();
-        				//table.draw();
-        				//console.log("change");
-        				
-        				
-	 			       });
+						  $(".bhdp1").on("change",function(e){
+        				d1();        				
+	 			      });
 	 			       
 
 				
@@ -668,8 +664,15 @@ table.dataTable tbody tr{
 							<tr>
 								<td>
 									<input class="input_style04" id="bd2" placeholder="기간" value="2017-00-00 ~ 2017-00-00" readonly>
-									<span class="showdp2"><img src="/images/car_icon.jpg"></span>
-									<div id="bet-depth2" style="display:none; width:; position:absolute; z-index:100000000; left: 230px; top:889px;">
+									<span class="showdp2" style="cursor:pointer"><img src="/images/car_icon.jpg"></span>
+									<div id="bet-depth2" style="display:none; position:absolute; z-index:100000000; left: 100px;">
+										
+										<div style="float:right; padding:7px 2px 7px 10px;">
+											<span id="closeMoneyPikaday" class="bclose2" >
+												<img src="/images/car_close.png" class="bclose2">
+											</span>
+										</div>
+										
 										<table border="0" cellspacing="0" cellpadding="0" class="car_table">
 											<tr>
 												<td id="bdfdiv2" bgcolor="#303030" style="border-radius:3px; padding:5px; box-shadow: 10px 10px 20px -5px rgba(10, 10, 5, 5);">
@@ -681,16 +684,14 @@ table.dataTable tbody tr{
 											</tr>
 											
 										</table>
-										<div style="float:right; padding:7px 2px 7px 10px;">
-											<span id="closeMoneyPikaday" class="bclose2" >
-												<img src="/images/car_close.png" class="bclose2">
-											</span>
-										</div>
+										
 									</div>
 								</td>
+								<!--
 								<td>
 									<span class="btn1" id="dpbtn2">검색</span>
 								</td>
+								-->
 							</tr>
 						</table>
 					</div>
@@ -703,12 +704,12 @@ table.dataTable tbody tr{
 									<table  id="table4"  cellspacing="0" cellpadding="0" width="100%">
 										<thead>
 										<tr>
-											<td class="list_table_t_1" width="9%" style="border-left:solid 1px #1c2021; border-right:solid 1px #1c2021;"><input type="checkbox"  name="sa_ag" id="sa_ag" ></td>
-											<td class="list_table_t_1" width="11%" style="border-right:solid 1px #1c2021;">베팅 NO.</td>
-											<td class="list_table_t_1" width="24%" style="border-right:solid 1px #1c2021;">일시</td>
-											<td class="list_table_t_1" width="24%" style="border-right:solid 1px #1c2021;">결과</td>
-											<td class="list_table_t_1" width="16%" style="border-right:solid 1px #1c2021;">배팅금액</td>
-											<td class="list_table_t_1" width="16%" style="border-right:solid 1px #1c2021;">결과금액</td>
+											<td class="list_table_t_1" width="5%" style="border-left:solid 1px #1c2021; border-right:solid 1px #1c2021;"><input type="checkbox"  name="sa_ag" id="sa_ag" ></td>
+											<td class="list_table_t_1" width="12%" style="border-right:solid 1px #1c2021;">베팅 NO.</td>
+											<td class="list_table_t_1" width="16%" style="border-right:solid 1px #1c2021;">일시</td>
+											<td class="list_table_t_1" style="border-right:solid 1px #1c2021;">결과</td>
+											<td class="list_table_t_1" width="24%" style="border-right:solid 1px #1c2021;">배팅금액</td>
+											<td class="list_table_t_1" width="24%" style="border-right:solid 1px #1c2021;">결과금액</td>
 										</tr>
 									</thead>
 									
@@ -720,39 +721,38 @@ table.dataTable tbody tr{
 																																				
 								%>
 								<tr style="cursor: pointer">
-									<td class="acc_list_check" style="border-left:solid 1px #1c2021; border-right:solid 1px #1c2021;"><input type="checkbox" name="cb" value="<%=blb_ag.getBgid()%>"></td>
+									<td class="acc_list_check_1" style="border-left:solid 1px #1c2021; border-right:solid 1px #1c2021;"><input type="checkbox" name="cb" value="<%=blb_ag.getBgid()%>"></td>
 									<td class="acc_list_num" style="border-right:solid 1px #1c2021;"><%=blb_ag.getBgid()%></td>
 									<td class="acc_list_time" style="border-right:solid 1px #1c2021;"><%=blb_ag.getRegdt()%></td>
 							
 							<%
 									if(blb_ag.getJob().equals("WIN")){
 							%>
-									<td class="acc_list_time" style="border-right:solid 1px #1c2021;"><span class="font_002">승</span></td>
-									<td style="text-align:right; border-right:solid 1px #1c2021;"><span class="font_002"><%=dfrmt.format(Integer.parseInt(blb_ag.getBmoney()))%></span> 원</td>
-									<td class="acc_list_price1" style="border-right:solid 1px #1c2021;"><span class="font_002"><%=dfrmt.format(Integer.parseInt(blb_ag.getRmoney()))%></span> 원</td>
+									<td class="acc_list_num" style="border-right:solid 1px #1c2021;"><span class="font_004">승</span></td>
+									<td style="text-align:right; border-right:solid 1px #1c2021;"><%=dfrmt.format(Integer.parseInt(blb_ag.getBmoney()))%>원</td>
+									<td class="acc_list_price1" style="border-right:solid 1px #1c2021;"><%=dfrmt.format(Integer.parseInt(blb_ag.getRmoney()))%> 원</td>
 							<%		
 									} else if(blb_ag.getJob().equals("LOSE")){ 
 							%>
-									<td class="acc_list_time" style="border-right:solid 1px #1c2021;"><span class="font_004">패</span></td>
-									<td class="acc_list_price1_1" style="border-right:solid 1px #1c2021;"><span class="font_004"><%=dfrmt.format(Integer.parseInt(blb_ag.getBmoney()))%></span> 원</td>
-									<td class="acc_list_price1_1" style="border-right:solid 1px #1c2021;"><span class="font_004"><%=dfrmt.format(Integer.parseInt(blb_ag.getRmoney()))%></span> 원</td>
+									<td class="acc_list_num" style="border-right:solid 1px #1c2021;"><span class="font_002">패</span></td>
+									<td class="acc_list_price1_1" style="border-right:solid 1px #1c2021;"><%=dfrmt.format(Integer.parseInt(blb_ag.getBmoney()))%> 원</td>
+									<td class="acc_list_price1_1" style="border-right:solid 1px #1c2021;"><%=dfrmt.format(Integer.parseInt(blb_ag.getRmoney()))%> 원</td>
 							
 							<%		
 									} else if(blb_ag.getJob().equals("BET")){ 
 							%>
-									<td class="acc_list_time" style="border-right:solid 1px #1c2021;"><span class="font_004">배팅</span></td>
-									<td class="acc_list_price1" style="border-right:solid 1px #1c2021;"><span class="font_004"><%=dfrmt.format(Integer.parseInt(blb_ag.getBmoney()))%></span> 원</td>
-									<td class="acc_list_price1" style="border-right:solid 1px #1c2021;"><span class="font_004"><%=dfrmt.format(Integer.parseInt(blb_ag.getRmoney()))%></span> 원</td>
+									<td class="acc_list_num" style="border-right:solid 1px #1c2021;">배팅</td>
+									<td class="acc_list_price1" style="border-right:solid 1px #1c2021;"><%=dfrmt.format(Integer.parseInt(blb_ag.getBmoney()))%> 원</td>
+									<td class="acc_list_price1" style="border-right:solid 1px #1c2021;"><%=dfrmt.format(Integer.parseInt(blb_ag.getRmoney()))%> 원</td>
 							<%		
 									} else if(blb_ag.getJob().equals("REFUND")){ 
 							%>
-									<td class="acc_list_time" style="border-right:solid 1px #1c2021;"><span class="font_004">환불</span></td>
-									<td class="acc_list_price1" style="border-right:solid 1px #1c2021;"><span class="font_004"><%=dfrmt.format(Integer.parseInt(blb_ag.getBmoney()))%></span> 원</td>
-									<td class="acc_list_price1" style="border-right:solid 1px #1c2021;"><span class="font_004"><%=dfrmt.format(Integer.parseInt(blb_ag.getRmoney()))%></span> 원</td>
+									<td class="acc_list_num" style="border-right:solid 1px #1c2021;"><span class="font_004">환불</span></td>
+									<td class="acc_list_price1" style="border-right:solid 1px #1c2021;"><%=dfrmt.format(Integer.parseInt(blb_ag.getBmoney()))%> 원</td>
+									<td class="acc_list_price1" style="border-right:solid 1px #1c2021;"><%=dfrmt.format(Integer.parseInt(blb_ag.getRmoney()))%> 원</td>
 							<%		
 									}
-							%>
-							%>				
+							%>		
 
 								</tr>
 											
@@ -875,6 +875,21 @@ table.dataTable tbody tr{
 								},
 						    });
 						    
+						 $.fn.dataTable.ext.search.push(
+					    function( settings, data, dataIndex ) {
+					        var min  = $('#bfd2').val();					        
+					        var max  = $('#bdt2').val();
+					        var max2 =  moment(max).add('days', 1);
+					        
+					        var createdAt = data[2] || 0; // Our date column in the table
+
+					        if((min== ""||max2== "")||( moment(createdAt).isSameOrAfter(min) && moment(createdAt).isSameOrBefore(max2) ) ){
+					            return true;
+					        }
+					        return false;
+					    }
+						);
+						    
 						</script>
 						
 				</div>
@@ -889,8 +904,14 @@ table.dataTable tbody tr{
 							<tr>
 								<td>
 									<input class="input_style04" id="bd3" placeholder="기간" value="2017-00-00 ~ 2017-00-00" readonly>
-									<span class="showdp3"><img src="/images/car_icon.jpg"></span>
-									<div id="bet-depth3" style="display:none; width:; position:absolute; z-index:100000000; left: 230px; top:1646px;">
+									<span class="showdp3" style="cursor:pointer"><img src="/images/car_icon.jpg"></span>
+									<div id="bet-depth3" style="display:none; width:; position:absolute; z-index:100000000; left: 100px;">
+										<div style="float:right; padding:7px 2px 7px 10px;">
+											<span id="closeMoneyPikaday" class="bclose3" style="cursor:pointer">
+												<img src="/images/car_close.png" class="bclose3">
+											</span>
+										</div>
+										
 										<table border="0" cellspacing="0" cellpadding="0" class="car_table">
 											<tr>
 												<td id="bdfdiv3" bgcolor="#303030" style="border-radius:3px; padding:5px; box-shadow: 10px 10px 20px -5px rgba(10, 10, 5, 5);">
@@ -899,19 +920,16 @@ table.dataTable tbody tr{
 												<td id="bdtdiv3" bgcolor="#303030" style="border-radius:3px; padding:5px; box-shadow: 10px 10px 20px -5px rgba(10, 10, 5, 5);">
 													<input type="text" id="bdt3" class="hidden bhdp3"  style="display: none;">
 												</td>
-											</tr>
-											
+											</tr>											
 										</table>
-										<div style="float:right; padding:7px 2px 7px 10px;">
-											<span id="closeMoneyPikaday" class="bclose3" >
-												<img src="/images/car_close.png" class="bclose3">
-											</span>
-										</div>
+										
 									</div>
 								</td>
+								<!--
 								<td>
 									<span class="btn1" id="dpbtn3">검색</span>
 								</td>
+								-->
 							</tr>
 						</table>
 					</div>
@@ -937,7 +955,7 @@ table.dataTable tbody tr{
 										for (int j=0; j < bl_sc.size() ; j++){
 											BettingListBean_SC blb_sc = (BettingListBean_SC) bl_sc.get(j);			
 											
-											String wd = "충전";
+											String wd = "<span class='font_004'>충전</span>";
 											
 											if(blb_sc.getJob().equals("W")){
 												wd = "<span class='font_002'>환전</span>";
@@ -949,7 +967,7 @@ table.dataTable tbody tr{
 									<td class="acc_list_num" width="7%"><%=blb_sc.getBgid()%></td>
 									<td class="acc_list_time"  width="7%"><%=blb_sc.getRegdt()%></td>
 									<td class="acc_list_time"  width="21%"><%=wd%></td>
-									<td class="acc_list_price1"  width="16%"><span class="font_002"><%=dfrmt.format(Integer.parseInt(blb_sc.getBmoney()))%></span> 원</td>
+									<td class="acc_list_price1"  width="16%"><%=dfrmt.format(Integer.parseInt(blb_sc.getBmoney()))%> 원</td>
 								</tr>
 											
 						<%
@@ -1070,6 +1088,22 @@ table.dataTable tbody tr{
 									emptyTable: "베팅 내역이 없습니다.",
 								},
 						    });
+						  
+						  $.fn.dataTable.ext.search.push(
+					    function( settings, data, dataIndex ) {
+					        var min  = $('#bfd3').val();					        
+					        var max  = $('#bdt3').val();
+					        var max2 =  moment(max).add('days', 1);
+					        
+					        var createdAt = data[2] || 0; // Our date column in the table
+
+					        if((min== ""||max2== "")||( moment(createdAt).isSameOrAfter(min) && moment(createdAt).isSameOrBefore(max2) ) ){
+					            return true;
+					        }
+					        return false;
+					    }
+						);
+						  
 						    
 						</script>
 						
@@ -1085,8 +1119,15 @@ table.dataTable tbody tr{
 							<tr>
 								<td>
 									<input class="input_style04" id="bd4" placeholder="기간" value="2017-00-00 ~ 2017-00-00" readonly>
-									<span class="showdp4"><img src="/images/car_icon.jpg"></span>
-									<div id="bet-depth4" style="display:none; width:; position:absolute; z-index:100000000; left: 230px; top:2405px;">
+									<span class="showdp4" style="cursor:pointer"><img src="/images/car_icon.jpg"></span>
+									<div id="bet-depth4" style="display:none; width:; position:absolute; z-index:100000000; left: 100px;">
+										
+										<div style="float:right; padding:7px 2px 7px 10px;">
+											<span id="closeMoneyPikaday" class="bclose4" style="cursor:pointer">
+												<img src="/images/car_close.png" class="bclose4">
+											</span>
+										</div>
+										
 										<table border="0" cellspacing="0" cellpadding="0" class="car_table">
 											<tr>
 												<td id="bdfdiv4" bgcolor="#303030" style="border-radius:3px; padding:5px; box-shadow: 10px 10px 20px -5px rgba(10, 10, 5, 5);">
@@ -1095,19 +1136,16 @@ table.dataTable tbody tr{
 												<td id="bdtdiv4" bgcolor="#303030" style="border-radius:3px; padding:5px; box-shadow: 10px 10px 20px -5px rgba(10, 10, 5, 5);">
 													<input type="text" id="bdt4" class="hidden bhdp4"  style="display: none;">
 												</td>
-											</tr>
-											
+											</tr>											
 										</table>
-										<div style="float:right; padding:7px 2px 7px 10px;">
-											<span id="closeMoneyPikaday" class="bclose4" >
-												<img src="/images/car_close.png" class="bclose4">
-											</span>
-										</div>
+
 									</div>
 								</td>
+								<!--
 								<td>
 									<span class="btn1" id="dpbtn4">검색</span>
 								</td>
+								-->
 							</tr>
 						</table>
 					</div>
@@ -1133,7 +1171,7 @@ table.dataTable tbody tr{
 										for (int m=0; m < bl_mg.size() ; m++){
 											BettingListBean_SC blb_mg = (BettingListBean_SC) bl_mg.get(m);	
 											
-											String wd = "충전";
+											String wd = "<span class='font_004'>충전</span>";
 											
 											if(blb_mg.getJob().equals("W")){
 												wd = "<span class='font_002'>환전</span>";
@@ -1145,7 +1183,7 @@ table.dataTable tbody tr{
 									<td class="acc_list_num" width="7%" ><%=blb_mg.getBgid()%></td>
 									<td class="acc_list_time"  width="7%" ><%=blb_mg.getRegdt()%></td>
 									<td class="acc_list_time"  width="21%" ><%=wd%></td>
-									<td class="acc_list_price1"  width="16%" ><span class="font_002"><%=dfrmt.format(Integer.parseInt(blb_mg.getBmoney()))%></span> 원</td>
+									<td class="acc_list_price1"  width="16%" ><%=dfrmt.format(Integer.parseInt(blb_mg.getBmoney()))%> 원</td>
 								</tr>
 											
 						<%
@@ -1265,6 +1303,22 @@ table.dataTable tbody tr{
 									emptyTable: "베팅 내역이 없습니다.",
 								},
 						    });
+						    
+						$.fn.dataTable.ext.search.push(
+					    function( settings, data, dataIndex ) {
+					        var min  = $('#bfd4').val();					        
+					        var max  = $('#bdt4').val();
+					        var max2 =  moment(max).add('days', 1);
+					        
+					        var createdAt = data[2] || 0; // Our date column in the table
+
+					        if((min== ""||max2== "")||( moment(createdAt).isSameOrAfter(min) && moment(createdAt).isSameOrBefore(max2) ) ){
+					            return true;
+					        }
+					        return false;
+					    }
+						);
+						
 						    
 						</script>
 						
@@ -1563,13 +1617,13 @@ var i18n = {
        	$(".bhdp3").on("change",function(e){
         	d3();
         });
-
+/*
         $("#dpbtn3").on("click",function(e){
         	e.preventDefault();
         	$moneyUseTable.ajax.reload();
         	$("#bet-depth3").hide();
         });
-
+*/
         $(".showdp3").on("click",function(e){
         	e.preventDefault();
         	show_over(this);
@@ -1611,29 +1665,30 @@ var i18n = {
 	    },	
    	});
 
-       	d4();
+   	d4();
 
-       	$(".bhdp4").on("change",function(e){
-        	d4();
-        });
+   	$(".bhdp4").on("change",function(e){
+    	d4();
+    });
 
-        $("#dpbtn4").on("click",function(e){
-        	e.preventDefault();
-        	$moneyUseTable.ajax.reload();
-        	$("#bet-depth4").hide();
-        });
+/*
+    $("#dpbtn4").on("click",function(e){
+    	e.preventDefault();
+    	$moneyUseTable.ajax.reload();
+    	$("#bet-depth4").hide();
+    });
+*/
+    $(".showdp4").on("click",function(e){
+    	e.preventDefault();
+    	show_over(this);
+    	show_layer('bet-depth4');
+    	
+    });
 
-        $(".showdp4").on("click",function(e){
-        	e.preventDefault();
-        	show_over(this);
-        	show_layer('bet-depth4');
-        	
-        });
-
-        $(".bclose4 ").on("click",function(e){
-        	e.preventDefault();
-        	$("#bet-depth4").hide();
-        });
+    $(".bclose4 ").on("click",function(e){
+    	e.preventDefault();
+    	$("#bet-depth4").hide();
+    });
 
 	});
 
@@ -1642,20 +1697,23 @@ var i18n = {
 
 	function d2(){
 		var dateFrom = $("#bfd2").val();
-    	var dateTo = $("#bdt2").val();
-    	$("#bd2").val(dateFrom + ' ~ '+ dateTo);
+    var dateTo = $("#bdt2").val();
+    $("#bd2").val(dateFrom + ' ~ '+ dateTo);
+   	table4.draw();
 	}
 
 	function d3(){
 		var dateFrom = $("#bfd3").val();
-    	var dateTo = $("#bdt3").val();
-    	$("#bd3").val(dateFrom + ' ~ '+ dateTo);
+    var dateTo = $("#bdt3").val();
+    $("#bd3").val(dateFrom + ' ~ '+ dateTo);
+    table2.draw();
 	}
 
 	function d4(){
 		var dateFrom = $("#bfd4").val();
-    	var dateTo = $("#bdt4").val();
-    	$("#bd4").val(dateFrom + ' ~ '+ dateTo);
+    var dateTo = $("#bdt4").val();
+    $("#bd4").val(dateFrom + ' ~ '+ dateTo);
+    table3.draw();
 	}
 	
 var NColor= "#262a2b";

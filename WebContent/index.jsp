@@ -1269,8 +1269,7 @@ mainAngular.controller("mc", function($scope, $sce, $templateCache, $compile, $h
 								<table width="100%" cellpadding="0" cellspacing="0"
 									class="board_table_2">
 									<tr>
-										<td width="28%" class="board_table_2_t" style="color:#0792c4">홈</td>
-										<td width="28%" class="board_table_2_t" style="color:#0792c4">원정</td>
+										<td width="56%" class="board_table_2_t" style="color:#0792c4">팀</td>
 										<td width="12%" class="board_table_2_t" style="color:#0792c4">승</td>
 										<td width="12%" class="board_table_2_t" style="color:#0792c4">무</td>
 										<td width="12%" class="board_table_2_t" style="color:#0792c4">패</td>
@@ -1520,8 +1519,7 @@ mainAngular.controller("mc", function($scope, $sce, $templateCache, $compile, $h
 									class="board_table_2">
 									<tr>
 										<td width="13%" class="board_table_2_t" style="color:#0792c4">시각</td>
-										<td width="22%" class="board_table_2_t" style="color:#0792c4">홈</td>
-										<td width="22%" class="board_table_2_t" style="color:#0792c4">원정</td>
+										<td width="44%" class="board_table_2_t" style="color:#0792c4">팀</td>
 										<td width="12%" class="board_table_2_t" style="color:#0792c4">승</td>
 										<td width="12%" class="board_table_2_t" style="color:#0792c4">무</td>
 										<td width="12%" class="board_table_2_t" style="color:#0792c4">패</td>

@@ -93,6 +93,8 @@ public class UserDao {
 		UserBean uib = new UserBean();
 		String query = "SELECT * FROM user_mst WHERE state='NORMAL' and userid = ? and siteid= ?";
 		
+		MgPlayerAccountBean user_profile = new MgPlayerAccountBean();
+		
 		int nproc = 0;
 
 		try {
@@ -115,6 +117,19 @@ public class UserDao {
 					uib.setMoney(rs.getInt("money"));
 					uib.setPoint(rs.getInt("point"));		
 					uib.setCell(rs.getString("cell"));
+					
+					user_profile.setPreferredAccountNumber(rs.getInt("siteid")+"_"+rs.getString("userid"));
+					user_profile.setFirstName(rs.getString("userid").concat("FNAME"));
+					user_profile.setLastName(rs.getString("userid").concat("LNAME"));
+					user_profile.setEmail("");
+					user_profile.setMobilePrefix(rs.getString("cell"));
+					user_profile.setMobileNumber(rs.getString("cell"));
+					user_profile.setDepositAmount(0);
+					user_profile.setPinCode("newplayer1");
+					user_profile.setIsProgressive(0);
+					//user_profile.setBettingProfiles(bet_profiles);
+					
+					createCasinoUser(user_profile); //check. save log if fail create.
 					
 					nproc = 1;
 					
@@ -241,7 +256,50 @@ public class UserDao {
 		return teg_resp;
   	
 	}
+	
+public String createCasinoUser(MgPlayerAccountBean user_profile) {     
 		
+		Debug.out("createCasinoUser..");
+		String teg_resp ="";
+		
+		MgPlayerAccountBean user_profile2 = new MgPlayerAccountBean();
+		user_profile2 = user_profile;
+		
+		try{
+			
+			MgBettingProfileBean bet_profile = new MgBettingProfileBean();
+			ArrayList<MgBettingProfileBean> bet_profiles	= new ArrayList<MgBettingProfileBean>();
+			  
+			bet_profile.setCategory("LGBetProfile");
+			bet_profile.setProfileId(1202);			
+			bet_profiles.add(bet_profile);
+			
+			TotalEgameController teg_ctrl = new TotalEgameController();
+			/*
+			MgPlayerAccountBean user_profile = new MgPlayerAccountBean();
+			
+			user_profile.setPreferredAccountNumber(user.getSiteid()+"_"+user.getUserid());
+			user_profile.setFirstName(user.getUserid().concat("FNAME"));
+			user_profile.setLastName(user.getUserid().concat("LNAME"));
+			user_profile.setEmail("");
+			user_profile.setMobilePrefix(user.getCell_prefix().substring(1));
+			user_profile.setMobileNumber(user.getCell());
+			user_profile.setDepositAmount(0);
+			user_profile.setPinCode("newplayer1");
+			user_profile.setIsProgressive(0);
+			
+			*/
+			user_profile2.setBettingProfiles(bet_profiles);
+			
+			teg_resp = teg_ctrl.addPlayerAccount(user_profile2);	
+		
+		}catch(Exception e){
+			Debug.out("createCasinoUser.." + e.toString());
+		}
+		
+		return teg_resp;
+	}
+
 	public boolean checkUserId(UserBean user) throws SQLException{
 
 		Connection con = null;
