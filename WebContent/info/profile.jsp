@@ -184,12 +184,8 @@
 		$.validator.addMethod(
 	        "sameCell",
 	        function(value, element) {
-	        	// // console.log("value: "+value);
-	        	// // console.log("element: "+element);
 	        	var prefix = $("#new_cell_prefix").val();
 	        	var number = "<%=currentUser.getCell()%>";
-	        	// console.log("number: "+element);
-	        	// console.log("new num: " + prefix+value);
 	        	if(number == prefix+value){
 	        		return false
 	        	}else{
@@ -206,7 +202,6 @@
 			var id = $(this).attr("id");
 			var valid = validator.element("#"+id);
 			$(this).qtip("hide");
-			// console.log(valid);
 			if(!valid && !valid){
 				$(this).focusin();
 			}			
@@ -224,7 +219,6 @@
 		$("#up_cll_btn").click(function(){
 			var validator = $( "#updateProfileForm" ).validate();
 			var validReferrer = validator.element( "#up_cell");
-			console.log(validReferrer);
 		});
 
 		$("#updateProfileForm").validate({
@@ -232,11 +226,9 @@
 	  		errorClass: 'form1-invalid',
 	    	validClass: 'form1-valid',
 	    	highlight: function(element, errorClass, validClass) {
-	    		// // console.log(element);
 		      	$(element).addClass(errorClass).removeClass(validClass);
 		    },
 		    unhighlight: function(element, errorClass, validClass) {
-		    	// // console.log(element);
 		      	$(element).removeClass(errorClass).addClass(validClass);
 		    },
 	  		rules: {
@@ -321,7 +313,6 @@
 			var id = $(this).attr("id");
 			var valid = validator.element("#"+id);
 			$(this).qtip("hide");
-			// console.log(valid);
 			if(!valid && !valid){
 				$(this).focusin();
 			}			
@@ -341,11 +332,9 @@
 	  		errorClass: 'form1-invalid',
 	    	validClass: 'form1-valid',
 	    	highlight: function(element, errorClass, validClass) {
-	    		// // console.log(element);
 		      	$(element).addClass(errorClass).removeClass(validClass);
 		    },
 		    unhighlight: function(element, errorClass, validClass) {
-		    	// // console.log(element);
 		      	$(element).removeClass(errorClass).addClass(validClass);
 		    },
 	  		rules: {
@@ -425,7 +414,6 @@
 			},
 			// submitHandler: function(form) {
 			// 	var data = $("#updatePasswordForm").serializeJSON();
-			// 	// console.log(data);
 			//     submitPasswrdChanges(data);
 			  
 		 //  	}
@@ -458,7 +446,6 @@
 			data : data,
 			method: 'POST',
 		}).done(function(data){ 
-			// console.log(data);
 			var obj = JSON.parse(data);
 			if(data.result){
 				resetupdateProfileForm();
@@ -483,7 +470,6 @@
 			data : data,
 			method: 'POST',
 		}).done(function(data){ 
-			console.log(data);
 			var obj = JSON.parse(data);
 			if(obj.result){
 				resetupdatePasswordForm();

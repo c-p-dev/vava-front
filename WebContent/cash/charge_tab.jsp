@@ -52,6 +52,11 @@
   left: 61px;
   top: 131px;
 }
+.pwdcmf{
+background-color: transparent!important; 
+border-color: transparent!important;
+color:white;
+}
 </style>
 	
 <ul class="smk_accordion">
@@ -68,7 +73,7 @@
 							<div class="row cash_13">
 								<input class="input_style03 pd" id="bankInfoTxt" name="bank_acct" placeholder="비밀번호 입력 후 전용계좌확인 버튼을 클릭해주세요">
 								<div id='inc' class="incp">
-									<span class="incpw "><font class="incpwf">비밀번호가 일치하지 않습니다. </font></span>
+									<span class="incpw"><font class="incpwf">비밀번호가 일치하지 않습니다. </font></span> 
 									<span id='' class="arrow-right"></span>
 								</div>
 								<div id='iinc' class="incp">
@@ -77,7 +82,7 @@
 								</div>
 							</div>
 							<div class="cash_3">
-								<span class="btn5" id="bankInfoBtn">전용계좌확인 </span>
+								<span class="btn5"> <input class="pwdcmf" type="submit"  id="bankInfoBtn" value="전용계좌확인"></span>
 							</div>
 						</div>
 						
