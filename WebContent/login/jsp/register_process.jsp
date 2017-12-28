@@ -20,8 +20,8 @@
 
 <%@ include file="/inc/session.jsp"%>
 
+
 <%
-	
 	JoinCodeBean jcBean 	= new JoinCodeBean();
 	SmsAuthBean smsBean 	= new SmsAuthBean();
 
@@ -78,6 +78,7 @@
 
     bc_db.addNewBcUser(bc_user);	        
 
+/*
 		sess.setAttribute("SITEID", SITEID);
 		sess.setAttribute("SSID", sess.getId());
 		sess.setAttribute("UID", userid);
@@ -86,6 +87,7 @@
 		sess.setAttribute("UGRADE", 1);
 		sess.setAttribute("UBAL", 0);
 		sess.setAttribute("UPOINT",0);	
+*/
 		}
 		
 		out.println(status);
