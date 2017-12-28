@@ -84,7 +84,7 @@
     			
     			bet_profiles.add(bet_profile);
     			
-    			user_profile.setPreferredAccountNumber(Integer.toString(ub.getSiteid()).concat("_").concat(ub.getUserid()));
+    			user_profile.setPreferredAccountNumber(game_username);
     			user_profile.setFirstName(ub.getUserid().concat("FNAME"));
     			user_profile.setLastName(ub.getUserid().trim().concat("LNAME"));
     			user_profile.setEmail("");

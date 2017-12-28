@@ -21,6 +21,12 @@ import util.StringManipulator;
 
 public class AsianGamingController {
 	
+	public static final String TOKEN_URL_PROD	= "http://gi.ibet25.com:81/doBusiness.do?";
+	public static final String TOKEN_URL_TEST	= "http://gi.aggdemo.com:81/doBusiness.do?";
+	
+	public static final String GAME_URL_PROD	= "http://gci.ibet25.com:81/forwardGame.do?";
+	public static final String GAME_URL_TEST	= "http://gci.aggdemo.com:81/forwardGame.do?";
+	
 	public static final String SITE_ID 			= "1";
 	public static final String API_KEY 			= "abtMbZZzuNAQ";
 	public static final String DES_KEY 			= "sOz9Zo5v";
@@ -66,7 +72,7 @@ public class AsianGamingController {
     //-----------------------------------------------------
 	public String checkCreateAccount(String user_id)
 	{
-		String url_base			= "http://gi.ibet25.com:81/doBusiness.do?";
+		String url_base			= TOKEN_URL_PROD;
 		String params_str		= "";
 		String enc_params		= "";
 		String ag_create_url	= "";
@@ -75,10 +81,10 @@ public class AsianGamingController {
         |	Build the GET Parameter String
         |-------------------------------------------------------------------*/
 		params_str			= params_str.concat("cagent=").concat(CAGENT_PARAM).concat(DES_PARAM_SUFX);
-		params_str			= params_str.concat("loginname=").concat(SITE_ID).concat("_").concat(user_id).concat(DES_PARAM_SUFX);
+		params_str			= params_str.concat("loginname=").concat(user_id).concat(DES_PARAM_SUFX);
 		params_str			= params_str.concat("method=").concat(METHOD_PARAM).concat(DES_PARAM_SUFX);
 		params_str			= params_str.concat("actype=").concat(ACTYPE_PARAM).concat(DES_PARAM_SUFX);
-		params_str			= params_str.concat("password=").concat(SITE_ID).concat("_").concat(user_id).concat(DES_PARAM_SUFX);
+		params_str			= params_str.concat("password=").concat(user_id).concat(DES_PARAM_SUFX);
 		params_str			= params_str.concat("oddtype=").concat("A").concat(DES_PARAM_SUFX);
 		params_str			= params_str.concat("cur=").concat(CURRENCY_PARAM);
 		
@@ -113,7 +119,7 @@ public class AsianGamingController {
         |	Build the GET Parameter String
         |-------------------------------------------------------------------*/
 		params_str			= params_str.concat("productid=").concat(PROD_ID_PARAM).concat("&");
-		params_str			= params_str.concat("username=").concat(SITE_ID).concat("_").concat(user_id).concat("&");
+		params_str			= params_str.concat("username=").concat(user_id).concat("&");
 		params_str			= params_str.concat("session_token=").concat(session_id).concat("&");
 		params_str			= params_str.concat("credit=").concat(Integer.toString(user_profile.getMoney()));
 		
@@ -124,7 +130,7 @@ public class AsianGamingController {
 	
 	public String forwardToAg(String user_id, String session_id, String lnk_dsp)
 	{
-		String url_base			= "http://gci.ibet25.com:81/forwardGame.do?";
+		String url_base			= GAME_URL_PROD;
 		String params_str		= "";
 		String enc_params		= "";
 		String ag_game_url		= "";
@@ -133,8 +139,8 @@ public class AsianGamingController {
         |	Build the GET Parameter String
         |-------------------------------------------------------------------*/
 		params_str			= params_str.concat("cagent=").concat(CAGENT_PARAM).concat(DES_PARAM_SUFX);
-		params_str			= params_str.concat("loginname=").concat(SITE_ID).concat("_").concat(user_id).concat(DES_PARAM_SUFX);
-		params_str			= params_str.concat("password=").concat(SITE_ID).concat("_").concat(user_id).concat(DES_PARAM_SUFX);
+		params_str			= params_str.concat("loginname=").concat(user_id).concat(DES_PARAM_SUFX);
+		params_str			= params_str.concat("password=").concat(user_id).concat(DES_PARAM_SUFX);
 		params_str			= params_str.concat("dm=").concat(AG_DM_PARAM).concat(DES_PARAM_SUFX);
 		params_str			= params_str.concat("sid=").concat(CAGENT_PARAM).concat(session_id).concat(DES_PARAM_SUFX);
 		params_str			= params_str.concat("mh5=").concat(MH5_PARAM).concat(DES_PARAM_SUFX);
@@ -187,7 +193,6 @@ public class AsianGamingController {
 		/*	Convert String DES Key to Secret Key type	*/
 		SecretKey key 			= new SecretKeySpec(DES_KEY_BYTE, 0, DES_KEY_BYTE.length, ENC_PARAM_ALGO);
 		DesEncrypter encrypter 	= new DesEncrypter(key);
-		
 		
 		String enc_params 		= encrypter.encrypt(params);
 		
