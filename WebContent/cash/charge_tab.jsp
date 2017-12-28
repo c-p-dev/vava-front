@@ -23,6 +23,9 @@
 {
 	display:none
 }
+.incpwb{
+	border-color: #ff8a00!important;
+}
 .incpw{
 	background-color: #424c4e!important;
 	color: #404654!important;
@@ -31,6 +34,9 @@
 	position: absolute;
 	top: 120px;
 	left: -108px; 
+}
+.iincpw{
+	left: -222px!important;
 }
 .incpwf{
 	vertical-align: inherit; 
@@ -65,9 +71,13 @@
 									<span class="incpw "><font class="incpwf">비밀번호가 일치하지 않습니다. </font></span>
 									<span id='' class="arrow-right"></span>
 								</div>
+								<div id='iinc' class="incp">
+									<span class="incpw iincpw"><font class="incpwf"> 비밀번호 입력 후 전용계좌확인 버튼을 클릭해주세요.</font></span>
+									<span id='' class="arrow-right"></span>
+								</div>
 							</div>
 							<div class="cash_3">
-								<button class="btn5" id="bankInfoBtn" DISABLE>전용계좌확인 </button>
+								<span class="btn5" id="bankInfoBtn">전용계좌확인 </span>
 							</div>
 						</div>
 						
@@ -307,11 +317,14 @@
 				console.log(obj.BN);
 				
 				if(obj.BN =="-1"){
-					$("#bankInfoTxt").val();
+					$("#bankInfoTxt").val('');
 					$("#inc").removeClass('incp');
-					 
+					$("#iinc").addClass('incp');	
+					$("#bankInfoTxt").addClass('incpwb');		
 				}	else if(data !="" || data !=null){
+					$("#bankInfoTxt").removeClass('incpwb');
 					$("#inc").addClass("incp");
+					$("#iinc").addClass('incp');
 					$('#bankInfoTxt').val('');
 					$('#bankInfoTxt').removeClass('pd');
 					// data = bank_name - bank_owner - bank_number
@@ -319,7 +332,7 @@
 					$("#ct_bank_owner").val(obj.BO); 
 					$('#bankInfoTxt').attr('readonly', true);
 					$("#bankInfoBtn").attr("disabled", true);
-
+					$("#ct_submit").removeAttr("disabled");
 				}else{
 					alert("처리중 오류가 발생하였습니다.");
 				}
@@ -331,8 +344,8 @@
 	      	scrolllock: true,
 	      	onclose:function(){
 	      		$('#bankInfoTxt').addClass('pd');
+	      		$("#bankInfoTxt").removeClass('incpwb');
 	      		$('#bankInfoTxt').attr('readonly', false);
-				$("#bankInfoBtn").attr("disabled", false);
 	      		resetChargeForm();
 	    	}
 	    });
@@ -417,12 +430,17 @@
       });
 
      $("#ct_submit").on("click",function(e){
+    	 e.preventDefault();
+    	 
 			if ($('#ct_bank_owner').val() == "") {
 				$('#bankInfoTxt').val('');
+				$("#iinc").removeClass('incp');
+				$("#inc").addClass("incp");
+				$("#bankInfoTxt").addClass('incpwb');
 			}else{
-				e.preventDefault();
-				
 				if($("#chargeForm").valid()){
+					$("#bankInfoTxt").removeClass('incpwb');
+					$("#iinc").addClass('incp');
 					$("#bankInfoTxt").qtip("hide");
 					$("#money").qtip("hide");
 					$("#ct_bank_owner").qtip("hide");
@@ -468,7 +486,7 @@
 				required:true,
 				money_number:true,
 				money_min: true,
-			}
+			},
 		},
 		messages: {
 			bank_acct :{
