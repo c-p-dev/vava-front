@@ -320,7 +320,6 @@
 		$("#conf_modal3 .conf_modal_yes").on("click",function(){
 			
 			var data = $("#formwithdraw").serializeJSON();
-			console.log(data);
 			if(data != null){
 				var num = data.withdraw;
 				data.withdraw = numberParser(num);
@@ -333,8 +332,6 @@
 			}).done(function(data){
 				if(data){
 					
-					console.log(data);
-					console.log(data.trim());
 					
 					if(data.trim()){
 						updateInstBal();
@@ -370,24 +367,19 @@
 					}).done(function(data){					
 						var obj = JSON.parse(data);
 						$("#uhead").html(obj.header);
-						console.log(obj.bal)
 						$("#balmoney").text(numberWithCommas(obj.bal));
-						console.log($("#balmoney").val())						
-						console.log("$($pointUseTable");
-						console.log($($pointUseTable))
 
 			  	
 						//$("#withdraw").val(obj.bal);
 						
 					});				
-					//console.log("UPDATED BAL");					
+				
 				} else {
-					//console.log("NOT UPDATED BAL");
+				
 				}
 				
 				data=null;
 			}).error(function(data, status, headers, config) {
-				console.log(status);
 				data=null;
 			});
 		

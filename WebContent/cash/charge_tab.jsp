@@ -314,7 +314,6 @@
 				
 				var obj = JSON.parse(data);
 				
-				console.log(obj.BN);
 				
 				if(obj.BN =="-1"){
 					$("#bankInfoTxt").val('');
@@ -459,7 +458,6 @@
 			var id = $(this).attr("id");
 			var valid = validator.element("#"+id);
 			$(this).qtip("hide");
-			// console.log(valid);
 			if(!valid && !valid){
 				$(this).focusin();
 			}			
@@ -553,7 +551,6 @@
 			current_am = parseInt(numberParser($("#money").val()));
 		}
 
-		//console.log(current_am);
 
 		var am = 0;
 		var sum = 0;
@@ -597,10 +594,9 @@
 				data:data,
 				type:'POST'
 			}).done(function(data){
-				// console.log(data);
+				
 				if(data){
 					
-					console.log("data:" + data);
 					
 					$("#chargeSuccesModal").popup("show");
 					

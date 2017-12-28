@@ -99,9 +99,9 @@
 				</div>
 <script>
 $(document).ready(function(){
-	//console.log("point");
+	
 	var p = <%=UPOINT%>;
-	//console.log("point : " + p);
+	
 	
 	$("#pointform").validate({
 		errorClass: 'form1-invalid',
@@ -178,12 +178,12 @@ function submitPoint(){
 	$("#conf_modal2 .conf_modal_yes").on("click",function(){
 		
 		var data = $("#pointform").serializeJSON();
-		// console.log(data);
+		
 		if(data != null){
 			var p = data.point;
 			data.point = numberParser(p);
 		} 
-		// console.log(data);
+		
 		$.ajax({
 			url : '/cash/jsp/switchPoints.jsp',
 			data : data,
@@ -195,9 +195,9 @@ function submitPoint(){
 				
 				//var obj = JSON.parse(data);
 				
-			 //console.log("submitPoint:"+data);
 			 
-			 //console.log(obj);
+			 
+			 
 			 
 			 if(data.isValid){
 				updateInstBal();		
@@ -232,7 +232,7 @@ function submitPoint(){
 			}
 			*/
 			
-			// console.log(data.money);
+			
 			
 			//getheader
 			
@@ -378,25 +378,25 @@ function addVal(point){
 						var obj = JSON.parse(data);
 						$("#uhead").html(obj.header);
 						
-						//console.log(obj.bal)
-						//$("#balmoney").text(numberWithCommas(obj.bal));
-						//console.log($("#balmoney").val())
 						
-						//console.log("$($pointUseTable");
-						//console.log($($pointUseTable))
+						//$("#balmoney").text(numberWithCommas(obj.bal));
+						
+						
+						
+						
 
 			  	
 						//$("#withdraw").val(obj.bal);
 						
 					});				
-					//console.log("UPDATED BAL");					
+					
 				} else {
-					//console.log("NOT UPDATED BAL");
+					
 				}
 				
 				data=null;
 			}).error(function(data, status, headers, config) {
-				console.log(status);
+
 				data=null;
 			});
 		

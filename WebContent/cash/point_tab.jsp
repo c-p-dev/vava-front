@@ -239,7 +239,6 @@ var $pointUseTable;
 		 getDate();
 	
 	$(".pikaday_input").on("change",function(e){
-			console.log("aa");
 		getDate();			
   });
  			       	 							

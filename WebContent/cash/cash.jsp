@@ -93,7 +93,6 @@
 	});
 
 	function clive_load() {
-		console.log("clive_load");
 	    var myVar = setTimeout(showPage_clive, 1000);
 	};
 	
@@ -178,27 +177,23 @@
 <script>
 	
 		$(document).ready(function(){
-	    $("#t_tab1").on("click",function(){
-      	console.log("$dataTable1_charge");      	
+	    $("#t_tab1").on("click",function(){   	
       	$dataTable1_charge.ajax.reload();
 		  	//$dataTable1_charge.columns.adjust().draw();
       });
       
       $("#t_tab2").on("click",function(){
-      	console.log("$dataTable_exchange");      	
       	$dataTable_exchange.ajax.reload();
 		  	//$dataTable_exchange.columns.adjust().draw();
       });
       
       
       $("#t_tab5").on("click",function(){
-      	console.log("$pointUseTable");      	
       	$pointUseTable.ajax.reload();
 		  	$pointUseTable.columns.adjust().draw();
       });
       
        $("#t_tab6").on("click",function(){
-      	console.log("$moneyUseTable");      	
       	$moneyUseTable.ajax.reload();
 		  	$moneyUseTable.columns.adjust().draw();
       });
