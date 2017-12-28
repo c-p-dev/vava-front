@@ -67,79 +67,7 @@
 		sess.putValue("UPOINT",ub.getPoint());
 		
 		
-<<<<<<< HEAD
-		/*	Set Game Username	*/
-        String game_username			= Integer.toString(ub.getSiteid()).concat("_").concat(ub.getUserid());
-        
-        /*	Initialize Controllers	*/
-    	TotalEgameController teg_ctrl	= new TotalEgameController();
-    	SpinCubeController sc_ctrl		= new SpinCubeController(game_username);
-    	BetConstructController bc_ctrl	= new BetConstructController();
-    	
-        /*--------------------------------------------------------------------
-        |	Check registration on MG
-        |-------------------------------------------------------------------*/
-        String teg_json				= teg_ctrl.checkIsAccountAvailable(game_username);
-        
-        MgAccountAvailable teg_resp	= gson.fromJson(teg_json, MgAccountAvailable.class);
-        
-        if (0 == teg_resp.getStatus().getErrorCode()) {
-        	/*	TEg account does not exist	*/
-        	if (true == teg_resp.getResult().getAccountAvailable()) {
-        		/*	Create TEg account	*/
-        		MgPlayerAccountBean user_profile 				= new MgPlayerAccountBean();
-        		MgBettingProfileBean bet_profile				= new MgBettingProfileBean();
-        		ArrayList<MgBettingProfileBean> bet_profiles	= new ArrayList<MgBettingProfileBean>();
-        		
-        		String cell_prefix	= "+".concat(ub.getCell().substring(0, 1));
-        		System.out.println(cell_prefix);
-        		bet_profile.setCategory("LGBetProfile");
-    			bet_profile.setProfileId(1202);
-    			
-    			bet_profiles.add(bet_profile);
-    			
-    			user_profile.setPreferredAccountNumber(game_username);
-    			user_profile.setFirstName(ub.getUserid().concat("FNAME"));
-    			user_profile.setLastName(ub.getUserid().trim().concat("LNAME"));
-    			user_profile.setEmail("");
-    			user_profile.setMobilePrefix(cell_prefix);
-    			user_profile.setMobileNumber(ub.getCell().substring(2));
-    			user_profile.setDepositAmount(0);
-    			user_profile.setPinCode("newplayer1");
-    			user_profile.setIsProgressive(0);
-    			user_profile.setBettingProfiles(bet_profiles);
-    			
-    			String add_resp = teg_ctrl.addPlayerAccount(user_profile);
-        	}
-        	else {
-        		teg_ctrl.getAllMoney(ub.getUserid(), ub.getSiteid());
-        	}
-        }
-        
-        /*--------------------------------------------------------------------
-        |	Check registration on SpinCube
-        |-------------------------------------------------------------------*/
-        sc_ctrl.createPlayer();
-        
-        /*--------------------------------------------------------------------
-        |	Check registration on BetContruct
-        |-------------------------------------------------------------------*/
-        BetConDao bc_db			= new BetConDao();
-        BetConUserBean bc_user	= new BetConUserBean();
-        
-        bc_user	= bc_db.getUserByUsername(ub.getUserid(), ub.getSiteid());
-        
-        if (null == bc_user.getUsername()) {
-        	/*	Create Betcon account	*/
-        	bc_user.setUsername(ub.getUserid());
-	        bc_user.setSession_token(Integer.toString(ub.getSiteid()).concat("_").concat(ub.getUserid()));
-	        bc_user.setSite_id(ub.getSiteid());
-			
-	        bc_db.addNewBcUser(bc_user);
-        }
-=======
     
->>>>>>> f0eff0b4d78a46b187362c2569604537c22ba47a
 	}
 	
 	HashMap<String, Object> hsm = new HashMap<String, Object>();
