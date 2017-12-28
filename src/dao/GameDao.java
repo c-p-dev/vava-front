@@ -376,7 +376,7 @@ public class GameDao {
 				"JOIN lk_game_types ON game_lst.game_type = lk_game_types.game_type_id " +
 				"WHERE game_provider = ? AND game_type != 5 AND game_type != 6 AND game_type != 10 AND game_type != 11 " +
 				"GROUP BY game_type, lk_game_types.description UNION " + 
-				"SELECT 0 , '�쟾泥�' AS game_type_name";
+				"SELECT 0 , '전체' AS game_type_name";
 		
 		
 		GameMenuBean gd = new GameMenuBean();
@@ -391,7 +391,7 @@ public class GameDao {
 						"JOIN lk_game_types ON game_lst.game_type = lk_game_types.game_type_id " +
 						"WHERE game_type != 5 AND game_type != 6 AND game_type != 10 AND game_type != 11 " +
 						"GROUP BY game_type, lk_game_types.description UNION " + 
-						"SELECT 0 , '�쟾泥�' AS game_type_name";
+						"SELECT 0 , '전체' AS game_type_name";
 				
 				pstmt   			= con.prepareStatement(query);
 			}else{

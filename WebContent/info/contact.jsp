@@ -184,7 +184,7 @@
 			method: 'GET',
 		}).done(function(data){ 
 
-
+			
 			drawMessages(data);
 			
 		});
@@ -246,14 +246,14 @@
 	}
 
 	function disbleCht(flg){
-		if(flg){
-			$("#txt").prop("disabled",true);
-			$("#sndMsgtBtn").attr("disabled", true);
-			$("#sndMsgtBtn").addClass('dis');
-		}else{
-			$("#txt").prop("disabled",false);
-			$("#sndMsgtBtn").attr("disabled", false);
-			$("#sndMsgtBtn").removeClass('dis');
-		}
+		// if(flg){
+		// 	$("#txt").prop("disabled",true);
+		// 	$("#sndMsgtBtn").attr("disabled", true);
+		// 	$("#sndMsgtBtn").addClass('dis');
+		// }else{
+		// 	$("#txt").prop("disabled",false);
+		// 	$("#sndMsgtBtn").attr("disabled", false);
+		// 	$("#sndMsgtBtn").removeClass('dis');
+		// }
 	}
 </script>

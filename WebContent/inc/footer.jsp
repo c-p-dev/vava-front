@@ -66,7 +66,11 @@ $(document).ready(function(){
 		cValU();
 		refreshMoney();
 		updateBal();
-	}		
+	}
+	else {
+		$('.casino-spinner').hide();
+		$(".casino_right").fadeIn();
+	}
 });
 
 function IntervalloadMsgCount(){

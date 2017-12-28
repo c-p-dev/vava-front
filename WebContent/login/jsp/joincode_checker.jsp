@@ -1,21 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
-<%@ page import = "bean.UserBean" %>
-<%@ page import = "dao.UserDao" %>
-<%@ page import = "java.sql.SQLException" %>
-<%@ page import = "bean.JoinCodeBean" %>
 <%@ page import = "dao.JoinCodeDao" %>
 
+
+<%@ include file="/inc/session.jsp" %>		
+
+
 <%
-	
-	UserDao ud = new UserDao();
 	JoinCodeDao jcDao = new JoinCodeDao();
-	String recommend = request.getParameter("referrer").trim();
-	String joincode = request.getParameter("recommend").trim();
 
+ String referrer="";
+ String recommend="";
+  
+if(request.getParameter("referrer") != null && request.getParameter("referrer").trim().length() > 0){
+   referrer =request.getParameter("referrer") ;
+}
 
-	boolean result = jcDao.checkJoinCode(recommend, joincode);
-	System.out.println(result);
+if(request.getParameter("recommend") != null && request.getParameter("recommend").trim().length() > 0){
+   recommend =request.getParameter("recommend") ;
+}
+
+	boolean result = jcDao.checkJoinCode(SITEID, referrer, recommend);
 	out.println(result);
 %>
 

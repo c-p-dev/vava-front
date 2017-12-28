@@ -9,7 +9,6 @@
 	List<GameBean> cgame_list		= game_dao.getChingaGames();
 %>
 
-<%@ include file="/inc/session.jsp"%>
 
 <!DOCTYPE html>
 <head>
@@ -138,7 +137,24 @@
 			
 		</div>
         
-		<div class="casino_right">
+        <div class = 'casino-spinner' style = 'width: 1040px; float: left; display: none;'>
+	        <div id="spin_clive" class="sk-circle ng-scope" style=""> 
+	        	<div class="sk-circle1 sk-child"></div>
+				<div class="sk-circle2 sk-child"></div>
+				<div class="sk-circle3 sk-child"></div>
+				<div class="sk-circle4 sk-child"></div>
+				<div class="sk-circle5 sk-child"></div>
+				<div class="sk-circle6 sk-child"></div>
+				<div class="sk-circle7 sk-child"></div>
+				<div class="sk-circle8 sk-child"></div>
+				<div class="sk-circle9 sk-child"></div>
+				<div class="sk-circle10 sk-child"></div>
+				<div class="sk-circle11 sk-child"></div>
+				<div class="sk-circle12 sk-child"></div>
+	        </div>
+        </div>
+        
+		<div class="casino_right" style = 'display: none;'>
 			<div id="l-tab1" class="left_tab_con">
 				
 				<div class="tab_container">
@@ -299,6 +315,8 @@
 						else {
 							$('#gm-pop-errmsg').html("An error occured. Please reload the game.");
 						}
+						
+						$('.fade_9_close').fadeIn();
 					});
 				}
 

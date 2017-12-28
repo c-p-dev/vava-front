@@ -8,7 +8,7 @@
 	List<GameBean> igame_list	= game_dao.getRacingGames();
 %>
 
-<%@ include file="/inc/session.jsp"%>
+
 
 <!DOCTYPE html>
 <head>
@@ -144,13 +144,29 @@
 			<ul class="l_tabs" id="game-cat">
 				<li><a href="#l-tab1" class="get-game">전체</a></li>
 				<li><a href="#l-tab3" class="get-game">가상 게임</a></li>
-				<li><a href="#l-tab2" class="get-game">인스턴트 게임</a></li>
 				<li><a href="#l-tab4" class="get-vbet-hist" target = '_blank'>베팅내역 확인하기</a></li>
 			</ul>
 			
 		</div>
         
-		<div class="casino_right">
+        <div class = 'casino-spinner' style = 'width: 1040px; float: left; display: none;'>
+	        <div id="spin_clive" class="sk-circle ng-scope" style=""> 
+	        	<div class="sk-circle1 sk-child"></div>
+				<div class="sk-circle2 sk-child"></div>
+				<div class="sk-circle3 sk-child"></div>
+				<div class="sk-circle4 sk-child"></div>
+				<div class="sk-circle5 sk-child"></div>
+				<div class="sk-circle6 sk-child"></div>
+				<div class="sk-circle7 sk-child"></div>
+				<div class="sk-circle8 sk-child"></div>
+				<div class="sk-circle9 sk-child"></div>
+				<div class="sk-circle10 sk-child"></div>
+				<div class="sk-circle11 sk-child"></div>
+				<div class="sk-circle12 sk-child"></div>
+	        </div>
+        </div>
+        
+		<div class="casino_right" style = 'display: none;'>
 			<div id="l-tab1" class="left_tab_con">
 				
 				<div class="tab_container">
@@ -185,70 +201,6 @@
 							
 						</div>
 						
-						<div class="casino_board_wrap">
-							<span>  </span>
-							<ul class="racing_board_list">
-								
-								<%
-									for (int i = 0; i < igame_list.size(); i++) {
-										GameBean cur_igame = igame_list.get(i);
-								%>
-								<li>
-									<a href="#" data-gm-provdr = '<%=cur_igame.getGame_provider()%>' data-link-dsp = '<%=cur_igame.getLink_dsp()%>'>
-										<div class="img racing_board_img">
-											<img src="/images/<%=cur_igame.getGame_img()%>" style = 'width: 320px; height: 195px;'>
-											<div class="overlay">
-												 <span class="expand" style = "width: 125px; font-size: 20px;">Play now</span>
-											</div>
-										</div>
-									</a>
-									<div class="casino_board_text">
-										<p class="casino_name"><%=cur_igame.getGame_name()%></p>
-									</div>
-								</li>
-								<%
-									}
-								%>
-							
-							</ul>
-						</div>
-						
-					</div>
-					
-				</div>
-			</div>
-            
-            <div id="l-tab2" class="left_tab_con">
-				
-				<div class="tab_container">
-					<div id="tab1" class="tab_content">
-						<div class="casino_board_wrap">
-							<span>  </span>
-							<ul class="racing_board_list">
-								
-								<%
-									for (int i = 0; i < igame_list.size(); i++) {
-										GameBean cur_igame = igame_list.get(i);
-								%>
-								<li>
-									<a href="#" data-gm-provdr = '<%=cur_igame.getGame_provider()%>' data-link-dsp = '<%=cur_igame.getLink_dsp()%>'>
-										<div class="img racing_board_img">
-											<img src="/images/<%=cur_igame.getGame_img()%>" style = 'width: 320px; height: 195px;'>
-											<div class="overlay">
-												 <span class="expand" style = "width: 125px; font-size: 20px;" style = "width: 125px; font-size: 20px;">Play now</span>
-											</div>
-										</div>
-									</a>
-									<div class="casino_board_text">
-										<p class="casino_name"><%=cur_igame.getGame_name()%></p>
-									</div>
-								</li>
-								<%
-									}
-								%>
-							
-							</ul>
-						</div>
 					</div>
 					
 				</div>
@@ -289,6 +241,7 @@
 					
 				</div>
 			</div>
+            
 		</div>
 	</div>
 </div><!-- contents -->
@@ -337,6 +290,8 @@
 						else {
 							$('#gm-pop-errmsg').html("An error occured. Please reload the game.");
 						}
+						
+						$('.fade_9_close').fadeIn();
 					});
 				}
 
@@ -368,7 +323,7 @@
         
 		$.get('/login/jsp/get_session.jsp', function(srv_resp) {
 			
-			if (!srv_resp.validUser) {
+			if (!srv_resp.result) {
 				$('a.get-vbet-hist').parent().hide();
 			}
 			else {

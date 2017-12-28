@@ -115,7 +115,7 @@ $(document).ready(function(){
 				max_point:p,
 				// digits: true,
 				// min: 1000,
-				// max: p,
+				 //max: p,
 			},
 		},
 			
@@ -192,9 +192,19 @@ function submitPoint(){
 		}).done(function(data){ 
 			
 			if(data){
+				
+				//var obj = JSON.parse(data);
+				
 			 //console.log("submitPoint:"+data);
 			 
-			 console.log(data);
+			 //console.log(obj);
+			 
+			 if(data.isValid){
+				updateInstBal();		
+				$("#showpoint").text(numberWithCommas(data.point));		
+				$("#PointSuccesModal").popup("show");
+				
+			}
 			 
 			 /*
 			 if(data.isValid){
@@ -226,11 +236,11 @@ function submitPoint(){
 			
 			//getheader
 			
-			$('.money_dsp').text(number_format(data.money,0));
-			$('.point_dsp').text(number_format(data.point,0));
-			$('.pointavail').text(number_format(data.point,0));
-			$("#pointform").validate().settings.rules.point.max = data.point;
-			$("#PointSuccesModal").popup("show");
+			//$('.money_dsp').text(number_format(data.money,0));
+			//$('.point_dsp').text(number_format(data.point,0));
+			//$('.pointavail').text(number_format(data.point,0));
+			//$("#pointform").validate().settings.rules.point.max = data.point;
+			
 			
 			
 			
@@ -267,7 +277,6 @@ $("#pointBtnSbmit").on("click",function(e){
 	    
 	}
 });
-
 
 
 $('#PointSuccesModal').popup({
@@ -347,4 +356,50 @@ function addVal(point){
 	}
 }
 
+
+	function updateInstBal() {	
+			
+	 		$.ajax({
+				url: '/inc/UpdateBal.jsp',
+				data : {},
+				method: 'GET',
+				cache: false,
+			}).done(function(data){				
+				
+				var obj = JSON.parse(data);
+											
+				if(obj.R){
+				
+					$.ajax({
+						url : '/login/jsp/get_header.jsp', //jsp				
+						data : {},
+						method: 'GET',
+					}).done(function(data){					
+						var obj = JSON.parse(data);
+						$("#uhead").html(obj.header);
+						
+						//console.log(obj.bal)
+						//$("#balmoney").text(numberWithCommas(obj.bal));
+						//console.log($("#balmoney").val())
+						
+						//console.log("$($pointUseTable");
+						//console.log($($pointUseTable))
+
+			  	
+						//$("#withdraw").val(obj.bal);
+						
+					});				
+					//console.log("UPDATED BAL");					
+				} else {
+					//console.log("NOT UPDATED BAL");
+				}
+				
+				data=null;
+			}).error(function(data, status, headers, config) {
+				console.log(status);
+				data=null;
+			});
+		
+	}
+	
 </script>

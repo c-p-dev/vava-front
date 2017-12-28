@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@ page import="dao.UserDao" %>
 <%@ page import="java.text.DecimalFormat" %>
 <%@ page import="java.util.*" %>
 
@@ -19,16 +18,20 @@
 	<%
 	
 	SITEID = "1";	
-	 session = request.getSession(false);
+	
+	HttpSession sess = request.getSession(false);		
+	//sess.invalidate(); 
+	
+	 //session = request.getSession(false);
 	 
-	if((String) session.getAttribute("UID") != null){			
+	if((String) sess.getAttribute("UID") != null){			
 		checkSession = true;			
-	 	UID = (String)session.getAttribute("UID");		
-		NICK  = (String)session.getAttribute("NICK");
-		UCLEVEL = (String)session.getAttribute("UCLEVEL");
-		UGRADE = (Integer)session.getAttribute("UGRADE");
-		UBAL = (Integer)session.getAttribute("UBAL");
-		UPOINT = (Integer)session.getAttribute("UPOINT");
+	 	UID = (String)sess.getAttribute("UID");		
+		NICK  = (String)sess.getAttribute("NICK");
+		UCLEVEL = (String)sess.getAttribute("UCLEVEL");
+		UGRADE = (Integer)sess.getAttribute("UGRADE");
+		UBAL = (Integer)sess.getAttribute("UBAL");
+		UPOINT = (Integer)sess.getAttribute("UPOINT");
 	}
 	
 	IP = request.getRemoteAddr();
@@ -46,6 +49,6 @@
 	
 	DecimalFormat dfrmt	= new DecimalFormat("#,###,###,###,###");	
 	
-	//	session.invalidate(); 
+	
 		
 %>

@@ -13,7 +13,6 @@
 	List<GameBean> game_type = game_dao.getGameType();
 %>
 
-<%@ include file="/inc/session.jsp"%>
 
 <!DOCTYPE html>
 <head>
@@ -219,7 +218,7 @@ div.chevy-cntr {
 						GameBean providers = game_providers.get(i);
 						int tab = i + 2;
 						
-						String html = "<li><a href=#l-tab"+tab+" class=get-game data-val="+providers.getGame_provider()+">"+providers.getProvider_name()+" <div class = 'chevy-cntr'><i class = 'chevy fa fa-chevron-down'></i></div></a></li>";
+						String html = "<li><a href=#l-tab"+tab+" class=get-game data-val="+providers.getGame_provider()+">"+providers.getProvider_name()+" <div class = 'chevy-cntr'><i class = 'chevy fa fa-chevron-up'></i></div></a></li>";
 
 						if( providers.getGame_provider() == 2){
 							
@@ -334,6 +333,8 @@ div.chevy-cntr {
 						else {
 							$('#gm-pop-errmsg').html("An error occured. Please reload the game.");
 						}
+						
+						$('.fade_9_close').fadeIn();
 					});
 				}
 
@@ -361,8 +362,8 @@ div.chevy-cntr {
 						$('.subm-manual').hide();
 						$('.pcheck-lnk').hide();
 						
-						$('.chevy').removeClass('fa-chevron-up');
-						$('.chevy').addClass('fa-chevron-down');
+						$('.chevy').removeClass('fa-chevron-down');
+						$('.chevy').addClass('fa-chevron-up');
 						
 						/*	Asian Gaming	*/
 						if (2 == game_prvdr) {
@@ -384,8 +385,8 @@ div.chevy-cntr {
 							/* Default. Do nothing	*/
 						}
 						
-						chev_mark.removeClass('fa-chevron-down');
-						chev_mark.addClass('fa-chevron-up');
+						chev_mark.removeClass('fa-chevron-up');
+						chev_mark.addClass('fa-chevron-down');
 						
 						//get Game
 						$.ajax({
@@ -550,7 +551,7 @@ div.chevy-cntr {
 		
 
 		setTimeout(function(){
-			$(".casino_right").hide().html(final_div).fadeIn();
+			$(".casino_right").html(final_div).fadeIn();
 			makeList();
 			
 		}, 600);	

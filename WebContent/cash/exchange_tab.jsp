@@ -40,7 +40,7 @@
 		<div class="acc_head dt_div"><h3>환전신청 리스트</h3></div>
 		<div class="acc_content">
 			<div class="acc_content_in_2">
-				<table id="dataTable2" cellspacing="0" cellpadding="0" data-scroll-x="true" style="width: 100%!important;">
+				<table id="dataTable2" cellspacing="0" cellpadding="0" width="100%">
             	</table>
 			</div>
 		</div>
@@ -56,6 +56,7 @@
 						<li>· 환전은 입금 후 5분 이내에 완료가 됩니다.</li>
 						<li>· 단, 해당 은행의 평일 점검, 서버 점검, 전산 장애가 있을 경우 환전이 지연 되오니 양해바랍니다.</li>
 					</ul>
+					
 					<div class="cash_bank">
 						<span class="font_006">은행 점검 시간</span>	
 						<table cellspacing="0" cellpadding="0" class="back_table">
@@ -125,6 +126,7 @@
 							</tr>
 						</table>	
 					</div>
+					
 				</div>
 			</div>
 		</li>
@@ -177,55 +179,68 @@
 		lengthChange: false,
 		autowWidth:true,
 		aaSorting: [[1,'desc']],
-	    columns : [
-	        	{ 
-	                data   : 'wdid',
-	                title  : '번호',
+    columns : [
+  	{ 
+      data   : 'wdid',
+      title  : '번호',
+      width : '10%',
 
-	            },
-	            { 
-	                data   : 'regdate',
-	                title  : '신청일시',
-	            },
-	            { 
-	                data   : 'money',
-	                title  : '금액',
-	                render : function(data,type,row,meta){
-	                	var html = '<span class="font_002">'+data+'</span> 원';
-	                	return html;
-	                }
-	            },
-	            { 
-	                data   : 'wdstate',
-	                title  : '상태',
-	               	render : function(data,type,row,meta){
-	                	var html = '<span class="font_009">신청<span>'; // pending
-	                	if(data == "DONE"){
-	                		html = '<span>완료</span>'; // complete
-	                	}else if(data=="WAIT"){
-	                		html = '<span class="font_010">대기</span>';
-	                	}
-	                	return html;
-	                }
-	               
-	            },
-	        ],
+    },
+    { 
+      data   : 'regdate',
+      title  : '신청 일시',
+      width : '30%',
+    },
+    { 
+      data   : 'money',
+      title  : '금액',
+      width : '30%',
+      render : function(data,type,row,meta){
+      	var html = '<span class="font_002">'+numberWithCommas(data)+'</span> 원';
+      	return html;
+      }
+    },
+    { 
+      data   : 'wdstate',
+      title  : '상태',
+     	render : function(data,type,row,meta){
+      	var html = ''; // pending
+      	
+      	if(data == "DONE"){
+      		html = '<span>완료</span>'; // complete
+      		
+      	}else if(data=="WAIT"){
+      		html = '<span class="font_010">대기</span>';
+      	
+      	}else if(data=="PEND"){
+      		html = '<span class="font_010">대기</span>';
+      			
+      	}else if(data == "DELETE"){
+      		html = '<span class="font_010">취소</span>';
+      	}
+      	
+      	return html;
+      }         
+    },
+    ],
 		pagingType: "full_numbers",
 	    language: {
-		    paginate: {
-		      	previous: "<",
-		      	next: ">",
-		      	first: "<<",
-		      	last: ">>",
-		    },
+	    paginate: {
+	      	previous: "<",
+	      	next: ">",
+	      	first: "<<",
+	      	last: ">>",
+	    },
 		    emptyTable: "결과가 없습니다.",
 		},
+		/*
 	    rowCallback : function(row , data , index) {
 	        
 	    },
 	    drawCallback: function( settings ) {
 	        
 	    }
+	  */
 	});
 
 
@@ -357,8 +372,7 @@
 						$("#uhead").html(obj.header);
 						console.log(obj.bal)
 						$("#balmoney").text(numberWithCommas(obj.bal));
-						console.log($("#balmoney").val())
-						
+						console.log($("#balmoney").val())						
 						console.log("$($pointUseTable");
 						console.log($($pointUseTable))
 
