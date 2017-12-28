@@ -23,6 +23,9 @@
 {
 	display:none
 }
+.incpwb{
+	border-color: #ff8a00!important;
+}
 .incpw{
 	background-color: #424c4e!important;
 	color: #404654!important;
@@ -33,7 +36,7 @@
 	left: -108px; 
 }
 .iincpw{
-	left: -94px!important;
+	left: -222px!important;
 }
 .incpwf{
 	vertical-align: inherit; 
@@ -69,7 +72,7 @@
 									<span id='' class="arrow-right"></span>
 								</div>
 								<div id='iinc' class="incp">
-									<span class="incpw iincpw"><font class="incpwf"> 귀하의 계정을 확인하십시오.</font></span>
+									<span class="incpw iincpw"><font class="incpwf"> 비밀번호 입력 후 전용계좌확인 버튼을 클릭해주세요.</font></span>
 									<span id='' class="arrow-right"></span>
 								</div>
 							</div>
@@ -316,8 +319,10 @@
 				if(obj.BN =="-1"){
 					$("#bankInfoTxt").val('');
 					$("#inc").removeClass('incp');
-					$("#iinc").addClass('incp');					 
+					$("#iinc").addClass('incp');	
+					$("#bankInfoTxt").addClass('incpwb');		
 				}	else if(data !="" || data !=null){
+					$("#bankInfoTxt").removeClass('incpwb');
 					$("#inc").addClass("incp");
 					$("#iinc").addClass('incp');
 					$('#bankInfoTxt').val('');
@@ -339,6 +344,7 @@
 	      	scrolllock: true,
 	      	onclose:function(){
 	      		$('#bankInfoTxt').addClass('pd');
+	      		$("#bankInfoTxt").removeClass('incpwb');
 	      		$('#bankInfoTxt').attr('readonly', false);
 	      		resetChargeForm();
 	    	}
@@ -430,8 +436,10 @@
 				$('#bankInfoTxt').val('');
 				$("#iinc").removeClass('incp');
 				$("#inc").addClass("incp");
+				$("#bankInfoTxt").addClass('incpwb');
 			}else{
 				if($("#chargeForm").valid()){
+					$("#bankInfoTxt").removeClass('incpwb');
 					$("#iinc").addClass('incp');
 					$("#bankInfoTxt").qtip("hide");
 					$("#money").qtip("hide");
