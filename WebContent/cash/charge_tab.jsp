@@ -479,9 +479,9 @@
     	validClass: 'form1-valid',
     	errorContainer: ".error_cash_in",
   		rules: {			
-			bank_acct:{
-				required:true,
-			},
+			// bank_acct:{
+			// 	required:true,
+			// },
 			money:{
 				required:true,
 				money_number:true,
@@ -489,9 +489,9 @@
 			},
 		},
 		messages: {
-			bank_acct :{
-					required:"비밀번호 입력후 전용계좌를 확인해 주세요.",
-			},
+			// bank_acct :{
+			// 		required:"비밀번호 입력후 전용계좌를 확인해 주세요.",
+			// },
 			money:{
 				required:"금액을 입력해 주세요.",
 				money_number: "금액을 숫자로 입력해 주세요.",

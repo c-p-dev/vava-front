@@ -3,7 +3,7 @@
 
 <style>
 	#cdt{
-		color:#5f6060;
+		color:#ffa800;
 		padding: 7px 0 0 5px;
 	}
 </style>
