@@ -350,6 +350,7 @@ color:white;
 	      		$('#bankInfoTxt').addClass('pd');
 	      		$("#bankInfoTxt").removeClass('incpwb');
 	      		$('#bankInfoTxt').attr('readonly', false);
+	      		$("#bankInfoBtn").removeAttr("disabled");
 	      		resetChargeForm();
 	    	}
 	    });
