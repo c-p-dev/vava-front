@@ -194,7 +194,7 @@ public class BetConstructController {
 			if (null != user_data.getUserid()) {
 				auth_user.setName(user_data.getNick());
 				auth_user.setNickName(user_data.getNick());
-				auth_user.setUserName(Integer.toString(user_data.getSiteid()).concat("_").concat(user_data.getUserid()));
+				auth_user.setUserName(user_data.getUserid());
 				auth_user.setToken(json_data.getToken());
 				auth_user.setTotalBalance(user_data.getMoney());
 				auth_user.setGender(false);
