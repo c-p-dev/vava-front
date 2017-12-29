@@ -89,7 +89,6 @@ $(document).ready(function() {
                
                 //If there was no resonse from the server
                 error: function(jqXHR, textStatus, errorThrown){
-                     console.log("ERROR " + textStatus);
                       $("#sportsResponse").html(jqXHR.responseText);
                 },
                

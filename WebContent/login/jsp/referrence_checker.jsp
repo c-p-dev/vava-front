@@ -8,8 +8,8 @@
 	UserDao ud = new UserDao();
 	UserBean uBean = new UserBean();
 	uBean.setUserid(request.getParameter("referrer").trim());
-	System.out.println(request.getParameter("referrer").trim());
+	//System.out.println(request.getParameter("referrer").trim());
 	boolean res  = ud.checkUserId(uBean);
-	System.out.println(res);
+	//System.out.println(res);
 	out.println(res);
 %>

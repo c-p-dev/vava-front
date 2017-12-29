@@ -370,10 +370,8 @@ public String createCasinoUser(MgPlayerAccountBean user_profile) {
 	}
 	
 	public String registerUser(String json_post){
-		System.out.println(json_post);
 		Gson gson = new Gson();
 		HashMap<String, String> json_data 	= gson.fromJson(json_post, new TypeToken<HashMap<String, String>>(){}.getType());
-		System.out.println(json_data);
 		logger.debug(json_data);
 		
 		return json_post;
@@ -739,9 +737,7 @@ public String createCasinoUser(MgPlayerAccountBean user_profile) {
 			rs.close();
 	        pstmt.close();
 	        con.close();
-	        System.out.print(query);
 		} catch(Exception e){
-			System.out.println(e);
 			e.printStackTrace();
 		} 
 	  	return list;
@@ -786,9 +782,9 @@ public String createCasinoUser(MgPlayerAccountBean user_profile) {
 			rs.close();
 	        pstmt.close();
 	        con.close();
-	        //System.out.print(query);
+	       
 		} catch(Exception e){
-			//System.out.println(e);
+		
 			e.printStackTrace();
 		} 
 	  	return list;
@@ -868,7 +864,7 @@ public String createCasinoUser(MgPlayerAccountBean user_profile) {
 	//         sc_ctrl.transferMoneyToVava(userid);
 	// 	}
 	// 	catch(Exception e) {
-	// 		System.out.println(e);
+
 	// 		logger.debug(e);
 	// 	}
 		
@@ -971,7 +967,6 @@ public String createCasinoUser(MgPlayerAccountBean user_profile) {
 	        }
 	        
 		} catch(Exception e) {
-			System.out.println(e);
 			logger.debug(e);
 		}
 		
@@ -1004,7 +999,6 @@ public String createCasinoUser(MgPlayerAccountBean user_profile) {
 	        
 		}
 		catch(Exception e) {
-			System.out.println(e);
 			logger.debug(e);
 		}
 		
@@ -1214,7 +1208,7 @@ public String createCasinoUser(MgPlayerAccountBean user_profile) {
 			con.close();
 			
 			//logger.debug(row);
-			//System.out.println("pasok sa app");
+		
 	  	}catch(Exception e){
 	  		logger.debug(query);
 	  		e.printStackTrace();
@@ -1274,7 +1268,6 @@ public String createCasinoUser(MgPlayerAccountBean user_profile) {
 		ResultSet rs = null;
 		SmsDao sd = new SmsDao();
 		boolean result = false;
-		System.out.println(cell);
 		try {
 			DBConnector.getInstance();
 			con = DBConnector.getConnection();
@@ -1309,7 +1302,6 @@ public String createCasinoUser(MgPlayerAccountBean user_profile) {
 		ResultSet rs = null;
 		SmsDao sd = new SmsDao();
 		boolean result = false;
-		System.out.println(cell);
 		try {
 			DBConnector.getInstance();
 			con = DBConnector.getConnection();
@@ -1390,11 +1382,6 @@ public String createCasinoUser(MgPlayerAccountBean user_profile) {
 		    		"AND bank_num = ? " + 
 		    		"AND cell = ? ";
 		    
-		    System.out.println(bank_owner);
-		    System.out.println(bank_name);
-		    System.out.println(bank_num);
-		    System.out.println(cell_prefix);
-		    System.out.println(cell);
 		    
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1,bank_owner);

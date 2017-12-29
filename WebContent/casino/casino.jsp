@@ -567,7 +567,7 @@ div.chevy-cntr {
 
 		var hackerList = new List('contents_wrap', options);
 
-		//console.log(hackerList);
+		
 	}
 
 	function addPgBtn(){
@@ -585,7 +585,7 @@ div.chevy-cntr {
 			method: 'GET',
 		}).done(function(data){
 			var obj = JSON.parse(data);
-			// console.log(obj);
+			
 			session = obj.result;
 
 		});

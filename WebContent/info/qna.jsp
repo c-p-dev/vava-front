@@ -175,7 +175,6 @@
 				data : {msgid:data.msgid},
 				method: 'POST',
 			}).done(function(data){
-				console.log(data);
 				loadMsgCount();
 			});	
 		}

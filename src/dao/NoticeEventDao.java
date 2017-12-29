@@ -79,7 +79,6 @@ public class NoticeEventDao {
 	        
 		}
 		catch(Exception e) {
-			System.out.println(e);
 		}
 		
 		return ne_list;
@@ -140,7 +139,6 @@ public class NoticeEventDao {
 	        
 		}
 		catch(Exception e) {
-			System.out.println(e);
 		}
 		
 		return ne_list;
@@ -201,7 +199,6 @@ public class NoticeEventDao {
 	        
 		}
 		catch(Exception e) {
-			System.out.println(e);
 		}
 		
 		return ne_list;
@@ -262,7 +259,6 @@ public class NoticeEventDao {
 	        
 		}
 		catch(Exception e) {
-			System.out.println(e);
 		}
 		
 		return ne_list;
@@ -322,7 +318,6 @@ public class NoticeEventDao {
 	        
 		}
 		catch(Exception e) {
-			System.out.println(e);
 		}
 		
 		return ne_list;

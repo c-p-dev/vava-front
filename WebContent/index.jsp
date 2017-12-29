@@ -316,17 +316,13 @@ mainAngular.controller("mc", function($scope, $sce, $templateCache, $compile, $h
     if (data) {
 
         $scope.validMKTypeId = data;
-        // console.log($scope.validMKTypeId);
     };
     data = null;
   }).error(function(data, status, headers, config) {
-    console.log("Error $scope.validMKTypeId");
     data = null;
 	});
 	
 	function sub_loadBlockMatch(response) {		
-		console.log("response.Type");
-		console.log("response.Type : " + response.Type);
 		
 		$scope.BLR = response;
 				
@@ -430,12 +426,10 @@ mainAngular.controller("mc", function($scope, $sce, $templateCache, $compile, $h
 
 	          $scope.DL = [];
 	          $scope.DL = data;
-	          console.log($scope.DL);
 
 	      };
 	      data = null;
       }).error(function(data, status, headers,config) {
-	      console.log("Exception getDepositList");
 	      data = null;
       });
   };
@@ -450,7 +444,6 @@ mainAngular.controller("mc", function($scope, $sce, $templateCache, $compile, $h
   };
 
   $scope.vM2 = function(sid, mid) {
-      // console.log("$scope.vM");
       document.form.mid.value = mid
       document.form.sid.value = sid
       document.form.tab.value = "2"
@@ -571,7 +564,6 @@ mainAngular.controller("mc", function($scope, $sce, $templateCache, $compile, $h
       
        data = null;
      }).error(function(data, status, headers,config) {
-        console.log("Exception loadLiveMatch");
         data = null;
      });
   };
@@ -613,7 +605,6 @@ mainAngular.controller("mc", function($scope, $sce, $templateCache, $compile, $h
 	                Vis = mResult[0].Vis;
 	                MkId = mResult[0].Id;
 
-	                // console.log(mSelect);
 
 	                for (var i = mSelect.length - 1; i >= 0; i--) {
 	                    if (mSelect[i].Nm == 'W1') {
@@ -683,7 +674,6 @@ mainAngular.controller("mc", function($scope, $sce, $templateCache, $compile, $h
 	      };
 	      
       }).error(function(data, status, headers,config) {
-	      console.log("Exception loadLiveMatch");
 	      data = null;
       });
   };
@@ -821,7 +811,6 @@ mainAngular.controller("mc", function($scope, $sce, $templateCache, $compile, $h
   function sub_loadGetMatch(res) {
       var nlm = true;
 
-      console.log("sub_loadGetMatch");
 
       angular.forEach(res.Objects,function(obj, idx) {
 
@@ -832,15 +821,12 @@ mainAngular.controller("mc", function($scope, $sce, $templateCache, $compile, $h
             return;
         };
 
-        console.log(obj);
-        console.log("MATCH ID:" +obj.Id);
 
         angular.forEach( $scope.LS, function( Ls_obj, i2) {
 
           if (Ls_obj.MId == obj.Id) {
               nlm = false;
 
-              console.log("MATCH LIVE MatchId : " +obj.MatchId);
 
               if (Ls_obj.IsVisible &&!obj.IsVisible) {
                   finishLiveMatch(obj.Id);
@@ -902,7 +888,6 @@ mainAngular.controller("mc", function($scope, $sce, $templateCache, $compile, $h
       document.getElementById("lm_spin").style.display = "block";
 
       $scope.lm_load();
-      console.log("selLS");
 
       $scope.tabSId = sid;
 
@@ -940,7 +925,6 @@ mainAngular.controller("mc", function($scope, $sce, $templateCache, $compile, $h
 
         if (data) {
           $scope.PS = [];
-          // console.log(data);
 
           angular.forEach( data,function(obj,idx) {
 
@@ -955,8 +939,6 @@ mainAngular.controller("mc", function($scope, $sce, $templateCache, $compile, $h
               var mResult = obj.Re.filter(function(el) {return el.MId == obj2.Id;})
               var mSelect = obj.Se.filter(function( el) {return el.MId == obj2.Id;})
 
-              // console.log(mResult);
-              // console.log(mSelect);
 
               var w1Price, w2Price, xPrice = "-";
               var SusM = true;
@@ -1018,7 +1000,6 @@ mainAngular.controller("mc", function($scope, $sce, $templateCache, $compile, $h
 
       }).error(
       function(data, status, headers,config) {
-        console.log(status);
         data = null;
       });
   };

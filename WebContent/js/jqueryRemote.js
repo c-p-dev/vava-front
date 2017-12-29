@@ -54,7 +54,6 @@ $.validator.addMethod("synchronousRemote", function (value, element, param) {
                 validator.invalid[element.name] = true;
                 validator.showErrors(errors);
 
-                console.log(errors);
 
              
             }

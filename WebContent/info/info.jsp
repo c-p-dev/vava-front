@@ -98,7 +98,6 @@
 	});
 	
 	function clive_load() {
-		console.log("clive_load");
 	    var myVar = setTimeout(showPage_clive, 1000);
 
 	};

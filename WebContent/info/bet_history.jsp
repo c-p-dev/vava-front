@@ -99,12 +99,8 @@ table.dataTable tbody tr{
 			
 			
 			$scope.updateSport = function(item) {
-				console.log(item);
-				//console.log($scope.table);
-				//console.log(table);
 				table.columns(9).search(item).draw();
 		  // $scope.sName = $scope.selectedItem.snames
-		  //console.log($scope.sName);
 		  
 	}
 
@@ -116,25 +112,18 @@ table.dataTable tbody tr{
 		  };
 
 			$scope.updateDate = function(item) {
-				console.log(item);
 				if(item == -1){
 					item = 365;
-					console.log(item);
 				}
 				
-				//console.log($scope.table);
-				//console.log(table);
 				
 				var today_ = new Date();
 				//var today__= today_.yyyymmdd();
-				//console.log(today__);
 				
 				var ft_eday = moment(today_).format('YYYYMMDD');
-				console.log("ft_eday:"+ft_eday);
 				
 				var sday_ = today_.setDate(today_.getDate()-item);
 				var ft_sday= moment(sday_).format('YYYYMMDD');
-				console.log("ft_sday:"+ft_sday);
 				
 				
 				$.fn.dataTable.ext.search.push(
@@ -142,11 +131,7 @@ table.dataTable tbody tr{
 		       // var min = parseInt( $('#min').val(), 10 );
 		       // var max = parseInt( $('#max').val(), 10 );
 		        var age = parseFloat( moment(data[2]).format('YYYYMMDD') ) || 0; // use data for the age column
-		        console.log("");
-		        console.log(age);
 		       // var dt = table.columns(2);
-		        console.log(ft_eday <= age);
-		 				console.log(age <= ft_sday);
 		 				
 		 				/* 
 		        if ( ( isNaN( ft_sday ) && isNaN( ft_eday ) ) ||
@@ -177,7 +162,6 @@ table.dataTable tbody tr{
 
 			//	table.columns(2).search(myfilter).draw();
 		  	// $scope.sName = $scope.selectedItem.snames
-		  	//console.log($scope.sName);
 		  
 		}
 	
@@ -191,7 +175,6 @@ table.dataTable tbody tr{
 	 	//var row = table.row(document.getElementById('cbForm1').cb); 
 	 //var row = table.row(document.getElementById('SP_'+bid));
 	 
-	 //console.log(row);
 	 
 	 	var $scope = angular.element(document.getElementById(bid)).scope();
 	 	var $http = angular.injector(['ng', 'Vava']).get('$http');
@@ -213,7 +196,6 @@ table.dataTable tbody tr{
 			"		  <div class='sk-circle12 sk-child'></div>" +
 			"		</div> ";
 		*/			
-			//console.log(sss);
 			
 			if($('#sub_'+bid).hasClass('panel-body')){
 				//row.child(sss).show();
@@ -224,7 +206,6 @@ table.dataTable tbody tr{
 								
 			//row.child(sss).show();
 			//row.child().slideDown();		
-			//console.log("row.child(sss).show();");
 			
 				$http({
 						method: 'GET', 
@@ -233,7 +214,6 @@ table.dataTable tbody tr{
 						headers: {'Content-Type': 'application/json; charset=utf-8'} 
 				}).success(function(data, status, headers, config) {
 											
-				//console.log(data);
 				var s="<table  id='sub_"+bid+"' class='panel-body bet_dd_p acc_list_table_in_01' cellpadding='0' cellspacing='0' >"+
 					"<tr>"+			
 					"	<td class='acc_list_table_in_t' width='11%'>경기일시</td>"+
@@ -249,7 +229,6 @@ table.dataTable tbody tr{
 																	
 				angular.forEach(data, function(obj,idx) {
 					
-					console.log(obj);
 					var ss = "진행중";
 					
 					if(obj.bresult== 'MISS'){
@@ -275,7 +254,6 @@ table.dataTable tbody tr{
 					
 					s +="</table>";
 					
-					//console.log(s);
 					row.child(s).show('1000');
 					
 					//$('#sub_'+bid , row.child()).slideDown(1000);
@@ -1348,13 +1326,11 @@ table.dataTable tbody tr{
 
 	<script type="text/javascript">					
 		$("#del_all_no").on("click",function(){
-			console.log("NO")
 
 			$("#delAllAsk").popup("hide");
 		});		
 		
 		$("#del_all_no2").on("click",function(){
-			console.log("NO")
 
 			$("#delAllAsk").popup("hide");
 		});	
@@ -1381,7 +1357,6 @@ table.dataTable tbody tr{
 			}
 
 			
-			console.log("param : " + param);
 
 			$.ajax({
 				url:'/info/jsp/delBettingHistory.jsp',								
@@ -1389,10 +1364,8 @@ table.dataTable tbody tr{
 				cache: false,
 	   			data: param,
 			}).done(function(data){
-				console.log("done");
 				
 				if(data !="" || data !=null){
-					console.log(data);
 					//alert("deleted");
 					//logoutModal2.show();
 					$("#delAllCon").popup("show");
@@ -1425,7 +1398,6 @@ table.dataTable tbody tr{
 	
 	<script>
 	$("#del_all_conf").on("click",function(){
-		console.log("NO")
 		//e.preventDefault();
 		$("#delAllCon").popup("hide");
 		location.reload();
@@ -1454,7 +1426,6 @@ table.dataTable tbody tr{
 	
 	<script>
 	$("#del_sel_conf").on("click",function(){
-		//console.log("NO")
 		//e.preventDefault();
 		$("#delSelAsk").popup("hide");
 		//location.reload();
@@ -1469,7 +1440,6 @@ table.dataTable tbody tr{
 
 <script>
 	$(document).ready(function(){
-		console.log("load calendar");
 
 		// calendar 1
 
@@ -1720,10 +1690,7 @@ var NColor= "#262a2b";
 var CColor= "#293133";
 
 	function CBg(row) { 
-		//console.log("A")
 		row.parentNode.style.backgroundColor = CColor; 
-		//console.log(row.parentNode.style)
-		//console.log(row.parentNode.style.backgroundColor)
 	}
 
 	function RBg(row) { 

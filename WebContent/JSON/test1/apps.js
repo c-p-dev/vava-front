@@ -49,7 +49,6 @@ alert("aa");
                
                 //If there was no resonse from the server
                 error: function(jqXHR, textStatus, errorThrown){
-                     console.log("Something really bad happened " + textStatus);
                       $("#ajaxResponse").html(jqXHR.responseText);
                 },
                
