@@ -198,8 +198,6 @@ public class SmsDao {
 		String message_id = sentMessageInfo.getMessageId();
 		int status_id = sentMessageInfo.getStatus().getId();
 		String status_name = sentMessageInfo.getStatus().getName();
-		//System.out.println(response);
-		//System.out.println(sentMessageInfo);
 		groupId = sentMessageInfo.getStatus().getGroupId();
 
 //      Sample Response
@@ -213,7 +211,6 @@ public class SmsDao {
     	hsm.put("status_name",status_name);
     	hsm.put("group_id",groupId);
     
-    	//System.out.println(hsm);
     	return hsm;
     }
 	
@@ -331,7 +328,6 @@ public class SmsDao {
 		}
 		
 		
-		System.out.println("SMS AUTH LOG STAT: " + saveLog);
 		
 		return result;
 	}
@@ -391,7 +387,6 @@ public class SmsDao {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1,mobile_no);
 			rs = pstmt.executeQuery();
-			System.out.println(pstmt);
 			if(rs.next()){
 				result = true;
 			}
@@ -420,7 +415,6 @@ public class SmsDao {
 			mobile_no = cell_prefix + cell;
 		}
 		 
-		//System.out.println(mobile_no);
 		return mobile_no;
 	}
 	
@@ -531,7 +525,6 @@ public class SmsDao {
 			
 		} catch(Exception e){
 			logger.debug(e);
-			System.out.println(e);
 			return null;	
 		}
 	}
@@ -568,7 +561,6 @@ public class SmsDao {
 			
 		} catch(Exception e){
 			logger.debug(e);
-			System.out.println(e);
 			return false;	
 		}
 	}
@@ -583,7 +575,6 @@ public class SmsDao {
 		
 		try{
 			
-			System.out.println(mobile_no);
 			DBConnector.getInstance();
 			con = DBConnector.getConnection();
 		    Date date = new Date();
@@ -630,7 +621,6 @@ public class SmsDao {
 		
 		try{
 			
-			System.out.println(mobile_no);
 			DBConnector.getInstance();
 			con = DBConnector.getConnection();
 		    Date date = new Date();
@@ -665,7 +655,6 @@ public class SmsDao {
 		
 		try{
 			
-			//System.out.println(mobile_no);
 			DBConnector.getInstance();
 			con = DBConnector.getConnection();
 		    Date date = new Date();
@@ -704,7 +693,6 @@ public class SmsDao {
 		String state = "INCORRECT CODE";
 		try{
 			
-			//System.out.println(mobile_no);
 			DBConnector.getInstance();
 			con 				= DBConnector.getConnection();
 		    //Date date = new Date();

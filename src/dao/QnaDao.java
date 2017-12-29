@@ -106,7 +106,6 @@ public class QnaDao {
 	        con.close();
 	        
 		} catch(Exception e){
-			System.out.println(e);
 			e.printStackTrace();
 		} 
 	  	return list;
@@ -136,7 +135,6 @@ public class QnaDao {
 			}
 		}
 		catch(Exception e) {
-			System.out.println(e);
 			logger.debug(e);
 		}
 		

@@ -164,11 +164,9 @@ public class ChargeDao {
 	        con.close();
 	  		    
 		} catch(Exception e){
-			System.out.println(e);
 			e.printStackTrace();
 		} 
 		
-		System.out.println(list);
 	  	return list;
 		
 	}
