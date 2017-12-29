@@ -4,36 +4,31 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DateFormat;
-import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Base64;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
 import java.util.Scanner;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import bean.CasinoErrorLogBean;
 import bean.FinTokenBean;
 import bean.MgBettingProfileBean;
 import bean.MgDepositBean;
 import bean.MgLiveGamesTransBean;
 import bean.MgPlayerAccountBean;
-import bean.MgResponseStatusBean;
 import bean.MgWithdrawAllBean;
 import bean.ScTransactionBean;
 import bean.UserBean;
+import dao.CasinoErrorLogDao;
 import dao.FinTokenDao;
 import dao.FinancialMovementDao;
 import dao.MgLiveTransLogDao;
@@ -41,9 +36,6 @@ import dao.UserDao;
 import util.NukeSSLCerts;
 import util.StringManipulator;
 
-import java.sql.*;
-import javax.sql.*;
-import javax.naming.*;
 import javax.net.ssl.HttpsURLConnection;
 
 public class TotalEgameController {
@@ -58,6 +50,17 @@ public class TotalEgameController {
 	/*	Error Codes	*/
 	public static final int	ACCOUNT_NOT_EXIST	= 46;
 	
+	/*	Method Name for Logs	*/
+	public static final int	GP_TEG					= 1;
+	public static final String TEG_MT_ADD_PLAYER	= "Registration";
+	public static final String TEG_MT_WITHDRAW_ALL	= "Withdraw All";
+	public static final String TEG_MT_DEPOSIT		= "Deposit";
+	public static final String TEG_MT_EDIT_ACCT		= "Edit Account";
+	public static final String TEG_MT_GET_LIVETRANS	= "Get Live Transactions";
+	public static final String TEG_MT_GET_SPINS		= "Get Spin Transactions";
+	public static final String TEG_MT_CHK_ACCT_EXST	= "Check existing account";
+	
+	
 	//-----------------------------------------------------
     //  TotalEgameController constructor
     //      Initialize Object Properties
@@ -69,7 +72,7 @@ public class TotalEgameController {
 		enc_creds				= new String(creds_b64);
 	}
     
-	public String addPlayerAccount(MgPlayerAccountBean user_profile)
+	public String addPlayerAccount(MgPlayerAccountBean user_profile, String username, int site_id)
 	{
 		/*	Variable Declaration	*/
 		Gson gson							= new Gson();
@@ -83,12 +86,12 @@ public class TotalEgameController {
 		/*--------------------------------------------------------------------
         |	Execute HTTP POST Request to TEG
         |-------------------------------------------------------------------*/
-		srv_resp 	= this.postToTeg(url, json_param);
+		srv_resp 	= this.postToTeg(url, json_param, username, site_id, TEG_MT_ADD_PLAYER);
 		
 		return srv_resp;
 	}
 	
-	public String withdrawAll(String username)
+	public String withdrawAll(String username, String user_id, int site_id)
 	{
 		/*	Variable Declaration	*/
 		Gson gson							= new Gson();
@@ -108,7 +111,7 @@ public class TotalEgameController {
 		/*--------------------------------------------------------------------
         |	Execute HTTP POST Request to TEG
         |-------------------------------------------------------------------*/
-		srv_resp 	= this.postToTeg(url, json_param);
+		srv_resp 	= this.postToTeg(url, json_param, user_id, site_id, TEG_MT_WITHDRAW_ALL);
 		trans_data	= gson.fromJson(srv_resp, MgWithdrawAllBean.class);
 		
 		/*	Add transaction record to database	*/
@@ -117,7 +120,7 @@ public class TotalEgameController {
 		return srv_resp;
 	}
 	
-	public String deposit(String username, double money)
+	public String deposit(String username, double money, String user_id, int site_id)
 	{
 		/*	Variable Declaration	*/
 		Gson gson							= new Gson();
@@ -138,7 +141,7 @@ public class TotalEgameController {
         |	Execute HTTP POST Request to TEG
         |-------------------------------------------------------------------*/
 		if (0 < money) {
-			srv_resp 	= this.postToTeg(url, json_param);
+			srv_resp 	= this.postToTeg(url, json_param, user_id, site_id, TEG_MT_DEPOSIT);
 			
 			/*	Add transaction record to database	*/
 			fin_db.addMgTransactionLog(username, money, "deposit");
@@ -150,7 +153,7 @@ public class TotalEgameController {
 		return srv_resp;
 	}
 	
-	public String editAccount(MgPlayerAccountBean user_profile)
+	public String editAccount(MgPlayerAccountBean user_profile, String username, int site_id)
 	{
 		/*	Variable Declaration	*/
 		Gson gson							= new Gson();
@@ -166,12 +169,12 @@ public class TotalEgameController {
 		/*--------------------------------------------------------------------
         |	Execute HTTP POST Request to TEG
         |-------------------------------------------------------------------*/
-		srv_resp 		= this.postToTeg(url, json_param);
+		srv_resp 		= this.postToTeg(url, json_param, username, site_id, TEG_MT_EDIT_ACCT);
 		
 		return srv_resp;
 	}
 	
-	public String getLiveGamesTransaction(String start_date, String end_date)
+	public String getLiveGamesTransaction(String start_date, String end_date, String username, int site_id)
 	{
 		/*	Variable Declaration	*/
 		Gson gson							= new Gson();
@@ -190,12 +193,12 @@ public class TotalEgameController {
 		/*--------------------------------------------------------------------
         |	Execute HTTP POST Request to TEG
         |-------------------------------------------------------------------*/
-		srv_resp 	= this.postToTeg(url, json_param);
+		srv_resp 	= this.postToTeg(url, json_param, username, site_id, TEG_MT_GET_LIVETRANS);
 		
 		return srv_resp;
 	}
 	
-	public String getSpinBySpinData()
+	public String getSpinBySpinData(int site_id)
 	{
 		/*	Variable Declaration	*/
 		Gson gson							= new Gson();
@@ -213,7 +216,7 @@ public class TotalEgameController {
 		/*--------------------------------------------------------------------
         |	Execute HTTP POST Request to TEG
         |-------------------------------------------------------------------*/
-		srv_resp 	= this.postToTeg(url, json_param);
+		srv_resp 	= this.postToTeg(url, json_param, null, site_id, TEG_MT_GET_SPINS);
 		
 		return srv_resp;
 	}
@@ -225,6 +228,7 @@ public class TotalEgameController {
 		String url							= api_base+"IsAccountAvailable";
 		String json_param					= "";
 		String srv_resp						= "";
+		String[] user_arr					= username.split("_");
 		HashMap<String, Object>	teg_param	= new HashMap<String, Object>();
 		
 		/*	Parameters to be passed to TEG	*/
@@ -236,7 +240,7 @@ public class TotalEgameController {
 		/*--------------------------------------------------------------------
         |	Execute HTTP POST Request to TEG
         |-------------------------------------------------------------------*/
-		srv_resp 	= this.postToTeg(url, json_param);
+		srv_resp 	= this.postToTeg(url, json_param, user_arr[1], Integer.valueOf(user_arr[0]), TEG_MT_CHK_ACCT_EXST);
 		
 		return srv_resp;
 	}
@@ -260,7 +264,7 @@ public class TotalEgameController {
 		String start_date	= dfrmt_start.format(cal_start.getTime());
 		String end_date		= dfrmt_end.format(cal_end.getTime());
 		
-		json_resp	= this.getLiveGamesTransaction(start_date, end_date);
+		json_resp	= this.getLiveGamesTransaction(start_date, end_date, null, 0);
 		
 		trans_list	= gson.fromJson(json_resp, MgLiveGamesTransBean.class);
 		
@@ -283,7 +287,6 @@ public class TotalEgameController {
 		String sc_resp			= "";		
 		String mg_username		= "";
 		String mg_pincode		= "";
-		String session_id		= "";
 		double money			= 0;
 		
 		AsianGamingController ag_ctrl	= new AsianGamingController();
@@ -332,7 +335,7 @@ public class TotalEgameController {
 			/*--------------------------------------------------------------------
 	        |	Withdraw all cash from TEG System
 	        |-------------------------------------------------------------------*/
-			srv_resp		= this.withdrawAll(mg_username);
+			srv_resp		= this.withdrawAll(mg_username, username, site_id);
 			withdraw_data	= gson.fromJson(srv_resp, MgWithdrawAllBean.class);
 			
 			if (0 == withdraw_data.getStatus().getErrorCode()) {
@@ -363,7 +366,7 @@ public class TotalEgameController {
 						mg_user.setPinCode("newplayer1");
 						mg_user.setIsProgressive(0);
 						mg_user.setBettingProfiles(bet_profls);
-						this.addPlayerAccount(mg_user);
+						this.addPlayerAccount(mg_user, username, site_id);
 						break;
 				}
 				
@@ -390,7 +393,7 @@ public class TotalEgameController {
 	        |-------------------------------------------------------------------*/
 			if (1 == game_provider) {
 				/*	Deposit all money from VAVA to MG	*/
-				srv_resp		= this.deposit(mg_username, money);
+				srv_resp		= this.deposit(mg_username, money, username, site_id);
 				deposit_data	= gson.fromJson(srv_resp, MgDepositBean.class);
 				
 				if (0 == deposit_data.getStatus().getErrorCode()) {
@@ -406,7 +409,7 @@ public class TotalEgameController {
 					edit_data.setAccountNumber(mg_username);
 					edit_data.setPinCode(mg_pincode);
 					
-					this.editAccount(edit_data);
+					this.editAccount(edit_data, username, site_id);
 					
 					/*--------------------------------------------------------------------
 			        |	Sets the Game URL
@@ -527,7 +530,7 @@ public class TotalEgameController {
 		/*--------------------------------------------------------------------
         |	Withdraw all money from MG and save to database
         |-------------------------------------------------------------------*/
-		srv_resp 		= this.withdrawAll(mg_username);
+		srv_resp 		= this.withdrawAll(mg_username, username, site_id);
 		withdraw_data	= gson.fromJson(srv_resp, MgWithdrawAllBean.class);
 		
 		if (0 == withdraw_data.getStatus().getErrorCode()) {
@@ -570,7 +573,7 @@ public class TotalEgameController {
 		edit_data.setAccountNumber(mg_username);
 		edit_data.setPinCode(mg_pincode);
 		
-		this.editAccount(edit_data);
+		this.editAccount(edit_data, username, site_id);
 		
 		srv_resp	= srv_resp.concat("&username=").concat(mg_username);
 		srv_resp	= srv_resp.concat("&password=").concat(mg_pincode);
@@ -578,10 +581,12 @@ public class TotalEgameController {
 		return srv_resp;
 	}
 	
-	public String postToTeg(String url, String json_param)
+	public String postToTeg(String url, String json_param, String username, int site_id, String method)
 	{
 		/*	Variable Declaration	*/
-		String responseBody = "";
+		String responseBody 		= "";
+		InputStream response		= null;
+		CasinoErrorLogDao log_db	= new CasinoErrorLogDao();
 		
 		try {
 			/*	Remove SSL check	*/
@@ -606,11 +611,33 @@ public class TotalEgameController {
 			output.writeBytes(json_param);
 			output.close();
 			
-			/*	Get TEG response			*/
-			InputStream response = connection.getInputStream();
+			/*	Get Status code of HTTP request	*/
+			int sts_code			= connection.getResponseCode();
+			
+			if ((400 > sts_code) && (200 <= sts_code)) {
+				/*	Get Error response			*/
+				response = connection.getInputStream();
+			}
+			else {
+				/*	Get TEG response			*/
+				response = connection.getErrorStream();
+			}
 			
 			try (Scanner scanner = new Scanner(response)) {
 				responseBody = scanner.useDelimiter("\\A").next();
+				
+				/*	Save Log to database	*/
+				if ((400 >= sts_code) && (200 <= sts_code)) {
+					CasinoErrorLogBean error_data	= new CasinoErrorLogBean();
+					
+					error_data.setUsername(username);
+					error_data.setSiteId(site_id);
+					error_data.setMessage(responseBody);
+					error_data.setGameProvider(GP_TEG);
+					error_data.setMethod(method);
+					
+					log_db.addNewErrorLog(error_data);
+				}
 			}
 			
 		}

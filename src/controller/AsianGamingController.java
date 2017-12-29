@@ -14,13 +14,17 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
+import bean.CasinoErrorLogBean;
 import bean.UserBean;
+import dao.CasinoErrorLogDao;
 import dao.UserDao;
 import util.DesEncrypter;
 import util.StringManipulator;
 
 public class AsianGamingController {
 	
+	public static final int GP_AG				= 2;
+	public static final String AG_MT_ADD_USER	= "Create / Check Player";
 	public static final String TOKEN_URL_PROD	= "http://gi.ibet25.com:81/doBusiness.do?";
 	public static final String TOKEN_URL_TEST	= "http://gi.aggdemo.com:81/doBusiness.do?";
 	
@@ -164,7 +168,9 @@ public class AsianGamingController {
 	
 	public String launchGame(String user_id, String lnk_dsp, int site_id) throws MalformedURLException, IOException
 	{
-		StringManipulator str_lib	= new StringManipulator();
+		StringManipulator str_lib		= new StringManipulator();
+		CasinoErrorLogBean casino_data	= new CasinoErrorLogBean();
+		CasinoErrorLogDao casino_db		= new CasinoErrorLogDao();
 		
 		String session_id		= str_lib.getSaltString(14);
 		String ag_create_url	= checkCreateAccount(user_id);
@@ -174,8 +180,16 @@ public class AsianGamingController {
 		InputStream  con_create	= new URL(ag_create_url).openStream();
 		try (Scanner scanner = new Scanner(con_create)) {
 			String responseBody = scanner.useDelimiter("\\A").next();
-			System.out.println(responseBody);
+			
+			casino_data.setUsername(user_id);
+			casino_data.setSiteId(site_id);
+			casino_data.setMessage(responseBody);
+			casino_data.setGameProvider(GP_AG);
+			casino_data.setMethod(AG_MT_ADD_USER);
+			
+			casino_db.addNewErrorLog(casino_data);
 		}
+		
 		InputStream  con_sess	= new URL(ag_sess_url).openStream();
 		
 		return ag_game_url;

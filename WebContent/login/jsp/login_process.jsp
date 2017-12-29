@@ -45,16 +45,15 @@
 		SpinCubeController sc_ctrl = new SpinCubeController(SITEID+"_"+userid);  
 		sc_ctrl.createPlayer();
 
-    BetConDao bc_db		= new BetConDao();    
-   	BetConUserBean bc_user	= new BetConUserBean();
-    bc_user.setUsername(userid);
-    bc_user.setSession_token(SITEID+"_"+userid);
-    bc_user.setSite_id(1);
-
-    bc_db.addNewBcUser(bc_user);	  
+		BetConDao bc_db		= new BetConDao();    
+		BetConUserBean bc_user	= new BetConUserBean();
+		bc_user.setUsername(userid);
+		bc_user.setSession_token(SITEID+"_"+userid);
+		bc_user.setSite_id(1);
+		
+		bc_db.addNewBcUser(bc_user);
     
-    
-    checkSession 	= true;	
+		checkSession 	= true;	
 		//sess 		= request.getSession(false);
 		sess.setMaxInactiveInterval(7200);	
 		sess.putValue("SITEID",ub.getSiteid());
@@ -66,8 +65,6 @@
 		sess.putValue("UBAL",ub.getMoney());
 		sess.putValue("UPOINT",ub.getPoint());
 		
-		
-    
 	}
 	
 	HashMap<String, Object> hsm = new HashMap<String, Object>();

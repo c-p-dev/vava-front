@@ -22,12 +22,14 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
+import bean.CasinoErrorLogBean;
 import bean.MgPlayerAccountBean;
 import bean.MgWithdrawAllBean;
 import bean.ScBetBean;
 import bean.ScTokenLogBean;
 import bean.ScTransactionBean;
 import bean.UserBean;
+import dao.CasinoErrorLogDao;
 import dao.FinancialMovementDao;
 import dao.ScBetLogDao;
 import dao.ScTokenLog;
@@ -38,10 +40,17 @@ import util.StringManipulator;
 public class SpinCubeController {
 	private String player_id	= "";
 	
-	public static final String SC_TOKEN_URL		= "https://sts.k2net.io/connect/token";
-	public static final String SC_AGENT_UNAME	= "testagent212555";
-	public static final String SC_AGENT_KEY		= "a4e94b08753842fdbbcd9a2aedcc80";
-	public static final String SC_BASE_URL		= "https://api-vavasoft.k2net.io/api/v1/";
+	public static final int GP_SPINCUBE				= 4;
+	public static final String SC_MT_CREATE_USER	= "Create Player";
+	public static final String SC_MT_GET_GAME		= "Get game URL";
+	public static final String SC_MT_LOCK_USER		= "Lock user";
+	public static final String SC_MT_GET_PLYCHK		= "Get Bet playcheck";
+	public static final String SC_MT_GET_BETS		= "Get All Bet Details";
+	
+	public static final String SC_TOKEN_URL			= "https://sts.k2net.io/connect/token";
+	public static final String SC_AGENT_UNAME		= "testagent212555";
+	public static final String SC_AGENT_KEY			= "a4e94b08753842fdbbcd9a2aedcc80";
+	public static final String SC_BASE_URL			= "https://api-vavasoft.k2net.io/api/v1/";
 	
 	//-----------------------------------------------------
     //  TotalEgameController constructor
@@ -160,6 +169,7 @@ public class SpinCubeController {
 		String url				= SC_BASE_URL.concat("agents/").concat(SC_AGENT_UNAME).concat("/Players");
 		String post_param		= "";
 		String srv_resp			= "";
+		String[] user_arr		= this.player_id.split("_");
 		
 		/*	Convert parameters to JSON	*/
 		post_param	= "playerId=".concat(this.player_id);
@@ -167,7 +177,8 @@ public class SpinCubeController {
 		/*--------------------------------------------------------------------
         |	Execute HTTP POST Request to TEG
         |-------------------------------------------------------------------*/
-		srv_resp 	= this.postToSc(url, post_param, "application/x-www-form-urlencoded");
+		
+		srv_resp 	= this.postToSc(url, post_param, "application/x-www-form-urlencoded", user_arr[1], Integer.valueOf(user_arr[0]), SC_MT_CREATE_USER);
 		
 		return srv_resp;
 	}
@@ -181,6 +192,7 @@ public class SpinCubeController {
 		String post_param		= "";
 		String srv_resp			= "";
 		JsonObject json_data	= new JsonObject();
+		String[] user_arr		= this.player_id.split("_");
 		
 		/*	Convert parameters to JSON	*/
 		post_param	= "game=".concat(game_name).concat("&");
@@ -190,7 +202,7 @@ public class SpinCubeController {
 		/*--------------------------------------------------------------------
         |	Execute HTTP POST Request to TEG
         |-------------------------------------------------------------------*/
-		srv_resp 	= this.postToSc(url, post_param, "application/x-www-form-urlencoded");
+		srv_resp 	= this.postToSc(url, post_param, "application/x-www-form-urlencoded", user_arr[1], Integer.valueOf(user_arr[0]), SC_MT_GET_GAME);
 		json_data	= gson.fromJson(srv_resp, JsonObject.class);
 		srv_resp	= json_data.get("gameURL").toString();
 		srv_resp	= srv_resp.replace("\"", "");
@@ -206,6 +218,7 @@ public class SpinCubeController {
 		String url				= SC_BASE_URL.concat("agents/").concat(SC_AGENT_UNAME).concat("/Players/").concat(this.player_id).concat("/products/SVS");
 		String post_param		= "";
 		String srv_resp			= "";
+		String[] user_arr		= this.player_id.split("_");
 		
 		/*	Convert parameters to JSON	*/
 		post_param	= "isLock=".concat(Boolean.toString(lock_sts));
@@ -213,7 +226,7 @@ public class SpinCubeController {
 		/*--------------------------------------------------------------------
         |	Execute HTTP POST Request to TEG
         |-------------------------------------------------------------------*/
-		srv_resp 	= this.postToSc(url, post_param, "application/x-www-form-urlencoded");
+		srv_resp 	= this.postToSc(url, post_param, "application/x-www-form-urlencoded", user_arr[1], Integer.valueOf(user_arr[0]), SC_MT_LOCK_USER);
 		
 		return srv_resp;
 	}
@@ -227,6 +240,7 @@ public class SpinCubeController {
 		ScTransactionBean fin_data	= new ScTransactionBean();
 		ScTokenLog sc_log_db		= new ScTokenLog();
 		ScTokenLogBean token_data	= sc_log_db.getLatestToken();
+		String[] user_arr			= this.player_id.split("_");
 		
 		String url				= SC_BASE_URL.concat("agents/").concat(SC_AGENT_UNAME).concat("/Transactions");
 		String post_param		= "";
@@ -265,7 +279,7 @@ public class SpinCubeController {
         |-------------------------------------------------------------------*/
 		if (true == allow_trans) {
 			
-			srv_resp 	= this.postToSc(url, post_param, "application/x-www-form-urlencoded");
+			srv_resp 	= this.postToSc(url, post_param, "application/x-www-form-urlencoded", user_arr[1], Integer.valueOf(user_arr[0]), type);
 			
 			if (type.equals("withdraw")) {
 				fin_data	= gson.fromJson(srv_resp, ScTransactionBean.class);
@@ -310,7 +324,7 @@ public class SpinCubeController {
 		/*--------------------------------------------------------------------
         |	Execute HTTP POST Request to TEG
         |-------------------------------------------------------------------*/
-		srv_resp 	= this.getToSc(url, "application/x-www-form-urlencoded");
+		srv_resp 	= this.getToSc(url, "application/x-www-form-urlencoded", null, 0, SC_MT_GET_BETS);
 		
 		return srv_resp;
 	}
@@ -323,6 +337,7 @@ public class SpinCubeController {
 		String url				= SC_BASE_URL.concat("agents/").concat(SC_AGENT_UNAME).concat("/Players/").concat(this.player_id).concat("/products/SVS/betVisualizers");
 		String post_param		= "";
 		String srv_resp			= "";
+		String[] user_arr		= this.player_id.split("_");
 		
 		/*	Convert parameters to JSON	*/
 		post_param	= "utcOffset=9&";
@@ -331,7 +346,7 @@ public class SpinCubeController {
 		/*--------------------------------------------------------------------
         |	Execute HTTP POST Request to TEG
         |-------------------------------------------------------------------*/
-		srv_resp 	= this.postToSc(url, post_param, "application/x-www-form-urlencoded");
+		srv_resp 	= this.postToSc(url, post_param, "application/x-www-form-urlencoded", user_arr[1], Integer.valueOf(user_arr[0]), SC_MT_GET_PLYCHK);
 		
 		return srv_resp;
 	}
@@ -397,14 +412,17 @@ public class SpinCubeController {
 		return json_data;
 	}
 	
-	public String getToSc(String url, String content_type) throws ParseException
+	public String getToSc(String url, String content_type, String username, int site_id, String method) throws ParseException
 	{
 		/*	Variable Declaration	*/
-		String responseBody = "";
-		String bearer_auth	= "";
+		int sts_code			= 0;
+		String responseBody 	= "";
+		String bearer_auth		= "";
+		InputStream response	= null;
 		
 		ScTokenLog sc_db			= new ScTokenLog();
 		ScTokenLogBean token_data	= sc_db.getLatestToken();
+		CasinoErrorLogDao log_db	= new CasinoErrorLogDao();
 		
 		boolean token_sts	= this.checkTokenExpiration();
 		
@@ -432,10 +450,30 @@ public class SpinCubeController {
 			connection.setDoInput(true);
 			
 			/*	Get SpinCube response		*/
-			InputStream response = connection.getInputStream();
+			if ((400 > sts_code) && (200 <= sts_code)) {
+				/*	Get Error response			*/
+				response = connection.getInputStream();
+			}
+			else {
+				/*	Get TEG response			*/
+				response = connection.getErrorStream();
+			}
 			
 			try (Scanner scanner = new Scanner(response)) {
 				responseBody = scanner.useDelimiter("\\A").next();
+				
+				/*	Save Log to database	*/
+				if ((400 >= sts_code) && (200 <= sts_code)) {
+					CasinoErrorLogBean error_data	= new CasinoErrorLogBean();
+					
+					error_data.setUsername(username);
+					error_data.setSiteId(site_id);
+					error_data.setMessage(responseBody);
+					error_data.setGameProvider(GP_SPINCUBE);
+					error_data.setMethod(method);
+					
+					log_db.addNewErrorLog(error_data);
+				}
 			}
 			
 		}
@@ -451,15 +489,17 @@ public class SpinCubeController {
 		return responseBody;
 	}
 	
-	public String postToSc(String url, String post_param, String content_type) throws ParseException
+	public String postToSc(String url, String post_param, String content_type, String username, int site_id, String method) throws ParseException
 	{
 		/*	Variable Declaration	*/
-		int resp_code		= 0;
-		String responseBody = "";
-		String bearer_auth	= "";
+		int sts_code			= 0;
+		String responseBody 	= "";
+		String bearer_auth		= "";
+		InputStream response	= null;
 		
 		ScTokenLog sc_db			= new ScTokenLog();
 		ScTokenLogBean token_data	= sc_db.getLatestToken();
+		CasinoErrorLogDao log_db	= new CasinoErrorLogDao();
 		
 		boolean token_sts	= this.checkTokenExpiration();
 		
@@ -494,18 +534,32 @@ public class SpinCubeController {
 			output.close();
 			
 			/*	Get SpinCube response		*/
-			resp_code				= connection.getResponseCode();
+			sts_code				= connection.getResponseCode();
 			
-			if ((200 == resp_code) || (201 == resp_code)) {
-				InputStream response 	= connection.getInputStream();
-				
-				try (Scanner scanner = new Scanner(response)) {
-					responseBody = scanner.useDelimiter("\\A").next();
-				}
+			if ((400 > sts_code) && (200 <= sts_code)) {
+				/*	Get Error response			*/
+				response = connection.getInputStream();
 			}
-			else if (401 == resp_code) {
-				this.getToken();
-				responseBody = this.postToSc(url, post_param, content_type);
+			else {
+				/*	Get TEG response			*/
+				response = connection.getErrorStream();
+			}
+			
+			try (Scanner scanner = new Scanner(response)) {
+				responseBody = scanner.useDelimiter("\\A").next();
+				
+				/*	Save Log to database	*/
+				if ((400 >= sts_code) && (200 <= sts_code)) {
+					CasinoErrorLogBean error_data	= new CasinoErrorLogBean();
+					
+					error_data.setUsername(username);
+					error_data.setSiteId(site_id);
+					error_data.setMessage(responseBody);
+					error_data.setGameProvider(GP_SPINCUBE);
+					error_data.setMethod(method);
+					
+					log_db.addNewErrorLog(error_data);
+				}
 			}
 			
 		}
@@ -515,7 +569,6 @@ public class SpinCubeController {
 		}
 		catch (IOException e) {
 			/*	Auto-generated catch block	*/
-			responseBody = "";
 			e.printStackTrace();
 		}
 		

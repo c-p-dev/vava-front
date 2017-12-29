@@ -84,19 +84,14 @@ public class UserDao {
 	  	return uib;
 	}
 	
-	//updated
 	public UserBean checkLogin(String SITEID, String UID,String password,String IP, String ssid) throws SQLException{
 		
-		Connection con = null;
+		Connection con 			= null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;		
-		UserBean uib = new UserBean();
-		String query = "SELECT * FROM user_mst WHERE state='NORMAL' and userid = ? and siteid= ?";
+		ResultSet rs 			= null;
+		UserBean uib 			= new UserBean();
+		String query 			= "SELECT * FROM user_mst WHERE state='NORMAL' and userid = ? and siteid= ?";
 		
-		MgPlayerAccountBean user_profile = new MgPlayerAccountBean();
-		
-		int nproc = 0;
-
 		try {
 			DBConnector.getInstance();
 			con = DBConnector.getConnection();
@@ -118,44 +113,32 @@ public class UserDao {
 					uib.setPoint(rs.getInt("point"));		
 					uib.setCell(rs.getString("cell"));
 					
-					user_profile.setPreferredAccountNumber(rs.getInt("siteid")+"_"+rs.getString("userid"));
-					user_profile.setFirstName(rs.getString("userid").concat("FNAME"));
-					user_profile.setLastName(rs.getString("userid").concat("LNAME"));
-					user_profile.setEmail("");
-					user_profile.setMobilePrefix(rs.getString("cell"));
-					user_profile.setMobileNumber(rs.getString("cell"));
-					user_profile.setDepositAmount(0);
-					user_profile.setPinCode("newplayer1");
-					user_profile.setIsProgressive(0);
-					//user_profile.setBettingProfiles(bet_profiles);
-					
-					createCasinoUser(user_profile); //check. save log if fail create.
-					
-					nproc = 1;
-					
-				}else{
+					if (updateUserAfterLogin(SITEID, UID, password, ssid, IP)) {
+						uib.setLoginStatus(0);
+					}
+					else {
+						uib.setLoginStatus(3); /*	Database problem	*/
+					}
+				}
+				else{
 					uib.setLoginStatus(1); // wrong password
 				}
-			}else{
+			}
+			else{
 				uib.setLoginStatus(2); // no account
+				createCasinoUser(uib);
 			}
 			
 	        rs.close();
 	        pstmt.close();
 	        con.close();
-	        
-	        Debug.out("[checkLogin:nproc]:"+nproc);
-	        
-	        if(nproc>0) {	     
-	        	
-	        	if(updateUserAfterLogin(SITEID, UID,password,ssid,IP))
-	        		uib.setLoginStatus(0); //success
-	        }
-	  		    
-		} catch(Exception e){
+			
+		}
+		catch(Exception e){
 		       	e.printStackTrace();
 		
-		} finally{
+		}
+		finally {
 		 	  if(rs!=null) rs.close();
 		 	  if(pstmt!=null) pstmt.close();
 		 	  if(con!=null) con.close();
@@ -164,67 +147,65 @@ public class UserDao {
 	  	return uib;
 	}
 	
-	public boolean setUser(UserBean user) throws SQLException{      
-		  Connection con = null;
-		  Statement stmt = null;
-		  PreparedStatement pstmt = null;
-		  int row = 0;
-		  boolean result = false;
-		  
-			try {
-				DBConnector.getInstance();
-				con = DBConnector.getConnection();
-				
-				SmsDao sd = new SmsDao();
-				String mobile_no = sd.formatCellNumber(user.getCell_prefix(), user.getCell());
-				Date date = new Date();
-			    String  query = "INSERT INTO user_mst (userid,siteid,passwd,cell,bank_name,bank_owner,bank_num,regdate,state,watch,charge_level,sess,ip,reg_ip,nick,recommend) "+
-						" VALUES (?,?,?,? ,?,?,?,GETDATE(),'NORMAL','N','LOW',?,?,?,?,?)";
-				
-			    pstmt = con.prepareStatement(query);
-			    
-			    pstmt.setString(1,user.getUserid());
-			    pstmt.setInt(2,user.getSiteid());
-			    pstmt.setString(3,user.getPasswd());
-			    pstmt.setString(4,mobile_no);
-			    pstmt.setString(5,user.getBank_name());
-			    pstmt.setString(6,user.getBank_owner());
-			    pstmt.setString(7,user.getBank_num());
-			    //pstmt.setString(7,sdf.format(date));
-			    pstmt.setString(8,user.getSSid());
-			    pstmt.setString(9,user.getIp());
-			    pstmt.setString(10,user.getIp());
-			    pstmt.setString(11,user.getNick());
-			    pstmt.setString(12,user.getRecommend());
-			    
-				row = pstmt.executeUpdate(); 
+	public boolean setUser(UserBean user) throws SQLException
+	{      
+		Connection con 				= null;
+		Statement stmt 				= null;
+		PreparedStatement pstmt 	= null;
+		SmsDao sd 					= new SmsDao();
+		
+		String mobile_no			= "";
+		int row 					= 0;
+		boolean result 				= false;
+		String  query 				= "INSERT INTO user_mst (userid,siteid,passwd,cell,bank_name,bank_owner,bank_num,regdate,state,watch,charge_level,sess,ip,reg_ip,nick,recommend) "+
+					" VALUES (?,?,?,? ,?,?,?,GETDATE(),'NORMAL','N','LOW',?,?,?,?,?)";
+					
+		try {
+			DBConnector.getInstance();
+			con 		= DBConnector.getConnection();
+			mobile_no 	= sd.formatCellNumber(user.getCell_prefix(), user.getCell());
 
-				pstmt.close();
-				con.close();
-
-				if(row > 0) {
-					result = true;
-					createCasinoUser(user); //check. save log if fail create.
-				}
+			pstmt = con.prepareStatement(query);
 			
-				return result;
-	            	
-		  	}catch(Exception e){
-		  		e.printStackTrace();
-		  		return false;
+			pstmt.setString(1,user.getUserid());
+			pstmt.setInt(2,user.getSiteid());
+			pstmt.setString(3,user.getPasswd());
+			pstmt.setString(4,mobile_no);
+			pstmt.setString(5,user.getBank_name());
+			pstmt.setString(6,user.getBank_owner());
+			pstmt.setString(7,user.getBank_num());
+			pstmt.setString(8,user.getSSid());
+			pstmt.setString(9,user.getIp());
+			pstmt.setString(10,user.getIp());
+			pstmt.setString(11,user.getNick());
+			pstmt.setString(12,user.getRecommend());
+			
+			row = pstmt.executeUpdate(); 
 
-		  	}finally{
-		  		if(stmt!=null) stmt.close();
-		  		if(con!=null) con.close();
-		  	}
+			pstmt.close();
+			con.close();
+
+			if(row > 0) {
+				result = true;
+				createCasinoUser(user);
+			}
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		finally{
+			if(stmt!=null) stmt.close();
+			if(con!=null) con.close();
+		}
+		
+		return result;
 	}
 	
-	public String createCasinoUser(UserBean user) {     
-		
-		Debug.out("createCasinoUser..");
+	public String createCasinoUser(UserBean user)
+	{
 		String teg_resp ="";
 		
-		try{
+		try {
 			
 			MgBettingProfileBean bet_profile = new MgBettingProfileBean();
 			ArrayList<MgBettingProfileBean> bet_profiles	= new ArrayList<MgBettingProfileBean>();
@@ -239,64 +220,17 @@ public class UserDao {
 			user_profile.setPreferredAccountNumber(user.getSiteid()+"_"+user.getUserid());
 			user_profile.setFirstName(user.getUserid().concat("FNAME"));
 			user_profile.setLastName(user.getUserid().concat("LNAME"));
-			user_profile.setEmail("");
-			user_profile.setMobilePrefix(user.getCell_prefix().substring(1));
-			user_profile.setMobileNumber(user.getCell());
 			user_profile.setDepositAmount(0);
 			user_profile.setPinCode("newplayer1");
 			user_profile.setIsProgressive(0);
 			user_profile.setBettingProfiles(bet_profiles);
 			
-			teg_resp = teg_ctrl.addPlayerAccount(user_profile);	
-		
-		}catch(Exception e){
-			Debug.out("createCasinoUser.." + e.toString());
+			teg_resp = teg_ctrl.addPlayerAccount(user_profile, user.getUserid(), user.getSiteid());	
+		}
+		catch(Exception e){
+			/*	No Processing	*/
 		}
 
-		return teg_resp;
-  	
-	}
-	
-public String createCasinoUser(MgPlayerAccountBean user_profile) {     
-		
-		Debug.out("createCasinoUser..");
-		String teg_resp ="";
-		
-		MgPlayerAccountBean user_profile2 = new MgPlayerAccountBean();
-		user_profile2 = user_profile;
-		
-		try{
-			
-			MgBettingProfileBean bet_profile = new MgBettingProfileBean();
-			ArrayList<MgBettingProfileBean> bet_profiles	= new ArrayList<MgBettingProfileBean>();
-			  
-			bet_profile.setCategory("LGBetProfile");
-			bet_profile.setProfileId(1202);			
-			bet_profiles.add(bet_profile);
-			
-			TotalEgameController teg_ctrl = new TotalEgameController();
-			/*
-			MgPlayerAccountBean user_profile = new MgPlayerAccountBean();
-			
-			user_profile.setPreferredAccountNumber(user.getSiteid()+"_"+user.getUserid());
-			user_profile.setFirstName(user.getUserid().concat("FNAME"));
-			user_profile.setLastName(user.getUserid().concat("LNAME"));
-			user_profile.setEmail("");
-			user_profile.setMobilePrefix(user.getCell_prefix().substring(1));
-			user_profile.setMobileNumber(user.getCell());
-			user_profile.setDepositAmount(0);
-			user_profile.setPinCode("newplayer1");
-			user_profile.setIsProgressive(0);
-			
-			*/
-			user_profile2.setBettingProfiles(bet_profiles);
-			
-			teg_resp = teg_ctrl.addPlayerAccount(user_profile2);	
-		
-		}catch(Exception e){
-			Debug.out("createCasinoUser.." + e.toString());
-		}
-		
 		return teg_resp;
 	}
 
@@ -576,7 +510,7 @@ public String createCasinoUser(MgPlayerAccountBean user_profile) {
 			
 			String query1 ="select count(*) cnt from user_mst WHERE siteid="+SITEID+" and userid = '"+UID+"' and passwd='"+PW+"'";
 			
-			String query2 ="select bank_owner_user, bank_name+' '+bank_num +' [ ©╧╠щаж : ' +bank_owner+' ]' as bank_account from ( " +
+			String query2 ="select bank_owner_user, bank_name+' '+bank_num +' [ О©╫О©╫О©╫О©╫О©╫О©╫ : ' +bank_owner+' ]' as bank_account from ( " +
 					" select a.bank_owner bank_owner_user, case  when charge_level='JOIN' then bank_join_name when charge_level='LOW' then bank_low_name when  charge_level='MIDDLE' then bank_middle_name when  charge_level='HIGH' then bank_high_name end bank_name, " +
 					" case  when charge_level='JOIN' then bank_join_num when charge_level='LOW' then bank_low_num when  charge_level='MIDDLE' then bank_middle_num when  charge_level='HIGH' then bank_high_num end bank_num, " +
 					" case  when charge_level='JOIN' then bank_join_owner when charge_level='LOW' then bank_low_owner when  charge_level='MIDDLE' then bank_middle_owner when  charge_level='HIGH' then bank_high_owner end bank_owner " +
@@ -795,90 +729,7 @@ public String createCasinoUser(MgPlayerAccountBean user_profile) {
 		
 	}	
 	
-	
-	// public int updateUserAfterLogin(String userid,String sessionId){
-		
-	// 	Gson gson				= new Gson();
-	// 	Connection con 			= null;
-	// 	PreparedStatement pstmt = null;
-	// 	int sts = 0;
-	// 	String  query 			= "UPDATE user_mst SET sess  = ?, login_cnt = login_cnt + 1 WHERE userid = ?";		
-		
-	// 	try {
-	// 		DBConnector.getInstance();
-	// 		con = DBConnector.getConnection();
-			
-	// 	    pstmt   			= con.prepareStatement(query);
- //            pstmt.setString(1, sessionId);
- //            pstmt.setString(2, userid);
-	// 		sts = pstmt.executeUpdate();
-			
-	//         pstmt.close();
-	//         con.close();
-	        
-	//         /*--------------------------------------------------------------------
-	//         |	Withdraw all money from MG
-	//         |-------------------------------------------------------------------*/
-	//         ArrayList<MgBettingProfileBean> bet_profls	= new ArrayList<MgBettingProfileBean>();
-	// 		MgPlayerAccountBean mg_user		= new MgPlayerAccountBean();
-	// 		MgBettingProfileBean bet_profl	= new MgBettingProfileBean();
-	// 		UserBean user_data				= this.getUserByUserId(userid);
-	// 		SpinCubeController sc_ctrl		= new SpinCubeController(Integer.toString(user_data.getSiteid()).concat("_").concat(userid));
-			
-	// 		double money					= user_data.getMoney();
-			
-	//         TotalEgameController teg_ctrl 	= new TotalEgameController();
-	//         MgWithdrawAllBean withdraw_data = new MgWithdrawAllBean();
-	//         String mg_username				= Integer.toString(user_data.getSiteid()).concat("_").concat(userid);
-	        
-	//         String withdraw_resp			= teg_ctrl.withdrawAll(mg_username);
-	//         withdraw_data					= gson.fromJson(withdraw_resp, MgWithdrawAllBean.class);
-	        
-	//         switch (withdraw_data.getStatus().getErrorCode()) {
-	// 	        /*	MG Account does not Exist	*/
-	// 	        case 46:
-	// 	        	/*	Create account for MG	*/
-	// 				bet_profl.setCategory("LGBetProfile");
-	// 				bet_profl.setProfileId(1202);
-					
-	// 				bet_profls.add(bet_profl);
-					
-	// 				mg_user.setPreferredAccountNumber(mg_username);
-	// 				mg_user.setFirstName(user_data.getUserid().trim().concat("FNAME"));
-	// 				mg_user.setLastName(user_data.getUserid().trim().concat("LNAME"));
-	// 				mg_user.setEmail("");
-	// 				mg_user.setMobilePrefix(user_data.getCell().substring(1, 3));
-	// 				mg_user.setMobileNumber(user_data.getCell().substring(3));
-	// 				mg_user.setDepositAmount(0);
-	// 				mg_user.setPinCode("newplayer1");
-	// 				mg_user.setIsProgressive(0);
-	// 				mg_user.setBettingProfiles(bet_profls);
-	// 				teg_ctrl.addPlayerAccount(mg_user);
-	//         		break;
-	        		
-	//         	case 0:
-	//         		money 	= money + withdraw_data.getResult().getTransactionAmount();
-	    			
-	//         		user_data.setMoney((int)money);
-	//     			this.setUserMoney(userid, money);	        		
-	//         	default:
-	//         		break;
-	//         }
-	        
-	//         sc_ctrl.transferMoneyToVava(userid);
-	// 	}
-	// 	catch(Exception e) {
-	// 		System.out.println(e);
-	// 		logger.debug(e);
-	// 	}
-		
-	// 	return sts;
-		
-	// }
-	
-	
-	//updated
-	public boolean updateUserAfterLogin(String SITEID, String UID,String pass, String sessionId, String IP){
+	public boolean updateUserAfterLogin(String SITEID, String UID, String pass, String sessionId, String IP){
 		
 		Gson gson				= new Gson();
 		Connection con 			= null;
@@ -899,15 +750,11 @@ public String createCasinoUser(MgPlayerAccountBean user_profile) {
             pstmt.setString(3, UID);
             pstmt.setString(4, SITEID);            
 			sts = pstmt.executeUpdate();
-			
-			 Debug.out("[updateUserAfterLogin:sts1]:"+sts);
 			 
-			if(sts>0){
+			if(sts > 0){
 				pstmt= con.prepareStatement(query2);
 				sts += pstmt.executeUpdate();				   
 			}
-			
-			 Debug.out("[updateUserAfterLogin:sts2]:"+sts);
 			 
 	        pstmt.close();
 	        con.close();
@@ -927,7 +774,7 @@ public String createCasinoUser(MgPlayerAccountBean user_profile) {
 	        MgWithdrawAllBean withdraw_data = new MgWithdrawAllBean();
 	        String mg_username				= Integer.toString(user_data.getSiteid()).concat("_").concat(UID);
 	        
-	        String withdraw_resp			= teg_ctrl.withdrawAll(mg_username);
+	        String withdraw_resp			= teg_ctrl.withdrawAll(mg_username, UID, user_data.getSiteid());
 	        withdraw_data					= gson.fromJson(withdraw_resp, MgWithdrawAllBean.class);
 	        
 	        switch (withdraw_data.getStatus().getErrorCode()) {
@@ -949,7 +796,7 @@ public String createCasinoUser(MgPlayerAccountBean user_profile) {
 					mg_user.setPinCode("newplayer1");
 					mg_user.setIsProgressive(0);
 					mg_user.setBettingProfiles(bet_profls);
-					teg_ctrl.addPlayerAccount(mg_user);
+					teg_ctrl.addPlayerAccount(mg_user, UID, Integer.valueOf(SITEID));
 	        		break;
 	        		
 	        	case 0:
@@ -957,8 +804,6 @@ public String createCasinoUser(MgPlayerAccountBean user_profile) {
 	    			
 	        		user_data.setMoney((int)money);
 	        		this.setUserMoney(UID, Integer.valueOf(SITEID), money);
-	        		
-	        		Debug.out("[updateUserAfterLogin:sts3]:"+sts);
 	        		 
 	        	default:
 	        		break;
@@ -966,7 +811,7 @@ public String createCasinoUser(MgPlayerAccountBean user_profile) {
 	        
 	        sc_ctrl.transferMoneyToVava(UID, Integer.valueOf(SITEID)); // need check..
 	        
-	        if (sts > 2) {
+	        if (sts >= 2) {
 				result = true;
 	        }
 	        
