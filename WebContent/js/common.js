@@ -34,3 +34,13 @@ function numberParser(num){
 	return parseInt(new_num, 10);
 }
 
+function dataEncrypter(data){
+	console.log(data);
+	var encryptedData = {};
+	$.each(data,function(item,val){
+		encryptedData[item] = au.e(k2,val.toString());
+	});
+
+	console.log(encryptedData);
+	return encryptedData;
+}
