@@ -253,13 +253,7 @@ pointer-events: none
 			addAmount(am);
 		});
 
-<<<<<<< .mine
 		$("#bankInfoBtn").on("click",function(){
-			
-=======
-		$("#bankInfoBtn").on("click",function(){			
-
->>>>>>> .theirs
 			var s = $("#bankInfoTxt").val();
 			
 			$.ajax({
@@ -269,13 +263,7 @@ pointer-events: none
 			}).done(function(data){
 				
 				var obj = JSON.parse(data);
-<<<<<<< .mine
-				
-				
-=======
 
-
->>>>>>> .theirs
 				if(obj.BN =="-1"){
 					$("#bankInfoTxt").val('');
 					$("#inc").removeClass('incp');
