@@ -315,23 +315,24 @@
 
 	submitWithdraw();
 
+
 	function submitWithdraw(){
 		
 		$("#conf_modal3 .conf_modal_yes").on("click",function(){
 			
-			var data = $("#formwithdraw").serializeJSON();
+			var data = $("#formwithdraw").serializeJSON();	
+			
 			if(data != null){
-				var num = data.withdraw;
-				data.withdraw = numberParser(num);
+				var num = data.withdraw;						
 			}
 
 			$.ajax({
 				url:'/cash/jsp/withdrawprocess.jsp',
-				data:data,
+				data: dataEncrypter(data),
 				type:'POST'
 			}).done(function(data){
 				if(data){
-					
+															
 					
 					if(data.trim()){
 						updateInstBal();
@@ -366,20 +367,18 @@
 						method: 'GET',
 					}).done(function(data){					
 						var obj = JSON.parse(data);
-						$("#uhead").html(obj.header);
-						$("#balmoney").text(numberWithCommas(obj.bal));
+						$("#uhead").html(obj.header);						
+						$("#balmoney").text(numberWithCommas(obj.bal));																		
 
 			  	
 						//$("#withdraw").val(obj.bal);
 						
-					});				
-				
-				} else {
-				
+					});									
+				} else {					
 				}
 				
 				data=null;
-			}).error(function(data, status, headers, config) {
+			}).error(function(data, status, headers, config) {				
 				data=null;
 			});
 		

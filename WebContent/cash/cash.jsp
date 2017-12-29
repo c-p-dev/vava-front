@@ -45,6 +45,9 @@
 <script type="text/javascript" src="/js/jquery.nice-select.js"></script><!-- select -->
 <script type="text/javascript" src="/js/jqueryRemote.js"></script> 
 <script type="text/javascript" src="/js/additional-methods.js"></script>
+<script type="text/javascript" src="/js/ae.js"></script>
+<script type="text/javascript" src="/js/pb.js"></script>
+<script type="text/javascript" src="/js/au.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/list.pagination.js/0.1.1/list.pagination.min.js"></script>
 <script type="text/javascript" src="/js/datatables/jquery.dataTables.js"></script><!-- datatable -->
