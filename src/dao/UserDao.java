@@ -304,10 +304,8 @@ public class UserDao {
 	}
 	
 	public String registerUser(String json_post){
-		System.out.println(json_post);
 		Gson gson = new Gson();
 		HashMap<String, String> json_data 	= gson.fromJson(json_post, new TypeToken<HashMap<String, String>>(){}.getType());
-		System.out.println(json_data);
 		logger.debug(json_data);
 		
 		return json_post;
@@ -673,9 +671,7 @@ public class UserDao {
 			rs.close();
 	        pstmt.close();
 	        con.close();
-	        System.out.print(query);
 		} catch(Exception e){
-			System.out.println(e);
 			e.printStackTrace();
 		} 
 	  	return list;
@@ -720,17 +716,17 @@ public class UserDao {
 			rs.close();
 	        pstmt.close();
 	        con.close();
-	        //System.out.print(query);
+	       
 		} catch(Exception e){
-			//System.out.println(e);
+		
 			e.printStackTrace();
 		} 
 	  	return list;
 		
 	}	
 	
-	public boolean updateUserAfterLogin(String SITEID, String UID, String pass, String sessionId, String IP){
-		
+	public boolean updateUserAfterLogin(String SITEID, String UID,String pass, String sessionId, String IP)
+	{
 		Gson gson				= new Gson();
 		Connection con 			= null;
 		PreparedStatement pstmt = null;
@@ -816,7 +812,6 @@ public class UserDao {
 	        }
 	        
 		} catch(Exception e) {
-			System.out.println(e);
 			logger.debug(e);
 		}
 		
@@ -849,7 +844,6 @@ public class UserDao {
 	        
 		}
 		catch(Exception e) {
-			System.out.println(e);
 			logger.debug(e);
 		}
 		
@@ -1059,7 +1053,7 @@ public class UserDao {
 			con.close();
 			
 			//logger.debug(row);
-			//System.out.println("pasok sa app");
+		
 	  	}catch(Exception e){
 	  		logger.debug(query);
 	  		e.printStackTrace();
@@ -1119,7 +1113,6 @@ public class UserDao {
 		ResultSet rs = null;
 		SmsDao sd = new SmsDao();
 		boolean result = false;
-		System.out.println(cell);
 		try {
 			DBConnector.getInstance();
 			con = DBConnector.getConnection();
@@ -1154,7 +1147,6 @@ public class UserDao {
 		ResultSet rs = null;
 		SmsDao sd = new SmsDao();
 		boolean result = false;
-		System.out.println(cell);
 		try {
 			DBConnector.getInstance();
 			con = DBConnector.getConnection();
@@ -1235,11 +1227,6 @@ public class UserDao {
 		    		"AND bank_num = ? " + 
 		    		"AND cell = ? ";
 		    
-		    System.out.println(bank_owner);
-		    System.out.println(bank_name);
-		    System.out.println(bank_num);
-		    System.out.println(cell_prefix);
-		    System.out.println(cell);
 		    
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1,bank_owner);

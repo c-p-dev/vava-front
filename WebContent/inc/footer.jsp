@@ -102,7 +102,6 @@ function cValU(){
 		}).done(function(data){
 			
 			var obj = JSON.parse(data);
-			console.log(obj);
 			var valid = obj.validUser;
 			//var loggedIn = obj.result; 
 					
@@ -130,15 +129,12 @@ function cValU(){
 				
 				
 				var obj = JSON.parse(data);
-				console.log(obj);
-				console.log(obj.R);
 							
 				if(obj.R){
 					
 					var cp = '<%=cp%>';	
 					if(cp == '/sport/prematch.jsp' || cp == '/sport/livematch.jsp'){
 						ISLOGIN.a = obj.uid;
-						console.log("UPDATED BAL");
 					}	
 					
 					
@@ -147,7 +143,7 @@ function cValU(){
 						data : {},
 						method: 'GET',
 					}).done(function(data){					
-					//	console.log(data);		
+				
 						var obj = JSON.parse(data);
 						$("#uhead").html(obj.header);
 						//createPopup(obj.popup);
@@ -157,15 +153,12 @@ function cValU(){
 						
 					});
 				
-					console.log("UPDATED BAL");
 					
 				} else {
-					console.log("NOT UPDATED BAL");
 				}
 				
 				data=null;
 			}).error(function(data, status, headers, config) {
-				console.log(status);
 				data=null;
 			});
 		}, 10*1000); //1 min

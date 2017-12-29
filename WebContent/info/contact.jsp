@@ -201,7 +201,6 @@
 		$.each( obj, function(index, el) {
 
 
-			// console.log(obj);
 			var html  = '<div class="inquiry"> <div class="inquiry_user"> <span class="user_tag"><img src="../images/user_tag.jpg"></span> <div class="inquiry_text">' + el.txt+ '</div> <div class="user_date">'+el.regdate+'</div></div></div>'; 
 				disbleCht(false);
 			if(el.class_name == "inquiry_admin"){
@@ -230,7 +229,6 @@
 			data : data,
 			method: 'POST',
 		}).done(function(data){
-			// console.log(data);
 			var obj = JSON.parse(data);
 			if(obj.result){
 				$('#messageModal').popup("show");

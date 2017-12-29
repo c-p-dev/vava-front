@@ -5,7 +5,6 @@ $(function () {
     //Pictures details view
 
     $(".picflex .resultitem > .box > a").click(function (e) {
-        console.log('opn');
         $(this).parent().parent().find('.addToOrder').children().attr('title', $(this).parent().find('.cart-add').attr('title'));
         $(".picflex .resultitem").removeClass("open");
         $(this).parent().parent().addClass("open");

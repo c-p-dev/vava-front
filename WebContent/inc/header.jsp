@@ -127,7 +127,6 @@ var UBAL = <%=UBAL%>;
 <a href="#myAnchor" class="go-top">▲</a>
 <script>
 	
-	//console.log(location.pathname.substring(location.pathname.lastIndexOf("/") + 1);
 	
 	
 /*Add class when scroll down*/
@@ -184,8 +183,6 @@ $(window).scroll(function(event){
 
 
 	$(document).ready(function(){
-		console.log('<%=IP%>');
-		console.log(navigator.userAgent);
 		if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 			window.location = "http://m.vava21.com";
 		}
@@ -239,8 +236,6 @@ $(window).scroll(function(event){
 			var validator = $( "#login_header" ).validate(); 
 			var vUser = validator.element("#userid-header-input");
 			var vPass = validator.element("#passwd-header-input");
-			//console.log(!vUser);
-			//console.log(!vPass);
 			if(!vUser && !vPass){
 				toastr.success("아이디와 비밀번호를 입력해 주세요.");
 			}else if (vUser && !vPass){
@@ -405,7 +400,6 @@ $(window).scroll(function(event){
 		})
 
 		if(checkSession){
-			console.log('counting msgs...');
 			loadMsgCount();
 		}
 
@@ -435,7 +429,6 @@ $(window).scroll(function(event){
 					data : {},
 					method: 'GET',
 				}).done(function(data){					
-				//	console.log(data);		
 					var obj = JSON.parse(data);
 					$("#uhead").html(obj.header);
 					createPopup(obj.popup);
@@ -482,10 +475,8 @@ $(window).scroll(function(event){
 			data : {},
 			method: 'GET',
 		}).done(function(data){
-			// console.log(data);
 			var obj = JSON.parse(data);
 			var t = moment(obj.t,"MMM DD, YYYY hh:mm:ss A");
-			// console.log(t);
 		
 			var i = setInterval(function(){
 		
@@ -500,7 +491,6 @@ $(window).scroll(function(event){
 	}
 
 	function createPopup(data){
-		console.log(data);
 		var html = "";
 		
 		$.each(data,function(x,y){

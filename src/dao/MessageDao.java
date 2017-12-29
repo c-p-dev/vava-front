@@ -54,7 +54,6 @@ public class MessageDao {
 			pstmt.setInt(2, mBean.getSend_siteid());
 
 			rs = pstmt.executeQuery();
-			System.out.println(query);
 
 			while (rs.next()) {
 				HashMap<String, Object> hsm = new HashMap<String, Object>();
@@ -76,10 +75,8 @@ public class MessageDao {
 			pstmt.close();
 			con.close();
 
-			System.out.println(data);
 
 		} catch (Exception e) {
-			System.out.println(e);
 			e.printStackTrace();
 		}
 
@@ -110,7 +107,6 @@ public class MessageDao {
 			}
 		}
 		catch(Exception e) {
-			System.out.println(e);
 			logger.debug(e);
 		}
 		
@@ -139,9 +135,6 @@ public class MessageDao {
 			rs = pstmt.executeQuery();
 					   
 			if(rs.next()){
-				System.out.println("count : " + rs.getInt("msg_count"));
-				System.out.println("recv_userid : " + mBean.getRecv_userid());
-				System.out.println("siteid : " +  mBean.getRecv_siteid());
 				count = rs.getInt("msg_count");
 			}
 			

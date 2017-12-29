@@ -65,7 +65,6 @@ public class AccountDao {
 			}
 
 			rs = pstmt.executeQuery();
-			System.out.println(dataQuery);
 					   
 			while(rs.next()){
 				HashMap<String, Object> hsm = new HashMap<String, Object>();
@@ -82,11 +81,9 @@ public class AccountDao {
 	        con.close();
 	  		    
 		} catch(Exception e){
-			//System.out.println(e);
 			e.printStackTrace();
 		} 
 		
-		System.out.println(data);
 	  	return data;
 		
 	}
@@ -137,7 +134,6 @@ public class AccountDao {
 			//}
 
 			rs = pstmt.executeQuery();
-			System.out.println(dataQuery);
 					   
 			while(rs.next()){
 				HashMap<String, Object> hsm = new HashMap<String, Object>();
@@ -156,11 +152,9 @@ public class AccountDao {
 	        con.close();
 	  		    
 		} catch(Exception e){
-			//System.out.println(e);
 			e.printStackTrace();
 		} 
 		
-		System.out.println(data);
 	  	return data;
 		
 	}
@@ -207,7 +201,6 @@ public class AccountDao {
 			pstmt.setString(4,(job.equals("ALL") ? "1" : job));
 			pstmt.setString(5,(moneypoint.equals("ALL") ? "1" : moneypoint));
 			
-			System.out.println(query.toString());
 			rs = pstmt.executeQuery();
 					   
 			while(rs.next()){
@@ -225,7 +218,6 @@ public class AccountDao {
 	        con.close();
 	  		    
 		} catch(Exception e){
-			System.out.println(e);
 			e.printStackTrace();
 		} 
 		
@@ -297,7 +289,6 @@ public class AccountDao {
 			//pstmt.setString(5,(job.equals("ALL") ? "1" : job));
 			//pstmt.setString(6,(moneypoint.equals("ALL") ? "1" : moneypoint));
 			
-			//System.out.println(query.toString());
 			rs = pstmt.executeQuery();
 					   
 			while(rs.next()){
@@ -325,7 +316,6 @@ public class AccountDao {
 	        con.close();
 	  		    
 		} catch(Exception e){
-			//System.out.println(e);
 			e.printStackTrace();
 		} 
 		
@@ -351,7 +341,6 @@ public class AccountDao {
 			con 				= DBConnector.getConnection();	 	
 			pstmt = con.prepareStatement(query);
 			
-			System.out.println(query.toString());
 			rs = pstmt.executeQuery();
 					   
 			while(rs.next()){
@@ -367,7 +356,6 @@ public class AccountDao {
 	        con.close();
 	  		    
 		} catch(Exception e){
-			System.out.println(e);
 			e.printStackTrace();
 		} 
 		
@@ -392,7 +380,6 @@ public class AccountDao {
 			con 				= DBConnector.getConnection();	 	
 			pstmt = con.prepareStatement(query);
 			
-			System.out.println(query.toString());
 			rs = pstmt.executeQuery();
 					   
 			while(rs.next()){
@@ -408,7 +395,6 @@ public class AccountDao {
 	        con.close();
 	  		    
 		} catch(Exception e){
-			System.out.println(e);
 			e.printStackTrace();
 		} 
 		

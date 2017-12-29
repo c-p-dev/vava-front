@@ -32,7 +32,6 @@ $(window).scroll(function(event){
 			}).done(function(data){
 				$("#login-header-warn").hide();
 				$('#login_header input').css("border-color","#505455");
-				console.log(data);
 				if(data == 0 ){
 					$("#login-header-warn").html("Login Successful").show();
 					location.reload();

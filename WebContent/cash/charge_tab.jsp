@@ -44,6 +44,14 @@
 		left: 61px;
 		top: 131px;
 	}
+.pwdcmf{
+background-color: transparent!important; 
+border-color: transparent!important;
+color:white;
+}
+.spd { 
+pointer-events: none 
+}
 </style>
 	
 <ul class="smk_accordion">
@@ -60,7 +68,7 @@
 							<div class="row cash_13">
 								<input class="input_style03 pd" id="bankInfoTxt" name="bank_acct" placeholder="비밀번호 입력 후 전용계좌확인 버튼을 클릭해주세요">
 								<div id='inc' class="incp">
-									<span class="incpw "><font class="incpwf">비밀번호가 일치하지 않습니다. </font></span>
+									<span class="incpw"><font class="incpwf">비밀번호가 일치하지 않습니다. </font></span> 
 									<span id='' class="arrow-right"></span>
 								</div>
 								<div id='iinc' class="incp">
@@ -245,7 +253,13 @@
 			addAmount(am);
 		});
 
+<<<<<<< .mine
+		$("#bankInfoBtn").on("click",function(){
+			
+=======
 		$("#bankInfoBtn").on("click",function(){			
+
+>>>>>>> .theirs
 			var s = $("#bankInfoTxt").val();
 			
 			$.ajax({
@@ -255,6 +269,13 @@
 			}).done(function(data){
 				
 				var obj = JSON.parse(data);
+<<<<<<< .mine
+				
+				
+=======
+
+
+>>>>>>> .theirs
 				if(obj.BN =="-1"){
 					$("#bankInfoTxt").val('');
 					$("#inc").removeClass('incp');
@@ -272,7 +293,7 @@
 					$("#bankInfoTxt").val(obj.BN); 
 					$("#ct_bank_owner").val(obj.BO); 
 					$('#bankInfoTxt').attr('readonly', true);
-					$("#bankInfoBtn").attr("disabled", true);
+					$("#bankInfoBtn").addClass('spd');
 					$("#ct_submit").removeAttr("disabled");
 				}else{
 					toastr.success("처리중 오류가 발생하였습니다.");
@@ -287,6 +308,7 @@
 	      		$('#bankInfoTxt').addClass('pd');
 	      		$("#bankInfoTxt").removeClass('incpwb');
 	      		$('#bankInfoTxt').attr('readonly', false);
+	      		$("#bankInfoBtn").removeClass("spd");
 	      		resetChargeForm();
 	    	}
 	    });
@@ -392,7 +414,6 @@
 			var id = $(this).attr("id");
 			var valid = validator.element("#"+id);
 			$(this).qtip("hide");
-			// console.log(valid);
 			if(!valid && !valid){
 				$(this).focusin();
 			}			
@@ -476,7 +497,6 @@
 			current_am = parseInt(numberParser($("#money").val()));
 		}
 
-		//console.log(current_am);
 
 		var am = 0;
 		var sum = 0;
@@ -519,7 +539,7 @@
 				data:dataEncrypter(data),
 				type:'POST'
 			}).done(function(data){
-				// console.log(data);
+				
 				if(data){
 					
 					$("#chargeSuccesModal").popup("show");

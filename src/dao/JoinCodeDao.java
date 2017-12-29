@@ -62,7 +62,6 @@ public class JoinCodeDao {
 		 	  if(pstmt!=null) pstmt.close();
 		 	  if(con!=null) con.close();
 		}
-		//System.out.println(result);
 		return result;
 	}
 	

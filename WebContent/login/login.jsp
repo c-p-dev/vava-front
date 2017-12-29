@@ -195,8 +195,6 @@
 			}
 		}).done(function(data){
 			var obj = JSON.parse(data);
-			console.log("obj");
-			 console.log(obj);
 			if(obj.result == 0 ){
 
 				$.ajax({
