@@ -85,7 +85,7 @@ pointer-events: none
 								</div>
 							</div>
 							<div class="cash_3">
-								<span class="btn5" id="bib"> <input class="pwdcmf" type="submit"  id="bankInfoBtn" value="전용계좌확인"></span>
+								<span class="btn5" id="bankInfoBtn">전용계좌확인</span>
 							</div>
 						</div>
 						
@@ -311,7 +311,6 @@ pointer-events: none
 
 		$("#bankInfoBtn").on("click",function(){
 			
-						
 			var s = $("#bankInfoTxt").val();
 			
 			$.ajax({
@@ -338,7 +337,7 @@ pointer-events: none
 					$("#bankInfoTxt").val(obj.BN); 
 					$("#ct_bank_owner").val(obj.BO); 
 					$('#bankInfoTxt').attr('readonly', true);
-					$("#bib").addClass('spd');
+					$("#bankInfoBtn").addClass('spd');
 					$("#ct_submit").removeAttr("disabled");
 				}else{
 					alert("처리중 오류가 발생하였습니다.");
@@ -353,7 +352,7 @@ pointer-events: none
 	      		$('#bankInfoTxt').addClass('pd');
 	      		$("#bankInfoTxt").removeClass('incpwb');
 	      		$('#bankInfoTxt').attr('readonly', false);
-	      		$("#bib").removeClass("spd");
+	      		$("#bankInfoBtn").removeClass("spd");
 	      		resetChargeForm();
 	    	}
 	    });
