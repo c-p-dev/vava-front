@@ -10,15 +10,9 @@
 <%@ include file="/inc/session.jsp"%>
 
 <%
-AccountDao aDao = new AccountDao();
-List<AccountListBean> res = aDao.getUsedMoneyKind(SITEID);
+	AccountDao aDao = new AccountDao();
+	List<AccountListBean> res = aDao.getUsedMoneyKind(SITEID);
 %>
-<%--
-	 ********************************
-	 *  HTML CODE STARTS FROM HERE  *
-	 ********************************
---%>
-
 <ul class="smk_accordion ">
 	<li>
 		<div class="accordion_title"><h3>머니사용내역</h3></div>
@@ -32,27 +26,15 @@ List<AccountListBean> res = aDao.getUsedMoneyKind(SITEID);
 									<select class="input_style02" id="money-use-job-select" onChange="selMoney(this.selectedIndex,this.options[this.selectedIndex].value)">
 										<option value="ALL" selected>전체</option>
 										
-								<%
-									for (int k=0; k < res.size() ; k++){
-									AccountListBean alb = (AccountListBean) res.get(k);
-									%>
-									
-									<option value="<%=alb.getJob()%>"><%=alb.getTitle()%></option>
-									
-								<%
-								}
-								%>
+										<%
+											for (int k=0; k < res.size() ; k++){
+												AccountListBean alb = (AccountListBean) res.get(k);
+										%>
+											<option value="<%=alb.getJob()%>"><%=alb.getTitle()%></option>
+										<% } %>
 							
 									</select>
 								</td>
-								<!--
-								<td>
-									<select class="input_style02" id="money-use-point-select">
-										<option value="ALL">전체</option>
-										<option value="M">M</option>
-									</select>
-								</td>
-								-->
 								<td>
 									<input class="input_style04" id="moneyDateSearch" placeholder="기간" value="2017-00-00 ~ 2017-00-00" readonly>
 									<span class="showMoneyDatePkr" style="cursor:pointer"><img src="/images/car_icon.jpg"></span>
@@ -75,11 +57,6 @@ List<AccountListBean> res = aDao.getUsedMoneyKind(SITEID);
 										</div>
 									</div>
 								</td>
-								<!--
-								<td>
-									<span class="btn1" id="searchMoneyBtn">검색</span>
-								</td>
-								-->
 							</tr>
 						</table>
 					</div>
@@ -111,25 +88,25 @@ List<AccountListBean> res = aDao.getUsedMoneyKind(SITEID);
 			bound: false, 
 			container: document.getElementById('moneyFromDateDiv'),
 			format: 'YYYY-MM-DD',
-      defaultDate: moment().subtract(30,'days').toDate(),
-      setDefaultDate : moment().subtract(30,'days').toDate(),
-      minDate : moment().subtract(30,'days').toDate(),
-      i18n : i18n,
+      		defaultDate: moment().subtract(30,'days').toDate(),
+      		setDefaultDate : moment().subtract(30,'days').toDate(),
+      		minDate : moment().subtract(30,'days').toDate(),
+      		i18n : i18n,
 		});
 
-   	var moneyPickerTo = new Pikaday({ 
-   		field: document.getElementById('moneyToDate'), 
-   		bound: false, 
-   		container: document.getElementById('moneyToDateDiv'),
-   		format :'YYYY-MM-DD',
-   		defaultDate: moment().toDate(),
-   		setDefaultDate : moment().toDate(),
-   		minDate : moneyPickerFrom.getDate(),
-   		onSelect: function() {
-  			$("#money-depth2").hide();
-  		},	
-   		i18n : i18n,
-   	});
+   		var moneyPickerTo = new Pikaday({ 
+   			field: document.getElementById('moneyToDate'), 
+   			bound: false, 
+	   		container: document.getElementById('moneyToDateDiv'),
+	   		format :'YYYY-MM-DD',
+	   		defaultDate: moment().toDate(),
+	   		setDefaultDate : moment().toDate(),
+	   		minDate : moneyPickerFrom.getDate(),
+	   		onSelect: function() {
+	  			$("#money-depth2").hide();
+	  		},	
+	   		i18n : i18n,
+	   	});
 
 		$moneyUseTable = $('#moneyUseTable').DataTable({
 			ajax: {
@@ -155,102 +132,102 @@ List<AccountListBean> res = aDao.getUsedMoneyKind(SITEID);
 			autowWidth:false,
 			scrollX: false,
 			pageLength: 10,
-      columns : [
-    	{ 
-        data   : 'regdate',
-        title  : '일시',
-        width : '20%',
-      },
-      { 
-        data   : 'job',
-        title  : '구분',
-        visible: false,
-        },
-      { 
-        data   : 'job_kor',
-        title  : '구분',
-      },
-      { 
-      data   : 'deduct_money',
-      title  : '차감 머니',
-      width : '17%',
-      render : function(data,type,row,meta){
-      	var html = (data != 0 || data != "0" ?  '<span class="font_008" style="align:right">'+comma(data)+'</span> 원' : '<span>-</span>' );
-      	return html;
-      }
-      },
-      { 
-      data   : 'added_money',
-      title  : '가산 머니',
-      width : '17%',
-      render : function(data,type,row,meta){
-      	var html = (data != 0 || data != "0" ? '<span class="font_004">'+comma(data)+'</span> 원' : '<span>-</span>' );
-      	return html;
-      }
-      },
-      { 
-      data   : 'remain_money',
-      title  : '잔여 머니',
-      width : '17%',
-      render : function(data,type,row,meta){
-      	var html = '<span class="font_002">'+comma(data)+'</span> 원</td>';
-      	return html;
-      }          	
-           
-      },
-    ],
-      order: [[ 0, "desc" ]] ,      
-    	pagingType: "full_numbers",
-        language: {
-	    paginate: {
-	      	previous: "<",
-	      	next: ">",
-	      	first: "<<",
-	      	last: ">>",
-	    },
+			columns : [
+				{ 
+					data   : 'regdate',
+					title  : '일시',
+					width : '20%',
+				},
+				{ 
+					data   : 'job',
+					title  : '구분',
+					visible: false,
+				},
+				{ 
+					data   : 'job_kor',
+					title  : '구분',
+				},
+				{ 
+					data   : 'deduct_money',
+					title  : '차감 머니',
+					width : '17%',
+					render : function(data,type,row,meta){
+						var html = (data != 0 || data != "0" ?  '<span class="font_008" style="align:right">'+comma(data)+'</span> 원' : '<span>-</span>' );
+						return html;
+					}
+				},
+				{ 
+					data   : 'added_money',
+					title  : '가산 머니',
+					width : '17%',
+					render : function(data,type,row,meta){
+						var html = (data != 0 || data != "0" ? '<span class="font_004">'+comma(data)+'</span> 원' : '<span>-</span>' );
+						return html;
+					}
+				},
+				{ 
+					data   : 'remain_money',
+					title  : '잔여 머니',
+					width : '17%',
+					render : function(data,type,row,meta){
+						var html = '<span class="font_002">'+comma(data)+'</span> 원</td>';
+						return html;
+					}          	
+
+				},
+			],
+	      	order: [[ 0, "desc" ]] ,      
+	    	pagingType: "full_numbers",
+	        language: {
+			    paginate: {
+			      	previous: "<",
+			      	next: ">",
+			      	first: "<<",
+			      	last: ">>",
+			    },
 			    emptyTable: "결과가 없습니다.",
 			},
-     });
+    	});
      
-    $.fn.dataTable.ext.search.push(
-	    function( settings, data, dataIndex ) {
-	        var min  = $('#moneyFromDate').val();					        
-	        var max  = $('#moneyToDate').val();
-	        var max2 =  moment(max).add('days', 1);	        
-	        var createdAt = data[0] || 0; // Our date column in the table
-	        if((min== ""||max2== "")||( moment(createdAt).isSameOrAfter(min) && moment(createdAt).isSameOrBefore(max2) ) ){
-	            return true;
-	        }
-	        return false;
-	    }
-		);
+    	$.fn.dataTable.ext.search.push(
+		    function( settings, data, dataIndex ) {
+		        var min  = $('#moneyFromDate').val();					        
+		        var max  = $('#moneyToDate').val();
+		        var max2 =  moment(max).add('days', 1);	        
+		        var createdAt = data[0] || 0; // Our date column in the table
+		        
+		        if((min== ""||max2== "")||( moment(createdAt).isSameOrAfter(min) && moment(createdAt).isSameOrBefore(max2) ) ){
+		            return true;
+		        }
+		        return false;
+	    });
 		
-	function getMoneyDate(){
-		var dateFrom = $("#moneyFromDate").val();
-    var dateTo = $("#moneyToDate").val();
-    $("#moneyDateSearch").val(dateFrom + ' ~ '+ dateTo);
-    $moneyUseTable.draw();
-	}	
-	   getMoneyDate();  	
+		function getMoneyDate(){
+			var dateFrom = $("#moneyFromDate").val();
+		    var dateTo = $("#moneyToDate").val();
+		    $("#moneyDateSearch").val(dateFrom + ' ~ '+ dateTo);
+		    $moneyUseTable.draw();
+		}	
+	   	getMoneyDate();  	
 
-    $(".money_pikaday_input").on("change",function(e){
-    	getMoneyDate();
-    });
+	    $(".money_pikaday_input").on("change",function(e){
+	    	getMoneyDate();
+	    });
     
-    $("#tab6").on("fadeInComplete", function() {
-			$moneyUseTable.columns.adjust().draw();
-		});
-		
-		$(".showMoneyDatePkr").on("click",function(e){
-    	e.preventDefault();
-    	show_over(this);
-    	show_layer('money-depth2');
-    });
+	    $("#tab6").on("fadeInComplete", function() {
+				$moneyUseTable.columns.adjust().draw();
+			});
+			
+			$(".showMoneyDatePkr").on("click",function(e){
+	    	e.preventDefault();
+	    	show_over(this);
+	    	show_layer('money-depth2');
+	    });
     
-    $(".closeMoneyPikaday, .my_search_list, #money-use-job-select, .input_style02 ").on("click",function(e){
-    	e.preventDefault();
-    	$("#money-depth2").hide();
-    });
+	    $(".closeMoneyPikaday, .my_search_list, #money-use-job-select, .input_style02 ").on("click",function(e){
+	    	e.preventDefault();
+	    	$("#money-depth2").hide();
+	    });
              
 	});
 

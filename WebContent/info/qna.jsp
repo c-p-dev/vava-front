@@ -136,7 +136,7 @@
     			$("#qna-div-spn").remove();
     			$("#qna-div").show();
 			  	$qnaDt.columns.adjust().draw();
-			}, 300);
+			}, 50);
     		
 		});
 

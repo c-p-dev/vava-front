@@ -1,57 +1,49 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
 <%@page import="dao.GameDao"%> 
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.*"%>
 <%@page import="dao.UserDao"%>
 <%@page import="bean.UserBean"%>
-
 <%@ include file="/inc/session.jsp"%>
 
-<%
-//	UserDao user_db			= new UserDao();	
-//	UserBean currentUser 	= user_db.getUserByUserId(UID);
-	
-%>
-
 <style>
-.input_hidden
-{
-  display:none
-}
-.incp
-{
-	display:none
-}
-.incpwb{
-	border-color: #ff8a00!important;
-}
-.incpw{
-	background-color: #424c4e!important;
-	color: #404654!important;
-	padding: 8px!important;
-	border-radius: 20px!important;
-	position: absolute;
-	top: 120px;
-	left: -108px; 
-}
-.iincpw{
-	left: -222px!important;
-}
-.incpwf{
-	vertical-align: inherit; 
-	color: white;
-}
-.arrow-right {
-  width: 0; 
-  height: 0; 
-  border-top: 4px solid transparent;
-  border-bottom: 4px solid transparent ;
-  border-left:9px solid #424c4e!important;
-  position: absolute;
-  left: 61px;
-  top: 131px;
-}
+	.input_hidden
+	{
+	  display:none
+	}
+	.incp
+	{
+		display:none
+	}
+	.incpwb{
+		border-color: #ff8a00!important;
+	}
+	.incpw{
+		background-color: #424c4e!important;
+		color: #404654!important;
+		padding: 8px!important;
+		border-radius: 20px!important;
+		position: absolute;
+		top: 120px;
+		left: -108px; 
+	}
+	.iincpw{
+		left: -222px!important;
+	}
+	.incpwf{
+		vertical-align: inherit; 
+		color: white;
+	}
+	.arrow-right {
+		width: 0; 
+		height: 0; 
+		border-top: 4px solid transparent;
+		border-bottom: 4px solid transparent ;
+		border-left:9px solid #424c4e!important;
+		position: absolute;
+		left: 61px;
+		top: 131px;
+	}
 </style>
 	
 <ul class="smk_accordion">
@@ -77,64 +69,19 @@
 								</div>
 							</div>
 							<div class="cash_3">
-								<span class="btn5" id="bankInfoBtn">전용계좌확인 </span>
+								<span class="btn5" style="cursor:pointer;" id="bankInfoBtn">전용계좌확인 </span>
 							</div>
 						</div>
-						
 						<div class="cash_in">
 							<div class="cash_10"><p style="float:left">보유금액</p><p style="float:right"><span class="font_002 money_dsp"><%=dfrmt.format(UBAL)%></span> 원</p></div>
 							<div class="cash_9">
 									<input class="input_style03" type="text" style="text-align: right;padding-right: 5%;" type="number" id="money" name="money"  placeholder="충전금액">	
 							</div>	
 						</div>
-						
-							<div class="cash_in">
-								<!--
-								<div class="cash_4">
-									<select class="input_style02" id="ct_bank_name" name="bank_name">
-										 	<option value="국민은행" selected>국민은행</option>
-										    <option value="기업은행">기업은행</option>
-										    <option value="경남은행">경남은행</option>
-										    <option value="광주은행">광주은행</option>
-										    <option value="동부증권">동부증권</option>
-										    <option value="대구은행">대구은행</option>
-										    <option value="부산은행">부산은행</option>
-										    <option value="산업은행">산업은행</option>
-										    <option value="삼성증권">삼성증권</option>
-										    <option value="삼성증권">신영증권</option>
-										    <option value="신한은행">신한은행</option>
-										    <option value="우리은행">우리은행</option>
-										    <option value="외환은행">외환은행</option>
-										    <option value="저축은행">저축은행</option>
-										    <option value="전북은행">전북은행</option>
-										    <option value="제주은행">제주은행</option>
-										    <option value="하나은행">하나은행</option>
-										    <option value="CITI은행">CITI은행</option>
-										    <option value="HSBC은행">HSBC은행</option>
-										    <option value="SC제일">SC제일</option>
-										    <option value="새마을금고">새마을금고</option>
-										    <option value="우체국">우체국</option>
-										    <option value="농협중앙회">농협중앙회</option>
-										    <option value="단위농협">단위농협</option>
-										    <option value="신협">신협</option>
-										    <option value="수협">수협</option>
-										    <option value="동양증권">동양증권</option>
-										    <option value="유진투자증권">유진투자증권</option>
-										    <option value="한국투자은행">한국투자은행</option>
-										    <option value="HMC투자증권">HMC투자증권</option>
-										    <option value="IBK투자증권">IBK투자증권</option>
-										    <option value="카카오뱅크">카카오뱅크</option>
-									</select>
-								</div>
-								
-								-->
-								
+							<div class="cash_in">								
 								<div class="cash_11_1">
 									<input class="input_style03" readonly id="ct_bank_owner" name="bank_owner" placeholder="입금자명">		
-								</div>
-<!-- 								<div class="cash_4">
-									<input class="input_style03"  id="ct_bank_num" name="bank_num"  placeholder="계좌번호">		
-								</div> -->								
+								</div>								
 							</div>
 							<div class="cash_in">
 								<span class="ebtn btn1 add-money" data-am="1" >1만원</span> 
@@ -143,13 +90,10 @@
 								<span class="ebtn btn1 add-money" data-am="50" >50만원</span> 
 								<span class="ebtn btn1 add-money" data-am="100" >100만원</span> 
 								<span class="ebtn btn1 add-money" data-am="0" >정정</span>
-								<!-- <span class="btn3c">충전신청</span></a> -->
-								
 							</div>
 							<div class="cash_in exbtn">
 								<input type="submit" id="ct_submit" value="충전신청" class="btn3c">
 							</div>
-							
 						</form>
 					</div>
 				</div>
@@ -161,7 +105,7 @@
 		<div class="acc_content">
 			<div class="acc_content_in_2">
 				<table id="dataTable1_charge" cellspacing="0" cellpadding="0" width="100%">
-        </table>
+        		</table>
 			</div>
 		</div>
 	</li>
@@ -295,15 +239,13 @@
 	var $dataTable1_charge;
 	
 	$(document).ready(function(){
-		
+
 		$(".add-money").on("click",function(e){
 			var am = $(this).attr("data-am");
 			addAmount(am);
 		});
 
-		$("#bankInfoBtn").on("click",function(){
-			
-						
+		$("#bankInfoBtn").on("click",function(){			
 			var s = $("#bankInfoTxt").val();
 			
 			$.ajax({
@@ -313,15 +255,14 @@
 			}).done(function(data){
 				
 				var obj = JSON.parse(data);
-				
-				console.log(obj.BN);
-				
 				if(obj.BN =="-1"){
 					$("#bankInfoTxt").val('');
 					$("#inc").removeClass('incp');
 					$("#iinc").addClass('incp');	
 					$("#bankInfoTxt").addClass('incpwb');		
-				}	else if(data !="" || data !=null){
+
+				}else if(data !="" || data !=null){
+					
 					$("#bankInfoTxt").removeClass('incpwb');
 					$("#inc").addClass("incp");
 					$("#iinc").addClass('incp');
@@ -334,7 +275,7 @@
 					$("#bankInfoBtn").attr("disabled", true);
 					$("#ct_submit").removeAttr("disabled");
 				}else{
-					alert("처리중 오류가 발생하였습니다.");
+					toastr.success("처리중 오류가 발생하였습니다.");
 				}
 			});
 		});
@@ -368,40 +309,40 @@
 			autowWidth:true,
 			pageLength: 10,
 			aaSorting: [[1,'desc']],
-      columns : [
-    	{ 
-        data   : 'chid',
-        title  : '번호',
-        width : '10%',
-      },
-      { 
-        data   : 'regdate',
-        title  : '신청일시',
-        width : '30%',
-      },
-      { 
-        data   : 'money',
-        title  : '금액',
-        width : '30%',
-        render : function(data,type,row,meta){
-        	var html = '<span class="font_002">'+comma(data)+'</span> 원';
-        	return html;
-        }
-      },
-      { 
-        data   : 'chstate',
-        title  : '상태',
-       	render : function(data,type,row,meta){
-        	var html = '<span class="font_009">신청<span>'; // pending
-        	if(data == "DONE"){
-        		html = '<span>완료</span>'; // complete
-        	}else if(data=="WAIT"){
-        		html = '<span class="font_010">대기</span>';
-        	}
-        	return html;
-        }           
-      },
-    ],
+			columns : [
+				{ 
+					data   : 'chid',
+					title  : '번호',
+					width : '10%',
+				},
+				{ 
+					data   : 'regdate',
+					title  : '신청일시',
+					width : '30%',
+				},
+				{ 
+					data   : 'money',
+					title  : '금액',
+					width : '30%',
+					render : function(data,type,row,meta){
+						var html = '<span class="font_002">'+comma(data)+'</span> 원';
+						return html;
+					}
+				},
+				{ 
+					data   : 'chstate',
+					title  : '상태',
+					render : function(data,type,row,meta){
+						var html = '<span class="font_009">신청<span>'; // pending
+						if(data == "DONE"){
+							html = '<span>완료</span>'; // complete
+						}else if(data=="WAIT"){
+							html = '<span class="font_010">대기</span>';
+						}
+						return html;
+					}           
+				},
+			],
         	pagingType: "full_numbers",
             language: {
 			    paginate: {
@@ -412,32 +353,24 @@
 			    },
 			    emptyTable: "결과가 없습니다.",
 			},
-			
-			/*
-      rowCallback : function(row , data , index) {
-          
-      },
-      drawCallback: function( settings ) {
-          
-      }
-      */
-    });
+    	});
 
-      $(".dt_div_cash").on("click",function(){
-        	setTimeout(function() {
+		$(".dt_div_cash").on("click",function(){
+			setTimeout(function() {
 			  	$dataTable1_charge.columns.adjust().draw();
 			}, 100);
-      });
+		});
 
-     $("#ct_submit").on("click",function(e){
-    	 e.preventDefault();
-    	 
+		$("#ct_submit").on("click",function(e){
+			e.preventDefault();
+		 
 			if ($('#ct_bank_owner').val() == "") {
 				$('#bankInfoTxt').val('');
 				$("#iinc").removeClass('incp');
 				$("#inc").addClass("incp");
 				$("#bankInfoTxt").addClass('incpwb');
 			}else{
+				
 				if($("#chargeForm").valid()){
 					$("#bankInfoTxt").removeClass('incpwb');
 					$("#iinc").addClass('incp');
@@ -464,7 +397,7 @@
 				$(this).focusin();
 			}			
 		});
-		
+
 		submitCharge();
 
 	});
@@ -479,9 +412,6 @@
     	validClass: 'form1-valid',
     	errorContainer: ".error_cash_in",
   		rules: {			
-			// bank_acct:{
-			// 	required:true,
-			// },
 			money:{
 				required:true,
 				money_number:true,
@@ -489,21 +419,15 @@
 			},
 		},
 		messages: {
-			// bank_acct :{
-			// 		required:"비밀번호 입력후 전용계좌를 확인해 주세요.",
-			// },
 			money:{
 				required:"금액을 입력해 주세요.",
 				money_number: "금액을 숫자로 입력해 주세요.",
 				money_min:"최소 만원 이상으로 입력해 주세요.",				
 			}
-
 		},
 		errorPlacement: function(error, element) {
-
 			var error_label = element.attr("name");
 			var id = element.attr("id");
-
 		    if(error.text() != ""){
 		    	element.qtip({ 
 				    overwrite: true,
@@ -533,7 +457,6 @@
 			}else{
 				element.qtip("hide");
 			}
-
 		}
 	});
 
@@ -590,17 +513,14 @@
 		//var sss = $("#money").val(); //$(this).attr("#money"); //$("#money").val;
 		$("#money").val(uncomma($("#money").val()));
 			
-			var data = $("#chargeForm").serializeJSON();
-			
+			var data = $("#chargeForm").serializeJSON();	
 			$.ajax({
 				url:'/cash/jsp/setChargeApplication.jsp',
-				data:data,
+				data:dataEncrypter(data),
 				type:'POST'
 			}).done(function(data){
 				// console.log(data);
 				if(data){
-					
-					console.log("data:" + data);
 					
 					$("#chargeSuccesModal").popup("show");
 					
@@ -615,19 +535,11 @@
 			});
 			// alert("charge_true");
 			$("#conf_modal1").popup("hide");
-		});
-		
+		});	
 	}
-
 	function resetChargeForm(){
 		$('#chargeForm input').css("border-color","#2e3032");
 		$("#chargeForm")[0].reset();
 		$("#chargeForm").validate().resetForm();
 	}
-
-	function chargeConfirm(){
-
-	}
-
-
 </script>
