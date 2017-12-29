@@ -9,9 +9,9 @@
 	List<NoticeEventBean> all_notice	= ne_dao.getAllNotice();
 	List<NoticeEventBean> all_events	= ne_dao.getAllEvent();
 	// List<NoticeEventBean> all_list	= ne_dao.getAllNoticeEvents();
-	System.out.println("size: " + all_list.size());
-	System.out.println("all notice size: " + all_notice.size());
-	System.out.println("all event size: " + all_events.size());
+	//System.out.println("size: " + all_list.size());
+	//System.out.println("all notice size: " + all_notice.size());
+	//System.out.println("all event size: " + all_events.size());
 	
 
 %>

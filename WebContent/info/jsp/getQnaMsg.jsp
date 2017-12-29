@@ -21,7 +21,7 @@
 	
 	if(res.size() > 0){
 		boolean updateMsgList = qDao.updateReceivedMessages(qBean);
-		System.out.println("update fetched messages result : " + updateMsgList );
+		//System.out.println("update fetched messages result : " + updateMsgList );
 	}
 	
 	out.println(gson.toJson(res).toString());

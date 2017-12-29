@@ -10,7 +10,7 @@
 	UserDao ud = new UserDao();
 	UserBean uBean = new UserBean();
 	uBean.setUserid(request.getParameter("userid").trim());
-	System.out.println(ud.checkUserId(uBean));
+	//System.out.println(ud.checkUserId(uBean));
 	if(ud.checkUserId(uBean)){
 		out.println(false);
 	}else{

@@ -193,7 +193,7 @@
 	if(ne_bean.size() > 0){
 		
 		for (int k=0; k < ne_bean.size() ; k++){
-			System.out.println("popup count: " +  k);
+			//System.out.println("popup count: " +  k);
 			NoticeEventBean b = (NoticeEventBean) ne_bean.get(k);
 
 			popup += "<div id=\"popup_"+k+" \" class=\"bg_mask_pop2 popup_modal\">\r\n" + 
