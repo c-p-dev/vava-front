@@ -303,12 +303,10 @@
 		function bindPlaycheckClick() {
 			$('#game-cat li').on('click', 'a.get-vbet-hist', function() {
 				
-				//$('#game-cat li').off('click', 'a.get-vbet-hist');
-				
 				var newWindow = window.open("","_blank");
 				
 				$.get('/spincube-api/GetBetPlaycheck', function(srv_resp) {
-					
+					console.log(srv_resp);
 					newWindow.location.href = srv_resp.url;
 					newWindow.blur;
 					newWindow.focus;
@@ -323,7 +321,7 @@
         
 		$.get('/login/jsp/get_session.jsp', function(srv_resp) {
 			
-			if (!srv_resp.result) {
+			if (!srv_resp.validUser) {
 				$('a.get-vbet-hist').parent().hide();
 			}
 			else {

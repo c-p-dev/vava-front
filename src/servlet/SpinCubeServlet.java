@@ -120,15 +120,21 @@ public class SpinCubeServlet extends HttpServlet {
 		else if (method.equals(SC_METHOD_GET_PCHECK)) {
 			String srv_resp_7 	= "";
 			
-			try {
-				username = Integer.toString(site_id).concat("_").concat(username);
+			if (null != request.getSession().getAttribute("SITEID")) {
+				site_id 			= Integer.valueOf(request.getSession().getAttribute("SITEID").toString());
+				username			= (String)request.getSession().getAttribute("UID");
 				
-				SpinCubeController sc_ctrl2		= new SpinCubeController(username);
-				srv_resp_7 			= sc_ctrl2.getBetPlaycheckUrl();
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				try {
+					username = Integer.toString(site_id).concat("_").concat(username);
+					
+					SpinCubeController sc_ctrl2		= new SpinCubeController(username);
+					srv_resp_7 						= sc_ctrl2.getBetPlaycheckUrl();
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
+			
 			output.print(srv_resp_7);
 		}
 		else {
