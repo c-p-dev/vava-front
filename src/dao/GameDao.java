@@ -179,7 +179,7 @@ public class GameDao {
 		Connection con 			= null;
 		PreparedStatement pstmt = null;
 		ResultSet rs 			= null;
-		String  query 			= "SELECT TOP 1000 * FROM game_lst WHERE game_type = 10 OR game_type = 11" ;
+		String  query 			= "SELECT TOP 1000 * FROM game_lst WHERE game_type = 11" ;
 		
 		List<GameBean>	game_list = new ArrayList<>();
 		

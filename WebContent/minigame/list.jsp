@@ -132,7 +132,6 @@
 			<ul class="l_tabs" id="game-cat">
 				<li><a href="#l-tab1" class="get-game">전체</a></li>
 				<li><a href="#l-tab2" class="get-game">텍사스 사다리 게임</a></li>
-				<li><a href="#l-tab3" class="get-game">가위바위보 게임</a></li>
 			</ul>
 			
 		</div>
@@ -224,42 +223,6 @@
 									}
 								%>
 							
-							</ul>
-						</div>
-					</div>
-					
-				</div>
-			</div>
-            
-            <div id="l-tab3" class="left_tab_con">
-				
-				<div class="tab_container">
-					<div id="tab1" class="tab_content">
-						<div class="casino_board_wrap">
-							<span> </span>
-							<ul class="racing_board_list">
-							
-								<%
-									for (int i = 0; i < cgame_list.size(); i++) {
-										GameBean cur_vgame = cgame_list.get(i);
-								%>
-								<li>
-									<a href="#" data-gm-provdr = '<%=cur_vgame.getGame_provider()%>' data-link-dsp = '<%=cur_vgame.getLink_dsp()%>'>
-										<div class="img racing_board_img">
-											<img src="/images/<%=cur_vgame.getGame_img()%>" style = 'width: 320px; height: 195px;'>
-											<div class="overlay">
-												 <span class="expand" style = "width: 125px; font-size: 20px;">Play now</span>
-											</div>
-										</div>
-									</a>
-									<div class="casino_board_text">
-										<p class="casino_name"><%=cur_vgame.getGame_name()%></p>
-									</div>
-								</li>
-								<%
-									}
-								%>
-								
 							</ul>
 						</div>
 					</div>
