@@ -102,6 +102,7 @@ function cValU(){
 		}).done(function(data){
 			
 			var obj = JSON.parse(data);
+			//console.log(obj);
 			var valid = obj.validUser;
 			//var loggedIn = obj.result; 
 					
@@ -129,12 +130,15 @@ function cValU(){
 				
 				
 				var obj = JSON.parse(data);
+				//console.log(obj);
+				//console.log(obj.R);
 							
 				if(obj.R){
 					
 					var cp = '<%=cp%>';	
 					if(cp == '/sport/prematch.jsp' || cp == '/sport/livematch.jsp'){
 						ISLOGIN.a = obj.uid;
+						//console.log("UPDATED BAL");
 					}	
 					
 					
@@ -143,7 +147,7 @@ function cValU(){
 						data : {},
 						method: 'GET',
 					}).done(function(data){					
-				
+					//	console.log(data);		
 						var obj = JSON.parse(data);
 						$("#uhead").html(obj.header);
 						//createPopup(obj.popup);
@@ -153,18 +157,95 @@ function cValU(){
 						
 					});
 				
+					//console.log("UPDATED BAL");
 					
 				} else {
+					//console.log("NOT UPDATED BAL");
 				}
 				
 				data=null;
 			}).error(function(data, status, headers, config) {
+				console.log(status);
 				data=null;
 			});
 		}, 10*1000); //1 min
 	}
  	
 </script>
+
+<script type="text/javascript">
+	
+	var isLogin;
+	var lg ;
+	var aId;
+	var aNick;
+		
+	if(checkSession){
+		window.__lc = window.__lc || {};
+		window.__lc.license = 8960524;
+		window.__lc.params = [
+        {name: '아이디', value:'<%=UID%>' },
+        {name:'닉네임',value:'<%=NICK%>'},
+    ];
+		(function() {
+		  var lc = document.createElement('script'); lc.type = 'text/javascript'; lc.async = true;
+		  lc.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.livechatinc.com/tracking.js';
+		  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(lc, s);
+		})();
+		
+	} else {		
+		isLogin = {
+	  aInternal: false,
+	  aListener: function(val) {},
+		  set a(val) {
+		    this.aInternal = val;
+		    this.aListener(val);
+		  },
+		  get a() {
+		    return this.aInternal;
+		  },
+		  set b(val) {
+		    this.aId = val;
+		    this.aListener(val);
+		  },
+		  get b() {
+		    return  this.aId;
+		  },
+		  set c(val) {
+		    this.aNick = val;
+		    this.aListener(val);
+		  },
+		  get c() {
+		    return  this.aNick;
+		  },
+		  registerListener: function(listener) {
+		    this.aListener = listener;
+		  }
+		}
+		isLogin.registerListener(function(val) {
+			aId = isLogin.b;
+			aNick = isLogin.c;
+			ch();
+		});
+	}
+	
+	function ch(){
+		window.__lc = window.__lc || {};
+		window.__lc.license = 8960524;
+		window.__lc.params = [
+        {name: '아이디', value:aId },
+        {name:'닉네임',value:aNick},
+    ];
+		(function() {
+		  var lc = document.createElement('script'); lc.type = 'text/javascript'; lc.async = true;
+		  lc.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.livechatinc.com/tracking.js';
+		  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(lc, s);
+		})();
+	}
+	
+</script>
+
+
 <!--
 
 //-->

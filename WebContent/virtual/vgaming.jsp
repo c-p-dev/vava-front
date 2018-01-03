@@ -93,7 +93,12 @@
 
 <%@ include file="/inc/header.jsp"%>
 <style>
-	
+	#wait-warn-cntr {
+		display: none;
+		color: red;
+    	padding: 10px;
+    	font-size: 20px;
+	}
 </style>
 <div id="contents_wrap">
 	<div class="contents">
@@ -144,7 +149,7 @@
 			<ul class="l_tabs" id="game-cat">
 				<li><a href="#l-tab1" class="get-game">전체</a></li>
 				<li><a href="#l-tab3" class="get-game">가상 게임</a></li>
-				<li><a href="#l-tab4" class="get-vbet-hist" target = '_blank'>베팅내역 확인하기</a></li>
+				<li style = 'display: none;'><a href="#l-tab4" class="get-vbet-hist">베팅내역 확인하기</a></li>
 			</ul>
 			
 		</div>
@@ -240,8 +245,20 @@
 					</div>
 					
 				</div>
+
 			</div>
             
+            <div id="l-tab4" class="left_tab_con">
+				
+				<div class="tab_container">
+					<div id="tab1" class="tab_content" style = 'background-color:#FFFFFF;'>
+						<div id = 'wait-warn-cntr'> <span id = 'wait-warn'> Please wait. Fetching bet data...</span> </div>
+						<iframe id = 'playcheck-frm' src = '' style = 'width:100%; height: 720px;'></iframe>
+					</div>
+					
+				</div>
+				
+			</div>
 		</div>
 	</div>
 </div><!-- contents -->
@@ -303,17 +320,19 @@
 		function bindPlaycheckClick() {
 			$('#game-cat li').on('click', 'a.get-vbet-hist', function() {
 				
-				var newWindow = window.open("","_blank");
+				$('#playcheck-frm').attr('src', '');
+				$('#wait-warn-cntr').fadeIn();
 				
 				$.get('/spincube-api/GetBetPlaycheck', function(srv_resp) {
-					console.log(srv_resp);
-					newWindow.location.href = srv_resp.url;
-					newWindow.blur;
-					newWindow.focus;
+					
+					$('#playcheck-frm').attr('src', srv_resp.url);
+					
+					setTimeout(function() {
+						$('#wait-warn-cntr').fadeOut();	
+					}, '7000');
 					
 				}, 'json');
 				
-				return false;
 			});
 		}
 		

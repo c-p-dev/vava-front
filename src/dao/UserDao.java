@@ -303,13 +303,12 @@ public class UserDao {
 		
 	}
 	
-	public String registerUser(String json_post){
+	public String registerUser(String json_post)
+	{
 		Gson gson = new Gson();
 		HashMap<String, String> json_data 	= gson.fromJson(json_post, new TypeToken<HashMap<String, String>>(){}.getType());
-		logger.debug(json_data);
 		
 		return json_post;
-		
 	}
 	
 	public boolean getUserSSID(String SITEID,String UID,String ssid){
@@ -508,7 +507,7 @@ public class UserDao {
 			
 			String query1 ="select count(*) cnt from user_mst WHERE siteid="+SITEID+" and userid = '"+UID+"' and passwd='"+PW+"'";
 			
-			String query2 ="select bank_owner_user, bank_name+' '+bank_num +' [ ������ : ' +bank_owner+' ]' as bank_account from ( " +
+			String query2 ="select bank_owner_user, bank_name+' '+bank_num +' [ ¿¹±ÝÁÖ : ' +bank_owner+' ]' as bank_account from ( " +
 					" select a.bank_owner bank_owner_user, case  when charge_level='JOIN' then bank_join_name when charge_level='LOW' then bank_low_name when  charge_level='MIDDLE' then bank_middle_name when  charge_level='HIGH' then bank_high_name end bank_name, " +
 					" case  when charge_level='JOIN' then bank_join_num when charge_level='LOW' then bank_low_num when  charge_level='MIDDLE' then bank_middle_num when  charge_level='HIGH' then bank_high_num end bank_num, " +
 					" case  when charge_level='JOIN' then bank_join_owner when charge_level='LOW' then bank_low_owner when  charge_level='MIDDLE' then bank_middle_owner when  charge_level='HIGH' then bank_high_owner end bank_owner " +
@@ -632,7 +631,8 @@ public class UserDao {
 			
 	}
 
-	public List<HashMap> getWithdrawList(String userid){
+	public List<HashMap> getWithdrawList(String userid)
+	{
 		Gson gson = new Gson();
 		List<HashMap> list = new ArrayList<HashMap>();
 		String result = "";
@@ -666,8 +666,6 @@ public class UserDao {
 				list.add(hsm);
 			}
 			
-			
-			
 			rs.close();
 	        pstmt.close();
 	        con.close();
@@ -678,7 +676,8 @@ public class UserDao {
 		
 	}	
 	
-	public List<HashMap> getWithdrawList(String SITEID, String UID){
+	public List<HashMap> getWithdrawList(String SITEID, String UID)
+	{
 		Gson gson = new Gson();
 		List<HashMap> list = new ArrayList<HashMap>();
 		String result = "";
@@ -688,8 +687,6 @@ public class UserDao {
 		ResultSet rs = null;
 
 		String query = "SELECT wdid,convert(char(19),regdate,120) regdate,money_req,isnull(convert(char(19),wddate,120),0) wddate,wdstate FROM withdraw_lst  WHERE siteid=? and userid = ?";
-		//DecimalFormat formatter = new DecimalFormat("#,###");
-		//DateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		
 		try{	      
 			
@@ -705,7 +702,6 @@ public class UserDao {
 				HashMap<String, Object> hsm = new HashMap<String, Object>();
 				hsm.put("wdid", (rs.getString("wdid")));
 				hsm.put("regdate", (rs.getString("regdate")));
-				//double amount = (rs.getString("money_req") != null ? Double.parseDouble(rs.getString("money_req")) : 0);
 				hsm.put("money", (rs.getInt("money_req")));
 				hsm.put("wddate", (rs.getString("wddate")));
 				hsm.put("wdstate", (rs.getString("wdstate")));
@@ -716,9 +712,7 @@ public class UserDao {
 			rs.close();
 	        pstmt.close();
 	        con.close();
-	       
 		} catch(Exception e){
-		
 			e.printStackTrace();
 		} 
 	  	return list;
@@ -805,7 +799,7 @@ public class UserDao {
 	        		break;
 	        }
 	        
-	        sc_ctrl.transferMoneyToVava(UID, Integer.valueOf(SITEID)); // need check..
+	        sc_ctrl.transferMoneyToVava(UID, Integer.valueOf(SITEID));
 	        
 	        if (sts >= 2) {
 				result = true;
@@ -816,7 +810,6 @@ public class UserDao {
 		}
 		
 		return result;
-		
 	}
 
 	public boolean updateUserProfile(String userid, String bank_name, String bank_owner,String bank_num, String cell_prefix, String cell){
@@ -978,15 +971,12 @@ public class UserDao {
 		
 	}
 	
-	//public boolean switchpoints(UserBean trans_data,int money,int point,int points) throws SQLException{
 	public UserBean switchpoints(String SITEID,String UID,String points) throws SQLException{
 		
 		PreparedStatement pstmt = null;
 		Connection con = null;
 		Statement stmt = null;
 		int row = 0;
-		//boolean result = false;
-		//Date date = new Date();
 		UserBean ub = new UserBean();
 		ResultSet rs = null;
 		
@@ -1016,44 +1006,23 @@ public class UserDao {
 		    pstmt.setString(2,SITEID);
 		    pstmt.setString(3,UID);
 		    pstmt.setString(4,SITEID);
-		    /*
-		    pstmt.setInt(3,(points*-1));
-		    pstmt.setString(4,sdf.format(date));
-		    pstmt.setInt(5,(money+points));
-		    pstmt.setInt(6,(point-points));
-		    pstmt.setString(7,trans_data.getUserid());
-		    pstmt.setInt(8,trans_data.getSiteid());
-		    pstmt.setInt(9,points);
-		    pstmt.setString(10,sdf.format(date));
-		    pstmt.setInt(11,(money+points));
-		    pstmt.setInt(12,(point-points));
-		    */		    
+			
 			row = pstmt.executeUpdate(); 
-			
-			//Debug.out("[switchpoints:row] :" + row);
-			
 			
 			if(row>0) {
 				pstmt = con.prepareStatement(query2);				
 				rs = pstmt.executeQuery();
 				
-				if(rs.next()){	
-					//Debug.out("rs.getInt(money):" + rs.getInt("money"));
-					//Debug.out("rs.getInt(point) :" + rs.getInt("point"));					
+				if(rs.next()){			
 					ub.setMoney(rs.getInt("money"));
 					ub.setPoint(rs.getInt("point")); 
 					ub.setValid(true);
 				}
 			}			
 			
-			//logger.debug(query);
-			//logger.debug(row);
 			rs.close();
 			pstmt.close();
 			con.close();
-			
-			//logger.debug(row);
-		
 	  	}catch(Exception e){
 	  		logger.debug(query);
 	  		e.printStackTrace();
@@ -1106,8 +1075,8 @@ public class UserDao {
 			
 	}
 	
-	public boolean checkCellNumByNick(String nickname,String cell_prefix,String cell ) throws SQLException{
-
+	public boolean checkCellNumByNick(String nickname,String cell_prefix,String cell ) throws SQLException
+	{
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -1140,8 +1109,8 @@ public class UserDao {
 		
 	}
 	
-	public boolean checkCellNumByUseridNick(String userid, String nickname,String cell_prefix,String cell ) throws SQLException{
-
+	public boolean checkCellNumByUseridNick(String userid, String nickname,String cell_prefix,String cell ) throws SQLException
+	{
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -1162,8 +1131,6 @@ public class UserDao {
 			}
 			
 			return result;
-			
-			
 		} catch(Exception e){
 			logger.debug(e);
 			return false;
@@ -1209,7 +1176,8 @@ public class UserDao {
 		
 	}
 
-	public boolean getUserIdPassByBank (String bank_owner,String bank_name, String bank_num, String cell_prefix, String cell) throws SQLException{
+	public boolean getUserIdPassByBank (String bank_owner,String bank_name, String bank_num, String cell_prefix, String cell) throws SQLException
+	{
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -1227,7 +1195,6 @@ public class UserDao {
 		    		"AND bank_num = ? " + 
 		    		"AND cell = ? ";
 		    
-		    
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1,bank_owner);
 			pstmt.setString(2,bank_name);
@@ -1238,16 +1205,13 @@ public class UserDao {
 			if(rs.next()){
 				result = true;
 			}
-
 			
 			return result;
-		} catch(Exception e){
+		} 
+		catch(Exception e) {
 			logger.debug(e);
 			return false;
 		}
-		
-		
-		
 	}
 	
 	public boolean forgotPasswordUpdate1(UserBean ub, SmsAuthBean sb)throws SQLException{

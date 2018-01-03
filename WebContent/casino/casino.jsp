@@ -167,6 +167,12 @@ div.chevy-cntr {
 	cursor: pointer;
 }
 
+#wait-warn-cntr {
+	display: none;
+	color: red;
+   	padding: 10px;
+   	font-size: 20px;
+}
 </style>
 
 
@@ -218,7 +224,7 @@ div.chevy-cntr {
 						GameBean providers = game_providers.get(i);
 						int tab = i + 2;
 						
-						String html = "<li><a href=#l-tab"+tab+" class=get-game data-val="+providers.getGame_provider()+">"+providers.getProvider_name()+" <div class = 'chevy-cntr'><i class = 'chevy fa fa-chevron-up'></i></div></a></li>";
+						String html = "<li><a href=#l-tab"+tab+" class=get-game data-val="+providers.getGame_provider()+">"+providers.getProvider_name()+" <div class = 'chevy-cntr'><i class = 'chevy fa fa-chevron-down'></i></div></a></li>";
 
 						if( providers.getGame_provider() == 2){
 							
@@ -252,7 +258,14 @@ div.chevy-cntr {
 		</div>
 
 		<div class="casino_right" id="casino_right">
+		
 		</div>
+		
+		<div class="pcheck-frame-cntr" id="pcheck-frame-cntr" style = 'display: none; width: 1040px; float: left;'>
+			<div id = 'wait-warn-cntr'> <span id = 'wait-warn'> Please wait. Fetching bet data...</span> </div>
+			<iframe id = 'playcheck-frm' src = '' style = 'width:100%; height: 720px;'></iframe>
+		</div>
+		
 	</div>
 </div><!-- contents -->
 
@@ -347,6 +360,9 @@ div.chevy-cntr {
 			
 			var lnk_clicked	= $(this);
 			
+			$('#casino_right').show();
+			$('#pcheck-frame-cntr').hide();
+			
 			if (lnk_clicked.parent().hasClass('active') == false) {
 				
 				$.get('/login/jsp/get_session.jsp', function(sess_check) {
@@ -362,8 +378,8 @@ div.chevy-cntr {
 						$('.subm-manual').hide();
 						$('.pcheck-lnk').hide();
 						
-						$('.chevy').removeClass('fa-chevron-down');
-						$('.chevy').addClass('fa-chevron-up');
+						$('.chevy').removeClass('fa-chevron-up');
+						$('.chevy').addClass('fa-chevron-down');
 						
 						/*	Asian Gaming	*/
 						if (2 == game_prvdr) {
@@ -385,8 +401,8 @@ div.chevy-cntr {
 							/* Default. Do nothing	*/
 						}
 						
-						chev_mark.removeClass('fa-chevron-up');
-						chev_mark.addClass('fa-chevron-down');
+						chev_mark.removeClass('fa-chevron-down');
+						chev_mark.addClass('fa-chevron-up');
 						
 						//get Game
 						$.ajax({
@@ -430,18 +446,26 @@ div.chevy-cntr {
 		});
 		
 		$('#game-cat li').on('click', 'a#get-mgpcheck-lnk', function() {
-
-			var newWindow = window.open("","_blank");
+			var lnk_clicked = $(this);
+			
+			$('#playcheck-frm').attr('src', '');
+			$('#wait-warn-cntr').show();
+			$('#casino_right').hide();
 			
 			$.get('/TegServlet?method=6', function(srv_resp) {
 				
-				newWindow.location.href = srv_resp;
-				newWindow.blur;
-				newWindow.focus;
-				
+				if (false === $('#casino_right').is(':visible')) {
+					$('#pcheck-frame-cntr').show();
+					
+					$('#playcheck-frm').attr('src', srv_resp);
+					
+					setTimeout(function() {
+						$('#wait-warn-cntr').fadeOut();
+					}, '2000');
+				}
 			});
 			
-			return false;
+			lnk_clicked.parent().click();
 		});
 		
 		if (Modernizr.touch) {
@@ -553,7 +577,7 @@ div.chevy-cntr {
 		setTimeout(function(){
 			$(".casino_right").html(final_div).fadeIn();
 			makeList();
-			
+			$('#pcheck-frame-cntr').hide();
 		}, 600);	
 	}
 

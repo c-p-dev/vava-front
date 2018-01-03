@@ -56,14 +56,14 @@
 		checkSession 	= true;	
 		//sess 		= request.getSession(false);
 		sess.setMaxInactiveInterval(7200);	
-		sess.putValue("SITEID",ub.getSiteid());
-		sess.putValue("SSID",ub.getUserid());
-		sess.putValue("UID",ub.getUserid());
-		sess.putValue("NICK",ub.getNick());
-		sess.putValue("UCLEVEL",ub.getCharge_level());
-		sess.putValue("UGRADE",ub.getGrade());
-		sess.putValue("UBAL",ub.getMoney());
-		sess.putValue("UPOINT",ub.getPoint());
+		sess.setAttribute("SITEID",ub.getSiteid());
+		sess.setAttribute("SSID",ub.getUserid());
+		sess.setAttribute("UID",ub.getUserid());
+		sess.setAttribute("NICK",ub.getNick());
+		sess.setAttribute("UCLEVEL",ub.getCharge_level());
+		sess.setAttribute("UGRADE",ub.getGrade());
+		sess.setAttribute("UBAL",ub.getMoney());
+		sess.setAttribute("UPOINT",ub.getPoint());
 		
 	}
 	
@@ -71,5 +71,6 @@
 	
 	hsm.put("result",response_code);
 	hsm.put("uid",userid);
+	hsm.put("unick",ub.getNick());
 	out.println(gson.toJson(hsm).toString());
 %>

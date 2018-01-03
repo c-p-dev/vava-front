@@ -44,13 +44,13 @@
 		left: 61px;
 		top: 131px;
 	}
-.pwdcmf{
-background-color: transparent!important; 
-border-color: transparent!important;
-color:white;
-}
-.spd { 
-pointer-events: none 
+	.pwdcmf{
+	background-color: transparent!important; 
+	border-color: transparent!important;
+	color:white;
+	}
+	.spd { 
+	pointer-events: none 
 }
 </style>
 	
