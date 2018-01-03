@@ -92,7 +92,7 @@
 		$scope.table = table1;		
 
 		$scope.updateSport = function(item) {
-			console.log(item);
+			// console.log(item);
 			table1.columns(9).search(item).draw();
 			table1.draw();
 		}
@@ -108,6 +108,7 @@
 	function selBet(bid,$scope){
 		
 		var row = table1.row(document.getElementById(bid)); 
+		// console.log(row);
 	 	//var row = table.row(document.getElementById('cbForm1').cb); 
 	 	//var row = table.row(document.getElementById('SP_'+bid));
 	 	//console.log(row);
@@ -167,7 +168,7 @@
 																
 			angular.forEach(data, function(obj,idx) {
 				
-				console.log(obj);
+				// console.log(obj);
 				var ss = "진행중";
 				
 				if(obj.bresult== 'MISS'){
@@ -532,7 +533,7 @@
 					width : "137px",
 					data  : "bgresult",
 					render : function(data,type,row,meta){
-						console.log(data);
+						// console.log(data);
 						var html  = '<span class="">'+data+'</span>';
 						
 						if(data == "NO"){
@@ -605,12 +606,14 @@
 				emptyTable: "베팅 내역이 없습니다.",
 			},
 			drawCallback: function( settings ) {
-				console.log("drawed table1");
+				//console.log("drawed table1");
 		        var api = this.api();
 		        $("#dt_l1").html(api.rows().data().length);
 		    },
 		    createdRow: function( row, data, dataIndex ){
 		    	var tds = $( row ).find('td').not('td:eq(0)').attr("data-acc-link", data.bgid);
+		    	$(row).attr("id", data.bgid);
+		    	// console.log(tds);
 		    	tds.on("click",function(e){
 		    		selBet(data.bgid);
 		    	});
@@ -712,8 +715,8 @@
 				emptyTable: "베팅 내역이 없습니다.",
 			},
 			drawCallback: function( settings ) {
-				console.log(settings);
-				console.log("drawed table2");
+				// console.log(settings);
+				// console.log("drawed table2");
 		        var api = this.api();
 		        $("#dt_l2").html(api.rows().data().length);
 		    }
@@ -1095,14 +1098,14 @@
 			}
 
 			
-			console.log("param : " + param);
+			// console.log("param : " + param);
 			$.ajax({
 				url:'/info/jsp/delBettingHistory.jsp',								
 				type:'POST',
 				cache: false,
 	   			data: param,
 			}).done(function(data){
-				console.log("done");
+				// console.log("done");
 				
 				if(data !="" || data !=null){
 					
@@ -1198,7 +1201,7 @@
 
 
 	    $("#del_all_conf").on("click",function(){
-			console.log("NO")
+			// console.log("NO")
 			//e.preventDefault();
 			$("#delAllCon").popup("hide");
 			// location.reload();
@@ -1215,7 +1218,7 @@
 	function checkAll(obj){
 		var table = obj.closest("table");		
 		var chkbxs = table.find("tbody tr td input[name=cb]");
-		console.log(chkbxs);
+		// console.log(chkbxs);
 		if(chkbxs.length > 0){
 			$.each(chkbxs,function(index,item){
 				if(obj.is(":checked")){
