@@ -94,7 +94,12 @@
 				}
 
 				( 'open' === mode ) ? $(sect).addClass('acc_active') : $(sect).removeClass('acc_active');
+				$(sect).trigger("tab_toggled");
+
+				console.log("tab_toggled");
 			});
+
+
 		}
 
 		// Open a single section by index

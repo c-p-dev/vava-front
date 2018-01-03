@@ -11,6 +11,11 @@ public class BettingListBean {
 	private String betdate;
 	private boolean selected;
 	
+	private String sname;
+	private String fullsname;
+	private String fn;
+	
+	
 	public void setBgid(String bgid) {
 		this.bgid = bgid;
 	}
@@ -76,5 +81,34 @@ public class BettingListBean {
 	public Boolean getSelected() {
 		return  this.selected;
 	}
+	
+	public String getSname() {
+		return sname;
+	}
+
+
+	public void setSname(String sname) {
+		this.sname = sname;
+	}
+
+
+	public String getFullsname() {
+		return fullsname;
+	}
+
+
+	public void setFullsname(String fullname) {
+		this.fullsname = fullname;
+	}
+	
+	public String getFn() {
+		return fn;
+	}
+
+
+	public void setFn(String fn) {
+		this.fn = fn;
+	}
+
 	
 }
