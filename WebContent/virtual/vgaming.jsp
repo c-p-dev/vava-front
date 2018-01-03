@@ -252,7 +252,7 @@
 				
 				<div class="tab_container">
 					<div id="tab1" class="tab_content" style = 'background-color:#FFFFFF;'>
-						<div id = 'wait-warn-cntr'> <span id = 'wait-warn'> Please wait. Fetching bet data...</span> </div>
+						<div id = 'wait-warn-cntr'> <span id = 'wait-warn'> 데이타를 불러오고 있습니다. 잠시만 기다려 주세요.</span> </div>
 						<iframe id = 'playcheck-frm' src = '' style = 'width:100%; height: 720px;'></iframe>
 					</div>
 					
